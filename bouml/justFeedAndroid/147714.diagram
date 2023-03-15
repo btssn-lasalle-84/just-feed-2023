@@ -63,7 +63,7 @@ msg 130306 synchronous
 msg 130690 synchronous
   from durationcanvas_ref 130434
   to durationcanvas_ref 130562
-  yz 119 2015 explicitmsg "etatDistributeur()"
+  yz 119 2015 explicitmsg "afficherEtatDistributeur()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 255 104
+  label_xy 231 104
 end
