@@ -2,52 +2,54 @@ format 224
 
 classcanvas 128002 class_ref 128002 // Opérateur
   simpleclassdiagramsettings end
-  xyz 97 261 2000
+  xyz 1 260 2000
 end
 usecasecanvas 128130 usecase_ref 128002 // Planifier une intervention
   color darkgreen
-  xyzwh 331 222 3005 64 32 label_xy 262 262
+  xyzwh 235 221 3005 64 32 label_xy 186 262
 end
 usecasecanvas 128258 usecase_ref 128130 // Lister les distributeurs
   color darkorange
-  xyzwh 374 77 3005 64 32 label_xy 338 51
+  xyzwh 278 76 3005 64 32 label_xy 242 50
 end
 usecasecanvas 128386 usecase_ref 128258 // Visualiser les statistiques
-  xyzwh 635 136 3005 64 32 label_xy 592 113
+  xyzwh 539 135 3005 64 32 label_xy 496 112
 end
 usecasecanvas 128514 usecase_ref 128386 // Visualiser l'état du distributeur
   color darkorange
-  xyzwh 633 28 3005 64 32 label_xy 574 9
+  xyzwh 537 27 3005 64 32 label_xy 478 8
 end
 usecasecanvas 128642 usecase_ref 128514 // Configurer les distributeurs
   color darkgreen
-  xyzwh 323 367 3005 64 32 label_xy 268 399
+  xyzwh 227 366 3005 64 32 label_xy 172 398
 end
 usecasecanvas 128770 usecase_ref 128642 // Imprimer une fiche intervention
   color darkgreen
-  xyzwh 630 315 3005 64 32 label_xy 575 287
+  xyzwh 534 314 3005 64 32 label_xy 479 286
 end
 usecasecanvas 128898 usecase_ref 128770 // Géolocaliser un distributeur
   color darkorange
-  xyzwh 629 225 3005 64 32 label_xy 572 206
+  xyzwh 533 224 3005 64 32 label_xy 476 205
 end
 line 129410 ----
   from ref 128002 z 2006 to ref 128130
 line 129666 ----
   from ref 128002 z 3006 to ref 128642
 simplerelationcanvas 130178 simplerelation_ref 128130
-  from ref 128130 z 3006 stereotype "<<include>>" xyz 301 151.5 3000 to ref 128258
+  from ref 128130 z 3006 stereotype "<<include>>" xyz 246 163 3000 to ref 128258
 end
 simplerelationcanvas 130946 simplerelation_ref 128386
-  from ref 128386 z 3006 stereotype "<<extend>>" xyz 491 129 3000 to ref 128258
+  from ref 128386 z 3006 stereotype "<<extend>>" xyz 395 128 3000 to ref 128258
 end
 simplerelationcanvas 131074 simplerelation_ref 128514
-  from ref 128514 z 3006 stereotype "<<extend>>" xyz 523.5 68.5 3000 to ref 128258
+  from ref 128514 z 3006 stereotype "<<extend>>" xyz 427 67 3000 to ref 128258
 end
 simplerelationcanvas 131202 simplerelation_ref 128642
-  from ref 128770 z 3006 stereotype "<<extend>>" xyz 468.5 295.5 3000 to ref 128130
+  from ref 128770 z 3006 stereotype "<<extend>>" xyz 372 294 3000 to ref 128130
 end
 simplerelationcanvas 131330 simplerelation_ref 128770
-  from ref 128898 z 3006 stereotype "<<extend>>" xyz 477.5 242 3000 to ref 128130
+  from ref 128898 z 3006 stereotype "<<extend>>" xyz 381 241 3000 to ref 128130
 end
+line 131458 ----
+  from ref 128002 z 3006 to ref 128258
 end
