@@ -50,6 +50,4 @@ end
 simplerelationcanvas 131330 simplerelation_ref 128770
   from ref 128898 z 3006 stereotype "<<extend>>" xyz 381 241 3000 to ref 128130
 end
-line 131458 ----
-  from ref 128002 z 3006 to ref 128258
 end
