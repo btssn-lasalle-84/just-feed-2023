@@ -1,4 +1,4 @@
-package com.justfeed.justfeed;
+package com.justfeed.justfeedandroid;
 
 import org.junit.Test;
 
