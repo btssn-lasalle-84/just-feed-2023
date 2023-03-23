@@ -6,6 +6,7 @@ IHMJustFeed::IHMJustFeed(QWidget *parent)
 
 }
 
+
 IHMJustFeed::~IHMJustFeed()
 {
 }
