@@ -4,3 +4,8 @@ Communication::Communication()
 {
 
 }
+
+Communication::~Communication()
+{
+
+}
