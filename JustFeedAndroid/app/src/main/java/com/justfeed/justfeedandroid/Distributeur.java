@@ -9,7 +9,7 @@ package com.justfeed.justfeedandroid;
  * @version 0.1
  */
 public class Distributeur {
-    private int id; //!< Nombre pour identifier le ditributeur.
+    private final int id; //!< Nombre pour identifier le ditributeur.
     private float poidsTotal; //!< Nombre pour indiquer le poids total du distributeur.
     private float poidsActuel; //!< Nombre pour indiquer le poids actuel du distributeur.
     private int hydrometrie; //!< Mesure du degré d'humidité présent dans le distributeur.

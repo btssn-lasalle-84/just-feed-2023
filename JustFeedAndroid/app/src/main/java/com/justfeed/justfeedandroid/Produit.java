@@ -8,18 +8,8 @@ package com.justfeed.justfeedandroid;
  */
 public class Produit {
     private int prix; //!< prix du produit
-    private int poidsDuProduit; //!< poids à l'unité du produit
-
-    private String nom; //!< nom du produit
-
-    /**
-     * @brief Constructeur par défaut de la classe Produit.
-     * @see Produit()
-     */
-    public Produit(){
-        this.prix = 0;
-        this.poidsDuProduit = 0;
-    }
+    private final int poidsDuProduit; //!< poids à l'unité du produit
+    private final String nom; //!< nom du produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.

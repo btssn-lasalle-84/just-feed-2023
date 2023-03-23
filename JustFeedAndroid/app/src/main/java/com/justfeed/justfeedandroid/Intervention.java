@@ -13,7 +13,7 @@ public class Intervention {
 
     private float poidsARemplir;
 
-    private int numeroIntervention;
+    private final int numeroIntervention;
 
     private boolean estIntervenu;
 
