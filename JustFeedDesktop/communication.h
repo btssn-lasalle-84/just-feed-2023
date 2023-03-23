@@ -2,7 +2,7 @@
 #define COMMUNICATION_H
 
 
-class Communication : public
+class Communication
 {
 public:
     Communication();
