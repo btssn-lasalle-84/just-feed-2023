@@ -4,7 +4,7 @@ classcanvas 128002 class_ref 134530 // IHMJustFeed
   classdiagramsettings show_members_visibility yes show_members_stereotype yes member_max_width 0 drawing_language java end
   xyz 281 90 2000
 end
-classcanvas 128130 class_ref 134658 // Distribution
+classcanvas 128130 class_ref 134658 // Distributeur
   classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
   xyzwh 33 375 2000 137 119
 end
