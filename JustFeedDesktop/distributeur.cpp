@@ -1,75 +1,142 @@
+/**
+ * @file        distributeur.cpp
+ * @brief       Définition de la classe Distributeur.
+ * @details     La classe Distrubuteur \c Cette classe permet ...
+ * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
+ * @version     0.1
+ * @date        2023
+ */
+
 #include "distributeur.h"
 
+/**
+ * @todo Il faut initialiser les attributs !
+ */
 Distributeur::Distributeur()
 {
-
 }
 
 Distributeur::~Distributeur()
 {
-
 }
 
-int Distributeur::getIdentifiant()
+/**
+ * @brief Accesseur de l'attribut identifiant.
+ * @return un entier qui represente l'identifiant du distributeur
+ */
+int Distributeur::getIdentifiant() const
 {
     return this->identifiant;
 }
 
-Produits Distributeur::getProduit()
+/**
+ * @brief Accesseur de l'attribut produit.
+ * @return un Produits qui represente le produit que contient le
+ * distributeur
+ */
+Produit Distributeur::getProduit() const
 {
     return this->produit;
 }
 
-int Distributeur::getHydrometrie()
+/**
+ * @brief Accesseur de l'attribut hydrometrie.
+ * @return un entier qui represente le degres d'humidité dans le
+ * distributeur
+ */
+int Distributeur::getHydrometrie() const
 {
     return this->hydroetrie;
 }
 
-Localisation Distributeur::getPosition()
+/**
+ * @brief Accesseur de l'attribut position.
+ * @return une Localisaton qui represente la géolocalisation du distributeur
+ */
+Localisation Distributeur::getPosition() const
 {
     return this->position;
 }
 
-int Distributeur::getPoidsTotal()
+/**
+ * @brief Accesseur de l'attribut poidsTotal.
+ * @return un entier qui represente le poids total que peut contenir le
+ * distributeur
+ */
+int Distributeur::getPoidsTotal() const
 {
     return this->poidsTotal;
 }
 
-int Distributeur::getPoidsActuel()
+/**
+ * @brief Accesseur de l'attribut poidsActuel.
+ * @return un entier qui represente le poids actuel dans le distributeur.
+ */
+int Distributeur::getPoidsActuel() const
 {
     return this->poidsActuel;
 }
 
-int Distributeur::getAIntervenir()
+/**
+ * @brief Accesseur de l'attribut AIntervenir.
+ * @return un bool qui permet de savoir si il faut intervenir sur le
+ * distributeur.
+ */
+int Distributeur::getAIntervenir() const
 {
     return this->aIntervenir;
 }
 
-void Distributeur::setProduit(Produits produit)
+/**
+ * @brief Mutateur de l'attribut Produit.
+ * @param il prend en argument le produit du distributeur.
+ */
+void Distributeur::setProduit(const Produit& produit)
 {
     this->produit = produit;
 }
 
+/**
+ * @brief Mutateur de l'attribut hydrométrie.
+ * @param il prend en argument l'hydrometrie du distributeur.
+ */
 void Distributeur::setHydrometrie(int hydrometrie)
 {
     this->hydroetrie = hydrometrie;
 }
 
-void Distributeur::setPosition(Localisation localisation)
+/**
+ * @brief Mutateur de l'attribut localisation.
+ * @param il prend en argument la localisation du distributeur.
+ */
+void Distributeur::setPosition(const Localisation& localisation)
 {
     this->position = localisation;
 }
 
+/**
+ * @brief Mutateur de l'attribut poidsTotal.
+ * @param il prend en argument le poids total du distributeur.
+ */
 void Distributeur::setPoidsTotal(int poidsTotal)
 {
     this->poidsTotal = poidsTotal;
 }
 
+/**
+ * @briefmutateur de l'attribut poidsActuel
+ * @param il prend en argument le poids actuel du distributeur.
+ */
 void Distributeur::setPoidsActuel(int poidsActuel)
 {
     this->poidsActuel = poidsActuel;
 }
 
+/**
+ * @briefmutateur de l'attribut aIntervenir.
+ * @param il prend en argument un booleen qui détérmine l'état du
+ * distributeur.
+ */
 void Distributeur::setAIntervenir(bool aIntervenir)
 {
     this->aIntervenir = aIntervenir;

@@ -1,13 +1,14 @@
 #include "serveur.h"
 
+/**
+ * @todo Il faut initialiser les attributs !
+ */
 Serveur::Serveur()
 {
-
 }
 
 Serveur::~Serveur()
 {
-
 }
 
 int Serveur::getPort()

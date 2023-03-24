@@ -1,13 +1,14 @@
 #include "statistiques.h"
 
+/**
+ * @todo Il faut initialiser les attributs !
+ */
 Statistiques::Statistiques()
 {
-
 }
 
 Statistiques::~Statistiques()
 {
-
 }
 int Statistiques::getFrequenceIntervetion()
 {
@@ -38,4 +39,3 @@ void Statistiques::setMoyenneKilometres(int moyenneKilometres)
 {
     this->moyenneKilometres = moyenneKilometres;
 }
-
