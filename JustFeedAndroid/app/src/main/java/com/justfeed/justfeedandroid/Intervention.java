@@ -7,27 +7,27 @@ package com.justfeed.justfeedandroid;
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class Intervention {
+public class Intervention
+{
+    private int numeroIntervention;
     private String heureIntervention;
     private String tempsTrajet;
-
-    private float poidsARemplir;
-
-    private final int numeroIntervention;
-
+    private double poidsARemplir;
     private boolean estIntervenu;
 
-    public Intervention(){
-        this.poidsARemplir = 0;
+    public Intervention()
+    {
         this.numeroIntervention = 0;
+        this.poidsARemplir = 0.0;
         this.estIntervenu = false;
     }
 
-    public Intervention(String heureIntervention, String tempsTrajet, float poidsARemplir, int numeroIntervention){
+    public Intervention(int numeroIntervention, String heureIntervention, String tempsTrajet, double poidsARemplir)
+    {
+        this.numeroIntervention = numeroIntervention;
         this.heureIntervention = heureIntervention;
         this.tempsTrajet = tempsTrajet;
         this.poidsARemplir = poidsARemplir;
-        this.numeroIntervention = numeroIntervention;
         this.estIntervenu = false;
     }
 
@@ -38,7 +38,7 @@ public class Intervention {
     public String getTempsTrajet(){
         return this.tempsTrajet;
     }
-    public float getPoidsARemplir(){
+    public double getPoidsARemplir(){
         return this.poidsARemplir;
     }
     public boolean interventionTerminee(){
@@ -46,7 +46,8 @@ public class Intervention {
     }
 
     //Mutateurs
-    public void modifierHeureIntervention(String nouvelleHeureIntervention){
+    public void modifierHeureIntervention(String nouvelleHeureIntervention)
+    {
         this.heureIntervention = nouvelleHeureIntervention;
     }
     public void modifierEtatIntervention(boolean estIntervenu){

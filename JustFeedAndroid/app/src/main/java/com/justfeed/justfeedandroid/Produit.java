@@ -8,7 +8,7 @@ package com.justfeed.justfeedandroid;
  */
 public class Produit {
     private int prix; //!< prix du produit
-    private final int poidsDuProduit; //!< poids à l'unité du produit
+    private int poidsDuProduit; //!< poids à l'unité du produit
     private final String nom; //!< nom du produit
 
     /**
@@ -18,10 +18,10 @@ public class Produit {
      * @param poidsDuProduit le poid du produit à l'unité.
      * @param nom le nom du produit.
      */
-    public Produit(int prix, int poidsDuProduit, String nom){
+    public Produit(int prix, int poidsDuProduit, String nom)
+    {
         this.prix = prix;
         this.poidsDuProduit = poidsDuProduit;
-
         this.nom = nom;
     }
 

@@ -8,53 +8,48 @@ package com.justfeed.justfeedandroid;
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class Distributeur {
-    private final int id; //!< Nombre pour identifier le ditributeur.
-    private float poidsTotal; //!< Nombre pour indiquer le poids total du distributeur.
-    private float poidsActuel; //!< Nombre pour indiquer le poids actuel du distributeur.
-    private int hydrometrie; //!< Mesure du degré d'humidité présent dans le distributeur.
-
-    private Produit produit; //!< Type de produit présent dans le distributeur.
-
-    private boolean aRemplir; //<! Le distributeur a besoin d'être remplie ou non.
+public class Distributeur
+{
+    private int id; //!< identifie le ditributeur.
+    private double poidsTotal; //!< indique le poids total du distributeur.
+    private double poidsActuel; //!< indique le poids actuel du distributeur.
+    private int hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
+    private Produit produit; //!< produit présent dans le distributeur.
+    private boolean aRemplir; //<! état du besoin de remplissage du distributeur
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
      * @see Distributeur()
      */
-    public Distributeur(){
+    public Distributeur()
+    {
         this.id = 0;
-        this.poidsTotal = 0;
-        this.poidsActuel = 0;
+        this.poidsTotal = 0.0;
+        this.poidsActuel = 0.0;
         this.hydrometrie = 0;
-
         this.produit = null;
-
         this.aRemplir = false;
     }
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, int prix, int poidsTotal, int poidsActuel, int hydrometrie, Produit produit)
+     * @see Distributeur(int id, int prix, double poidsTotal, double poidsActuel, int hydrometrie, Produit produit)
      * @param id L'identifiant du distributeur.
      * @param poidsTotal Le poids total du contenue du distributeur.
      * @param poidsActuel Le poids actuel du contenue du distributeur.
      * @param hydrometrie Le degré d'humidité présent dans le distributeur.
      * @param produit Type de produit dans le distributeur.
      */
-    public Distributeur(int id, float poidsTotal, float poidsActuel, int hydrometrie, Produit produit){
+    public Distributeur(int id, double poidsTotal, double poidsActuel, int hydrometrie, Produit produit){
         this.id = id;
         this.poidsTotal = poidsTotal;
         this.poidsActuel = poidsActuel;
         this.hydrometrie = hydrometrie;
-
         this.produit = produit;
-
         this.aRemplir = false;
     }
 
     //Accesseurs
-
     /**
      * @brief Accesseur de l'identifiant du distributeur.
      * @return id du distributeur.
@@ -66,14 +61,14 @@ public class Distributeur {
      * @brief Accesseur du poids total du distributeur.
      * @return poidsTotal la valeur du poids total du distributeur.
      */
-    public float getPoidsTotal(){
+    public double getPoidsTotal(){
         return this.poidsTotal;
     }
     /**
      * @brief Accesseur du poids actuel du distributeur.
      * @return poidsActuel la valeur du poids actuel du distributeur.
      */
-    public float getPoidsActuel(){
+    public double getPoidsActuel(){
         return this.poidsActuel;
     }
     /**
@@ -103,7 +98,7 @@ public class Distributeur {
      * @brief Mutateur du poids total du distributeur.
      * @param nouveauPoids.
      */
-    public void changerPoidsTotal(float nouveauPoids){
+    public void changerPoidsTotal(double nouveauPoids){
         this.poidsTotal = nouveauPoids;
     }
     /**
