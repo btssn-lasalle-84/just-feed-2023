@@ -33,7 +33,7 @@ public class Distributeur
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, int prix, double poidsTotal, double poidsActuel, int hydrometrie, Produit produit)
+     * @see Distributeur(int id, double poidsTotal, double poidsActuel, int hydrometrie, Produit produit)
      * @param id L'identifiant du distributeur.
      * @param poidsTotal Le poids total du contenue du distributeur.
      * @param poidsActuel Le poids actuel du contenue du distributeur.

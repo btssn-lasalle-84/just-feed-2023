@@ -7,9 +7,19 @@
 package com.justfeed.justfeedandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @class JustFeed
@@ -25,10 +35,12 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private Intervention[] interventions;
-    private Distributeur[] distributeurs;
-    private BaseDeDonnees baseDeDonnees;
-
+    private List<Intervention> interventions; //!< Liste des interventions
+    private List<Distributeur> distributeurs; //!< Liste des distributeurs
+    private BaseDeDonnees baseDeDonnees; //!< Identifiants pour la base de données
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
     /**
      * Ressources GUI
      */
@@ -41,6 +53,13 @@ public class JustFeed extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        distributeurs = recupererDistributeurs();
+        recyclerView = (RecyclerView) findViewById(R.id.listeDistributeurs);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new DistributeurAdapter(distributeurs);
+        recyclerView.setAdapter(adapter);
         Log.d(TAG, "onCreate()");
     }
 
@@ -94,6 +113,16 @@ public class JustFeed extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
-    public void listerDistributeurs(){};
-    public void visualiserInterventions(){};
+    private List<Distributeur> recupererDistributeurs(){
+        /**
+         * @todo récupérer les informations des distributeurs sur la base de données
+         */
+        List<Distributeur> distributeurs = Arrays.asList(
+                new Distributeur(8456, 5, 3, 2, new Produit(2, 2, "cacahuètes")),
+                new Distributeur(8457, 10, 8, 4, new Produit(3, 1, "riz")),
+                new Distributeur(8458, 8, 8, 2, new Produit(4, 2, "fèves"))
+        );
+
+        return distributeurs;
+    }
 }
