@@ -6,10 +6,11 @@ package com.justfeed.justfeedandroid;
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class Produit {
-    private int prix; //!< prix du produit
-    private int poidsDuProduit; //!< poids à l'unité du produit
-    private final String nom; //!< nom du produit
+public class Produit
+{
+    private int          prix;           //!< prix du produit
+    private int          poidsDuProduit; //!< poids à l'unité du produit
+    private final String nom;            //!< nom du produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
@@ -20,17 +21,18 @@ public class Produit {
      */
     public Produit(int prix, int poidsDuProduit, String nom)
     {
-        this.prix = prix;
+        this.prix           = prix;
         this.poidsDuProduit = poidsDuProduit;
-        this.nom = nom;
+        this.nom            = nom;
     }
 
-    //Accesseurs
+    // Accesseurs
     /**
      * @brief Accesseur du prix du produit.
      * @return prix le prix du produit
      */
-    public int getPrix(){
+    public int getPrix()
+    {
         return this.prix;
     }
 
@@ -38,7 +40,8 @@ public class Produit {
      * @brief Accesseur du poids du produit.
      * @return poidsDuProduit le poids du produit à l'unité
      */
-    public int getPoidsDuProduit(){
+    public int getPoidsDuProduit()
+    {
         return this.poidsDuProduit;
     }
 
@@ -46,16 +49,18 @@ public class Produit {
      * @brief Accesseur du nom du produit.
      * @return nom le nom du produit
      */
-    public String getNom(){
+    public String getNom()
+    {
         return this.nom;
     }
 
-    //Mutateur
+    // Mutateur
     /**
      * @brief Mutateur du prix du produit.
      * @param nouveauPrix le nouveau prix du produit
      */
-    public void modifierPrix(int nouveauPrix){
+    public void modifierPrix(int nouveauPrix)
+    {
         this.prix = nouveauPrix;
     }
 }

@@ -30,7 +30,7 @@ public class JustFeed extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG = "_JustFeed_";  //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_JustFeed_"; //!< TAG pour les logs (cf. Logcat)
 
     /**
      * Attributs
@@ -48,8 +48,7 @@ public class JustFeed extends AppCompatActivity
     /**
      * @brief Méthode appelée à la création de l'activité
      */
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
+    @Override protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -64,10 +63,10 @@ public class JustFeed extends AppCompatActivity
     }
 
     /**
-     * @brief Méthode appelée au démarrage après le onCreate() ou un restart après un onStop()
+     * @brief Méthode appelée au démarrage après le onCreate() ou un restart
+     * après un onStop()
      */
-    @Override
-    protected void onStart()
+    @Override protected void onStart()
     {
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -76,18 +75,17 @@ public class JustFeed extends AppCompatActivity
     /**
      * @brief Méthode appelée après onStart() ou après onPause()
      */
-    @Override
-    protected void onResume()
+    @Override protected void onResume()
     {
         super.onResume();
         Log.d(TAG, "onResume()");
     }
 
     /**
-     * @brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on reprend sur un onResume()) ou avant onStop() (activité plus visible)
+     * @brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on
+     * reprend sur un onResume()) ou avant onStop() (activité plus visible)
      */
-    @Override
-    protected void onPause()
+    @Override protected void onPause()
     {
         super.onPause();
         Log.d(TAG, "onPause()");
@@ -96,18 +94,17 @@ public class JustFeed extends AppCompatActivity
     /**
      * @brief Méthode appelée lorsque l'activité n'est plus visible
      */
-    @Override
-    protected void onStop()
+    @Override protected void onStop()
     {
         super.onStop();
         Log.d(TAG, "onStop()");
     }
 
     /**
-     * @brief Méthode appelée à la destruction de l'application (après onStop() et détruite par le système Android)
+     * @brief Méthode appelée à la destruction de l'application (après onStop()
+     * et détruite par le système Android)
      */
-    @Override
-    protected void onDestroy()
+    @Override protected void onDestroy()
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
