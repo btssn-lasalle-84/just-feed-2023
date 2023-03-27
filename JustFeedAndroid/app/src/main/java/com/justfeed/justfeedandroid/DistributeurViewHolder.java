@@ -5,7 +5,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class DistributeurViewHolder extends RecyclerView.ViewHolder {
+public class DistributeurViewHolder extends RecyclerView.ViewHolder
+{
     private final TextView identifiant;
     private final TextView typeProduit;
 
@@ -16,7 +17,8 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder {
 
     private Distributeur distributeur;
 
-    public DistributeurViewHolder(final View itemView){
+    public DistributeurViewHolder(final View itemView)
+    {
         super(itemView);
 
         identifiant = ((TextView)itemView.findViewById(R.id.identifiant));
@@ -27,7 +29,8 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder {
         hydrometrie = ((TextView)itemView.findViewById(R.id.hydrometrie));
     }
 
-    public void afficherDistributeur(Distributeur distributeur){
+    public void afficherDistributeur(Distributeur distributeur)
+    {
         this.distributeur = distributeur;
 
         identifiant.setText(distributeur.getIdentifiant());

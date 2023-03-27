@@ -113,7 +113,8 @@ public class JustFeed extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
-    private List<Distributeur> recupererDistributeurs(){
+    private List<Distributeur> recupererDistributeurs()
+    {
         /**
          * @todo récupérer les informations des distributeurs sur la base de données
          */
