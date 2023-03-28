@@ -38,5 +38,6 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         prixProduit.setText(distributeur.getProduit().getPrix() + " €");
         poidsTotal.setText(distributeur.getPoidsTotal() + " kg");
         poidsActuel.setText(distributeur.getPoidsActuel() + " kg");
+        hydrometrie.setText(distributeur.getHydrometrie());
     }
 }

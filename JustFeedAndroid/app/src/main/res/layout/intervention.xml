@@ -8,53 +8,46 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/distributeurCarte"
+        android:id="@+id/carteIntervention"
         android:layout_width="397dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="60dp" >
 
         <TextView
-            android:id="@+id/identifiant"
+            android:id="@+id/numeroIntervention"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="91dp" />
 
         <TextView
-            android:id="@+id/typeProduit"
+            android:id="@+id/heureIntervention"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="180dp" />
 
         <TextView
-            android:id="@+id/prixProduit"
+            android:id="@+id/tempsTrajet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="180dp" />
 
         <TextView
-            android:id="@+id/poidsTotal"
+            android:id="@+id/poidsARemplir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="141dp" />
 
         <TextView
-            android:id="@+id/poidsActuel"
+            android:id="@+id/aIntervenir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:layout_editor_absoluteX="48dp"
             tools:layout_editor_absoluteY="219dp" />
-
-        <TextView
-            android:id="@+id/hydrometrie"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="255dp" />
 
     </androidx.cardview.widget.CardView>
 

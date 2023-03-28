@@ -35,12 +35,12 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private List<Intervention> interventions; //!< Liste des interventions
-    private List<Distributeur> distributeurs; //!< Liste des distributeurs
+    private List<Intervention> vueListeInterventions; //!< Liste des interventions
+    private List<Distributeur> vueListeDistributeurs; //!< Liste des distributeurs
     private BaseDeDonnees baseDeDonnees; //!< Identifiants pour la base de données
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
+    private RecyclerView.LayoutManager layoutVueListeDistributeurs;
     /**
      * Ressources GUI
      */
@@ -52,12 +52,12 @@ public class JustFeed extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        distributeurs = recupererDistributeurs();
+        vueListeDistributeurs = recupererDistributeurs();
         recyclerView = (RecyclerView) findViewById(R.id.listeDistributeurs);
         recyclerView.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        adapter = new DistributeurAdapter(distributeurs);
+        layoutVueListeDistributeurs = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutVueListeDistributeurs);
+        adapter = new DistributeurAdapter(vueListeDistributeurs);
         recyclerView.setAdapter(adapter);
         Log.d(TAG, "onCreate()");
     }
