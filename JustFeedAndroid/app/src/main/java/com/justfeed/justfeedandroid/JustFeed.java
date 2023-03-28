@@ -19,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @class JustFeed
@@ -52,7 +54,7 @@ public class JustFeed extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        listeDistributeurs = recupererDistributeurs();
+        recupererDistributeurs();
         vueListeDistributeurs = (RecyclerView) findViewById(R.id.listeDistributeurs);
         vueListeDistributeurs.setHasFixedSize(true);
         layoutVueListeDistributeurs = new LinearLayoutManager(this);
@@ -110,17 +112,40 @@ public class JustFeed extends AppCompatActivity
         Log.d(TAG, "onDestroy()");
     }
 
-    private List<Distributeur> recupererDistributeurs()
+    public void visualiserInterventions()
+    {
+        /**
+         * @todo méthode qui invoque la méthode afficherInterventions() pour créer une seconde activité
+         */
+    }
+
+    private void recupererDistributeurs()
     {
         /**
          * @todo récupérer les informations des distributeurs sur la base de données
          */
-        List<Distributeur> distributeurs = Arrays.asList(
-                new Distributeur(8456, 5, 3, 2, new Produit(2, 2, "cacahuètes")),
-                new Distributeur(8457, 10, 8, 4, new Produit(3, 1, "riz")),
-                new Distributeur(8458, 8, 8, 2, new Produit(4, 2, "fèves"))
+        List<Produit> produits = Arrays.asList(
+                new Produit(2, 0.005, 0.00003, "cacahuètes"),
+                new Produit(3, 0.001, 0.00001, "riz"),
+                new Produit(4, 0.004, 0.00003,"fèves")
         );
 
-        return distributeurs;
+        Map<Produit, String> bacs = new HashMap<Produit, String>();
+        bacs.put(produits.get(0), "1.3");
+        bacs.put(produits.get(1), "0.8");
+        bacs.put(produits.get(2), "1.06");
+
+        this.listeDistributeurs = Arrays.asList(
+                new Distributeur(8456, bacs, 2, produits),
+                new Distributeur(8457, bacs, 4, produits),
+                new Distributeur(8458, bacs, 2, produits)
+        );
+    }
+
+    private void recupererInterventions()
+    {
+        /**
+         * @todo récupérer les informations des interventions sur la base de données
+         */
     }
 }

@@ -9,20 +9,24 @@ package com.justfeed.justfeedandroid;
 public class Produit
 {
     private int          prix;           //!< prix du produit
-    private int          poidsDuProduit; //!< poids à l'unité du produit
+    private double       poidsDuProduit; //!< poids en kg à l'unité du produit
+
+    private double       volumeProduit;  //!< Volume du produit en dm3
     private final String nom;            //!< nom du produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
-     * @see Produit(int prix, int poidsDuProduit, String nom)
+     * @see Produit(int prix, double poidsDuProduit, double volumeProduit, String nom)
      * @param prix le prix du produit.
      * @param poidsDuProduit le poid du produit à l'unité.
+     * @param volumeProduit le volume du produit.
      * @param nom le nom du produit.
      */
-    public Produit(int prix, int poidsDuProduit, String nom)
+    public Produit(int prix, double poidsDuProduit, double volumeProduit, String nom)
     {
         this.prix           = prix;
         this.poidsDuProduit = poidsDuProduit;
+        this.volumeProduit  = volumeProduit;
         this.nom            = nom;
     }
 
@@ -40,9 +44,18 @@ public class Produit
      * @brief Accesseur du poids du produit.
      * @return poidsDuProduit le poids du produit à l'unité
      */
-    public int getPoidsDuProduit()
+    public double getPoidsDuProduit()
     {
         return this.poidsDuProduit;
+    }
+
+    /**
+     * @brief Accesseur du volume du produit.
+     * @return volumeProduit le volume du produit à l'unité
+     */
+    public double getVolume()
+    {
+        return this.volumeProduit;
     }
 
     /**

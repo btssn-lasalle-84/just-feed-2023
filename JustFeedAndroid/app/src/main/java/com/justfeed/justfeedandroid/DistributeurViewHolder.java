@@ -43,14 +43,27 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
 
     public void afficherDistributeur(Distributeur distributeur)
     {
+        String listeProduits   = "";
+        String prixProduits    = "";
+        String poidsTotalBacs  = "";
+        String poidsActuelBacs = "";
+
         this.distributeur = distributeur;
-        Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant() + " - " + distributeur.getProduit().getNom());
+        Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
+
+        for (Produit produit: distributeur.getProduits())
+        {
+            listeProduits.concat(produit.getNom()+" ");
+            prixProduits.concat(produit.getPrix()+" € ");
+            poidsTotalBacs.concat(distributeur.getPoidsTotalBac(produit)+" kg ");
+            poidsActuelBacs.concat(" "+distributeur.getPoidsActuel(produit)+" kg ");
+        }
 
         identifiant.setText(String.valueOf(distributeur.getIdentifiant()));
-        typeProduit.setText("Produit : " + distributeur.getProduit().getNom());
-        prixProduit.setText(distributeur.getProduit().getPrix() + " €");
-        poidsTotal.setText(distributeur.getPoidsTotal() + " kg");
-        poidsActuel.setText(distributeur.getPoidsActuel() + " kg");
+        typeProduit.setText("Produits : " + listeProduits);
+        prixProduit.setText(prixProduits);
+        poidsTotal.setText(poidsTotalBacs);
+        poidsActuel.setText(poidsActuelBacs);
         hydrometrie.setText(distributeur.getHydrometrie());
     }
 }
