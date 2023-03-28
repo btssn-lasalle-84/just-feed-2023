@@ -35,12 +35,12 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private List<Intervention> vueListeInterventions; //!< Liste des interventions
-    private List<Distributeur> vueListeDistributeurs; //!< Liste des distributeurs
+    private List<Intervention> listeInterventions; //!< Liste des interventions
+    private List<Distributeur> listeDistributeurs; //!< Liste des distributeurs
     private BaseDeDonnees baseDeDonnees; //!< Identifiants pour la base de données
-    private RecyclerView recyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutVueListeDistributeurs;
+    private RecyclerView vueListeDistributeurs; //!< Affichage de la liste des distributeurs
+    private RecyclerView.Adapter adapteurDistributeur; //!< Remplit les vues des distributeurs
+    private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
     /**
      * Ressources GUI
      */
@@ -52,13 +52,13 @@ public class JustFeed extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        vueListeDistributeurs = recupererDistributeurs();
-        recyclerView = (RecyclerView) findViewById(R.id.listeDistributeurs);
-        recyclerView.setHasFixedSize(true);
+        listeDistributeurs = recupererDistributeurs();
+        vueListeDistributeurs = (RecyclerView) findViewById(R.id.listeDistributeurs);
+        vueListeDistributeurs.setHasFixedSize(true);
         layoutVueListeDistributeurs = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutVueListeDistributeurs);
-        adapter = new DistributeurAdapter(vueListeDistributeurs);
-        recyclerView.setAdapter(adapter);
+        vueListeDistributeurs.setLayoutManager(layoutVueListeDistributeurs);
+        adapteurDistributeur = new DistributeurAdapter(listeDistributeurs);
+        vueListeDistributeurs.setAdapter(adapteurDistributeur);
         Log.d(TAG, "onCreate()");
     }
 

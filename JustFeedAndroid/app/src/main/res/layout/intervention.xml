@@ -9,10 +9,10 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/carteIntervention"
-        android:layout_width="397dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="60dp" >
+        app:layout_constraintBottom_toTopOf="parent" >
 
         <TextView
             android:id="@+id/numeroIntervention"
