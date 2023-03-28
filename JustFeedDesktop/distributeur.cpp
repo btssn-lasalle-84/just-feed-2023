@@ -1,7 +1,8 @@
 /**
  * @file        distributeur.cpp
  * @brief       Définition de la classe Distributeur.
- * @details     La classe Distrubuteur \c Cette classe permet définir un distributeur
+ * @details     La classe Distributeur \c Cette classe permet définir un
+ * distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -10,37 +11,39 @@
 #include "distributeur.h"
 
 /**
- * @todo Il faut initialiser les attributs !
+ * @brief Constructeur par défaut de la classe Distributeur
  */
-
-/**
- * @brief Constructeur par défault de la classe Distributeur
- * @see Distributeur
- */
-Distributeur::Distributeur() : identifiant(0), produit(), poidsTotal(0), poidsActuel(0),hydroetrie(0), position(), aIntervenir(false)
+Distributeur::Distributeur() :
+    identifiant(0), produit(), poidsTotal(0), poidsActuel(0), hydrometrie(0),
+    position(), aIntervenir(false)
 {
 }
 
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
- * @see Distributeur
  */
-Distributeur::Distributeur(int identifiant, Produit produit, int poidsTotal, int poidsActuel, int hydroetrie,Localisation position, bool aIntervenir)
-    : identifiant(identifiant), produit(produit), poidsTotal(poidsTotal), poidsActuel(poidsActuel),hydroetrie(hydroetrie), position(position), aIntervenir(aIntervenir)
+Distributeur::Distributeur(int          identifiant,
+                           Produit      produit,
+                           int          poidsTotal,
+                           int          poidsActuel,
+                           int          hydrometrie,
+                           Localisation position,
+                           bool         aIntervenir) :
+    identifiant(identifiant),
+    produit(produit), poidsTotal(poidsTotal), poidsActuel(poidsActuel),
+    hydrometrie(hydrometrie), position(position), aIntervenir(aIntervenir)
 {
-
 }
 
 /**
  * @brief Destructeur de la classe Distributeur
- * @see Distributeur
  */
 Distributeur::~Distributeur()
 {
 }
 
 /**
- * @brief Accesseur de l'attribut identifiant.
+ * @brief Accesseur de l'attribut identifiant
  * @return un entier qui represente l'identifiant du distributeur
  */
 int Distributeur::getIdentifiant() const
@@ -49,7 +52,7 @@ int Distributeur::getIdentifiant() const
 }
 
 /**
- * @brief Accesseur de l'attribut produit.
+ * @brief Accesseur de l'attribut produit
  * @return un Produits qui represente le produit que contient le
  * distributeur
  */
@@ -59,17 +62,17 @@ Produit Distributeur::getProduit() const
 }
 
 /**
- * @brief Accesseur de l'attribut hydrometrie.
- * @return un entier qui represente le degres d'humidité dans le
+ * @brief Accesseur de l'attribut hydrometrie
+ * @return un entier qui represente le degré d'humidité dans le
  * distributeur
  */
 int Distributeur::getHydrometrie() const
 {
-    return this->hydroetrie;
+    return this->hydrometrie;
 }
 
 /**
- * @brief Accesseur de l'attribut position.
+ * @brief Accesseur de l'attribut position
  * @return une Localisaton qui represente la géolocalisation du distributeur
  */
 Localisation Distributeur::getPosition() const
@@ -78,7 +81,7 @@ Localisation Distributeur::getPosition() const
 }
 
 /**
- * @brief Accesseur de l'attribut poidsTotal.
+ * @brief Accesseur de l'attribut poidsTotal
  * @return un entier qui represente le poids total que peut contenir le
  * distributeur
  */
@@ -88,8 +91,8 @@ int Distributeur::getPoidsTotal() const
 }
 
 /**
- * @brief Accesseur de l'attribut poidsActuel.
- * @return un entier qui represente le poids actuel dans le distributeur.
+ * @brief Accesseur de l'attribut poidsActuel
+ * @return un entier qui represente le poids actuel dans le distributeur
  */
 int Distributeur::getPoidsActuel() const
 {
@@ -97,9 +100,9 @@ int Distributeur::getPoidsActuel() const
 }
 
 /**
- * @brief Accesseur de l'attribut AIntervenir.
- * @return un bool qui permet de savoir si il faut intervenir sur le
- * distributeur.
+ * @brief Accesseur de l'attribut AIntervenir
+ * @return un bool qui permet de savoir s'il faut intervenir sur le
+ * distributeur
  */
 int Distributeur::getAIntervenir() const
 {
@@ -107,8 +110,8 @@ int Distributeur::getAIntervenir() const
 }
 
 /**
- * @brief Mutateur de l'attribut Produit.
- * @param il prend en argument le produit du distributeur.
+ * @brief Mutateur de l'attribut Produit
+ * @param produit le type de produit que contient le distributeur
  */
 void Distributeur::setProduit(const Produit& produit)
 {
@@ -116,17 +119,17 @@ void Distributeur::setProduit(const Produit& produit)
 }
 
 /**
- * @brief Mutateur de l'attribut hydrométrie.
- * @param il prend en argument l'hydrometrie du distributeur.
+ * @brief Mutateur de l'attribut hydrométrie
+ * @param hydrometrie l'hydrometrie du distributeur
  */
 void Distributeur::setHydrometrie(int hydrometrie)
 {
-    this->hydroetrie = hydrometrie;
+    this->hydrometrie = hydrometrie;
 }
 
 /**
- * @brief Mutateur de l'attribut localisation.
- * @param il prend en argument la localisation du distributeur.
+ * @brief Mutateur de l'attribut localisation
+ * @param localisation la localisation du distributeur
  */
 void Distributeur::setPosition(const Localisation& localisation)
 {
@@ -134,8 +137,8 @@ void Distributeur::setPosition(const Localisation& localisation)
 }
 
 /**
- * @brief Mutateur de l'attribut poidsTotal.
- * @param il prend en argument le poids total du distributeur.
+ * @brief Mutateur de l'attribut poidsTotal
+ * @param poidsTotal le poids total du distributeur
  */
 void Distributeur::setPoidsTotal(int poidsTotal)
 {
@@ -144,7 +147,7 @@ void Distributeur::setPoidsTotal(int poidsTotal)
 
 /**
  * @briefmutateur de l'attribut poidsActuel
- * @param il prend en argument le poids actuel du distributeur.
+ * @param poidsActuel le poids actuel du distributeur
  */
 void Distributeur::setPoidsActuel(int poidsActuel)
 {
@@ -152,9 +155,9 @@ void Distributeur::setPoidsActuel(int poidsActuel)
 }
 
 /**
- * @briefmutateur de l'attribut aIntervenir.
- * @param il prend en argument un booleen qui détérmine l'état du
- * distributeur.
+ * @briefmutateur de l'attribut aIntervenir
+ * @param aIntervenir un booleen qui détérmine l'état du
+ * distributeur
  */
 void Distributeur::setAIntervenir(bool aIntervenir)
 {

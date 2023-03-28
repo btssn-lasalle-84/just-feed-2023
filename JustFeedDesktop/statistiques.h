@@ -1,7 +1,6 @@
 /**
  * @file        Statistiques.h
  * @brief       Déclaration de la classe Statistiques.
- * @details      La classe Statistiques \c Cette classe permet déclarer un objet Statistiques
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -19,7 +18,9 @@ class Statistiques
 
   public:
     Statistiques();
-    Statistiques(int frequenceIntervetion, int poidsMoyenProduits, int moyenneKilometres);
+    Statistiques(int frequenceIntervetion,
+                 int poidsMoyenProduits,
+                 int moyenneKilometres);
     ~Statistiques();
 
     // Accesseurs

@@ -10,22 +10,24 @@
 #include "serveur.h"
 
 /**
- * @brief Constructeur par défault de la classe Serveur
+ * @brief Constructeur par défaut de la classe Serveur
  * @see Intervention
  */
-Serveur::Serveur() :  port(0), hostName(""), utilisateur(""), motDePasse(0)
+Serveur::Serveur() : port(0), hostName(""), utilisateur(""), motDePasse("")
 {
 }
-
 
 /**
  * @brief Constructeur d'initialisation de la classe Serveur
  * @see Intervention
  */
-Serveur::Serveur(int port, QString hostName, QString utilisateur, int motDePasse) :
-    port(port), hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
+Serveur::Serveur(int     port,
+                 QString hostName,
+                 QString utilisateur,
+                 QString motDePasse) :
+    port(port),
+    hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
 {
-
 }
 
 /**
@@ -37,7 +39,7 @@ Serveur::~Serveur()
 }
 
 /**
- * @brief Accesseur de l'attribut port.
+ * @brief Accesseur de l'attribut port
  * @return un entier qui represente le port du serveur
  */
 int Serveur::getPort() const
@@ -46,7 +48,7 @@ int Serveur::getPort() const
 }
 
 /**
- * @brief Accesseur de l'attribut hostName.
+ * @brief Accesseur de l'attribut hostName
  * @return un QString
  */
 QString Serveur::getHostName() const
@@ -55,7 +57,7 @@ QString Serveur::getHostName() const
 }
 
 /**
- * @brief Accesseur de l'attribut utilisateur.
+ * @brief Accesseur de l'attribut utilisateur
  * @return un QString
  */
 QString Serveur::getUtilisateur() const
@@ -64,17 +66,17 @@ QString Serveur::getUtilisateur() const
 }
 
 /**
- * @brief Accesseur de l'attribut motDePasse.
- * @return un entier
+ * @brief Accesseur de l'attribut motDePasse
+ * @return un QString
  */
-int Serveur::getMotDePasse() const
+QString Serveur::getMotDePasse() const
 {
     return this->motDePasse;
 }
 
 /**
- * @brief Mutateur de l'attribut port.
- * @param il prend en argument le port du serveur.
+ * @brief Mutateur de l'attribut port
+ * @param port le port du serveur
  */
 void Serveur::setPort(const int port)
 {
@@ -82,28 +84,28 @@ void Serveur::setPort(const int port)
 }
 
 /**
- * @brief Mutateur de l'attribut hostName.
- * @param il prend en argument .  //TODO
+ * @brief Mutateur de l'attribut hostName
+ * @param hostname
  */
-void Serveur::setHostName(const QString hostName)
+void Serveur::setHostName(const QString& hostName)
 {
     this->hostName = hostName;
 }
 
 /**
- * @brief Mutateur de l'attribut utilisateur.
- * @param il prend en argument le nom de l'utilisateur.
+ * @brief Mutateur de l'attribut utilisateur
+ * @param utilisateur le nom de l'utilisateur
  */
-void Serveur::setUtilisateur(const QString utilisateur)
+void Serveur::setUtilisateur(const QString& utilisateur)
 {
     this->utilisateur = utilisateur;
 }
 
 /**
- * @brief Mutateur de l'attribut motDePasse.
- * @param il prend en argument le mot de passe.
+ * @brief Mutateur de l'attribut motDePasse
+ * @param motDePasse le mot de passe
  */
-void Serveur::setMotDePasse(const int motDePasse)
+void Serveur::setMotDePasse(const QString& motDePasse)
 {
     this->motDePasse = motDePasse;
 }

@@ -18,6 +18,11 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 {
     qDebug() << Q_FUNC_INFO;
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
+    resize(qApp->desktop()->availableGeometry(this).width(),
+           qApp->desktop()->availableGeometry(this).height());
+    setMinimumSize(qApp->desktop()->availableGeometry(this).width(),
+                   qApp->desktop()->availableGeometry(this).height());
+    // showMaximized();
 }
 
 /**

@@ -1,7 +1,6 @@
 /**
  * @file        distributeur.h
  * @brief       Déclaration de la classe Distributeur.
- * @details     La classe Distrubuteur \c Cette classe permet déclarer un objet distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -12,8 +11,7 @@
 
 /**
  * @struct Produit
- * @brief structure des differents produits qui peut avoir dans le distributeur
- *
+ * @brief Définit les propriétés d'un produit
  */
 struct Produit
 {
@@ -25,10 +23,12 @@ struct Produit
 /**
  * @struct Localisation
  * @brief Pour localiser un distributeur
- *
  */
 struct Localisation
 {
+    /**
+     * @todo Il manque des choses
+     */
     float latitude;
     float longitude;
 };
@@ -36,24 +36,29 @@ struct Localisation
 /**
  * @class       Distributeur
  * @brief       Déclaration de la classe Distributeur.
- * @details     La classe Distrubuteur \c Cette classe permet ...
+ * @details     La classe Distributeur \c Cette classe permet ...
  */
 class Distributeur
 {
   private:
-    int          identifiant; //!< identifiant du distributeur.
-    Produit      produit;     //!< type de produit que contient le distributeur.
-    int          poidsTotal;  //!< à définir.
-    int          poidsActuel; //!< à définir.
-    int          hydroetrie;  //!< hydrométrie de l'interieur du distributeur.
-    Localisation position;    //!< géolocalisation du distributeur.
+    int          identifiant; //!< identifiant du distributeur
+    Produit      produit;     //!< type de produit que contient le distributeur
+    int          poidsTotal;  //!< à définir
+    int          poidsActuel; //!< à définir
+    int          hydrometrie; //!< hydrométrie de l'interieur du distributeur
+    Localisation position;    //!< géolocalisation du distributeur
     bool         aIntervenir; //!< permet de savoir s'il faut intervenir sur le
-                              //!< distributeur.
+                              //!< distributeur
 
   public:
-
     Distributeur();
-    Distributeur(int identifiant, Produit produit, int poidsTotal, int poidsActuel, int hydroetrie,Localisation position, bool aIntervenir);
+    Distributeur(int          identifiant,
+                 Produit      produit,
+                 int          poidsTotal,
+                 int          poidsActuel,
+                 int          hydrometrie,
+                 Localisation position,
+                 bool         aIntervenir);
     ~Distributeur();
 
     // Accesseurs
