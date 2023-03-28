@@ -1,7 +1,7 @@
 /**
  * @file        distributeur.cpp
  * @brief       Définition de la classe Distributeur.
- * @details     La classe Distrubuteur \c Cette classe permet ...
+ * @details     La classe Distrubuteur \c Cette classe permet définir un distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -12,10 +12,29 @@
 /**
  * @todo Il faut initialiser les attributs !
  */
-Distributeur::Distributeur()
+
+/**
+ * @brief Constructeur par défault de la classe Distributeur
+ * @see Distributeur
+ */
+Distributeur::Distributeur() : identifiant(0), produit(), poidsTotal(0), poidsActuel(0),hydroetrie(0), position(), aIntervenir(false)
 {
 }
 
+/**
+ * @brief Constructeur d'initialisation de la classe Distributeur
+ * @see Distributeur
+ */
+Distributeur::Distributeur(int identifiant, Produit produit, int poidsTotal, int poidsActuel, int hydroetrie,Localisation position, bool aIntervenir)
+    : identifiant(identifiant), produit(produit), poidsTotal(poidsTotal), poidsActuel(poidsActuel),hydroetrie(hydroetrie), position(position), aIntervenir(aIntervenir)
+{
+
+}
+
+/**
+ * @brief Destructeur de la classe Distributeur
+ * @see Distributeur
+ */
 Distributeur::~Distributeur()
 {
 }

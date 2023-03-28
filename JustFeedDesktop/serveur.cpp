@@ -1,52 +1,109 @@
+/**
+ * @file        serveur.cpp
+ * @brief       Définition de la classe serveur.
+ * @details     La classe serveur \c Cette classe permet de définir le serveur
+ * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
+ * @version     0.1
+ * @date        2023
+ */
+
 #include "serveur.h"
 
 /**
- * @todo Il faut initialiser les attributs !
+ * @brief Constructeur par défault de la classe Serveur
+ * @see Intervention
  */
-Serveur::Serveur()
+Serveur::Serveur() :  port(0), hostName(""), utilisateur(""), motDePasse(0)
 {
 }
 
+
+/**
+ * @brief Constructeur d'initialisation de la classe Serveur
+ * @see Intervention
+ */
+Serveur::Serveur(int port, QString hostName, QString utilisateur, int motDePasse) :
+    port(port), hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
+{
+
+}
+
+/**
+ * @brief Destructeur de la classe Serveur
+ * @see Intervention
+ */
 Serveur::~Serveur()
 {
 }
 
-int Serveur::getPort()
+/**
+ * @brief Accesseur de l'attribut port.
+ * @return un entier qui represente le port du serveur
+ */
+int Serveur::getPort() const
 {
     return this->port;
 }
 
-QString Serveur::getHostName()
+/**
+ * @brief Accesseur de l'attribut hostName.
+ * @return un QString
+ */
+QString Serveur::getHostName() const
 {
     return this->hostName;
 }
 
-QString Serveur::getUtilisateur()
+/**
+ * @brief Accesseur de l'attribut utilisateur.
+ * @return un QString
+ */
+QString Serveur::getUtilisateur() const
 {
     return this->utilisateur;
 }
 
-int Serveur::getMotDePasse()
+/**
+ * @brief Accesseur de l'attribut motDePasse.
+ * @return un entier
+ */
+int Serveur::getMotDePasse() const
 {
     return this->motDePasse;
 }
 
-void Serveur::setPort(int port)
+/**
+ * @brief Mutateur de l'attribut port.
+ * @param il prend en argument le port du serveur.
+ */
+void Serveur::setPort(const int port)
 {
     this->port = port;
 }
 
-void Serveur::setHostName(QString hostName)
+/**
+ * @brief Mutateur de l'attribut hostName.
+ * @param il prend en argument .  //TODO
+ */
+void Serveur::setHostName(const QString hostName)
 {
     this->hostName = hostName;
 }
 
-void Serveur::setUtilisateur(QString utilisateur)
+/**
+ * @brief Mutateur de l'attribut utilisateur.
+ * @param il prend en argument le nom de l'utilisateur.
+ */
+void Serveur::setUtilisateur(const QString utilisateur)
 {
     this->utilisateur = utilisateur;
 }
 
-void Serveur::setMotDePasse(int motDePasse)
+/**
+ * @brief Mutateur de l'attribut motDePasse.
+ * @param il prend en argument le mot de passe.
+ */
+void Serveur::setMotDePasse(const int motDePasse)
 {
     this->motDePasse = motDePasse;
 }

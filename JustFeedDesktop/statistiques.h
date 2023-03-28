@@ -1,7 +1,7 @@
 /**
  * @file        Statistiques.h
  * @brief       Déclaration de la classe Statistiques.
- * @detail      La classe Statistiques \c Cette classe permet ...
+ * @details      La classe Statistiques \c Cette classe permet déclarer un objet Statistiques
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -19,17 +19,18 @@ class Statistiques
 
   public:
     Statistiques();
+    Statistiques(int frequenceIntervetion, int poidsMoyenProduits, int moyenneKilometres);
     ~Statistiques();
 
     // Accesseurs
-    int getFrequenceIntervetion();
-    int getPoidsMoyenProduits();
-    int getMoyenneKilometres();
+    int getFrequenceIntervetion() const;
+    int getPoidsMoyenProduits() const;
+    int getMoyenneKilometres() const;
 
     // Mutateurs
-    void setFrequenceIntervetion(int frequenceIntervetion);
-    void setPoidsMoyenProduits(int poidsMoyenProduits);
-    void setMoyenneKilometres(int moyenneKilometres);
+    void setFrequenceIntervetion(const int frequenceIntervetion);
+    void setPoidsMoyenProduits(const int poidsMoyenProduits);
+    void setMoyenneKilometres(const int moyenneKilometres);
 };
 
 #endif // STATISTIQUES_H

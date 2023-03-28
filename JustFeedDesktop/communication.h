@@ -1,7 +1,7 @@
 /**
  * @file        Communication.h
  * @brief       Déclaration de la classe Communication.
- * @details      La classe Communication \c Cette classe permet ...
+ * @details      La classe Communication \c Cette classe permet de déclarer un objet communication
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -17,7 +17,15 @@
 class Communication
 {
   public:
+    /**
+     * @brief Constructeur par défault de la classe Communication
+     * @see Distributeur
+     */
     Communication();
+    /**
+     * @brief Destructeur par défault de la classe Communication
+     * @see Distributeur
+     */
     ~Communication();
 };
 

@@ -1,7 +1,7 @@
 /**
  * @file        Serveur.h
  * @brief       Déclaration de la classe Serveur.
- * @detail      La classe Serveur \c Cette classe permet ...
+ * @details      La classe Serveur \c Cette classe permet déclarer un objet Serveur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -22,19 +22,20 @@ class Serveur
 
   public:
     Serveur();
+    Serveur(int port, QString hostName, QString utilisateur, int motDePasse);
     ~Serveur();
 
     // Accesseurs
-    int     getPort();
-    QString getHostName();
-    QString getUtilisateur();
-    int     getMotDePasse();
+    int     getPort() const;
+    QString getHostName() const;
+    QString getUtilisateur() const;
+    int     getMotDePasse() const;
 
     // Mutateurs
-    void setPort(int port);
-    void setHostName(QString hostName);
-    void setUtilisateur(QString utilisateur);
-    void setMotDePasse(int motDePasse);
+    void setPort(const int port);
+    void setHostName(const QString hostName);
+    void setUtilisateur(const QString utilisateur);
+    void setMotDePasse(const int motDePasse);
 };
 
 #endif // SERVEUR_H

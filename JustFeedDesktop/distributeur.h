@@ -1,7 +1,7 @@
 /**
  * @file        distributeur.h
  * @brief       Déclaration de la classe Distributeur.
- * @details     La classe Distrubuteur \c Cette classe permet ...
+ * @details     La classe Distrubuteur \c Cette classe permet déclarer un objet distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -12,7 +12,7 @@
 
 /**
  * @struct Produit
- * @brief ...
+ * @brief structure des differents produits qui peut avoir dans le distributeur
  *
  */
 struct Produit
@@ -29,9 +29,8 @@ struct Produit
  */
 struct Localisation
 {
-    /**
-     * @todo Définir les propriétés d'une Localisation
-     */
+    float latitude;
+    float longitude;
 };
 
 /**
@@ -52,8 +51,10 @@ class Distributeur
                               //!< distributeur.
 
   public:
-    Distributeur();  // TODO
-    ~Distributeur(); // TODO
+
+    Distributeur();
+    Distributeur(int identifiant, Produit produit, int poidsTotal, int poidsActuel, int hydroetrie,Localisation position, bool aIntervenir);
+    ~Distributeur();
 
     // Accesseurs
     int          getIdentifiant() const;

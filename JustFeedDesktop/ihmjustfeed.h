@@ -29,7 +29,7 @@
  * @class       IHMJustFeed
  * @brief       Déclaration de la classe IHMJustFeed.
  * @details      La classe IHMJustFeed \c Cette classe permet de définir la GUI
- * de l'application EcoClassroomDesktop
+ * de l'application JustFeed
  */
 class IHMJustFeed : public QWidget
 {

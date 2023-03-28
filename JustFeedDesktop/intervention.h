@@ -1,7 +1,7 @@
 /**
  * @file        Intervention.h
  * @brief       Déclaration de la classe Intervention.
- * @details      La classe Intervention \c Cette classe permet ...
+ * @details      La classe Intervention \c Cette classe permet déclarer un objet Intervention
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -21,25 +21,20 @@ class Intervention
 
   public:
     Intervention();
+    Intervention(QTime heureIntervention, int numeroIntervention, QTime tempsTrajet, double poidsARemplir);
     ~Intervention();
 
     // Accesseurs
-    /**
-     * @todo Il faut penser const !
-     */
-    QTime  getHeureIntervention();
-    int    getNumeroIntervention();
-    QTime  getTempsTrajet();
-    double getPoidsARemplir();
+    QTime  getHeureIntervention() const;
+    int    getNumeroIntervention() const;
+    QTime  getTempsTrajet() const;
+    double getPoidsARemplir() const;
 
     // Mutateurs
-    /**
-     * @todo Il faut penser référence et const ou pas const !
-     */
-    void setHeureIntervention(QTime heureIntervention);
-    void setNumeroIntervention(int numeroIntervention);
-    void setTempsTrajet(QTime tempsTrajet);
-    void setPoidsARemplir(double poidsARemplir);
+    void setHeureIntervention(const QTime heureIntervention);
+    void setNumeroIntervention(const int numeroIntervention);
+    void setTempsTrajet(const QTime tempsTrajet);
+    void setPoidsARemplir(const double poidsARemplir);
 };
 
 #endif // INTERVENTION_H
