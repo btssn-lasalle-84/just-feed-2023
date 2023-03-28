@@ -1,5 +1,6 @@
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -7,19 +8,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class DistributeurViewHolder extends RecyclerView.ViewHolder
 {
-    private final TextView identifiant;
-    private final TextView typeProduit;
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_DistributeurViewHolder"; //!< TAG pour les logs
 
-    private final TextView prixProduit;
-    private final TextView poidsTotal;
-    private final TextView poidsActuel;
-    private final TextView hydrometrie;
-
+    /**
+     * Attributs
+     */
     private Distributeur distributeur;
+
+    /**
+     * Ressources GUI
+     */
+    private TextView identifiant;
+    private TextView typeProduit;
+    private TextView prixProduit;
+    private TextView poidsTotal;
+    private TextView poidsActuel;
+    private TextView hydrometrie;
 
     public DistributeurViewHolder(final View itemView)
     {
         super(itemView);
+        Log.d(TAG, "DistributeurViewHolder()");
 
         identifiant = ((TextView)itemView.findViewById(R.id.identifiant));
         typeProduit = ((TextView)itemView.findViewById(R.id.typeProduit));
@@ -32,8 +44,9 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
     public void afficherDistributeur(Distributeur distributeur)
     {
         this.distributeur = distributeur;
+        Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant() + " - " + distributeur.getProduit().getNom());
 
-        identifiant.setText(distributeur.getIdentifiant());
+        identifiant.setText(String.valueOf(distributeur.getIdentifiant()));
         typeProduit.setText("Produit : " + distributeur.getProduit().getNom());
         prixProduit.setText(distributeur.getProduit().getPrix() + " €");
         poidsTotal.setText(distributeur.getPoidsTotal() + " kg");

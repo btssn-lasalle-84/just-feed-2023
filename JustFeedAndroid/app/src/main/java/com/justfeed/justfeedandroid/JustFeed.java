@@ -30,7 +30,7 @@ public class JustFeed extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG = "_JustFeed_"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
 
     /**
      * Attributs
