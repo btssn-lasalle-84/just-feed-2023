@@ -1,5 +1,6 @@
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -8,17 +9,29 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 public class InterventionViewHolder extends ViewHolder
 {
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_InterventionViewHolder";
+
+    /**
+     * Attributs
+     */
+    private Intervention intervention;
+
+    /**
+     * Ressources GUI
+     */
     private final TextView numeroIntervention;
     private final TextView heureIntervention;
     private final TextView tempsTrajet;
     private final TextView poidsARemplir;
     private final TextView aIntervenir;
 
-    private Intervention intervention;
-
     public InterventionViewHolder(final View itemView)
     {
         super(itemView);
+        Log.d(TAG, "InterventionViewHolder()");
 
         numeroIntervention = ((TextView)itemView.findViewById(R.id.numeroIntervention));
         heureIntervention = ((TextView)itemView.findViewById(R.id.heureIntervention));

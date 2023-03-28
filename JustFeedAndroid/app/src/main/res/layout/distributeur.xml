@@ -18,43 +18,43 @@
             android:id="@+id/identifiant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="91dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/typeProduit" />
 
         <TextView
             android:id="@+id/typeProduit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/prixProduit" />
 
         <TextView
             android:id="@+id/prixProduit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/poidsTotal" />
 
         <TextView
             android:id="@+id/poidsTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="141dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/poidsActuel" />
 
         <TextView
             android:id="@+id/poidsActuel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="219dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/hydrometrie" />
 
         <TextView
             android:id="@+id/hydrometrie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="255dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </androidx.cardview.widget.CardView>
 

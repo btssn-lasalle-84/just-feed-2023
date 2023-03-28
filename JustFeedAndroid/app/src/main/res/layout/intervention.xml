@@ -18,36 +18,36 @@
             android:id="@+id/numeroIntervention"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="91dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/heureIntervention" />
 
         <TextView
             android:id="@+id/heureIntervention"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tempsTrajet" />
 
         <TextView
             android:id="@+id/tempsTrajet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="180dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/poidsARemplir" />
 
         <TextView
             android:id="@+id/poidsARemplir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="141dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/aIntervenir" />
 
         <TextView
             android:id="@+id/aIntervenir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:layout_editor_absoluteX="48dp"
-            tools:layout_editor_absoluteY="219dp" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintBottom_toTopOf="parent" />
 
     </androidx.cardview.widget.CardView>
 
