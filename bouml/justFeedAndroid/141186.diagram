@@ -1,0 +1,7 @@
+format 224
+
+classcanvas 128002 class_ref 128002 // operateur
+  simpleclassdiagramsettings end
+  xyz 124 131 2000
+end
+end
