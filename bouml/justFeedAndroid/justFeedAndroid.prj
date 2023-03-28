@@ -1,6 +1,6 @@
 format 224
 "justFeedAndroid"
-  revision 7
+  revision 8
   modified_by 2 "btssn2"
 
 
@@ -311,6 +311,13 @@ ${members}}
 	    classrelation_ref 128770 // <directional composition>
 	  b parent class_ref 134914 // Serveur
       end
+
+      classrelation 135298 // <directional aggregation>
+	relation 135042 o-->
+	  a role_name "" private
+	    classrelation_ref 135298 // <directional aggregation>
+	  b multiplicity "1..*" parent class_ref 134658 // Distributeur
+      end
     end
 
     class 134658 "Distributeur"
@@ -348,7 +355,7 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 128258 "poidTotal"
+      attribute 128258 "poidsTotal"
 	private explicit_type "int"
 	cpp_decl ""
 	java_decl ""
@@ -359,7 +366,7 @@ ${members}}
 	MysqlColumn
       end
 
-      attribute 128386 "poidActuelle"
+      attribute 128386 "poidsActuel"
 	private explicit_type "int"
 	cpp_decl ""
 	java_decl ""
@@ -525,7 +532,6 @@ ${members}}
 	MysqlColumn
       end
     end
-
   end
 
   usecaseview 134530 "justFeedAndroidDSS"
