@@ -25,7 +25,7 @@ public class Distributeur
      */
     private int                  id; //!< identifie le ditributeur.
 
-    private Map<Produit, String> bacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private Map<Produit, Double> bacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
     private int                  hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
     private List<Produit>        produits; //!< produits présents dans le distributeur.
 
@@ -43,14 +43,14 @@ public class Distributeur
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, Map<Produit, String> bacs, int hydrometrie, List<Produit> produits)
+     * @see Distributeur(int id, Map<Produit, Double> bacs, int hydrometrie, List<Produit> produits)
      * @param id L'identifiant du distributeur.
      * @param bacs Les bacs du distributeur.
      * @param hydrometrie Le degré d'humidité présent dans le distributeur.
      * @param produits Produits disponibles dans le distributeur.
      */
     public Distributeur(int     id,
-                        Map<Produit, String> bacs,
+                        Map<Produit, Double> bacs,
                         int     hydrometrie,
                         List<Produit> produits)
     {
@@ -81,7 +81,7 @@ public class Distributeur
      * @brief Accesseur du poids actuel d'un bac en kg.
      * @return le poids actuel d'un bac.
      */
-    public String getPoidsActuel(Produit produit)
+    public Double getPoidsActuel(Produit produit)
 
     {
         return this.bacs.get(produit);
@@ -109,7 +109,7 @@ public class Distributeur
     public boolean estRemplie(Produit produit)
     {
         boolean aRemplir = false;
-        if (Integer.parseInt(this.bacs.get(produit)) <= (getPoidsTotalBac(produit)/MOITIE))
+        if (this.bacs.get(produit) <= (getPoidsTotalBac(produit)/MOITIE))
         {
             aRemplir = true;
         }

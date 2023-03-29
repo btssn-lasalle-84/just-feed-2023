@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DecimalFormat;
+
 public class DistributeurViewHolder extends RecyclerView.ViewHolder
 {
     /**
@@ -43,27 +45,29 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
 
     public void afficherDistributeur(Distributeur distributeur)
     {
-        String listeProduits   = "";
-        String prixProduits    = "";
-        String poidsTotalBacs  = "";
-        String poidsActuelBacs = "";
+        String identifiant     = "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
+        String listeProduits   = "Produits : ";
+        String prixProduits    = "Prix : ";
+        String poidsTotalBacs  = "Poids Total : ";
+        String poidsActuelBacs = "Poids Actuel : ";
+        String hydrometrie     = "Hydrometrie : ".concat(Integer.toString(distributeur.getHydrometrie()));
 
         this.distributeur = distributeur;
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
 
         for (Produit produit: distributeur.getProduits())
         {
-            listeProduits.concat(produit.getNom()+" ");
-            prixProduits.concat(produit.getPrix()+" € ");
-            poidsTotalBacs.concat(distributeur.getPoidsTotalBac(produit)+" kg ");
-            poidsActuelBacs.concat(" "+distributeur.getPoidsActuel(produit)+" kg ");
+            listeProduits = listeProduits.concat(produit.getNom()).concat(" ");
+            prixProduits = prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
+            poidsTotalBacs = poidsTotalBacs.concat(String.format("%.2f", distributeur.getPoidsTotalBac(produit))).concat(" kg ");
+            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", distributeur.getPoidsActuel(produit))).concat(" kg ");
         }
 
-        identifiant.setText(String.valueOf(distributeur.getIdentifiant()));
-        typeProduit.setText("Produits : " + listeProduits);
+        this.identifiant.setText(identifiant);
+        typeProduit.setText(listeProduits);
         prixProduit.setText(prixProduits);
         poidsTotal.setText(poidsTotalBacs);
         poidsActuel.setText(poidsActuelBacs);
-        hydrometrie.setText(distributeur.getHydrometrie());
+        this.hydrometrie.setText(hydrometrie);
     }
 }
