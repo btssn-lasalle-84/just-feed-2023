@@ -95,22 +95,6 @@ public class Distributeur
         return listeBacs.get(numeroBac).getTypeProduit();
     }
     /**
-     * @brief Accesseur de l'état d'un bac du distributeur.
-     * @return aRemplir le booléen qui indique si le bac est à remplir.
-     */
-    public boolean estRemplie(int numeroBac)
-    {
-        /**
-         * @todo rajouter un booléen estImportant pour définir si le remplissage est vraiment nécessaire
-         */
-        boolean aRemplir = false;
-        if (listeBacs.get(numeroBac).getPoidsActuel() <= (getPoidsTotalBac(numeroBac)/MOITIE))
-        {
-            aRemplir = true;
-        }
-        return aRemplir;
-    }
-    /**
      * @brief Accesseur de l'hydrométrie du distributeur.
      * @return hydrometrie la valeur de l'hydrométrie du distributeur.
      */
@@ -118,6 +102,7 @@ public class Distributeur
     {
         return this.hydrometrie;
     }
+
     /**
      * @brief Mutateur du type de produit contenu dans un bac.
      * @param nouveauxProduits.

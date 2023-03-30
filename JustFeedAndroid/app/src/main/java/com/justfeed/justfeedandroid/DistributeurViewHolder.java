@@ -13,7 +13,8 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
     /**
      * Constantes
      */
-    private static final String TAG = "_DistributeurViewHolder"; //!< TAG pour les logs
+    private static final String   TAG                       = "_DistributeurViewHolder"; //!< TAG pour les logs
+    private final double          AUCUNE_QUANTITE_A_REMPLIR = 0.0; //!< Le bac n'a pas besoin d'être rempli
 
     /**
      * Attributs
@@ -45,13 +46,13 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
 
     public void afficherDistributeur(Distributeur distributeur)
     {
-        String identifiant     = "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
-        String listeProduits   = "Produits : ";
-        String prixProduits    = "Prix : ";
-        String poidsTotalBacs  = "Poids Total : ";
-        String poidsActuelBacs = "Poids Actuel : ";
-        String hydrometrie     = "Hydrometrie : ".concat(Integer.toString(distributeur.getHydrometrie()));
-        int    index           = 0;
+        String  identifiant     = "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
+        String  listeProduits   = "Produits : ";
+        String  prixProduits    = "Prix : ";
+        String  poidsTotalBacs  = "Poids Total : ";
+        String  poidsActuelBacs = "Poids Actuel : ";
+        String  hydrometrie     = "Hydrometrie : ".concat(Integer.toString(distributeur.getHydrometrie()));
+        int     index           = 0;
 
         this.distributeur = distributeur;
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());

@@ -13,6 +13,13 @@
         android:theme="@style/Theme.JustFeedAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".ActiviteInterventions"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".JustFeed"
             android:exported="true">
             <intent-filter>
