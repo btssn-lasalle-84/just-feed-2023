@@ -1,5 +1,8 @@
 package com.justfeed.justfeedandroid;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @brief Définition de la classe Distributeur
  * @details La classe distributeur \c Distributeur permet de décrire un
@@ -11,12 +14,20 @@ package com.justfeed.justfeedandroid;
  */
 public class Distributeur
 {
-    private int     id;          //!< identifie le ditributeur.
-    private double  poidsTotal;  //!< indique le poids total du distributeur.
-    private double  poidsActuel; //!< indique le poids actuel du distributeur.
-    private int     hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
-    private Produit produit;     //!< produit présent dans le distributeur.
-    private boolean aRemplir;    //<! état du besoin de remplissage du distributeur
+    /**
+     * Constantes
+     */
+    private final int VOLUME_BACS = 8; //!< Volume en dm3 d'un bac de 8 litres.
+    private final int MOITIE      = 2;
+
+    /**
+     * Attributs
+     */
+    private int                  id; //!< identifie le ditributeur.
+
+    private Map<Produit, Double> bacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private int                  hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
+    private List<Produit>        produits; //!< produits présents dans le distributeur.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -25,35 +36,28 @@ public class Distributeur
     public Distributeur()
     {
         this.id          = 0;
-        this.poidsTotal  = 0.0;
-        this.poidsActuel = 0.0;
+        this.bacs        = null;
         this.hydrometrie = 0;
-        this.produit     = null;
-        this.aRemplir    = false;
+        this.produits    = null;
     }
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, int prix, double poidsTotal, double
-     *   poidsActuel, int hydrometrie, Produit produit)
+     * @see Distributeur(int id, Map<Produit, Double> bacs, int hydrometrie, List<Produit> produits)
      * @param id L'identifiant du distributeur.
-     * @param poidsTotal Le poids total du contenue du distributeur.
-     * @param poidsActuel Le poids actuel du contenue du distributeur.
+     * @param bacs Les bacs du distributeur.
      * @param hydrometrie Le degré d'humidité présent dans le distributeur.
-     * @param produit Type de produit dans le distributeur.
+     * @param produits Produits disponibles dans le distributeur.
      */
     public Distributeur(int     id,
-                        double  poidsTotal,
-                        double  poidsActuel,
+                        Map<Produit, Double> bacs,
                         int     hydrometrie,
-                        Produit produit)
+                        List<Produit> produits)
     {
         this.id          = id;
-        this.poidsTotal  = poidsTotal;
-        this.poidsActuel = poidsActuel;
+        this.bacs        = bacs;
         this.hydrometrie = hydrometrie;
-        this.produit     = produit;
-        this.aRemplir    = false;
+        this.produits    = produits;
     }
 
     // Accesseurs
@@ -66,20 +70,21 @@ public class Distributeur
         return this.id;
     }
     /**
-     * @brief Accesseur du poids total du distributeur.
-     * @return poidsTotal la valeur du poids total du distributeur.
+     * @brief Accesseur du poids total d'un bac du distributeur en kg.
+     * @return Le poids total d'un bac du distributeur quant-il est plein.
      */
-    public double getPoidsTotal()
+    public double getPoidsTotalBac(Produit produit)
     {
-        return this.poidsTotal;
+        return ( VOLUME_BACS / produit.getVolume() ) * produit.getPoidsDuProduit();
     }
     /**
-     * @brief Accesseur du poids actuel du distributeur.
-     * @return poidsActuel la valeur du poids actuel du distributeur.
+     * @brief Accesseur du poids actuel d'un bac en kg.
+     * @return le poids actuel d'un bac.
      */
-    public double getPoidsActuel()
+    public Double getPoidsActuel(Produit produit)
+
     {
-        return this.poidsActuel;
+        return this.bacs.get(produit);
     }
     /**
      * @brief Accesseur de l'hydrométrie du distributeur.
@@ -90,45 +95,33 @@ public class Distributeur
         return this.hydrometrie;
     }
     /**
-     * @brief Accesseur du type de produit du distributeur.
-     * @return produit le type du produit.
+     * @brief Accesseur da la liste de produits du distributeur.
+     * @return produits la liste des produits disponibles.
      */
-    public Produit getProduit()
+    public List<Produit> getProduits()
     {
-        return this.produit;
+        return this.produits;
     }
     /**
      * @brief Accesseur de l'état du distributeur.
      * @return aRemplir le booléen qui indique si la machine est à remplir.
      */
-    public boolean estRemplie()
+    public boolean estRemplie(Produit produit)
     {
-        return this.aRemplir;
+        boolean aRemplir = false;
+        if (this.bacs.get(produit) <= (getPoidsTotalBac(produit)/MOITIE))
+        {
+            aRemplir = true;
+        }
+        return aRemplir;
     }
 
-    // Mutateurs
-    /**
-     * @brief Mutateur du poids total du distributeur.
-     * @param nouveauPoids.
-     */
-    public void changerPoidsTotal(double nouveauPoids)
-    {
-        this.poidsTotal = nouveauPoids;
-    }
     /**
      * @brief Mutateur du type de produit.
-     * @param nouveauProduit.
+     * @param nouveauxProduits.
      */
-    public void changerProduit(Produit nouveauProduit)
+    public void changerProduit(Produit ancienProduit, Produit nouveauProduit)
     {
-        this.produit = nouveauProduit;
-    }
-    /**
-     * @brief Mutateur de l'état du distributeur.
-     * @param nouvelEtat.
-     */
-    public void changerEtat(boolean nouvelEtat)
-    {
-        this.aRemplir = nouvelEtat;
+        this.produits.set(produits.indexOf(ancienProduit), nouveauProduit);
     }
 }
