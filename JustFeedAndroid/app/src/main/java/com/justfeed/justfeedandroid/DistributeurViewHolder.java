@@ -51,16 +51,20 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         String poidsTotalBacs  = "Poids Total : ";
         String poidsActuelBacs = "Poids Actuel : ";
         String hydrometrie     = "Hydrometrie : ".concat(Integer.toString(distributeur.getHydrometrie()));
+        int    index           = 0;
 
         this.distributeur = distributeur;
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
 
-        for (Produit produit: distributeur.getProduits())
+        for (Bac bac : distributeur.getListeBacs())
         {
+            Produit produit = bac.getTypeProduit();
             listeProduits = listeProduits.concat(produit.getNom()).concat(" ");
             prixProduits = prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
-            poidsTotalBacs = poidsTotalBacs.concat(String.format("%.2f", distributeur.getPoidsTotalBac(produit))).concat(" kg ");
-            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", distributeur.getPoidsActuel(produit))).concat(" kg ");
+            poidsTotalBacs = poidsTotalBacs.concat(String.format("%.2f", distributeur.getPoidsTotalBac(index))).concat(" kg ");
+            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", distributeur.getPoidsActuel(index))).concat(" kg ");
+
+            index++;
         }
 
         this.identifiant.setText(identifiant);

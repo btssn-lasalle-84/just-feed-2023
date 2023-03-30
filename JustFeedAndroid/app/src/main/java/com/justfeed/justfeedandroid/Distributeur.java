@@ -25,9 +25,8 @@ public class Distributeur
      */
     private int                  id; //!< identifie le ditributeur.
 
-    private Map<Produit, Double> bacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private List<Bac>            listeBacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
     private int                  hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
-    private List<Produit>        produits; //!< produits présents dans le distributeur.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -36,28 +35,24 @@ public class Distributeur
     public Distributeur()
     {
         this.id          = 0;
-        this.bacs        = null;
+        this.listeBacs   = null;
         this.hydrometrie = 0;
-        this.produits    = null;
     }
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, Map<Produit, Double> bacs, int hydrometrie, List<Produit> produits)
+     * @see Distributeur(int id, List<Bac> listeBacs, int hydrometrie)
      * @param id L'identifiant du distributeur.
-     * @param bacs Les bacs du distributeur.
+     * @param listeBacs Les bacs du distributeur.
      * @param hydrometrie Le degré d'humidité présent dans le distributeur.
-     * @param produits Produits disponibles dans le distributeur.
      */
     public Distributeur(int     id,
-                        Map<Produit, Double> bacs,
-                        int     hydrometrie,
-                        List<Produit> produits)
+                        List<Bac> listeBacs,
+                        int     hydrometrie)
     {
         this.id          = id;
-        this.bacs        = bacs;
+        this.listeBacs   = listeBacs;
         this.hydrometrie = hydrometrie;
-        this.produits    = produits;
     }
 
     // Accesseurs
@@ -70,21 +65,50 @@ public class Distributeur
         return this.id;
     }
     /**
+     * @brief Accesseur des bacs du distributeur
+     * @return listeBacs , la liste des bacs du distributeur
+     */
+    public List<Bac> getListeBacs() { return this.listeBacs; }
+    /**
      * @brief Accesseur du poids total d'un bac du distributeur en kg.
      * @return Le poids total d'un bac du distributeur quant-il est plein.
      */
-    public double getPoidsTotalBac(Produit produit)
+    public double getPoidsTotalBac(int numeroBac)
     {
+        Produit produit = listeBacs.get(numeroBac).getTypeProduit();
         return ( VOLUME_BACS / produit.getVolume() ) * produit.getPoidsDuProduit();
     }
     /**
      * @brief Accesseur du poids actuel d'un bac en kg.
      * @return le poids actuel d'un bac.
      */
-    public Double getPoidsActuel(Produit produit)
-
+    public double getPoidsActuel(int numeroBac)
     {
-        return this.bacs.get(produit);
+        return listeBacs.get(numeroBac).getPoidsActuel();
+    }
+    /**
+     * @brief Accesseur du produits présent dans un bac du distributeur.
+     * @return le type de produit contenu dans le bac.
+     */
+    public Produit getProduits(int numeroBac)
+    {
+        return listeBacs.get(numeroBac).getTypeProduit();
+    }
+    /**
+     * @brief Accesseur de l'état d'un bac du distributeur.
+     * @return aRemplir le booléen qui indique si le bac est à remplir.
+     */
+    public boolean estRemplie(int numeroBac)
+    {
+        /**
+         * @todo rajouter un booléen estImportant pour définir si le remplissage est vraiment nécessaire
+         */
+        boolean aRemplir = false;
+        if (listeBacs.get(numeroBac).getPoidsActuel() <= (getPoidsTotalBac(numeroBac)/MOITIE))
+        {
+            aRemplir = true;
+        }
+        return aRemplir;
     }
     /**
      * @brief Accesseur de l'hydrométrie du distributeur.
@@ -95,33 +119,11 @@ public class Distributeur
         return this.hydrometrie;
     }
     /**
-     * @brief Accesseur da la liste de produits du distributeur.
-     * @return produits la liste des produits disponibles.
-     */
-    public List<Produit> getProduits()
-    {
-        return this.produits;
-    }
-    /**
-     * @brief Accesseur de l'état du distributeur.
-     * @return aRemplir le booléen qui indique si la machine est à remplir.
-     */
-    public boolean estRemplie(Produit produit)
-    {
-        boolean aRemplir = false;
-        if (this.bacs.get(produit) <= (getPoidsTotalBac(produit)/MOITIE))
-        {
-            aRemplir = true;
-        }
-        return aRemplir;
-    }
-
-    /**
-     * @brief Mutateur du type de produit.
+     * @brief Mutateur du type de produit contenu dans un bac.
      * @param nouveauxProduits.
      */
-    public void changerProduit(Produit ancienProduit, Produit nouveauProduit)
+    public void changerProduit(int numeroBac, Produit nouveauProduit)
     {
-        this.produits.set(produits.indexOf(ancienProduit), nouveauProduit);
+        this.listeBacs.get(numeroBac).changerTypeProduit(nouveauProduit);
     }
 }

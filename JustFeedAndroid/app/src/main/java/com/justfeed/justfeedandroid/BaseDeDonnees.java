@@ -66,43 +66,29 @@ public class BaseDeDonnees
          * @todo récupérer les informations des distributeurs sur la base de données
          */
         Log.d(TAG, "recupererDistributeurs()");
-        List<Produit> listeProduits1 = Arrays.asList(
-                new Produit(0.70, 0.001, 0.004, "cacahuètes"),
-                new Produit(0.35, 0.00005, 0.0003, "riz"),
-                new Produit(0.50, 0.002, 0.003,"fèves")
+
+        List<Bac> bacsDistributeur1 = Arrays.asList(
+                new Bac(new Produit(0.70, 0.001, 0.004, "cacahuètes"), 1.5),
+                new Bac(new Produit(0.35, 0.00005, 0.0003, "riz"), 0.8),
+                new Bac(new Produit(0.50, 0.002, 0.003,"fèves"), 1.5)
         );
 
-        List<Produit> listeProduits2 = Arrays.asList(
-                new Produit(3.10, 0.003, 0.002, "Banane séchée"),
-                new Produit(3.20, 0.008, 0.004, "Abricot sec"),
-                new Produit(2.15, 0.002, 0.001,"raisin sec")
+        List<Bac> bacsDistributeur2 = Arrays.asList(
+                new Bac(new Produit(3.10, 0.003, 0.002, "Banane séchée"), 5.0),
+                new Bac(new Produit(3.20, 0.008, 0.004, "Abricot sec"), 14.0),
+                new Bac(new Produit(2.15, 0.002, 0.001,"raisin sec"), 10.5)
         );
 
-        List<Produit> listeProduits3 = Arrays.asList(
-                new Produit(3.55, 0.0006, 0.0005, "pistache"),
-                new Produit(1.45, 0.00035, 0.0004, "maïs séché"),
-                new Produit(4.49, 0.00006, 0.0005,"graine de café")
+        List<Bac> bacsDistributeur3 = Arrays.asList(
+                new Bac(new Produit(3.55, 0.0006, 0.0005, "pistache"), 9.6),
+                new Bac(new Produit(1.45, 0.00035, 0.0004, "maïs séché"), 4.5),
+                new Bac(new Produit(4.49, 0.00006, 0.0005,"graine de café"), 1.0)
         );
-
-        Map<Produit, Double> bacsDistributeur1 = new HashMap<Produit, Double>();
-        bacsDistributeur1.put(listeProduits1.get(0), 1.5);
-        bacsDistributeur1.put(listeProduits1.get(1), 0.8);
-        bacsDistributeur1.put(listeProduits1.get(2), 1.5);
-
-        Map<Produit, Double> bacsDistributeur2 = new HashMap<Produit, Double>();
-        bacsDistributeur2.put(listeProduits2.get(0), 5.0);
-        bacsDistributeur2.put(listeProduits2.get(1), 14.0);
-        bacsDistributeur2.put(listeProduits2.get(2), 10.5);
-
-        Map<Produit, Double> bacsDistributeur3 = new HashMap<Produit, Double>();
-        bacsDistributeur3.put(listeProduits3.get(0), 9.6);
-        bacsDistributeur3.put(listeProduits3.get(1), 4.5);
-        bacsDistributeur3.put(listeProduits3.get(2), 1.0);
 
         List<Distributeur> listeDistributeurs = Arrays.asList(
-                new Distributeur(8456, bacsDistributeur1, 2, listeProduits1),
-                new Distributeur(8457, bacsDistributeur2, 4, listeProduits2),
-                new Distributeur(8458, bacsDistributeur3, 2, listeProduits3)
+                new Distributeur(8456, bacsDistributeur1, 2),
+                new Distributeur(8457, bacsDistributeur2, 4),
+                new Distributeur(8458, bacsDistributeur3, 2)
         );
 
         return listeDistributeurs;
