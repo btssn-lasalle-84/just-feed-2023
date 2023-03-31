@@ -1,7 +1,7 @@
 format 224
 "JustFeedDesktop" // JustFeedDesktop
-  revision 1
-  modified_by 24 "btssn2"
+  revision 2
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -30,8 +30,8 @@ format 224
   activitydiagramsettings
    end
   
-  cpp_h_dir "/home/btssn2/Salaun/just-feed-2023/JustFeedDesktop/"
-  cpp_src_dir "/home/btssn2/Salaun/just-feed-2023/JustFeedDesktop/"
+  cpp_h_dir "JustFeedDesktop/"
+  cpp_src_dir "JustFeedDesktop/"
   classview 128024 "JustFeedDesktop"
     
     classdiagramsettings member_max_width 0 end
