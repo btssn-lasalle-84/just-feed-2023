@@ -18,7 +18,7 @@ class Bac
   private:
     Produit*     produit;     //!< produit que contient le bac
     unsigned int poidsActuel; //!< à définir
-    double       pourcentageRemplissage;
+    double       pourcentageRemplissage; //!< pourcentage de remplissage du bu bac
 
   public:
     Bac();

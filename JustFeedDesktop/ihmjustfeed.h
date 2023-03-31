@@ -13,6 +13,9 @@
 #include <QtWidgets>
 #include <QString>
 #include <QPushButton>
+#include <QVector>
+
+class Distributeur;
 
 /**
  * @def TITRE_APPLICATION
@@ -37,6 +40,7 @@ class IHMJustFeed : public QWidget
     Q_OBJECT
   private:
     QPushButton *configurer;
+    QVector<Distributeur*> distributeurs;
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();

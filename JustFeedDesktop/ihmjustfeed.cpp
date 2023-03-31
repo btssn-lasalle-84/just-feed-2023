@@ -22,6 +22,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
            qApp->desktop()->availableGeometry(this).height());
     setMinimumSize(qApp->desktop()->availableGeometry(this).width(),
                    qApp->desktop()->availableGeometry(this).height());*/
+    distributeurs.push_back(new Distributeur());
     show();
 }
 
