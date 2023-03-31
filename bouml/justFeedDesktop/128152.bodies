@@ -1,0 +1,9 @@
+class Produit
+!!!136746.cpp!!!	getPrix() : double
+    return this->prix;
+!!!136874.cpp!!!	getNom() : QString
+    return this->nom;
+!!!137002.cpp!!!	setPrix(in prix : double) : void
+    this->prix = prix;
+!!!137130.cpp!!!	setNom(in nom : QString) : void
+    this->nom = nom;

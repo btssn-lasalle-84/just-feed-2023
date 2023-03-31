@@ -22,52 +22,52 @@ fragment 134296 "opt"
   xyzwh 277 641 2030 312 168
 end
 durationcanvas 128152 classinstance_ref 128130 // :Opérateur
-  xyzwh 104 67 2010 11 40
+  xyzwh 139 67 2010 11 40
 end
 durationcanvas 128280 classinstance_ref 128024 // :système
-  xyzwh 317 67 2010 11 25
+  xyzwh 345 67 2010 11 25
 end
 durationcanvas 128536 classinstance_ref 128130 // :Opérateur
-  xyzwh 104 186 2010 11 91
+  xyzwh 139 186 2010 11 91
 end
 durationcanvas 128664 classinstance_ref 128024 // :système
-  xyzwh 317 182 2010 11 248
+  xyzwh 345 182 2010 11 248
   overlappingdurationcanvas 128920
-    xyzwh 323 253 2020 11 49
+    xyzwh 351 253 2020 11 49
   end
   overlappingdurationcanvas 130072
-    xyzwh 323 311 2020 11 25
+    xyzwh 351 311 2020 11 25
   end
   overlappingdurationcanvas 130584
-    xyzwh 323 393 2020 11 32
+    xyzwh 351 393 2020 11 32
   end
   overlappingdurationcanvas 130840
-    xyzwh 323 360 2020 11 25
+    xyzwh 351 360 2020 11 25
   end
 end
 durationcanvas 129560 classinstance_ref 128386 // :BDD
-  xyzwh 553 222 2010 11 25
+  xyzwh 569 222 2010 11 25
 end
 durationcanvas 131096 classinstance_ref 128130 // :Opérateur
-  xyzwh 104 619 2010 11 38
+  xyzwh 139 619 2010 11 38
 end
 durationcanvas 131224 classinstance_ref 128024 // :système
-  xyzwh 317 621 2010 11 164
+  xyzwh 345 621 2010 11 164
   overlappingdurationcanvas 131480
-    xyzwh 323 654 2020 11 25
+    xyzwh 351 654 2020 11 25
   end
   overlappingdurationcanvas 131736
-    xyzwh 323 684 2020 11 26
+    xyzwh 351 684 2020 11 26
   end
 end
 durationcanvas 132376 classinstance_ref 128386 // :BDD
-  xyzwh 553 741 2010 11 56
+  xyzwh 569 741 2010 11 56
 end
 durationcanvas 133272 classinstance_ref 128130 // :Opérateur
-  xyzwh 104 509 2010 11 50
+  xyzwh 139 509 2010 11 50
 end
 durationcanvas 133400 classinstance_ref 128024 // :système
-  xyzwh 317 509 2010 11 25
+  xyzwh 345 509 2010 11 25
 end
 msg 128408 asynchronous
   from durationcanvas_ref 128152

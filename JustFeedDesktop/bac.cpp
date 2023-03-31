@@ -1,6 +1,6 @@
 /**
  * @file        Bac.cpp
- * @brief       Déclaration de la classe Bac.
+ * @brief       Définition de la classe Bac.
  * @details     La classe Bac \c Cette classe permet de définir un bac
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
@@ -8,24 +8,33 @@
  */
 #include "bac.h"
 #include "produit.h"
+#include <QDebug>
 
 /**
- * @brief Constructeur par défaut de la classe bac
+ * @brief Constructeur par défaut de la classe Bac
  */
-Bac::Bac(): produit(NULL), poidsActuel(0), pourcentageRemplissage(0.),hydrometrie(0),
-    position(), aIntervenir(false)
+Bac::Bac() : produit(nullptr), poidsActuel(0), pourcentageRemplissage(0.)
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
  * @brief Constructeur d'initialisation du bac
  */
-Bac::Bac(Produit produit, unsigned int poidsActuel, float pourcentageRemplissage,int hydrometrie, Localisation position, bool aIntervenir) :
-    produit(new Produit(produit)), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage),
-    hydrometrie(hydrometrie), position(position), aIntervenir(aIntervenir)
+Bac::Bac(Produit* produit, unsigned int poidsActuel, double pourcentageRemplissage) :
+    produit(produit), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage)
 {
+    qDebug() << Q_FUNC_INFO;
+}
 
+/**
+ * @brief Constructeur de copie
+ */
+Bac::Bac(const Bac& bac) :
+    produit(bac.produit), poidsActuel(bac.poidsActuel),
+    pourcentageRemplissage(bac.pourcentageRemplissage)
+{
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
@@ -33,51 +42,44 @@ Bac::Bac(Produit produit, unsigned int poidsActuel, float pourcentageRemplissage
  */
 Bac::~Bac()
 {
-
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
  * @brief Accesseur de l'attribut produit
  * @return un Produits qui represente le produit que contient le
- * distributeur
+ * bac
+ */
+Produit* Bac::getProduit() const
+{
+    return produit;
+}
+
+/**
+ * @brief Retourne le nom du produit
+ * @return le nom du Produit que contient le bac
  */
 QString Bac::getNomProduit() const
 {
-    return produit->getNom();
+    if(produit != nullptr)
+        return produit->getNom();
+    return QString();
 }
 
 /**
- * @brief Accesseur de l'attribut produit
- * @return un Produits qui represente le produit que contient le
- * distributeur
+ * @brief Retourne le prix du produit
+ * @return le prix du produit que contient le bac
  */
 double Bac::getPrixProduit() const
 {
-    return produit->getPrix();
-}
-
-/**
- * @brief Accesseur de l'attribut hydrometrie
- * @return un entier qui represente le degré d'humidité dans le
- * distributeur
- */
-int Bac::getHydrometrie() const
-{
-    return this->hydrometrie;
-}
-
-/**
- * @brief Accesseur de l'attribut position
- * @return une Localisaton qui represente la géolocalisation du distributeur
- */
-Localisation Bac::getPosition() const
-{
-    return this->position;
+    if(produit != nullptr)
+        return produit->getPrix();
+    return 0.;
 }
 
 /**
  * @brief Accesseur de l'attribut poidsActuel
- * @return un entier qui represente le poids actuel dans le distributeur
+ * @return un entier qui represente le poids actuel dans le bac
  */
 unsigned int Bac::getPoidsActuel() const
 {
@@ -85,66 +87,39 @@ unsigned int Bac::getPoidsActuel() const
 }
 
 /**
- * @brief Accesseur de l'attribut AIntervenir
- * @return un bool qui permet de savoir s'il faut intervenir sur le
- * distributeur
+ * @brief Mutateur de l'attribut Produit
+ * @param produit le poduit que contient le bac
  */
-int Bac::getAIntervenir() const
+void Bac::setProduit(Produit* produit)
 {
-    return this->aIntervenir;
+    this->produit = produit;
 }
 
 /**
- * @brief Mutateur de l'attribut Produit
- * @param nomProduit le type de produit que contient le distributeur
+ * @brief Modifie le nom du produit
+ * @param nomProduit le nom de produit que contient le bac
  */
-void Bac::setNomProduit(const QString& NomProduit)
+void Bac::setNomProduit(const QString& nomProduit)
 {
-    this->produit->setNom(NomProduit);
+    if(produit != nullptr)
+        this->produit->setNom(nomProduit);
 }
 
 /**
- * @brief Mutateur de l'attribut Produit
- * @param prixProduit le prix du produit que contient le distributeur
+ * @brief Modifie le prix du produit
+ * @param prixProduit le prix du produit que contient le bac
  */
 void Bac::setPrixProduit(const int& prixProduit)
 {
-    this->produit->setPrix(prixProduit);
+    if(produit != nullptr)
+        this->produit->setPrix(prixProduit);
 }
 
 /**
- * @brief Mutateur de l'attribut hydrométrie
- * @param hydrometrie l'hydrometrie du distributeur
- */
-void Bac::setHydrometrie(int hydrometrie)
-{
-    this->hydrometrie = hydrometrie;
-}
-
-/**
- * @brief Mutateur de l'attribut localisation
- * @param localisation la localisation du distributeur
- */
-void Bac::setPosition(const Localisation& localisation)
-{
-    this->position = localisation;
-}
-
-/**
- * @briefmutateur de l'attribut poidsActuel
- * @param poidsActuel le poids actuel du distributeur
+ * @brief Mutateur de l'attribut poidsActuel
+ * @param poidsActuel le poids actuel du bac
  */
 void Bac::setPoidsActuel(int poidsActuel)
 {
     this->poidsActuel = poidsActuel;
-}
-
-/**
- * @briefmutateur de l'attribut aIntervenir
- * @param aIntervenir un booleen qui détérmine l'état du
- * distributeur
- */
-void Bac::setAIntervenir(bool aIntervenir)
-{
-    this->aIntervenir = aIntervenir;
 }

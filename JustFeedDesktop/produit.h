@@ -13,22 +13,22 @@
 
 class Produit
 {
-private :
-    double prix; //!< prix au 100 grammes du produit
-    QString nom; //!< nom du produit
+  private:
+    double  prix; //!< prix au 100 grammes du produit
+    QString nom;  //!< nom du produit
 
-public:
+  public:
     Produit();
     Produit(double prix, QString nom);
     ~Produit();
 
     // Accesseurs
-    double getPrix() const;
+    double  getPrix() const;
     QString getNom() const;
 
-    //Mutateurs
+    // Mutateurs
     void setPrix(const double prix);
-    void setNom(const QString nom);
+    void setNom(const QString& nom);
 };
 
 #endif // PRODUIT_H

@@ -1,7 +1,8 @@
 format 224
 "justFeedDesktop"
-  revision 6
-  modified_by 24 "btssn2"
+  revision 8
+  modified_by 42 "tv"
+  cpp_root_dir "../../"
 
 
   
@@ -386,7 +387,7 @@ ${inlines}
     activitydiagramsettings
      end
     classdiagram 128024 "Diagramme de classe"
-      classdiagramsettings draw_all_relations no member_max_width 0 end
+      classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
   end

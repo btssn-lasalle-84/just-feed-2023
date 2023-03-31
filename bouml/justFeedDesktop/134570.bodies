@@ -1,0 +1,31 @@
+class Bac
+!!!134570.cpp!!!	Bac()
+    qDebug() << Q_FUNC_INFO;
+!!!134698.cpp!!!	Bac(inout produit : Produit, in poidsActuel : uint, in pourcentageRemplissage : double = 100.)
+    qDebug() << Q_FUNC_INFO;
+!!!134826.cpp!!!	Bac(in bac : Bac)
+    qDebug() << Q_FUNC_INFO;
+!!!134954.cpp!!!	~Bac()
+    qDebug() << Q_FUNC_INFO;
+!!!135082.cpp!!!	getProduit() : Produit
+    return produit;
+!!!135210.cpp!!!	getNomProduit() : QString
+    if(produit != nullptr)
+        return produit->getNom();
+    return QString();
+!!!135338.cpp!!!	getPrixProduit() : double
+    if(produit != nullptr)
+        return produit->getPrix();
+    return 0.;
+!!!135466.cpp!!!	getPoidsActuel() : uint
+    return this->poidsActuel;
+!!!135594.cpp!!!	setProduit(inout produit : Produit) : void
+    this->produit = produit;
+!!!135722.cpp!!!	setNomProduit(in nomProduit : QString) : void
+    if(produit != nullptr)
+        this->produit->setNom(nomProduit);
+!!!135850.cpp!!!	setPrixProduit(in prixProduit : int) : void
+    if(produit != nullptr)
+        this->produit->setPrix(prixProduit);
+!!!135978.cpp!!!	setPoidsActuel(in poidsActuel : int) : void
+    this->poidsActuel = poidsActuel;

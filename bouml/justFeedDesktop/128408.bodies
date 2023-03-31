@@ -1,27 +1,29 @@
 class Distributeur
+!!!128280.cpp!!!	Distributeur()
+    qDebug() << Q_FUNC_INFO;
+!!!128408.cpp!!!	Distributeur(in identifiant : int, in position : Localisation)
+    qDebug() << Q_FUNC_INFO;
+!!!128536.cpp!!!	~Distributeur()
+    for(int i = 0; i < bacs.size(); ++i)
+    {
+        delete bacs[i];
+    }
+    qDebug() << Q_FUNC_INFO;
 !!!128664.cpp!!!	getIdentifiant() : int
     return this->identifiant;
-!!!128792.cpp!!!	getProduit() : Produit
-    return this->produit;
-!!!128920.cpp!!!	getHydrometrie() : int
-    return this->hydrometrie;
 !!!129048.cpp!!!	getPosition() : Localisation
     return this->position;
-!!!129176.cpp!!!	getPoidsTotal() : int
-    return this->poidsTotal;
-!!!129304.cpp!!!	getPoidsActuel() : int
-    return this->poidsActuel;
 !!!129432.cpp!!!	getAIntervenir() : int
     return this->aIntervenir;
-!!!129560.cpp!!!	setProduit(in produit : Produit) : void
-    this->produit = produit;
+!!!128920.cpp!!!	getHydrometrie() : int
+    return this->hydrometrie;
+!!!136106.cpp!!!	setIdentifiant(in identifiant : int) : void
+    this->identifiant = identifiant;
 !!!129688.cpp!!!	setHydrometrie(in hydrometrie : int) : void
     this->hydrometrie = hydrometrie;
 !!!129816.cpp!!!	setPosition(in localisation : Localisation) : void
     this->position = localisation;
-!!!129944.cpp!!!	setPoidsTotal(in poidsTotal : int) : void
-    this->poidsTotal = poidsTotal;
-!!!130072.cpp!!!	setPoidsActuel(in poidsActuel : int) : void
-    this->poidsActuel = poidsActuel;
 !!!130200.cpp!!!	setAIntervenir(in aIntervenir : bool) : void
     this->aIntervenir = aIntervenir;
+!!!136234.cpp!!!	ajouterBac(in bac : Bac) : void
+    bacs.push_back(new Bac(bac));
