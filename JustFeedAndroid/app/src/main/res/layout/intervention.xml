@@ -15,7 +15,7 @@
         app:layout_constraintBottom_toTopOf="parent" >
 
         <TextView
-            android:id="@+id/numeroIntervention"
+            android:id="@+id/identifiantDistributeur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -29,21 +29,14 @@
             app:layout_constraintBottom_toTopOf="@+id/tempsTrajet" />
 
         <TextView
-            android:id="@+id/tempsTrajet"
+            android:id="@+id/aRemplir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/poidsARemplir" />
+            app:layout_constraintBottom_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/poidsARemplir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/aIntervenir" />
-
-        <TextView
-            android:id="@+id/aIntervenir"
+            android:id="@+id/aDepanner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"

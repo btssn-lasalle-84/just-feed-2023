@@ -46,13 +46,15 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
 
     public void afficherDistributeur(Distributeur distributeur)
     {
+        /**
+         * @todo changer l'affichage des distributeurs
+         */
         String  identifiant     = "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
         String  listeProduits   = "Produits : ";
         String  prixProduits    = "Prix : ";
         String  poidsTotalBacs  = "Poids Total : ";
         String  poidsActuelBacs = "Poids Actuel : ";
-        String  hydrometrie     = "Hydrometrie : ".concat(Integer.toString(distributeur.getHydrometrie()));
-        int     index           = 0;
+        String  hydrometrie     = "Hydrometrie : ";
 
         this.distributeur = distributeur;
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
@@ -60,12 +62,11 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         for (Bac bac : distributeur.getListeBacs())
         {
             Produit produit = bac.getTypeProduit();
-            listeProduits = listeProduits.concat(produit.getNom()).concat(" ");
-            prixProduits = prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
-            poidsTotalBacs = poidsTotalBacs.concat(String.format("%.2f", distributeur.getPoidsTotalBac(index))).concat(" kg ");
-            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", distributeur.getPoidsActuel(index))).concat(" kg ");
-
-            index++;
+            listeProduits   = listeProduits.concat(produit.getNom()).concat(" ");
+            prixProduits    = prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
+            poidsTotalBacs  = poidsTotalBacs.concat(String.format("%.2f", bac.getPoidsTotalBac())).concat(" kg ");
+            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", bac.getPoidsActuel())).concat(" kg ");
+            hydrometrie     = hydrometrie.concat(Integer.toString(bac.getHydrometrie()));
         }
 
         this.identifiant.setText(identifiant);

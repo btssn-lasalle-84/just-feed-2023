@@ -10,57 +10,68 @@ package com.justfeed.justfeedandroid;
  */
 public class Intervention
 {
-    private int     numeroIntervention;
+    /**
+     * Constantes
+     */
+    private final int    SEUIL_HUMIDITE = 0;
+    private final int    MOITIE         = 2;
+    /**
+     * Attributs
+     */
     private String  heureIntervention;
-    private String  tempsTrajet;
     private double  poidsARemplir;
+    private boolean aRemplir;
+    private boolean aDepanner;
     private boolean estIntervenu;
 
     public Intervention()
     {
-        this.numeroIntervention = 0;
         this.poidsARemplir      = 0.0;
+        this.aRemplir           = false;
+        this.aDepanner          = false;
         this.estIntervenu       = false;
     }
 
-    public Intervention(int    numeroIntervention,
-                        String heureIntervention,
-                        String tempsTrajet,
-                        double poidsARemplir)
+    public Intervention(String heureIntervention,
+                        double poidsARemplir,
+                        boolean aRemplir,
+                        boolean aDepanner)
     {
-        this.numeroIntervention = numeroIntervention;
         this.heureIntervention  = heureIntervention;
-        this.tempsTrajet        = tempsTrajet;
         this.poidsARemplir      = poidsARemplir;
+        this.aRemplir           = aRemplir;
+        this.aDepanner          = aDepanner;
         this.estIntervenu       = false;
     }
 
     // Accesseurs
-    public int getNumeroIntervention() { return this.numeroIntervention; }
-    public String getHeureIntervention()
-    {
-        return this.heureIntervention;
-    }
-    public String getTempsTrajet()
-    {
-        return this.tempsTrajet;
-    }
-    public double getPoidsARemplir()
-    {
-        return this.poidsARemplir;
-    }
-    public boolean interventionTerminee()
-    {
-        return this.estIntervenu;
-    }
+    public String getHeureIntervention() { return this.heureIntervention; }
+    public double getPoidsARemplir() { return this.poidsARemplir; }
+    public boolean estARemplir() { return this.aRemplir; }
+    public boolean estADepanner() { return this.aDepanner; }
+    public boolean interventionTerminee() { return this.estIntervenu; }
 
     // Mutateurs
-    public void modifierHeureIntervention(String nouvelleHeureIntervention)
+    public void modifierHeureIntervention(String nouvelleHeureIntervention) { this.heureIntervention = nouvelleHeureIntervention; }
+    public void modifierEtatIntervention(boolean estIntervenu) { this.estIntervenu = estIntervenu; }
+    public void modifierIntervention(double poidsActuel, double poidsTotal, int hydrometrie)
     {
-        this.heureIntervention = nouvelleHeureIntervention;
-    }
-    public void modifierEtatIntervention(boolean estIntervenu)
-    {
-        this.estIntervenu = estIntervenu;
+        if (poidsActuel < (poidsTotal / MOITIE) )
+        {
+            this.aRemplir = true;
+        }
+        else
+        {
+            this.aRemplir = false;
+        }
+
+        if (hydrometrie > SEUIL_HUMIDITE)
+        {
+            this.aDepanner = true;
+        }
+        else
+        {
+            this.aDepanner = false;
+        }
     }
 }

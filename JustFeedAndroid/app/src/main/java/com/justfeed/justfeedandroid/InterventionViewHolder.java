@@ -7,6 +7,9 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import java.util.List;
+import java.util.Map;
+
 public class InterventionViewHolder extends ViewHolder
 {
     /**
@@ -22,39 +25,49 @@ public class InterventionViewHolder extends ViewHolder
     /**
      * Ressources GUI
      */
-    private final TextView numeroIntervention;
+    private final TextView identifiantDistributeur;
     private final TextView heureIntervention;
-    private final TextView tempsTrajet;
-    private final TextView poidsARemplir;
-    private final TextView aIntervenir;
+    private final TextView aRemplir;
+    private final TextView aDepanner;
 
     public InterventionViewHolder(final View itemView)
     {
         super(itemView);
         Log.d(TAG, "InterventionViewHolder()");
 
-        numeroIntervention = ((TextView)itemView.findViewById(R.id.numeroIntervention));
-        heureIntervention = ((TextView)itemView.findViewById(R.id.heureIntervention));
-        tempsTrajet = ((TextView)itemView.findViewById(R.id.tempsTrajet));
-        poidsARemplir = ((TextView)itemView.findViewById(R.id.poidsARemplir));
-        aIntervenir = ((TextView)itemView.findViewById(R.id.aIntervenir));
+        identifiantDistributeur = ((TextView)itemView.findViewById(R.id.identifiantDistributeur));
+        heureIntervention       = ((TextView)itemView.findViewById(R.id.heureIntervention));
+        aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
+        aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
     }
 
-    public void afficherInterventions(Intervention intervention)
+    public void afficherInterventions(List<Distributeur> listeDistributeurs)
     {
-        this.intervention = intervention;
+        String interventionsARealiser = "";
+        boolean aIntervenir           = false;
 
-        numeroIntervention.setText(intervention.getNumeroIntervention());
-        heureIntervention.setText(intervention.getHeureIntervention());
-        tempsTrajet.setText(intervention.getTempsTrajet());
-        poidsARemplir.setText(intervention.getPoidsARemplir() + " kg");
-        if (intervention.interventionTerminee())
+        for(Distributeur distributeur: listeDistributeurs)
         {
-            aIntervenir.setText("Distributeur en état de marche");
-        }
-        else
-        {
-            aIntervenir.setText("Distributeur à intervenir");
+            List<Bac> listeBacs = distributeur.getListeBacs();
+            for(Bac bac: listeBacs)
+            {
+                if(bac.getIntervention().estARemplir())
+                {
+                    double poidsARemplir = bac.getIntervention().getPoidsARemplir();
+                    aIntervenir = true;
+                    interventionsARealiser.concat("Remplir Bac ").concat(bac.getTypeProduit().getNom()).concat(" de ").concat(String.format("%.2f kg\n", poidsARemplir));
+                }
+                if(bac.getIntervention().estADepanner())
+                {
+                    aIntervenir = true;
+                    interventionsARealiser.concat("Dépannage nécessaire Bac ").concat(bac.getTypeProduit().getNom()).concat(" taux humidité > 0%\n");
+                }
+                if(aIntervenir)
+                {
+                    heureIntervention.setText(bac.getIntervention().getHeureIntervention());
+                    identifiantDistributeur.setText(Integer.toString(distributeur.getIdentifiant()));
+                }
+            }
         }
     }
 }
