@@ -12,7 +12,7 @@
 /**
  * @brief Constructeur par défaut de la classe bac
  */
-Bac::Bac(): produit(NULL), poidsTotal(0), poidsActuel(0), hydrometrie(0),
+Bac::Bac(): produit(NULL), poidsActuel(0), pourcentageRemplissage(0.),hydrometrie(0),
     position(), aIntervenir(false)
 {
 
@@ -21,8 +21,8 @@ Bac::Bac(): produit(NULL), poidsTotal(0), poidsActuel(0), hydrometrie(0),
 /**
  * @brief Constructeur d'initialisation du bac
  */
-Bac::Bac(Produit produit,int poidsTotal, int poidsActuel, int hydrometrie, Localisation position, bool aIntervenir) :
-    produit(new Produit(produit)),poidsTotal(poidsTotal), poidsActuel(poidsActuel),
+Bac::Bac(Produit produit, unsigned int poidsActuel, float pourcentageRemplissage,int hydrometrie, Localisation position, bool aIntervenir) :
+    produit(new Produit(produit)), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage),
     hydrometrie(hydrometrie), position(position), aIntervenir(aIntervenir)
 {
 
@@ -47,6 +47,16 @@ QString Bac::getNomProduit() const
 }
 
 /**
+ * @brief Accesseur de l'attribut produit
+ * @return un Produits qui represente le produit que contient le
+ * distributeur
+ */
+double Bac::getPrixProduit() const
+{
+    return produit->getPrix();
+}
+
+/**
  * @brief Accesseur de l'attribut hydrometrie
  * @return un entier qui represente le degré d'humidité dans le
  * distributeur
@@ -66,20 +76,10 @@ Localisation Bac::getPosition() const
 }
 
 /**
- * @brief Accesseur de l'attribut poidsTotal
- * @return un entier qui represente le poids total que peut contenir le
- * distributeur
- */
-int Bac::getPoidsTotal() const
-{
-    return this->poidsTotal;
-}
-
-/**
  * @brief Accesseur de l'attribut poidsActuel
  * @return un entier qui represente le poids actuel dans le distributeur
  */
-int Bac::getPoidsActuel() const
+unsigned int Bac::getPoidsActuel() const
 {
     return this->poidsActuel;
 }
@@ -128,15 +128,6 @@ void Bac::setHydrometrie(int hydrometrie)
 void Bac::setPosition(const Localisation& localisation)
 {
     this->position = localisation;
-}
-
-/**
- * @brief Mutateur de l'attribut poidsTotal
- * @param poidsTotal le poids total du distributeur
- */
-void Bac::setPoidsTotal(int poidsTotal)
-{
-    this->poidsTotal = poidsTotal;
 }
 
 /**

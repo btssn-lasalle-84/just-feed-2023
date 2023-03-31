@@ -29,7 +29,7 @@ class Bac
 {
 private:
     Produit      *produit;     //!< type de produit que contient le distributeur
-    int          poidsActuel; //!< à définir
+    unsigned int poidsActuel; //!< à définir
     float        pourcentageRemplissage;
     int          hydrometrie; //!< hydrométrie de l'interieur du distributeur
     Localisation position;    //!< géolocalisation du distributeur
@@ -38,8 +38,8 @@ private:
 public:
     Bac();
     Bac(Produit      produit,
-        int          poidsTotal,
-        int          poidsActuel,
+        unsigned int          poidsActuel,
+        float        pourcentageRemplissage,
         int          hydrometrie,
         Localisation position,
         bool         aIntervenir);
@@ -47,10 +47,10 @@ public:
 
     // Accesseurs
     QString      getNomProduit() const;
+    double       getPrixProduit() const;
     int          getHydrometrie() const;
     Localisation getPosition() const;
-    int          getPoidsTotal() const;
-    int          getPoidsActuel() const;
+    unsigned int          getPoidsActuel() const;
     int          getAIntervenir() const;
 
     // Mutateurs
@@ -58,7 +58,6 @@ public:
     void setPrixProduit(const int& prixProduit);
     void setHydrometrie(int hydrometrie);
     void setPosition(const Localisation& localisation);
-    void setPoidsTotal(int poidsTotal);
     void setPoidsActuel(int poidsActuel);
     void setAIntervenir(bool aIntervenir);
 };

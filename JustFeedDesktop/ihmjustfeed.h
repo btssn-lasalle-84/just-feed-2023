@@ -12,6 +12,7 @@
 
 #include <QtWidgets>
 #include <QString>
+#include <QPushButton>
 
 /**
  * @def TITRE_APPLICATION
@@ -35,6 +36,7 @@ class IHMJustFeed : public QWidget
 {
     Q_OBJECT
   private:
+    QPushButton *configurer;
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();

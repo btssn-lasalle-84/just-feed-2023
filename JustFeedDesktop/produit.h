@@ -19,7 +19,7 @@ private :
 
 public:
     Produit();
-    Produit(int prix, QString nom);
+    Produit(double prix, QString nom);
     ~Produit();
 
     // Accesseurs
