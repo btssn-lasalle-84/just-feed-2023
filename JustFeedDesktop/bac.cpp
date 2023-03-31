@@ -12,7 +12,7 @@
 /**
  * @brief Constructeur par défaut de la classe bac
  */
-Bac::Bac(): produit(), poidsTotal(0), poidsActuel(0), hydrometrie(0),
+Bac::Bac(): produit(NULL), poidsTotal(0), poidsActuel(0), hydrometrie(0),
     position(), aIntervenir(false)
 {
 
@@ -21,8 +21,8 @@ Bac::Bac(): produit(), poidsTotal(0), poidsActuel(0), hydrometrie(0),
 /**
  * @brief Constructeur d'initialisation du bac
  */
-Bac::Bac(Produit *produit, int poidsTotal, int poidsActuel, int hydrometrie, Localisation position, bool aIntervenir) :
-    produit(new produit()), poidsTotal(poidsTotal), poidsActuel(poidsActuel),
+Bac::Bac(Produit produit,int poidsTotal, int poidsActuel, int hydrometrie, Localisation position, bool aIntervenir) :
+    produit(new Produit(produit)),poidsTotal(poidsTotal), poidsActuel(poidsActuel),
     hydrometrie(hydrometrie), position(position), aIntervenir(aIntervenir)
 {
 
@@ -96,11 +96,20 @@ int Bac::getAIntervenir() const
 
 /**
  * @brief Mutateur de l'attribut Produit
- * @param produit le type de produit que contient le distributeur
+ * @param nomProduit le type de produit que contient le distributeur
  */
 void Bac::setNomProduit(const QString& NomProduit)
 {
     this->produit->setNom(NomProduit);
+}
+
+/**
+ * @brief Mutateur de l'attribut Produit
+ * @param prixProduit le prix du produit que contient le distributeur
+ */
+void Bac::setPrixProduit(const int& prixProduit)
+{
+    this->produit->setPrix(prixProduit);
 }
 
 /**

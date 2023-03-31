@@ -12,9 +12,9 @@
 class Statistiques
 {
   private:
-    int frequenceIntervetion;
-    int poidsMoyenProduits;
-    int moyenneKilometres;
+    int frequenceIntervetion; //!< frequence d'intervention pour chaque bac
+    int poidsMoyenProduits; //!< poids moyen à prendre pour remplir un bac
+    int moyenneKilometres; //!< kilometres moyen lors d'une intervention
 
   public:
     Statistiques();

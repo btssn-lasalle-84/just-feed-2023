@@ -21,11 +21,11 @@ class Distributeur
 {
   private:
     int          identifiant; //!< identifiant du distributeur
-    std::vector<Bac*>  bacs; //!< conteneur de bac
+    std::vector<Bac>  bacs; //!< conteneur de bac
 
   public:
     Distributeur();
-    Distributeur(int identifiant, std::vector<Bac*>  bacs);
+    Distributeur(int identifiant, std::vector<Bac>  bacs);
     ~Distributeur();
 
     // Accesseurs
@@ -33,7 +33,6 @@ class Distributeur
 
     //mutateurs
     void        setIdentifiant(const int identifiant);
-    void        setBacsProduit(const int identifiantBac, const Produit produit);
 
 };
 

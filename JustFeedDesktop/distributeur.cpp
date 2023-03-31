@@ -15,14 +15,14 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    identifiant(0), bacs(nullptr)
+    identifiant(0), bacs()//todo
 {
 }
 
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
-Distributeur::Distributeur(int identifiant, std::vector<Bac*>  bacs) : identifiant(identifiant), bacs(bacs)
+Distributeur::Distributeur(int identifiant, std::vector<Bac>  bacs) : identifiant(identifiant), bacs(bacs)
 {
 }
 
@@ -51,11 +51,3 @@ void Distributeur::setIdentifiant(const int identifiant)
     this->identifiant = identifiant;
 }
 
-/**
- * @brief Mutateur pour changer le produit d'un bac
- * @param identifiant du bac et le produit
- */
-void Distributeur::setBacsProduit(const int identifiantBac, const Produit produit)
-{
-        bacs[identifiantBac] = new produit();
-}

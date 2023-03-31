@@ -8,10 +8,16 @@
  */
 #include "communication.h"
 
+/**
+ * @brief Constructeur par défaut de la classe bac
+ */
 Communication::Communication()
 {
 }
 
+/**
+ * @brief Destructeur de la classe bac
+ */
 Communication::~Communication()
 {
 }
