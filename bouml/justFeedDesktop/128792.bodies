@@ -1,0 +1,17 @@
+class Intervention
+!!!130968.cpp!!!	getHeureIntervention() : QTime
+    return this->heureIntervention;
+!!!131096.cpp!!!	getNumeroIntervention() : int
+    return this->numeroIntervention;
+!!!131224.cpp!!!	getTempsTrajet() : QTime
+    return this->tempsTrajet;
+!!!131352.cpp!!!	getPoidsARemplir() : double
+    return this->poidsARemplir;
+!!!131480.cpp!!!	setHeureIntervention(in heureIntervention : QTime) : void
+    this->heureIntervention = heureIntervention;
+!!!131608.cpp!!!	setNumeroIntervention(in numeroIntervention : int) : void
+    this->numeroIntervention = numeroIntervention;
+!!!131736.cpp!!!	setTempsTrajet(in tempsTrajet : QTime) : void
+    this->tempsTrajet = tempsTrajet;
+!!!131864.cpp!!!	setPoidsARemplir(in poidsARemplir : double) : void
+    this->poidsARemplir = poidsARemplir;

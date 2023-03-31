@@ -1,0 +1,17 @@
+class Serveur
+!!!132376.cpp!!!	getPort() : int
+    return this->port;
+!!!132504.cpp!!!	getHostName() : QString
+    return this->hostName;
+!!!132632.cpp!!!	getUtilisateur() : QString
+    return this->utilisateur;
+!!!132760.cpp!!!	getMotDePasse() : QString
+    return this->motDePasse;
+!!!132888.cpp!!!	setPort(in port : int) : void
+    this->port = port;
+!!!133016.cpp!!!	setHostName(in hostName : QString) : void
+    this->hostName = hostName;
+!!!133144.cpp!!!	setUtilisateur(in utilisateur : QString) : void
+    this->utilisateur = utilisateur;
+!!!133272.cpp!!!	setMotDePasse(in motDePasse : QString) : void
+    this->motDePasse = motDePasse;

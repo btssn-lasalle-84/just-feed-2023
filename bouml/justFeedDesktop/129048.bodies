@@ -1,0 +1,13 @@
+class Statistiques
+!!!133784.cpp!!!	getFrequenceIntervetion() : int
+    return this->frequenceIntervetion;
+!!!133912.cpp!!!	getPoidsMoyenProduits() : int
+    return this->poidsMoyenProduits;
+!!!134040.cpp!!!	getMoyenneKilometres() : int
+    return this->moyenneKilometres;
+!!!134168.cpp!!!	setFrequenceIntervetion(in frequenceIntervetion : int) : void
+    this->frequenceIntervetion = frequenceIntervetion;
+!!!134296.cpp!!!	setPoidsMoyenProduits(in poidsMoyenProduits : int) : void
+    this->poidsMoyenProduits = poidsMoyenProduits;
+!!!134424.cpp!!!	setMoyenneKilometres(in moyenneKilometres : int) : void
+    this->moyenneKilometres = moyenneKilometres;
