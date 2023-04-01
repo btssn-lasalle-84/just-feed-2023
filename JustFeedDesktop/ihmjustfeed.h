@@ -39,6 +39,11 @@ class IHMJustFeed : public QWidget
     Q_OBJECT
   private:
     QVector<Distributeur*> distributeurs; //!< les distributeurs
+
+    QLabel *titreConfiguration; //!< titre
+    QLabel *magasin; //!< contient le nom du magasin
+    QLabel *produit;//!< contient le nom du produit
+    QLabel *prix; //!< contient le le prix du produit
     // Les widgets
 
     void initialiserGUI();
@@ -47,6 +52,9 @@ class IHMJustFeed : public QWidget
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
+    void instancierWigets();
+    void initialiserWigets();
+    void positionnementWigets();
 };
 
 #endif // IHMJUSTFEED_H

@@ -145,6 +145,24 @@ QString Distributeur::getDescription() const
 }
 
 /**
+ * @brief Accesseur pour récupérer le nom du produit dans le bac voulu
+ * @return QString  qui permet de connaitre le nom du produit
+ */
+QString Distributeur::getProduitBac(int identifiant) const
+{
+    return bacs[identifiant]->getNomProduit();
+}
+
+/**
+ * @brief Accesseur pour récupérer le prix du produit dans le bac voulu
+ * @return double qui permet de connaitre le prix du produit
+ */
+double Distributeur::getProduitPrix(int identifiant) const
+{
+    return bacs[identifiant]->getPrixProduit();
+}
+
+/**
  * @brief Mutateur de l'attribut identifiant
  * @param identifiant du distributeur
  */

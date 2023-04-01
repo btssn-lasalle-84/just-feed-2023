@@ -13,6 +13,7 @@
 #include <QDate>
 
 class Bac;
+class Produit;
 
 /**
  * @struct Localisation
@@ -68,6 +69,8 @@ class Distributeur
     QString      getVille() const;
     QDate        getDateMiseService() const;
     QString      getDescription() const;
+    QString      getProduitBac(int identifiant) const;
+    double       getProduitPrix(int identifiant) const;
 
     // mutateurs
     void setdeviceID(const QString deviceID);
