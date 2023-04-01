@@ -2,7 +2,7 @@
  * @file        ihmjustfeed.h
  * @brief       Déclaration de la classe IHMJustFeed.
  * @details     La classe IHMJustFeed \c Cette classe permet de définir la GUI
- * de l'application EcoClassroomDesktop
+ * de l'application JustFeed (Desktop)
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
@@ -12,7 +12,6 @@
 
 #include <QtWidgets>
 #include <QString>
-#include <QPushButton>
 #include <QVector>
 
 class Distributeur;
@@ -39,8 +38,12 @@ class IHMJustFeed : public QWidget
 {
     Q_OBJECT
   private:
-    QPushButton *configurer;
-    QVector<Distributeur*> distributeurs;
+    QVector<Distributeur*> distributeurs; //!< les distributeurs
+    // Les widgets
+
+    void initialiserGUI();
+    void initialiserDistributeurs();
+
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();

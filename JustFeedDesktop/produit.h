@@ -14,30 +14,30 @@
 class Produit
 {
   private:
-    double  prix; //!< prix au 100 grammes du produit
-    QString nom;  //!< nom du produit
-    QString marque; //!< marque du produit
+    QString nom;         //!< nom du produit
+    QString marque;      //!< marque du produit
     QString description; //!< description du produit
-    unsigned long long codeProduit; //!< code EAN 13 du produit
+    QString codeProduit; //!< code EAN 13 du produit
+    double  prix;        //!< prix au 100 grammes du produit
 
   public:
     Produit();
-    Produit(double prix, QString nom, QString marque, QString description, unsigned long long codeProduit);
+    Produit(QString nom, QString marque, QString description, QString codeProduit, double prix);
     ~Produit();
 
     // Accesseurs
-    double  getPrix() const;
     QString getNom() const;
     QString getMarque() const;
     QString getDescription() const;
-    unsigned long long getCodeProduit() const;
+    QString getCodeProduit() const;
+    double  getPrix() const;
 
     // Mutateurs
-    void setPrix(const double prix);
     void setNom(const QString& nom);
     void setMarque(const QString& marque);
     void setDescription(const QString& description);
-    void setCodeProduit(const unsigned long long& codeProduit);
+    void setCodeProduit(const QString& codeProduit);
+    void setPrix(const double prix);
 };
 
 #endif // PRODUIT_H

@@ -13,25 +13,21 @@
 /**
  * @brief Constructeur par défaut de la classe produit
  */
-Produit::Produit() : prix(0.), nom("")
+Produit::Produit() : nom(""), marque(""), description(""), codeProduit(""), prix(0.)
 {
 }
 
 /**
  * @brief destructeur par défaut de la classe produit
  */
-Produit::Produit(double prix, QString nom, QString marque, QString description, unsigned long long codeProduit) :
-    prix(prix), nom(nom), marque(marque), description(description), codeProduit(codeProduit)
+Produit::Produit(QString nom,
+                 QString marque,
+                 QString description,
+                 QString codeProduit,
+                 double  prix) :
+    nom(nom),
+    marque(marque), description(description), codeProduit(codeProduit), prix(prix)
 {
-}
-
-/**
- * @brief Accesseur de l'attribut prix
- * @return un double qui permet de connaitre le prix du produit
- */
-double Produit::getPrix() const
-{
-    return this->prix;
 }
 
 /**
@@ -63,21 +59,20 @@ QString Produit::getDescription() const
 
 /**
  * @brief Accesseur de l'attribut codeProduit
- * @return un int qui permet de connaitre le code du produit
+ * @return QString le code du produit
  */
-unsigned long long Produit::getCodeProduit() const
+QString Produit::getCodeProduit() const
 {
     return this->codeProduit;
 }
 
 /**
- * @brief Mutateur de l'attribut prix
- * @param prix un doucle qui affecte le prix du
- * produit
+ * @brief Accesseur de l'attribut prix
+ * @return un double qui permet de connaitre le prix du produit
  */
-void Produit::setPrix(const double prix)
+double Produit::getPrix() const
 {
-    this->prix = prix;
+    return this->prix;
 }
 
 /**
@@ -112,10 +107,19 @@ void Produit::setDescription(const QString& description)
 
 /**
  * @brief Mutateur de l'attribut code produit
- * @param codeProduit un doucle qui affecte le code produit du
- * produit
+ * @param codeProduit QString le code produit du produit
  */
-void Produit::setCodeProduit(const unsigned long long& codeProduit)
+void Produit::setCodeProduit(const QString& codeProduit)
 {
     this->codeProduit = codeProduit;
+}
+
+/**
+ * @brief Mutateur de l'attribut prix
+ * @param prix un doucle qui affecte le prix du
+ * produit
+ */
+void Produit::setPrix(const double prix)
+{
+    this->prix = prix;
 }

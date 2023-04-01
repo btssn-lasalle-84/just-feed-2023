@@ -32,22 +32,29 @@ struct Localisation
 class Distributeur
 {
   private:
-    QString      deviceID; //!< identifiant du distributeur
-    Localisation position;    //!< géolocalisation du distributeur
-    QVector<Bac*> bacs;       //!< les bacs du distributeur
-    QString nom; //!< nom du distributeur
-    QString adresse; //!< adresse du distributeur
-    unsigned int codePostal; //!< code postal du distributeur
-    QString ville; //!< ville du distributeur
-    QDate dateMiseEnService; //!< date de mise en service du distributeur
-    QString description; //!< description du distributeur
-    int          hydrometrie; //!< hydrométrie de l'interieur du distributeur
-    bool         aIntervenir; //!< permet de savoir s'il faut intervenir sur le
-                              //!< distributeur
+    QString       deviceID;          //!< identifiant du distributeur
+    Localisation  position;          //!< géolocalisation du distributeur
+    QVector<Bac*> bacs;              //!< les bacs du distributeur
+    QString       nom;               //!< nom du distributeur
+    QString       adresse;           //!< adresse du distributeur
+    QString       codePostal;        //!< code postal du distributeur
+    QString       ville;             //!< ville du distributeur
+    QDate         dateMiseEnService; //!< date de mise en service du distributeur
+    QString       description;       //!< description du distributeur
+    int           hydrometrie;       //!< hydrométrie de l'interieur du distributeur
+    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
+                                     //!< distributeur
 
   public:
     Distributeur();
-    Distributeur(QString deviceID, Localisation position, QString nom, QString adresse, unsigned int codePostal, QString ville, QString description);
+    Distributeur(QString      deviceID,
+                 Localisation position,
+                 QString      nom,
+                 QString      adresse,
+                 QString      codePostal,
+                 QString      ville,
+                 QString      description,
+                 QDate        dateMiseEnService);
     ~Distributeur();
 
     // Accesseurs
@@ -55,12 +62,12 @@ class Distributeur
     Localisation getPosition() const;
     int          getAIntervenir() const;
     int          getHydrometrie() const;
-    QString getNom() const;
-    QString getAdresse() const;
-    unsigned int getCodePostal() const;
-    QString getVille() const;
-    QDate getDateMiseService() const;
-    QString getDescription() const;
+    QString      getNom() const;
+    QString      getAdresse() const;
+    QString      getCodePostal() const;
+    QString      getVille() const;
+    QDate        getDateMiseService() const;
+    QString      getDescription() const;
 
     // mutateurs
     void setdeviceID(const QString deviceID);
@@ -70,7 +77,7 @@ class Distributeur
     void ajouterBac(const Bac& bac);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
-    void setCodePostal(const unsigned int& codePostal) ;
+    void setCodePostal(const QString& codePostal);
     void setVille(const QString& ville);
     void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);

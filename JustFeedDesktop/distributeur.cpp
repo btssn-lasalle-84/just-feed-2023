@@ -7,8 +7,8 @@
  * @version     0.1
  * @date        2023
  */
-#include "bac.h"
 #include "distributeur.h"
+#include "bac.h"
 #include "produit.h"
 #include <QDebug>
 
@@ -16,8 +16,8 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), position(), hydrometrie(0), aIntervenir(false), bacs(), nom(""), adresse(""), codePostal(0),
-    ville(""), dateMiseEnService(), description("")
+    deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
+    dateMiseEnService(QDate::currentDate()), description(""), hydrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -25,9 +25,18 @@ Distributeur::Distributeur() :
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
-Distributeur::Distributeur(QString deviceID, Localisation position, QString nom, QString adresse, unsigned int codePostal, QString ville, QString description) :
-    deviceID(deviceID), position(position), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville), description(description), hydrometrie(0),
-    aIntervenir(false), bacs(), dateMiseEnService(QDate::currentDate())
+Distributeur::Distributeur(QString      deviceID,
+                           Localisation position,
+                           QString      nom,
+                           QString      adresse,
+                           QString      codePostal,
+                           QString      ville,
+                           QString      description,
+                           QDate        dateMiseEnService) :
+    deviceID(deviceID),
+    position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    dateMiseEnService(dateMiseEnService), description(description), hydrometrie(0),
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -101,16 +110,16 @@ QString Distributeur::getAdresse() const
 
 /**
  * @brief Accesseur de l'attribut codePostal
- * @return un unsigned int qui permet de connaitre le code postal du distributeur
+ * @return QString le code postal du distributeur
  */
-unsigned int Distributeur::getCodePostal() const
+QString Distributeur::getCodePostal() const
 {
     return this->codePostal;
 }
 
 /**
  * @brief Accesseur de l'attribut ville
- * @return un QString qui permet de connaitre la ville du distributeur
+ * @return QString la ville où est implanté le distributeur
  */
 QString Distributeur::getVille() const
 {
@@ -119,7 +128,7 @@ QString Distributeur::getVille() const
 
 /**
  * @brief Accesseur de l'attribut dateMiseEnService
- * @return QDate int qui permet de connaitre la date de mise en service du distributeur
+ * @return QDate la date de mise en service du distributeur
  */
 QDate Distributeur::getDateMiseService() const
 {
@@ -134,7 +143,6 @@ QString Distributeur::getDescription() const
 {
     return this->description;
 }
-
 
 /**
  * @brief Mutateur de l'attribut identifiant
@@ -165,7 +173,7 @@ void Distributeur::setPosition(const Localisation& localisation)
 
 /**
  * @brief Mutateur de l'attribut aIntervenir
- * @param aIntervenir un booleen qui détérmine l'état du
+ * @param aIntervenir un booleen qui détermine l'état du
  * distributeur
  */
 void Distributeur::setAIntervenir(bool aIntervenir)
@@ -175,7 +183,7 @@ void Distributeur::setAIntervenir(bool aIntervenir)
 
 /**
  * @brief Mutateur de l'attribut nom
- * @param nom un QString qui détérmine le nom du
+ * @param nom un QString qui détermine le nom du
  * distributeur
  */
 void Distributeur::setNom(const QString& nom)
@@ -185,7 +193,7 @@ void Distributeur::setNom(const QString& nom)
 
 /**
  * @brief Mutateur de l'attribut adresse
- * @param adresse un QString qui détérmine l'e nom'adresse du
+ * @param adresse un QString qui détermine l'e nom'adresse du
  * distributeur
  */
 void Distributeur::setAdresse(const QString& adresse)
@@ -195,17 +203,17 @@ void Distributeur::setAdresse(const QString& adresse)
 
 /**
  * @brief Mutateur de l'attribut codePostal
- * @param codePostal un unsigned int qui détérmine l'edresse du
+ * @param codePostal QString
  * distributeur
  */
-void Distributeur::setCodePostal(const unsigned int& codePostal)
+void Distributeur::setCodePostal(const QString& codePostal)
 {
     this->codePostal = codePostal;
 }
 
 /**
  * @brief Mutateur de l'attribut ville
- * @param ville un QString qui détérmine la ville du
+ * @param ville un QString qui détermine la ville du
  * distributeur
  */
 void Distributeur::setVille(const QString& ville)
@@ -215,7 +223,7 @@ void Distributeur::setVille(const QString& ville)
 
 /**
  * @brief Mutateur de l'attribut dateMiseEnService
- * @param dateMiseEnService un QTime qui détérmine la date de mise en place du
+ * @param dateMiseEnService un QTime qui détermine la date de mise en place du
  * distributeur
  */
 void Distributeur::setDateMiseEnService(const QDate& dateMiseEnService)
@@ -225,7 +233,7 @@ void Distributeur::setDateMiseEnService(const QDate& dateMiseEnService)
 
 /**
  * @brief Mutateur de l'attribut description
- * @param description un QString qui détérmine la description du
+ * @param description un QString qui détermine la description du
  * distributeur
  */
 void Distributeur::setDescription(const QString& description)
