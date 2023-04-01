@@ -2,7 +2,10 @@ class Bac
 !!!134570.cpp!!!	Bac()
     qDebug() << Q_FUNC_INFO;
 !!!134698.cpp!!!	Bac(inout produit : Produit, in poidsActuel : uint, in pourcentageRemplissage : double = 100.)
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
+             << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "pourcentageRemplissage" << pourcentageRemplissage;
 !!!134826.cpp!!!	Bac(in bac : Bac)
     qDebug() << Q_FUNC_INFO;
 !!!134954.cpp!!!	~Bac()

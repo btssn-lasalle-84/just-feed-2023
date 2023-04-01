@@ -1,4 +1,9 @@
 class Produit
+!!!136362.cpp!!!	Produit()
+    qDebug() << Q_FUNC_INFO;
+!!!136490.cpp!!!	Produit(in nom : QString, in marque : QString, in description : QString, in codeProduit : QString, in prix : double)
+    qDebug() << Q_FUNC_INFO << "nom" << nom << "marque" << marque << "description" << description
+             << "codeProduit" << codeProduit << "prix" << prix;
 !!!136874.cpp!!!	getNom() : QString
     return this->nom;
 !!!145706.cpp!!!	getMarque() : QString
