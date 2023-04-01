@@ -72,20 +72,21 @@ class Distributeur
     QString      getNomProduitBac(int numeroBac) const;
     double       getProduitPrix(int numeroBac) const;
     Produit*     getProduitBac(int numeroBac) const;
+    int          getNbBacs() const;
 
     // mutateurs
     void setdeviceID(const QString deviceID);
     void setHydrometrie(int hydrometrie);
     void setPosition(const Localisation& localisation);
     void setAIntervenir(bool aIntervenir);
-    void ajouterBac(const Bac& bac);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
     void setCodePostal(const QString& codePostal);
     void setVille(const QString& ville);
     void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
-    void setPrixProduit(const double& prix, const int& numeroBac);
+    void setPrixProduit(const int& numeroBac, const double& prix);
+    void ajouterBac(const Bac& bac);
 };
 
 #endif // DISTRIBUTEUR_H

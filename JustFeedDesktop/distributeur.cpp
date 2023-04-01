@@ -38,7 +38,11 @@ Distributeur::Distributeur(QString      deviceID,
     dateMiseEnService(dateMiseEnService), description(description), hydrometrie(0),
     aIntervenir(false)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
+             << "longitude" << position.longitude << "nom" << nom << "adresse"
+             << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
+             << dateMiseEnService << "description" << description << "hydrometrie" << hydrometrie
+             << "aIntervenir" << aIntervenir;
 }
 
 /**
@@ -150,11 +154,11 @@ QString Distributeur::getDescription() const
  */
 QString Distributeur::getNomProduitBac(int numeroBac) const
 {
-    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    if(numeroBac >= 0 && numeroBac < bacs.size())
     {
         return bacs[numeroBac]->getNomProduit();
     }
-    return "identifiant invalide";
+    return QString();
 }
 
 /**
@@ -163,7 +167,7 @@ QString Distributeur::getNomProduitBac(int numeroBac) const
  */
 double Distributeur::getProduitPrix(int numeroBac) const
 {
-    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    if(numeroBac >= 0 && numeroBac < bacs.size())
     {
         return bacs[numeroBac]->getPrixProduit();
     }
@@ -176,11 +180,20 @@ double Distributeur::getProduitPrix(int numeroBac) const
  */
 Produit* Distributeur::getProduitBac(int numeroBac) const
 {
-    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    if(numeroBac >= 0 && numeroBac < bacs.size())
     {
         return bacs[numeroBac]->getProduit();
     }
-    return NULL;
+    return nullptr;
+}
+
+/**
+ * @brief Accesseur pour récupérer le produit dans le bac voulu
+ * @return Produit qui permet de connaitre le produit
+ */
+int Distributeur::getNbBacs() const
+{
+    return bacs.size();
 }
 
 /**
@@ -280,9 +293,10 @@ void Distributeur::setDescription(const QString& description)
     this->description = description;
 }
 
-void Distributeur::setPrixProduit(const double& prix, const int& numeroBac)
+void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 {
-    this->bacs[numeroBac]->setPrixProduit(prix);
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+        this->bacs[numeroBac]->setPrixProduit(prix);
 }
 
 /**

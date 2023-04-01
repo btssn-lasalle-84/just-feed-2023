@@ -23,7 +23,6 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 
     initialiserGUI();
     initialiserDistributeurs();
-    show();
 }
 
 /**
@@ -39,14 +38,39 @@ IHMJustFeed::~IHMJustFeed()
 }
 
 /**
- * @brief méthode qui initialise la GUI
+ * @brief Méthode qui initialise la GUI
  */
 void IHMJustFeed::initialiserGUI()
 {
+    instancierWigets();
+    initialiserWigets();
+    positionnerWigets();
+
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
     QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
     resize(screenGeometry.width(), screenGeometry.height());
+}
+
+/**
+ * @brief Méthode qui instancie les widgets de la GUI
+ */
+void IHMJustFeed::instancierWigets()
+{
+}
+
+/**
+ * @brief Méthode qui initialise les widgets de la GUI
+ */
+void IHMJustFeed::initialiserWigets()
+{
+}
+
+/**
+ * @brief Méthode qui positionne les widgets dans la GUI
+ */
+void IHMJustFeed::positionnerWigets()
+{
 }
 
 /**
@@ -79,33 +103,60 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Barbentane",
                                              QDate::fromString("2022-01-10", "yyyy-MM-dd")));
 
-    Produit *pruneaux = new Produit("pruneaux", "Maître Prunille", "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une délicieuse friandise à déguster à tout moment de la journée.",
-                                    "761234567890", 1.15);
-    Produit *abricot = new Produit("Abricots secs", "Maître Prunille", "L'abricot moelleux, une gourmandise tendre et fruitée!",
-                                    "761234566000", 1.13);
-    Produit *Cranberries = new Produit("Cranberries", "SEEBERGER", "Cranberries tranchées sucrées séchées ",
-                                    "761234569000", 2.1);
-    Produit *Banane = new Produit("Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ",
-                                    "761234560008", 0.76);
-    Produit *Raisin = new Produit("Raisin sec", "Petit Prix ", "Raisins secs, huile végétale (graine de coton)",
-                                    "761264569090", 0.39);
-    Produit *fruitsSec = new Produit("fruits sec", "FRUIDYLLIC", "peut se manger tel que sans préparation. ",
-                                    "761234960940", 1.06);
-    Produit *cacahuete = new Produit("Cacahuète", "carrefour", "arachide crue blanche décortiquée. pour cuisiner ou pâtisserie ",
-                                    "761234561000", 0.49);
-    Produit *soja = new Produit("soja", " OFAL BIO ", "SOJA jaune biologique.",
-                                    "761234529000", 0.96);
-    Produit *basilic = new Produit("Basilic", "DUCROS", "Basilic déshydraté issu de l'agriculture biologique",
-                                    "761234679900", 17.18);
+    Produit* pruneaux    = new Produit("pruneaux",
+                                    "Maître Prunille",
+                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "761234567890",
+                                    1.15);
+    Produit* abricot     = new Produit("Abricots secs",
+                                   "Maître Prunille",
+                                   "L'abricot moelleux, une gourmandise tendre et fruitée !",
+                                   "761234566000",
+                                   1.13);
+    Produit* cranberries = new Produit("Cranberries",
+                                       "SEEBERGER",
+                                       "Cranberries tranchées sucrées séchées",
+                                       "761234569000",
+                                       2.1);
+    Produit* banane =
+      new Produit("Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
+    Produit* raisin    = new Produit("Raisin sec",
+                                  "Petit Prix",
+                                  "Raisins secs, huile végétale (graine de coton)",
+                                  "761264569090",
+                                  0.39);
+    Produit* fruitsSec = new Produit("fruits sec",
+                                     "FRUIDYLLIC",
+                                     "Peut se manger tel que sans préparation.",
+                                     "761234960940",
+                                     1.06);
+    Produit* cacahuete =
+      new Produit("Cacahuète",
+                  "Carrefour",
+                  "Arachide crue blanche décortiquée pour cuisiner ou pâtisserie",
+                  "761234561000",
+                  0.49);
+    Produit* soja = new Produit("Soja", "OFAL BIO", "SOJA jaune biologique.", "761234529000", 0.96);
+    Produit* basilic = new Produit("Basilic",
+                                   "DUCROS",
+                                   "Basilic déshydraté issu de l'agriculture biologique",
+                                   "761234679900",
+                                   17.18);
 
     distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(Cranberries, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(Banane, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(Raisin, 0, 0.));
+    distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
+             << distributeurs[0]->getNbBacs();
+    distributeurs[1]->ajouterBac(Bac(banane, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(raisin, 0, 0.));
     distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
+             << distributeurs[1]->getNbBacs();
     distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
+             << distributeurs[2]->getNbBacs();
 }
-

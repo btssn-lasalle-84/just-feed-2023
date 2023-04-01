@@ -39,14 +39,17 @@ class IHMJustFeed : public QWidget
     Q_OBJECT
   private:
     QVector<Distributeur*> distributeurs; //!< les distributeurs
-    void initialiserGUI();
-    void initialiserDistributeurs();
+    void                   initialiserGUI();
+    void                   instancierWigets();
+    void                   initialiserWigets();
+    void                   positionnerWigets();
+    void                   initialiserDistributeurs();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
 
-private slots:
+  private slots:
 };
 
 #endif // IHMJUSTFEED_H

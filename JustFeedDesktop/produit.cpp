@@ -9,12 +9,14 @@
  */
 
 #include "produit.h"
+#include <QDebug>
 
 /**
  * @brief Constructeur par défaut de la classe produit
  */
 Produit::Produit() : nom(""), marque(""), description(""), codeProduit(""), prix(0.)
 {
+    qDebug() << Q_FUNC_INFO;
 }
 
 /**
@@ -28,6 +30,8 @@ Produit::Produit(QString nom,
     nom(nom),
     marque(marque), description(description), codeProduit(codeProduit), prix(prix)
 {
+    qDebug() << Q_FUNC_INFO << "nom" << nom << "marque" << marque << "description" << description
+             << "codeProduit" << codeProduit << "prix" << prix;
 }
 
 /**

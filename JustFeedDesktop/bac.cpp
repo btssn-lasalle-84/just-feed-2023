@@ -24,7 +24,10 @@ Bac::Bac() : produit(nullptr), poidsActuel(0), pourcentageRemplissage(0.)
 Bac::Bac(Produit* produit, unsigned int poidsActuel, double pourcentageRemplissage) :
     produit(produit), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
+             << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "pourcentageRemplissage" << pourcentageRemplissage;
 }
 
 /**
