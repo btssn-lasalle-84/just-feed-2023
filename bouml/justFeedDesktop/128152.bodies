@@ -1,9 +1,21 @@
 class Produit
-!!!136746.cpp!!!	getPrix() : double
-    return this->prix;
 !!!136874.cpp!!!	getNom() : QString
     return this->nom;
-!!!137002.cpp!!!	setPrix(in prix : double) : void
-    this->prix = prix;
+!!!145706.cpp!!!	getMarque() : QString
+    return this->marque;
+!!!145834.cpp!!!	getDescription() : QString
+    return this->description;
+!!!145962.cpp!!!	getCodeProduit() : QString
+    return this->codeProduit;
+!!!136746.cpp!!!	getPrix() : double
+    return this->prix;
 !!!137130.cpp!!!	setNom(in nom : QString) : void
     this->nom = nom;
+!!!146090.cpp!!!	setMarque(in marque : QString) : void
+    this->marque = marque;
+!!!146218.cpp!!!	setDescription(in description : QString) : void
+    this->description = description;
+!!!146346.cpp!!!	setCodeProduit(in codeProduit : QString) : void
+    this->codeProduit = codeProduit;
+!!!137002.cpp!!!	setPrix(in prix : double) : void
+    this->prix = prix;

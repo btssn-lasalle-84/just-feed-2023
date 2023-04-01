@@ -2,28 +2,33 @@ format 224
 
 classcanvas 128042 class_ref 128536 // IHMJustFeed
   classdiagramsettings member_max_width 0 end
-  xyz 84 78 2000
+  xyz 19 13 2000
 end
 classcanvas 128170 class_ref 128408 // Distributeur
   classdiagramsettings member_max_width 0 end
-  xyz 1036 241 2000
+  xyz 395 338 2000
 end
 classcanvas 128298 class_ref 128152 // Produit
   classdiagramsettings member_max_width 0 end
-  xyz 2317 1022 2000
+  xyz 1695 1547 2000
 end
 classcanvas 128426 class_ref 134570 // Bac
   classdiagramsettings member_max_width 0 end
-  xyz 814 941 2005
+  xyz 268 1611 2005
 end
-relationcanvas 128554 relation_ref 134698 // <unidirectional association>
-  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 1261 851.5 3000 to ref 128426
-  role_a_pos 1437 900 3000 no_role_b
+relationcanvas 128554 relation_ref 134698 // <directional composition>
+  from ref 128170 z 2006 to ref 128426
+  role_a_pos 1107 1570 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128682 relation_ref 134570 // <unidirectional association>
   from ref 128426 z 2006 to ref 128298
-  role_a_pos 2207 1146 3000 no_role_b
+  role_a_pos 1585 1816 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128810 relation_ref 141226 // <unidirectional association>
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 532 263 3000 to ref 128170
+  role_a_pos 567 302 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end
