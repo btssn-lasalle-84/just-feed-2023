@@ -36,6 +36,7 @@ public class Intervention
     }
 
     // Accesseurs
+    public int getNumeroIntervention() { return this.numeroIntervention; }
     public String getHeureIntervention()
     {
         return this.heureIntervention;
