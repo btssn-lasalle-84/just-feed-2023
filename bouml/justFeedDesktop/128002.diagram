@@ -10,7 +10,7 @@ usecasecanvas 128130 usecase_ref 128002 // Planifier une intervention
 end
 usecasecanvas 128258 usecase_ref 128130 // Lister les distributeurs
   color darkorange
-  xyzwh 278 76 3005 64 32 label_xy 242 50
+  xyzwh 279 76 3005 64 32 label_xy 243 50
 end
 usecasecanvas 128386 usecase_ref 128258 // Visualiser les statistiques
   xyzwh 539 135 3005 64 32 label_xy 496 112
@@ -39,10 +39,10 @@ simplerelationcanvas 130178 simplerelation_ref 128130
   from ref 128130 z 3006 stereotype "<<include>>" xyz 246 163 3000 to ref 128258
 end
 simplerelationcanvas 130946 simplerelation_ref 128386
-  from ref 128386 z 3006 stereotype "<<extend>>" xyz 395 128 3000 to ref 128258
+  from ref 128386 z 3006 stereotype "<<extend>>" xyz 395.5 128 3000 to ref 128258
 end
 simplerelationcanvas 131074 simplerelation_ref 128514
-  from ref 128514 z 3006 stereotype "<<extend>>" xyz 427 67 3000 to ref 128258
+  from ref 128514 z 3006 stereotype "<<extend>>" xyz 427.5 67 3000 to ref 128258
 end
 simplerelationcanvas 131202 simplerelation_ref 128642
   from ref 128770 z 3006 stereotype "<<extend>>" xyz 372 294 3000 to ref 128130
