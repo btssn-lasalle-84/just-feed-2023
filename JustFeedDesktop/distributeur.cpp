@@ -148,18 +148,39 @@ QString Distributeur::getDescription() const
  * @brief Accesseur pour récupérer le nom du produit dans le bac voulu
  * @return QString  qui permet de connaitre le nom du produit
  */
-QString Distributeur::getProduitBac(int identifiant) const
+QString Distributeur::getNomProduitBac(int numeroBac) const
 {
-    return bacs[identifiant]->getNomProduit();
+    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    {
+        return bacs[numeroBac]->getNomProduit();
+    }
+    return "identifiant invalide";
 }
 
 /**
  * @brief Accesseur pour récupérer le prix du produit dans le bac voulu
  * @return double qui permet de connaitre le prix du produit
  */
-double Distributeur::getProduitPrix(int identifiant) const
+double Distributeur::getProduitPrix(int numeroBac) const
 {
-    return bacs[identifiant]->getPrixProduit();
+    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    {
+        return bacs[numeroBac]->getPrixProduit();
+    }
+    return 0.;
+}
+
+/**
+ * @brief Accesseur pour récupérer le produit dans le bac voulu
+ * @return Produit qui permet de connaitre le produit
+ */
+Produit* Distributeur::getProduitBac(int numeroBac) const
+{
+    if(numeroBac <= bacs.size() && numeroBac >= 0)
+    {
+        return bacs[numeroBac]->getProduit();
+    }
+    return NULL;
 }
 
 /**
@@ -257,6 +278,11 @@ void Distributeur::setDateMiseEnService(const QDate& dateMiseEnService)
 void Distributeur::setDescription(const QString& description)
 {
     this->description = description;
+}
+
+void Distributeur::setPrixProduit(const double& prix, const int& numeroBac)
+{
+    this->bacs[numeroBac]->setPrixProduit(prix);
 }
 
 /**

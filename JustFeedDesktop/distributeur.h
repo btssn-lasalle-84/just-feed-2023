@@ -69,8 +69,9 @@ class Distributeur
     QString      getVille() const;
     QDate        getDateMiseService() const;
     QString      getDescription() const;
-    QString      getProduitBac(int identifiant) const;
-    double       getProduitPrix(int identifiant) const;
+    QString      getNomProduitBac(int numeroBac) const;
+    double       getProduitPrix(int numeroBac) const;
+    Produit*     getProduitBac(int numeroBac) const;
 
     // mutateurs
     void setdeviceID(const QString deviceID);
@@ -84,6 +85,7 @@ class Distributeur
     void setVille(const QString& ville);
     void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
+    void setPrixProduit(const double& prix, const int& numeroBac);
 };
 
 #endif // DISTRIBUTEUR_H

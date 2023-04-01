@@ -16,49 +16,6 @@
 /**
  * @brief Constructeur par défaut de la classe IHMJustFeed
  */
-void IHMJustFeed::instancierWigets()
-{
-    magasin = new QLabel(this);
-    produit = new QLabel(this);
-    prix = new QLabel(this);
-}
-
-void IHMJustFeed::initialiserWigets()
-{
-    magasin->setText("Configuration des bacs des distributeurs : " + distributeurs[0]->getNom());
-    magasin->setAlignment(Qt::AlignCenter);
-    produit->setText("Produit : " + distributeurs[0]->getProduitBac(0));
-    produit->setAlignment(Qt::AlignCenter);
-    prix->setText("prix €/100g : " + QString::number(distributeurs[0]->getProduitPrix(0)) + " €");
-    prix->setAlignment(Qt::AlignCenter);
-}
-
-void IHMJustFeed::positionnementWigets()
-{
-    QHBoxLayout *nomMagasin = new QHBoxLayout;
-    QHBoxLayout *distributeur = new QHBoxLayout;
-    QVBoxLayout *mainLayout  = new QVBoxLayout;
-
-    nomMagasin->addWidget(magasin);
-    distributeur->addWidget(produit);
-    distributeur->addWidget(prix);
-    mainLayout->addLayout(nomMagasin);
-    mainLayout->addLayout(distributeur);
-    setLayout(mainLayout);
-    setStyleSheet("QLabel {"
-                  "color: black;"
-                  "background-color: white;"
-                  "border-radius: 5px;"
-                  "padding: 5px;"
-                  "}"
-                  "QHBoxLayout {"
-                  "spacing: 10px;"
-                  "}"
-                  "QVBoxLayout {"
-                  "spacing: 20px;"
-                  "margin: 20px;"
-                  "}");
-}
 
 IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 {
@@ -66,9 +23,6 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 
     initialiserGUI();
     initialiserDistributeurs();
-    instancierWigets();
-    initialiserWigets();
-    positionnementWigets();
     show();
 }
 
@@ -144,26 +98,14 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit *basilic = new Produit("Basilic", "DUCROS", "Basilic déshydraté issu de l'agriculture biologique",
                                     "761234679900", 17.18);
 
-
-    Bac bac0GrandFrais(pruneaux, 0, 0.);
-    Bac bac1GrandFrais(abricot, 0, 0.);
-    Bac bac2GrandFrais(Cranberries, 0, 0.);
-    distributeurs[0]->ajouterBac(bac0GrandFrais);
-    distributeurs[0]->ajouterBac(bac1GrandFrais);
-    distributeurs[0]->ajouterBac(bac2GrandFrais);
-
-    Bac bac0Carrefour(Banane, 0, 0.);
-    Bac bac1Carrefour(Raisin, 0, 0.);
-    Bac bac2Carrefour(fruitsSec, 0, 0.);
-    distributeurs[1]->ajouterBac(bac0Carrefour);
-    distributeurs[1]->ajouterBac(bac1Carrefour);
-    distributeurs[1]->ajouterBac(bac2Carrefour);
-
-    Bac bac0CosyPrimeurs(soja, 0, 0.);
-    Bac bac1CosyPrimeurs(cacahuete, 0, 0.);
-    Bac bac2CosyPrimeurs(basilic, 0, 0.);
-    distributeurs[2]->ajouterBac(bac0CosyPrimeurs);
-    distributeurs[2]->ajouterBac(bac1CosyPrimeurs);
-    distributeurs[2]->ajouterBac(bac2CosyPrimeurs);
+    distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
+    distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
+    distributeurs[0]->ajouterBac(Bac(Cranberries, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(Banane, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(Raisin, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
+    distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
+    distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
+    distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
 }
 
