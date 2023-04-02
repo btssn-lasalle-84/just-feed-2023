@@ -9,26 +9,34 @@
  */
 
 #include "intervention.h"
+#include "distributeur.h"
 
 /**
  * @brief Constructeur par défaut de la classe Intervention
  */
 Intervention::Intervention() :
-    heureIntervention(), numeroIntervention(0), tempsTrajet(), poidsARemplir(0.)
+    heureIntervention(), tempsTrajet(), distributeurAIntervenir(), poidsARemplir()
 {
+
 }
+
 /**
  * @brief Constructeur d'initialisation de la classe Intervention
  */
 Intervention::Intervention(QTime  heureIntervention,
-                           int    numeroIntervention,
                            QTime  tempsTrajet,
-                           double poidsARemplir) :
+                           QVector<double> poidsARemplir,
+                           Distributeur *distributeurAIntervenir) :
     heureIntervention(heureIntervention),
-    numeroIntervention(numeroIntervention), tempsTrajet(tempsTrajet),
-    poidsARemplir(poidsARemplir)
+    tempsTrajet(tempsTrajet),
+    distributeurAIntervenir(distributeurAIntervenir)
 {
+    for(int i = 0; i < this->distributeurAIntervenir->getNbBacs(); i++)
+    {
+        this->poidsARemplir[i] = poidsARemplir[i];
+    }
 }
+
 /**
  * @brief Destructeur de la classe Intervention
  */
@@ -46,16 +54,6 @@ QTime Intervention::getHeureIntervention() const
 }
 
 /**
- * @brief Accesseur de l'attribut numeroIntervention
- * @return un entier qui représente le numéro de l'intervention sur le
- * distributeur
- */
-int Intervention::getNumeroIntervention() const
-{
-    return this->numeroIntervention;
-}
-
-/**
  * @brief Accesseur de l'attribut tempsTrajet
  * @return QTime représente le temps de trajet entre lui et le distributeur
  */
@@ -69,9 +67,22 @@ QTime Intervention::getTempsTrajet() const
  * @return un float qui represente le poids que doit prendre le technicien pour
  * remplir le distributeur
  */
-double Intervention::getPoidsARemplir() const
+double Intervention::getPoidsARemplir(int numeroBac) const
 {
-    return this->poidsARemplir;
+    if(numeroBac >= 0 && numeroBac < distributeurAIntervenir->getNbBacs())
+    {
+        return this->poidsARemplir[numeroBac];
+    }
+    return 0.;
+}
+
+/**
+ * @brief Accesseur de l'attribut distributeurAIntervenir
+ * @return Distributeur qui represente le distributeur sur lequel il faut intervenir
+ */
+Distributeur* Intervention::getDistributeurAIntervenir() const
+{
+    return this->distributeurAIntervenir;
 }
 
 /**
@@ -81,15 +92,6 @@ double Intervention::getPoidsARemplir() const
 void Intervention::setHeureIntervention(const QTime& heureIntervention)
 {
     this->heureIntervention = heureIntervention;
-}
-
-/**
- * @brief Mutateur de l'attribut numeroIntervention
- * @param numeroIntervention le numero d'intervention
- */
-void Intervention::setNumeroIntervention(const int numeroIntervention)
-{
-    this->numeroIntervention = numeroIntervention;
 }
 
 /**
@@ -104,9 +106,21 @@ void Intervention::setTempsTrajet(const QTime& tempsTrajet)
 /**
  * @brief Mutateur de l'attribut poidsARemplir
  * @param poidsARemplir le poids que le technicien doit prendre pour remplir le
- * distributeur
+ * distributeur et numeroBac pour savoir pour quel bac
  */
-void Intervention::setPoidsARemplir(const double poidsARemplir)
+void Intervention::setPoidsARemplir(const double poidsARemplir, const int numeroBac)
 {
-    this->poidsARemplir = poidsARemplir;
+    if(numeroBac >= 0 && numeroBac < distributeurAIntervenir->getNbBacs())
+    {
+        this->poidsARemplir[numeroBac] = poidsARemplir;
+    }
+}
+
+/**
+ * @brief Mutateur de l'attribut distributeurAIntervenir
+ * @param distributeur, distributeur sur lequel il faut intervenir
+ */
+void Intervention::setDistributeurAIntervenir(Distributeur* distributeur)
+{
+    this->distributeurAIntervenir = distributeur;
 }

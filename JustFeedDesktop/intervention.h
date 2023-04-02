@@ -8,35 +8,38 @@
 #ifndef INTERVENTION_H
 #define INTERVENTION_H
 
+#include <QVector>
 #include <QTime>
+class Distributeur;
+class Produit;
 
 class Intervention
 {
   private:
     QTime  heureIntervention;  //!< heure de l'intervention
-    int    numeroIntervention; //!< numéro qui identifie l'intervention
     QTime  tempsTrajet;        //!< temps de trajet vers le distributeur
-    double poidsARemplir; //!< poids à prévoir pour remplir le distributeur
+    QVector<double> poidsARemplir; //!< poids à prévoir pour remplir les differents bac du distributeur
+    Distributeur *distributeurAIntervenir; //!< les distributeurs sur les quels il faut intervenir
 
   public:
     Intervention();
     Intervention(QTime  heureIntervention,
-                 int    numeroIntervention,
                  QTime  tempsTrajet,
-                 double poidsARemplir);
+                 QVector<double> poidsARemplir,
+                 Distributeur *distributeurAIntervenir);
     ~Intervention();
 
     // Accesseurs
     QTime  getHeureIntervention() const;
-    int    getNumeroIntervention() const;
     QTime  getTempsTrajet() const;
-    double getPoidsARemplir() const;
+    double getPoidsARemplir(int numeroBac) const;
+    Distributeur* getDistributeurAIntervenir() const;
 
     // Mutateurs
     void setHeureIntervention(const QTime& heureIntervention);
-    void setNumeroIntervention(const int numeroIntervention);
     void setTempsTrajet(const QTime& tempsTrajet);
-    void setPoidsARemplir(const double poidsARemplir);
+    void setPoidsARemplir(const double poidsARemplir, const int numeroBac);
+    void setDistributeurAIntervenir(Distributeur* distributeur);
 };
 
 #endif // INTERVENTION_H
