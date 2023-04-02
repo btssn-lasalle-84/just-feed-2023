@@ -9,16 +9,11 @@
 #ifndef DISTRIBUTEUR_H
 #define DISTRIBUTEUR_H
 
-/**
- * @struct Produit
- * @brief Définit les propriétés d'un produit
- */
-struct Produit
-{
-    /**
-     * @todo Définir les propriétés d'un Produit
-     */
-};
+#include <QVector>
+#include <QDate>
+
+class Bac;
+class Produit;
 
 /**
  * @struct Localisation
@@ -26,11 +21,8 @@ struct Produit
  */
 struct Localisation
 {
-    /**
-     * @todo Il manque des choses
-     */
-    float latitude;
-    float longitude;
+    QString latitude;
+    QString longitude;
 };
 
 /**
@@ -41,42 +33,60 @@ struct Localisation
 class Distributeur
 {
   private:
-    int          identifiant; //!< identifiant du distributeur
-    Produit      produit;     //!< type de produit que contient le distributeur
-    int          poidsTotal;  //!< à définir
-    int          poidsActuel; //!< à définir
-    int          hydrometrie; //!< hydrométrie de l'interieur du distributeur
-    Localisation position;    //!< géolocalisation du distributeur
-    bool         aIntervenir; //!< permet de savoir s'il faut intervenir sur le
-                              //!< distributeur
+    QString       deviceID;          //!< identifiant du distributeur
+    Localisation  position;          //!< géolocalisation du distributeur
+    QVector<Bac*> bacs;              //!< les bacs du distributeur
+    QString       nom;               //!< nom du distributeur
+    QString       adresse;           //!< adresse du distributeur
+    QString       codePostal;        //!< code postal du distributeur
+    QString       ville;             //!< ville du distributeur
+    QDate         dateMiseEnService; //!< date de mise en service du distributeur
+    QString       description;       //!< description du distributeur
+    int           hydrometrie;       //!< hydrométrie de l'interieur du distributeur
+    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
+                                     //!< distributeur
 
   public:
     Distributeur();
-    Distributeur(int          identifiant,
-                 Produit      produit,
-                 int          poidsTotal,
-                 int          poidsActuel,
-                 int          hydrometrie,
+    Distributeur(QString      deviceID,
                  Localisation position,
-                 bool         aIntervenir);
+                 QString      nom,
+                 QString      adresse,
+                 QString      codePostal,
+                 QString      ville,
+                 QString      description,
+                 QDate        dateMiseEnService);
     ~Distributeur();
 
     // Accesseurs
-    int          getIdentifiant() const;
-    Produit      getProduit() const;
-    int          getHydrometrie() const;
+    QString      getdeviceID() const;
     Localisation getPosition() const;
-    int          getPoidsTotal() const;
-    int          getPoidsActuel() const;
     int          getAIntervenir() const;
+    int          getHydrometrie() const;
+    QString      getNom() const;
+    QString      getAdresse() const;
+    QString      getCodePostal() const;
+    QString      getVille() const;
+    QDate        getDateMiseService() const;
+    QString      getDescription() const;
+    QString      getNomProduitBac(int numeroBac) const;
+    double       getProduitPrix(int numeroBac) const;
+    Produit*     getProduitBac(int numeroBac) const;
+    int          getNbBacs() const;
 
-    // Mutateurs
-    void setProduit(const Produit& produit);
+    // mutateurs
+    void setdeviceID(const QString deviceID);
     void setHydrometrie(int hydrometrie);
     void setPosition(const Localisation& localisation);
-    void setPoidsTotal(int poidsTotal);
-    void setPoidsActuel(int poidsActuel);
     void setAIntervenir(bool aIntervenir);
+    void setNom(const QString& nom);
+    void setAdresse(const QString& adresse);
+    void setCodePostal(const QString& codePostal);
+    void setVille(const QString& ville);
+    void setDateMiseEnService(const QDate& dateMiseEnService);
+    void setDescription(const QString& description);
+    void setPrixProduit(const int& numeroBac, const double& prix);
+    void ajouterBac(const Bac& bac);
 };
 
 #endif // DISTRIBUTEUR_H

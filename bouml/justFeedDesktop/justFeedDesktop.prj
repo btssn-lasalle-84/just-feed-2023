@@ -1,6 +1,6 @@
 format 224
 "justFeedDesktop"
-  revision 7
+  revision 10
   modified_by 42 "tv"
   cpp_root_dir "../../"
 
@@ -71,7 +71,7 @@ format 224
       size A0
     end
 
-    class 128002 "Opérateur"
+    class 128002 "OpÃ©rateur"
       visibility package stereotype "actor"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -175,7 +175,7 @@ ${inlines}
       end
     end
 
-    usecase 128386 "Visualiser l'état du distributeur"
+    usecase 128386 "Visualiser l'Ã©tat du distributeur"
       
       usecasediagramsettings end
       
@@ -254,7 +254,7 @@ ${inlines}
       end
     end
 
-    usecase 128770 "Géolocaliser un distributeur"
+    usecase 128770 "GÃ©olocaliser un distributeur"
       
       usecasediagramsettings end
       
@@ -283,7 +283,7 @@ ${inlines}
     end
   end
 
-  usecaseview 134530 "Diagramme de séquence"
+  usecaseview 134530 "Diagramme de sÃ©quence"
     
     usecasediagramsettings end
     
@@ -304,13 +304,13 @@ ${inlines}
     
     activitydiagramsettings
      end
-    sequencediagram 141314 "Diagramme de séquence"
+    sequencediagram 141314 "Diagramme de sÃ©quence"
       sequencediagramsettings end
       overlapping_bars size A0
     end
 
     classinstance 128258 ""
-      type class_ref 128002 // Opérateur
+      type class_ref 128002 // OpÃ©rateur
       attributes
         end
       relations
@@ -340,7 +340,7 @@ ${inlines}
         end
     end
 
-    class 129176 "système"
+    class 129176 "systÃ¨me"
       visibility package 
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -356,7 +356,7 @@ ${inlines}
     end
 
     classinstance 128024 ""
-      type class_ref 129176 // système
+      type class_ref 129176 // systÃ¨me
       attributes
         end
       relations
@@ -387,7 +387,7 @@ ${inlines}
     activitydiagramsettings
      end
     classdiagram 128024 "Diagramme de classe"
-      classdiagramsettings draw_all_relations no member_max_width 0 end
+      classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 show_relation_visibility yes end
       size A0
     end
   end
