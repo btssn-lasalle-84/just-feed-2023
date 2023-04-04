@@ -57,6 +57,25 @@ void IHMJustFeed::initialiserGUI()
  */
 void IHMJustFeed::instancierWigets()
 {
+    // Le widget principal
+    centralWidget = new QWidget(this);
+    tableWidgetDistributeurs= new QTableWidget(this);
+
+    //Les labels
+    labelNomDistributeur = new QLabel(this);
+    nomDistributeur = new QLabel(this);
+    labelLatitude = new QLabel(this);
+    latitude = new QLabel(this);
+    labelLongitude = new QLabel(this);
+    longitude = new QLabel(this);
+    labelEnseigne = new QLabel(this);
+    enseigne = new QLabel(this);
+    labelType = new QLabel(this);
+    type = new QLabel(this);
+    labelAdresse = new QLabel(this);
+    adresse = new QLabel(this);
+    labelCreation = new QLabel(this);
+    creation = new QLabel(this);
 }
 
 /**
@@ -64,6 +83,122 @@ void IHMJustFeed::instancierWigets()
  */
 void IHMJustFeed::initialiserWigets()
 {
+
+    // Les boutons
+    boutonCharger = new QPushButton("Charger", this);
+    boutonEffacer = new QPushButton("Effacer", this);
+    boutonRetour  = new QPushButton("Retour", this);
+
+
+    // Les polices
+    QFont police;
+    police.setPointSize(TAILLE_POLICE);
+    police.setBold(true);
+    // font.setWeight(75);
+    QFont policeGras;
+    policeGras.setPointSize(TAILLE_POLICE);
+
+
+
+    // Une personnalisation de la police et par feuille de style
+    labelNomDistributeur->setFont(policeGras);
+    nomDistributeur->setFont(police);
+    nomDistributeur->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelLatitude->setFont(policeGras);
+    latitude->setFont(police);
+    latitude->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelLongitude->setFont(policeGras);
+    longitude->setFont(police);
+    longitude->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelEnseigne->setFont(policeGras);
+    enseigne->setFont(police);
+    enseigne->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelType->setFont(policeGras);
+    type->setFont(police);
+    type->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelAdresse->setFont(policeGras);
+    adresse->setFont(police);
+    adresse->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+    labelCreation->setFont(policeGras);
+    creation->setFont(police);
+    creation->setStyleSheet(
+      QString::fromUtf8("color: rgb(117, 80, 123);"));
+
+
+    labelNomDistributeur->setText("Nom :");
+    labelLatitude->setText("Latitude :");
+    labelLongitude->setText("Longitude :");
+    labelEnseigne->setText("Enseigne :");
+    labelType->setText("Type :");
+    labelAdresse->setText("Adresse :");
+    labelCreation->setText("Date de création :");
+
+    // Les layouts
+    QVBoxLayout* layoutPrincipal                         = new QVBoxLayout();
+    QVBoxLayout* layoutF1Principal                       = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table                           = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutNomDistributeur         = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutLatitude                = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutLongitude               = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutEnseigne                = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutType                    = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutAdresse                 = new QHBoxLayout();
+    QHBoxLayout* horizontalLayoutCreation                = new QHBoxLayout();
+
+    // Positionnement
+
+    horizontalLayoutNomDistributeur->addWidget(labelNomDistributeur);
+    horizontalLayoutNomDistributeur->addWidget(nomDistributeur);
+    horizontalLayoutNomDistributeur->addStretch();
+    horizontalLayoutLatitude->addWidget(labelLatitude);
+    horizontalLayoutLatitude->addWidget(latitude);
+    horizontalLayoutLatitude->addStretch();
+    horizontalLayoutLongitude->addWidget(labelLongitude);
+    horizontalLayoutLongitude->addWidget(longitude);
+    horizontalLayoutLongitude->addStretch();
+    horizontalLayoutEnseigne->addWidget(labelEnseigne);
+    horizontalLayoutEnseigne->addWidget(enseigne);
+    horizontalLayoutEnseigne->addStretch();
+    horizontalLayoutType->addWidget(labelType);
+    horizontalLayoutType->addWidget(type);
+    horizontalLayoutType->addStretch();
+    horizontalLayoutAdresse->addWidget(labelAdresse);
+    horizontalLayoutAdresse->addWidget(adresse);
+    horizontalLayoutAdresse->addStretch();
+    horizontalLayoutCreation->addWidget(labelCreation);
+    horizontalLayoutCreation->addWidget(creation);
+    horizontalLayoutCreation->addStretch();
+
+
+    layoutF1Principal->addLayout(horizontalLayoutNomDistributeur);
+    layoutF1Principal->addLayout(horizontalLayoutLatitude);
+    layoutF1Principal->addLayout(horizontalLayoutLongitude);
+    layoutF1Principal->addLayout(horizontalLayoutEnseigne);
+    layoutF1Principal->addLayout(horizontalLayoutType);
+    layoutF1Principal->addLayout(horizontalLayoutAdresse);
+    layoutF1Principal->addLayout(horizontalLayoutCreation);
+
+    layoutF1Principal->addStretch();
+
+
+    centralWidget->setLayout(layoutPrincipal);
+
+    resize(qApp->desktop()->availableGeometry(this).width(),
+           qApp->desktop()->availableGeometry(this).height());
+    // Pas de redimensionnement (optionnel)
+
 }
 
 /**
@@ -71,6 +206,41 @@ void IHMJustFeed::initialiserWigets()
  */
 void IHMJustFeed::positionnerWigets()
 {
+    // Les colonnes
+    nomColonnes << "Nom"
+                << "Latitude"
+                << "Longitude"
+                << "Enseigne"
+                << "Type"
+                << "Adresse"
+                << "Date de création";
+
+    tableWidgetDistributeurs->setColumnCount(nomColonnes.count());
+    tableWidgetDistributeurs->setHorizontalHeaderLabels(nomColonnes);
+    // Vide (pas de lignes donc pas d'utilisateurs dans la table)
+    tableWidgetDistributeurs->setRowCount(0);
+    nbLignesDistributeurs = 0;
+    // Redimensionnement automatique (inutile)
+    // tableWidgetDistributeurs->resizeColumnsToContents();
+    // Pas d'étiquettes numérotées sur le côté gauche
+    tableWidgetDistributeurs->verticalHeader()->setHidden(true);
+    // Taille
+    // tableWidgetDistributeurs->setMinimumSize(QSize(0, 0));
+    // Prend toute la largeur
+    tableWidgetDistributeurs->setMinimumWidth(centralWidget->width());
+    // Hauteur fixe ?
+    // tableWidgetDistributeurs->setMinimumHeight(centralWidget->height());
+    /*cf. setFixedSize()*/
+    tableWidgetDistributeurs->setFixedHeight(
+      tableWidgetDistributeurs->verticalHeader()->length() +
+      tableWidgetDistributeurs->horizontalHeader()->height());
+    // Largeur automatique des colonnes sur toute la largeur
+    QHeaderView* headerView = tableWidgetDistributeurs->horizontalHeader();
+    headerView->setSectionResizeMode(QHeaderView::Stretch);
+    // Pas de scroll
+    tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    tableWidgetDistributeurs->setHorizontalScrollBarPolicy(
+      Qt::ScrollBarAlwaysOff);
 }
 
 /**
