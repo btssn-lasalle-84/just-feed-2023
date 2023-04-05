@@ -42,25 +42,6 @@ public class BaseDeDonnees
         this.motDePasse  = "";
         this.hostName    = "";
         this.port = PORT_DEFAUT;
-    }
-
-    /**
-     * @brief Constructeur d'initialisation de la classe BaseDeDonnees.
-     * @see BaseDeDonnees(String identifiant, String motDePasse, String
-     *     hostName, int port)
-     * @param identifiant le nom d'un utilisateur autorisé sur la base de
-     *   données.
-     * @param motDePasse le mot de passe de l'utilisateur.
-     * @param hostName le nom de la machine distante.
-     * @param port le numéro de port sur lequel le processus de la base de
-     *   données écoute.
-     */
-    public BaseDeDonnees(String identifiant, String motDePasse, String hostName, int port)
-    {
-        this.identifiant = identifiant;
-        this.motDePasse  = motDePasse;
-        this.hostName    = hostName;
-        this.port = port;
 
         List<Bac> bacsDistributeur1 = Arrays.asList(
                 new Bac(new Produit(0.70, 0.001, 0.004, "cacahuètes"),
@@ -96,10 +77,29 @@ public class BaseDeDonnees
         );
 
         this.listeInterventions = Arrays.asList(
-            new Intervention("10h" , new Distributeur(8456, bacsDistributeur1), true),
-            new Intervention("11h", new Distributeur(8457, bacsDistributeur2), true),
-            new Intervention("12h", new Distributeur(8458, bacsDistributeur3), true)
+                new Intervention("10h" , new Distributeur(8456, bacsDistributeur1), true),
+                new Intervention("11h", new Distributeur(8457, bacsDistributeur2), true),
+                new Intervention("12h", new Distributeur(8458, bacsDistributeur3), true)
         );
+    }
+
+    /**
+     * @brief Constructeur d'initialisation de la classe BaseDeDonnees.
+     * @see BaseDeDonnees(String identifiant, String motDePasse, String
+     *     hostName, int port)
+     * @param identifiant le nom d'un utilisateur autorisé sur la base de
+     *   données.
+     * @param motDePasse le mot de passe de l'utilisateur.
+     * @param hostName le nom de la machine distante.
+     * @param port le numéro de port sur lequel le processus de la base de
+     *   données écoute.
+     */
+    public BaseDeDonnees(String identifiant, String motDePasse, String hostName, int port)
+    {
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port = port;
     }
 
     public List<Distributeur> recupererDistributeurs()

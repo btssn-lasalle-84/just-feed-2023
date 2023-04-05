@@ -56,9 +56,9 @@ public class Intervention
         {
             if (bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE) )
             {
-                quantiteARemplir = bac.getPoidsTotalBac() - bac.getPoidsActuel();
-                typeProduit      = bac.getTypeProduit().getNom();
-                listeBacsARemplir.concat(typeProduit+" : "+String.format("%.2f kg",quantiteARemplir)+"\n");
+                quantiteARemplir  = bac.getPoidsTotalBac() - bac.getPoidsActuel();
+                typeProduit       = bac.getTypeProduit().getNom();
+                listeBacsARemplir = listeBacsARemplir.concat(typeProduit+" : "+String.format("%.2f kg",quantiteARemplir)+"\n");
             }
         }
 
@@ -72,7 +72,7 @@ public class Intervention
         {
             if(bac.getHydrometrie() > SEUIL_HUMIDITE)
             {
-                listeBacsADepanner.concat(bac.getTypeProduit().getNom()+"\n");
+                listeBacsADepanner = listeBacsADepanner.concat(bac.getTypeProduit().getNom()+"\n");
             }
         }
 
