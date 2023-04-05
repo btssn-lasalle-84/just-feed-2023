@@ -17,12 +17,13 @@
  * @brief Constructeur par défaut de la classe IHMJustFeed
  */
 
-IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
+IHMJustFeed::IHMJustFeed(QWidget* parent) : QMainWindow(parent)
 {
     qDebug() << Q_FUNC_INFO;
 
     initialiserGUI();
     initialiserDistributeurs();
+
 }
 
 /**
@@ -42,9 +43,10 @@ IHMJustFeed::~IHMJustFeed()
  */
 void IHMJustFeed::initialiserGUI()
 {
+    qDebug() << Q_FUNC_INFO;
     instancierWigets();
     initialiserWigets();
-    positionnerWigets();
+    gererEvenements();
 
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
@@ -57,25 +59,11 @@ void IHMJustFeed::initialiserGUI()
  */
 void IHMJustFeed::instancierWigets()
 {
-    // Le widget principal
-    centralWidget = new QWidget(this);
-    tableWidgetDistributeurs= new QTableWidget(this);
-
-    //Les labels
-    labelNomDistributeur = new QLabel(this);
-    nomDistributeur = new QLabel(this);
-    labelLatitude = new QLabel(this);
-    latitude = new QLabel(this);
-    labelLongitude = new QLabel(this);
-    longitude = new QLabel(this);
-    labelEnseigne = new QLabel(this);
-    enseigne = new QLabel(this);
-    labelType = new QLabel(this);
-    type = new QLabel(this);
-    labelAdresse = new QLabel(this);
-    adresse = new QLabel(this);
-    labelCreation = new QLabel(this);
-    creation = new QLabel(this);
+    qDebug() << Q_FUNC_INFO;
+    titrePrincipal = new QLabel("Just Feed",this);
+    boutonQuitter = new QPushButton("X",this);
+    boutonIntervenir = new QPushButton("Intervenir",this);
+    boutonConfigurer = new QPushButton("Configurer",this);
 }
 
 /**
@@ -83,121 +71,41 @@ void IHMJustFeed::instancierWigets()
  */
 void IHMJustFeed::initialiserWigets()
 {
+    QPainter painter(this);
 
-    // Les boutons
-    boutonCharger = new QPushButton("Charger", this);
-    boutonEffacer = new QPushButton("Effacer", this);
-    boutonRetour  = new QPushButton("Retour", this);
+    titrePrincipal->setAlignment(Qt::AlignCenter);
+    titrePrincipal->setGeometry(868,5,100,100);
 
+    boutonQuitter->setGeometry(1815,0,50,100);
+    boutonIntervenir->setGeometry(1650,900,100,100);
+    boutonConfigurer->setGeometry(1750,900,100,100);
 
-    // Les polices
-    QFont police;
-    police.setPointSize(TAILLE_POLICE);
-    police.setBold(true);
-    // font.setWeight(75);
-    QFont policeGras;
-    policeGras.setPointSize(TAILLE_POLICE);
+    qDebug() << Q_FUNC_INFO;
+    gui = new QWidget(this);
+    fenetres = new QStackedWidget(this);
+    QWidget* fenetreAccueil = new QWidget(this);
+    fenetres->addWidget(fenetreAccueil);
 
-
-
-    // Une personnalisation de la police et par feuille de style
-    labelNomDistributeur->setFont(policeGras);
-    nomDistributeur->setFont(police);
-    nomDistributeur->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelLatitude->setFont(policeGras);
-    latitude->setFont(police);
-    latitude->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelLongitude->setFont(policeGras);
-    longitude->setFont(police);
-    longitude->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelEnseigne->setFont(policeGras);
-    enseigne->setFont(police);
-    enseigne->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelType->setFont(policeGras);
-    type->setFont(police);
-    type->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelAdresse->setFont(policeGras);
-    adresse->setFont(police);
-    adresse->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-    labelCreation->setFont(policeGras);
-    creation->setFont(police);
-    creation->setStyleSheet(
-      QString::fromUtf8("color: rgb(117, 80, 123);"));
-
-
-    labelNomDistributeur->setText("Nom :");
-    labelLatitude->setText("Latitude :");
-    labelLongitude->setText("Longitude :");
-    labelEnseigne->setText("Enseigne :");
-    labelType->setText("Type :");
-    labelAdresse->setText("Adresse :");
-    labelCreation->setText("Date de création :");
+    // La table
+    positionnerWigets();
 
     // Les layouts
-    QVBoxLayout* layoutPrincipal                         = new QVBoxLayout();
-    QVBoxLayout* layoutF1Principal                       = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table                           = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutNomDistributeur         = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutLatitude                = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutLongitude               = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutEnseigne                = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutType                    = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutAdresse                 = new QHBoxLayout();
-    QHBoxLayout* horizontalLayoutCreation                = new QHBoxLayout();
-
-    // Positionnement
-
-    horizontalLayoutNomDistributeur->addWidget(labelNomDistributeur);
-    horizontalLayoutNomDistributeur->addWidget(nomDistributeur);
-    horizontalLayoutNomDistributeur->addStretch();
-    horizontalLayoutLatitude->addWidget(labelLatitude);
-    horizontalLayoutLatitude->addWidget(latitude);
-    horizontalLayoutLatitude->addStretch();
-    horizontalLayoutLongitude->addWidget(labelLongitude);
-    horizontalLayoutLongitude->addWidget(longitude);
-    horizontalLayoutLongitude->addStretch();
-    horizontalLayoutEnseigne->addWidget(labelEnseigne);
-    horizontalLayoutEnseigne->addWidget(enseigne);
-    horizontalLayoutEnseigne->addStretch();
-    horizontalLayoutType->addWidget(labelType);
-    horizontalLayoutType->addWidget(type);
-    horizontalLayoutType->addStretch();
-    horizontalLayoutAdresse->addWidget(labelAdresse);
-    horizontalLayoutAdresse->addWidget(adresse);
-    horizontalLayoutAdresse->addStretch();
-    horizontalLayoutCreation->addWidget(labelCreation);
-    horizontalLayoutCreation->addWidget(creation);
-    horizontalLayoutCreation->addStretch();
+    QVBoxLayout* layoutPrincipal   = new QVBoxLayout();
+    QVBoxLayout* layoutF1Principal = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table     = new QHBoxLayout();
 
 
-    layoutF1Principal->addLayout(horizontalLayoutNomDistributeur);
-    layoutF1Principal->addLayout(horizontalLayoutLatitude);
-    layoutF1Principal->addLayout(horizontalLayoutLongitude);
-    layoutF1Principal->addLayout(horizontalLayoutEnseigne);
-    layoutF1Principal->addLayout(horizontalLayoutType);
-    layoutF1Principal->addLayout(horizontalLayoutAdresse);
-    layoutF1Principal->addLayout(horizontalLayoutCreation);
+ // Positionnement
+        // La fenêtre accueil
+        layoutF1Table->addWidget(tableWidgetDistributeurs);
+        layoutF1Principal->addLayout(layoutF1Table);
+        layoutF1Principal->addStretch();
+        fenetreAccueil->setLayout(layoutF1Principal);
 
-    layoutF1Principal->addStretch();
-
-
-    centralWidget->setLayout(layoutPrincipal);
-
-    resize(qApp->desktop()->availableGeometry(this).width(),
-           qApp->desktop()->availableGeometry(this).height());
-    // Pas de redimensionnement (optionnel)
+        // La GUI
+        layoutPrincipal->addWidget(fenetres);
+        gui->setLayout(layoutPrincipal);
+        setCentralWidget(gui);
 
 }
 
@@ -206,10 +114,12 @@ void IHMJustFeed::initialiserWigets()
  */
 void IHMJustFeed::positionnerWigets()
 {
+    qDebug() << Q_FUNC_INFO;
+    tableWidgetDistributeurs= new QTableWidget(this);
+
     // Les colonnes
     nomColonnes << "Nom"
-                << "Latitude"
-                << "Longitude"
+                << "Localisation"
                 << "Enseigne"
                 << "Type"
                 << "Adresse"
@@ -227,9 +137,9 @@ void IHMJustFeed::positionnerWigets()
     // Taille
     // tableWidgetDistributeurs->setMinimumSize(QSize(0, 0));
     // Prend toute la largeur
-    tableWidgetDistributeurs->setMinimumWidth(centralWidget->width());
+    tableWidgetDistributeurs->setMinimumWidth(gui->width());
     // Hauteur fixe ?
-    // tableWidgetDistributeurs->setMinimumHeight(centralWidget->height());
+    // tableWidgetDistributeurs->setMinimumHeight(gui->height());
     /*cf. setFixedSize()*/
     tableWidgetDistributeurs->setFixedHeight(
       tableWidgetDistributeurs->verticalHeader()->length() +
@@ -241,6 +151,7 @@ void IHMJustFeed::positionnerWigets()
     tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tableWidgetDistributeurs->setHorizontalScrollBarPolicy(
       Qt::ScrollBarAlwaysOff);
+
 }
 
 /**
@@ -329,4 +240,54 @@ void IHMJustFeed::initialiserDistributeurs()
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
+}
+
+void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
+{
+    fenetres->setCurrentIndex(fenetre);
+}
+
+void IHMJustFeed::afficherFenetreAccueil()
+{
+    afficherFenetre(IHMJustFeed::Fenetre::Accueil);
+}
+
+void IHMJustFeed::effacerTableau(int ligne, int colonne)
+{
+    Q_UNUSED(ligne)
+    Q_UNUSED(colonne)
+    // on réinitialise la table
+    int nb = tableWidgetDistributeurs->rowCount();
+    if(nb != 0)
+    {
+        // on les efface
+        for(int n = 0; n < nb; n++)
+            tableWidgetDistributeurs->removeRow(0);
+    }
+}
+
+void IHMJustFeed::effacerTableDistributeurs()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    effacerTableau(0, 0);
+    nbLignesDistributeurs = 0;
+}
+
+void IHMJustFeed::afficherDistributeurTable(Distributeur distributeur)
+{
+    qDebug() << Q_FUNC_INFO << "nom";
+}
+
+void IHMJustFeed::paintEvent(QPaintEvent* e)
+{
+    QPainter painter(this); // construire
+    painter.setPen( QPen(Qt::gray, 2) ); // personnaliser
+    QRect rect(0, 0, 1920, 100);
+    painter.fillRect(rect, Qt::gray);
+}
+
+void IHMJustFeed::gererEvenements()
+{
+    connect(boutonQuitter, SIGNAL(clicked(bool)), qApp, SLOT(quit()));
 }
