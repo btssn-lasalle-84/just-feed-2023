@@ -20,9 +20,8 @@
 IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 {
     qDebug() << Q_FUNC_INFO;
-
-    initialiserGUI();
     initialiserDistributeurs();
+    initialiserGUI();
 }
 
 /**
@@ -57,6 +56,19 @@ void IHMJustFeed::initialiserGUI()
  */
 void IHMJustFeed::instancierWigets()
 {
+    nomDistributeur = new QLabel(this);
+    nomDistributeur->setText("Configurer distributeur " + distributeurs[DISTRIBUTEUR_1]->getNom() + " Distributeur numero : " + QString::number(DISTRIBUTEUR_1));
+    nomDistributeur->setAlignment(Qt::AlignCenter);
+    for(int i = 0; i < distributeurs[0]->getNbBacs(); i++)
+    {
+        labelBac.push_back(bac = new QLabel(this));
+        labelProduit.push_back(produit = new QLabel(this));
+        labelPrix.push_back(prix = new QLabel(this));
+        lineChangerPrix.push_back(editionPrix = new QLineEdit(this));
+        lineChangerProduit.push_back(editionProduit = new QLineEdit(this));
+        qboutonChangerPrix.push_back(boutonChangerPrix = new QPushButton(this));
+        qboutonChangerProduit.push_back(boutonChangerProduit = new QPushButton(this));
+    }
 }
 
 /**
@@ -64,6 +76,18 @@ void IHMJustFeed::instancierWigets()
  */
 void IHMJustFeed::initialiserWigets()
 {
+    for(int i = 0; i < distributeurs[0]->getNbBacs(); i++)
+    {
+        labelBac[i]->setText("Bac numero : " + QString::number(i));
+        labelBac[i]->setAlignment(Qt::AlignCenter);
+        labelProduit[i]->setText("Produit : " + distributeurs[DISTRIBUTEUR_1]->getNomProduitBac(i));
+        labelProduit[i]->setAlignment(Qt::AlignCenter);
+        labelPrix[i]->setText("Prix : " + QString::number(distributeurs[DISTRIBUTEUR_1]->getProduitPrix(i)) + " €");
+        labelPrix[i]->setAlignment(Qt::AlignCenter);
+        lineChangerPrix[i]->setAlignment(Qt::AlignCenter);
+        qboutonChangerPrix[i]->setText("changer prix");
+        qboutonChangerProduit[i]->setText("changer produit");
+    }
 }
 
 /**
@@ -71,6 +95,22 @@ void IHMJustFeed::initialiserWigets()
  */
 void IHMJustFeed::positionnerWigets()
 {
+    QVBoxLayout* mainLayout = new QVBoxLayout();
+    mainLayout->addWidget(nomDistributeur);
+    QVector<QHBoxLayout*> distributeurLayout(distributeurs[DISTRIBUTEUR_1]->getNbBacs());;
+    for(int i = 0; i < distributeurs[0]->getNbBacs(); i++)
+    {
+        distributeurLayout[i] = new QHBoxLayout();
+        distributeurLayout[i]->addWidget(labelBac[i]);
+        distributeurLayout[i]->addWidget(labelProduit[i]);
+        distributeurLayout[i]->addWidget(lineChangerProduit[i]);
+        distributeurLayout[i]->addWidget(qboutonChangerProduit[i]);
+        distributeurLayout[i]->addWidget(labelPrix[i]);
+        distributeurLayout[i]->addWidget(lineChangerPrix[i]);
+        distributeurLayout[i]->addWidget(qboutonChangerPrix[i]);
+        mainLayout->addLayout(distributeurLayout[i]);
+    }
+    setLayout(mainLayout);
 }
 
 /**
