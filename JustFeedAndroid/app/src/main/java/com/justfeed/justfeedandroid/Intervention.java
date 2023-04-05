@@ -1,5 +1,12 @@
 package com.justfeed.justfeedandroid;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+
 /**
  * @brief Définition de la classe Intervention.
  * @details La classe Intervention \c Intervention permet de décrire une Intervention pour
@@ -18,60 +25,61 @@ public class Intervention
     /**
      * Attributs
      */
-    private String  heureIntervention;
-    private double  poidsARemplir;
-    private boolean aRemplir;
-    private boolean aDepanner;
-    private boolean estIntervenu;
+    private String       heureIntervention;
+    private Distributeur distributeur;
+    private boolean      aIntervenir;
 
     public Intervention()
     {
-        this.poidsARemplir      = 0.0;
-        this.aRemplir           = false;
-        this.aDepanner          = false;
-        this.estIntervenu       = false;
+        this.distributeur = null;
     }
 
     public Intervention(String heureIntervention,
-                        double poidsARemplir,
-                        boolean aRemplir,
-                        boolean aDepanner)
+                        Distributeur distributeur,
+                        boolean aIntervenir)
     {
         this.heureIntervention  = heureIntervention;
-        this.poidsARemplir      = poidsARemplir;
-        this.aRemplir           = aRemplir;
-        this.aDepanner          = aDepanner;
-        this.estIntervenu       = false;
+        this.distributeur       = distributeur;
+        this.aIntervenir        = true;
     }
 
     // Accesseurs
     public String getHeureIntervention() { return this.heureIntervention; }
-    public double getPoidsARemplir() { return this.poidsARemplir; }
-    public boolean estARemplir() { return this.aRemplir; }
-    public boolean estADepanner() { return this.aDepanner; }
-    public boolean interventionTerminee() { return this.estIntervenu; }
+    public int getIdentifiantDistribteur() { return this.distributeur.getIdentifiant(); }
+    public boolean estAIntervenir() { return this.aIntervenir; }
+    public String bacsARemplir() {
+        String listeBacsARemplir = "";
+        String typeProduit;
+        Double quantiteARemplir;
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if (bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE) )
+            {
+                quantiteARemplir = bac.getPoidsTotalBac() - bac.getPoidsActuel();
+                typeProduit      = bac.getTypeProduit().getNom();
+                listeBacsARemplir.concat(typeProduit+" : "+String.format("%.2f kg",quantiteARemplir)+"\n");
+            }
+        }
+
+        return listeBacsARemplir;
+    }
+    public String bacsADepanner()
+    {
+        String listeBacsADepanner = "";
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getHydrometrie() > SEUIL_HUMIDITE)
+            {
+                listeBacsADepanner.concat(bac.getTypeProduit().getNom()+"\n");
+            }
+        }
+
+        return listeBacsADepanner;
+    }
 
     // Mutateurs
     public void modifierHeureIntervention(String nouvelleHeureIntervention) { this.heureIntervention = nouvelleHeureIntervention; }
-    public void modifierEtatIntervention(boolean estIntervenu) { this.estIntervenu = estIntervenu; }
-    public void modifierIntervention(double poidsActuel, double poidsTotal, int hydrometrie)
-    {
-        if (poidsActuel < (poidsTotal / MOITIE) )
-        {
-            this.aRemplir = true;
-        }
-        else
-        {
-            this.aRemplir = false;
-        }
-
-        if (hydrometrie > SEUIL_HUMIDITE)
-        {
-            this.aDepanner = true;
-        }
-        else
-        {
-            this.aDepanner = false;
-        }
-    }
+    public void modifierEtatIntervention(boolean estIntervenu) { this.aIntervenir = estIntervenu; }
 }

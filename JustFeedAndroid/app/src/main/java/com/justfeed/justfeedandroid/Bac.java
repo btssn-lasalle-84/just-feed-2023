@@ -14,7 +14,6 @@ public class Bac
      * Attributs
      */
     private Produit typeProduit; //!< Type de produit dans le bac
-    private Intervention intervention; //!< Intervention à réaliser sur le bac
     private double  poidsActuel; //!< Poids actuel du bac en Kg
     private double  poidsTotal; //!< Poids total du bac en kg
     private int     hydrometrie; //!< Taux d'humidité dans un bac
@@ -26,7 +25,6 @@ public class Bac
     public Bac()
     {
         this.typeProduit  = null;
-        this.intervention = null;
         this.poidsActuel  = 0.0;
         this.poidsTotal   = 0.0;
         this.hydrometrie  = 0;
@@ -34,15 +32,14 @@ public class Bac
 
     /**
      * @brief Constructeur d'initialisation de la classe Bac
-     * @see Bac(Produit typeProduit, Intervention intervention, double poidsActuel, double poidsTotal, int hydrometrie)
+     * @see Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hydrometrie)
      * @param typeProduit , type de produit dans le bac
      * @param poidsActuel , poids actuel d'un bac
      * @param poidsTotal  , poids total d'un bac
      */
-    public Bac(Produit typeProduit, Intervention intervention, double poidsActuel, double poidsTotal, int hydrometrie)
+    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hydrometrie)
     {
         this.typeProduit  = typeProduit;
-        this.intervention = intervention;
         this.poidsActuel  = poidsActuel;
         this.poidsTotal   = poidsTotal;
         this.hydrometrie  = hydrometrie;
@@ -57,11 +54,6 @@ public class Bac
      */
     public Produit getTypeProduit(){ return this.typeProduit; }
     /**
-     * @brief Accesseur de l'intervention.
-     * @return intervention , l'intervention à réaliser.
-     */
-    public Intervention getIntervention(){ return this.intervention; }
-    /**
      * @brief Accesseur du poids actuel du bac.
      * @return poidsActuel , poids actuel en kg du bac.
      */
@@ -71,11 +63,6 @@ public class Bac
      * @return Le poids total d'un bac du distributeur quant-il est plein.
      */
     public double getPoidsTotalBac() { return this.poidsTotal; }
-    /**
-     * @brief Accesseur du produit présent dans un bac.
-     * @return le type de produit contenu dans le bac.
-     */
-    public Produit getProduit() { return this.typeProduit; }
     /**
      * @brief Accesseur de l'hydrométrie d'un bac.
      * @return hydrometrie le taux d'humidité d'un bac.

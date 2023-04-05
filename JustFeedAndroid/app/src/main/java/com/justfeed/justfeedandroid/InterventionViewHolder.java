@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
+import java.util.Dictionary;
 import java.util.List;
 import java.util.Map;
 
@@ -16,12 +17,6 @@ public class InterventionViewHolder extends ViewHolder
      * Constantes
      */
     private static final String TAG = "_InterventionViewHolder";
-
-    /**
-     * Attributs
-     */
-    private Intervention intervention;
-
     /**
      * Ressources GUI
      */
@@ -41,33 +36,11 @@ public class InterventionViewHolder extends ViewHolder
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
     }
 
-    public void afficherInterventions(List<Distributeur> listeDistributeurs)
+    public void afficherInterventions(Intervention intervention)
     {
-        String interventionsARealiser = "";
-        boolean aIntervenir           = false;
-
-        for(Distributeur distributeur: listeDistributeurs)
-        {
-            List<Bac> listeBacs = distributeur.getListeBacs();
-            for(Bac bac: listeBacs)
-            {
-                if(bac.getIntervention().estARemplir())
-                {
-                    double poidsARemplir = bac.getIntervention().getPoidsARemplir();
-                    aIntervenir = true;
-                    interventionsARealiser.concat("Remplir Bac ").concat(bac.getTypeProduit().getNom()).concat(" de ").concat(String.format("%.2f kg\n", poidsARemplir));
-                }
-                if(bac.getIntervention().estADepanner())
-                {
-                    aIntervenir = true;
-                    interventionsARealiser.concat("Dépannage nécessaire Bac ").concat(bac.getTypeProduit().getNom()).concat(" taux humidité > 0%\n");
-                }
-                if(aIntervenir)
-                {
-                    heureIntervention.setText(bac.getIntervention().getHeureIntervention());
-                    identifiantDistributeur.setText(Integer.toString(distributeur.getIdentifiant()));
-                }
-            }
-        }
+        identifiantDistributeur.setText(Integer.toString(intervention.getIdentifiantDistribteur()));
+        aDepanner.setText(intervention.bacsADepanner());
+        aRemplir.setText(intervention.bacsARemplir());
+        heureIntervention.setText(intervention.getHeureIntervention());
     }
 }

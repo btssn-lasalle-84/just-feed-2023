@@ -15,12 +15,6 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
      */
     private static final String   TAG                       = "_DistributeurViewHolder"; //!< TAG pour les logs
     private final double          AUCUNE_QUANTITE_A_REMPLIR = 0.0; //!< Le bac n'a pas besoin d'être rempli
-
-    /**
-     * Attributs
-     */
-    private Distributeur distributeur;
-
     /**
      * Ressources GUI
      */
@@ -56,7 +50,6 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         String  poidsActuelBacs = "Poids Actuel : ";
         String  hydrometrie     = "Hydrometrie : ";
 
-        this.distributeur = distributeur;
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
 
         for (Bac bac : distributeur.getListeBacs())

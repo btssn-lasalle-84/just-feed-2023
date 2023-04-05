@@ -40,7 +40,6 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private List<Intervention>   listeInterventions;    //!< Liste des interventions
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -77,7 +76,6 @@ public class JustFeed extends AppCompatActivity
 
         initialiserVueListeDistributeurs();
         afficherDistributeurs();
-
     }
 
     /**
