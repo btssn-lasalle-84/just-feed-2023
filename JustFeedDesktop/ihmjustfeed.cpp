@@ -17,20 +17,12 @@
  * @brief Constructeur par défaut de la classe IHMJustFeed
  */
 
+
 IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
 {
     qDebug() << Q_FUNC_INFO;
     initialiserDistributeurs();
     initialiserGUI();
-    for(int i = 0;  i < distributeurs[DISTRIBUTEUR_1]->getNbBacs(); i++)
-    {
-        connect(qboutonChangerPrix[i], &QPushButton::clicked, this, [this, i]() {
-            changerLePrix(i);
-        });
-        connect(qboutonChangerProduit[i], &QPushButton::clicked, this, [this, i]() {
-            changerLeProduit(i);
-        });
-    }
 }
 
 /**
@@ -53,7 +45,7 @@ void IHMJustFeed::initialiserGUI()
     instancierWigets();
     initialiserWigets();
     positionnerWigets();
-
+    initialiserConnect();
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
     /*QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
@@ -68,15 +60,19 @@ void IHMJustFeed::instancierWigets()
     nomDistributeur = new QLabel(this);
     nomDistributeur->setText("Configurer distributeur " + distributeurs[DISTRIBUTEUR_1]->getNom() + " Distributeur numero : " + QString::number(DISTRIBUTEUR_1));
     nomDistributeur->setAlignment(Qt::AlignCenter);
+    qboutonAjoutBac = new QPushButton(this);
+    qboutonAjoutBac->setText("Ajout d'un bac");
+    qboutonSuppressionBac = new QPushButton(this);
+    qboutonSuppressionBac->setText("suppression d'un bac");
     for(int i = 0; i < distributeurs[0]->getNbBacs(); i++)
     {
-        labelBac.push_back(bac = new QLabel(this));
-        labelProduit.push_back(produit = new QLabel(this));
-        labelPrix.push_back(prix = new QLabel(this));
-        lineChangerPrix.push_back(editionPrix = new QLineEdit(this));
-        lineChangerProduit.push_back(editionProduit = new QLineEdit(this));
-        qboutonChangerPrix.push_back(boutonChangerPrix = new QPushButton(this));
-        qboutonChangerProduit.push_back(boutonChangerProduit = new QPushButton(this));
+        labelBac.push_back(new QLabel(this));
+        labelProduit.push_back(new QLabel(this));
+        labelPrix.push_back(new QLabel(this));
+        lineChangerPrix.push_back(new QLineEdit(this));
+        lineChangerProduit.push_back(new QLineEdit(this));
+        qboutonChangerPrix.push_back(new QPushButton(this));
+        qboutonChangerProduit.push_back(new QPushButton(this));
     }
 }
 
@@ -104,9 +100,13 @@ void IHMJustFeed::initialiserWigets()
  */
 void IHMJustFeed::positionnerWigets()
 {
-    QVBoxLayout* mainLayout = new QVBoxLayout();
-    mainLayout->addWidget(nomDistributeur);
-    QVector<QHBoxLayout*> distributeurLayout(distributeurs[DISTRIBUTEUR_1]->getNbBacs());;
+    mainLayout = new QVBoxLayout();
+    QHBoxLayout *titre = new QHBoxLayout();
+    titre->addWidget(nomDistributeur);
+    titre->addWidget(qboutonAjoutBac);
+    titre->addWidget(qboutonSuppressionBac);
+    mainLayout->addLayout(titre);
+    QVector<QHBoxLayout*>  distributeurLayout(distributeurs[DISTRIBUTEUR_1]->getNbBacs());;
     for(int i = 0; i < distributeurs[0]->getNbBacs(); i++)
     {
         distributeurLayout[i] = new QHBoxLayout();
@@ -123,12 +123,29 @@ void IHMJustFeed::positionnerWigets()
 }
 
 /**
+ * @brief méthode qui initialise les connection signal slot
+ */
+void IHMJustFeed::initialiserConnect()
+{
+    for(int i = 0;  i < distributeurs[DISTRIBUTEUR_1]->getNbBacs(); i++)
+    {
+        connect(qboutonChangerPrix[i], &QPushButton::clicked, this, [this, i]() {
+            changerLePrix(i);
+        });
+        connect(qboutonChangerProduit[i], &QPushButton::clicked, this, [this, i]() {
+            changerLeProduit(i);
+        });
+    }
+    connect(qboutonAjoutBac, SIGNAL(clicked()), this, SLOT(ajoutBac()));
+}
+
+/**
  * @brief méthode qui initianlise les distributeurs avec les bacs et les produits
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
     distributeurs.push_back(new Distributeur("distributeur-1-sim",
-                                             { "44.11161", "4.84856" },
+                                             { "44.11161", "4.84856" , "0"},
                                              "Grand Frais",
                                              "Distributeur de fruits secs",
                                              "Zone du Coudoulet Rond point du Péage Sud",
@@ -136,7 +153,7 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Orange",
                                              QDate::fromString("2022-01-08", "yyyy-MM-dd")));
     distributeurs.push_back(new Distributeur("distributeur-2-sim",
-                                             { "43.92844", "4.79247" },
+                                             { "43.92844", "4.79247", "0"},
                                              "Carrefour",
                                              "Distributeur de fruits secs",
                                              "390 Rue Jean Marie Tjibaou",
@@ -144,7 +161,7 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Avignon",
                                              QDate::fromString("2022-03-09", "yyyy-MM-dd")));
     distributeurs.push_back(new Distributeur("distributeur-3",
-                                             { "43.90252", "4.75280" },
+                                             { "43.90252", "4.75280", "0" },
                                              "Cosy Primeurs",
                                              "Distributeur de fruits secs",
                                              "292 Route de Boulbon",
@@ -210,6 +227,9 @@ void IHMJustFeed::initialiserDistributeurs()
              << distributeurs[2]->getNbBacs();
 }
 
+/**
+ * @brief méthode qui change le prix d'un produit
+ */
 void IHMJustFeed::changerLePrix(const int numeroBac)
 {
     QString nouveauPrix = lineChangerPrix[numeroBac]->text();
@@ -217,9 +237,94 @@ void IHMJustFeed::changerLePrix(const int numeroBac)
     lineChangerPrix[numeroBac]->setText("");
 }
 
+/**
+ * @brief méthode qui change le produit d'un bac
+ */
 void IHMJustFeed::changerLeProduit(const int numeroBac)
 {
     QString nouveauProduit = lineChangerProduit[numeroBac]->text();
     labelProduit[numeroBac]->setText("Produit : " + nouveauProduit);
     lineChangerProduit[numeroBac]->setText("");
+}
+
+/**
+ * @brief méthode qui ajoute un bac
+ */
+void IHMJustFeed::ajoutBac()
+{
+    Bac bac;
+    distributeurs[DISTRIBUTEUR_1]->ajouterBac(bac);
+    qDebug() << Q_FUNC_INFO << "ajoutBac" << distributeurs[DISTRIBUTEUR_1]->getNom() << "NbLabelbac"
+             << distributeurs[DISTRIBUTEUR_1]->getNbBacs();
+    int nbrBacs = (distributeurs[DISTRIBUTEUR_1]->getNbBacs() - 1);
+    instancierNouveauWidget();
+    initialiserNouveauWidget(nbrBacs);
+    positionnerNouveauWidget(nbrBacs);
+    for (int i = 0; i < distributeurs[DISTRIBUTEUR_1]->getNbBacs(); i++)
+     {
+         labelBac[i]->setText("Bac numero : " + QString::number(i));
+     }
+    connecterNouveauWidget(nbrBacs);
+}
+
+/**
+ * @brief méthode qui instancie un nouveau bac
+ */
+void IHMJustFeed::instancierNouveauWidget()
+{
+    labelBac.push_back(new QLabel(this));
+    labelProduit.push_back(new QLabel(this));
+    labelPrix.push_back(new QLabel(this));
+    lineChangerPrix.push_back(new QLineEdit(this));
+    lineChangerProduit.push_back(new QLineEdit(this));
+    qboutonChangerPrix.push_back(new QPushButton(this));
+    qboutonChangerProduit.push_back(new QPushButton(this));
+}
+
+/**
+ * @brief méthode qui initialise le nouveau bac
+ */
+void IHMJustFeed::initialiserNouveauWidget(int nbrBacs)
+{
+    labelBac[nbrBacs]->setText("Bac numero : " + QString::number(nbrBacs));
+    labelBac[nbrBacs]->setAlignment(Qt::AlignCenter);
+    labelProduit[nbrBacs]->setText("Produit : " + distributeurs[DISTRIBUTEUR_1]->getNomProduitBac(nbrBacs));
+    labelProduit[nbrBacs]->setAlignment(Qt::AlignCenter);
+    labelPrix[nbrBacs]->setText("Prix : " + QString::number(distributeurs[DISTRIBUTEUR_1]->getProduitPrix(nbrBacs)) + " €");
+    labelPrix[nbrBacs]->setAlignment(Qt::AlignCenter);
+    lineChangerPrix[nbrBacs]->setAlignment(Qt::AlignCenter);
+    qboutonChangerPrix[nbrBacs]->setText("changer prix");
+    qboutonChangerProduit[nbrBacs]->setText("changer produit");
+}
+
+/**
+ * @brief méthode qui positionne le nouveau bac
+ */
+void IHMJustFeed::positionnerNouveauWidget(int nbrBacs)
+{
+    QHBoxLayout *distributeurLayout = new QHBoxLayout();
+    distributeurLayout->addWidget(labelBac[nbrBacs]);
+    distributeurLayout->addWidget(labelProduit[nbrBacs]);
+    distributeurLayout->addWidget(lineChangerProduit[nbrBacs]);
+    distributeurLayout->addWidget(qboutonChangerProduit[nbrBacs]);
+    distributeurLayout->addWidget(labelPrix[nbrBacs]);
+    distributeurLayout->addWidget(lineChangerPrix[nbrBacs]);
+    distributeurLayout->addWidget(qboutonChangerPrix[nbrBacs]);
+    mainLayout->addLayout(distributeurLayout);
+}
+
+/**
+ * @brief méthode qui connecte le nouveau bac
+ */
+void IHMJustFeed::connecterNouveauWidget(int nbrBacs)
+{
+    for(int i = nbrBacs;  i < distributeurs[DISTRIBUTEUR_1]->getNbBacs(); i++)
+    {
+        connect(qboutonChangerPrix[i], &QPushButton::clicked, this, [this, i]() {
+            changerLePrix(i);
+        });
+        connect(qboutonChangerProduit[i], &QPushButton::clicked, this, [this, i]() {
+            changerLeProduit(i);
+        });
+    }
 }

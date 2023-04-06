@@ -43,20 +43,16 @@ class IHMJustFeed : public QWidget
   private:
     QVector<Distributeur*> distributeurs; //!< les distributeurs
     QLabel *nomDistributeur; //!< nom du distributeur et son numero
-    QLabel *bac; //!< numero du bac
-    QLabel *produit; //!< produit qui se trouve dans le bac
-    QLabel *prix; //!< prix du produit
-    QLineEdit *editionPrix; //!< zone qui permet de changer le prix
-    QLineEdit *editionProduit; //!< zone qui permet de changer le produit
-    QPushButton *boutonChangerPrix; //!< bouton pour changer le prix
-    QPushButton *boutonChangerProduit; //!< bouton pour changer le produit
     QVector<QLabel*> labelBac; //!< conteneur de QLabel de bac
     QVector<QLabel*> labelProduit; //!< conteneur de QLabel de produit
     QVector<QLabel*> labelPrix; //!< conteneur de QLabel de prix
+    QPushButton *qboutonAjoutBac;
+    QPushButton *qboutonSuppressionBac;
     QVector<QLineEdit*> lineChangerPrix; //!<conteneur de QLineEdit de etidion prix
     QVector<QLineEdit*> lineChangerProduit; //!< conteneur de QLineEdit de etidion produit
     QVector<QPushButton*> qboutonChangerPrix; //!< conteneur de QLineEdit de bouton changer prix
     QVector<QPushButton*> qboutonChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
+    QVBoxLayout* mainLayout;
 
     void                   initialiserGUI();
     void                   instancierWigets();
@@ -68,9 +64,24 @@ class IHMJustFeed : public QWidget
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
 
-  private slots:
+    void initialiserConnect();
+    
+    void initialiserNouveauWidget();
+
+    void positionnerNouveauWigets(int nbrBacs);
+
+    void instancierNouveauWidget();
+
+    void initialiserNouveauWidget(int nbrBacs);
+
+    void positionnerNouveauWidget(int nbrBacs);
+
+    void connecterNouveauWidget(int nbrBacs);
+
+private slots:
     void changerLePrix(int numeroBac);
     void changerLeProduit(int numeroBac);
+    void ajoutBac();
 };
 
 #endif // IHMJUSTFEED_H
