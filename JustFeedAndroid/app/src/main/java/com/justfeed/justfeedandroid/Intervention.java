@@ -20,8 +20,8 @@ public class Intervention
     /**
      * Constantes
      */
-    private final int    SEUIL_HUMIDITE = 0;
-    private final int    MOITIE         = 2;
+    private final int SEUIL_HUMIDITE = 0;
+    private final int MOITIE         = 2;
     /**
      * Attributs
      */
@@ -34,31 +34,43 @@ public class Intervention
         this.distributeur = null;
     }
 
-    public Intervention(String heureIntervention,
-                        Distributeur distributeur,
-                        boolean aIntervenir)
+    public Intervention(String heureIntervention, Distributeur distributeur, boolean aIntervenir)
     {
-        this.heureIntervention  = heureIntervention;
-        this.distributeur       = distributeur;
-        this.aIntervenir        = true;
+        this.heureIntervention = heureIntervention;
+        this.distributeur      = distributeur;
+        this.aIntervenir       = true;
     }
 
     // Accesseurs
-    public String getHeureIntervention() { return this.heureIntervention; }
-    public int getIdentifiantDistribteur() { return this.distributeur.getIdentifiant(); }
-    public boolean estAIntervenir() { return this.aIntervenir; }
-    public String bacsARemplir() {
+    public String getHeureIntervention()
+    {
+        return this.heureIntervention;
+    }
+
+    public int getIdentifiantDistribteur()
+    {
+        return this.distributeur.getIdentifiant();
+    }
+
+    public boolean estAIntervenir()
+    {
+        return this.aIntervenir;
+    }
+
+    public String bacsARemplir()
+    {
         String listeBacsARemplir = "";
         String typeProduit;
         Double quantiteARemplir;
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if (bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE) )
+            if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
             {
                 quantiteARemplir  = bac.getPoidsTotalBac() - bac.getPoidsActuel();
                 typeProduit       = bac.getTypeProduit().getNom();
-                listeBacsARemplir = listeBacsARemplir.concat(typeProduit+" : "+String.format("%.2f kg",quantiteARemplir)+"\n");
+                listeBacsARemplir = listeBacsARemplir.concat(
+                  typeProduit + " : " + String.format("%.2f kg", quantiteARemplir) + "\n");
             }
         }
 
@@ -72,7 +84,8 @@ public class Intervention
         {
             if(bac.getHydrometrie() > SEUIL_HUMIDITE)
             {
-                listeBacsADepanner = listeBacsADepanner.concat(bac.getTypeProduit().getNom()+"\n");
+                listeBacsADepanner =
+                  listeBacsADepanner.concat(bac.getTypeProduit().getNom() + "\n");
             }
         }
 
@@ -80,6 +93,13 @@ public class Intervention
     }
 
     // Mutateurs
-    public void modifierHeureIntervention(String nouvelleHeureIntervention) { this.heureIntervention = nouvelleHeureIntervention; }
-    public void modifierEtatIntervention(boolean estIntervenu) { this.aIntervenir = estIntervenu; }
+    public void modifierHeureIntervention(String nouvelleHeureIntervention)
+    {
+        this.heureIntervention = nouvelleHeureIntervention;
+    }
+
+    public void modifierEtatIntervention(boolean estIntervenu)
+    {
+        this.aIntervenir = estIntervenu;
+    }
 }

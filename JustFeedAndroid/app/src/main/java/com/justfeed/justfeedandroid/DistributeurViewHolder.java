@@ -13,8 +13,8 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
     /**
      * Constantes
      */
-    private static final String   TAG                       = "_DistributeurViewHolder"; //!< TAG pour les logs
-    private final double          AUCUNE_QUANTITE_A_REMPLIR = 0.0; //!< Le bac n'a pas besoin d'être rempli
+    private static final String TAG = "_DistributeurViewHolder"; //!< TAG pour les logs
+    private final double AUCUNE_QUANTITE_A_REMPLIR = 0.0; //!< Le bac n'a pas besoin d'être rempli
     /**
      * Ressources GUI
      */
@@ -33,7 +33,7 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         identifiant = ((TextView)itemView.findViewById(R.id.identifiant));
         typeProduit = ((TextView)itemView.findViewById(R.id.typeProduit));
         prixProduit = ((TextView)itemView.findViewById(R.id.prixProduit));
-        poidsTotal = ((TextView)itemView.findViewById(R.id.poidsTotal));
+        poidsTotal  = ((TextView)itemView.findViewById(R.id.poidsTotal));
         poidsActuel = ((TextView)itemView.findViewById(R.id.poidsActuel));
         hydrometrie = ((TextView)itemView.findViewById(R.id.hydrometrie));
     }
@@ -43,23 +43,27 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         /**
          * @todo changer l'affichage des distributeurs
          */
-        String  identifiant     = "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
-        String  listeProduits   = "Produits : ";
-        String  prixProduits    = "Prix : ";
-        String  poidsTotalBacs  = "Poids Total : ";
-        String  poidsActuelBacs = "Poids Actuel : ";
-        String  hydrometrie     = "Hydrometrie : ";
+        String identifiant =
+          "Identifiant : ".concat(Integer.toString(distributeur.getIdentifiant()));
+        String listeProduits   = "Produits : ";
+        String prixProduits    = "Prix : ";
+        String poidsTotalBacs  = "Poids Total : ";
+        String poidsActuelBacs = "Poids Actuel : ";
+        String hydrometrie     = "Hydrometrie : ";
 
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
 
-        for (Bac bac : distributeur.getListeBacs())
+        for(Bac bac: distributeur.getListeBacs())
         {
             Produit produit = bac.getTypeProduit();
             listeProduits   = listeProduits.concat(produit.getNom()).concat(" ");
-            prixProduits    = prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
-            poidsTotalBacs  = poidsTotalBacs.concat(String.format("%.2f", bac.getPoidsTotalBac())).concat(" kg ");
-            poidsActuelBacs = poidsActuelBacs.concat(String.format("%.2f", bac.getPoidsActuel())).concat(" kg ");
-            hydrometrie     = hydrometrie.concat(Integer.toString(bac.getHydrometrie()));
+            prixProduits =
+              prixProduits.concat(String.format("%.2f", produit.getPrix())).concat(" ");
+            poidsTotalBacs =
+              poidsTotalBacs.concat(String.format("%.2f", bac.getPoidsTotalBac())).concat(" kg ");
+            poidsActuelBacs =
+              poidsActuelBacs.concat(String.format("%.2f", bac.getPoidsActuel())).concat(" kg ");
+            hydrometrie = hydrometrie.concat(Integer.toString(bac.getHydrometrie()));
         }
 
         this.identifiant.setText(identifiant);

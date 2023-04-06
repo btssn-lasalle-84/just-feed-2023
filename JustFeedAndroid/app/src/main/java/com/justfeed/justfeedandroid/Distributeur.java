@@ -17,9 +17,9 @@ public class Distributeur
     /**
      * Attributs
      */
-    private int                  id; //!< identifie le ditributeur.
-
-    private List<Bac>            listeBacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private int id; //!< identifie le ditributeur.
+    private List<Bac>
+      listeBacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -27,8 +27,8 @@ public class Distributeur
      */
     public Distributeur()
     {
-        this.id          = 0;
-        this.listeBacs   = null;
+        this.id        = 0;
+        this.listeBacs = null;
     }
 
     /**
@@ -37,11 +37,10 @@ public class Distributeur
      * @param id L'identifiant du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
-    public Distributeur(int     id,
-                        List<Bac> listeBacs)
+    public Distributeur(int id, List<Bac> listeBacs)
     {
-        this.id          = id;
-        this.listeBacs   = listeBacs;
+        this.id        = id;
+        this.listeBacs = listeBacs;
     }
     // Accesseurs
     /**
@@ -56,7 +55,10 @@ public class Distributeur
      * @brief Accesseur des bacs du distributeur
      * @return listeBacs , la liste des bacs du distributeur
      */
-    public List<Bac> getListeBacs() { return this.listeBacs; }
+    public List<Bac> getListeBacs()
+    {
+        return this.listeBacs;
+    }
     /**
      * @brief Mutateur du type de produit contenu dans un bac.
      * @param nouveauxProduits.

@@ -48,7 +48,8 @@ public class JustFeed extends AppCompatActivity
     /**
      * Ressources GUI
      */
-    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste les interventions
+    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
+                                        //!< les interventions
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -61,15 +62,15 @@ public class JustFeed extends AppCompatActivity
         Log.d(TAG, "onCreate()");
 
         boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
-        baseDeDonnees      = new BaseDeDonnees();
-        listeDistributeurs = baseDeDonnees.recupererDistributeurs();
+        baseDeDonnees       = new BaseDeDonnees();
+        listeDistributeurs  = baseDeDonnees.recupererDistributeurs();
 
-        boutonInterventions.setOnClickListener(new View.OnClickListener()
-        {
+        boutonInterventions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View vue)
             {
-                Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+                Intent activiteIntervention =
+                  new Intent(JustFeed.this, ActiviteInterventions.class);
                 startActivity(activiteIntervention);
             }
         });

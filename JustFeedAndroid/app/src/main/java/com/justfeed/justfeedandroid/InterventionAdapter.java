@@ -27,7 +27,7 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionViewHo
     public InterventionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.intervention, parent, false);
+        View           view     = inflater.inflate(R.layout.intervention, parent, false);
 
         return new InterventionViewHolder(view);
     }

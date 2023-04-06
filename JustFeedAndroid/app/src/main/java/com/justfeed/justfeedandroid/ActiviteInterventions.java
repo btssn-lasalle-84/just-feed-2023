@@ -9,7 +9,8 @@ import android.util.Log;
 
 import java.util.List;
 
-public class ActiviteInterventions extends AppCompatActivity {
+public class ActiviteInterventions extends AppCompatActivity
+{
     /**
      * Constantes
      */
@@ -18,14 +19,15 @@ public class ActiviteInterventions extends AppCompatActivity {
     /**
      * Attributs
      */
-    List<Intervention> listeInterventions;
-    BaseDeDonnees baseDeDonnees;
-    private RecyclerView vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter adapteurIntervention;  //!< Remplit les vues des Interventions
-    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionne les vues
+    List<Intervention>                 listeInterventions; //!< La liste des interventions
+    BaseDeDonnees                      baseDeDonnees; //!< L'accès à la base de données
+    private RecyclerView               vueListeInterventions; //!< Pour l'affichage des Interventions
+    private RecyclerView.Adapter       adapteurIntervention; //!< Les données de la vue
+    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement de la vues
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_interventions);
 
@@ -91,11 +93,11 @@ public class ActiviteInterventions extends AppCompatActivity {
 
     private void initialiserVueInterventions()
     {
-        this.vueListeInterventions       = (RecyclerView)findViewById(R.id.listeInterventions);
+        this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
-        this.adapteurIntervention        = new InterventionAdapter(this.listeInterventions);
+        this.adapteurIntervention = new InterventionAdapter(this.listeInterventions);
         this.vueListeInterventions.setAdapter(this.adapteurIntervention);
     }
 
