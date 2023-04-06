@@ -17,14 +17,16 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
     /**
      * Ressources GUI
      */
-    private TextView identifiant;
+    private TextView     identifiant;
+    private RecyclerView vueListeBacs;
 
     public DistributeurViewHolder(final View itemView)
     {
         super(itemView);
         Log.d(TAG, "DistributeurViewHolder()");
 
-        identifiant = ((TextView)itemView.findViewById(R.id.identifiant));
+        identifiant   = ((TextView)itemView.findViewById(R.id.identifiant));
+        vueListeBacs = itemView.findViewById(R.id.listeBacs);
     }
 
     public void afficherDistributeur(Distributeur distributeur)
@@ -32,5 +34,10 @@ public class DistributeurViewHolder extends RecyclerView.ViewHolder
         Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
 
         this.identifiant.setText(Integer.toString(distributeur.getIdentifiant()));
+    }
+
+    public RecyclerView modifierVueListeBacs()
+    {
+        return this.vueListeBacs;
     }
 }

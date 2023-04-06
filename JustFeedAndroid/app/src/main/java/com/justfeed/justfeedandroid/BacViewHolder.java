@@ -31,12 +31,15 @@ public class BacViewHolder extends RecyclerView.ViewHolder
 
     public void afficherBac(Bac bac)
     {
-        int pourcentageRestant   = (int)(bac.getPoidsActuel() / bac.getPoidsTotalBac())*100;
-        int remplissageRectangle = RECTANGLE_PLEIN / (pourcentageRestant / 100);
+        /**
+         * @bug division par zéro
+         */
+        /*int pourcentageRestant   = (int)(bac.getPoidsActuel() / bac.getPoidsTotalBac())*100;
+        int remplissageRectangle = RECTANGLE_PLEIN / (pourcentageRestant / 100);*/
 
         prix.setText(String.format("%.2f €", bac.getTypeProduit().getPrix()));
         produit.setText(bac.getTypeProduit().getNom());
         hydrometrie.setText(Integer.toString(bac.getHydrometrie()));
-        poidsActuel.setHeight(remplissageRectangle);
+        /*poidsActuel.setHeight(remplissageRectangle);*/
     }
 }

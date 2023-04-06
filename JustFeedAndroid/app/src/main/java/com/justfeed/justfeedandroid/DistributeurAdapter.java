@@ -7,13 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
 public class DistributeurAdapter extends RecyclerView.Adapter<DistributeurViewHolder>
 {
-    private List<Distributeur> distributeurs = null;
+    private List<Distributeur> distributeurs         = null;
+    private RecyclerView.RecycledViewPool partageVue = new RecyclerView.RecycledViewPool();
 
     public DistributeurAdapter(List<Distributeur> distributeurs)
     {
@@ -38,6 +40,16 @@ public class DistributeurAdapter extends RecyclerView.Adapter<DistributeurViewHo
     {
         Distributeur distributeur = distributeurs.get(position);
         holder.afficherDistributeur(distributeur);
+        LinearLayoutManager layoutVueListesBacs = new LinearLayoutManager(
+                holder.modifierVueListeBacs().getContext(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+        );
+        layoutVueListesBacs.setInitialPrefetchItemCount(distributeur.getListeBacs().size());
+        BacAdapter adapteurBacs = new BacAdapter(distributeur.getListeBacs());
+        holder.modifierVueListeBacs().setLayoutManager(layoutVueListesBacs);
+        holder.modifierVueListeBacs().setAdapter(adapteurBacs);
+        holder.modifierVueListeBacs().setRecycledViewPool(partageVue);
     }
 
     @Override
