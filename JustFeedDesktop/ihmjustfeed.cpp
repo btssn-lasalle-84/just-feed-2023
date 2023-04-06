@@ -22,6 +22,15 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent)
     qDebug() << Q_FUNC_INFO;
     initialiserDistributeurs();
     initialiserGUI();
+    for(int i = 0;  i < distributeurs[DISTRIBUTEUR_1]->getNbBacs(); i++)
+    {
+        connect(qboutonChangerPrix[i], &QPushButton::clicked, this, [this, i]() {
+            changerLePrix(i);
+        });
+        connect(qboutonChangerProduit[i], &QPushButton::clicked, this, [this, i]() {
+            changerLeProduit(i);
+        });
+    }
 }
 
 /**
@@ -47,8 +56,8 @@ void IHMJustFeed::initialiserGUI()
 
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
-    QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    resize(screenGeometry.width(), screenGeometry.height());
+    /*QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
+    resize(screenGeometry.width(), screenGeometry.height());*/
 }
 
 /**
@@ -199,4 +208,18 @@ void IHMJustFeed::initialiserDistributeurs()
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
+}
+
+void IHMJustFeed::changerLePrix(const int numeroBac)
+{
+    QString nouveauPrix = lineChangerPrix[numeroBac]->text();
+    labelPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");
+    lineChangerPrix[numeroBac]->setText("");
+}
+
+void IHMJustFeed::changerLeProduit(const int numeroBac)
+{
+    QString nouveauProduit = lineChangerProduit[numeroBac]->text();
+    labelProduit[numeroBac]->setText("Produit : " + nouveauProduit);
+    lineChangerProduit[numeroBac]->setText("");
 }

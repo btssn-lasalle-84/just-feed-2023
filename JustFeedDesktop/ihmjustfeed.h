@@ -69,6 +69,8 @@ class IHMJustFeed : public QWidget
     ~IHMJustFeed();
 
   private slots:
+    void changerLePrix(int numeroBac);
+    void changerLeProduit(int numeroBac);
 };
 
 #endif // IHMJUSTFEED_H
