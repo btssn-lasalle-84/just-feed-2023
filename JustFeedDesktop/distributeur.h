@@ -43,7 +43,7 @@ class Distributeur
     QString       ville;             //!< ville du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
-    float           hygrometrie;       //!< hygrometrie de l'interieur du distributeur
+    float         hygrometrie;       //!< hygrometrie de l'interieur du distributeur
     bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
 

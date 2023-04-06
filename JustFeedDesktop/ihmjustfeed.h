@@ -14,7 +14,6 @@
 #include <QString>
 #include <QVector>
 
-#define DISTRIBUTEUR_1  0
 class Distributeur;
 
 /**
@@ -39,41 +38,49 @@ class IHMJustFeed : public QWidget
 {
     Q_OBJECT
   private:
-    QVector<Distributeur*> distributeurs; //!< les distributeurs
-    QLabel *nomDistributeur; //!< nom du distributeur et son numero
-    QVector<QLabel*> labelBac; //!< conteneur de QLabel de bac
-    QVector<QLabel*> labelProduit; //!< conteneur de QLabel de produit
-    QVector<QLabel*> labelPrix; //!< conteneur de QLabel de prix
-    QPushButton *qboutonAjoutBac;
-    QPushButton *qboutonSuppressionBac;
-    QVector<QLineEdit*> lineChangerPrix; //!<conteneur de QLineEdit de etidion prix
-    QVector<QLineEdit*> lineChangerProduit; //!< conteneur de QLineEdit de etidion produit
-    QVector<QPushButton*> qboutonChangerPrix; //!< conteneur de QLineEdit de bouton changer prix
-    QVector<QPushButton*> qboutonChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
-    QVBoxLayout* mainLayout;
+    QVector<Distributeur*> distributeurs;                 //!< les distributeurs
+    int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    // Widgets
+    QLabel*          nomDistributeur; //!< nom du distributeur et son numero
+    QVector<QLabel*> labelsBac;       //!< conteneur de QLabel de bac
+    QVector<QLabel*> labelsProduit;   //!< conteneur de QLabel de produit
+    QVector<QLabel*> labelsPrix;      //!< conteneur de QLabel de prix
+    QPushButton*     boutonAjoutBac;
+    QPushButton*     boutonSuppressionBac;
+    /**
+     * @todo Il faut utiliser un QSpinBox
+     */
+    QVector<QLineEdit*> editionsNouveauPrix; //!< conteneur de QLineEdit de etidion prix
+    /**
+     * @todo Il faut utiliser un QComboBox
+     */
+    QVector<QLineEdit*>   choixNouveauProduit; //!< conteneur de QLineEdit de etidion produit
+    QVector<QPushButton*> boutonsChangerPrix;  //!< conteneur de QLineEdit de bouton changer prix
+    QVector<QPushButton*>
+                 boutonsChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
+    QVBoxLayout* layoutBacs;
 
-    void                   initialiserGUI();
-    void                   instancierWigets();
-    void                   initialiserWigets();
-    void                   positionnerWigets();
-    void                   initialiserDistributeurs();
+    void initialiserGUI();
+    void instancierWidgets();
+    void initialiserWidgets();
+    void positionnerWidgets();
+    void initialiserEvenements();
+    void initialiserDistributeurs();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
-    void initialiserConnect();
-    void initialiserNouveauWidget();
-    void positionnerNouveauWigets(int nbrBacs);
-    void instancierNouveauWidget();
-    void initialiserNouveauWidget(int nbrBacs);
-    void positionnerNouveauWidget(int nbrBacs);
-    void connecterNouveauWidget(int nbrBacs);
 
-private slots:
+    int  instancierNouveauBac();
+    void initialiserNouveauBac(int numeroBac);
+    void positionnerNouveauBac(int numeroBac);
+    void connecterNouveauBac(int numeroBac);
+
+  private slots:
     void changerLePrix(int numeroBac);
     void changerLeProduit(int numeroBac);
-    void ajoutBac();
-    void supprimerBac(int numerobac);
+    void ajouterBac();
+    // void supprimerBac(int numerobac);
 };
 
 #endif // IHMJUSTFEED_H

@@ -17,7 +17,7 @@
  */
 Distributeur::Distributeur() :
     deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
-    dateMiseEnService(QDate::currentDate()), description(""), hydrometrie(0), aIntervenir(false)
+    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -35,13 +35,13 @@ Distributeur::Distributeur(QString      deviceID,
                            QDate        dateMiseEnService) :
     deviceID(deviceID),
     position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hydrometrie(0),
+    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
     aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
              << "longitude" << position.longitude << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << dateMiseEnService << "description" << description << "hydrometrie" << hydrometrie
+             << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
              << "aIntervenir" << aIntervenir;
 }
 
@@ -67,8 +67,9 @@ QString Distributeur::getdeviceID() const
 }
 
 /**
- * @brief Accesseur de l'attribut Hygrometrie
- * @return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air humide du distributeur
+ * @brief Accesseur de l'attribut hygrometrie
+ * @return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air
+ * humide du distributeur
  */
 float Distributeur::getHygrometrie() const
 {
@@ -206,7 +207,8 @@ void Distributeur::setdeviceID(const QString deviceID)
 
 /**
  * @brief Mutateur de l'attribut Hygrometrie
- * @param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du distributeur
+ * @param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du
+ * distributeur
  */
 void Distributeur::setHygrometrie(float Hygrometrie)
 {
