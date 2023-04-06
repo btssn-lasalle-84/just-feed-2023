@@ -67,13 +67,12 @@ QString Distributeur::getdeviceID() const
 }
 
 /**
- * @brief Accesseur de l'attribut hydrometrie
- * @return un entier qui represente le degré d'humidité dans le
- * distributeur
+ * @brief Accesseur de l'attribut Hygrometrie
+ * @return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air humide du distributeur
  */
-int Distributeur::getHydrometrie() const
+float Distributeur::getHygrometrie() const
 {
-    return this->hydrometrie;
+    return this->hygrometrie;
 }
 
 /**
@@ -206,12 +205,12 @@ void Distributeur::setdeviceID(const QString deviceID)
 }
 
 /**
- * @brief Mutateur de l'attribut hydrométrie
- * @param hydrometrie l'hydrometrie du distributeur
+ * @brief Mutateur de l'attribut Hygrometrie
+ * @param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du distributeur
  */
-void Distributeur::setHydrometrie(int hydrometrie)
+void Distributeur::setHygrometrie(float Hygrometrie)
 {
-    this->hydrometrie = hydrometrie;
+    this->hygrometrie = Hygrometrie;
 }
 
 /**

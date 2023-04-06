@@ -43,7 +43,7 @@ class Distributeur
     QString       ville;             //!< ville du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
-    int           hydrometrie;       //!< hydrométrie de l'interieur du distributeur
+    float           hygrometrie;       //!< hygrometrie de l'interieur du distributeur
     bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
 
@@ -63,7 +63,7 @@ class Distributeur
     QString      getdeviceID() const;
     Localisation getPosition() const;
     int          getAIntervenir() const;
-    int          getHydrometrie() const;
+    float        getHygrometrie() const;
     QString      getNom() const;
     QString      getAdresse() const;
     QString      getCodePostal() const;
@@ -77,7 +77,7 @@ class Distributeur
 
     // mutateurs
     void setdeviceID(const QString deviceID);
-    void setHydrometrie(int hydrometrie);
+    void setHygrometrie(float hydrometrie);
     void setPosition(const Localisation& localisation);
     void setAIntervenir(bool aIntervenir);
     void setNom(const QString& nom);

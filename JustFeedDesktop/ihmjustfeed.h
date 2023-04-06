@@ -15,8 +15,6 @@
 #include <QVector>
 
 #define DISTRIBUTEUR_1  0
-#define DISTRIBUTEUR_2  1
-#define DISTRIBUTEUR_3  2
 class Distributeur;
 
 /**
@@ -63,25 +61,19 @@ class IHMJustFeed : public QWidget
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
-
     void initialiserConnect();
-    
     void initialiserNouveauWidget();
-
     void positionnerNouveauWigets(int nbrBacs);
-
     void instancierNouveauWidget();
-
     void initialiserNouveauWidget(int nbrBacs);
-
     void positionnerNouveauWidget(int nbrBacs);
-
     void connecterNouveauWidget(int nbrBacs);
 
 private slots:
     void changerLePrix(int numeroBac);
     void changerLeProduit(int numeroBac);
     void ajoutBac();
+    void supprimerBac(int numerobac);
 };
 
 #endif // IHMJUSTFEED_H
