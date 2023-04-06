@@ -11,11 +11,13 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -38,7 +40,6 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private List<Intervention>   listeInterventions;    //!< Liste des interventions
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -47,6 +48,8 @@ public class JustFeed extends AppCompatActivity
     /**
      * Ressources GUI
      */
+    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
+                                        //!< les interventions
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -58,8 +61,20 @@ public class JustFeed extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate()");
 
-        baseDeDonnees      = new BaseDeDonnees();
-        listeDistributeurs = baseDeDonnees.recupererDistributeurs();
+        boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
+        baseDeDonnees       = new BaseDeDonnees();
+        listeDistributeurs  = baseDeDonnees.recupererDistributeurs();
+
+        boutonInterventions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vue)
+            {
+                Intent activiteIntervention =
+                  new Intent(JustFeed.this, ActiviteInterventions.class);
+                startActivity(activiteIntervention);
+            }
+        });
+
         initialiserVueListeDistributeurs();
         afficherDistributeurs();
     }

@@ -15,19 +15,11 @@ import java.util.Map;
 public class Distributeur
 {
     /**
-     * Constantes
-     */
-    private final int VOLUME_BACS = 8; //!< Volume en dm3 d'un bac de 8 litres.
-    private final int MOITIE      = 2;
-
-    /**
      * Attributs
      */
-    private int                  id; //!< identifie le ditributeur.
-
-    private Map<Produit, Double> bacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
-    private int                  hydrometrie; //!< pourcentage d'humidité présent dans le distributeur.
-    private List<Produit>        produits; //!< produits présents dans le distributeur.
+    private int id; //!< identifie le ditributeur.
+    private List<Bac>
+      listeBacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -35,31 +27,21 @@ public class Distributeur
      */
     public Distributeur()
     {
-        this.id          = 0;
-        this.bacs        = null;
-        this.hydrometrie = 0;
-        this.produits    = null;
+        this.id        = 0;
+        this.listeBacs = null;
     }
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, Map<Produit, Double> bacs, int hydrometrie, List<Produit> produits)
+     * @see Distributeur(int id, List<Bac> listeBacs)
      * @param id L'identifiant du distributeur.
-     * @param bacs Les bacs du distributeur.
-     * @param hydrometrie Le degré d'humidité présent dans le distributeur.
-     * @param produits Produits disponibles dans le distributeur.
+     * @param listeBacs Les bacs du distributeur.
      */
-    public Distributeur(int     id,
-                        Map<Produit, Double> bacs,
-                        int     hydrometrie,
-                        List<Produit> produits)
+    public Distributeur(int id, List<Bac> listeBacs)
     {
-        this.id          = id;
-        this.bacs        = bacs;
-        this.hydrometrie = hydrometrie;
-        this.produits    = produits;
+        this.id        = id;
+        this.listeBacs = listeBacs;
     }
-
     // Accesseurs
     /**
      * @brief Accesseur de l'identifiant du distributeur.
@@ -70,58 +52,19 @@ public class Distributeur
         return this.id;
     }
     /**
-     * @brief Accesseur du poids total d'un bac du distributeur en kg.
-     * @return Le poids total d'un bac du distributeur quant-il est plein.
+     * @brief Accesseur des bacs du distributeur
+     * @return listeBacs , la liste des bacs du distributeur
      */
-    public double getPoidsTotalBac(Produit produit)
+    public List<Bac> getListeBacs()
     {
-        return ( VOLUME_BACS / produit.getVolume() ) * produit.getPoidsDuProduit();
+        return this.listeBacs;
     }
     /**
-     * @brief Accesseur du poids actuel d'un bac en kg.
-     * @return le poids actuel d'un bac.
-     */
-    public Double getPoidsActuel(Produit produit)
-
-    {
-        return this.bacs.get(produit);
-    }
-    /**
-     * @brief Accesseur de l'hydrométrie du distributeur.
-     * @return hydrometrie la valeur de l'hydrométrie du distributeur.
-     */
-    public int getHydrometrie()
-    {
-        return this.hydrometrie;
-    }
-    /**
-     * @brief Accesseur da la liste de produits du distributeur.
-     * @return produits la liste des produits disponibles.
-     */
-    public List<Produit> getProduits()
-    {
-        return this.produits;
-    }
-    /**
-     * @brief Accesseur de l'état du distributeur.
-     * @return aRemplir le booléen qui indique si la machine est à remplir.
-     */
-    public boolean estRemplie(Produit produit)
-    {
-        boolean aRemplir = false;
-        if (this.bacs.get(produit) <= (getPoidsTotalBac(produit)/MOITIE))
-        {
-            aRemplir = true;
-        }
-        return aRemplir;
-    }
-
-    /**
-     * @brief Mutateur du type de produit.
+     * @brief Mutateur du type de produit contenu dans un bac.
      * @param nouveauxProduits.
      */
-    public void changerProduit(Produit ancienProduit, Produit nouveauProduit)
+    public void changerProduit(int numeroBac, Produit nouveauProduit)
     {
-        this.produits.set(produits.indexOf(ancienProduit), nouveauProduit);
+        this.listeBacs.get(numeroBac).changerTypeProduit(nouveauProduit);
     }
 }
