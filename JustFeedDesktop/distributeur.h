@@ -43,8 +43,8 @@ class Distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
     int           hydrometrie;       //!< hydrométrie de l'interieur du distributeur
-    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
-                                     //!< distributeur
+    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le distributeur
+    QStringList distributeur;        //!
 
   public:
     Distributeur();
@@ -56,7 +56,10 @@ class Distributeur
                  QString      ville,
                  QString      description,
                  QDate        dateMiseEnService);
+
+    Distributeur(QStringList distributeur);
     ~Distributeur();
+    QStringList getDistributeur() const;
 
     // Accesseurs
     QString      getdeviceID() const;
@@ -87,6 +90,20 @@ class Distributeur
     void setDescription(const QString& description);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
+
+
+    enum ChampsDistributeur
+    {
+        TABLE_DISTRIBUTEUR_ID_DISTRIBUTEUR,
+        TABLE_DISTRIBUTEUR_POSITION,
+        TABLE_DISTRIBUTEUR_NOM,
+        TABLE_DISTRIBUTEUR_ADRESSE,
+        TABLE_DISTRIBUTEUR_CODE_POSTAL,
+        TABLE_DISTRIBUTEUR_VILLE,
+        TABLE_DISTRIBUTEUR_DESCRIPTION,
+        TABLE_DISTRIBUTEUR_DATE_EN_MISE_EN_SERVICE,
+    };
+
 };
 
 #endif // DISTRIBUTEUR_H

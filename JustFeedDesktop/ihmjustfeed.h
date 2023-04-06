@@ -15,6 +15,7 @@
 #include <QtWidgets>
 #include <QString>
 #include <QVector>
+#include <QLabel>
 
 
 
@@ -47,6 +48,17 @@ class IHMJustFeed : public QMainWindow
             NbFenetres
         };
 
+    enum ColonneDistributeur
+    {
+        COLONNE_DISTRIBUTEUR_NOM,         //!< Emplacment du nom
+        COLONNE_DISTRIBUTEUR_LOCALISATION,      //!< Emplacment du prenom
+        COLONNE_DISTRIBUTEUR_ENSEIGNE, //!< Emplacment de l'identifiant
+        COLONNE_DISTRIBUTEUR_TYPE,        //!< Emplacment du code
+        COLONNE_DISTRIBUTEUR_ADRESSE, //!< Emplacment de l'état actif
+        COLONNE_DISTRIBUTEUR_DATE,
+        NB_COLONNES
+    };
+
     Q_OBJECT
   private:
 
@@ -61,6 +73,13 @@ class IHMJustFeed : public QMainWindow
     QPushButton* boutonIntervenir;
     QPushButton* boutonConfigurer;
 
+    QLabel* labelNom;
+    QLabel* labelPosition;
+    QLabel* labelAdresse;
+    QLabel* labelCodePostal;
+    QLabel* labelVille;
+    QLabel* labelMiseEnService;
+
 
 
     QVector<Distributeur*> distributeurs;//!< les distributeurs
@@ -69,7 +88,6 @@ class IHMJustFeed : public QMainWindow
     void                   initialiserWigets();
     void                   positionnerWigets();
     void                   initialiserDistributeurs();
-    void                   chargerDistributeurs();
     void                   effacerTableau(int ligne, int colonne);
     void                   effacerTableDistributeurs();
 
@@ -79,9 +97,10 @@ class IHMJustFeed : public QMainWindow
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
     void afficherDistributeurTable(Distributeur distributeur);
-    void                   paintEvent(QPaintEvent* e);
+    void                   paintEvent(QPaintEvent* dessin);
     void                   gererEvenements();
-  //void                   afficherDistributeurTable (QStringList distributeur);
+
+    void                   afficherDistributeurTable (QStringList distributeur);
 
   private slots:
 
