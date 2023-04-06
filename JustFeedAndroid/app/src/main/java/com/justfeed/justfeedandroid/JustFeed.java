@@ -61,8 +61,8 @@ public class JustFeed extends AppCompatActivity
         Log.d(TAG, "onCreate()");
 
         boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
-        baseDeDonnees      = new BaseDeDonnees();
-        listeDistributeurs = baseDeDonnees.recupererDistributeurs();
+        baseDeDonnees       = new BaseDeDonnees();
+        listeDistributeurs  = baseDeDonnees.recupererDistributeurs();
 
         boutonInterventions.setOnClickListener(new View.OnClickListener()
         {
