@@ -50,9 +50,9 @@ ConfigurationDistributeur::~ConfigurationDistributeur()
  */
 void ConfigurationDistributeur::changerLePrix(const int numeroBac)
 {
-    QString nouveauPrix = editionsNouveauPrix[numeroBac]->text();
+    QString nouveauPrix = QString::number(editionsNouveauPrix[numeroBac]->value());
     labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");
-    editionsNouveauPrix[numeroBac]->setText("");
+    editionsNouveauPrix[numeroBac]->setValue(0.);
 }
 
 /**
@@ -116,7 +116,7 @@ void ConfigurationDistributeur::instancierWidgets()
         labelsBac.push_back(new QLabel(this));
         labelsProduit.push_back(new QLabel(this));
         labelsPrix.push_back(new QLabel(this));
-        editionsNouveauPrix.push_back(new QLineEdit(this));
+        editionsNouveauPrix.push_back(new QDoubleSpinBox(this));
         choixNouveauProduit.push_back(new QComboBox(this));
         boutonsChangerPrix.push_back(new QPushButton(this));
         boutonsChangerProduit.push_back(new QPushButton(this));
@@ -211,7 +211,7 @@ int ConfigurationDistributeur::instancierNouveauBac()
     labelsBac.push_back(new QLabel(this));
     labelsProduit.push_back(new QLabel(this));
     labelsPrix.push_back(new QLabel(this));
-    editionsNouveauPrix.push_back(new QLineEdit(this));
+    editionsNouveauPrix.push_back(new QDoubleSpinBox(this));
     choixNouveauProduit.push_back(new QComboBox(this));
     boutonsChangerPrix.push_back(new QPushButton(this));
     boutonsChangerProduit.push_back(new QPushButton(this));
