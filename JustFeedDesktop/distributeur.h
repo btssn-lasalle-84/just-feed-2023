@@ -73,6 +73,7 @@ class Distributeur
     QString      getNomProduitBac(int numeroBac) const;
     double       getProduitPrix(int numeroBac) const;
     Produit*     getProduitBac(int numeroBac) const;
+    Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
 
     // mutateurs

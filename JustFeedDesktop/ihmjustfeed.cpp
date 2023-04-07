@@ -150,10 +150,13 @@ void IHMJustFeed::initialiserEvenements()
 }
 
 /**
- * @brief méthode qui initianlise les distributeurs avec les bacs et les produits
+ * @brief méthode qui initialise les distributeurs avec les bacs et les produits
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
+    /**
+     * @todo Récupérer les données depuis la base de données
+     */
     distributeurs.push_back(new Distributeur("distributeur-1-sim",
                                              { "44.11161", "4.84856", "0" },
                                              "Grand Frais",
@@ -179,7 +182,7 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Barbentane",
                                              QDate::fromString("2022-01-10", "yyyy-MM-dd")));
 
-    Produit* pruneaux    = new Produit("pruneaux",
+    Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
                                        "délicieuse friandise à déguster à tout moment de la journée.",
@@ -220,6 +223,16 @@ void IHMJustFeed::initialiserDistributeurs()
                                    "761234679900",
                                    17.18);
 
+    produits.push_back(pruneaux);
+    produits.push_back(abricot);
+    produits.push_back(cranberries);
+    produits.push_back(banane);
+    produits.push_back(raisin);
+    produits.push_back(fruitsSec);
+    produits.push_back(cacahuete);
+    produits.push_back(soja);
+    produits.push_back(basilic);
+
     distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
@@ -239,27 +252,34 @@ void IHMJustFeed::initialiserDistributeurs()
     numeroDistributeurSelectionne = 0; // pour les tests
 }
 
+/**
+ * @brief méthode qui initialise les différents produits disponibles
+ */
 void IHMJustFeed::initialiserProduits()
 {
-    for(int i = 0; i < distributeurs.size(); i++)
-    {
-        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
-        {
-            produits.push_back(distributeurs[i]->getProduitBac(j));
-        }
-    }
+    /**
+     * @todo Récupérer les données depuis la base de données
+     */
 }
 
-QString IHMJustFeed::getProduits(int numero) const
+Produit* IHMJustFeed::getProduit(int index) const
 {
-    return produits[numero]->getNom();
+    return produits[index];
 }
 
-double IHMJustFeed::getPrix(int numero) const
+QString IHMJustFeed::getNomProduit(int index) const
 {
-    return produits[numero]->getPrix();
+    return produits[index]->getNom();
 }
 
+double IHMJustFeed::getPrixProduit(int index) const
+{
+    return produits[index]->getPrix();
+}
+
+/**
+ * @brief méthode qui retourne le nombre de produits disponibles
+ */
 int IHMJustFeed::getNbProduits() const
 {
     return produits.size();

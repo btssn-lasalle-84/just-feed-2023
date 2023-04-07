@@ -41,13 +41,14 @@ class ConfigurationDistributeur : public QDialog
     QVector<QLabel*> labelsProduit;   //!< conteneur de QLabel de produit
     QVector<QLabel*> labelsPrix;      //!< conteneur de QLabel de prix
     QPushButton*     boutonAjoutBac;
-    QPushButton*     boutonSuppressionBac;
     /**
-     * @todo Il faut utiliser un QSpinBox
+     * @todo Il faut un bouton Supprimer par bac
      */
+    QPushButton*             boutonSuppressionBac;
     QVector<QDoubleSpinBox*> editionsNouveauPrix; //!< conteneur de QLineEdit de etidion prix
-    QVector<QComboBox*>   choixNouveauProduit; //!< conteneur de QComboBox pour changer le produit du bac
-    QVector<QPushButton*> boutonsChangerPrix;  //!< conteneur de QLineEdit de bouton changer prix
+    QVector<QComboBox*>
+      choixNouveauProduit; //!< conteneur de QComboBox pour changer le produit du bac
+    QVector<QPushButton*> boutonsChangerPrix; //!< conteneur de QLineEdit de bouton changer prix
     QVector<QPushButton*>
                  boutonsChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
     QVBoxLayout* layoutBacs;
@@ -67,10 +68,14 @@ class ConfigurationDistributeur : public QDialog
     ~ConfigurationDistributeur();
 
   private slots:
+    void selectionnerNouveauProduit(int numeroBac);
     void changerLePrix(int numeroBac);
     void changerLeProduit(int numeroBac);
     void ajouterBac();
-    // void supprimerBac(int numerobac);
+    /**
+     * @todo Supprimer un bac
+     */
+    // void supprimerBac();
 };
 
 #endif // CONFIGURATIONDISTRIBUTEUR_H

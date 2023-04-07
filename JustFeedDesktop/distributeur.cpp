@@ -188,6 +188,19 @@ Produit* Distributeur::getProduitBac(int numeroBac) const
 }
 
 /**
+ * @brief Accesseur pour récupérer un bac
+ * @return Bac
+ */
+Bac* Distributeur::getBac(int numeroBac) const
+{
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac];
+    }
+    return nullptr;
+}
+
+/**
  * @brief Accesseur pour récupérer le produit dans le bac voulu
  * @return Produit qui permet de connaitre le produit
  */

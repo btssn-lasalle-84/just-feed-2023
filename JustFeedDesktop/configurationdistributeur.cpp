@@ -46,12 +46,24 @@ ConfigurationDistributeur::~ConfigurationDistributeur()
 // Slots
 
 /**
+ * @brief méthode qui sélectionne un produit dans la liste
+ */
+void ConfigurationDistributeur::selectionnerNouveauProduit(int numeroBac)
+{
+    labelsPrix[numeroBac]->setText(
+      "Prix : " +
+      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[numeroBac]->currentIndex())) +
+      " €");
+}
+
+/**
  * @brief méthode qui change le prix d'un produit
  */
 void ConfigurationDistributeur::changerLePrix(const int numeroBac)
 {
     QString nouveauPrix = QString::number(editionsNouveauPrix[numeroBac]->value());
     labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");
+    distributeur->setPrixProduit(numeroBac, editionsNouveauPrix[numeroBac]->value());
     editionsNouveauPrix[numeroBac]->setValue(0.);
 }
 
@@ -62,8 +74,11 @@ void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
 {
     QString nouveauProduit = choixNouveauProduit[numeroBac]->currentText();
     labelsProduit[numeroBac]->setText("Produit : " + nouveauProduit);
+    distributeur->getBac(numeroBac)->setProduit(
+      ihmJustFeed->getProduit(choixNouveauProduit[numeroBac]->currentIndex()));
 
-    QString nouveauPrix = QString::number(ihmJustFeed->getPrix(choixNouveauProduit[numeroBac]->currentIndex()));
+    QString nouveauPrix =
+      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[numeroBac]->currentIndex()));
     labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");
 }
 
@@ -141,7 +156,7 @@ void ConfigurationDistributeur::initialiserWidgets()
         boutonsChangerProduit[i]->setText("Changer produit");
         for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
         {
-            choixNouveauProduit[i]->addItem(ihmJustFeed->getProduits(j));
+            choixNouveauProduit[i]->addItem(ihmJustFeed->getNomProduit(j));
         }
     }
 }
@@ -182,6 +197,13 @@ void ConfigurationDistributeur::initialiserEvenements()
 {
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
+        connect(choixNouveauProduit[i],
+                QOverload<int>::of(&QComboBox::currentIndexChanged),
+                this,
+                [this, i]()
+                {
+                    selectionnerNouveauProduit(i);
+                });
         connect(boutonsChangerPrix[i],
                 &QPushButton::clicked,
                 this,
@@ -235,7 +257,7 @@ void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
     boutonsChangerProduit[numeroBac]->setText("changer produit");
     for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
     {
-        choixNouveauProduit[numeroBac]->addItem(ihmJustFeed->getProduits(j));
+        choixNouveauProduit[numeroBac]->addItem(ihmJustFeed->getNomProduit(j));
     }
 }
 
