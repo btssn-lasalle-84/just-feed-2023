@@ -17,6 +17,8 @@
 #include <QVector>
 #include <QLabel>
 
+class Produit;
+
 class Distributeur;
 
 /**
@@ -37,40 +39,32 @@ class Distributeur;
  * @details     La classe IHMJustFeed \c Cette classe permet de définir la GUI
  * de l'application JustFeed
  */
-class IHMJustFeed : public QMainWindow
+class IHMJustFeed : public QWidget
 {
+    /**
+     * @enum Fenetre
+     * @brief Définit les différentes fenêtres de l'IHM
+     *
+     */
     enum Fenetre
     {
         Accueil,
         NbFenetres
     };
 
-    enum ColonneDistributeur
-    {
-        COLONNE_DISTRIBUTEUR_NOM,
-        COLONNE_DISTRIBUTEUR_LOCALISATION,
-        COLONNE_DISTRIBUTEUR_ENSEIGNE,
-        COLONNE_DISTRIBUTEUR_TYPE,
-        COLONNE_DISTRIBUTEUR_ADRESSE,
-        COLONNE_DISTRIBUTEUR_DATE,
-        NB_COLONNES
-    };
-
     Q_OBJECT
   private:
     QVector<Distributeur*> distributeurs; //!< les distributeurs
+    QStringList            nomColonnes;   //!< Liste de nom des colonnes
 
-    QStringList nomColonnes;           //!< Liste de nom des colonnes
-    int         nbLignesDistributeurs; //!< Nombre de lignes dans la table
+    int nbLignesDistributeurs; //!< Nombre de lignes dans la table
 
     // Widgets
-    QWidget*        gui;
-    QStackedWidget* fenetres;
+    QWidget*        gui;                      //!< Widget central
+    QStackedWidget* fenetres;                 //!< Pile de fenêtres
     QTableWidget*   tableWidgetDistributeurs; //!< Affichage sous forme de table
     QPushButton*    boutonIntervenir;
     QPushButton*    boutonConfigurer;
-
-    QPushButton* boutonQuitter;
 
     QLabel* deviceIDDistributeur;
     QLabel* positionDistributeur;
@@ -88,16 +82,15 @@ class IHMJustFeed : public QMainWindow
     void initialiserDistributeurs();
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
+    void gererEvenements();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
     void afficherDistributeurTable(Distributeur distributeur);
-    void gererEvenements();
-
-  private slots:
 
   public slots:
+
     void afficherFenetre(IHMJustFeed::Fenetre fenetre);
     void afficherFenetreAccueil();
 };
