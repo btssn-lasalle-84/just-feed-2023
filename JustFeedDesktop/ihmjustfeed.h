@@ -62,6 +62,7 @@ class IHMJustFeed : public QWidget
     ~IHMJustFeed();
     QString getProduits(int numero) const;
     int getNbProduits() const;
+    double getPrix(int numero) const;
 
   private slots:
     void configurerDistributeur();

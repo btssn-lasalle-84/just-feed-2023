@@ -63,8 +63,8 @@ void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
     QString nouveauProduit = choixNouveauProduit[numeroBac]->currentText();
     labelsProduit[numeroBac]->setText("Produit : " + nouveauProduit);
 
-    /*QString nouveauPrix = QString::number(ihmJustFeed->getPrix(choixNouveauProduit[numeroBac]->currentIndex()));
-    labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");*/
+    QString nouveauPrix = QString::number(ihmJustFeed->getPrix(choixNouveauProduit[numeroBac]->currentIndex()));
+    labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");
 }
 
 /**

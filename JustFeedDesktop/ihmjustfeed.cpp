@@ -255,6 +255,11 @@ QString IHMJustFeed::getProduits(int numero) const
     return produits[numero]->getNom();
 }
 
+double IHMJustFeed::getPrix(int numero) const
+{
+    return produits[numero]->getPrix();
+}
+
 int IHMJustFeed::getNbProduits() const
 {
     return produits.size();
