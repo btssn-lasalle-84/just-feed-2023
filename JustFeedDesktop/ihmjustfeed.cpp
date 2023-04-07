@@ -21,6 +21,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistri
 {
     qDebug() << Q_FUNC_INFO;
     initialiserDistributeurs();
+    initialiserProduits();
     initialiserGUI();
 }
 
@@ -236,4 +237,25 @@ void IHMJustFeed::initialiserDistributeurs()
              << distributeurs[2]->getNbBacs();
 
     numeroDistributeurSelectionne = 0; // pour les tests
+}
+
+void IHMJustFeed::initialiserProduits()
+{
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
+        {
+            produits.push_back(distributeurs[i]->getProduitBac(j));
+        }
+    }
+}
+
+QString IHMJustFeed::getProduits(int numero) const
+{
+    return produits[numero]->getNom();
+}
+
+int IHMJustFeed::getNbProduits() const
+{
+    return produits.size();
 }

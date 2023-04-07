@@ -60,9 +60,11 @@ void ConfigurationDistributeur::changerLePrix(const int numeroBac)
  */
 void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
 {
-    QString nouveauProduit = choixNouveauProduit[numeroBac]->text();
+    QString nouveauProduit = choixNouveauProduit[numeroBac]->currentText();
     labelsProduit[numeroBac]->setText("Produit : " + nouveauProduit);
-    choixNouveauProduit[numeroBac]->setText("");
+
+    /*QString nouveauPrix = QString::number(ihmJustFeed->getPrix(choixNouveauProduit[numeroBac]->currentIndex()));
+    labelsPrix[numeroBac]->setText("Prix : " + nouveauPrix + " €");*/
 }
 
 /**
@@ -115,7 +117,7 @@ void ConfigurationDistributeur::instancierWidgets()
         labelsProduit.push_back(new QLabel(this));
         labelsPrix.push_back(new QLabel(this));
         editionsNouveauPrix.push_back(new QLineEdit(this));
-        choixNouveauProduit.push_back(new QLineEdit(this));
+        choixNouveauProduit.push_back(new QComboBox(this));
         boutonsChangerPrix.push_back(new QPushButton(this));
         boutonsChangerProduit.push_back(new QPushButton(this));
     }
@@ -137,6 +139,10 @@ void ConfigurationDistributeur::initialiserWidgets()
         editionsNouveauPrix[i]->setAlignment(Qt::AlignCenter);
         boutonsChangerPrix[i]->setText("Changer prix");
         boutonsChangerProduit[i]->setText("Changer produit");
+        for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
+        {
+            choixNouveauProduit[i]->addItem(ihmJustFeed->getProduits(j));
+        }
     }
 }
 
@@ -206,7 +212,7 @@ int ConfigurationDistributeur::instancierNouveauBac()
     labelsProduit.push_back(new QLabel(this));
     labelsPrix.push_back(new QLabel(this));
     editionsNouveauPrix.push_back(new QLineEdit(this));
-    choixNouveauProduit.push_back(new QLineEdit(this));
+    choixNouveauProduit.push_back(new QComboBox(this));
     boutonsChangerPrix.push_back(new QPushButton(this));
     boutonsChangerProduit.push_back(new QPushButton(this));
     return (distributeur->getNbBacs() - 1);
@@ -227,6 +233,10 @@ void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
     editionsNouveauPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     boutonsChangerPrix[numeroBac]->setText("changer prix");
     boutonsChangerProduit[numeroBac]->setText("changer produit");
+    for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
+    {
+        choixNouveauProduit[numeroBac]->addItem(ihmJustFeed->getProduits(j));
+    }
 }
 
 /**

@@ -21,6 +21,7 @@
 
 class Distributeur;
 class IHMJustFeed;
+class Produit;
 
 /**
  * @class       ConfigurationDistributeur
@@ -45,10 +46,7 @@ class ConfigurationDistributeur : public QDialog
      * @todo Il faut utiliser un QSpinBox
      */
     QVector<QLineEdit*> editionsNouveauPrix; //!< conteneur de QLineEdit de etidion prix
-    /**
-     * @todo Il faut utiliser un QComboBox
-     */
-    QVector<QLineEdit*>   choixNouveauProduit; //!< conteneur de QLineEdit de etidion produit
+    QVector<QComboBox*>   choixNouveauProduit; //!< conteneur de QComboBox pour changer le produit du bac
     QVector<QPushButton*> boutonsChangerPrix;  //!< conteneur de QLineEdit de bouton changer prix
     QVector<QPushButton*>
                  boutonsChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
