@@ -76,7 +76,7 @@ class Distributeur
     int          getNbBacs() const;
 
     // mutateurs
-    void setdeviceID(const QString deviceID);
+    void setDeviceID(const QString deviceID);
     void setHygrometrie(float hydrometrie);
     void setPosition(const Localisation& localisation);
     void setAIntervenir(bool aIntervenir);

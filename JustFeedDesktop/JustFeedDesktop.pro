@@ -9,6 +9,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     bac.cpp \
     communication.cpp \
+    configurationdistributeur.cpp \
     distributeur.cpp \
     intervention.cpp \
     main.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
     bac.h \
     communication.h \
+    configurationdistributeur.h \
     distributeur.h \
     ihmjustfeed.h \
     intervention.h \

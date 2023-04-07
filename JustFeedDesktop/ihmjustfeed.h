@@ -15,6 +15,7 @@
 #include <QVector>
 
 class Distributeur;
+class ConfigurationDistributeur;
 
 /**
  * @def TITRE_APPLICATION
@@ -40,25 +41,12 @@ class IHMJustFeed : public QWidget
   private:
     QVector<Distributeur*> distributeurs;                 //!< les distributeurs
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    ConfigurationDistributeur*
+      configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
+
     // Widgets
-    QLabel*          nomDistributeur; //!< nom du distributeur et son numero
-    QVector<QLabel*> labelsBac;       //!< conteneur de QLabel de bac
-    QVector<QLabel*> labelsProduit;   //!< conteneur de QLabel de produit
-    QVector<QLabel*> labelsPrix;      //!< conteneur de QLabel de prix
-    QPushButton*     boutonAjoutBac;
-    QPushButton*     boutonSuppressionBac;
-    /**
-     * @todo Il faut utiliser un QSpinBox
-     */
-    QVector<QLineEdit*> editionsNouveauPrix; //!< conteneur de QLineEdit de etidion prix
-    /**
-     * @todo Il faut utiliser un QComboBox
-     */
-    QVector<QLineEdit*>   choixNouveauProduit; //!< conteneur de QLineEdit de etidion produit
-    QVector<QPushButton*> boutonsChangerPrix;  //!< conteneur de QLineEdit de bouton changer prix
-    QVector<QPushButton*>
-                 boutonsChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
-    QVBoxLayout* layoutBacs;
+    QComboBox*   listeDistributeurs;              //!< liste de distributeurs
+    QPushButton* boutonConfigurationDistributeur; //!< bouton de configuration d'un distributeur
 
     void initialiserGUI();
     void instancierWidgets();
@@ -71,16 +59,9 @@ class IHMJustFeed : public QWidget
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
 
-    int  instancierNouveauBac();
-    void initialiserNouveauBac(int numeroBac);
-    void positionnerNouveauBac(int numeroBac);
-    void connecterNouveauBac(int numeroBac);
-
   private slots:
-    void changerLePrix(int numeroBac);
-    void changerLeProduit(int numeroBac);
-    void ajouterBac();
-    // void supprimerBac(int numerobac);
+    void configurerDistributeur();
+    void selectionnerDistributeur(int numeroDistributeur);
 };
 
 #endif // IHMJUSTFEED_H
