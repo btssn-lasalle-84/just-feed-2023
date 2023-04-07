@@ -57,7 +57,6 @@ class Distributeur
                  QString      description,
                  QDate        dateMiseEnService);
 
-    Distributeur(QStringList distributeur);
     ~Distributeur();
     QStringList getDistributeur() const;
 
@@ -91,18 +90,6 @@ class Distributeur
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
 
-
-    enum ChampsDistributeur
-    {
-        TABLE_DISTRIBUTEUR_ID_DISTRIBUTEUR,
-        TABLE_DISTRIBUTEUR_POSITION,
-        TABLE_DISTRIBUTEUR_NOM,
-        TABLE_DISTRIBUTEUR_ADRESSE,
-        TABLE_DISTRIBUTEUR_CODE_POSTAL,
-        TABLE_DISTRIBUTEUR_VILLE,
-        TABLE_DISTRIBUTEUR_DESCRIPTION,
-        TABLE_DISTRIBUTEUR_DATE_EN_MISE_EN_SERVICE,
-    };
 
 };
 

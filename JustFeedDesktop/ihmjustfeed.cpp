@@ -22,6 +22,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QMainWindow(parent)
     qDebug() << Q_FUNC_INFO;
     initialiserGUI();
     initialiserDistributeurs();
+    IHMJustFeed::gererEvenements();
 }
 
 /**
@@ -44,7 +45,6 @@ void IHMJustFeed::initialiserGUI()
     qDebug() << Q_FUNC_INFO;
     instancierWigets();
     initialiserWigets();
-    gererEvenements();
 
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
@@ -58,18 +58,17 @@ void IHMJustFeed::initialiserGUI()
 void IHMJustFeed::instancierWigets()
 {
     qDebug() << Q_FUNC_INFO;
-    titrePrincipal = new QLabel("Just Feed",this);
-    boutonQuitter = new QPushButton("X",this);
-    boutonIntervenir = new QPushButton("Intervenir",this);
-    boutonConfigurer = new QPushButton("Configurer",this);
+    boutonQuitter    = new QPushButton("X", this);
+    boutonIntervenir = new QPushButton("Intervenir", this);
+    boutonConfigurer = new QPushButton("Configurer", this);
 
-    labelNom = new QLabel(this);
-    labelPosition = new QLabel(this);
-    labelAdresse = new QLabel(this);
-    labelCodePostal= new QLabel(this);
-    labelVille = new QLabel(this);
-    labelMiseEnService = new QLabel(this);
-
+    deviceIDDistributeur      = new QLabel(this);
+    positionDistributeur      = new QLabel(this);
+    nomDistributeur           = new QLabel(this);
+    adresseDistributeur       = new QLabel(this);
+    codePostalDistributeur    = new QLabel(this);
+    villeDistributeur         = new QLabel(this);
+    miseEnServiceDistributeur = new QLabel(this);
 }
 
 /**
@@ -77,18 +76,13 @@ void IHMJustFeed::instancierWigets()
  */
 void IHMJustFeed::initialiserWigets()
 {
-    QPainter painter(this);
-
-    titrePrincipal->setAlignment(Qt::AlignCenter);
-    titrePrincipal->setGeometry(868,5,100,100);
-
-    boutonQuitter->setGeometry(1815,0,50,100);
-    boutonIntervenir->setGeometry(1650,900,100,100);
-    boutonConfigurer->setGeometry(1750,900,100,100);
+    boutonQuitter->setGeometry(1815, 0, 50, 100);
+    boutonIntervenir->setGeometry(1650, 900, 100, 100);
+    boutonConfigurer->setGeometry(1750, 900, 100, 100);
 
     qDebug() << Q_FUNC_INFO;
-    gui = new QWidget(this);
-    fenetres = new QStackedWidget(this);
+    gui                     = new QWidget(this);
+    fenetres                = new QStackedWidget(this);
     QWidget* fenetreAccueil = new QWidget(this);
     fenetres->addWidget(fenetreAccueil);
 
@@ -96,24 +90,22 @@ void IHMJustFeed::initialiserWigets()
     positionnerWigets();
 
     // Les layouts
-    QVBoxLayout* layoutPrincipal   = new QVBoxLayout();
+    QVBoxLayout* layoutPrincipal         = new QVBoxLayout();
     QVBoxLayout* layoutFenetrePrincipale = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table     = new QHBoxLayout();
+    QHBoxLayout* layoutF1Table           = new QHBoxLayout();
 
+    // Positionnement
+    // La fenêtre accueil
+    layoutF1Table->addWidget(tableWidgetDistributeurs);
+    layoutFenetrePrincipale->addLayout(layoutF1Table);
+    layoutFenetrePrincipale->addStretch();
+    fenetreAccueil->setLayout(layoutFenetrePrincipale);
+    layoutF1Table->setAlignment(Qt::AlignCenter);
 
- // Positionnement
-        // La fenêtre accueil
-        layoutF1Table->addWidget(tableWidgetDistributeurs);
-        layoutFenetrePrincipale->addLayout(layoutF1Table);
-        layoutFenetrePrincipale->addStretch();
-        fenetreAccueil->setLayout(layoutFenetrePrincipale);
-        layoutF1Table ->setAlignment(Qt::AlignCenter);
-
-        // La GUI
-        layoutPrincipal->addWidget(fenetres);
-        gui->setLayout(layoutPrincipal);
-        setCentralWidget(gui);
-
+    // La GUI
+    layoutPrincipal->addWidget(fenetres);
+    gui->setLayout(layoutPrincipal);
+    setCentralWidget(gui);
 }
 
 /**
@@ -122,15 +114,16 @@ void IHMJustFeed::initialiserWigets()
 void IHMJustFeed::positionnerWigets()
 {
     qDebug() << Q_FUNC_INFO;
-    tableWidgetDistributeurs= new QTableWidget(this);
+    tableWidgetDistributeurs = new QTableWidget(this);
 
     // Les colonnes
-    nomColonnes << "Nom"
+    nomColonnes << "Device ID"
                 << "Localisation"
-                << "Enseigne"
-                << "Type"
+                << "Nom"
                 << "Adresse"
-                << "Date de création";
+                << "Code postal"
+                << "Ville"
+                << "Mise en Service";
 
     tableWidgetDistributeurs->setColumnCount(nomColonnes.count());
     tableWidgetDistributeurs->setHorizontalHeaderLabels(nomColonnes);
@@ -156,9 +149,7 @@ void IHMJustFeed::positionnerWigets()
     headerView->setSectionResizeMode(QHeaderView::Stretch);
     // Pas de scroll
     tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    tableWidgetDistributeurs->setHorizontalScrollBarPolicy(
-      Qt::ScrollBarAlwaysOff);
-
+    tableWidgetDistributeurs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
 /**
@@ -194,7 +185,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -247,17 +238,39 @@ void IHMJustFeed::initialiserDistributeurs()
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
+
+    /**
+     * @todo Pour chaque distributeur, l'afficher dans la table
+     */
+    qDebug() << Q_FUNC_INFO << "Nb salles" << distributeurs.size();
+
+    for(int i = 0; i < distributeurs.size(); ++i)
+
+    {
+        afficherDistributeurTable(*distributeurs.at(i));
+    }
 }
 
+/**
+ * @brief méthode qui affiche les fenetres
+ */
 void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
 {
     fenetres->setCurrentIndex(fenetre);
 }
 
+/**
+ * @brief méthode qui affiche la fenetre principale
+ */
+
 void IHMJustFeed::afficherFenetreAccueil()
 {
     afficherFenetre(IHMJustFeed::Fenetre::Accueil);
 }
+
+/**
+ * @brief méthode qui efface le tableau
+ */
 
 void IHMJustFeed::effacerTableau(int ligne, int colonne)
 {
@@ -272,6 +285,12 @@ void IHMJustFeed::effacerTableau(int ligne, int colonne)
             tableWidgetDistributeurs->removeRow(0);
     }
 }
+
+/**
+ * @brief Efface le QTableWidget
+ *
+ * @fn IHM::effacerTableUtilisateurs
+ */
 
 void IHMJustFeed::effacerTableDistributeurs()
 {
@@ -289,56 +308,58 @@ void IHMJustFeed::afficherDistributeurTable(Distributeur distributeur)
     // texte.setPointSize(TAILLE_POLICE);
     texte.setBold(true);
 
-    QTableWidgetItem *itemNom, *itemPosition, *itemAdresse, *itemCodePostal, *itemVille, *itemDateEnMiseEnService;
+    QTableWidgetItem *itemDeviceId, *itemNom, *itemPosition, *itemAdresse, *itemCodePostal,
+      *itemVille, *itemMiseEnService;
 
     // Le nombre d'utilisateurs déjà présents dans la table
     int nb = tableWidgetDistributeurs->rowCount();
 
-  /*  // Affiche les informations dans la table
-    itemNom = new QTableWidgetItem(distributeur[].at(Distributeur::TABLE_DISTRIBUTEUR_NOM))
+    // Affiche les informations dans la table
+    itemDeviceId = new QTableWidgetItem(distributeur.getdeviceID());
     // Personnalise un item
-    itemNom->setFlags(Qt::ItemIsEnabled);
+    itemDeviceId->setFlags(Qt::ItemIsEnabled);
+    itemDeviceId->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+    itemDeviceId->setFont(texte);
+
+    itemNom = new QTableWidgetItem(distributeur.getNom());
+    // Personnalise un item
     itemNom->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     itemNom->setFont(texte);
 
-    itemPosition = new QTableWidgetItem(
-    distributeur.at(Distributeur::TABLE_DISTRIBUTEUR_POSITION));
-    itemPosition->setFlags(Qt::ItemIsEnabled);
-    itemPosition->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-    itemPosition->setFont(texte);
-
-    itemAdresse = new QTableWidgetItem(
-      distributeur.at(Distributeur::TABLE_DISTRIBUTEUR_ADRESSE));
+    /* itemPosition = new QTableWidgetItem(distributeur.getPosition());
+     itemPosition->setFlags(Qt::ItemIsEnabled);
+     itemPosition->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+     itemPosition->setFont(texte);
+ */
+    itemAdresse = new QTableWidgetItem(distributeur.getAdresse());
     itemAdresse->setFlags(Qt::NoItemFlags);
     itemAdresse->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    itemCodePostal = new QTableWidgetItem(
-      distributeurs[].at(Distributeur::TABLE_DISTRIBUTEUR_CODE_POSTAL));
+    itemCodePostal = new QTableWidgetItem(distributeur.getCodePostal());
     itemCodePostal->setFlags(Qt::NoItemFlags);
     itemCodePostal->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    itemVille = new QTableWidgetItem(
-      distributeur.at(Distributeur::TABLE_DISTRIBUTEUR_VILLE));
+    itemVille = new QTableWidgetItem(distributeur.getVille());
     itemVille->setFlags(Qt::NoItemFlags);
     itemVille->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
-    itemDateEnMiseEnService = new QTableWidgetItem(
-      distributeur.at(Distributeur::TABLE_DISTRIBUTEUR_DATE_EN_MISE_EN_SERVICE));
-    itemDateEnMiseEnService->setFlags(Qt::NoItemFlags);
-    itemDateEnMiseEnService->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-*/
+    /* itemMiseEnService = new QTableWidgetItem(distributeur.getDateMiseService());
+     itemMiseEnService->setFlags(Qt::NoItemFlags);
+     itemMiseEnService->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+ */
     nbLignesDistributeurs += 1;
     qDebug() << Q_FUNC_INFO << "nbLignesDistributeur" << nbLignesDistributeurs;
 
     // Ajoute une nouvelle ligne
     tableWidgetDistributeurs->setRowCount(++nb);
     // Insère les informations dans la table
-    tableWidgetDistributeurs->setItem(nb - 1, 0, itemNom);
-    tableWidgetDistributeurs->setItem(nb - 1, 1, itemPosition);
-    tableWidgetDistributeurs->setItem(nb - 1, 2, itemAdresse);
-    tableWidgetDistributeurs->setItem(nb - 1, 3, itemCodePostal);
-    tableWidgetDistributeurs->setItem(nb - 1, 4, itemVille);
-    tableWidgetDistributeurs->setItem(nb - 1, 5, itemDateEnMiseEnService);
+    tableWidgetDistributeurs->setItem(nb - 1, 0, itemDeviceId);
+    tableWidgetDistributeurs->setItem(nb - 1, 1, itemNom);
+    tableWidgetDistributeurs->setItem(nb - 1, 2, itemPosition);
+    tableWidgetDistributeurs->setItem(nb - 1, 3, itemAdresse);
+    tableWidgetDistributeurs->setItem(nb - 1, 4, itemCodePostal);
+    tableWidgetDistributeurs->setItem(nb - 1, 5, itemVille);
+    tableWidgetDistributeurs->setItem(nb - 1, 6, itemMiseEnService);
 
     // Se replace au début de la table
     tableWidgetDistributeurs->scrollToItem(tableWidgetDistributeurs->item(0, 1));
@@ -348,17 +369,13 @@ void IHMJustFeed::afficherDistributeurTable(Distributeur distributeur)
     tableWidgetDistributeurs->setFixedHeight(
       tableWidgetDistributeurs->verticalHeader()->length() +
       tableWidgetDistributeurs->horizontalHeader()->height());
-
 }
 
-void IHMJustFeed::paintEvent(QPaintEvent* dessin)
-{
-    QPainter painter(this); // construire
-    painter.setPen( QPen(Qt::gray, 2) ); // personnaliser
-    QRect rect(0, 0, 1920, 100);
-    painter.fillRect(rect, Qt::gray);
-}
-
+/**
+ * @brief Assure la connexion des signaux et slots
+ *
+ * @fn IHM::gererEvenements
+ */
 void IHMJustFeed::gererEvenements()
 {
     connect(boutonQuitter, SIGNAL(clicked(bool)), qApp, SLOT(quit()));

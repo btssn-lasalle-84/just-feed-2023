@@ -17,8 +17,6 @@
 #include <QVector>
 #include <QLabel>
 
-
-
 class Distributeur;
 
 /**
@@ -41,70 +39,65 @@ class Distributeur;
  */
 class IHMJustFeed : public QMainWindow
 {
-
     enum Fenetre
-        {
-            Accueil,
-            NbFenetres
-        };
+    {
+        Accueil,
+        NbFenetres
+    };
 
     enum ColonneDistributeur
     {
-        COLONNE_DISTRIBUTEUR_NOM,         //!< Emplacment du nom
-        COLONNE_DISTRIBUTEUR_LOCALISATION,      //!< Emplacment du prenom
-        COLONNE_DISTRIBUTEUR_ENSEIGNE, //!< Emplacment de l'identifiant
-        COLONNE_DISTRIBUTEUR_TYPE,        //!< Emplacment du code
-        COLONNE_DISTRIBUTEUR_ADRESSE, //!< Emplacment de l'état actif
+        COLONNE_DISTRIBUTEUR_NOM,
+        COLONNE_DISTRIBUTEUR_LOCALISATION,
+        COLONNE_DISTRIBUTEUR_ENSEIGNE,
+        COLONNE_DISTRIBUTEUR_TYPE,
+        COLONNE_DISTRIBUTEUR_ADRESSE,
         COLONNE_DISTRIBUTEUR_DATE,
         NB_COLONNES
     };
 
     Q_OBJECT
   private:
+    QVector<Distributeur*> distributeurs; //!< les distributeurs
 
-    QStringList    nomColonnes;          //!< Liste de nom des colonnes
-    int            nbLignesDistributeurs; //!< Nombre de lignes dans la table
+    QStringList nomColonnes;           //!< Liste de nom des colonnes
+    int         nbLignesDistributeurs; //!< Nombre de lignes dans la table
+
+    // Widgets
     QWidget*        gui;
     QStackedWidget* fenetres;
     QTableWidget*   tableWidgetDistributeurs; //!< Affichage sous forme de table
+    QPushButton*    boutonIntervenir;
+    QPushButton*    boutonConfigurer;
 
-    QLabel* titrePrincipal;
     QPushButton* boutonQuitter;
-    QPushButton* boutonIntervenir;
-    QPushButton* boutonConfigurer;
 
-    QLabel* labelNom;
-    QLabel* labelPosition;
-    QLabel* labelAdresse;
-    QLabel* labelCodePostal;
-    QLabel* labelVille;
-    QLabel* labelMiseEnService;
+    QLabel* deviceIDDistributeur;
+    QLabel* positionDistributeur;
+    QLabel* nomDistributeur;
+    QLabel* adresseDistributeur;
+    QLabel* codePostalDistributeur;
+    QLabel* villeDistributeur;
+    QLabel* descriptionDistributeur;
+    QLabel* miseEnServiceDistributeur;
 
-
-
-    QVector<Distributeur*> distributeurs;//!< les distributeurs
-    void                   initialiserGUI();
-    void                   instancierWigets();
-    void                   initialiserWigets();
-    void                   positionnerWigets();
-    void                   initialiserDistributeurs();
-    void                   effacerTableau(int ligne, int colonne);
-    void                   effacerTableDistributeurs();
-
-    void                   listerDistributeurs();
+    void initialiserGUI();
+    void instancierWigets();
+    void initialiserWigets();
+    void positionnerWigets();
+    void initialiserDistributeurs();
+    void effacerTableau(int ligne, int colonne);
+    void effacerTableDistributeurs();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
     void afficherDistributeurTable(Distributeur distributeur);
-    void                   paintEvent(QPaintEvent* dessin);
-    void                   gererEvenements();
-
-    void                   afficherDistributeurTable (QStringList distributeur);
+    void gererEvenements();
 
   private slots:
 
-  public slots :
+  public slots:
     void afficherFenetre(IHMJustFeed::Fenetre fenetre);
     void afficherFenetreAccueil();
 };

@@ -16,7 +16,7 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
+    deviceID(""), position(), bacs(), nom("moi"), adresse(""), codePostal(""), ville(""),
     dateMiseEnService(QDate::currentDate()), description(""), hydrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
@@ -25,27 +25,6 @@ Distributeur::Distributeur() :
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
-Distributeur::Distributeur(QStringList distributeur) : distributeur(distributeur)
-{
-    deviceID                     = distributeur.at(TABLE_DISTRIBUTEUR_ID_DISTRIBUTEUR);
-
-    QString positionStr = distributeur.at(TABLE_DISTRIBUTEUR_POSITION);
-    QStringList positionParts = positionStr.split(',');
-    if (positionParts.count() == 2) {
-        position.latitude = positionParts[0];
-        position.longitude = positionParts[1];
-    } else
-    {
-        // Gérer l'erreur ici si la chaîne n'a pas le bon format
-    }
-    nom                          = distributeur.at(TABLE_DISTRIBUTEUR_NOM);
-    adresse                      = distributeur.at(TABLE_DISTRIBUTEUR_ADRESSE);
-    codePostal                   = distributeur.at(TABLE_DISTRIBUTEUR_CODE_POSTAL);
-    ville                        = distributeur.at(TABLE_DISTRIBUTEUR_VILLE);
-    description                  = distributeur.at(TABLE_DISTRIBUTEUR_DESCRIPTION);
-    dateMiseEnService            = QDate::fromString(distributeur.at(TABLE_DISTRIBUTEUR_DATE_EN_MISE_EN_SERVICE), "dd/MM/yyyy");
-}
-
 Distributeur::Distributeur(QString      deviceID,
                            Localisation position,
                            QString      nom,
