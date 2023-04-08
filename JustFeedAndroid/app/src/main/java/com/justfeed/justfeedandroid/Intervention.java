@@ -1,5 +1,12 @@
 package com.justfeed.justfeedandroid;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Dictionary;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.List;
+
 /**
  * @brief Définition de la classe Intervention.
  * @details La classe Intervention \c Intervention permet de décrire une Intervention pour
@@ -10,48 +17,79 @@ package com.justfeed.justfeedandroid;
  */
 public class Intervention
 {
-    private int     numeroIntervention;
-    private String  heureIntervention;
-    private String  tempsTrajet;
-    private double  poidsARemplir;
-    private boolean estIntervenu;
+    /**
+     * Constantes
+     */
+    private final int SEUIL_HUMIDITE = 0;
+    private final int MOITIE         = 2;
+    /**
+     * Attributs
+     */
+    private String       heureIntervention;
+    private Distributeur distributeur;
+    private boolean      aIntervenir;
 
     public Intervention()
     {
-        this.numeroIntervention = 0;
-        this.poidsARemplir      = 0.0;
-        this.estIntervenu       = false;
+        this.distributeur = null;
     }
 
-    public Intervention(int    numeroIntervention,
-                        String heureIntervention,
-                        String tempsTrajet,
-                        double poidsARemplir)
+    public Intervention(String heureIntervention, Distributeur distributeur, boolean aIntervenir)
     {
-        this.numeroIntervention = numeroIntervention;
-        this.heureIntervention  = heureIntervention;
-        this.tempsTrajet        = tempsTrajet;
-        this.poidsARemplir      = poidsARemplir;
-        this.estIntervenu       = false;
+        this.heureIntervention = heureIntervention;
+        this.distributeur      = distributeur;
+        this.aIntervenir       = true;
     }
 
     // Accesseurs
-    public int getNumeroIntervention() { return this.numeroIntervention; }
     public String getHeureIntervention()
     {
         return this.heureIntervention;
     }
-    public String getTempsTrajet()
+
+    public int getIdentifiantDistribteur()
     {
-        return this.tempsTrajet;
+        return this.distributeur.getIdentifiant();
     }
-    public double getPoidsARemplir()
+
+    public boolean estAIntervenir()
     {
-        return this.poidsARemplir;
+        return this.aIntervenir;
     }
-    public boolean interventionTerminee()
+
+    public String bacsARemplir()
     {
-        return this.estIntervenu;
+        String listeBacsARemplir = "";
+        String typeProduit;
+        Double quantiteARemplir;
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
+            {
+                quantiteARemplir  = bac.getPoidsTotalBac() - bac.getPoidsActuel();
+                typeProduit       = bac.getTypeProduit().getNom();
+                listeBacsARemplir = listeBacsARemplir.concat(
+                  typeProduit + " : " + String.format("%.2f kg", quantiteARemplir) + "\n");
+            }
+        }
+
+        return listeBacsARemplir;
+    }
+    public String bacsADepanner()
+    {
+        String listeBacsADepanner = "";
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getHydrometrie() > SEUIL_HUMIDITE)
+            {
+                listeBacsADepanner =
+                  listeBacsADepanner.concat(bac.getTypeProduit().getNom() + "\n");
+            }
+        }
+
+        return listeBacsADepanner;
     }
 
     // Mutateurs
@@ -59,8 +97,9 @@ public class Intervention
     {
         this.heureIntervention = nouvelleHeureIntervention;
     }
+
     public void modifierEtatIntervention(boolean estIntervenu)
     {
-        this.estIntervenu = estIntervenu;
+        this.aIntervenir = estIntervenu;
     }
 }

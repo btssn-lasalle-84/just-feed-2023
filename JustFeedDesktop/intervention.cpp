@@ -9,26 +9,15 @@
  */
 
 #include "intervention.h"
+#include "distributeur.h"
 
 /**
  * @brief Constructeur par défaut de la classe Intervention
  */
-Intervention::Intervention() :
-    heureIntervention(), numeroIntervention(0), tempsTrajet(), poidsARemplir(0.)
+Intervention::Intervention() : horodatage(), effectuee(false)
 {
 }
-/**
- * @brief Constructeur d'initialisation de la classe Intervention
- */
-Intervention::Intervention(QTime  heureIntervention,
-                           int    numeroIntervention,
-                           QTime  tempsTrajet,
-                           double poidsARemplir) :
-    heureIntervention(heureIntervention),
-    numeroIntervention(numeroIntervention), tempsTrajet(tempsTrajet),
-    poidsARemplir(poidsARemplir)
-{
-}
+
 /**
  * @brief Destructeur de la classe Intervention
  */
@@ -37,76 +26,28 @@ Intervention::~Intervention()
 }
 
 /**
- * @brief Accesseur de l'attribut heureIntervention
- * @return QTime représente l'heure de l'intervention sur le distributeur
+ * @brief Accesseur de l'attribut horodatage
+ * @return QDateTime représente la date et l'heure de l'intervention sur le distributeur
  */
-QTime Intervention::getHeureIntervention() const
+QDateTime Intervention::getHorodatage() const
 {
-    return this->heureIntervention;
+    return this->horodatage;
 }
 
 /**
- * @brief Accesseur de l'attribut numeroIntervention
- * @return un entier qui représente le numéro de l'intervention sur le
- * distributeur
+ * @brief Accesseur de l'attribut distributeurAIntervenir
+ * @return QVector<Distributeur*> represente les distributeurs surlequels il faut intervenir
  */
-int Intervention::getNumeroIntervention() const
+QVector<Distributeur*> Intervention::getDistributeurs() const
 {
-    return this->numeroIntervention;
+    return this->distributeurs;
 }
 
 /**
- * @brief Accesseur de l'attribut tempsTrajet
- * @return QTime représente le temps de trajet entre lui et le distributeur
+ * @brief Mutateur de l'attribut distributeurAIntervenir
+ * @param distributeur, distributeur sur lequel il faut intervenir
  */
-QTime Intervention::getTempsTrajet() const
+void Intervention::ajouterDistributeur(Distributeur* distributeur)
 {
-    return this->tempsTrajet;
-}
-
-/**
- * @brief Accesseur de l'attribut poidsARemplir
- * @return un float qui represente le poids que doit prendre le technicien pour
- * remplir le distributeur
- */
-double Intervention::getPoidsARemplir() const
-{
-    return this->poidsARemplir;
-}
-
-/**
- * @brief Mutateur de l'attribut heureIntervention
- * @param heureIntervention l'heure à laquel le technicien doit intervenir
- */
-void Intervention::setHeureIntervention(const QTime& heureIntervention)
-{
-    this->heureIntervention = heureIntervention;
-}
-
-/**
- * @brief Mutateur de l'attribut numeroIntervention
- * @param numeroIntervention le numero d'intervention
- */
-void Intervention::setNumeroIntervention(const int numeroIntervention)
-{
-    this->numeroIntervention = numeroIntervention;
-}
-
-/**
- * @brief Mutateur de l'attribut tempsTrajet
- * @param tempsTrajet le temps de trajet
- */
-void Intervention::setTempsTrajet(const QTime& tempsTrajet)
-{
-    this->tempsTrajet = tempsTrajet;
-}
-
-/**
- * @brief Mutateur de l'attribut poidsARemplir
- * @param poidsARemplir le poids que le technicien doit prendre pour remplir le
- * distributeur
- */
-void Intervention::setPoidsARemplir(const double poidsARemplir)
-{
-    this->poidsARemplir = poidsARemplir;
+    this->distributeurs.push_back(distributeur);
 }

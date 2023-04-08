@@ -8,11 +8,11 @@ package com.justfeed.justfeedandroid;
  */
 public class Produit
 {
-    private double          prix;           //!< prix du produit pour 100g
-    private double       poidsDuProduit; //!< poids en kg à l'unité du produit
+    private double prix;           //!< prix du produit pour 100g
+    private double poidsDuProduit; //!< poids en kg à l'unité du produit
 
-    private double       volumeProduit;  //!< Volume du produit en dm3
-    private final String nom;            //!< nom du produit
+    private double       volumeProduit; //!< Volume du produit en dm3
+    private final String nom;           //!< nom du produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
