@@ -23,6 +23,7 @@ struct Localisation
 {
     QString latitude;
     QString longitude;
+    QString atitude;
 };
 
 /**
@@ -42,7 +43,7 @@ class Distributeur
     QString       ville;             //!< ville du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
-    int           hydrometrie;       //!< hydrométrie de l'interieur du distributeur
+    float         hygrometrie;       //!< hygrometrie de l'interieur du distributeur
     bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
 
@@ -62,7 +63,7 @@ class Distributeur
     QString      getdeviceID() const;
     Localisation getPosition() const;
     int          getAIntervenir() const;
-    int          getHydrometrie() const;
+    float        getHygrometrie() const;
     QString      getNom() const;
     QString      getAdresse() const;
     QString      getCodePostal() const;
@@ -72,11 +73,12 @@ class Distributeur
     QString      getNomProduitBac(int numeroBac) const;
     double       getProduitPrix(int numeroBac) const;
     Produit*     getProduitBac(int numeroBac) const;
+    Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
 
     // mutateurs
-    void setdeviceID(const QString deviceID);
-    void setHydrometrie(int hydrometrie);
+    void setDeviceID(const QString deviceID);
+    void setHygrometrie(float hydrometrie);
     void setPosition(const Localisation& localisation);
     void setAIntervenir(bool aIntervenir);
     void setNom(const QString& nom);
@@ -87,6 +89,7 @@ class Distributeur
     void setDescription(const QString& description);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
+    void supprimerBac(const int numeroBacASupprimer);
 };
 
 #endif // DISTRIBUTEUR_H

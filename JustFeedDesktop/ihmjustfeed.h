@@ -15,6 +15,8 @@
 #include <QVector>
 
 class Distributeur;
+class ConfigurationDistributeur;
+class Produit;
 
 /**
  * @def TITRE_APPLICATION
@@ -38,18 +40,35 @@ class IHMJustFeed : public QWidget
 {
     Q_OBJECT
   private:
-    QVector<Distributeur*> distributeurs; //!< les distributeurs
-    void                   initialiserGUI();
-    void                   instancierWigets();
-    void                   initialiserWigets();
-    void                   positionnerWigets();
-    void                   initialiserDistributeurs();
+    QVector<Distributeur*> distributeurs;                 //!< les distributeur
+    QVector<Produit*>      produits;                      //!< les produits
+    int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    ConfigurationDistributeur*
+      configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
+
+    // Widgets
+    QComboBox*   listeDistributeurs;              //!< liste de distributeurs
+    QPushButton* boutonConfigurationDistributeur; //!< bouton de configuration d'un distributeur
+
+    void initialiserGUI();
+    void instancierWidgets();
+    void initialiserWidgets();
+    void positionnerWidgets();
+    void initialiserEvenements();
+    void initialiserDistributeurs();
+    void initialiserProduits();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
+    Produit* getProduit(int index) const;
+    QString  getNomProduit(int index) const;
+    double   getPrixProduit(int index) const;
+    int      getNbProduits() const;
 
   private slots:
+    void configurerDistributeur();
+    void selectionnerDistributeur(int numeroDistributeur);
 };
 
 #endif // IHMJUSTFEED_H

@@ -10,6 +10,7 @@ SOURCES += \
     bac.cpp \
     basededonnees.cpp \
     communication.cpp \
+    configurationdistributeur.cpp \
     distributeur.cpp \
     intervention.cpp \
     main.cpp \
@@ -22,6 +23,7 @@ HEADERS += \
     bac.h \
     basededonnees.h \
     communication.h \
+    configurationdistributeur.h \
     distributeur.h \
     ihmjustfeed.h \
     intervention.h \

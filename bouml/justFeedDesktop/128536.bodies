@@ -1,16 +1,49 @@
 class IHMJustFeed
 !!!145450.cpp!!!	initialiserGUI() : void
-    instancierWigets();
-    initialiserWigets();
-    positionnerWigets();
+    instancierWidgets();
+    initialiserWidgets();
+    positionnerWidgets();
+    initialiserEvenements();
 
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
     QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
     resize(screenGeometry.width(), screenGeometry.height());
+!!!162986.cpp!!!	instancierWidgets() : void
+    listeDistributeurs              = new QComboBox(this);
+    boutonConfigurationDistributeur = new QPushButton(this);
+!!!163114.cpp!!!	initialiserWidgets() : void
+    boutonConfigurationDistributeur->setText("Configurer un distributeur");
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        listeDistributeurs->addItem(distributeurs[i]->getNom());
+    }
+!!!163242.cpp!!!	positionnerWidgets() : void
+    QVBoxLayout* layoutConfigurationDistributeur = new QVBoxLayout();
+    QHBoxLayout* layoutBoutons                   = new QHBoxLayout();
+
+    layoutConfigurationDistributeur->addWidget(listeDistributeurs);
+    layoutBoutons->addStretch();
+    layoutBoutons->addWidget(boutonConfigurationDistributeur);
+    layoutConfigurationDistributeur->addLayout(layoutBoutons);
+    layoutConfigurationDistributeur->addStretch();
+
+    setLayout(layoutConfigurationDistributeur);
+!!!163370.cpp!!!	initialiserEvenements() : void
+    connect(listeDistributeurs,
+            SIGNAL(currentIndexChanged(int)),
+            this,
+            SLOT(selectionnerDistributeur(int)));
+    connect(boutonConfigurationDistributeur,
+            SIGNAL(clicked()),
+            this,
+            SLOT(configurerDistributeur()));
 !!!145578.cpp!!!	initialiserDistributeurs() : void
+    /**
+     * @todo Récupérer les données depuis la base de données
+     */
     distributeurs.push_back(new Distributeur("distributeur-1-sim",
-                                             { "44.11161", "4.84856" },
+                                             { "44.11161", "4.84856", "0" },
                                              "Grand Frais",
                                              "Distributeur de fruits secs",
                                              "Zone du Coudoulet Rond point du Péage Sud",
@@ -18,7 +51,7 @@ class IHMJustFeed
                                              "Orange",
                                              QDate::fromString("2022-01-08", "yyyy-MM-dd")));
     distributeurs.push_back(new Distributeur("distributeur-2-sim",
-                                             { "43.92844", "4.79247" },
+                                             { "43.92844", "4.79247", "0" },
                                              "Carrefour",
                                              "Distributeur de fruits secs",
                                              "390 Rue Jean Marie Tjibaou",
@@ -26,7 +59,7 @@ class IHMJustFeed
                                              "Avignon",
                                              QDate::fromString("2022-03-09", "yyyy-MM-dd")));
     distributeurs.push_back(new Distributeur("distributeur-3",
-                                             { "43.90252", "4.75280" },
+                                             { "43.90252", "4.75280", "0" },
                                              "Cosy Primeurs",
                                              "Distributeur de fruits secs",
                                              "292 Route de Boulbon",
@@ -34,7 +67,7 @@ class IHMJustFeed
                                              "Barbentane",
                                              QDate::fromString("2022-01-10", "yyyy-MM-dd")));
 
-    Produit* pruneaux    = new Produit("pruneaux",
+    Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
                                        "délicieuse friandise à déguster à tout moment de la journée.",
@@ -75,6 +108,16 @@ class IHMJustFeed
                                    "761234679900",
                                    17.18);
 
+    produits.push_back(pruneaux);
+    produits.push_back(abricot);
+    produits.push_back(cranberries);
+    produits.push_back(banane);
+    produits.push_back(raisin);
+    produits.push_back(fruitsSec);
+    produits.push_back(cacahuete);
+    produits.push_back(soja);
+    produits.push_back(basilic);
+
     distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
@@ -90,14 +133,45 @@ class IHMJustFeed
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
+
+    numeroDistributeurSelectionne = 0; // pour les tests
+!!!163498.cpp!!!	initialiserProduits() : void
+    /**
+     * @todo Récupérer les données depuis la base de données
+     */
 !!!130328.cpp!!!	IHMJustFeed(inout parent : QWidget = nullptr)
     qDebug() << Q_FUNC_INFO;
-
-    initialiserGUI();
     initialiserDistributeurs();
+    initialiserProduits();
+    initialiserGUI();
 !!!130456.cpp!!!	~IHMJustFeed()
     for(int i = 0; i < distributeurs.size(); ++i)
     {
         delete distributeurs[i];
     }
     qDebug() << Q_FUNC_INFO;
+!!!163626.cpp!!!	getProduit(in index : int) : Produit
+    return produits[index];
+!!!163754.cpp!!!	getNomProduit(in index : int) : QString
+    return produits[index]->getNom();
+!!!163882.cpp!!!	getPrixProduit(in index : int) : double
+    return produits[index]->getPrix();
+!!!164010.cpp!!!	getNbProduits() : int
+    return produits.size();
+!!!164138.cpp!!!	configurerDistributeur() : void
+    if(configurationDistributeur == nullptr)
+    {
+        if(numeroDistributeurSelectionne != -1)
+            configurationDistributeur =
+              new ConfigurationDistributeur(distributeurs[numeroDistributeurSelectionne], this);
+        else
+            return;
+    }
+    else
+        return;
+    configurationDistributeur->exec();
+    delete configurationDistributeur;
+    configurationDistributeur = nullptr;
+!!!164266.cpp!!!	selectionnerDistributeur(in numeroDistributeur : int) : void
+    qDebug() << Q_FUNC_INFO << "numeroDistributeur" << numeroDistributeur;
+    numeroDistributeurSelectionne = numeroDistributeur;
