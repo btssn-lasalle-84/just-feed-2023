@@ -5,7 +5,7 @@ class Distributeur
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
              << "longitude" << position.longitude << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << dateMiseEnService << "description" << description << "hydrometrie" << hydrometrie
+             << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
              << "aIntervenir" << aIntervenir;
 !!!128536.cpp!!!	~Distributeur()
     for(int i = 0; i < bacs.size(); ++i)
@@ -19,6 +19,8 @@ class Distributeur
     return this->position;
 !!!129432.cpp!!!	getAIntervenir() : int
     return this->aIntervenir;
+!!!162346.cpp!!!	getHygrometrie() : float
+    return this->hygrometrie;
 !!!128920.cpp!!!	getHydrometrie() : int
     return this->hydrometrie;
 !!!143786.cpp!!!	getNom() : QString
@@ -51,12 +53,18 @@ class Distributeur
         return bacs[numeroBac]->getProduit();
     }
     return nullptr;
+!!!162474.cpp!!!	getBac(in numeroBac : int) : Bac
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac];
+    }
+    return nullptr;
 !!!153258.cpp!!!	getNbBacs() : int
     return bacs.size();
-!!!144554.cpp!!!	setdeviceID(in deviceID : QString) : void
+!!!162602.cpp!!!	setDeviceID(in deviceID : QString) : void
     this->deviceID = deviceID;
-!!!129688.cpp!!!	setHydrometrie(in hydrometrie : int) : void
-    this->hydrometrie = hydrometrie;
+!!!162730.cpp!!!	setHygrometrie(in Hygrometrie : float) : void
+    this->hygrometrie = Hygrometrie;
 !!!129816.cpp!!!	setPosition(in localisation : Localisation) : void
     this->position = localisation;
 !!!130200.cpp!!!	setAIntervenir(in aIntervenir : bool) : void
@@ -78,3 +86,15 @@ class Distributeur
         this->bacs[numeroBac]->setPrixProduit(prix);
 !!!136234.cpp!!!	ajouterBac(in bac : Bac) : void
     bacs.push_back(new Bac(bac));
+!!!162858.cpp!!!	supprimerBac(in numeroBacASupprimer : int) : void
+    if(numeroBacASupprimer >= 0 && numeroBacASupprimer < bacs.size())
+    {
+        qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
+        delete bacs[numeroBacASupprimer];
+        bacs.removeAt(numeroBacASupprimer);
+        qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
+    }
+!!!144554.cpp!!!	setdeviceID(in deviceID : QString) : void
+    this->deviceID = deviceID;
+!!!129688.cpp!!!	setHydrometrie(in hydrometrie : int) : void
+    this->hydrometrie = hydrometrie;

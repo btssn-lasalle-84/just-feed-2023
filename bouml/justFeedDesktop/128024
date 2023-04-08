@@ -1,6 +1,6 @@
 format 224
 "JustFeedDesktop" // JustFeedDesktop
-  revision 5
+  revision 6
   modified_by 42 "tv"
   // class settings
   
@@ -473,6 +473,18 @@ ${inlines}
 	mysql_decl ""
 	MysqlColumn
       end
+
+      attribute 150698 "atitude"
+	public explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
     end
 
     class 128408 "Distributeur"
@@ -604,6 +616,19 @@ ${inlines}
 	comment "!< description du distributeur"
       end
 
+      attribute 150826 "hygrometrie"
+	private explicit_type "float"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< hygrometrie de l'interieur du distributeur"
+      end
+
       attribute 128664 "hydrometrie"
 	private explicit_type "int"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
@@ -640,7 +665,7 @@ ${inlines}
 
 ${inline}${typeprefix}${class}::${name}${(}${)} :
     deviceID(\"\"), position(), bacs(), nom(\"\"), adresse(\"\"), codePostal(\"\"), ville(\"\"),
-    dateMiseEnService(QDate::currentDate()), description(\"\"), hydrometrie(0), aIntervenir(false)
+    dateMiseEnService(QDate::currentDate()), description(\"\"), hygrometrie(0), aIntervenir(false)
 ${throw}{
 ${body}}
 "
@@ -670,7 +695,7 @@ ${body}}
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}, ${t7} ${p7}${)} :
     deviceID(deviceID),
     position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hydrometrie(0),
+    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
     aIntervenir(false)
 ${throw}{
 ${body}}
@@ -742,6 +767,25 @@ ${body}}
 "
 	cpp_def "//@brief Accesseur de l'attribut AIntervenir
 //@return un bool qui permet de savoir s'il faut intervenir sur le
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162346 "getHygrometrie"
+	preserve_cpp_body_indent const public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut hygrometrie
+//@return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air
+//humide du distributeur
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -937,6 +981,25 @@ ${body}}
 	
       end
 
+      operation 162474 "getBac"
+	preserve_cpp_body_indent const public return_type class_ref 134570 // Bac
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer un bac
+//@return Bac
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 153258 "getNbBacs"
 	preserve_cpp_body_indent const public explicit_return_type "int"
 	nparams 0
@@ -955,7 +1018,7 @@ ${body}}
 	
       end
 
-      operation 144554 "setdeviceID"
+      operation 162602 "setDeviceID"
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "deviceID" explicit_type "QString"
@@ -975,14 +1038,15 @@ ${body}}
 	comment " mutateurs"
       end
 
-      operation 129688 "setHydrometrie"
+      operation 162730 "setHygrometrie"
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
-	  param in name "hydrometrie" explicit_type "int"
+	  param in name "Hygrometrie" explicit_type "float"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Mutateur de l'attribut hydrométrie
-//@param hydrometrie l'hydrometrie du distributeur
+	cpp_def "//@brief Mutateur de l'attribut Hygrometrie
+//@param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du
+//distributeur
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
@@ -1140,8 +1204,7 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Mutateur de l'attribut description
-//@param description un QString qui détermine la description du
-//distributeur
+//@param description
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
@@ -1160,8 +1223,13 @@ ${body}}
 	  param in name "prix" explicit_type "double"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-  ${body}}
+	cpp_def "//@brief Mutateur de l'attribut produit
+//@param numeroBac
+//@param prix
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -1180,6 +1248,64 @@ ${body}}
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162858 "supprimerBac"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBacASupprimer" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Supprime un bac dans le distributeur
+//@param numeroBacASupprimer
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144554 "setdeviceID"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "deviceID" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut identifiant
+//@param identifiant du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " mutateurs"
+      end
+
+      operation 129688 "setHydrometrie"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "hydrometrie" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut hydrométrie
+//@param hydrometrie l'hydrometrie du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1229,11 +1355,72 @@ de l'application JustFeed
 	relation 141226 --->
 	  stereotype "QVector"
 	  a role_name "distributeurs" private
-	    comment "!< les distributeurs"
+	    comment "!< les distributeur"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
 "
 	    classrelation_ref 141226 // distributeurs (<unidirectional association>)
 	  b parent class_ref 128408 // Distributeur
+      end
+
+      classrelation 148138 // produits (<unidirectional association>)
+	relation 148138 --->
+	  stereotype "QVector"
+	  a role_name "produits" private
+	    comment "!< les produits"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 148138 // produits (<unidirectional association>)
+	  b parent class_ref 128152 // Produit
+      end
+
+      attribute 150954 "numeroDistributeurSelectionne"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le distributeur sélectionné"
+      end
+
+      classrelation 148266 // configurationDistributeur (<unidirectional association>)
+	relation 148266 --->
+	  a role_name "configurationDistributeur" private
+	    comment "!< la boîte de dialogue pour configurer un distributeur"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148266 // configurationDistributeur (<unidirectional association>)
+	  b parent class_ref 141098 // ConfigurationDistributeur
+      end
+
+      attribute 151082 "listeDistributeurs"
+	private explicit_type "QComboBox"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Widgets
+!< liste de distributeurs"
+      end
+
+      attribute 151210 "boutonConfigurationDistributeur"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton de configuration d'un distributeur"
       end
 
       operation 145450 "initialiserGUI"
@@ -1241,10 +1428,270 @@ de l'application JustFeed
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Méthode qui initialise la GUI
+	cpp_def "// Méthodes privées
+//
+//@brief méthode qui initialise la GUI
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162986 "instancierWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163114 "initialiserWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163242 "positionnerWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne les widgets dans la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163370 "initialiserEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les connexion signal/slot
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145578 "initialiserDistributeurs"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les distributeurs avec les bacs et les produits
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163498 "initialiserProduits"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les différents produits disponibles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130328 "IHMJustFeed"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "QWidget"
+	    defaultvalue "nullptr"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief constructeur par défaut de la classe IHMJustFeed
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QWidget(parent), configurationDistributeur(nullptr)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130456 "~IHMJustFeed"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief destructeur de la classe IHMJustFeed
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163626 "getProduit"
+	preserve_cpp_body_indent const public return_type class_ref 128152 // Produit
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le produit
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163754 "getNomProduit"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le nom du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163882 "getPrixProduit"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le prix de produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164010 "getNbProduits"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le nombre de produits disponibles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 134570 "slots"
+	
+	cpp "  private slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 164138 "configurerDistributeur"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes publiques
+// Slots
+//
+//@brief méthode qui configure un distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164266 "selectionnerDistributeur"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroDistributeur" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui sélectionne un distributeur à configurer
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -1302,70 +1749,6 @@ ${body}}
 	
 	
 	
-      end
-
-      operation 145578 "initialiserDistributeurs"
-	preserve_cpp_body_indent private explicit_return_type "void"
-	nparams 0
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "//@brief méthode qui initianlise les distributeurs avec les bacs et les produits
-//
-
-${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
-      operation 130328 "IHMJustFeed"
-	preserve_cpp_body_indent public explicit_return_type ""
-	nparams 1
-	  param inout name "parent" explicit_type "QWidget"
-	    defaultvalue "nullptr"
-	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
-"
-	cpp_def "//@brief Constructeur par défaut de la classe IHMJustFeed
-//
-
-${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QWidget(parent)
-${throw}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
-      operation 130456 "~IHMJustFeed"
-	preserve_cpp_body_indent public explicit_return_type ""
-	nparams 0
-	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
-"
-	cpp_def "//@brief Destructeur de la classe IHMJustFeed
-//
-
-${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
-      extra_member 134570 "slots"
-	
-	cpp "  private slots:" ""
-	java ""
-	php ""
-	python ""
-	idl ""
-	mysql ""
       end
     end
 
@@ -2410,7 +2793,7 @@ ${body}}
       operation 135850 "setPrixProduit"
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
-	  param in name "prixProduit" explicit_type "int"
+	  param in name "prixProduit" explicit_type "double"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Modifie le prix du produit
@@ -2444,6 +2827,523 @@ ${body}}
 	
 	
       end
+    end
+
+    class 141098 "ConfigurationDistributeur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class       ConfigurationDistributeur
+@brief       Déclaration de la classe ConfigurationDistributeur.
+@details     La classe ConfigurationDistributeur \\c Cette classe permet de définir la
+configuration d'un distributeur
+"
+      classrelation 147754 // <generalisation>
+	relation 147754 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147754 // <generalisation>
+	  b parent class_ref 141226 // typedef2
+      end
+
+      extra_member 141098 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      classrelation 147882 // distributeur (<unidirectional association>)
+	relation 147882 --->
+	  a role_name "distributeur" private
+	    comment "!< le distributeur à configurer"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 147882 // distributeur (<unidirectional association>)
+	  b parent class_ref 128408 // Distributeur
+      end
+
+      classrelation 148010 // ihmJustFeed (<unidirectional association>)
+	relation 148010 --->
+	  a role_name "ihmJustFeed" private
+	    comment "!< l'ihm principale"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148010 // ihmJustFeed (<unidirectional association>)
+	  b parent class_ref 128536 // IHMJustFeed
+      end
+
+      attribute 149290 "nomDistributeur"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Widgets
+!< nom du distributeur et son numero"
+      end
+
+      attribute 149418 "labelsBac"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de bac"
+      end
+
+      attribute 149546 "labelsProduit"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de produit"
+      end
+
+      attribute 149674 "labelsPrix"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de prix"
+      end
+
+      attribute 149802 "boutonAjoutBac"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton pour ajouter un bac"
+      end
+
+      attribute 149930 "boutonSuppressionBac"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton supprimer pour chaque bac"
+      end
+
+      attribute 150058 "editionsNouveauPrix"
+	private explicit_type "QDoubleSpinBox*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLineEdit de etidion prix"
+      end
+
+      attribute 150186 "choixNouveauProduit"
+	private explicit_type "QComboBox*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de listes déroulantes pour choisir un produit du bac"
+      end
+
+      attribute 150314 "boutonsChangerPrix"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de boutons pour changer le prix"
+      end
+
+      attribute 150442 "boutonsChangerProduit"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de boutons changer le produit"
+      end
+
+      attribute 150570 "layoutBacs"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< positionnement des bacs dans la boîte de dialogue"
+      end
+
+      operation 160298 "initialiserBoiteDeDialogue"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes privées
+//
+//@brief méthode qui initialise la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160426 "instancierWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie les widgets de la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160554 "initialiserWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les widgets de la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160682 "positionnerWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne les widgets dans la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160810 "initialiserEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les connexions signal/slot
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160938 "instancierNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie un nouveau bac
+//@return int le numéro du nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161066 "initialiserNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161194 "positionnerNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161322 "connecterNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui connecte le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161450 "ConfigurationDistributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	  param inout name "parent" type class_ref 128536 // IHMJustFeed
+	    defaultvalue "0"
+	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief constructeur par défaut de la classe ConfigurationDistributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}${)} :
+    QDialog(parent),
+    distributeur(distributeur), ihmJustFeed(parent)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161578 "~ConfigurationDistributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief destructeur de la classe ConfigurationDistributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 141226 "slots"
+	
+	cpp "  private slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 161706 "selectionnerNouveauProduit"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Slots
+//
+//@brief méthode qui sélectionne un produit dans la liste
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161834 "changerLePrix"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161962 "changerLeProduit"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162090 "ajouterBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui ajoute un bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162218 "supprimerBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui supprime un bac
+//@param numeroBac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 141226 "typedef2"
+      visibility package stereotype "typedef" explicit_base_type "QDialog"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
     end
   end
 
@@ -2647,6 +3547,30 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 128152 // Produit
+      end
+    end
+
+    artifact 141226 "configurationdistributeur"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 141226 // typedef2
+	class_ref 141098 // ConfigurationDistributeur
       end
     end
   end

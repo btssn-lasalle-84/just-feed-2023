@@ -327,16 +327,16 @@ void Distributeur::ajouterBac(const Bac& bac)
 }
 
 /**
- * @brief supprime un bac dans le distributeur
- * @param numerobacASupprimer
+ * @brief Supprime un bac dans le distributeur
+ * @param numeroBacASupprimer
  */
-void Distributeur::supprimerBac(const int numerobacASupprimer)
+void Distributeur::supprimerBac(const int numeroBacASupprimer)
 {
-    if(numerobacASupprimer >= 0 && numerobacASupprimer < bacs.size())
+    if(numeroBacASupprimer >= 0 && numeroBacASupprimer < bacs.size())
     {
-        delete bacs[numerobacASupprimer];
-        bacs.removeAt(numerobacASupprimer);
-        qDebug() << Q_FUNC_INFO << "supprimerBac" << bacs.size()<< "NbBacs"
-                 ;
+        qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
+        delete bacs[numeroBacASupprimer];
+        bacs.removeAt(numeroBacASupprimer);
+        qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
 }

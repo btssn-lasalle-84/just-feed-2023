@@ -15,7 +15,7 @@
 #include "configurationdistributeur.h"
 
 /**
- * @brief Constructeur par défaut de la classe IHMJustFeed
+ * @brief constructeur par défaut de la classe IHMJustFeed
  */
 IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistributeur(nullptr)
 {
@@ -26,7 +26,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistri
 }
 
 /**
- * @brief Destructeur de la classe IHMJustFeed
+ * @brief destructeur de la classe IHMJustFeed
  */
 IHMJustFeed::~IHMJustFeed()
 {
@@ -56,21 +56,13 @@ void IHMJustFeed::configurerDistributeur()
     }
     else
         return;
-    int retour = configurationDistributeur->exec();
-    if(retour == QDialog::Accepted)
-    {
-        qDebug() << Q_FUNC_INFO << "QDialog::Accepted";
-    }
-    else if(retour == QDialog::QDialog::Rejected)
-    {
-        qDebug() << Q_FUNC_INFO << "QDialog::Rejected";
-    }
+    configurationDistributeur->exec();
     delete configurationDistributeur;
     configurationDistributeur = nullptr;
 }
 
 /**
- * @brief Méthode qui sélectionne un distrubuteur à configurer
+ * @brief méthode qui sélectionne un distributeur à configurer
  */
 void IHMJustFeed::selectionnerDistributeur(int numeroDistributeur)
 {
@@ -81,7 +73,7 @@ void IHMJustFeed::selectionnerDistributeur(int numeroDistributeur)
 // Méthodes privées
 
 /**
- * @brief Méthode qui initialise la GUI
+ * @brief méthode qui initialise la GUI
  */
 void IHMJustFeed::initialiserGUI()
 {
@@ -97,7 +89,7 @@ void IHMJustFeed::initialiserGUI()
 }
 
 /**
- * @brief Méthode qui instancie les widgets de la GUI
+ * @brief méthode qui instancie les widgets de la GUI
  */
 void IHMJustFeed::instancierWidgets()
 {
@@ -106,7 +98,7 @@ void IHMJustFeed::instancierWidgets()
 }
 
 /**
- * @brief Méthode qui initialise les widgets de la GUI
+ * @brief méthode qui initialise les widgets de la GUI
  */
 void IHMJustFeed::initialiserWidgets()
 {
@@ -118,7 +110,7 @@ void IHMJustFeed::initialiserWidgets()
 }
 
 /**
- * @brief Méthode qui positionne les widgets dans la GUI
+ * @brief méthode qui positionne les widgets dans la GUI
  */
 void IHMJustFeed::positionnerWidgets()
 {
@@ -262,16 +254,25 @@ void IHMJustFeed::initialiserProduits()
      */
 }
 
+/**
+ * @brief méthode qui retourne le produit
+ */
 Produit* IHMJustFeed::getProduit(int index) const
 {
     return produits[index];
 }
 
+/**
+ * @brief méthode qui retourne le nom du produit
+ */
 QString IHMJustFeed::getNomProduit(int index) const
 {
     return produits[index]->getNom();
 }
 
+/**
+ * @brief méthode qui retourne le prix de produit
+ */
 double IHMJustFeed::getPrixProduit(int index) const
 {
     return produits[index]->getPrix();

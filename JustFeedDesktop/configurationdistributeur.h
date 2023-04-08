@@ -26,7 +26,7 @@ class Produit;
 /**
  * @class       ConfigurationDistributeur
  * @brief       Déclaration de la classe ConfigurationDistributeur.
- * @details     La classe IHMJustFeed \c Cette classe permet de définir la
+ * @details     La classe ConfigurationDistributeur \c Cette classe permet de définir la
  * configuration d'un distributeur
  */
 class ConfigurationDistributeur : public QDialog
@@ -36,21 +36,20 @@ class ConfigurationDistributeur : public QDialog
     Distributeur* distributeur; //!< le distributeur à configurer
     IHMJustFeed*  ihmJustFeed;  //!< l'ihm principale
     // Widgets
-    QLabel*          nomDistributeur; //!< nom du distributeur et son numero
-    QVector<QLabel*> labelsBac;       //!< conteneur de QLabel de bac
-    QVector<QLabel*> labelsProduit;   //!< conteneur de QLabel de produit
-    QVector<QLabel*> labelsPrix;      //!< conteneur de QLabel de prix
-    QPushButton*     boutonAjoutBac;
-    QVector<QPushButton*> boutonSuppressionBac; //!< bouton supprimer pour chaque bac
-    QVector<QDoubleSpinBox*> editionsNouveauPrix; //!< conteneur de QLineEdit de etidion prix
+    QLabel*                  nomDistributeur;      //!< nom du distributeur et son numero
+    QVector<QLabel*>         labelsBac;            //!< conteneur de QLabel de bac
+    QVector<QLabel*>         labelsProduit;        //!< conteneur de QLabel de produit
+    QVector<QLabel*>         labelsPrix;           //!< conteneur de QLabel de prix
+    QPushButton*             boutonAjoutBac;       //!< bouton pour ajouter un bac
+    QVector<QPushButton*>    boutonSuppressionBac; //!< bouton supprimer pour chaque bac
+    QVector<QDoubleSpinBox*> editionsNouveauPrix;  //!< conteneur de QLineEdit de etidion prix
     QVector<QComboBox*>
-      choixNouveauProduit; //!< conteneur de QComboBox pour changer le produit du bac
-    QVector<QPushButton*> boutonsChangerPrix; //!< conteneur de QLineEdit de bouton changer prix
-    QVector<QPushButton*>
-                 boutonsChangerProduit; //!< conteneur de QLineEdit de bouton changer produit
-    QVBoxLayout* layoutBacs; //!<
+      choixNouveauProduit; //!< conteneur de listes déroulantes pour choisir un produit du bac
+    QVector<QPushButton*> boutonsChangerPrix;    //!< conteneur de boutons pour changer le prix
+    QVector<QPushButton*> boutonsChangerProduit; //!< conteneur de boutons changer le produit
+    QVBoxLayout*          layoutBacs; //!< positionnement des bacs dans la boîte de dialogue
 
-    void initialiserGUI();
+    void initialiserBoiteDeDialogue();
     void instancierWidgets();
     void initialiserWidgets();
     void positionnerWidgets();
