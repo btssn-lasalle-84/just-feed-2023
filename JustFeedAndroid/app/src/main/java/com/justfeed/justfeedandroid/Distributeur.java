@@ -59,7 +59,8 @@ public class Distributeur
     public List<Bac> getListeBacs() { return this.listeBacs; }
     /**
      * @brief Mutateur du type de produit contenu dans un bac.
-     * @param nouveauxProduits.
+     * @param numeroBac le numéro du bac à changer.
+     * @param nouveauProduit le nouveau produit.
      */
     public void changerProduit(int numeroBac, Produit nouveauProduit)
     {

@@ -20,7 +20,6 @@ public class BaseDeDonnees
     /**
      * Constantes
      */
-    private static final String TAG = "_BaseDeDonnees"; //!< TAG pour les logs
     private static final int PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
     /**
      * Attributs
@@ -28,8 +27,8 @@ public class BaseDeDonnees
     private String             identifiant; //!< Identifiant de l'utilisateur de la base de donées.
     private String             motDePasse;  //!< Mot de passe de l'identifiant.
     private String             hostName;    //!< Nom de la machine distante.
-    private List<Distributeur> listeDistributeurs; //Simule la récupération d'une liste de Distributeurs sur une BDD
-    private List<Intervention> listeInterventions;
+    private List<Distributeur> listeDistributeurs; //!< Simule la récupération d'une liste de Distributeurs sur une BDD
+    private List<Intervention> listeInterventions; //!< Simula la récupération d'une liste d'interventions sur une BDD.
     private int                port;        //!< Port sur lequel le processus de la base de données écoute.
 
     /**
@@ -102,6 +101,10 @@ public class BaseDeDonnees
         this.port = port;
     }
 
+    /**
+     * @brief Méthode qui retourne une liste de distributeurs de la BDD.
+     * @return listeDistributeurs
+     */
     public List<Distributeur> recupererDistributeurs()
     {
         /**
@@ -111,12 +114,15 @@ public class BaseDeDonnees
         return this.listeDistributeurs;
     }
 
+    /**
+     * @brief Méthode qui retourne une liste d'interventions de la BDD.
+     * @return listeInterventions
+     */
     public List<Intervention> recupererInterventions()
     {
         /**
          * @todo récupérer les informations des interventions sur la base de données
          */
-        Log.d(TAG, "recupererInterventions()");
 
         return this.listeInterventions;
     }

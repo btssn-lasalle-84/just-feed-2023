@@ -14,10 +14,6 @@ import java.util.Map;
 public class InterventionViewHolder extends ViewHolder
 {
     /**
-     * Constantes
-     */
-    private static final String TAG = "_InterventionViewHolder";
-    /**
      * Ressources GUI
      */
     private final TextView identifiantDistributeur;
@@ -28,7 +24,6 @@ public class InterventionViewHolder extends ViewHolder
     public InterventionViewHolder(final View itemView)
     {
         super(itemView);
-        Log.d(TAG, "InterventionViewHolder()");
 
         identifiantDistributeur = ((TextView)itemView.findViewById(R.id.identifiantDistributeur));
         heureIntervention       = ((TextView)itemView.findViewById(R.id.heureIntervention));
@@ -38,9 +33,15 @@ public class InterventionViewHolder extends ViewHolder
 
     public void afficherInterventions(Intervention intervention)
     {
-        identifiantDistributeur.setText(Integer.toString(intervention.getIdentifiantDistribteur()));
-        aDepanner.setText(intervention.bacsADepanner());
-        aRemplir.setText(intervention.bacsARemplir());
-        heureIntervention.setText(intervention.getHeureIntervention());
+        identifiantDistributeur.setText("Identifiant du distributuer : "+Integer.toString(intervention.getIdentifiantDistribteur()));
+        if(!(intervention.bacsADepanner().isEmpty()))
+        {
+            aDepanner.setText("Bacs à dépanner (Hygrométrie > 0%) : \n"+intervention.bacsADepanner());
+        }
+        if(!(intervention.bacsARemplir().isEmpty()))
+        {
+            aRemplir.setText("Bacs à remplir: \n"+intervention.bacsARemplir());
+        }
+        heureIntervention.setText("Heure de l'intervention : "+intervention.getHeureIntervention());
     }
 }

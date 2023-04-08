@@ -7,33 +7,41 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.DecimalFormat;
-
+/**
+ * @brief Définition de la classe DistributeurViewHolder.
+ * @details La classe DistributeurViewHolder \c DistributeurViewHolder permet de gérer les vues
+ * pour afficher des distributeurs.
+ * @author Fargier Mayeul
+ * @version 0.1
+ */
 public class DistributeurViewHolder extends RecyclerView.ViewHolder
 {
     /**
-     * Constantes
-     */
-    private static final String   TAG = "_DistributeurViewHolder"; //!< TAG pour les logs
-    /**
      * Ressources GUI
      */
-    private TextView     identifiant;
-    private RecyclerView vueListeBacs;
+    private TextView     identifiant; //!< attribut GUI qui affiche l'identifiant du distributeur.
+    private RecyclerView vueListeBacs; //!< attribut GUI qui afficher la liste des bacs du distributeur.
 
+    /**
+     * @brief Constructeur d'initialisation de la classe DistributeurViewHolder.
+     * @details initialise les attributs GUI.
+     * @param itemView
+     */
     public DistributeurViewHolder(final View itemView)
     {
         super(itemView);
-        Log.d(TAG, "DistributeurViewHolder()");
 
         identifiant   = ((TextView)itemView.findViewById(R.id.identifiant));
         vueListeBacs = itemView.findViewById(R.id.listeBacs);
     }
 
+    /**
+     * @brief Méthode qui affiche les distributeurs.
+     * @param distributeur
+     */
     public void afficherDistributeur(Distributeur distributeur)
     {
-        Log.d(TAG, "afficherDistributeur() : " + distributeur.getIdentifiant());
-
-        this.identifiant.setText(Integer.toString(distributeur.getIdentifiant()));
+        this.identifiant.setText("Identifant : "+Integer.toString(distributeur.getIdentifiant()));
     }
 
     public RecyclerView modifierVueListeBacs()

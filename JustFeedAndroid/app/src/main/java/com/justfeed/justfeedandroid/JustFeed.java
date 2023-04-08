@@ -33,11 +33,6 @@ import java.util.Map;
 public class JustFeed extends AppCompatActivity
 {
     /**
-     * Constantes
-     */
-    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
-
-    /**
      * Attributs
      */
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
@@ -58,7 +53,6 @@ public class JustFeed extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate()");
 
         boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
         baseDeDonnees       = new BaseDeDonnees();
@@ -86,7 +80,6 @@ public class JustFeed extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        Log.d(TAG, "onStart()");
     }
 
     /**
@@ -96,7 +89,6 @@ public class JustFeed extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        Log.d(TAG, "onResume()");
     }
 
     /**
@@ -107,7 +99,6 @@ public class JustFeed extends AppCompatActivity
     protected void onPause()
     {
         super.onPause();
-        Log.d(TAG, "onPause()");
     }
 
     /**
@@ -117,7 +108,6 @@ public class JustFeed extends AppCompatActivity
     protected void onStop()
     {
         super.onStop();
-        Log.d(TAG, "onStop()");
     }
 
     /**
@@ -128,15 +118,6 @@ public class JustFeed extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        Log.d(TAG, "onDestroy()");
-    }
-
-    public void visualiserInterventions()
-    {
-        /**
-         * @todo méthode qui invoque la méthode afficherInterventions() pour créer une seconde
-         * activité
-         */
     }
 
     /**
