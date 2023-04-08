@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -8,7 +8,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     bac.cpp \
+    basededonnees.cpp \
     communication.cpp \
+    configurationdistributeur.cpp \
     distributeur.cpp \
     intervention.cpp \
     main.cpp \
@@ -19,7 +21,9 @@ SOURCES += \
 
 HEADERS += \
     bac.h \
+    basededonnees.h \
     communication.h \
+    configurationdistributeur.h \
     distributeur.h \
     ihmjustfeed.h \
     intervention.h \

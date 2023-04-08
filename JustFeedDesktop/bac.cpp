@@ -112,7 +112,7 @@ void Bac::setNomProduit(const QString& nomProduit)
  * @brief Modifie le prix du produit
  * @param prixProduit le prix du produit que contient le bac
  */
-void Bac::setPrixProduit(const int& prixProduit)
+void Bac::setPrixProduit(const double& prixProduit)
 {
     if(produit != nullptr)
         this->produit->setPrix(prixProduit);

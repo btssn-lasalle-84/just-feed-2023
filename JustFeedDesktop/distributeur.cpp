@@ -16,8 +16,8 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), position(), bacs(), nom("moi"), adresse(""), codePostal(""), ville(""),
-    dateMiseEnService(QDate::currentDate()), description(""), hydrometrie(0), aIntervenir(false)
+    deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
+    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -35,15 +35,16 @@ Distributeur::Distributeur(QString      deviceID,
                            QDate        dateMiseEnService) :
     deviceID(deviceID),
     position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hydrometrie(0),
+    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
     aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
              << "longitude" << position.longitude << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << dateMiseEnService << "description" << description << "hydrometrie" << hydrometrie
+             << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
              << "aIntervenir" << aIntervenir;
 }
+
 /**
  * @brief Destructeur de la classe Distributeur
  */
@@ -56,12 +57,6 @@ Distributeur::~Distributeur()
     qDebug() << Q_FUNC_INFO;
 }
 
-QStringList Distributeur::getDistributeur() const
-{
-    return distributeur;
-}
-
-
 /**
  * @brief Accesseur de l'attribut identifiant
  * @return un QString qui represente l'identifiant du distributeur
@@ -72,13 +67,13 @@ QString Distributeur::getdeviceID() const
 }
 
 /**
- * @brief Accesseur de l'attribut hydrometrie
- * @return un entier qui represente le degré d'humidité dans le
- * distributeur
+ * @brief Accesseur de l'attribut hygrometrie
+ * @return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air
+ * humide du distributeur
  */
-int Distributeur::getHydrometrie() const
+float Distributeur::getHygrometrie() const
 {
-    return this->hydrometrie;
+    return this->hygrometrie;
 }
 
 /**
@@ -193,6 +188,19 @@ Produit* Distributeur::getProduitBac(int numeroBac) const
 }
 
 /**
+ * @brief Accesseur pour récupérer un bac
+ * @return Bac
+ */
+Bac* Distributeur::getBac(int numeroBac) const
+{
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac];
+    }
+    return nullptr;
+}
+
+/**
  * @brief Accesseur pour récupérer le produit dans le bac voulu
  * @return Produit qui permet de connaitre le produit
  */
@@ -205,18 +213,19 @@ int Distributeur::getNbBacs() const
  * @brief Mutateur de l'attribut identifiant
  * @param identifiant du distributeur
  */
-void Distributeur::setdeviceID(const QString deviceID)
+void Distributeur::setDeviceID(const QString deviceID)
 {
     this->deviceID = deviceID;
 }
 
 /**
- * @brief Mutateur de l'attribut hydrométrie
- * @param hydrometrie l'hydrometrie du distributeur
+ * @brief Mutateur de l'attribut Hygrometrie
+ * @param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du
+ * distributeur
  */
-void Distributeur::setHydrometrie(int hydrometrie)
+void Distributeur::setHygrometrie(float Hygrometrie)
 {
-    this->hydrometrie = hydrometrie;
+    this->hygrometrie = Hygrometrie;
 }
 
 /**
@@ -290,14 +299,18 @@ void Distributeur::setDateMiseEnService(const QDate& dateMiseEnService)
 
 /**
  * @brief Mutateur de l'attribut description
- * @param description un QString qui détermine la description du
- * distributeur
+ * @param description
  */
 void Distributeur::setDescription(const QString& description)
 {
     this->description = description;
 }
 
+/**
+ * @brief Mutateur de l'attribut produit
+ * @param numeroBac
+ * @param prix
+ */
 void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 {
     if(numeroBac >= 0 && numeroBac < bacs.size())
@@ -311,4 +324,19 @@ void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 void Distributeur::ajouterBac(const Bac& bac)
 {
     bacs.push_back(new Bac(bac));
+}
+
+/**
+ * @brief Supprime un bac dans le distributeur
+ * @param numeroBacASupprimer
+ */
+void Distributeur::supprimerBac(const int numeroBacASupprimer)
+{
+    if(numeroBacASupprimer >= 0 && numeroBacASupprimer < bacs.size())
+    {
+        qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
+        delete bacs[numeroBacASupprimer];
+        bacs.removeAt(numeroBacASupprimer);
+        qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
+    }
 }
