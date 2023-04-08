@@ -92,8 +92,8 @@ void IHMJustFeed::initialiserGUI()
 
     // La fenêtre principale
     setWindowTitle(TITRE_APPLICATION + " " + VERSION_APPLICATION);
-    /*QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
-    resize(screenGeometry.width(), screenGeometry.height());*/
+    QRect screenGeometry = QGuiApplication::primaryScreen()->availableGeometry();
+    resize(screenGeometry.width(), screenGeometry.height());
 }
 
 /**

@@ -321,3 +321,12 @@ void Distributeur::ajouterBac(const Bac& bac)
 {
     bacs.push_back(new Bac(bac));
 }
+
+void Distributeur::supprimerBac(const int numerobacASupprimer)
+{
+    if(numerobacASupprimer >= 0 && numerobacASupprimer < bacs.size())
+    {
+        delete bacs[numerobacASupprimer];
+        bacs.removeAt(numerobacASupprimer);
+    }
+}

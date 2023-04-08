@@ -124,8 +124,6 @@ void ConfigurationDistributeur::instancierWidgets()
     nomDistributeur->setAlignment(Qt::AlignCenter);
     boutonAjoutBac = new QPushButton(this);
     boutonAjoutBac->setText("Ajouter un bac");
-    boutonSuppressionBac = new QPushButton(this);
-    boutonSuppressionBac->setText("Supprimer un bac");
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
         labelsBac.push_back(new QLabel(this));
@@ -135,6 +133,7 @@ void ConfigurationDistributeur::instancierWidgets()
         choixNouveauProduit.push_back(new QComboBox(this));
         boutonsChangerPrix.push_back(new QPushButton(this));
         boutonsChangerProduit.push_back(new QPushButton(this));
+        boutonSuppressionBac.push_back(new QPushButton(this));
     }
 }
 
@@ -154,6 +153,7 @@ void ConfigurationDistributeur::initialiserWidgets()
         editionsNouveauPrix[i]->setAlignment(Qt::AlignCenter);
         boutonsChangerPrix[i]->setText("Changer prix");
         boutonsChangerProduit[i]->setText("Changer produit");
+        boutonSuppressionBac[i]->setText("Supprimer");
         for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
         {
             choixNouveauProduit[i]->addItem(ihmJustFeed->getNomProduit(j));
@@ -171,7 +171,6 @@ void ConfigurationDistributeur::positionnerWidgets()
 
     layoutTitre->addWidget(nomDistributeur);
     layoutTitre->addWidget(boutonAjoutBac);
-    layoutTitre->addWidget(boutonSuppressionBac);
     layoutBacs->addLayout(layoutTitre);
     QVector<QHBoxLayout*> layoutsDistributeur(distributeur->getNbBacs());
     ;
@@ -185,6 +184,7 @@ void ConfigurationDistributeur::positionnerWidgets()
         layoutsDistributeur[i]->addWidget(labelsPrix[i]);
         layoutsDistributeur[i]->addWidget(editionsNouveauPrix[i]);
         layoutsDistributeur[i]->addWidget(boutonsChangerPrix[i]);
+        layoutsDistributeur[i]->addWidget(boutonSuppressionBac[i]);
         layoutBacs->addLayout(layoutsDistributeur[i]);
     }
     setLayout(layoutBacs);
@@ -218,6 +218,14 @@ void ConfigurationDistributeur::initialiserEvenements()
                 {
                     changerLeProduit(i);
                 });
+        connect(boutonSuppressionBac[i],
+                &QPushButton::clicked,
+                this,
+                [this, i]()
+                {
+                    supprimerBac(i);
+                });
+
     }
     connect(boutonAjoutBac, SIGNAL(clicked()), this, SLOT(ajouterBac()));
 }
@@ -299,4 +307,26 @@ void ConfigurationDistributeur::connecterNouveauBac(int numeroBac)
                     changerLeProduit(i);
                 });
     }
+}
+
+void ConfigurationDistributeur::supprimerBac(const int numeroBac)
+{
+    distributeur->supprimerBac(numeroBac);
+
+    delete labelsBac[numeroBac];
+    delete labelsProduit[numeroBac];
+    delete  labelsPrix[numeroBac];
+    delete editionsNouveauPrix[numeroBac];
+    delete choixNouveauProduit[numeroBac];
+    delete boutonsChangerPrix[numeroBac];
+    delete boutonsChangerProduit[numeroBac];
+    delete boutonSuppressionBac[numeroBac];
+    labelsBac.removeAt(numeroBac);
+    labelsProduit.removeAt(numeroBac);
+    labelsPrix.removeAt(numeroBac);
+    editionsNouveauPrix.removeAt(numeroBac);
+    choixNouveauProduit.removeAt(numeroBac);
+    boutonsChangerPrix.removeAt(numeroBac);
+    boutonsChangerProduit.removeAt(numeroBac);
+    boutonSuppressionBac.removeAt(numeroBac);
 }

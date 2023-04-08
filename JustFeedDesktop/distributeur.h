@@ -89,6 +89,7 @@ class Distributeur
     void setDescription(const QString& description);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
+    void supprimerBac(const int numerobacASupprimer);
 };
 
 #endif // DISTRIBUTEUR_H
