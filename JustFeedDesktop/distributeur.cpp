@@ -299,14 +299,18 @@ void Distributeur::setDateMiseEnService(const QDate& dateMiseEnService)
 
 /**
  * @brief Mutateur de l'attribut description
- * @param description un QString qui détermine la description du
- * distributeur
+ * @param description
  */
 void Distributeur::setDescription(const QString& description)
 {
     this->description = description;
 }
 
+/**
+ * @brief Mutateur de l'attribut produit
+ * @param numeroBac
+ * @param prix
+ */
 void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 {
     if(numeroBac >= 0 && numeroBac < bacs.size())
@@ -322,11 +326,17 @@ void Distributeur::ajouterBac(const Bac& bac)
     bacs.push_back(new Bac(bac));
 }
 
+/**
+ * @brief supprime un bac dans le distributeur
+ * @param numerobacASupprimer
+ */
 void Distributeur::supprimerBac(const int numerobacASupprimer)
 {
     if(numerobacASupprimer >= 0 && numerobacASupprimer < bacs.size())
     {
         delete bacs[numerobacASupprimer];
         bacs.removeAt(numerobacASupprimer);
+        qDebug() << Q_FUNC_INFO << "supprimerBac" << bacs.size()<< "NbBacs"
+                 ;
     }
 }

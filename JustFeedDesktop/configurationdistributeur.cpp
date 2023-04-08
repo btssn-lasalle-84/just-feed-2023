@@ -245,6 +245,7 @@ int ConfigurationDistributeur::instancierNouveauBac()
     choixNouveauProduit.push_back(new QComboBox(this));
     boutonsChangerPrix.push_back(new QPushButton(this));
     boutonsChangerProduit.push_back(new QPushButton(this));
+    boutonSuppressionBac.push_back(new QPushButton(this));
     return (distributeur->getNbBacs() - 1);
 }
 
@@ -263,6 +264,7 @@ void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
     editionsNouveauPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     boutonsChangerPrix[numeroBac]->setText("changer prix");
     boutonsChangerProduit[numeroBac]->setText("changer produit");
+    boutonSuppressionBac[numeroBac]->setText("supprimer");
     for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
     {
         choixNouveauProduit[numeroBac]->addItem(ihmJustFeed->getNomProduit(j));
@@ -282,6 +284,7 @@ void ConfigurationDistributeur::positionnerNouveauBac(int numeroBac)
     layoutBac->addWidget(labelsPrix[numeroBac]);
     layoutBac->addWidget(editionsNouveauPrix[numeroBac]);
     layoutBac->addWidget(boutonsChangerPrix[numeroBac]);
+    layoutBac->addWidget(boutonSuppressionBac[numeroBac]);
     layoutBacs->addLayout(layoutBac);
 }
 
@@ -306,13 +309,24 @@ void ConfigurationDistributeur::connecterNouveauBac(int numeroBac)
                 {
                     changerLeProduit(i);
                 });
+        connect(boutonSuppressionBac[i],
+                &QPushButton::clicked,
+                this,
+                [this, i]()
+                {
+                    supprimerBac(i);
+                });
+
     }
 }
 
+/**
+ * @brief méthode qui supprime un bac
+ * @param numeroBac
+ */
 void ConfigurationDistributeur::supprimerBac(const int numeroBac)
 {
     distributeur->supprimerBac(numeroBac);
-
     delete labelsBac[numeroBac];
     delete labelsProduit[numeroBac];
     delete  labelsPrix[numeroBac];
@@ -329,4 +343,10 @@ void ConfigurationDistributeur::supprimerBac(const int numeroBac)
     boutonsChangerPrix.removeAt(numeroBac);
     boutonsChangerProduit.removeAt(numeroBac);
     boutonSuppressionBac.removeAt(numeroBac);
+
+    for(int i = 0; i < distributeur->getNbBacs(); i++)
+    {
+        labelsBac[i]->setText("Bac numéro : " + QString::number(i));
+    }
+
 }
