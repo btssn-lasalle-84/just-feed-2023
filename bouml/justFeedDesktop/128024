@@ -1,0 +1,3577 @@
+format 224
+"JustFeedDesktop" // JustFeedDesktop
+  revision 6
+  modified_by 42 "tv"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "JustFeedDesktop/"
+  cpp_src_dir "JustFeedDesktop/"
+  classview 128024 "JustFeedDesktop"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 128024 "Communication"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class       Communication
+@brief       Définition de la classe Communication.
+@detail      La classe Communication \\c Cette classe permet ...
+"
+      operation 128024 "Communication"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe bac
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Constructeur par défault de la classe Communication
+@see Distributeur
+"
+      end
+
+      operation 128152 "~Communication"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe bac
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "@brief Destructeur par défault de la classe Communication
+@see Distributeur
+"
+      end
+    end
+
+    class 128152 "Produit"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 135082 "nom"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< nom du produit"
+      end
+
+      attribute 142506 "marque"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< marque du produit"
+      end
+
+      attribute 142634 "description"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< description du produit"
+      end
+
+      attribute 142762 "codeProduit"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< code EAN 13 du produit"
+      end
+
+      attribute 134954 "prix"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< prix au 100 grammes du produit"
+      end
+
+      operation 136362 "Produit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe produit
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} : nom(\"\"), marque(\"\"), description(\"\"), codeProduit(\"\"), prix(0.)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136490 "Produit"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param in name "nom" explicit_type "QString"
+	  param in name "marque" explicit_type "QString"
+	  param in name "description" explicit_type "QString"
+	  param in name "codeProduit" explicit_type "QString"
+	  param in name "prix" explicit_type "double"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief destructeur par défaut de la classe produit
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)} :
+    nom(nom),
+    marque(marque), description(description), codeProduit(codeProduit), prix(prix)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136618 "~Produit"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 136874 "getNom"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut nom
+//@return un QString qui permet de connaitre le nom du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 145706 "getMarque"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut marque
+//@return un QString qui permet de connaitre la marque du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145834 "getDescription"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut descriptio,
+//@return un QString qui permet de connaitre la description du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145962 "getCodeProduit"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut codeProduit
+//@return QString le code du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136746 "getPrix"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut prix
+//@return un double qui permet de connaitre le prix du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137130 "setNom"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "nom" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut nom
+//@param nom un QString qui affecte le nom du
+//produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Mutateurs"
+      end
+
+      operation 146090 "setMarque"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "marque" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut la marque
+//@param marque un QString qui affecte la marque du
+//produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 146218 "setDescription"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "description" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut description
+//@param description un doucle qui affecte la description du
+//produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 146346 "setCodeProduit"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "codeProduit" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut code produit
+//@param codeProduit QString le code produit du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 137002 "setPrix"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "prix" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut prix
+//@param prix un doucle qui affecte le prix du
+//produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128280 "Localisation"
+      visibility package stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@struct Localisation
+@brief Pour localiser un distributeur
+"
+      attribute 128024 "latitude"
+	public explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 128152 "longitude"
+	public explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 150698 "atitude"
+	public explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128408 "Distributeur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class       Distributeur
+@brief       Déclaration de la classe Distributeur.
+@details     La classe Distributeur \\c Cette classe permet ...
+"
+      attribute 141610 "deviceID"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< identifiant du distributeur"
+      end
+
+      classrelation 128152 // position (<directional composition>)
+	relation 128152 *-->
+	  a role_name "position" multiplicity "1" private
+	    comment "!< géolocalisation du distributeur"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 128152 // position (<directional composition>)
+	  b parent class_ref 128280 // Localisation
+      end
+
+      classrelation 134698 // bacs (<directional composition>)
+	relation 134698 *-->
+	  stereotype "QVector"
+	  a role_name "bacs" private
+	    comment "!< les bacs du distributeur"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 134698 // bacs (<directional composition>)
+	  b parent class_ref 134570 // Bac
+      end
+
+      attribute 141738 "nom"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< nom du distributeur"
+      end
+
+      attribute 141866 "adresse"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< adresse du distributeur"
+      end
+
+      attribute 141994 "codePostal"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< code postal du distributeur"
+      end
+
+      attribute 142122 "ville"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< ville du distributeur"
+      end
+
+      attribute 142250 "dateMiseEnService"
+	private explicit_type "QDate"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< date de mise en service du distributeur"
+      end
+
+      attribute 142378 "description"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< description du distributeur"
+      end
+
+      attribute 150826 "hygrometrie"
+	private explicit_type "float"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< hygrometrie de l'interieur du distributeur"
+      end
+
+      attribute 128664 "hydrometrie"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< hydrométrie de l'interieur du distributeur"
+      end
+
+      attribute 128792 "aIntervenir"
+	private explicit_type "bool"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< permet de savoir s'il faut intervenir sur le"
+      end
+
+      operation 128280 "Distributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe Distributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} :
+    deviceID(\"\"), position(), bacs(), nom(\"\"), adresse(\"\"), codePostal(\"\"), ville(\"\"),
+    dateMiseEnService(QDate::currentDate()), description(\"\"), hygrometrie(0), aIntervenir(false)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+	comment "!< distributeur"
+      end
+
+      operation 128408 "Distributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 8
+	  param in name "deviceID" explicit_type "QString"
+	  param in name "position" type class_ref 128280 // Localisation
+	  param in name "nom" explicit_type "QString"
+	  param in name "adresse" explicit_type "QString"
+	  param in name "codePostal" explicit_type "QString"
+	  param in name "ville" explicit_type "QString"
+	  param in name "description" explicit_type "QString"
+	  param in name "dateMiseEnService" explicit_type "QDate"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}, ${t6} ${p6}${v6}, ${t7} ${p7}${v7}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur d'initialisation de la classe Distributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}, ${t7} ${p7}${)} :
+    deviceID(deviceID),
+    position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
+    aIntervenir(false)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128536 "~Distributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Distributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 143658 "getdeviceID"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut identifiant
+//@return un QString qui represente l'identifiant du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 129048 "getPosition"
+	preserve_cpp_body_indent const public return_type class_ref 128280 // Localisation
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut position
+//@return une Localisaton qui represente la géolocalisation du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129432 "getAIntervenir"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut AIntervenir
+//@return un bool qui permet de savoir s'il faut intervenir sur le
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162346 "getHygrometrie"
+	preserve_cpp_body_indent const public explicit_return_type "float"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut hygrometrie
+//@return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air
+//humide du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128920 "getHydrometrie"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut hydrometrie
+//@return un entier qui represente le degré d'humidité dans le
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 143786 "getNom"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut nom
+//@return un QString qui permet de connaitre le nom du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 143914 "getAdresse"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut adresse
+//@return un QString qui permet de connaitre l'adresse du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144042 "getCodePostal"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut codePostal
+//@return QString le code postal du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144170 "getVille"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut ville
+//@return QString la ville où est implanté le distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144298 "getDateMiseService"
+	preserve_cpp_body_indent const public explicit_return_type "QDate"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut dateMiseEnService
+//@return QDate la date de mise en service du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144426 "getDescription"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut description
+//@return QString  qui permet de connaitre la description du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 152874 "getNomProduitBac"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer le nom du produit dans le bac voulu
+//@return QString  qui permet de connaitre le nom du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153002 "getProduitPrix"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer le prix du produit dans le bac voulu
+//@return double qui permet de connaitre le prix du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153130 "getProduitBac"
+	preserve_cpp_body_indent const public return_type class_ref 128152 // Produit
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer le produit dans le bac voulu
+//@return Produit qui permet de connaitre le produit
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162474 "getBac"
+	preserve_cpp_body_indent const public return_type class_ref 134570 // Bac
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer un bac
+//@return Bac
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153258 "getNbBacs"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur pour récupérer le produit dans le bac voulu
+//@return Produit qui permet de connaitre le produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162602 "setDeviceID"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "deviceID" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut identifiant
+//@param identifiant du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " mutateurs"
+      end
+
+      operation 162730 "setHygrometrie"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "Hygrometrie" explicit_type "float"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut Hygrometrie
+//@param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129816 "setPosition"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "localisation" type class_ref 128280 // Localisation
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut localisation
+//@param localisation la localisation du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130200 "setAIntervenir"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "aIntervenir" explicit_type "bool"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut aIntervenir
+//@param aIntervenir un booleen qui détermine l'état du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144682 "setNom"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "nom" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut nom
+//@param nom un QString qui détermine le nom du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144810 "setAdresse"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "adresse" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut adresse
+//@param adresse un QString qui détermine l'e nom'adresse du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144938 "setCodePostal"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "codePostal" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut codePostal
+//@param codePostal QString
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145066 "setVille"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "ville" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut ville
+//@param ville un QString qui détermine la ville du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145194 "setDateMiseEnService"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "dateMiseEnService" explicit_type "QDate"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut dateMiseEnService
+//@param dateMiseEnService un QTime qui détermine la date de mise en place du
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145322 "setDescription"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "description" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut description
+//@param description
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153386 "setPrixProduit"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 2
+	  param in name "numeroBac" explicit_type "int"
+	  param in name "prix" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}, const ${t1} & ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut produit
+//@param numeroBac
+//@param prix
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}, const ${t1} & ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 136234 "ajouterBac"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "bac" type class_ref 134570 // Bac
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Ajoute un bac dans le distributeur
+//@param bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162858 "supprimerBac"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBacASupprimer" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Supprime un bac dans le distributeur
+//@param numeroBacASupprimer
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 144554 "setdeviceID"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "deviceID" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut identifiant
+//@param identifiant du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " mutateurs"
+      end
+
+      operation 129688 "setHydrometrie"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "hydrometrie" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut hydrométrie
+//@param hydrometrie l'hydrometrie du distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128536 "IHMJustFeed"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class       IHMJustFeed
+@brief       Déclaration de la classe IHMJustFeed.
+@details     La classe IHMJustFeed \\c Cette classe permet de définir la GUI
+de l'application JustFeed
+"
+      classrelation 128280 // <generalisation>
+	relation 128280 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128280 // <generalisation>
+	  b parent class_ref 128664 // typedef1
+      end
+
+      extra_member 128024 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      classrelation 141226 // distributeurs (<unidirectional association>)
+	relation 141226 --->
+	  stereotype "QVector"
+	  a role_name "distributeurs" private
+	    comment "!< les distributeur"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 141226 // distributeurs (<unidirectional association>)
+	  b parent class_ref 128408 // Distributeur
+      end
+
+      classrelation 148138 // produits (<unidirectional association>)
+	relation 148138 --->
+	  stereotype "QVector"
+	  a role_name "produits" private
+	    comment "!< les produits"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 148138 // produits (<unidirectional association>)
+	  b parent class_ref 128152 // Produit
+      end
+
+      attribute 150954 "numeroDistributeurSelectionne"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< le distributeur sélectionné"
+      end
+
+      classrelation 148266 // configurationDistributeur (<unidirectional association>)
+	relation 148266 --->
+	  a role_name "configurationDistributeur" private
+	    comment "!< la boîte de dialogue pour configurer un distributeur"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148266 // configurationDistributeur (<unidirectional association>)
+	  b parent class_ref 141098 // ConfigurationDistributeur
+      end
+
+      attribute 151082 "listeDistributeurs"
+	private explicit_type "QComboBox"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Widgets
+!< liste de distributeurs"
+      end
+
+      attribute 151210 "boutonConfigurationDistributeur"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton de configuration d'un distributeur"
+      end
+
+      operation 145450 "initialiserGUI"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes privées
+//
+//@brief méthode qui initialise la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162986 "instancierWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163114 "initialiserWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163242 "positionnerWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne les widgets dans la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163370 "initialiserEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les connexion signal/slot
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145578 "initialiserDistributeurs"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les distributeurs avec les bacs et les produits
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163498 "initialiserProduits"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les différents produits disponibles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130328 "IHMJustFeed"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param inout name "parent" explicit_type "QWidget"
+	    defaultvalue "nullptr"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief constructeur par défaut de la classe IHMJustFeed
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} : QWidget(parent), configurationDistributeur(nullptr)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130456 "~IHMJustFeed"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief destructeur de la classe IHMJustFeed
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163626 "getProduit"
+	preserve_cpp_body_indent const public return_type class_ref 128152 // Produit
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le produit
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163754 "getNomProduit"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le nom du produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 163882 "getPrixProduit"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 1
+	  param in name "index" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le prix de produit
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164010 "getNbProduits"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui retourne le nombre de produits disponibles
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 134570 "slots"
+	
+	cpp "  private slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 164138 "configurerDistributeur"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes publiques
+// Slots
+//
+//@brief méthode qui configure un distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 164266 "selectionnerDistributeur"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroDistributeur" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui sélectionne un distributeur à configurer
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153514 "instancierWigets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Méthode qui instancie les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153642 "initialiserWigets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Méthode qui initialise les widgets de la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 153770 "positionnerWigets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Méthode qui positionne les widgets dans la GUI
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128664 "typedef1"
+      visibility package stereotype "typedef" explicit_base_type "QWidget"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 128792 "Intervention"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 128920 "heureIntervention"
+	private explicit_type "QTime"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< heure de l'intervention"
+      end
+
+      attribute 129048 "numeroIntervention"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< numéro qui identifie l'intervention"
+      end
+
+      attribute 129176 "tempsTrajet"
+	private explicit_type "QTime"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< temps de trajet vers le distributeur"
+      end
+
+      attribute 129304 "poidsARemplir"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< poids à prévoir pour remplir le distributeur"
+      end
+
+      operation 130584 "Intervention"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} :
+    heureIntervention(), numeroIntervention(0), tempsTrajet(), poidsARemplir(0.)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130712 "Intervention"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "heureIntervention" explicit_type "QTime"
+	  param in name "numeroIntervention" explicit_type "int"
+	  param in name "tempsTrajet" explicit_type "QTime"
+	  param in name "poidsARemplir" explicit_type "double"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur d'initialisation de la classe Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)} :
+    heureIntervention(heureIntervention),
+    numeroIntervention(numeroIntervention), tempsTrajet(tempsTrajet),
+    poidsARemplir(poidsARemplir)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130840 "~Intervention"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130968 "getHeureIntervention"
+	preserve_cpp_body_indent const public explicit_return_type "QTime"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut heureIntervention
+//@return QTime représente l'heure de l'intervention sur le distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 131096 "getNumeroIntervention"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut numeroIntervention
+//@return un entier qui représente le numéro de l'intervention sur le
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131224 "getTempsTrajet"
+	preserve_cpp_body_indent const public explicit_return_type "QTime"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut tempsTrajet
+//@return QTime représente le temps de trajet entre lui et le distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131352 "getPoidsARemplir"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut poidsARemplir
+//@return un float qui represente le poids que doit prendre le technicien pour
+//remplir le distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131480 "setHeureIntervention"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "heureIntervention" explicit_type "QTime"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut heureIntervention
+//@param heureIntervention l'heure à laquel le technicien doit intervenir
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Mutateurs"
+      end
+
+      operation 131608 "setNumeroIntervention"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "numeroIntervention" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut numeroIntervention
+//@param numeroIntervention le numero d'intervention
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131736 "setTempsTrajet"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "tempsTrajet" explicit_type "QTime"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut tempsTrajet
+//@param tempsTrajet le temps de trajet
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131864 "setPoidsARemplir"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "poidsARemplir" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut poidsARemplir
+//@param poidsARemplir le poids que le technicien doit prendre pour remplir le
+//distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128920 "Serveur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 129432 "port"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< port du serveur"
+      end
+
+      attribute 129560 "hostName"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< name du serveur"
+      end
+
+      attribute 129688 "utilisateur"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< ulisateur du serveur"
+      end
+
+      attribute 129816 "motDePasse"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< mot de passe du serveur"
+      end
+
+      operation 131992 "Serveur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe Serveur
+//@see Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} : port(0), hostName(\"\"), utilisateur(\"\"), motDePasse(\"\")
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132120 "Serveur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 4
+	  param in name "port" explicit_type "int"
+	  param in name "hostName" explicit_type "QString"
+	  param in name "utilisateur" explicit_type "QString"
+	  param in name "motDePasse" explicit_type "QString"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur d'initialisation de la classe Serveur
+//@see Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)} :
+    port(port),
+    hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132248 "~Serveur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Serveur
+//@see Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132376 "getPort"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut port
+//@return un entier qui represente le port du serveur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 132504 "getHostName"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut hostName
+//@return un QString
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132632 "getUtilisateur"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut utilisateur
+//@return un QString
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132760 "getMotDePasse"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut motDePasse
+//@return un QString
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 132888 "setPort"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "port" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut port
+//@param port le port du serveur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Mutateurs"
+      end
+
+      operation 133016 "setHostName"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "hostName" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut hostName
+//@param hostname
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133144 "setUtilisateur"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "utilisateur" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut utilisateur
+//@param utilisateur le nom de l'utilisateur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133272 "setMotDePasse"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "motDePasse" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut motDePasse
+//@param motDePasse le mot de passe
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 129048 "Statistiques"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      attribute 129944 "frequenceIntervetion"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< frequence d'intervention pour chaque bac"
+      end
+
+      attribute 130072 "poidsMoyenProduits"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< poids moyen à prendre pour remplir un bac"
+      end
+
+      attribute 130200 "moyenneKilometres"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< kilometres moyen lors d'une intervention"
+      end
+
+      operation 133400 "Statistiques"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe Serveur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} :
+    frequenceIntervetion(0), poidsMoyenProduits(0), moyenneKilometres(0)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133528 "Statistiques"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param in name "frequenceIntervetion" explicit_type "int"
+	  param in name "poidsMoyenProduits" explicit_type "int"
+	  param in name "moyenneKilometres" explicit_type "int"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur d'initialisation de la classe Serveur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    frequenceIntervetion(frequenceIntervetion),
+    poidsMoyenProduits(poidsMoyenProduits), moyenneKilometres(moyenneKilometres)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133656 "~Statistiques"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Serveur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 133784 "getFrequenceIntervetion"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut frequenceIntervetion
+//@return un entier
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 133912 "getPoidsMoyenProduits"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut poidsMoyenProduits
+//@return un entier
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134040 "getMoyenneKilometres"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut poidsMoyenProduits
+//@return un entier
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134168 "setFrequenceIntervetion"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "frequenceIntervetion" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut frequenceIntervetion
+//@param il prend en argument la frequence d'intervention
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Mutateurs"
+      end
+
+      operation 134296 "setPoidsMoyenProduits"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "poidsMoyenProduits" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut poidsMoyenProduits
+//@param il prend en argument le poids moyen du produits concerné
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134424 "setMoyenneKilometres"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "moyenneKilometres" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut moyenneKilometres
+//@param il prend en argument la moyenne des kilometres effectués par le/les
+//techniciens
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 134570 "Bac"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 134570 // produit (<unidirectional association>)
+	relation 134570 --->
+	  a role_name "produit" private
+	    comment "!< produit que contient le bac"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 134570 // produit (<unidirectional association>)
+	  b parent class_ref 128152 // Produit
+      end
+
+      attribute 134570 "poidsActuel"
+	private explicit_type "uint"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< à définir"
+      end
+
+      attribute 134698 "pourcentageRemplissage"
+	private explicit_type "double"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< pourcentage de remplissage du bu bac"
+      end
+
+      operation 134570 "Bac"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur par défaut de la classe Bac
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)} : produit(nullptr), poidsActuel(0), pourcentageRemplissage(0.)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134698 "Bac"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 3
+	  param inout name "produit" type class_ref 128152 // Produit
+	  param in name "poidsActuel" explicit_type "uint"
+	  param in name "pourcentageRemplissage" explicit_type "double"
+	    defaultvalue "100."
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} * ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur d'initialisation du bac
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}, ${t1} ${p1}, ${t2} ${p2}${)} :
+    produit(produit), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134826 "Bac"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "bac" type class_ref 134570 // Bac
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} & ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur de copie
+//
+
+${inline}${typeprefix}${class}::${name}${(}const ${t0} & ${p0}${)} :
+    produit(bac.produit), poidsActuel(bac.poidsActuel),
+    pourcentageRemplissage(bac.pourcentageRemplissage)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 134954 "~Bac"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Destructeur de la classe Bac
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135082 "getProduit"
+	preserve_cpp_body_indent const public return_type class_ref 128152 // Produit
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} * ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut produit
+//@return un Produits qui represente le produit que contient le
+//bac
+//
+
+${inline}${typeprefix}${type} * ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Accesseurs"
+      end
+
+      operation 135210 "getNomProduit"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne le nom du produit
+//@return le nom du Produit que contient le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135338 "getPrixProduit"
+	preserve_cpp_body_indent const public explicit_return_type "double"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne le prix du produit
+//@return le prix du produit que contient le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135466 "getPoidsActuel"
+	preserve_cpp_body_indent const public explicit_return_type "uint"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut poidsActuel
+//@return un entier qui represente le poids actuel dans le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135594 "setProduit"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param inout name "produit" type class_ref 128152 // Produit
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut Produit
+//@param produit le poduit que contient le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+	comment " Mutateurs"
+      end
+
+      operation 135722 "setNomProduit"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "nomProduit" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Modifie le nom du produit
+//@param nomProduit le nom de produit que contient le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135850 "setPrixProduit"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "prixProduit" explicit_type "double"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Modifie le prix du produit
+//@param prixProduit le prix du produit que contient le bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 135978 "setPoidsActuel"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "poidsActuel" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut poidsActuel
+//@param poidsActuel le poids actuel du bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 141098 "ConfigurationDistributeur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class       ConfigurationDistributeur
+@brief       Déclaration de la classe ConfigurationDistributeur.
+@details     La classe ConfigurationDistributeur \\c Cette classe permet de définir la
+configuration d'un distributeur
+"
+      classrelation 147754 // <generalisation>
+	relation 147754 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 147754 // <generalisation>
+	  b parent class_ref 141226 // typedef2
+      end
+
+      extra_member 141098 "Q_OBJECT"
+	
+	cpp "  Q_OBJECT" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      classrelation 147882 // distributeur (<unidirectional association>)
+	relation 147882 --->
+	  a role_name "distributeur" private
+	    comment "!< le distributeur à configurer"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 147882 // distributeur (<unidirectional association>)
+	  b parent class_ref 128408 // Distributeur
+      end
+
+      classrelation 148010 // ihmJustFeed (<unidirectional association>)
+	relation 148010 --->
+	  a role_name "ihmJustFeed" private
+	    comment "!< l'ihm principale"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	    classrelation_ref 148010 // ihmJustFeed (<unidirectional association>)
+	  b parent class_ref 128536 // IHMJustFeed
+      end
+
+      attribute 149290 "nomDistributeur"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " Widgets
+!< nom du distributeur et son numero"
+      end
+
+      attribute 149418 "labelsBac"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de bac"
+      end
+
+      attribute 149546 "labelsProduit"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de produit"
+      end
+
+      attribute 149674 "labelsPrix"
+	private explicit_type "QLabel*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLabel de prix"
+      end
+
+      attribute 149802 "boutonAjoutBac"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton pour ajouter un bac"
+      end
+
+      attribute 149930 "boutonSuppressionBac"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< bouton supprimer pour chaque bac"
+      end
+
+      attribute 150058 "editionsNouveauPrix"
+	private explicit_type "QDoubleSpinBox*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de QLineEdit de etidion prix"
+      end
+
+      attribute 150186 "choixNouveauProduit"
+	private explicit_type "QComboBox*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de listes déroulantes pour choisir un produit du bac"
+      end
+
+      attribute 150314 "boutonsChangerPrix"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de boutons pour changer le prix"
+      end
+
+      attribute 150442 "boutonsChangerProduit"
+	private explicit_type "QPushButton*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< conteneur de boutons changer le produit"
+      end
+
+      attribute 150570 "layoutBacs"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< positionnement des bacs dans la boîte de dialogue"
+      end
+
+      operation 160298 "initialiserBoiteDeDialogue"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Méthodes privées
+//
+//@brief méthode qui initialise la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160426 "instancierWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie les widgets de la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160554 "initialiserWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les widgets de la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160682 "positionnerWidgets"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne les widgets dans la boîte de dialogue
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160810 "initialiserEvenements"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise les connexions signal/slot
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 160938 "instancierNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui instancie un nouveau bac
+//@return int le numéro du nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161066 "initialiserNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui initialise le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161194 "positionnerNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui positionne le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161322 "connecterNouveauBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui connecte le nouveau bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161450 "ConfigurationDistributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 2
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	  param inout name "parent" type class_ref 128536 // IHMJustFeed
+	    defaultvalue "0"
+	cpp_decl "    ${comment}${inline}explicit ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief constructeur par défaut de la classe ConfigurationDistributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}${)} :
+    QDialog(parent),
+    distributeur(distributeur), ihmJustFeed(parent)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161578 "~ConfigurationDistributeur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief destructeur de la classe ConfigurationDistributeur
+//
+
+${inline}${typeprefix}${class}::${name}${(}${)}${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      extra_member 141226 "slots"
+	
+	cpp "  private slots:" ""
+	java ""
+	php ""
+	python ""
+	idl ""
+	mysql ""
+      end
+
+      operation 161706 "selectionnerNouveauProduit"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "// Slots
+//
+//@brief méthode qui sélectionne un produit dans la liste
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161834 "changerLePrix"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 161962 "changerLeProduit"
+	private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162090 "ajouterBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui ajoute un bac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 162218 "supprimerBac"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param in name "numeroBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode qui supprime un bac
+//@param numeroBac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 141226 "typedef2"
+      visibility package stereotype "typedef" explicit_base_type "QDialog"
+      cpp_decl "${comment}typedef ${type} ${name};
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+  end
+
+  deploymentview 128024 "JustFeedDesktop"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128024 "communication"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128024 // Communication
+      end
+    end
+
+    artifact 128152 "distributeur"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128280 // Localisation
+	class_ref 128408 // Distributeur
+      end
+    end
+
+    artifact 128280 "ihmjustfeed"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128536 // IHMJustFeed
+      end
+    end
+
+    artifact 128408 "intervention"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128792 // Intervention
+      end
+    end
+
+    artifact 128536 "serveur"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128920 // Serveur
+      end
+    end
+
+    artifact 128664 "statistiques"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 129048 // Statistiques
+      end
+    end
+
+    artifact 128792 "main"
+      stereotype "source"
+      cpp_src "int main(int argc, char *argv[])
+{
+    QApplication a(argc, argv);
+    IHMJustFeed w;
+    w.show();
+    return a.exec();
+}
+"
+      associated_elems
+      end
+    end
+
+    artifact 134570 "bac"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134570 // Bac
+      end
+    end
+
+    artifact 134698 "produit"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128152 // Produit
+      end
+    end
+
+    artifact 141226 "configurationdistributeur"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 141226 // typedef2
+	class_ref 141098 // ConfigurationDistributeur
+      end
+    end
+  end
+end

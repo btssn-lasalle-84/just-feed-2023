@@ -1,0 +1,41 @@
+format 224
+
+classcanvas 128002 class_ref 128002 // operateur
+  simpleclassdiagramsettings end
+  xyz 37 154 2000
+end
+usecasecanvas 128130 usecase_ref 128002 // lister les distributeurs
+  xyzwh 214 40 3005 64 32 label_xy 177 72
+end
+usecasecanvas 128258 usecase_ref 128130 // visualiser l'état d'un distributeur
+  xyzwh 544 38 3005 64 32 label_xy 474 70
+end
+usecasecanvas 128770 usecase_ref 128258 // réaliser une intervention
+  xyzwh 211 288 3005 73 35 label_xy 166 328
+end
+usecasecanvas 128898 usecase_ref 128386 // visualiser une intervention
+  xyzwh 463 305 3005 64 32 label_xy 410 337
+end
+usecasecanvas 131074 usecase_ref 134914 // dialoguer avec un distributeur
+  xyzwh 470 189 3005 64 32 label_xy 406 221
+end
+usecasecanvas 131458 usecase_ref 135042 // valider une intervention
+  xyzwh 361 454 3005 64 32 label_xy 317 486
+end
+line 130306 ----
+  from ref 128002 z 3006 to ref 128130
+simplerelationcanvas 130434 simplerelation_ref 128002
+  from ref 128258 z 3006 stereotype "<<extend>>" xyz 369.5 65.5 3000 to ref 128130
+end
+line 130818 ----
+  from ref 128770 z 3006 to ref 128002
+simplerelationcanvas 130946 simplerelation_ref 128130
+  from ref 128770 z 3006 stereotype "<<include>>" xyz 327 323.5 3000 to ref 128898
+end
+simplerelationcanvas 131330 simplerelation_ref 134786
+  from ref 131074 z 3006 stereotype "<<extend>>" xyz 312.5 142 3000 to ref 128130
+end
+simplerelationcanvas 131714 simplerelation_ref 134914
+  from ref 128770 z 3006 stereotype "<<include>>" xyz 244 399 3000 to ref 131458
+end
+end

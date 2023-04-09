@@ -1,0 +1,39 @@
+format 224
+
+classcanvas 128042 class_ref 128536 // IHMJustFeed
+  classdiagramsettings member_max_width 0 end
+  xyz 2714 937 2000
+end
+classcanvas 128170 class_ref 128408 // Distributeur
+  classdiagramsettings member_max_width 0 end
+  xyz 45 201 2000
+end
+classcanvas 128298 class_ref 128152 // Produit
+  classdiagramsettings member_max_width 0 end
+  xyz 1695 1807 2000
+end
+classcanvas 128426 class_ref 134570 // Bac
+  classdiagramsettings member_max_width 0 end
+  xyz 268 1871 2005
+end
+relationcanvas 128554 relation_ref 134698 // <directional composition>
+  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 931 1760 3000 to ref 128426
+  role_a_pos 993 1830 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128682 relation_ref 134570 // <unidirectional association>
+  from ref 128426 z 2006 to ref 128298
+  role_a_pos 1585 2076 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128810 relation_ref 141226 // <unidirectional association>
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1825.5 644 3000 to ref 128170
+  role_a_pos 2621 1152 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128938 relation_ref 148138 // <unidirectional association>
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2421 1678.5 3000 to ref 128298
+  role_a_pos 2706 1766 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

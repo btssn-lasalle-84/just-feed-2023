@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet just-feed:  Fichier source de bac.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet just-feed
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('bac_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">bac.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="bac_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef BAC_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define BAC_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">class </span><a class="code" href="class_produit.html">Produit</a>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_bac.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_bac.html">Bac</a></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_bac.html#a1c456bcc09ab661103d1422915231910">   19</a></span>&#160;    <a class="code" href="class_produit.html">Produit</a>*     <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>;                </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">   20</a></span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>;            </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_bac.html#a1937e0247af342c198c4e122271219f1">   21</a></span>&#160;    <span class="keywordtype">double</span>       <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac</a>(<a class="code" href="class_produit.html">Produit</a>* <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>, <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>, <span class="keywordtype">double</span> <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> = 100.);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac</a>(<span class="keyword">const</span> <a class="code" href="class_bac.html">Bac</a>&amp; bac);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_bac.html#a5d03e01610a9fcf02c54c1741721176e">~Bac</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// Accesseurs</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_produit.html">Produit</a>*     <a class="code" href="class_bac.html#af8eead2a15e95452633962ad2b7d7ad7">getProduit</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    QString      <a class="code" href="class_bac.html#a72f2f6a8cc73727e2c3a1de14806ee2c">getNomProduit</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">double</span>       <a class="code" href="class_bac.html#a0873da4f610e46901cfd8208ade527ab">getPrixProduit</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> <a class="code" href="class_bac.html#af2ccd525468a70e9630ac90317826eca">getPoidsActuel</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="comment">// Mutateurs</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_bac.html#ae652513179d9ce0a2651695dd0c87cd1">setProduit</a>(<a class="code" href="class_produit.html">Produit</a>* <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_bac.html#ad522c7898f9f7f269606e02f796babdc">setNomProduit</a>(<span class="keyword">const</span> QString&amp; nomProduit);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_bac.html#a125597de50a111fdea7a55dcea6fdfb5">setPrixProduit</a>(<span class="keyword">const</span> <span class="keywordtype">double</span>&amp; prixProduit);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_bac.html#adb49b48c04720e6a5a0310f88bc26dbc">setPoidsActuel</a>(<span class="keywordtype">int</span> <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// BAC_H</span></div>
+<div class="ttc" id="aclass_bac_html"><div class="ttname"><a href="class_bac.html">Bac</a></div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00016">bac.h:17</a></div></div>
+<div class="ttc" id="aclass_bac_html_a0873da4f610e46901cfd8208ade527ab"><div class="ttname"><a href="class_bac.html#a0873da4f610e46901cfd8208ade527ab">Bac::getPrixProduit</a></div><div class="ttdeci">double getPrixProduit() const</div><div class="ttdoc">Retourne le prix du produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00076">bac.cpp:76</a></div></div>
+<div class="ttc" id="aclass_bac_html_a125597de50a111fdea7a55dcea6fdfb5"><div class="ttname"><a href="class_bac.html#a125597de50a111fdea7a55dcea6fdfb5">Bac::setPrixProduit</a></div><div class="ttdeci">void setPrixProduit(const double &amp;prixProduit)</div><div class="ttdoc">Modifie le prix du produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00115">bac.cpp:115</a></div></div>
+<div class="ttc" id="aclass_bac_html_a1937e0247af342c198c4e122271219f1"><div class="ttname"><a href="class_bac.html#a1937e0247af342c198c4e122271219f1">Bac::pourcentageRemplissage</a></div><div class="ttdeci">double pourcentageRemplissage</div><div class="ttdoc">pourcentage de remplissage du bu bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00021">bac.h:21</a></div></div>
+<div class="ttc" id="aclass_bac_html_a1c456bcc09ab661103d1422915231910"><div class="ttname"><a href="class_bac.html#a1c456bcc09ab661103d1422915231910">Bac::produit</a></div><div class="ttdeci">Produit * produit</div><div class="ttdoc">produit que contient le bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00019">bac.h:19</a></div></div>
+<div class="ttc" id="aclass_bac_html_a5ca0aa3fc0beb247f994723c588b648e"><div class="ttname"><a href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac::Bac</a></div><div class="ttdeci">Bac()</div><div class="ttdoc">Constructeur par défaut de la classe Bac.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00016">bac.cpp:16</a></div></div>
+<div class="ttc" id="aclass_bac_html_a5d03e01610a9fcf02c54c1741721176e"><div class="ttname"><a href="class_bac.html#a5d03e01610a9fcf02c54c1741721176e">Bac::~Bac</a></div><div class="ttdeci">~Bac()</div><div class="ttdoc">Destructeur de la classe Bac.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00046">bac.cpp:46</a></div></div>
+<div class="ttc" id="aclass_bac_html_a72f2f6a8cc73727e2c3a1de14806ee2c"><div class="ttname"><a href="class_bac.html#a72f2f6a8cc73727e2c3a1de14806ee2c">Bac::getNomProduit</a></div><div class="ttdeci">QString getNomProduit() const</div><div class="ttdoc">Retourne le nom du produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00065">bac.cpp:65</a></div></div>
+<div class="ttc" id="aclass_bac_html_ad522c7898f9f7f269606e02f796babdc"><div class="ttname"><a href="class_bac.html#ad522c7898f9f7f269606e02f796babdc">Bac::setNomProduit</a></div><div class="ttdeci">void setNomProduit(const QString &amp;nomProduit)</div><div class="ttdoc">Modifie le nom du produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00105">bac.cpp:105</a></div></div>
+<div class="ttc" id="aclass_bac_html_adb49b48c04720e6a5a0310f88bc26dbc"><div class="ttname"><a href="class_bac.html#adb49b48c04720e6a5a0310f88bc26dbc">Bac::setPoidsActuel</a></div><div class="ttdeci">void setPoidsActuel(int poidsActuel)</div><div class="ttdoc">Mutateur de l'attribut poidsActuel.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00125">bac.cpp:125</a></div></div>
+<div class="ttc" id="aclass_bac_html_ae652513179d9ce0a2651695dd0c87cd1"><div class="ttname"><a href="class_bac.html#ae652513179d9ce0a2651695dd0c87cd1">Bac::setProduit</a></div><div class="ttdeci">void setProduit(Produit *produit)</div><div class="ttdoc">Mutateur de l'attribut Produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00096">bac.cpp:96</a></div></div>
+<div class="ttc" id="aclass_bac_html_af2ccd525468a70e9630ac90317826eca"><div class="ttname"><a href="class_bac.html#af2ccd525468a70e9630ac90317826eca">Bac::getPoidsActuel</a></div><div class="ttdeci">unsigned int getPoidsActuel() const</div><div class="ttdoc">Accesseur de l'attribut poidsActuel.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00087">bac.cpp:87</a></div></div>
+<div class="ttc" id="aclass_bac_html_af8eead2a15e95452633962ad2b7d7ad7"><div class="ttname"><a href="class_bac.html#af8eead2a15e95452633962ad2b7d7ad7">Bac::getProduit</a></div><div class="ttdeci">Produit * getProduit() const</div><div class="ttdoc">Accesseur de l'attribut produit.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00056">bac.cpp:56</a></div></div>
+<div class="ttc" id="aclass_bac_html_afd38fde916c18beb8efcb37c0984d170"><div class="ttname"><a href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">Bac::poidsActuel</a></div><div class="ttdeci">unsigned int poidsActuel</div><div class="ttdoc">à définir.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00020">bac.h:20</a></div></div>
+<div class="ttc" id="aclass_produit_html"><div class="ttname"><a href="class_produit.html">Produit</a></div><div class="ttdef"><b>Definition:</b> <a href="produit_8h_source.html#l00014">produit.h:15</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="bac_8h.html">bac.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet just-feed:  Fichier source de JustFeed.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet just-feed
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_just_feed_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">JustFeed.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_just_feed_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keyword">package </span>com.justfeed.justfeedandroid;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">import</span> androidx.annotation.NonNull;</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">import</span> androidx.appcompat.app.AppCompatActivity;</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">import</span> androidx.recyclerview.widget.LinearLayoutManager;</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">import</span> androidx.recyclerview.widget.RecyclerView;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">import</span> android.content.Intent;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="keyword">import</span> android.os.Bundle;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">import</span> android.os.Handler;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">import</span> android.os.Message;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">import</span> android.view.View;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">import</span> android.widget.Button;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="keyword">import</span> java.util.List;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html">   28</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html">JustFeed</a> <span class="keyword">extends</span> AppCompatActivity</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;{</div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">   33</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a> = <span class="stringliteral">&quot;_JustFeed&quot;</span>; </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ab489eb6be49c02d39bf954f3ce94c8c1">   38</a></span>&#160;    <span class="keyword">private</span> List&lt;Distributeur&gt;   <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ab489eb6be49c02d39bf954f3ce94c8c1">listeDistributeurs</a>;    </div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">   39</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">baseDeDonnees</a>;         </div>
+<div class="line"><a name="l00040"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ae2f251d90f31fa209fdb79c19ed466c9">   40</a></span>&#160;    <span class="keyword">private</span> Handler              <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ae2f251d90f31fa209fdb79c19ed466c9">handler</a> = <span class="keyword">null</span>;        <span class="comment">//&lt;! Le handler utilisé par l&#39;activité</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9b253491e5999f23a5d1cced629a87b8">   41</a></span>&#160;    <span class="keyword">private</span> RecyclerView         <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9b253491e5999f23a5d1cced629a87b8">vueListeDistributeurs</a>; </div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9c5cb02d250ae5099c4b3744c42ebe83">   42</a></span>&#160;    <span class="keyword">private</span> RecyclerView.Adapter <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9c5cb02d250ae5099c4b3744c42ebe83">adapteurDistributeur</a>;  </div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6d40ba5947b87b2790105df85f7e1fe3">   43</a></span>&#160;    <span class="keyword">private</span> RecyclerView.LayoutManager <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6d40ba5947b87b2790105df85f7e1fe3">layoutVueListeDistributeurs</a>; </div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">   48</a></span>&#160;    <span class="keyword">private</span> Button <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">boutonInterventions</a>; </div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    @Override</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a104e062e2b4a9d4cfd4814caebcff85f">   55</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a104e062e2b4a9d4cfd4814caebcff85f">onCreate</a>(Bundle savedInstanceState)</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    {</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        super.onCreate(savedInstanceState);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        setContentView(R.layout.justfeed);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onCreate()&quot;</span>);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5cc6a1f89d6343d8204bcff50939d266">initialiserHandler</a>();</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="comment">// Récupère l&#39;instance de BaseDeDonnees</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">baseDeDonnees</a>      = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a9c2484cfb87f90e46cf878eb7803abb2">getInstance</a>(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ae2f251d90f31fa209fdb79c19ed466c9">handler</a>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ab489eb6be49c02d39bf954f3ce94c8c1">listeDistributeurs</a> = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">baseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#ad8c0541cf500304a9ccdb4e6bda0edb6">recupererDistributeurs</a>();</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6768da0e4956b45b4ec19feb75e9f2f3">initialiserGUI</a>();</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#afed013c73c1bb675e6144c537c10dd3e">afficherDistributeurs</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    }</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    @Override</div>
+<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5a07b48278bae9559552e48fa7cfc259">   77</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5a07b48278bae9559552e48fa7cfc259">onStart</a>()</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        super.onStart();</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onStart()&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    @Override</div>
+<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#af66297c0502d2c761f754f40a97e2d16">   87</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#af66297c0502d2c761f754f40a97e2d16">onResume</a>()</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        super.onResume();</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onResume()&quot;</span>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    }</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    @Override</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ac99e6e7dd1822e9e3df1c753a75602eb">   98</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ac99e6e7dd1822e9e3df1c753a75602eb">onPause</a>()</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    {</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;        super.onPause();</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onPause()&quot;</span>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    @Override</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a915699c9cff3f46630375a98bc171b47">  108</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a915699c9cff3f46630375a98bc171b47">onStop</a>()</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    {</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;        super.onStop();</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onStop()&quot;</span>);</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    }</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;    @Override</div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a70a2f39467274721ff192bc771987071">  119</a></span>&#160;    <span class="keyword">protected</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a70a2f39467274721ff192bc771987071">onDestroy</a>()</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    {</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;        super.onDestroy();</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;onDestroy()&quot;</span>);</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;    }</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160; </div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6768da0e4956b45b4ec19feb75e9f2f3">  128</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6768da0e4956b45b4ec19feb75e9f2f3">initialiserGUI</a>()</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    {</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">boutonInterventions</a> = (Button)findViewById(R.id.boutonInterventions);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">boutonInterventions</a>.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            @Override</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> onClick(View vue)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;            {</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                Intent activiteIntervention =</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;                  <span class="keyword">new</span> Intent(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html">JustFeed</a>.this, <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">ActiviteInterventions</a>.class);</div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;                startActivity(activiteIntervention);</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;            }</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        });</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a425f6bf9cbe8a9f629b7036b1240a166">initialiserVueListeDistributeurs</a>();</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;    }</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a425f6bf9cbe8a9f629b7036b1240a166">  147</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a425f6bf9cbe8a9f629b7036b1240a166">initialiserVueListeDistributeurs</a>()</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    {</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        this.vueListeDistributeurs = (RecyclerView)findViewById(R.id.listeDistributeurs);</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;        this.vueListeDistributeurs.setHasFixedSize(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6d40ba5947b87b2790105df85f7e1fe3">layoutVueListeDistributeurs</a> = <span class="keyword">new</span> LinearLayoutManager(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;        this.vueListeDistributeurs.setLayoutManager(this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6d40ba5947b87b2790105df85f7e1fe3">layoutVueListeDistributeurs</a>);</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9c5cb02d250ae5099c4b3744c42ebe83">adapteurDistributeur</a> = <span class="keyword">new</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_distributeur.html">AdaptateurDistributeur</a>(this.listeDistributeurs);</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;        this.vueListeDistributeurs.setAdapter(this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9c5cb02d250ae5099c4b3744c42ebe83">adapteurDistributeur</a>);</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    }</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00160"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#afed013c73c1bb675e6144c537c10dd3e">  160</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#afed013c73c1bb675e6144c537c10dd3e">afficherDistributeurs</a>()</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    {</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;        <span class="comment">// this.adapteurDistributeur.notifyDataSetChanged();</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    }</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5cc6a1f89d6343d8204bcff50939d266">  168</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5cc6a1f89d6343d8204bcff50939d266">initialiserHandler</a>()</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    {</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;        this.handler = <span class="keyword">new</span> Handler(this.getMainLooper()) {</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;            @Override</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;            <span class="keyword">public</span> <span class="keywordtype">void</span> handleMessage(@NonNull Message message)</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;            {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;                Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] id message = &quot;</span> + message.what);</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;                Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] message = &quot;</span> + message.obj.toString());</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordflow">switch</span>(message.what)</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;                {</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#aab98aec3bb9b8cfe5fbea7d2635d39d9">CONNEXION_OK</a>:</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] CONNEXION_OK&quot;</span>);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a2f15da7e935b2a387b3d7f232eee2958">CONNEXION_ERREUR</a>:</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] CONNEXION_ERREUR&quot;</span>);</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a382542377dc8ad6d9329b21c134ae6d8">DECONNEXION_OK</a>:</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] DECONNEXION_OK&quot;</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a0941352a985f87154daee19796c6fa5b">DECONNEXION_ERREUR</a>:</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] DECONNEXION_ERREUR&quot;</span>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a65e97bec39ea59185298eb4b78a5d685">REQUETE_SQL_OK</a>:</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] REQUETE_SQL_OK&quot;</span>);</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a2db8c02e489dd47dcfedfd52aec657da">REQUETE_SQL_ERREUR</a>:</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] REQUETE_SQL_ERREUR&quot;</span>);</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;                    <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a7a1372a1f2eb42bf401bfda97aa76cce">REQUETE_SQL_SELECT</a>:</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;                        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">TAG</a>, <span class="stringliteral">&quot;[Handler] REQUETE_SQL_SELECT&quot;</span>);</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                        <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                }</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            }</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        };</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    }</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;}</div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">com.justfeed.justfeedandroid.ActiviteInterventions</a></div><div class="ttdoc">Définition de la classe ActiviteInterventions.</div><div class="ttdef"><b>Definition:</b> <a href="_activite_interventions_8java_source.html#l00024">ActiviteInterventions.java:25</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_distributeur_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_distributeur.html">com.justfeed.justfeedandroid.AdaptateurDistributeur</a></div><div class="ttdoc">Définition de la classe AdaptateurDistributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_adaptateur_distributeur_8java_source.html#l00026">AdaptateurDistributeur.java:27</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html">com.justfeed.justfeedandroid.BaseDeDonnees</a></div><div class="ttdoc">Classe BaseDeDonnees.</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00039">BaseDeDonnees.java:40</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a0941352a985f87154daee19796c6fa5b"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a0941352a985f87154daee19796c6fa5b">com.justfeed.justfeedandroid.BaseDeDonnees.DECONNEXION_ERREUR</a></div><div class="ttdeci">static final int DECONNEXION_ERREUR</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00048">BaseDeDonnees.java:48</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a2db8c02e489dd47dcfedfd52aec657da"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a2db8c02e489dd47dcfedfd52aec657da">com.justfeed.justfeedandroid.BaseDeDonnees.REQUETE_SQL_ERREUR</a></div><div class="ttdeci">static final int REQUETE_SQL_ERREUR</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00050">BaseDeDonnees.java:50</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a2f15da7e935b2a387b3d7f232eee2958"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a2f15da7e935b2a387b3d7f232eee2958">com.justfeed.justfeedandroid.BaseDeDonnees.CONNEXION_ERREUR</a></div><div class="ttdeci">static final int CONNEXION_ERREUR</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00046">BaseDeDonnees.java:46</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a382542377dc8ad6d9329b21c134ae6d8"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a382542377dc8ad6d9329b21c134ae6d8">com.justfeed.justfeedandroid.BaseDeDonnees.DECONNEXION_OK</a></div><div class="ttdeci">static final int DECONNEXION_OK</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00047">BaseDeDonnees.java:47</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a65e97bec39ea59185298eb4b78a5d685"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a65e97bec39ea59185298eb4b78a5d685">com.justfeed.justfeedandroid.BaseDeDonnees.REQUETE_SQL_OK</a></div><div class="ttdeci">static final int REQUETE_SQL_OK</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00049">BaseDeDonnees.java:49</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a7a1372a1f2eb42bf401bfda97aa76cce"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a7a1372a1f2eb42bf401bfda97aa76cce">com.justfeed.justfeedandroid.BaseDeDonnees.REQUETE_SQL_SELECT</a></div><div class="ttdeci">static final int REQUETE_SQL_SELECT</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00051">BaseDeDonnees.java:51</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_a9c2484cfb87f90e46cf878eb7803abb2"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a9c2484cfb87f90e46cf878eb7803abb2">com.justfeed.justfeedandroid.BaseDeDonnees.getInstance</a></div><div class="ttdeci">static synchronized BaseDeDonnees getInstance()</div><div class="ttdoc">Retourne l'instance BaseDeDonnees.</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00089">BaseDeDonnees.java:89</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_aab98aec3bb9b8cfe5fbea7d2635d39d9"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#aab98aec3bb9b8cfe5fbea7d2635d39d9">com.justfeed.justfeedandroid.BaseDeDonnees.CONNEXION_OK</a></div><div class="ttdeci">static final int CONNEXION_OK</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00045">BaseDeDonnees.java:45</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_html_ad8c0541cf500304a9ccdb4e6bda0edb6"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#ad8c0541cf500304a9ccdb4e6bda0edb6">com.justfeed.justfeedandroid.BaseDeDonnees.recupererDistributeurs</a></div><div class="ttdeci">List&lt; Distributeur &gt; recupererDistributeurs()</div><div class="ttdoc">Méthode qui retourne une liste de distributeurs de la BDD.</div><div class="ttdef"><b>Definition:</b> <a href="_base_de_donnees_8java_source.html#l00612">BaseDeDonnees.java:612</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html">com.justfeed.justfeedandroid.JustFeed</a></div><div class="ttdoc">L'activité principale.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00028">JustFeed.java:29</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a104e062e2b4a9d4cfd4814caebcff85f"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a104e062e2b4a9d4cfd4814caebcff85f">com.justfeed.justfeedandroid.JustFeed.onCreate</a></div><div class="ttdeci">void onCreate(Bundle savedInstanceState)</div><div class="ttdoc">Méthode appelée à la création de l'activité</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00055">JustFeed.java:55</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a2c72763515fb5411687d7ad5a30c29c4"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">com.justfeed.justfeedandroid.JustFeed.boutonInterventions</a></div><div class="ttdeci">Button boutonInterventions</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00048">JustFeed.java:48</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a4148ed4ea1cd78fa584cb31e52dfc474"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">com.justfeed.justfeedandroid.JustFeed.baseDeDonnees</a></div><div class="ttdeci">BaseDeDonnees baseDeDonnees</div><div class="ttdoc">Identifiants pour la base de données.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00039">JustFeed.java:39</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a425f6bf9cbe8a9f629b7036b1240a166"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a425f6bf9cbe8a9f629b7036b1240a166">com.justfeed.justfeedandroid.JustFeed.initialiserVueListeDistributeurs</a></div><div class="ttdeci">void initialiserVueListeDistributeurs()</div><div class="ttdoc">Initialise la vue pour afficher la liste des distributeurs.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00147">JustFeed.java:147</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a5a07b48278bae9559552e48fa7cfc259"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5a07b48278bae9559552e48fa7cfc259">com.justfeed.justfeedandroid.JustFeed.onStart</a></div><div class="ttdeci">void onStart()</div><div class="ttdoc">Méthode appelée au démarrage après le onCreate() ou un restart après un onStop()</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00077">JustFeed.java:77</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a5cc6a1f89d6343d8204bcff50939d266"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a5cc6a1f89d6343d8204bcff50939d266">com.justfeed.justfeedandroid.JustFeed.initialiserHandler</a></div><div class="ttdeci">void initialiserHandler()</div><div class="ttdoc">Initialise la gestion des messages en provenance des threads.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00168">JustFeed.java:168</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a6768da0e4956b45b4ec19feb75e9f2f3"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6768da0e4956b45b4ec19feb75e9f2f3">com.justfeed.justfeedandroid.JustFeed.initialiserGUI</a></div><div class="ttdeci">void initialiserGUI()</div><div class="ttdoc">Initialise la vue de l'activité</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00128">JustFeed.java:128</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a6d40ba5947b87b2790105df85f7e1fe3"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a6d40ba5947b87b2790105df85f7e1fe3">com.justfeed.justfeedandroid.JustFeed.layoutVueListeDistributeurs</a></div><div class="ttdeci">RecyclerView.LayoutManager layoutVueListeDistributeurs</div><div class="ttdoc">Positionne les vues.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00043">JustFeed.java:43</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a70a2f39467274721ff192bc771987071"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a70a2f39467274721ff192bc771987071">com.justfeed.justfeedandroid.JustFeed.onDestroy</a></div><div class="ttdeci">void onDestroy()</div><div class="ttdoc">Méthode appelée à la destruction de l'application (après onStop() et détruite par le système Android)</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00119">JustFeed.java:119</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a915699c9cff3f46630375a98bc171b47"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a915699c9cff3f46630375a98bc171b47">com.justfeed.justfeedandroid.JustFeed.onStop</a></div><div class="ttdeci">void onStop()</div><div class="ttdoc">Méthode appelée lorsque l'activité n'est plus visible.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00108">JustFeed.java:108</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a9b253491e5999f23a5d1cced629a87b8"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9b253491e5999f23a5d1cced629a87b8">com.justfeed.justfeedandroid.JustFeed.vueListeDistributeurs</a></div><div class="ttdeci">RecyclerView vueListeDistributeurs</div><div class="ttdoc">Affichage de la liste des distributeurs.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00041">JustFeed.java:41</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_a9c5cb02d250ae5099c4b3744c42ebe83"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9c5cb02d250ae5099c4b3744c42ebe83">com.justfeed.justfeedandroid.JustFeed.adapteurDistributeur</a></div><div class="ttdeci">RecyclerView.Adapter adapteurDistributeur</div><div class="ttdoc">Remplit les vues des distributeurs.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00042">JustFeed.java:42</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_ab489eb6be49c02d39bf954f3ce94c8c1"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ab489eb6be49c02d39bf954f3ce94c8c1">com.justfeed.justfeedandroid.JustFeed.listeDistributeurs</a></div><div class="ttdeci">List&lt; Distributeur &gt; listeDistributeurs</div><div class="ttdoc">Liste des distributeurs.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00038">JustFeed.java:38</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_ac99e6e7dd1822e9e3df1c753a75602eb"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ac99e6e7dd1822e9e3df1c753a75602eb">com.justfeed.justfeedandroid.JustFeed.onPause</a></div><div class="ttdeci">void onPause()</div><div class="ttdoc">Méthode appelée après qu'une boîte de dialogue s'est affichée (on reprend sur un onResume()) ou avant...</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00098">JustFeed.java:98</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_ad534b0b450eb8ebaa6ef992b985842fb"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ad534b0b450eb8ebaa6ef992b985842fb">com.justfeed.justfeedandroid.JustFeed.TAG</a></div><div class="ttdeci">static final String TAG</div><div class="ttdoc">TAG pour les logs (cf. Logcat)</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00033">JustFeed.java:33</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_ae2f251d90f31fa209fdb79c19ed466c9"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ae2f251d90f31fa209fdb79c19ed466c9">com.justfeed.justfeedandroid.JustFeed.handler</a></div><div class="ttdeci">Handler handler</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00040">JustFeed.java:40</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_af66297c0502d2c761f754f40a97e2d16"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#af66297c0502d2c761f754f40a97e2d16">com.justfeed.justfeedandroid.JustFeed.onResume</a></div><div class="ttdeci">void onResume()</div><div class="ttdoc">Méthode appelée après onStart() ou après onPause()</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00087">JustFeed.java:87</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_just_feed_html_afed013c73c1bb675e6144c537c10dd3e"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#afed013c73c1bb675e6144c537c10dd3e">com.justfeed.justfeedandroid.JustFeed.afficherDistributeurs</a></div><div class="ttdeci">void afficherDistributeurs()</div><div class="ttdoc">Met à jour l'affichage de la liste des distributeurs.</div><div class="ttdef"><b>Definition:</b> <a href="_just_feed_8java_source.html#l00160">JustFeed.java:160</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_53e37af7aaa85a476f947ba6b1d4ed39.html">JustFeedAndroid</a></li><li class="navelem"><a class="el" href="dir_18ef3db294d4e2a55ab01151c45c661c.html">app</a></li><li class="navelem"><a class="el" href="dir_303284309fdf16b00fe51bee7897a6be.html">src</a></li><li class="navelem"><a class="el" href="dir_0bf19ce2fae7c1cc57049142be97a5f6.html">main</a></li><li class="navelem"><a class="el" href="dir_8a04882a4d4689a16125712ca756204c.html">java</a></li><li class="navelem"><a class="el" href="dir_44c0d615e41bb1786dbbaec414491258.html">com</a></li><li class="navelem"><a class="el" href="dir_53b9cc8f93aa8158345b128217724142.html">justfeed</a></li><li class="navelem"><a class="el" href="dir_8a82e326b33e34f42747822abc087719.html">justfeedandroid</a></li><li class="navelem"><a class="el" href="_just_feed_8java.html">JustFeed.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>
