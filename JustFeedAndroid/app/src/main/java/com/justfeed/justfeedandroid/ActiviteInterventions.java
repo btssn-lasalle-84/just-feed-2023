@@ -1,3 +1,9 @@
+/**
+ * @file ActiviteInterventions.java
+ * @brief Déclaration de l'activité ActiviteInterventions
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -5,13 +11,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
+
 /**
- * @brief Définition de la classe ActiviteIntervention.
- * @details La classe ActiviteIntervention \c ActiviteIntervention permet de lancer une seconde activité
- * pour l'application Android.
+ * @brief Définition de la classe ActiviteInterventions.
+ * @details La classe ActiviteIntervention \c ActiviteIntervention permet de lancer une seconde
+ * activité pour l'application Android.
  * @author Fargier Mayeul
  * @version 0.1
  */
@@ -21,21 +27,24 @@ public class ActiviteInterventions extends AppCompatActivity
      * Attributs
      */
     List<Intervention> listeInterventions; //!< Liste des interventions à afficher
-    BaseDeDonnees baseDeDonnees; //!< objet BaseDeDonnees pour pouvoir retrouver les informations sur les interventions dans une BDD.
-    private RecyclerView vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter adapteurIntervention;  //!< Remplit les vues des Interventions
-    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionne les vues
+    BaseDeDonnees baseDeDonnees; //!< objet BaseDeDonnees pour pouvoir retrouver les informations
+                                 //!< sur les interventions dans une BDD.
+    private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
+    private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
+    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
      * @param savedInstanceState
      */
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interventions);
+        setContentView(R.layout.interventions);
 
-        baseDeDonnees      = new BaseDeDonnees();
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees = BaseDeDonnees.getInstance();
         listeInterventions = baseDeDonnees.recupererInterventions();
 
         initialiserVueInterventions();
@@ -97,11 +106,11 @@ public class ActiviteInterventions extends AppCompatActivity
      */
     private void initialiserVueInterventions()
     {
-        this.vueListeInterventions       = (RecyclerView)findViewById(R.id.listeInterventions);
+        this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
-        this.adapteurIntervention        = new InterventionAdapter(this.listeInterventions);
+        this.adapteurIntervention = new AdaptateurIntervention(this.listeInterventions);
         this.vueListeInterventions.setAdapter(this.adapteurIntervention);
     }
 }

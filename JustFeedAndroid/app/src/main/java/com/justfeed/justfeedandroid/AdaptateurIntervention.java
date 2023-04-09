@@ -1,6 +1,11 @@
+/**
+ * @file AdaptateurIntervention.java
+ * @brief Déclaration de la classe AdaptateurIntervention
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 /**
- * @brief Définition de la classe InterventionAdapter.
- * @details La classe InterventionAdapter \c InterventionAdapter permet de remplir les vues gérer
- * par la classe InterventionViewHolder.
+ * @brief Définition de la classe AdaptateurIntervention.
+ * @details La classe AdaptateurIntervention \c InterventionAdapter permet de remplir les vues gérer
+ * par la classe VueIntervention.
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class InterventionAdapter extends RecyclerView.Adapter<InterventionViewHolder>
+public class AdaptateurIntervention extends RecyclerView.Adapter<VueIntervention>
 {
-    private List<Intervention> interventions = null; //!< Liste des interventions à affficher.
+    private List<Intervention> interventions = null; //!< Liste des interventions à afficher.
 
     /**
      * @brief Constructeur d'initialisation de la classe InterventionAdapter
      * @param interventions
      */
-    public InterventionAdapter(List<Intervention> interventions)
+    public AdaptateurIntervention(List<Intervention> interventions)
     {
         if(interventions != null)
         {
@@ -41,12 +46,12 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionViewHo
      */
     @NonNull
     @Override
-    public InterventionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public VueIntervention onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.intervention, parent, false);
+        View           view     = inflater.inflate(R.layout.intervention, parent, false);
 
-        return new InterventionViewHolder(view);
+        return new VueIntervention(view);
     }
 
     /**
@@ -56,7 +61,7 @@ public class InterventionAdapter extends RecyclerView.Adapter<InterventionViewHo
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull InterventionViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull VueIntervention holder, int position)
     {
         Intervention intervention = interventions.get(position);
         holder.afficherInterventions(intervention);

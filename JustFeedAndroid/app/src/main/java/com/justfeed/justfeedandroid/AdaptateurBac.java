@@ -1,3 +1,9 @@
+/**
+ * @file AdaptateurBac.java
+ * @brief Déclaration de la classe AdaptateurBac
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
 import android.view.LayoutInflater;
@@ -8,14 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
 /**
- * @brief Définition de la classe BacAdapter.
- * @details La classe BacAdapter \c BacAdapter permet de créer une instance de la classe BacViewHolder (cf. BacViewHolder)
- * et elle remplit les vues de la classe BacViewHolder.
+ * @brief Définition de la classe AdaptateurBac.
+ * @details La classe AdaptateurBac \c AdaptateurBac permet de créer une instance de la classe
+ * BacViewHolder (cf. BacViewHolder) et elle remplit les vues de la classe VueBac.
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class BacAdapter extends RecyclerView.Adapter<BacViewHolder>
+public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
 {
     private List<Bac> listeBacs = null; //!< Liste des bacs à afficher
 
@@ -23,7 +30,7 @@ public class BacAdapter extends RecyclerView.Adapter<BacViewHolder>
      * @brief Constructeur par défaut de la classe BacAdapter.
      * @param listeBacs
      */
-    public BacAdapter(List<Bac> listeBacs)
+    public AdaptateurBac(List<Bac> listeBacs)
     {
         if(listeBacs != null)
         {
@@ -42,12 +49,12 @@ public class BacAdapter extends RecyclerView.Adapter<BacViewHolder>
      */
     @NonNull
     @Override
-    public BacViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public VueBac onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View vue                = inflater.inflate(R.layout.bac, parent, false);
+        View           vue      = inflater.inflate(R.layout.bac, parent, false);
 
-        return new BacViewHolder(vue);
+        return new VueBac(vue);
     }
 
     /**
@@ -57,7 +64,7 @@ public class BacAdapter extends RecyclerView.Adapter<BacViewHolder>
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull BacViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull VueBac holder, int position)
     {
         Bac bac = listeBacs.get(position);
         holder.afficherBac(bac);

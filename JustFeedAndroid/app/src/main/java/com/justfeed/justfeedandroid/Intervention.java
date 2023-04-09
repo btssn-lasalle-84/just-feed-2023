@@ -1,11 +1,10 @@
-package com.justfeed.justfeedandroid;
+/**
+ * @file Intervention.java
+ * @brief Déclaration de la classe Intervention
+ * @author FARGIER Mayeul
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
+package com.justfeed.justfeedandroid;
 
 /**
  * @brief Définition de la classe Intervention.
@@ -20,14 +19,15 @@ public class Intervention
     /**
      * Constantes
      */
-    private final int    SEUIL_HUMIDITE = 0; //!< Seuil du taux d'humidité d'un distributeur.
-    private final int    MOITIE         = 2; //!< Moitie d'un bac.
+    private final int SEUIL_HUMIDITE = 0; //!< Seuil du taux d'humidité d'un distributeur.
+    private final int MOITIE         = 2; //!< Moitie d'un bac.
+
     /**
      * Attributs
      */
     private String       heureIntervention; //!< Heure de l'intervention.
-    private Distributeur distributeur; //!< Distributeur où intervenir.
-    private boolean      aIntervenir; //!< Si l'intervention a été ménée ou non.
+    private Distributeur distributeur;      //!< Distributeur où intervenir.
+    private boolean      aIntervenir;       //!< Si l'intervention a été ménée ou non.
 
     /**
      * @brief Constructeur par défaut de classe Intervention.
@@ -43,13 +43,11 @@ public class Intervention
      * @param distributeur
      * @param aIntervenir
      */
-    public Intervention(String heureIntervention,
-                        Distributeur distributeur,
-                        boolean aIntervenir)
+    public Intervention(String heureIntervention, Distributeur distributeur, boolean aIntervenir)
     {
-        this.heureIntervention  = heureIntervention;
-        this.distributeur       = distributeur;
-        this.aIntervenir        = true;
+        this.heureIntervention = heureIntervention;
+        this.distributeur      = distributeur;
+        this.aIntervenir       = true;
     }
 
     // Accesseurs
@@ -58,36 +56,47 @@ public class Intervention
      * @brief Méthode d'accés à l'heure d'intervention.
      * @return l'heure de l'intervention.
      */
-    public String getHeureIntervention() { return this.heureIntervention; }
+    public String getHeureIntervention()
+    {
+        return this.heureIntervention;
+    }
 
     /**
      * @brief Méthode d'accés à l'identifiant du distributeur.
      * @return l'identifiant du distributeur.
      */
-    public int getIdentifiantDistribteur() { return this.distributeur.getIdentifiant(); }
+    public int getIdentifiantDistribteur()
+    {
+        return this.distributeur.getIdentifiant();
+    }
 
     /**
      * @brief Méthode d'accés à aIntervenir.
      * @return aIntervenir.
      */
-    public boolean estAIntervenir() { return this.aIntervenir; }
+    public boolean estAIntervenir()
+    {
+        return this.aIntervenir;
+    }
 
     /**
      * @brief Méthode qui renvoie la liste des bacs à remplir.
      * @return la liste des bacs à remplir.
      */
-    public String bacsARemplir() {
+    public String bacsARemplir()
+    {
         String listeBacsARemplir = "";
         String typeProduit;
         Double quantiteARemplir;
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if (bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE) )
+            if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
             {
                 quantiteARemplir  = bac.getPoidsTotalBac() - bac.getPoidsActuel();
                 typeProduit       = bac.getTypeProduit().getNom();
-                listeBacsARemplir = listeBacsARemplir.concat(typeProduit+" : "+String.format("%.2f kg",quantiteARemplir)+"\n");
+                listeBacsARemplir = listeBacsARemplir.concat(
+                  typeProduit + " : " + String.format("%.2f kg", quantiteARemplir) + "\n");
             }
         }
 
@@ -104,9 +113,10 @@ public class Intervention
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if(bac.getHydrometrie() > SEUIL_HUMIDITE)
+            if(bac.getHygrometrie() > SEUIL_HUMIDITE)
             {
-                listeBacsADepanner = listeBacsADepanner.concat(bac.getTypeProduit().getNom()+"\n");
+                listeBacsADepanner =
+                  listeBacsADepanner.concat(bac.getTypeProduit().getNom() + "\n");
             }
         }
 
@@ -119,11 +129,17 @@ public class Intervention
      * @brief Méthode pour modifier l'heure d'intervention.
      * @param nouvelleHeureIntervention
      */
-    public void modifierHeureIntervention(String nouvelleHeureIntervention) { this.heureIntervention = nouvelleHeureIntervention; }
+    public void modifierHeureIntervention(String nouvelleHeureIntervention)
+    {
+        this.heureIntervention = nouvelleHeureIntervention;
+    }
 
     /**
      * @brief Méthode pour modifier l'état de l'intervention.
      * @param estIntervenu
      */
-    public void modifierEtatIntervention(boolean estIntervenu) { this.aIntervenir = estIntervenu; }
+    public void modifierEtatIntervention(boolean estIntervenu)
+    {
+        this.aIntervenir = estIntervenu;
+    }
 }

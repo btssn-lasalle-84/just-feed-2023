@@ -1,7 +1,11 @@
+/**
+ * @file AdaptateurDistributeur.java
+ * @brief Déclaration de la classe AdaptateurDistributeur
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,23 +15,25 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
 /**
- * @brief Définition de la classe DistributeurAdapter.
- * @details La classe DistributuerAdapter \c DistributeurAdapter permet de remplir les vues
- * définies par la classe DistributeurViewHolder.
+ * @brief Définition de la classe AdaptateurDistributeur.
+ * @details La classe AdaptateurDistributeur \c AdaptateurDistributeur permet de remplir les vues
+ * définies par la classe VueDistributeur.
  * @author Fargier Mayeul
  * @version 0.1
  */
-public class DistributeurAdapter extends RecyclerView.Adapter<DistributeurViewHolder>
+public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur>
 {
-    private List<Distributeur> distributeurs         = null; //!< Liste des distributeurs à afficher.
-    private RecyclerView.RecycledViewPool partageVue = new RecyclerView.RecycledViewPool(); //!< partage des vues entre plusieurs recyclerview.
+    private List<Distributeur> distributeurs = null; //!< Liste des distributeurs à afficher.
+    private RecyclerView.RecycledViewPool partageVue =
+      new RecyclerView.RecycledViewPool(); //!< Partage des vues entre plusieurs recyclerview.
 
     /**
      * @brief Constructeur d'initialisation de la classe DistributeurAdapter.
      * @param distributeurs
      */
-    public DistributeurAdapter(List<Distributeur> distributeurs)
+    public AdaptateurDistributeur(List<Distributeur> distributeurs)
     {
         if(distributeurs != null)
         {
@@ -45,12 +51,12 @@ public class DistributeurAdapter extends RecyclerView.Adapter<DistributeurViewHo
      */
     @NonNull
     @Override
-    public DistributeurViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+    public VueDistributeur onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
     {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.distributeur, parent, false);
+        View           view     = inflater.inflate(R.layout.distributeur, parent, false);
 
-        return new DistributeurViewHolder(view);
+        return new VueDistributeur(view);
     }
 
     /**
@@ -60,17 +66,16 @@ public class DistributeurAdapter extends RecyclerView.Adapter<DistributeurViewHo
      * @param position The position of the item within the adapter's data set.
      */
     @Override
-    public void onBindViewHolder(@NonNull DistributeurViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull VueDistributeur holder, int position)
     {
         Distributeur distributeur = distributeurs.get(position);
         holder.afficherDistributeur(distributeur);
-        LinearLayoutManager layoutVueListesBacs = new LinearLayoutManager(
-                holder.modifierVueListeBacs().getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false
-        );
+        LinearLayoutManager layoutVueListesBacs =
+          new LinearLayoutManager(holder.modifierVueListeBacs().getContext(),
+                                  LinearLayoutManager.HORIZONTAL,
+                                  false);
         layoutVueListesBacs.setInitialPrefetchItemCount(distributeur.getListeBacs().size());
-        BacAdapter adapteurBacs = new BacAdapter(distributeur.getListeBacs());
+        AdaptateurBac adapteurBacs = new AdaptateurBac(distributeur.getListeBacs());
         holder.modifierVueListeBacs().setLayoutManager(layoutVueListesBacs);
         holder.modifierVueListeBacs().setAdapter(adapteurBacs);
         holder.modifierVueListeBacs().setRecycledViewPool(partageVue);

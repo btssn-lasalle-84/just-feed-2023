@@ -1,3 +1,9 @@
+/**
+ * @file Produit.java
+ * @brief Déclaration de la classe Produit
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
 /**
@@ -8,11 +14,10 @@ package com.justfeed.justfeedandroid;
  */
 public class Produit
 {
-    private double          prix;           //!< prix du produit pour 100g
-    private double       poidsDuProduit; //!< poids en kg à l'unité du produit
-
-    private double       volumeProduit;  //!< Volume du produit en dm3
     private final String nom;            //!< nom du produit
+    private double       prix;           //!< prix du produit pour 100g
+    private double       poidsDuProduit; //!< poids en kg à l'unité du produit
+    private double       volumeProduit;  //!< Volume du produit en dm3
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
@@ -22,12 +27,12 @@ public class Produit
      * @param volumeProduit le volume du produit.
      * @param nom le nom du produit.
      */
-    public Produit(double prix, double poidsDuProduit, double volumeProduit, String nom)
+    public Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)
     {
+        this.nom            = nom;
         this.prix           = prix;
         this.poidsDuProduit = poidsDuProduit;
         this.volumeProduit  = volumeProduit;
-        this.nom            = nom;
     }
 
     // Accesseurs
@@ -68,11 +73,12 @@ public class Produit
     }
 
     // Mutateur
+
     /**
      * @brief Mutateur du prix du produit.
      * @param nouveauPrix le nouveau prix du produit
      */
-    public void modifierPrix(int nouveauPrix)
+    public void modifierPrix(double nouveauPrix)
     {
         this.prix = nouveauPrix;
     }
