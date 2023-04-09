@@ -1,3 +1,9 @@
+/**
+ * @file ActiviteInterventions.java
+ * @brief Déclaration de l'activité ActiviteInterventions
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -5,10 +11,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import java.util.List;
 
+/**
+ * @brief Définition de la classe ActiviteInterventions.
+ * @details La classe ActiviteIntervention \c ActiviteIntervention permet de lancer une seconde
+ * activité pour l'application Android.
+ * @author Fargier Mayeul
+ * @version 0.1
+ */
 public class ActiviteInterventions extends AppCompatActivity
 {
     /**
@@ -19,23 +31,28 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * Attributs
      */
-    List<Intervention>                 listeInterventions; //!< La liste des interventions
-    BaseDeDonnees                      baseDeDonnees; //!< L'accès à la base de données
-    private RecyclerView               vueListeInterventions; //!< Pour l'affichage des Interventions
-    private RecyclerView.Adapter       adapteurIntervention; //!< Les données de la vue
-    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement de la vues
+    List<Intervention> listeInterventions; //!< Liste des interventions à afficher
+    BaseDeDonnees baseDeDonnees; //!< objet BaseDeDonnees pour pouvoir retrouver les informations
+                                 //!< sur les interventions dans une BDD.
+    private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
+    private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
+    private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
 
+    /**
+     * @brief Méthode appelé à la création d'une seconde activité
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interventions);
+        setContentView(R.layout.interventions);
 
-        baseDeDonnees      = new BaseDeDonnees();
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees      = BaseDeDonnees.getInstance();
         listeInterventions = baseDeDonnees.recupererInterventions();
 
         initialiserVueInterventions();
-        afficherInterventions();
     }
 
     /**
@@ -46,7 +63,6 @@ public class ActiviteInterventions extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        Log.d(TAG, "onStart()");
     }
 
     /**
@@ -56,7 +72,6 @@ public class ActiviteInterventions extends AppCompatActivity
     protected void onResume()
     {
         super.onResume();
-        Log.d(TAG, "onResume()");
     }
 
     /**
@@ -67,7 +82,6 @@ public class ActiviteInterventions extends AppCompatActivity
     protected void onPause()
     {
         super.onPause();
-        Log.d(TAG, "onPause()");
     }
 
     /**
@@ -77,7 +91,6 @@ public class ActiviteInterventions extends AppCompatActivity
     protected void onStop()
     {
         super.onStop();
-        Log.d(TAG, "onStop()");
     }
 
     /**
@@ -88,21 +101,21 @@ public class ActiviteInterventions extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        Log.d(TAG, "onDestroy()");
     }
 
+    /**
+     * @brief Méthode qui initialise la vue des Interventions
+     * @details initialiserVueInterventions() initialise les attributs chargés
+     * d'afficher les interventions, de placer les interventions et de remplir les vues
+     * des interventions
+     */
     private void initialiserVueInterventions()
     {
         this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
-        this.adapteurIntervention = new InterventionAdapter(this.listeInterventions);
+        this.adapteurIntervention = new AdaptateurIntervention(this.listeInterventions);
         this.vueListeInterventions.setAdapter(this.adapteurIntervention);
-    }
-
-    private void afficherInterventions()
-    {
-        // this.adapteurIntervention.notifyDataSetChanged();
     }
 }

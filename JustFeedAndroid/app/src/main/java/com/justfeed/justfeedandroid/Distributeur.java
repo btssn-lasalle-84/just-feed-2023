@@ -1,3 +1,9 @@
+/**
+ * @file Distributeur.java
+ * @brief Déclaration de la classe Distributeur
+ * @author FARGIER Mayeul
+ */
+
 package com.justfeed.justfeedandroid;
 
 import java.util.List;
@@ -17,9 +23,9 @@ public class Distributeur
     /**
      * Attributs
      */
-    private int id; //!< identifie le ditributeur.
+    private int id; //!< l'identifiant d'un ditributeur.
     private List<Bac>
-      listeBacs; //!< Identifie les bacs du distributeur avec leurs produits et leurs poids actuel.
+      listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -42,6 +48,7 @@ public class Distributeur
         this.id        = id;
         this.listeBacs = listeBacs;
     }
+
     // Accesseurs
     /**
      * @brief Accesseur de l'identifiant du distributeur.
@@ -51,6 +58,7 @@ public class Distributeur
     {
         return this.id;
     }
+
     /**
      * @brief Accesseur des bacs du distributeur
      * @return listeBacs , la liste des bacs du distributeur
@@ -59,9 +67,11 @@ public class Distributeur
     {
         return this.listeBacs;
     }
+
     /**
      * @brief Mutateur du type de produit contenu dans un bac.
-     * @param nouveauxProduits.
+     * @param numeroBac le numéro du bac à changer.
+     * @param nouveauProduit le nouveau produit.
      */
     public void changerProduit(int numeroBac, Produit nouveauProduit)
     {

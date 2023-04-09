@@ -1,11 +1,10 @@
-package com.justfeed.justfeedandroid;
+/**
+ * @file Intervention.java
+ * @brief Déclaration de la classe Intervention
+ * @author FARGIER Mayeul
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Dictionary;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.List;
+package com.justfeed.justfeedandroid;
 
 /**
  * @brief Définition de la classe Intervention.
@@ -20,20 +19,30 @@ public class Intervention
     /**
      * Constantes
      */
-    private final int SEUIL_HUMIDITE = 0;
-    private final int MOITIE         = 2;
+    private final int SEUIL_HUMIDITE = 0; //!< Seuil du taux d'humidité d'un distributeur.
+    private final int MOITIE         = 2; //!< Moitie d'un bac.
+
     /**
      * Attributs
      */
-    private String       heureIntervention;
-    private Distributeur distributeur;
-    private boolean      aIntervenir;
+    private String       heureIntervention; //!< Heure de l'intervention.
+    private Distributeur distributeur;      //!< Distributeur où intervenir.
+    private boolean      aIntervenir;       //!< Si l'intervention a été ménée ou non.
 
+    /**
+     * @brief Constructeur par défaut de classe Intervention.
+     */
     public Intervention()
     {
         this.distributeur = null;
     }
 
+    /**
+     * @brief Constructeur d'initialisation de la classe Intervention.
+     * @param heureIntervention
+     * @param distributeur
+     * @param aIntervenir
+     */
     public Intervention(String heureIntervention, Distributeur distributeur, boolean aIntervenir)
     {
         this.heureIntervention = heureIntervention;
@@ -42,21 +51,38 @@ public class Intervention
     }
 
     // Accesseurs
+
+    /**
+     * @brief Méthode d'accés à l'heure d'intervention.
+     * @return l'heure de l'intervention.
+     */
     public String getHeureIntervention()
     {
         return this.heureIntervention;
     }
 
+    /**
+     * @brief Méthode d'accés à l'identifiant du distributeur.
+     * @return l'identifiant du distributeur.
+     */
     public int getIdentifiantDistribteur()
     {
         return this.distributeur.getIdentifiant();
     }
 
+    /**
+     * @brief Méthode d'accés à aIntervenir.
+     * @return aIntervenir.
+     */
     public boolean estAIntervenir()
     {
         return this.aIntervenir;
     }
 
+    /**
+     * @brief Méthode qui renvoie la liste des bacs à remplir.
+     * @return la liste des bacs à remplir.
+     */
     public String bacsARemplir()
     {
         String listeBacsARemplir = "";
@@ -76,13 +102,18 @@ public class Intervention
 
         return listeBacsARemplir;
     }
+
+    /**
+     * @brief Méthode qui renvoie la liste des bacs à dépanner.
+     * @return la liste des bacs à dépanner.
+     */
     public String bacsADepanner()
     {
         String listeBacsADepanner = "";
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if(bac.getHydrometrie() > SEUIL_HUMIDITE)
+            if(bac.getHygrometrie() > SEUIL_HUMIDITE)
             {
                 listeBacsADepanner =
                   listeBacsADepanner.concat(bac.getTypeProduit().getNom() + "\n");
@@ -93,11 +124,20 @@ public class Intervention
     }
 
     // Mutateurs
+
+    /**
+     * @brief Méthode pour modifier l'heure d'intervention.
+     * @param nouvelleHeureIntervention
+     */
     public void modifierHeureIntervention(String nouvelleHeureIntervention)
     {
         this.heureIntervention = nouvelleHeureIntervention;
     }
 
+    /**
+     * @brief Méthode pour modifier l'état de l'intervention.
+     * @param estIntervenu
+     */
     public void modifierEtatIntervention(boolean estIntervenu)
     {
         this.aIntervenir = estIntervenu;
