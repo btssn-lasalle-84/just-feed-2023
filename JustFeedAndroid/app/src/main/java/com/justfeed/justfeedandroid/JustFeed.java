@@ -61,8 +61,8 @@ public class JustFeed extends AppCompatActivity
         initialiserHandler();
 
         // Récupère l'instance de BaseDeDonnees
-        baseDeDonnees = BaseDeDonnees.getInstance(handler);
-        listeDistributeurs  = baseDeDonnees.recupererDistributeurs();
+        baseDeDonnees      = BaseDeDonnees.getInstance(handler);
+        listeDistributeurs = baseDeDonnees.recupererDistributeurs();
 
         initialiserGUI();
 
@@ -133,7 +133,7 @@ public class JustFeed extends AppCompatActivity
             public void onClick(View vue)
             {
                 Intent activiteIntervention =
-                        new Intent(JustFeed.this, ActiviteInterventions.class);
+                  new Intent(JustFeed.this, ActiviteInterventions.class);
                 startActivity(activiteIntervention);
             }
         });
@@ -181,7 +181,8 @@ public class JustFeed extends AppCompatActivity
                         /**
                          * Exemples de requêtes
                          *
-                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18' WHERE Distributeur.idDistributeur = '1'");
+                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
+                         * WHERE Distributeur.idDistributeur = '1'");
                          * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
                          */
                         break;

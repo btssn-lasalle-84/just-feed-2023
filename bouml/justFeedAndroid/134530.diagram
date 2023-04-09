@@ -1,0 +1,34 @@
+format 224
+
+classcanvas 128002 class_ref 134530 // IHMJustFeed
+  classdiagramsettings show_members_visibility yes show_members_stereotype yes member_max_width 0 drawing_language java end
+  xyz 281 90 2000
+end
+classcanvas 128130 class_ref 134658 // Distributeur
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
+  xyzwh 33 375 2000 143 119
+end
+classcanvas 128258 class_ref 134786 // Intervention
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
+  xyz 263 375 2000
+end
+classcanvas 128386 class_ref 134914 // Serveur
+  classdiagramsettings show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 end
+  xyz 580 71 2000
+end
+relationcanvas 129282 relation_ref 128386 // <directional aggregation>
+  from ref 128002 z 2001 to ref 128258
+  no_role_a no_role_b
+  multiplicity_a_pos 317 354 3000 no_multiplicity_b
+end
+relationcanvas 129410 relation_ref 128514 // <directional composition>
+  from ref 128002 z 2001 to ref 128386
+  no_role_a no_role_b
+  multiplicity_a_pos 561 124 3000 no_multiplicity_b
+end
+relationcanvas 129538 relation_ref 135042 // <directional aggregation>
+  from ref 128002 z 2001 to ref 128130
+  no_role_a no_role_b
+  no_multiplicity_a multiplicity_b_pos 281 135 3000
+end
+end

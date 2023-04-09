@@ -1,0 +1,58 @@
+format 224
+
+classinstancecanvas 128002 classinstance_ref 134658 // 
+  xyz 65 4 2005 life_line_z 2000
+end
+classinstancecanvas 128130 classinstance_ref 134786 // 
+  xyz 310 4 2005 life_line_z 2000
+end
+classinstancecanvas 128258 classinstance_ref 134914 // 
+  xyz 545 4 2005 life_line_z 2000
+end
+fragment 129666 "loop"
+  xyzwh 83 98 3005 303 96
+end
+fragment 129794 "loop"
+  xyzwh 91 335 2020 523 119
+end
+durationcanvas 128386 classinstance_ref 128002 // :IHMJustFeed
+  xyzwh 111 51 2010 11 133
+  overlappingdurationcanvas 128770
+    xyzwh 117 70 2020 11 25
+  end
+end
+durationcanvas 128514 classinstance_ref 128130 // :Distributeur
+  xyzwh 350 115 2010 11 45
+end
+durationcanvas 129026 classinstance_ref 128002 // :IHMJustFeed
+  xyzwh 111 283 2010 11 127
+  overlappingdurationcanvas 129410
+    xyzwh 117 302 2020 11 25
+  end
+end
+durationcanvas 129154 classinstance_ref 128258 // :Intervention
+  xyzwh 586 348 2010 11 51
+end
+msg 128642 synchronous
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128514
+  yz 149 2015 explicitmsg "informationsDistributeur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 154 134
+reflexivemsg 128898 synchronous
+  to durationcanvas_ref 128770
+  yz 70 2025 explicitmsg "listerDistributeurs()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 130 56
+msg 129282 synchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 129154
+  yz 370 2015 explicitmsg "informationIntervention()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 183 355
+reflexivemsg 129538 synchronous
+  to durationcanvas_ref 129410
+  yz 302 2025 explicitmsg "visualiserInterventions()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 129 287
+end

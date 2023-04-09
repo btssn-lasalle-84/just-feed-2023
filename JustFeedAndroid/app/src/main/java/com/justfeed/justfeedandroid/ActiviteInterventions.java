@@ -24,6 +24,11 @@ import java.util.List;
 public class ActiviteInterventions extends AppCompatActivity
 {
     /**
+     * Constantes
+     */
+    private static final String TAG = "_Interventions"; //!< TAG pour les logs (cf. Logcat)
+
+    /**
      * Attributs
      */
     List<Intervention> listeInterventions; //!< Liste des interventions à afficher
@@ -44,7 +49,7 @@ public class ActiviteInterventions extends AppCompatActivity
         setContentView(R.layout.interventions);
 
         // Récupère l'instance de BaseDeDonnees
-        baseDeDonnees = BaseDeDonnees.getInstance();
+        baseDeDonnees      = BaseDeDonnees.getInstance();
         listeInterventions = baseDeDonnees.recupererInterventions();
 
         initialiserVueInterventions();
