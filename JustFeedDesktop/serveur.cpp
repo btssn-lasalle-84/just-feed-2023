@@ -21,12 +21,8 @@ Serveur::Serveur() : port(0), hostName(""), utilisateur(""), motDePasse("")
  * @brief Constructeur d'initialisation de la classe Serveur
  * @see Intervention
  */
-Serveur::Serveur(int     port,
-                 QString hostName,
-                 QString utilisateur,
-                 QString motDePasse) :
-    port(port),
-    hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
+Serveur::Serveur(int port, QString hostName, QString utilisateur, QString motDePasse) :
+    port(port), hostName(hostName), utilisateur(utilisateur), motDePasse(motDePasse)
 {
 }
 
@@ -85,7 +81,7 @@ void Serveur::setPort(const int port)
 
 /**
  * @brief Mutateur de l'attribut hostName
- * @param hostname
+ * @param hostName
  */
 void Serveur::setHostName(const QString& hostName)
 {

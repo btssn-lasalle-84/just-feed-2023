@@ -90,9 +90,342 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="contents">
 <div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&amp;logo=java&amp;logoColor=white&amp;style=plastic" alt="Java Badge" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
 <p><a href="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" alt="pages-build-deployment" style="pointer-events: none;" class="inline"/></a></p>
-<h1>Le projet just-feed-2023</h1>
+<h1>Le projet just-feed 2023</h1>
+<ul>
+<li><a href="#le-projet-just-feed-2023">Le projet just-feed 2023</a><ul>
+<li><a href="#documentation-du-code">Documentation du code</a></li>
+<li><a href="#resources-logicielles">Resources logicielles</a></li>
+<li><a href="#base-de-données">Base de données</a></li>
+<li><a href="#mqtt">MQTT</a><ul>
+<li><a href="#qt-mqtt">Qt MQTT</a></li>
+<li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
+</ul>
+</li>
+<li><a href="#versions">Versions</a><ul>
+<li><a href="#01">0.1</a></li>
+</ul>
+</li>
+<li><a href="#auteurs">Auteurs</a></li>
+</ul>
+</li>
+</ul>
 <hr  />
- <h2>Documentation du code : <a href="https://btssn-lasalle-84.github.io/just-feed-2023/">https://btssn-lasalle-84.github.io/just-feed-2023/</a> </h2>
+<p>Le système doit permettre de surveiller à distance des distributeurs automatiques (café, fruits secs, céréales, …) afin d’optimiser le processus de réapprovisionnement.</p>
+<ul>
+<li>Chaque distributeur automatique est équipé de capteurs et d’une carte embarquée (The Things Uno ou modèle équivalent) communiquant via LoRaWan avec un serveur The Things Network. [Étudiants EC]</li>
+<li>Une application <b>PC Desktop</b> supervise l’ensemble des distributeurs afin de déterminer leur état d’approvisionnement. Les données sont reçues au format JSON par le protocole MQTT via le réseau <em>The Things Network</em>. [Étudiants IR]</li>
+<li>Une application mobile pour <b>Android</b> permettra aux opérateurs d’assurer leur intervention (géolocalisation, parcours, type de produits à réapprovisionner, validation de l’intervention, ...). [Étudiant IR]</li>
+</ul>
+<h2>Documentation du code</h2>
+<p><a href="https://btssn-lasalle-84.github.io/just-feed-2023/">https://btssn-lasalle-84.github.io/just-feed-2023/</a></p>
+<h2>Resources logicielles</h2>
+<ul>
+<li>Application <em>Desktop</em> :</li>
+</ul>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Désignation   </th><th class="markdownTableHeadCenter">Caractéristiques    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">OS Poste de développement   </td><td class="markdownTableBodyCenter">PC sous GNU/Linux Ubuntu 20.04    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">EDI   </td><td class="markdownTableBodyCenter">Qt Creator 4.11.0    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Développement   </td><td class="markdownTableBodyCenter">Qt 5.12.8 / C++ (GCC 9.3.0, 64 bits)   </td></tr>
+</table>
+<ul>
+<li>Application <em>Android</em> :</li>
+</ul>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Désignation   </th><th class="markdownTableHeadCenter">Caractéristiques    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">OS Poste de développement   </td><td class="markdownTableBodyCenter">PC sous GNU/Linux Ubuntu 20.04    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">EDI   </td><td class="markdownTableBodyCenter">Android Studio 2021.3 / Gradle 7.3.1    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Développement   </td><td class="markdownTableBodyCenter">Java (JDK 11.0.13)   </td></tr>
+</table>
+<h2>Base de données</h2>
+<p>Base de données MySQL 8.0 <code>justfeed</code> hébergée sur www.db4free.net (pour les tests) :</p>
+<p><img src="sql/justfeed-v0.1.png" alt="" class="inline"/></p>
+<div class="fragment"><div class="line"><span class="comment">--- LDD (langage de définition de données)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">DROP</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> `justfeed`;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">NOT</span> <span class="keyword">EXISTS</span> `justfeed` <span class="keywordtype">CHARACTER</span> <span class="keyword">SET</span> utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Base de données : `justfeed`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line">USE justfeed;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Approvisionnement;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Intervention;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> StockDistributeur;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Produit;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Distributeur;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Operateur;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> ServeurTTN;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `ServeurTTN`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `ServeurTTN` (</div>
+<div class="line">  `idServeurTTN` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `hostname` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `port` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;1883&#39;</span>,</div>
+<div class="line">  `username` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `password` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `applicationID` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `estActif` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Operateur`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Operateur` (</div>
+<div class="line">  `idOperateur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `nom` <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `prenom` <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `identifiant` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `email` <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Distributeur`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Distributeur` (</div>
+<div class="line">  `idDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `idServeurTTN` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `nom` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `description` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `adresse` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `ville` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `codepostal` <span class="keywordtype">varchar</span>(<span class="stringliteral">5</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `dateMiseEnService` <span class="keywordtype">date</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `longitude` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `latitude` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `deviceID` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `hygrometrie` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">  `nbBacs` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;2&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Distributeur`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `deviceID` (`deviceID`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Distributeur_fk_1` (`idServeurTTN`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Distributeur`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Distributeur_fk_1` <span class="keyword">FOREIGN</span> KEY (`idServeurTTN`) <span class="keyword">REFERENCES</span> `ServeurTTN` (`idServeurTTN`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Produit`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Produit` (</div>
+<div class="line">  `idProduit` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `nom` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `marque` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `description` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `codeEAN` <span class="keywordtype">varchar</span>(<span class="stringliteral">12</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `prix` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `poidsUnitaire` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `volumeUnitaire` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Produit`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `codeEAN` (`codeEAN`);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `StockDistributeur`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `StockDistributeur` (</div>
+<div class="line">  `idStockDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `idDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `idProduit` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `remplissage` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `StockDistributeur`</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Stock_fk_2` (`idProduit`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `StockDistributeur`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Stock_fk_1` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Stock_fk_2` <span class="keyword">FOREIGN</span> KEY (`idProduit`) <span class="keyword">REFERENCES</span> `Produit` (`idProduit`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Intervention`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Intervention` (</div>
+<div class="line">  `idIntervention` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `idOperateur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `dateIntervention` <span class="keywordtype">date</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `effectuee` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Intervention_fk_1` (`idOperateur`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Intervention_fk_1` <span class="keyword">FOREIGN</span> KEY (`idOperateur`) <span class="keyword">REFERENCES</span> `Operateur` (`idOperateur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Approvisionnement`</span></div>
+<div class="line"><span class="comment">--</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Approvisionnement` (</div>
+<div class="line">  `idApprovisionnement` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line">  `idIntervention` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `idStockDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `dateApprovisionnement` <span class="keywordtype">date</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `effectue` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Approvisionnement`</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Approvisionnement_fk_1` (`idIntervention`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Approvisionnement_fk_2` (`idStockDistributeur`);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Approvisionnement`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_1` <span class="keyword">FOREIGN</span> KEY (`idIntervention`) <span class="keyword">REFERENCES</span> `Intervention` (`idIntervention`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_2` <span class="keyword">FOREIGN</span> KEY (`idStockDistributeur`) <span class="keyword">REFERENCES</span> `StockDistributeur` (`idStockDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+</div><!-- fragment --><h2>MQTT</h2>
+<p>Voir aussi : modules-lora/README.md</p>
+<h3>Qt MQTT</h3>
+<p><a href="https://doc.qt.io/QtMQTT/index.html">Qt MQTT</a> fournit une implémentation conforme à la norme MQTT.</p>
+<p>Qt MQTT fait parti de <a href="http://doc.qt.io/QtForAutomation/qtautomation-overview.html">Qt For Automation</a> et pas directement de Qt. Il faut donc l'installer.</p>
+<p>Installation :</p>
+<ol type="1">
+<li>Identifier la version de Qt :</li>
+</ol>
+<div class="fragment"><div class="line">$ qmake -v</div>
+<div class="line">QMake version 3.1</div>
+<div class="line">Using Qt version 5.12.8 in /usr/lib/x86_64-linux-gnu</div>
+</div><!-- fragment --><p>Ici, la version de Qt est <code>5.12.8</code>.</p>
+<ol type="1">
+<li>Récupérer le code source du module <code>mqtt</code> en clonant le dépôt git</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo git clone https://code.qt.io/qt/qtmqtt.git</div>
+<div class="line">$ cd qtmqtt/</div>
+</div><!-- fragment --><ol type="1">
+<li>Sélectionner la branche qui correspond à la version de Qt utilisée</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo git checkout 5.12.8</div>
+</div><!-- fragment --><ol type="1">
+<li>Installer le paquet fournissant les fichiers d'en-tête de développement indépendants</li>
+</ol>
+<div class="fragment"><div class="line">$ sudo apt install qtbase5-private-dev</div>
+</div><!-- fragment --><ol type="1">
+<li>Fabriquer et installer le module <code>mqtt</code></li>
+</ol>
+<div class="fragment"><div class="line">$ sudo qmake</div>
+<div class="line"> </div>
+<div class="line">$ sudo make</div>
+<div class="line"> </div>
+<div class="line">$ sudo make install</div>
+</div><!-- fragment --><p>Pour accèder aux classes du module Qt MQTT, il faudra ajouter le module <code>mqtt</code> au fichier de projet <code>.pro</code> :</p>
+<div class="fragment"><div class="line">QT += mqtt</div>
+</div><!-- fragment --><h3>Paho MQTT (Android)</h3>
+<p>Il faut ajouter les dépendances vers les bibliothèques nécessaires à l’utilisation du protocole MQTT : le client Paho MQTT et le service Android fournis par Eclipse.</p>
+<p>Liens : <a href="https://www.eclipse.org/paho/">Eclipse Paho</a> et <a href="https://github.com/eclipse/paho.mqtt.java">github</a></p>
+<ol type="1">
+<li>Il faut ajouter l’url d’Eclipse Paho dans le ficher <code>build.gradle</code> du projet :</li>
+</ol>
+<div class="fragment"><div class="line">buildscript {</div>
+<div class="line">    repositories {</div>
+<div class="line">        google()</div>
+<div class="line">        jcenter()</div>
+<div class="line">    }</div>
+<div class="line">    dependencies {</div>
+<div class="line">        classpath &#39;com.android.tools.build:gradle:3.1.3&#39;</div>
+<div class="line">        // NOTE: Do not place your application dependencies here; they belong</div>
+<div class="line">        // in the individual module build.gradle files</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">allprojects {</div>
+<div class="line">    repositories {</div>
+<div class="line">        google()</div>
+<div class="line">        jcenter()</div>
+<div class="line">        maven {</div>
+<div class="line">            url &quot;https://repo.eclipse.org/content/repositories/paho-snapshots/&quot;</div>
+<div class="line">        }</div>
+<div class="line">    }</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line">task clean(type: Delete) {</div>
+<div class="line">    delete rootProject.buildDir</div>
+<div class="line">}</div>
+</div><!-- fragment --><ol type="1">
+<li>Puis, il faut ajouter les dépendances vers le client Paho MQTT et le service Android dans le fichier build.gradle du dossier <code>app</code> :</li>
+</ol>
+<div class="fragment"><div class="line">...</div>
+<div class="line">dependencies {</div>
+<div class="line">    ...</div>
+<div class="line"> </div>
+<div class="line">    implementation &#39;org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0&#39;</div>
+<div class="line">    implementation &#39;org.eclipse.paho:org.eclipse.paho.android.service:1.1.1&#39;</div>
+<div class="line">    implementation &#39;androidx.localbroadcastmanager:localbroadcastmanager:1.0.0&#39;</div>
+<div class="line">}</div>
+</div><!-- fragment --><ol type="1">
+<li>L’utilisation du protocole MQTT suppose que l’on ait un accès réseau. Pour cela, on va attribuer les permissions <code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code>, <code>ACCESS_WIFI_STATE</code> et <code>WAKE_LOCK</code> à l’application Android dans son fichier <code><a class="el" href="_android_manifest_8xml.html">AndroidManifest.xml</a></code>. On ajoutera aussi le service <code>MqttService</code>.</li>
+</ol>
+<div class="fragment"><div class="line">&lt;?<span class="keyword">xml</span> <span class="keyword">version</span>=<span class="stringliteral">&quot;1.0&quot;</span> <span class="keyword">encoding</span>=<span class="stringliteral">&quot;utf-8&quot;</span>?&gt;</div>
+<div class="line">&lt;<span class="keywordtype">manifest</span> <span class="keyword">xmlns:android</span>=<span class="stringliteral">&quot;http://schemas.android.com/apk/res/android&quot;</span></div>
+<div class="line">    ...&gt;</div>
+<div class="line"> </div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.INTERNET&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.ACCESS_NETWORK_STATE&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.ACCESS_WIFI_STATE&quot;</span> /&gt;</div>
+<div class="line">    &lt;<span class="keywordtype">uses-permission</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;android.permission.WAKE_LOCK&quot;</span>/&gt;</div>
+<div class="line"> </div>
+<div class="line">    &lt;<span class="keywordtype">application</span></div>
+<div class="line">        ...&gt;</div>
+<div class="line">        ...</div>
+<div class="line">        &lt;<span class="keywordtype">service</span> <span class="keyword">android:name</span>=<span class="stringliteral">&quot;org.eclipse.paho.android.service.MqttService&quot;</span> /&gt;</div>
+<div class="line">    &lt;/<span class="keywordtype">application</span>&gt;</div>
+<div class="line"> </div>
+<div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
+</div><!-- fragment --><h2>Versions</h2>
+<h3>0.1</h3>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-justfeed-android-distributeur-v0.1.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-v0.1.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-justfeed-qt-distributeurs-v0.1.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
+<h2>Auteurs</h2>
+<p>Étudiants IR :</p>
+<ul>
+<li>Matthieu SALAUN <a href="#" onclick="location.href='mai'+'lto:'+'mat'+'th'+'ieu'+'sa'+'lau'+'n3'+'0@g'+'ma'+'il.'+'co'+'m'; return false;">matth<span style="display: none;">.nosp@m.</span>ieus<span style="display: none;">.nosp@m.</span>alaun<span style="display: none;">.nosp@m.</span>30@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a></li>
+<li>Nicolas ROUANET</li>
+<li>Mayeul FARGIER</li>
+</ul>
 <hr  />
 <p> ©️ LaSalle Avignon 2023 </p>
 </div></div><!-- contents -->
@@ -102,7 +435,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Vendredi 3 Mars 2023 21:13:50 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

@@ -1,18 +1,27 @@
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![](https://badgen.net/badge/Qt/5.12.8/green) ![Java Badge](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=java&logoColor=white&style=plastic) ![Android Badge](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=plastic)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&logoColor=fff&style=plastic) ![Android Badge](https://img.shields.io/badge/Android-3DDC84?logo=android&logoColor=fff&style=plastic)
 
-[![pages-build-deployment](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment)
+![](https://badgen.net/badge/Qt/5.12.8/green) [![qt-build](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/make-qt.yml/badge.svg)](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/make-qt.yml) [![android-build](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/android-build.yml/badge.svg)](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/android-build.yml) [![pages-build-deployment](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop)](https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment)
 
-# Le projet just-feed-2023
+# Le projet just-feed 2023
 
-- [Le projet just-feed-2023](#le-projet-just-feed-2023)
+- [Le projet just-feed 2023](#le-projet-just-feed-2023)
   - [Documentation du code](#documentation-du-code)
   - [Resources logicielles](#resources-logicielles)
   - [Base de données](#base-de-données)
   - [MQTT](#mqtt)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
+  - [Versions](#versions)
+    - [0.1](#01)
+  - [Auteurs](#auteurs)
 
 ---
+
+Le système doit permettre de surveiller à distance des distributeurs automatiques (café, fruits secs, céréales, …) afin d’optimiser le processus de réapprovisionnement.
+
+- Chaque distributeur automatique est équipé de capteurs et d’une carte embarquée (The Things Uno ou modèle équivalent) communiquant via LoRaWan avec un serveur The Things Network. [Étudiants EC]
+- Une application **PC Desktop** supervise l’ensemble des distributeurs afin de déterminer leur état d’approvisionnement. Les données sont reçues au format JSON par le protocole MQTT via le réseau _The Things Network_. [Étudiants IR]
+- Une application mobile pour **Android** permettra aux opérateurs d’assurer leur intervention (géolocalisation, parcours, type de produits à réapprovisionner, validation de l’intervention, ...). [Étudiant IR]
 
 ## Documentation du code
 
@@ -334,6 +343,32 @@ dependencies {
 
 </manifest>
 ```
+
+## Versions
+
+### 0.1
+
+![](images/jira-tickets-v0.1.png)
+
+- Android :
+
+![](images/screenshot-justfeed-android-distributeur-v0.1.png)
+
+![](images/screenshot-justfeed-android-interventions-v0.1.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-justfeed-qt-distributeurs-v0.1.png)
+
+![](images/screenshot-justfeed-qt-configuration-v0.1.png)
+
+## Auteurs
+
+Étudiants IR :
+
+- Matthieu SALAUN <matthieusalaun30@gmail.com>
+- Nicolas ROUANET
+- Mayeul FARGIER
 
 ---
 ©️ LaSalle Avignon 2023

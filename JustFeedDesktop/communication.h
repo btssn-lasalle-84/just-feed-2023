@@ -12,7 +12,7 @@
 /**
  * @class       Communication
  * @brief       Définition de la classe Communication.
- * @detail      La classe Communication \c Cette classe permet ...
+ * @details      La classe Communication \c Cette classe permet ...
  */
 class Communication
 {
