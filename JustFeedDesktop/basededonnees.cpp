@@ -77,7 +77,6 @@ void BaseDeDonnees::detruireInstance()
 
 /**
  * @brief Définition méthode connecter()
- * @fn BaseDeDonnees::connecter
  * @details Permet de se connecter à la base de données
  * @param[in] nomBase le nom de la base de données MySQL
  * @param[in] username l'identifiant d'accès à la base de données
@@ -105,9 +104,8 @@ bool BaseDeDonnees::connecter(QString nomBase /*=DATABASENAME*/,
         if(db.open())
         {
 #ifdef DEBUG_BDD
-            qDebug()
-              << Q_FUNC_INFO
-              << QString::fromUtf8("connexion réussie à %1").arg(db.hostName());
+            qDebug() << Q_FUNC_INFO
+                     << QString::fromUtf8("connexion réussie à %1").arg(db.hostName());
 #endif
 
             return true;
@@ -120,8 +118,7 @@ bool BaseDeDonnees::connecter(QString nomBase /*=DATABASENAME*/,
             QMessageBox::critical(
               nullptr,
               QString::fromUtf8("BaseDeDonnees"),
-              QString::fromUtf8(
-                "Impossible de se connecter à la base de données !"));
+              QString::fromUtf8("Impossible de se connecter à la base de données !"));
             return false;
         }
     }
@@ -154,8 +151,7 @@ bool BaseDeDonnees::executer(QString requete)
 
     if(db.isOpen())
     {
-        if(requete.contains("UPDATE") || requete.contains("INSERT") ||
-           requete.contains("DELETE"))
+        if(requete.contains("UPDATE") || requete.contains("INSERT") || requete.contains("DELETE"))
         {
             retour = r.exec(requete);
 #ifdef DEBUG_BDD
@@ -180,8 +176,7 @@ bool BaseDeDonnees::executer(QString requete)
         else
         {
             qDebug() << Q_FUNC_INFO
-                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
-                          .arg(requete);
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !").arg(requete);
             return false;
         }
     }
@@ -222,8 +217,7 @@ bool BaseDeDonnees::recuperer(QString requete, QString& donnees)
                 if(!r.isValid())
                 {
 #ifdef DEBUG_BDD
-                    qDebug() << Q_FUNC_INFO
-                             << QString::fromUtf8("Résultat non valide !");
+                    qDebug() << Q_FUNC_INFO << QString::fromUtf8("Résultat non valide !");
 #endif
                     return false;
                 }
@@ -232,8 +226,7 @@ bool BaseDeDonnees::recuperer(QString requete, QString& donnees)
                 if(r.isNull(0))
                 {
 #ifdef DEBUG_BDD
-                    qDebug()
-                      << Q_FUNC_INFO << QString::fromUtf8("Aucun résultat !");
+                    qDebug() << Q_FUNC_INFO << QString::fromUtf8("Aucun résultat !");
 #endif
                     return false;
                 }
@@ -255,8 +248,7 @@ bool BaseDeDonnees::recuperer(QString requete, QString& donnees)
         else
         {
             qDebug() << Q_FUNC_INFO
-                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
-                          .arg(requete);
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !").arg(requete);
             return false;
         }
     }
@@ -297,8 +289,7 @@ bool BaseDeDonnees::recuperer(QString requete, QStringList& donnees)
                 if(!r.isValid())
                 {
 #ifdef DEBUG_BDD
-                    qDebug() << Q_FUNC_INFO
-                             << QString::fromUtf8("Résultat non valide !");
+                    qDebug() << Q_FUNC_INFO << QString::fromUtf8("Résultat non valide !");
 #endif
                     return false;
                 }
@@ -326,8 +317,7 @@ bool BaseDeDonnees::recuperer(QString requete, QStringList& donnees)
         else
         {
             qDebug() << Q_FUNC_INFO
-                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
-                          .arg(requete);
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !").arg(requete);
             return false;
         }
     }
@@ -394,8 +384,7 @@ bool BaseDeDonnees::recuperer(QString requete, QVector<QString>& donnees)
         else
         {
             qDebug() << Q_FUNC_INFO
-                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
-                          .arg(requete);
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !").arg(requete);
             return false;
         }
     }
@@ -469,8 +458,7 @@ bool BaseDeDonnees::recuperer(QString requete, QVector<QStringList>& donnees)
         else
         {
             qDebug() << Q_FUNC_INFO
-                     << QString::fromUtf8("Erreur : requête %1 non autorisée !")
-                          .arg(requete);
+                     << QString::fromUtf8("Erreur : requête %1 non autorisée !").arg(requete);
             return false;
         }
     }

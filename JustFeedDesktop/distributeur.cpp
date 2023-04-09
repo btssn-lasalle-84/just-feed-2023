@@ -211,7 +211,7 @@ int Distributeur::getNbBacs() const
 
 /**
  * @brief Mutateur de l'attribut identifiant
- * @param identifiant du distributeur
+ * @param deviceID identifiant du distributeur
  */
 void Distributeur::setDeviceID(const QString deviceID)
 {

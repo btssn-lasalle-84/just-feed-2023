@@ -236,6 +236,7 @@ public class BaseDeDonnees
      * @param hostName le nom de la machine distante.
      * @param port le numéro de port sur lequel le processus de la base de
      *   données écoute.
+     * @param handler Le handler pour l'échange de messages entre les threads.
      */
     private BaseDeDonnees(String  nomBase,
                           String  identifiant,
@@ -476,7 +477,7 @@ public class BaseDeDonnees
         }
 
         /**
-         * @fn onPreExecute
+         * @fn onPostExecute
          * @brief Méthode appelée lorsque doInBackground a terminé (s’exécute dans le thread UI)
          */
         @Override
@@ -554,9 +555,8 @@ public class BaseDeDonnees
     }
 
     /**
-     * @fn selectionner
      * @brief Sélectionne des enregistrements dans la base de données en arrière-plan
-     * @return requeteSELECT String la requête SQL
+     * @param requeteSELECT String la requête SQL
      */
     public void selectionner(final String requeteSELECT)
     {

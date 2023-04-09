@@ -39,10 +39,10 @@ public class Bac
 
     /**
      * @brief Constructeur d'initialisation de la classe Bac
-     * @see Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie )
-     * @param typeProduit , type de produit dans le bac
-     * @param poidsActuel , poids actuel d'un bac
-     * @param poidsTotal  , poids total d'un bac
+     * @param typeProduit type de produit dans le bac
+     * @param poidsActuel poids actuel d'un bac
+     * @param poidsTotal  poids total d'un bac
+     * @param hygrometrie
      */
     public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie)
     {
@@ -107,7 +107,7 @@ public class Bac
 
     /**
      * @brief Change le poids actuel.
-     * @return nouveauPoids le nouveau poids.
+     * @param nouveauPoids le nouveau poids.
      */
     public void changerPoidsActuel(double nouveauPoids)
     {

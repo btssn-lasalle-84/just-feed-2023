@@ -1,0 +1,623 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet just-feed:  Fichier source de ihmjustfeed.cpp</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet just-feed
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('ihmjustfeed_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ihmjustfeed.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="ihmjustfeed_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ihmjustfeed_8h.html">ihmjustfeed.h</a>&quot;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="distributeur_8h.html">distributeur.h</a>&quot;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="produit_8h.html">produit.h</a>&quot;</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="bac_8h.html">bac.h</a>&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="configurationdistributeur_8h.html">configurationdistributeur.h</a>&quot;</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a51be77e4855b0f8cef2b33ebe7af3610">   21</a></span>&#160;<a class="code" href="class_i_h_m_just_feed.html#a51be77e4855b0f8cef2b33ebe7af3610">IHMJustFeed::IHMJustFeed</a>(<a class="code" href="class_q_widget.html">QWidget</a>* parent) : <a class="code" href="class_q_widget.html">QWidget</a>(parent), configurationDistributeur(nullptr)</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ab75dac57d8da106ad159b6395e6afaa4">initialiserDistributeurs</a>();</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7234bfc5ebcd10d581a0bd8a976730f6">initialiserProduits</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ac43f60712d22e91dd0160ba14d176d78">initialiserGUI</a>();</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a4afa7cbde9234191b329fcd83b13a09e">chargerDistributeurs</a>();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a0f2ebe0ba7c02c8f83f503d6aebec917">   33</a></span>&#160;<a class="code" href="class_i_h_m_just_feed.html#a0f2ebe0ba7c02c8f83f503d6aebec917">IHMJustFeed::~IHMJustFeed</a>()</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;{</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.size(); ++i)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <span class="keyword">delete</span> <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[i];</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;}</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// Méthodes publiques</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a418f10480ee62db2c6365d955c313aea">   47</a></span>&#160;<a class="code" href="class_distributeur.html">Distributeur</a>* <a class="code" href="class_i_h_m_just_feed.html#a418f10480ee62db2c6365d955c313aea">IHMJustFeed::getDistributeur</a>(QString nom)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.size(); ++i)</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[i]-&gt;getNom() == nom)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[i];</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    }</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a82953747b621eef32a8e7361f0bb4aeb">   60</a></span>&#160;<a class="code" href="class_produit.html">Produit</a>* <a class="code" href="class_i_h_m_just_feed.html#a82953747b621eef32a8e7361f0bb4aeb">IHMJustFeed::getProduit</a>(<span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>[index];</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#ad819ce91c979eb3542ca79899094f91d">   68</a></span>&#160;QString <a class="code" href="class_i_h_m_just_feed.html#ad819ce91c979eb3542ca79899094f91d">IHMJustFeed::getNomProduit</a>(<span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>[index]-&gt;getNom();</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a49d28c323b4588f1966e74627963c81e">   76</a></span>&#160;<span class="keywordtype">double</span> <a class="code" href="class_i_h_m_just_feed.html#a49d28c323b4588f1966e74627963c81e">IHMJustFeed::getPrixProduit</a>(<span class="keywordtype">int</span> index)<span class="keyword"> const</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>[index]-&gt;getPrix();</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a6d00d1324370aa24a3dd21c473bf9698">   84</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="class_i_h_m_just_feed.html#a6d00d1324370aa24a3dd21c473bf9698">IHMJustFeed::getNbProduits</a>()<span class="keyword"> const</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="keyword"></span>{</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.size();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">// Slots</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a5dfa32e9dd327ec2d2d0d01c56ccc775">   94</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a5dfa32e9dd327ec2d2d0d01c56ccc775">IHMJustFeed::afficherFenetre</a>(<a class="code" href="class_i_h_m_just_feed.html#aa6f3b8150fe18985089fd3a887b23fdb">IHMJustFeed::Fenetre</a> fenetre)</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;{</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">fenetres</a>-&gt;setCurrentIndex(fenetre);</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#aacb88e7bfa6822ce9df8b5f50894ead4">  102</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#aacb88e7bfa6822ce9df8b5f50894ead4">IHMJustFeed::afficherFenetreAccueil</a>()</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;{</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a5dfa32e9dd327ec2d2d0d01c56ccc775">afficherFenetre</a>(IHMJustFeed::Fenetre::FAccueil);</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;}</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160; </div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a7c0cf8b10774ccb920a3af48ebf66be4">  110</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a7c0cf8b10774ccb920a3af48ebf66be4">IHMJustFeed::afficherFenetreDistributeur</a>()</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;{</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a5dfa32e9dd327ec2d2d0d01c56ccc775">afficherFenetre</a>(IHMJustFeed::Fenetre::FDistributeur);</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;}</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00118"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#aef68b5bc52512ab084e9963099ae273a">  118</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#aef68b5bc52512ab084e9963099ae273a">IHMJustFeed::configurerDistributeur</a>()</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;{</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">configurationDistributeur</a> == <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    {</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">numeroDistributeurSelectionne</a> != -1)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;            <a class="code" href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">configurationDistributeur</a> =</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;              <span class="keyword">new</span> <a class="code" href="class_configuration_distributeur.html">ConfigurationDistributeur</a>(<a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[<a class="code" href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">numeroDistributeurSelectionne</a>], <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;            <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    }</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;        <span class="keywordflow">return</span>;</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">configurationDistributeur</a>-&gt;exec();</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="keyword">delete</span> <a class="code" href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">configurationDistributeur</a>;</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">configurationDistributeur</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;}</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">  138</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">IHMJustFeed::selectionnerDistributeur</a>(<span class="keywordtype">int</span> numeroDistributeur)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;{</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;numeroDistributeur&quot;</span> &lt;&lt; numeroDistributeur;</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">numeroDistributeurSelectionne</a> = numeroDistributeur;</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;}</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a52c5d111863ab39b24a7a7c762edea87">  147</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">IHMJustFeed::selectionnerDistributeur</a>(<span class="keywordtype">int</span> ligne, <span class="keywordtype">int</span> colonne)</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;{</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    Q_UNUSED(colonne)</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    QTableWidgetItem* <a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>;</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a> = <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;item(ligne, <a class="code" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da46f66c670e062d9a95d3d6a5351485dc">COLONNE_DISTRIBUTEUR_NOM</a>);</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;distributeur&quot;</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;             &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a418f10480ee62db2c6365d955c313aea">getDistributeur</a>(<a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>-&gt;data(0).toString())-&gt;<a class="code" href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">getNom</a>();</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a5cc0d7a9c6d6c0f7b8cc24160cc00700">afficherDistributeur</a>(<a class="code" href="class_i_h_m_just_feed.html#a418f10480ee62db2c6365d955c313aea">getDistributeur</a>(<a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>-&gt;data(0).toString()));</div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;}</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="comment">// Méthodes privées</span></div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00162"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#ac43f60712d22e91dd0160ba14d176d78">  162</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#ac43f60712d22e91dd0160ba14d176d78">IHMJustFeed::initialiserGUI</a>()</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;{</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a52feef903385404d5dd2ca9182aa3260">instancierWidgets</a>();</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7c9ba77647a2a30748ebf573e22516b4">initialiserWidgets</a>();</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a767ef40b9947e1efacf95f10a1c7011f">positionnerWidgets</a>();</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ad7d6fb9725f7690059e32545ac0b2f19">initialiserEvenements</a>();</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="comment">// La fenêtre principale</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    setWindowTitle(<a class="code" href="ihmjustfeed_8h.html#a9eb2396052c2167d0e0f70355a4f6ed5">TITRE_APPLICATION</a> + <span class="stringliteral">&quot; &quot;</span> + <a class="code" href="ihmjustfeed_8h.html#a121d9d72e2cc9cdcf09da6b88fa7859d">VERSION_APPLICATION</a>);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    QRect screenGeometry = QGuiApplication::primaryScreen()-&gt;availableGeometry();</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    resize(screenGeometry.width(), screenGeometry.height());</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;}</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a52feef903385404d5dd2ca9182aa3260">  178</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a52feef903385404d5dd2ca9182aa3260">IHMJustFeed::instancierWidgets</a>()</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="comment">// Les fenêtres</span></div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#add00614e57b9b007cc0a383014f43740">gui</a>                 = <span class="keyword">new</span> <a class="code" href="class_q_widget.html">QWidget</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">fenetres</a>            = <span class="keyword">new</span> QStackedWidget(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a9c6f586e2f2db7f9168f127d8b2cabc3">fenetreAccueil</a>      = <span class="keyword">new</span> <a class="code" href="class_q_widget.html">QWidget</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a3ca265117c4192d6cd633c57165fc44e">fenetreDistributeur</a> = <span class="keyword">new</span> <a class="code" href="class_q_widget.html">QWidget</a>(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    <span class="comment">// Les boutons</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a04e4c5f47d6a693d7d8cb88c3060262d">boutonIntervenir</a> = <span class="keyword">new</span> QPushButton(<span class="stringliteral">&quot;Intervenir&quot;</span>, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a03582cc1b35d36151d7cbd104de7f0a5">boutonConfigurer</a> = <span class="keyword">new</span> QPushButton(<span class="stringliteral">&quot;Configurer&quot;</span>, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a81037205102bab53dd5943acf7ebbcb2">boutonValider</a>    = <span class="keyword">new</span> QPushButton(<span class="stringliteral">&quot;Valider&quot;</span>, <span class="keyword">this</span>);</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160; </div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="comment">// Les labels</span></div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>           = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#addb4ba8134853417745ab8422e545303">adresseDistributeur</a>       = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a8ac09b2ef9c3837b4b1ebf8323b42f99">codePostalDistributeur</a>    = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7a72687cadb456e79bf3aa741bc34884">villeDistributeur</a>         = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7d907f82eb1986a412196a25bc0ebbc6">descriptionDistributeur</a>   = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a8b11f3009e0eedf220c3d3959fd2f1d1">miseEnServiceDistributeur</a> = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#aa1e9e8fd06da880dc621982d39e23939">positionDistributeur</a>      = <span class="keyword">new</span> QLabel(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    <span class="comment">// Les listes</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a2858634f426c151fe3866a05ad31ddbf">listeDistributeurs</a> = <span class="keyword">new</span> QComboBox(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;}</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a7c9ba77647a2a30748ebf573e22516b4">  207</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a7c9ba77647a2a30748ebf573e22516b4">IHMJustFeed::initialiserWidgets</a>()</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;{</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;    <span class="comment">// Les fenêtres</span></div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">fenetres</a>-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a9c6f586e2f2db7f9168f127d8b2cabc3">fenetreAccueil</a>);</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">fenetres</a>-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a3ca265117c4192d6cd633c57165fc44e">fenetreDistributeur</a>);</div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160; </div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="comment">// La table</span></div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7a2ebd130413e55b7562f8cd6f44a2b5">initialiseTable</a>();</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160; </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    <span class="comment">// Les listes</span></div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.size(); i++)</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    {</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;        <a class="code" href="class_i_h_m_just_feed.html#a2858634f426c151fe3866a05ad31ddbf">listeDistributeurs</a>-&gt;addItem(<a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[i]-&gt;getNom());</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    }</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;}</div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
+<div class="line"><a name="l00226"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a767ef40b9947e1efacf95f10a1c7011f">  226</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a767ef40b9947e1efacf95f10a1c7011f">IHMJustFeed::positionnerWidgets</a>()</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;{</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <span class="comment">// Les layouts</span></div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;    QVBoxLayout* layoutPrincipal           = <span class="keyword">new</span> QVBoxLayout();</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    QVBoxLayout* layoutFenetrePrincipale   = <span class="keyword">new</span> QVBoxLayout();</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    QVBoxLayout* layoutFenetreDistributeur = <span class="keyword">new</span> QVBoxLayout();</div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    QHBoxLayout* layoutF1Table             = <span class="keyword">new</span> QHBoxLayout();</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    QHBoxLayout* layoutBoutonsAccueil      = <span class="keyword">new</span> QHBoxLayout();</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    QHBoxLayout* layoutBoutonsDistributeur = <span class="keyword">new</span> QHBoxLayout();</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160; </div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    <span class="comment">// Positionnement</span></div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;    <span class="comment">// La fenêtre accueil</span></div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    layoutF1Table-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;    layoutF1Table-&gt;setAlignment(Qt::AlignCenter);</div>
+<div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;    layoutBoutonsAccueil-&gt;addStretch();</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    layoutBoutonsAccueil-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a2858634f426c151fe3866a05ad31ddbf">listeDistributeurs</a>);</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    layoutBoutonsAccueil-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a03582cc1b35d36151d7cbd104de7f0a5">boutonConfigurer</a>);</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    layoutBoutonsAccueil-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a04e4c5f47d6a693d7d8cb88c3060262d">boutonIntervenir</a>);</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    layoutFenetrePrincipale-&gt;addLayout(layoutF1Table);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    layoutFenetrePrincipale-&gt;addLayout(layoutBoutonsAccueil);</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    layoutFenetrePrincipale-&gt;addStretch();</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a9c6f586e2f2db7f9168f127d8b2cabc3">fenetreAccueil</a>-&gt;setLayout(layoutFenetrePrincipale);</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <span class="comment">// La fenêtre distributeur</span></div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>);</div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#addb4ba8134853417745ab8422e545303">adresseDistributeur</a>);</div>
+<div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a8ac09b2ef9c3837b4b1ebf8323b42f99">codePostalDistributeur</a>);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a7a72687cadb456e79bf3aa741bc34884">villeDistributeur</a>);</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a7d907f82eb1986a412196a25bc0ebbc6">descriptionDistributeur</a>);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a8b11f3009e0eedf220c3d3959fd2f1d1">miseEnServiceDistributeur</a>);</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;    layoutFenetreDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#aa1e9e8fd06da880dc621982d39e23939">positionDistributeur</a>);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    layoutBoutonsDistributeur-&gt;addStretch();</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    layoutBoutonsDistributeur-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a81037205102bab53dd5943acf7ebbcb2">boutonValider</a>);</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    layoutFenetreDistributeur-&gt;addLayout(layoutBoutonsDistributeur);</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a3ca265117c4192d6cd633c57165fc44e">fenetreDistributeur</a>-&gt;setLayout(layoutFenetreDistributeur);</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160; </div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="comment">// La GUI</span></div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    layoutPrincipal-&gt;addWidget(<a class="code" href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">fenetres</a>);</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#add00614e57b9b007cc0a383014f43740">gui</a>-&gt;setLayout(layoutPrincipal);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    this-&gt;setLayout(layoutPrincipal);</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;}</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160; </div>
+<div class="line"><a name="l00271"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a7a2ebd130413e55b7562f8cd6f44a2b5">  271</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a7a2ebd130413e55b7562f8cd6f44a2b5">IHMJustFeed::initialiseTable</a>()</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;{</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a> = <span class="keyword">new</span> QTableWidget(<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160; </div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    <span class="comment">// Les colonnes</span></div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7d974a0601aba56f051fdf07bd1bb466">nomColonnes</a> &lt;&lt; <span class="stringliteral">&quot;Enseigne&quot;</span></div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;Adresse&quot;</span></div>
+<div class="line"><a name="l00278"></a><span class="lineno">  278</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;Ville&quot;</span></div>
+<div class="line"><a name="l00279"></a><span class="lineno">  279</span>&#160;                &lt;&lt; <span class="stringliteral">&quot;Code Postal&quot;</span>;</div>
+<div class="line"><a name="l00280"></a><span class="lineno">  280</span>&#160; </div>
+<div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setColumnCount(<a class="code" href="class_i_h_m_just_feed.html#a7d974a0601aba56f051fdf07bd1bb466">nomColonnes</a>.count());</div>
+<div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setHorizontalHeaderLabels(<a class="code" href="class_i_h_m_just_feed.html#a7d974a0601aba56f051fdf07bd1bb466">nomColonnes</a>);</div>
+<div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160;    <span class="comment">// Vide (pas de lignes donc pas d&#39;utilisateurs dans la table)</span></div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setRowCount(0);</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">nbLignesDistributeurs</a> = 0;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    <span class="comment">// Redimensionnement automatique (inutile)</span></div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="comment">// tableWidgetDistributeurs-&gt;resizeColumnsToContents();</span></div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    <span class="comment">// Pas d&#39;étiquettes numérotées sur le côté gauche</span></div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;verticalHeader()-&gt;setHidden(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;    <span class="comment">// Taille</span></div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;    <span class="comment">// tableWidgetDistributeurs-&gt;setMinimumSize(QSize(0, 0));</span></div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;    <span class="comment">// Prend toute la largeur</span></div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setMinimumWidth(<a class="code" href="class_i_h_m_just_feed.html#add00614e57b9b007cc0a383014f43740">gui</a>-&gt;width());</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    <span class="comment">// Hauteur fixe ?</span></div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;    <span class="comment">// tableWidgetDistributeurs-&gt;setMinimumHeight(gui-&gt;height());</span></div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;    <span class="comment">/*cf. setFixedSize()*/</span></div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setFixedHeight(</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;      <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;verticalHeader()-&gt;length() +</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;horizontalHeader()-&gt;height());</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;    <span class="comment">// Largeur automatique des colonnes sur toute la largeur</span></div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;    QHeaderView* headerView = <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;horizontalHeader();</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;    headerView-&gt;setSectionResizeMode(QHeaderView::Stretch);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    <span class="comment">// Pas de scroll</span></div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;}</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160; </div>
+<div class="line"><a name="l00311"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#ad7d6fb9725f7690059e32545ac0b2f19">  311</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#ad7d6fb9725f7690059e32545ac0b2f19">IHMJustFeed::initialiserEvenements</a>()</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;{</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    connect(<a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>,</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;            SIGNAL(cellClicked(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>)),</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;            <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;            SLOT(<a class="code" href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">selectionnerDistributeur</a>(<span class="keywordtype">int</span>, <span class="keywordtype">int</span>)));</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;    connect(<a class="code" href="class_i_h_m_just_feed.html#a2858634f426c151fe3866a05ad31ddbf">listeDistributeurs</a>,</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;            SIGNAL(currentIndexChanged(<span class="keywordtype">int</span>)),</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;            <span class="keyword">this</span>,</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;            SLOT(<a class="code" href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">selectionnerDistributeur</a>(<span class="keywordtype">int</span>)));</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;    connect(<a class="code" href="class_i_h_m_just_feed.html#a03582cc1b35d36151d7cbd104de7f0a5">boutonConfigurer</a>, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_i_h_m_just_feed.html#aef68b5bc52512ab084e9963099ae273a">configurerDistributeur</a>()));</div>
+<div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;    connect(<a class="code" href="class_i_h_m_just_feed.html#a81037205102bab53dd5943acf7ebbcb2">boutonValider</a>, SIGNAL(clicked()), <span class="keyword">this</span>, SLOT(<a class="code" href="class_i_h_m_just_feed.html#aacb88e7bfa6822ce9df8b5f50894ead4">afficherFenetreAccueil</a>()));</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;}</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00328"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#ab75dac57d8da106ad159b6395e6afaa4">  328</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#ab75dac57d8da106ad159b6395e6afaa4">IHMJustFeed::initialiserDistributeurs</a>()</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;{</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.push_back(<span class="keyword">new</span> <a class="code" href="class_distributeur.html">Distributeur</a>(<span class="stringliteral">&quot;distributeur-1-sim&quot;</span>,</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                                             { <span class="stringliteral">&quot;44.11161&quot;</span>, <span class="stringliteral">&quot;4.84856&quot;</span>, <span class="stringliteral">&quot;0&quot;</span> },</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                                             <span class="stringliteral">&quot;Grand Frais&quot;</span>,</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;                                             <span class="stringliteral">&quot;Distributeur de fruits secs&quot;</span>,</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;                                             <span class="stringliteral">&quot;Zone du Coudoulet Rond point du Péage Sud&quot;</span>,</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;                                             <span class="stringliteral">&quot;84100&quot;</span>,</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;                                             <span class="stringliteral">&quot;Orange&quot;</span>,</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;                                             QDate::fromString(<span class="stringliteral">&quot;2022-01-08&quot;</span>, <span class="stringliteral">&quot;yyyy-MM-dd&quot;</span>)));</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.push_back(<span class="keyword">new</span> <a class="code" href="class_distributeur.html">Distributeur</a>(<span class="stringliteral">&quot;distributeur-2-sim&quot;</span>,</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;                                             { <span class="stringliteral">&quot;43.92844&quot;</span>, <span class="stringliteral">&quot;4.79247&quot;</span>, <span class="stringliteral">&quot;0&quot;</span> },</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;                                             <span class="stringliteral">&quot;Carrefour&quot;</span>,</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;                                             <span class="stringliteral">&quot;Distributeur de fruits secs&quot;</span>,</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;                                             <span class="stringliteral">&quot;390 Rue Jean Marie Tjibaou&quot;</span>,</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                                             <span class="stringliteral">&quot;84000&quot;</span>,</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;                                             <span class="stringliteral">&quot;Avignon&quot;</span>,</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                                             QDate::fromString(<span class="stringliteral">&quot;2022-03-09&quot;</span>, <span class="stringliteral">&quot;yyyy-MM-dd&quot;</span>)));</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.push_back(<span class="keyword">new</span> <a class="code" href="class_distributeur.html">Distributeur</a>(<span class="stringliteral">&quot;distributeur-3&quot;</span>,</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;                                             { <span class="stringliteral">&quot;43.90252&quot;</span>, <span class="stringliteral">&quot;4.75280&quot;</span>, <span class="stringliteral">&quot;0&quot;</span> },</div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;                                             <span class="stringliteral">&quot;Cosy Primeurs&quot;</span>,</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;                                             <span class="stringliteral">&quot;Distributeur de fruits secs&quot;</span>,</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;                                             <span class="stringliteral">&quot;292 Route de Boulbon&quot;</span>,</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                                             <span class="stringliteral">&quot;13570&quot;</span>,</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;                                             <span class="stringliteral">&quot;Barbentane&quot;</span>,</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;                                             QDate::fromString(<span class="stringliteral">&quot;2022-01-10&quot;</span>, <span class="stringliteral">&quot;yyyy-MM-dd&quot;</span>)));</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160; </div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* pruneaux    = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Pruneaux&quot;</span>,</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;                                    <span class="stringliteral">&quot;Maître Prunille&quot;</span>,</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;                                    <span class="stringliteral">&quot;Les Pruneaux d&#39;Agen dénoyautés Maître Prunille sont une &quot;</span></div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;                                       <span class="stringliteral">&quot;délicieuse friandise à déguster à tout moment de la journée.&quot;</span>,</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;                                    <span class="stringliteral">&quot;761234567890&quot;</span>,</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                                    1.15);</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* abricot     = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Abricots secs&quot;</span>,</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;                                   <span class="stringliteral">&quot;Maître Prunille&quot;</span>,</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160;                                   <span class="stringliteral">&quot;L&#39;abricot moelleux, une gourmandise tendre et fruitée !&quot;</span>,</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;                                   <span class="stringliteral">&quot;761234566000&quot;</span>,</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;                                   1.13);</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* cranberries = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Cranberries&quot;</span>,</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;                                       <span class="stringliteral">&quot;SEEBERGER&quot;</span>,</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;                                       <span class="stringliteral">&quot;Cranberries tranchées sucrées séchées&quot;</span>,</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;                                       <span class="stringliteral">&quot;761234569000&quot;</span>,</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;                                       2.1);</div>
+<div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* banane =</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Banane CHIPS&quot;</span>, <span class="stringliteral">&quot; BIO VILLAGE&quot;</span>, <span class="stringliteral">&quot;Banane CHIPS bio &quot;</span>, <span class="stringliteral">&quot;761234560008&quot;</span>, 0.76);</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* raisin    = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Raisin sec&quot;</span>,</div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;                                  <span class="stringliteral">&quot;Petit Prix&quot;</span>,</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;                                  <span class="stringliteral">&quot;Raisins secs, huile végétale (graine de coton)&quot;</span>,</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;                                  <span class="stringliteral">&quot;761264569090&quot;</span>,</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;                                  0.39);</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* fruitsSec = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;fruits sec&quot;</span>,</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160;                                     <span class="stringliteral">&quot;FRUIDYLLIC&quot;</span>,</div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;                                     <span class="stringliteral">&quot;Peut se manger tel que sans préparation.&quot;</span>,</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;                                     <span class="stringliteral">&quot;761234960940&quot;</span>,</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;                                     1.06);</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* cacahuete =</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;      <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Cacahuète&quot;</span>,</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;                  <span class="stringliteral">&quot;Carrefour&quot;</span>,</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;                  <span class="stringliteral">&quot;Arachide crue blanche décortiquée pour cuisiner ou pâtisserie&quot;</span>,</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;                  <span class="stringliteral">&quot;761234561000&quot;</span>,</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                  0.49);</div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* soja = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Soja&quot;</span>, <span class="stringliteral">&quot;OFAL BIO&quot;</span>, <span class="stringliteral">&quot;SOJA jaune biologique.&quot;</span>, <span class="stringliteral">&quot;761234529000&quot;</span>, 0.96);</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;    <a class="code" href="class_produit.html">Produit</a>* basilic = <span class="keyword">new</span> <a class="code" href="class_produit.html">Produit</a>(<span class="stringliteral">&quot;Basilic&quot;</span>,</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                                   <span class="stringliteral">&quot;DUCROS&quot;</span>,</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                                   <span class="stringliteral">&quot;Basilic déshydraté issu de l&#39;agriculture biologique&quot;</span>,</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                                   <span class="stringliteral">&quot;761234679900&quot;</span>,</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                                   17.18);</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160; </div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(pruneaux);</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(abricot);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(cranberries);</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(banane);</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(raisin);</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(fruitsSec);</div>
+<div class="line"><a name="l00405"></a><span class="lineno">  405</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(cacahuete);</div>
+<div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(soja);</div>
+<div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">produits</a>.push_back(basilic);</div>
+<div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160; </div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[0]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(pruneaux, 0, 0.));</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[0]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(abricot, 0, 0.));</div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[0]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(cranberries, 0, 0.));</div>
+<div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Distributeur&quot;</span> &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[0]-&gt;getNom() &lt;&lt; <span class="stringliteral">&quot;NbBacs&quot;</span></div>
+<div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;             &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[0]-&gt;getNbBacs();</div>
+<div class="line"><a name="l00414"></a><span class="lineno">  414</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[1]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(banane, 0, 0.));</div>
+<div class="line"><a name="l00415"></a><span class="lineno">  415</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[1]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(raisin, 0, 0.));</div>
+<div class="line"><a name="l00416"></a><span class="lineno">  416</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[1]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(fruitsSec, 0, 0.));</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Distributeur&quot;</span> &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[1]-&gt;getNom() &lt;&lt; <span class="stringliteral">&quot;NbBacs&quot;</span></div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;             &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[1]-&gt;getNbBacs();</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[2]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(cacahuete, 0, 0.));</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[2]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(soja, 0, 0.));</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[2]-&gt;ajouterBac(<a class="code" href="class_bac.html">Bac</a>(basilic, 0, 0.));</div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;Distributeur&quot;</span> &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[2]-&gt;getNom() &lt;&lt; <span class="stringliteral">&quot;NbBacs&quot;</span></div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;             &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>[2]-&gt;getNbBacs();</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160; </div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">numeroDistributeurSelectionne</a> = 0; <span class="comment">// pour les tests</span></div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;}</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160; </div>
+<div class="line"><a name="l00431"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a7234bfc5ebcd10d581a0bd8a976730f6">  431</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a7234bfc5ebcd10d581a0bd8a976730f6">IHMJustFeed::initialiserProduits</a>()</div>
+<div class="line"><a name="l00432"></a><span class="lineno">  432</span>&#160;{</div>
+<div class="line"><a name="l00436"></a><span class="lineno">  436</span>&#160;}</div>
+<div class="line"><a name="l00437"></a><span class="lineno">  437</span>&#160; </div>
+<div class="line"><a name="l00441"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a4afa7cbde9234191b329fcd83b13a09e">  441</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a4afa7cbde9234191b329fcd83b13a09e">IHMJustFeed::chargerDistributeurs</a>()</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;{</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.size(); ++i)</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    {</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160;        <a class="code" href="class_i_h_m_just_feed.html#aa2e05e000da7aee0ca412d2872b68025">afficherDistributeurTable</a>(*<a class="code" href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">distributeurs</a>.at(i));</div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    }</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;}</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160; </div>
+<div class="line"><a name="l00453"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#aa2e05e000da7aee0ca412d2872b68025">  453</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#aa2e05e000da7aee0ca412d2872b68025">IHMJustFeed::afficherDistributeurTable</a>(<span class="keyword">const</span> <a class="code" href="class_distributeur.html">Distributeur</a>&amp; distributeur)</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;{</div>
+<div class="line"><a name="l00455"></a><span class="lineno">  455</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span>;</div>
+<div class="line"><a name="l00456"></a><span class="lineno">  456</span>&#160; </div>
+<div class="line"><a name="l00457"></a><span class="lineno">  457</span>&#160;    QFont texte;</div>
+<div class="line"><a name="l00458"></a><span class="lineno">  458</span>&#160;    <span class="comment">// texte.setPointSize(TAILLE_POLICE);</span></div>
+<div class="line"><a name="l00459"></a><span class="lineno">  459</span>&#160;    texte.setBold(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00460"></a><span class="lineno">  460</span>&#160; </div>
+<div class="line"><a name="l00461"></a><span class="lineno">  461</span>&#160;    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal;</div>
+<div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160; </div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="comment">// Le nombre d&#39;utilisateurs déjà présents dans la table</span></div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    <span class="keywordtype">int</span> nb = <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;rowCount();</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160; </div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;    <span class="comment">// Affiche les informations dans la table</span></div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    itemEnseigne = <span class="keyword">new</span> QTableWidgetItem(distributeur.<a class="code" href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">getNom</a>());</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <span class="comment">// Personnalise un item</span></div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;    itemEnseigne-&gt;setFlags(Qt::ItemIsEnabled);</div>
+<div class="line"><a name="l00470"></a><span class="lineno">  470</span>&#160;    itemEnseigne-&gt;setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);</div>
+<div class="line"><a name="l00471"></a><span class="lineno">  471</span>&#160; </div>
+<div class="line"><a name="l00472"></a><span class="lineno">  472</span>&#160;    itemAdresse = <span class="keyword">new</span> QTableWidgetItem(distributeur.<a class="code" href="class_distributeur.html#a8b844eae19e403c972d78194bfb3c872">getAdresse</a>());</div>
+<div class="line"><a name="l00473"></a><span class="lineno">  473</span>&#160;    itemAdresse-&gt;setFlags(Qt::ItemIsEnabled);</div>
+<div class="line"><a name="l00474"></a><span class="lineno">  474</span>&#160;    itemAdresse-&gt;setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);</div>
+<div class="line"><a name="l00475"></a><span class="lineno">  475</span>&#160; </div>
+<div class="line"><a name="l00476"></a><span class="lineno">  476</span>&#160;    itemVille = <span class="keyword">new</span> QTableWidgetItem(distributeur.<a class="code" href="class_distributeur.html#af00ed092114ea0882c3a55f4673719ac">getVille</a>());</div>
+<div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;    itemVille-&gt;setFlags(Qt::ItemIsEnabled);</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    itemVille-&gt;setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160; </div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    itemCodePostal = <span class="keyword">new</span> QTableWidgetItem(distributeur.<a class="code" href="class_distributeur.html#a385153e4add07e66032c795fd5363468">getCodePostal</a>());</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;    itemCodePostal-&gt;setFlags(Qt::ItemIsEnabled);</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;    itemCodePostal-&gt;setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160; </div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">nbLignesDistributeurs</a> += 1;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;nbLignesDistributeur&quot;</span> &lt;&lt; <a class="code" href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">nbLignesDistributeurs</a>;</div>
+<div class="line"><a name="l00486"></a><span class="lineno">  486</span>&#160; </div>
+<div class="line"><a name="l00487"></a><span class="lineno">  487</span>&#160;    <span class="comment">// Ajoute une nouvelle ligne</span></div>
+<div class="line"><a name="l00488"></a><span class="lineno">  488</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setRowCount(++nb);</div>
+<div class="line"><a name="l00489"></a><span class="lineno">  489</span>&#160;    <span class="comment">// Insère les informations dans la table</span></div>
+<div class="line"><a name="l00490"></a><span class="lineno">  490</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setItem(nb - 1, <a class="code" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da46f66c670e062d9a95d3d6a5351485dc">COLONNE_DISTRIBUTEUR_NOM</a>, itemEnseigne);</div>
+<div class="line"><a name="l00491"></a><span class="lineno">  491</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setItem(nb - 1, <a class="code" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49dacab5905c274674073bac0ae03231f5b9">COLONNE_DISTRIBUTEUR_ADRESSE</a>, itemAdresse);</div>
+<div class="line"><a name="l00492"></a><span class="lineno">  492</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setItem(nb - 1, <a class="code" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da7933a8633b8fd17b25d8e41dbc6376da">COLONNE_DISTRIBUTEUR_VILLE</a>, itemVille);</div>
+<div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setItem(nb - 1, <a class="code" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da388fad449a02053b4208893bcfcc910e">COLONNE_DISTRIBUTEUR_CODEPOSTAL</a>, itemCodePostal);</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160; </div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    <span class="comment">// Se replace au début de la table</span></div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;scrollToItem(<a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;item(0, 1));</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setCurrentCell(0, 1);</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160; </div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    <span class="comment">// La hauteur a changé !</span></div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;setFixedHeight(</div>
+<div class="line"><a name="l00501"></a><span class="lineno">  501</span>&#160;      <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;verticalHeader()-&gt;length() +</div>
+<div class="line"><a name="l00502"></a><span class="lineno">  502</span>&#160;      <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;horizontalHeader()-&gt;height());</div>
+<div class="line"><a name="l00503"></a><span class="lineno">  503</span>&#160;}</div>
+<div class="line"><a name="l00504"></a><span class="lineno">  504</span>&#160; </div>
+<div class="line"><a name="l00508"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a5cc0d7a9c6d6c0f7b8cc24160cc00700">  508</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a5cc0d7a9c6d6c0f7b8cc24160cc00700">IHMJustFeed::afficherDistributeur</a>(<a class="code" href="class_distributeur.html">Distributeur</a>* distributeur)</div>
+<div class="line"><a name="l00509"></a><span class="lineno">  509</span>&#160;{</div>
+<div class="line"><a name="l00513"></a><span class="lineno">  513</span>&#160;    <span class="comment">// pour les tests</span></div>
+<div class="line"><a name="l00514"></a><span class="lineno">  514</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">nomDistributeur</a>-&gt;setText(distributeur-&gt;<a class="code" href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">getNom</a>());</div>
+<div class="line"><a name="l00515"></a><span class="lineno">  515</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#addb4ba8134853417745ab8422e545303">adresseDistributeur</a>-&gt;setText(distributeur-&gt;<a class="code" href="class_distributeur.html#a8b844eae19e403c972d78194bfb3c872">getAdresse</a>());</div>
+<div class="line"><a name="l00516"></a><span class="lineno">  516</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a8ac09b2ef9c3837b4b1ebf8323b42f99">codePostalDistributeur</a>-&gt;setText(distributeur-&gt;<a class="code" href="class_distributeur.html#a385153e4add07e66032c795fd5363468">getCodePostal</a>());</div>
+<div class="line"><a name="l00517"></a><span class="lineno">  517</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7a72687cadb456e79bf3aa741bc34884">villeDistributeur</a>-&gt;setText(distributeur-&gt;<a class="code" href="class_distributeur.html#af00ed092114ea0882c3a55f4673719ac">getVille</a>());</div>
+<div class="line"><a name="l00518"></a><span class="lineno">  518</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7d907f82eb1986a412196a25bc0ebbc6">descriptionDistributeur</a>-&gt;setText(distributeur-&gt;<a class="code" href="class_distributeur.html#a7ffcc51b7faba4205f74d1178bb1ee90">getDescription</a>());</div>
+<div class="line"><a name="l00519"></a><span class="lineno">  519</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a8b11f3009e0eedf220c3d3959fd2f1d1">miseEnServiceDistributeur</a>-&gt;setText(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00520"></a><span class="lineno">  520</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#aa1e9e8fd06da880dc621982d39e23939">positionDistributeur</a>-&gt;setText(<span class="stringliteral">&quot;&quot;</span>);</div>
+<div class="line"><a name="l00521"></a><span class="lineno">  521</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a7c0cf8b10774ccb920a3af48ebf66be4">afficherFenetreDistributeur</a>();</div>
+<div class="line"><a name="l00522"></a><span class="lineno">  522</span>&#160;}</div>
+<div class="line"><a name="l00523"></a><span class="lineno">  523</span>&#160; </div>
+<div class="line"><a name="l00527"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#ab47f9b9947a225fa6e952960b6d7f622">  527</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#ab47f9b9947a225fa6e952960b6d7f622">IHMJustFeed::effacerTableau</a>(<span class="keywordtype">int</span> ligne, <span class="keywordtype">int</span> colonne)</div>
+<div class="line"><a name="l00528"></a><span class="lineno">  528</span>&#160;{</div>
+<div class="line"><a name="l00529"></a><span class="lineno">  529</span>&#160;    Q_UNUSED(ligne)</div>
+<div class="line"><a name="l00530"></a><span class="lineno">  530</span>&#160;    Q_UNUSED(colonne)</div>
+<div class="line"><a name="l00531"></a><span class="lineno">  531</span>&#160;    <span class="comment">// on réinitialise la table</span></div>
+<div class="line"><a name="l00532"></a><span class="lineno">  532</span>&#160;    <span class="keywordtype">int</span> nb = <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;rowCount();</div>
+<div class="line"><a name="l00533"></a><span class="lineno">  533</span>&#160;    <span class="keywordflow">if</span>(nb != 0)</div>
+<div class="line"><a name="l00534"></a><span class="lineno">  534</span>&#160;    {</div>
+<div class="line"><a name="l00535"></a><span class="lineno">  535</span>&#160;        <span class="comment">// on les efface</span></div>
+<div class="line"><a name="l00536"></a><span class="lineno">  536</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> n = 0; n &lt; nb; n++)</div>
+<div class="line"><a name="l00537"></a><span class="lineno">  537</span>&#160;            <a class="code" href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">tableWidgetDistributeurs</a>-&gt;removeRow(0);</div>
+<div class="line"><a name="l00538"></a><span class="lineno">  538</span>&#160;    }</div>
+<div class="line"><a name="l00539"></a><span class="lineno">  539</span>&#160;}</div>
+<div class="line"><a name="l00540"></a><span class="lineno">  540</span>&#160; </div>
+<div class="line"><a name="l00546"></a><span class="lineno"><a class="line" href="class_i_h_m_just_feed.html#a936cc3d5a64c9edd09fec4c3cfaea212">  546</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="class_i_h_m_just_feed.html#a936cc3d5a64c9edd09fec4c3cfaea212">IHMJustFeed::effacerTableDistributeurs</a>()</div>
+<div class="line"><a name="l00547"></a><span class="lineno">  547</span>&#160;{</div>
+<div class="line"><a name="l00548"></a><span class="lineno">  548</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00549"></a><span class="lineno">  549</span>&#160; </div>
+<div class="line"><a name="l00550"></a><span class="lineno">  550</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#ab47f9b9947a225fa6e952960b6d7f622">effacerTableau</a>(0, 0);</div>
+<div class="line"><a name="l00551"></a><span class="lineno">  551</span>&#160;    <a class="code" href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">nbLignesDistributeurs</a> = 0;</div>
+<div class="line"><a name="l00552"></a><span class="lineno">  552</span>&#160;}</div>
+<div class="ttc" id="abac_8h_html"><div class="ttname"><a href="bac_8h.html">bac.h</a></div><div class="ttdoc">Déclaration de la classe Bac.</div></div>
+<div class="ttc" id="aclass_bac_html"><div class="ttname"><a href="class_bac.html">Bac</a></div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00016">bac.h:17</a></div></div>
+<div class="ttc" id="aclass_configuration_distributeur_html"><div class="ttname"><a href="class_configuration_distributeur.html">ConfigurationDistributeur</a></div><div class="ttdoc">Déclaration de la classe ConfigurationDistributeur.</div><div class="ttdef"><b>Definition:</b> <a href="configurationdistributeur_8h_source.html#l00032">configurationdistributeur.h:33</a></div></div>
+<div class="ttc" id="aclass_distributeur_html"><div class="ttname"><a href="class_distributeur.html">Distributeur</a></div><div class="ttdoc">Déclaration de la classe Distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8h_source.html#l00034">distributeur.h:35</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_a385153e4add07e66032c795fd5363468"><div class="ttname"><a href="class_distributeur.html#a385153e4add07e66032c795fd5363468">Distributeur::getCodePostal</a></div><div class="ttdeci">QString getCodePostal() const</div><div class="ttdoc">Accesseur de l'attribut codePostal.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00119">distributeur.cpp:119</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_a7ffcc51b7faba4205f74d1178bb1ee90"><div class="ttname"><a href="class_distributeur.html#a7ffcc51b7faba4205f74d1178bb1ee90">Distributeur::getDescription</a></div><div class="ttdeci">QString getDescription() const</div><div class="ttdoc">Accesseur de l'attribut description.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00146">distributeur.cpp:146</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_a8b844eae19e403c972d78194bfb3c872"><div class="ttname"><a href="class_distributeur.html#a8b844eae19e403c972d78194bfb3c872">Distributeur::getAdresse</a></div><div class="ttdeci">QString getAdresse() const</div><div class="ttdoc">Accesseur de l'attribut adresse.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00110">distributeur.cpp:110</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_ae3b4b61b2443f6918eb036a8c8f0c30a"><div class="ttname"><a href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">Distributeur::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Accesseur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00101">distributeur.cpp:101</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_af00ed092114ea0882c3a55f4673719ac"><div class="ttname"><a href="class_distributeur.html#af00ed092114ea0882c3a55f4673719ac">Distributeur::getVille</a></div><div class="ttdeci">QString getVille() const</div><div class="ttdoc">Accesseur de l'attribut ville.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00128">distributeur.cpp:128</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a03582cc1b35d36151d7cbd104de7f0a5"><div class="ttname"><a href="class_i_h_m_just_feed.html#a03582cc1b35d36151d7cbd104de7f0a5">IHMJustFeed::boutonConfigurer</a></div><div class="ttdeci">QPushButton * boutonConfigurer</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00086">ihmjustfeed.h:86</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a04e4c5f47d6a693d7d8cb88c3060262d"><div class="ttname"><a href="class_i_h_m_just_feed.html#a04e4c5f47d6a693d7d8cb88c3060262d">IHMJustFeed::boutonIntervenir</a></div><div class="ttdeci">QPushButton * boutonIntervenir</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00085">ihmjustfeed.h:85</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a0f2ebe0ba7c02c8f83f503d6aebec917"><div class="ttname"><a href="class_i_h_m_just_feed.html#a0f2ebe0ba7c02c8f83f503d6aebec917">IHMJustFeed::~IHMJustFeed</a></div><div class="ttdeci">~IHMJustFeed()</div><div class="ttdoc">destructeur de la classe IHMJustFeed</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00033">ihmjustfeed.cpp:33</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a189e7f27e2687c8eee03382f6be755e4"><div class="ttname"><a href="class_i_h_m_just_feed.html#a189e7f27e2687c8eee03382f6be755e4">IHMJustFeed::tableWidgetDistributeurs</a></div><div class="ttdeci">QTableWidget * tableWidgetDistributeurs</div><div class="ttdoc">l'affichage sous forme de table</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00084">ihmjustfeed.h:84</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a1ca32116bf7182b98dbd86e12a791078"><div class="ttname"><a href="class_i_h_m_just_feed.html#a1ca32116bf7182b98dbd86e12a791078">IHMJustFeed::distributeurs</a></div><div class="ttdeci">QVector&lt; Distributeur * &gt; distributeurs</div><div class="ttdoc">les distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00071">ihmjustfeed.h:71</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a1d5783f025b58d5d7343989a308bf86a"><div class="ttname"><a href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">IHMJustFeed::nbLignesDistributeurs</a></div><div class="ttdeci">int nbLignesDistributeurs</div><div class="ttdoc">le nombre de lignes dans la table</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00077">ihmjustfeed.h:77</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a2858634f426c151fe3866a05ad31ddbf"><div class="ttname"><a href="class_i_h_m_just_feed.html#a2858634f426c151fe3866a05ad31ddbf">IHMJustFeed::listeDistributeurs</a></div><div class="ttdeci">QComboBox * listeDistributeurs</div><div class="ttdoc">liste de distributeurs</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00088">ihmjustfeed.h:88</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a30c5eafeb052156b3e1ee90e83d7fe6e"><div class="ttname"><a href="class_i_h_m_just_feed.html#a30c5eafeb052156b3e1ee90e83d7fe6e">IHMJustFeed::configurationDistributeur</a></div><div class="ttdeci">ConfigurationDistributeur * configurationDistributeur</div><div class="ttdoc">la boîte de dialogue pour configurer un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00075">ihmjustfeed.h:75</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a3ca265117c4192d6cd633c57165fc44e"><div class="ttname"><a href="class_i_h_m_just_feed.html#a3ca265117c4192d6cd633c57165fc44e">IHMJustFeed::fenetreDistributeur</a></div><div class="ttdeci">QWidget * fenetreDistributeur</div><div class="ttdoc">la fenêtre d'un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00083">ihmjustfeed.h:83</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a418f10480ee62db2c6365d955c313aea"><div class="ttname"><a href="class_i_h_m_just_feed.html#a418f10480ee62db2c6365d955c313aea">IHMJustFeed::getDistributeur</a></div><div class="ttdeci">Distributeur * getDistributeur(QString nom) const</div><div class="ttdoc">méthode qui retourne le distributeur dont le nom est passé en paramètre</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00047">ihmjustfeed.cpp:47</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a49d28c323b4588f1966e74627963c81e"><div class="ttname"><a href="class_i_h_m_just_feed.html#a49d28c323b4588f1966e74627963c81e">IHMJustFeed::getPrixProduit</a></div><div class="ttdeci">double getPrixProduit(int index) const</div><div class="ttdoc">méthode qui retourne le prix de produit</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00076">ihmjustfeed.cpp:76</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4afa7cbde9234191b329fcd83b13a09e"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4afa7cbde9234191b329fcd83b13a09e">IHMJustFeed::chargerDistributeurs</a></div><div class="ttdeci">void chargerDistributeurs()</div><div class="ttdoc">méthode qui charge et affiche les distributeurs disponibles</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00441">ihmjustfeed.cpp:441</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4ba1c55ca75b1a03e7d3f47e2b56c49da388fad449a02053b4208893bcfcc910e"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da388fad449a02053b4208893bcfcc910e">IHMJustFeed::COLONNE_DISTRIBUTEUR_CODEPOSTAL</a></div><div class="ttdeci">@ COLONNE_DISTRIBUTEUR_CODEPOSTAL</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00065">ihmjustfeed.h:65</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4ba1c55ca75b1a03e7d3f47e2b56c49da46f66c670e062d9a95d3d6a5351485dc"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da46f66c670e062d9a95d3d6a5351485dc">IHMJustFeed::COLONNE_DISTRIBUTEUR_NOM</a></div><div class="ttdeci">@ COLONNE_DISTRIBUTEUR_NOM</div><div class="ttdoc">Emplacement du nom.</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00062">ihmjustfeed.h:62</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4ba1c55ca75b1a03e7d3f47e2b56c49da7933a8633b8fd17b25d8e41dbc6376da"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da7933a8633b8fd17b25d8e41dbc6376da">IHMJustFeed::COLONNE_DISTRIBUTEUR_VILLE</a></div><div class="ttdeci">@ COLONNE_DISTRIBUTEUR_VILLE</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00064">ihmjustfeed.h:64</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4ba1c55ca75b1a03e7d3f47e2b56c49dacab5905c274674073bac0ae03231f5b9"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49dacab5905c274674073bac0ae03231f5b9">IHMJustFeed::COLONNE_DISTRIBUTEUR_ADRESSE</a></div><div class="ttdeci">@ COLONNE_DISTRIBUTEUR_ADRESSE</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00063">ihmjustfeed.h:63</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a4d7babe00d35fcd54d889efd1b9268ee"><div class="ttname"><a href="class_i_h_m_just_feed.html#a4d7babe00d35fcd54d889efd1b9268ee">IHMJustFeed::selectionnerDistributeur</a></div><div class="ttdeci">void selectionnerDistributeur(int numeroDistributeur)</div><div class="ttdoc">méthode qui sélectionne un distributeur à configurer</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00138">ihmjustfeed.cpp:138</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a51be77e4855b0f8cef2b33ebe7af3610"><div class="ttname"><a href="class_i_h_m_just_feed.html#a51be77e4855b0f8cef2b33ebe7af3610">IHMJustFeed::IHMJustFeed</a></div><div class="ttdeci">IHMJustFeed(QWidget *parent=nullptr)</div><div class="ttdoc">constructeur par défaut de la classe IHMJustFeed</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00021">ihmjustfeed.cpp:21</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a52feef903385404d5dd2ca9182aa3260"><div class="ttname"><a href="class_i_h_m_just_feed.html#a52feef903385404d5dd2ca9182aa3260">IHMJustFeed::instancierWidgets</a></div><div class="ttdeci">void instancierWidgets()</div><div class="ttdoc">méthode qui instancie les widgets de la GUI</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00178">ihmjustfeed.cpp:178</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a5cc0d7a9c6d6c0f7b8cc24160cc00700"><div class="ttname"><a href="class_i_h_m_just_feed.html#a5cc0d7a9c6d6c0f7b8cc24160cc00700">IHMJustFeed::afficherDistributeur</a></div><div class="ttdeci">void afficherDistributeur(Distributeur *distributeur)</div><div class="ttdoc">méthode qui affiche les détails d'un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00508">ihmjustfeed.cpp:508</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a5dfa32e9dd327ec2d2d0d01c56ccc775"><div class="ttname"><a href="class_i_h_m_just_feed.html#a5dfa32e9dd327ec2d2d0d01c56ccc775">IHMJustFeed::afficherFenetre</a></div><div class="ttdeci">void afficherFenetre(IHMJustFeed::Fenetre fenetre)</div><div class="ttdoc">méthode qui affiche les fenetres</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00094">ihmjustfeed.cpp:94</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a63af55ce478ed56e54f46dc5682744d3"><div class="ttname"><a href="class_i_h_m_just_feed.html#a63af55ce478ed56e54f46dc5682744d3">IHMJustFeed::produits</a></div><div class="ttdeci">QVector&lt; Produit * &gt; produits</div><div class="ttdoc">les produits</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00072">ihmjustfeed.h:72</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a6c111095fc099e52371055f9b6d6bb23"><div class="ttname"><a href="class_i_h_m_just_feed.html#a6c111095fc099e52371055f9b6d6bb23">IHMJustFeed::fenetres</a></div><div class="ttdeci">QStackedWidget * fenetres</div><div class="ttdoc">la pile de fenêtres</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00081">ihmjustfeed.h:81</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a6d00d1324370aa24a3dd21c473bf9698"><div class="ttname"><a href="class_i_h_m_just_feed.html#a6d00d1324370aa24a3dd21c473bf9698">IHMJustFeed::getNbProduits</a></div><div class="ttdeci">int getNbProduits() const</div><div class="ttdoc">méthode qui retourne le nombre de produits disponibles</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00084">ihmjustfeed.cpp:84</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7234bfc5ebcd10d581a0bd8a976730f6"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7234bfc5ebcd10d581a0bd8a976730f6">IHMJustFeed::initialiserProduits</a></div><div class="ttdeci">void initialiserProduits()</div><div class="ttdoc">méthode qui initialise les différents produits disponibles</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00431">ihmjustfeed.cpp:431</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a767ef40b9947e1efacf95f10a1c7011f"><div class="ttname"><a href="class_i_h_m_just_feed.html#a767ef40b9947e1efacf95f10a1c7011f">IHMJustFeed::positionnerWidgets</a></div><div class="ttdeci">void positionnerWidgets()</div><div class="ttdoc">méthode qui positionne les widgets dans la GUI</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00226">ihmjustfeed.cpp:226</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7a2ebd130413e55b7562f8cd6f44a2b5"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7a2ebd130413e55b7562f8cd6f44a2b5">IHMJustFeed::initialiseTable</a></div><div class="ttdeci">void initialiseTable()</div><div class="ttdoc">méthode qui initialise le QTableWidget</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00271">ihmjustfeed.cpp:271</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7a72687cadb456e79bf3aa741bc34884"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7a72687cadb456e79bf3aa741bc34884">IHMJustFeed::villeDistributeur</a></div><div class="ttdeci">QLabel * villeDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00092">ihmjustfeed.h:92</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7c0cf8b10774ccb920a3af48ebf66be4"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7c0cf8b10774ccb920a3af48ebf66be4">IHMJustFeed::afficherFenetreDistributeur</a></div><div class="ttdeci">void afficherFenetreDistributeur()</div><div class="ttdoc">méthode qui affiche la fenetre d'un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00110">ihmjustfeed.cpp:110</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7c9ba77647a2a30748ebf573e22516b4"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7c9ba77647a2a30748ebf573e22516b4">IHMJustFeed::initialiserWidgets</a></div><div class="ttdeci">void initialiserWidgets()</div><div class="ttdoc">méthode qui initialise les widgets de la GUI</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00207">ihmjustfeed.cpp:207</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7d907f82eb1986a412196a25bc0ebbc6"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7d907f82eb1986a412196a25bc0ebbc6">IHMJustFeed::descriptionDistributeur</a></div><div class="ttdeci">QLabel * descriptionDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00093">ihmjustfeed.h:93</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a7d974a0601aba56f051fdf07bd1bb466"><div class="ttname"><a href="class_i_h_m_just_feed.html#a7d974a0601aba56f051fdf07bd1bb466">IHMJustFeed::nomColonnes</a></div><div class="ttdeci">QStringList nomColonnes</div><div class="ttdoc">la liste des noms de colonne</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00076">ihmjustfeed.h:76</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a81037205102bab53dd5943acf7ebbcb2"><div class="ttname"><a href="class_i_h_m_just_feed.html#a81037205102bab53dd5943acf7ebbcb2">IHMJustFeed::boutonValider</a></div><div class="ttdeci">QPushButton * boutonValider</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00087">ihmjustfeed.h:87</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a82953747b621eef32a8e7361f0bb4aeb"><div class="ttname"><a href="class_i_h_m_just_feed.html#a82953747b621eef32a8e7361f0bb4aeb">IHMJustFeed::getProduit</a></div><div class="ttdeci">Produit * getProduit(int index) const</div><div class="ttdoc">méthode qui retourne le produit</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00060">ihmjustfeed.cpp:60</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a8ac09b2ef9c3837b4b1ebf8323b42f99"><div class="ttname"><a href="class_i_h_m_just_feed.html#a8ac09b2ef9c3837b4b1ebf8323b42f99">IHMJustFeed::codePostalDistributeur</a></div><div class="ttdeci">QLabel * codePostalDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00091">ihmjustfeed.h:91</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a8b11f3009e0eedf220c3d3959fd2f1d1"><div class="ttname"><a href="class_i_h_m_just_feed.html#a8b11f3009e0eedf220c3d3959fd2f1d1">IHMJustFeed::miseEnServiceDistributeur</a></div><div class="ttdeci">QLabel * miseEnServiceDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00094">ihmjustfeed.h:94</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a936cc3d5a64c9edd09fec4c3cfaea212"><div class="ttname"><a href="class_i_h_m_just_feed.html#a936cc3d5a64c9edd09fec4c3cfaea212">IHMJustFeed::effacerTableDistributeurs</a></div><div class="ttdeci">void effacerTableDistributeurs()</div><div class="ttdoc">méthode qui efface le QTableWidget</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00546">ihmjustfeed.cpp:546</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a94a60c012ec082a17a3a16401b94d9c7"><div class="ttname"><a href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">IHMJustFeed::nomDistributeur</a></div><div class="ttdeci">QLabel * nomDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00089">ihmjustfeed.h:89</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_a9c6f586e2f2db7f9168f127d8b2cabc3"><div class="ttname"><a href="class_i_h_m_just_feed.html#a9c6f586e2f2db7f9168f127d8b2cabc3">IHMJustFeed::fenetreAccueil</a></div><div class="ttdeci">QWidget * fenetreAccueil</div><div class="ttdoc">la fenêtre d'accueil</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00082">ihmjustfeed.h:82</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_aa1e9e8fd06da880dc621982d39e23939"><div class="ttname"><a href="class_i_h_m_just_feed.html#aa1e9e8fd06da880dc621982d39e23939">IHMJustFeed::positionDistributeur</a></div><div class="ttdeci">QLabel * positionDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00095">ihmjustfeed.h:95</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_aa2e05e000da7aee0ca412d2872b68025"><div class="ttname"><a href="class_i_h_m_just_feed.html#aa2e05e000da7aee0ca412d2872b68025">IHMJustFeed::afficherDistributeurTable</a></div><div class="ttdeci">void afficherDistributeurTable(const Distributeur &amp;distributeur)</div><div class="ttdoc">méthode qui affiche un distributeur dans le QTableWidget</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00453">ihmjustfeed.cpp:453</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_aa6f3b8150fe18985089fd3a887b23fdb"><div class="ttname"><a href="class_i_h_m_just_feed.html#aa6f3b8150fe18985089fd3a887b23fdb">IHMJustFeed::Fenetre</a></div><div class="ttdeci">Fenetre</div><div class="ttdoc">Définit les différentes fenêtres de l'IHM.</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00049">ihmjustfeed.h:50</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_aacb88e7bfa6822ce9df8b5f50894ead4"><div class="ttname"><a href="class_i_h_m_just_feed.html#aacb88e7bfa6822ce9df8b5f50894ead4">IHMJustFeed::afficherFenetreAccueil</a></div><div class="ttdeci">void afficherFenetreAccueil()</div><div class="ttdoc">méthode qui affiche la fenetre principale</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00102">ihmjustfeed.cpp:102</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ab47f9b9947a225fa6e952960b6d7f622"><div class="ttname"><a href="class_i_h_m_just_feed.html#ab47f9b9947a225fa6e952960b6d7f622">IHMJustFeed::effacerTableau</a></div><div class="ttdeci">void effacerTableau(int ligne, int colonne)</div><div class="ttdoc">méthode qui efface le tableau</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00527">ihmjustfeed.cpp:527</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ab75dac57d8da106ad159b6395e6afaa4"><div class="ttname"><a href="class_i_h_m_just_feed.html#ab75dac57d8da106ad159b6395e6afaa4">IHMJustFeed::initialiserDistributeurs</a></div><div class="ttdeci">void initialiserDistributeurs()</div><div class="ttdoc">méthode qui initialise les distributeurs avec les bacs et les produits</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00328">ihmjustfeed.cpp:328</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ac43f60712d22e91dd0160ba14d176d78"><div class="ttname"><a href="class_i_h_m_just_feed.html#ac43f60712d22e91dd0160ba14d176d78">IHMJustFeed::initialiserGUI</a></div><div class="ttdeci">void initialiserGUI()</div><div class="ttdoc">méthode qui initialise la GUI</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00162">ihmjustfeed.cpp:162</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ac8e34b82db99152afba5122954edd139"><div class="ttname"><a href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">IHMJustFeed::numeroDistributeurSelectionne</a></div><div class="ttdeci">int numeroDistributeurSelectionne</div><div class="ttdoc">le distributeur sélectionné</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00073">ihmjustfeed.h:73</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ad7d6fb9725f7690059e32545ac0b2f19"><div class="ttname"><a href="class_i_h_m_just_feed.html#ad7d6fb9725f7690059e32545ac0b2f19">IHMJustFeed::initialiserEvenements</a></div><div class="ttdeci">void initialiserEvenements()</div><div class="ttdoc">méthode qui initialise les connexion signal/slot</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00311">ihmjustfeed.cpp:311</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_ad819ce91c979eb3542ca79899094f91d"><div class="ttname"><a href="class_i_h_m_just_feed.html#ad819ce91c979eb3542ca79899094f91d">IHMJustFeed::getNomProduit</a></div><div class="ttdeci">QString getNomProduit(int index) const</div><div class="ttdoc">méthode qui retourne le nom du produit</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00068">ihmjustfeed.cpp:68</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_add00614e57b9b007cc0a383014f43740"><div class="ttname"><a href="class_i_h_m_just_feed.html#add00614e57b9b007cc0a383014f43740">IHMJustFeed::gui</a></div><div class="ttdeci">QWidget * gui</div><div class="ttdoc">le widget central</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00080">ihmjustfeed.h:80</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_addb4ba8134853417745ab8422e545303"><div class="ttname"><a href="class_i_h_m_just_feed.html#addb4ba8134853417745ab8422e545303">IHMJustFeed::adresseDistributeur</a></div><div class="ttdeci">QLabel * adresseDistributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00090">ihmjustfeed.h:90</a></div></div>
+<div class="ttc" id="aclass_i_h_m_just_feed_html_aef68b5bc52512ab084e9963099ae273a"><div class="ttname"><a href="class_i_h_m_just_feed.html#aef68b5bc52512ab084e9963099ae273a">IHMJustFeed::configurerDistributeur</a></div><div class="ttdeci">void configurerDistributeur()</div><div class="ttdoc">méthode qui configure un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8cpp_source.html#l00118">ihmjustfeed.cpp:118</a></div></div>
+<div class="ttc" id="aclass_produit_html"><div class="ttname"><a href="class_produit.html">Produit</a></div><div class="ttdef"><b>Definition:</b> <a href="produit_8h_source.html#l00014">produit.h:15</a></div></div>
+<div class="ttc" id="aclass_q_widget_html"><div class="ttname"><a href="class_q_widget.html">QWidget</a></div></div>
+<div class="ttc" id="aconfigurationdistributeur_8h_html"><div class="ttname"><a href="configurationdistributeur_8h.html">configurationdistributeur.h</a></div><div class="ttdoc">Déclaration de la classe ConfigurationDistributeur.</div></div>
+<div class="ttc" id="adistributeur_8h_html"><div class="ttname"><a href="distributeur_8h.html">distributeur.h</a></div><div class="ttdoc">Déclaration de la classe Distributeur.</div></div>
+<div class="ttc" id="aihmjustfeed_8h_html"><div class="ttname"><a href="ihmjustfeed_8h.html">ihmjustfeed.h</a></div><div class="ttdoc">Déclaration de la classe IHMJustFeed.</div></div>
+<div class="ttc" id="aihmjustfeed_8h_html_a121d9d72e2cc9cdcf09da6b88fa7859d"><div class="ttname"><a href="ihmjustfeed_8h.html#a121d9d72e2cc9cdcf09da6b88fa7859d">VERSION_APPLICATION</a></div><div class="ttdeci">#define VERSION_APPLICATION</div><div class="ttdoc">Définit la version de l'application.</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00032">ihmjustfeed.h:32</a></div></div>
+<div class="ttc" id="aihmjustfeed_8h_html_a9eb2396052c2167d0e0f70355a4f6ed5"><div class="ttname"><a href="ihmjustfeed_8h.html#a9eb2396052c2167d0e0f70355a4f6ed5">TITRE_APPLICATION</a></div><div class="ttdeci">#define TITRE_APPLICATION</div><div class="ttdoc">Définit le titre de l'application.</div><div class="ttdef"><b>Definition:</b> <a href="ihmjustfeed_8h_source.html#l00026">ihmjustfeed.h:26</a></div></div>
+<div class="ttc" id="aproduit_8h_html"><div class="ttname"><a href="produit_8h.html">produit.h</a></div><div class="ttdoc">Déclaration de la classe Produit.</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="ihmjustfeed_8cpp.html">ihmjustfeed.cpp</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

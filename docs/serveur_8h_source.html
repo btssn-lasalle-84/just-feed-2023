@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet just-feed:  Fichier source de serveur.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet just-feed
+   &#160;<span id="projectnumber">0.1</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('serveur_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">serveur.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="serveur_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef SERVEUR_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#define SERVEUR_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;QString&gt;</span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="class_serveur.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_serveur.html">Serveur</a></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">   17</a></span>&#160;    <span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>;        </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">   18</a></span>&#160;    QString <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>;    </div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">   19</a></span>&#160;    QString <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>; </div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">   20</a></span>&#160;    QString <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>;  </div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur</a>();</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur</a>(<span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>,</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            QString <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>,</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            QString <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            QString <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_serveur.html#a722aefd65c9efab0b3e0646bf3440ea1">~Serveur</a>();</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Accesseurs</span></div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#aafd6e938f7e14ef3a4ed70c3cd2d3d79">getPort</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QString <a class="code" href="class_serveur.html#a35208f48d86589d96b2ac1967774f0cb">getHostName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QString <a class="code" href="class_serveur.html#a66f97003fe0556c38d32d552e70dbf36">getUtilisateur</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QString <a class="code" href="class_serveur.html#ad462addaa056be83fce1d41a472e3bca">getMotDePasse</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Mutateurs</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a4344a091913db5b8021571b36f528eb7">setPort</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a3675dddca182cb7f120723344e82da79">setHostName</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#af192097ea811e7919efffc174948250c">setUtilisateur</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>);</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3">setMotDePasse</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SERVEUR_H</span></div>
+<div class="ttc" id="aclass_serveur_html"><div class="ttname"><a href="class_serveur.html">Serveur</a></div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00014">serveur.h:15</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a1b9e9d83f8a1c7c08c11efb0e74eb9f3"><div class="ttname"><a href="class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3">Serveur::setMotDePasse</a></div><div class="ttdeci">void setMotDePasse(const QString &amp;motDePasse)</div><div class="ttdoc">Mutateur de l'attribut motDePasse.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00104">serveur.cpp:104</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a1d877917435962e9602ac93d2d59dc0d"><div class="ttname"><a href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">Serveur::port</a></div><div class="ttdeci">int port</div><div class="ttdoc">port du serveur</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00017">serveur.h:17</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a35208f48d86589d96b2ac1967774f0cb"><div class="ttname"><a href="class_serveur.html#a35208f48d86589d96b2ac1967774f0cb">Serveur::getHostName</a></div><div class="ttdeci">QString getHostName() const</div><div class="ttdoc">Accesseur de l'attribut hostName.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00050">serveur.cpp:50</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a3675dddca182cb7f120723344e82da79"><div class="ttname"><a href="class_serveur.html#a3675dddca182cb7f120723344e82da79">Serveur::setHostName</a></div><div class="ttdeci">void setHostName(const QString &amp;hostName)</div><div class="ttdoc">Mutateur de l'attribut hostName.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00086">serveur.cpp:86</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a4344a091913db5b8021571b36f528eb7"><div class="ttname"><a href="class_serveur.html#a4344a091913db5b8021571b36f528eb7">Serveur::setPort</a></div><div class="ttdeci">void setPort(const int port)</div><div class="ttdoc">Mutateur de l'attribut port.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00077">serveur.cpp:77</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a488a91ae1c69d7769afd9278a4ed4fc6"><div class="ttname"><a href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">Serveur::motDePasse</a></div><div class="ttdeci">QString motDePasse</div><div class="ttdoc">mot de passe du serveur</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00020">serveur.h:20</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a5940ad18d6f69c068a0ebc1ccfd4116f"><div class="ttname"><a href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">Serveur::utilisateur</a></div><div class="ttdeci">QString utilisateur</div><div class="ttdoc">ulisateur du serveur</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00019">serveur.h:19</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a66f97003fe0556c38d32d552e70dbf36"><div class="ttname"><a href="class_serveur.html#a66f97003fe0556c38d32d552e70dbf36">Serveur::getUtilisateur</a></div><div class="ttdeci">QString getUtilisateur() const</div><div class="ttdoc">Accesseur de l'attribut utilisateur.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00059">serveur.cpp:59</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a722aefd65c9efab0b3e0646bf3440ea1"><div class="ttname"><a href="class_serveur.html#a722aefd65c9efab0b3e0646bf3440ea1">Serveur::~Serveur</a></div><div class="ttdeci">~Serveur()</div><div class="ttdoc">Destructeur de la classe Serveur.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00033">serveur.cpp:33</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a8a7a1df15a07e095436dedd0d40a0196"><div class="ttname"><a href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur::Serveur</a></div><div class="ttdeci">Serveur()</div><div class="ttdoc">Constructeur par défaut de la classe Serveur.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00016">serveur.cpp:16</a></div></div>
+<div class="ttc" id="aclass_serveur_html_a9b75bb349949ffb77bef7ac5bfb80a53"><div class="ttname"><a href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">Serveur::hostName</a></div><div class="ttdeci">QString hostName</div><div class="ttdoc">name du serveur</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00018">serveur.h:18</a></div></div>
+<div class="ttc" id="aclass_serveur_html_aafd6e938f7e14ef3a4ed70c3cd2d3d79"><div class="ttname"><a href="class_serveur.html#aafd6e938f7e14ef3a4ed70c3cd2d3d79">Serveur::getPort</a></div><div class="ttdeci">int getPort() const</div><div class="ttdoc">Accesseur de l'attribut port.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00041">serveur.cpp:41</a></div></div>
+<div class="ttc" id="aclass_serveur_html_ad462addaa056be83fce1d41a472e3bca"><div class="ttname"><a href="class_serveur.html#ad462addaa056be83fce1d41a472e3bca">Serveur::getMotDePasse</a></div><div class="ttdeci">QString getMotDePasse() const</div><div class="ttdoc">Accesseur de l'attribut motDePasse.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00068">serveur.cpp:68</a></div></div>
+<div class="ttc" id="aclass_serveur_html_af192097ea811e7919efffc174948250c"><div class="ttname"><a href="class_serveur.html#af192097ea811e7919efffc174948250c">Serveur::setUtilisateur</a></div><div class="ttdeci">void setUtilisateur(const QString &amp;utilisateur)</div><div class="ttdoc">Mutateur de l'attribut utilisateur.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00095">serveur.cpp:95</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="serveur_8h.html">serveur.h</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

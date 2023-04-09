@@ -45,7 +45,7 @@ QVector<Distributeur*> Intervention::getDistributeurs() const
 
 /**
  * @brief Mutateur de l'attribut distributeurAIntervenir
- * @param distributeur, distributeur sur lequel il faut intervenir
+ * @param distributeur distributeur sur lequel il faut intervenir
  */
 void Intervention::ajouterDistributeur(Distributeur* distributeur)
 {

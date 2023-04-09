@@ -13,8 +13,7 @@
 /**
  * @brief Constructeur par défaut de la classe Serveur
  */
-Statistiques::Statistiques() :
-    frequenceIntervetion(0), poidsMoyenProduits(0), moyenneKilometres(0)
+Statistiques::Statistiques() : frequenceIntervetion(0), poidsMoyenProduits(0), moyenneKilometres(0)
 {
 }
 
@@ -65,7 +64,7 @@ int Statistiques::getMoyenneKilometres() const
 
 /**
  * @brief Mutateur de l'attribut frequenceIntervetion
- * @param il prend en argument la frequence d'intervention
+ * @param frequenceIntervetion il prend en argument la frequence d'intervention
  */
 void Statistiques::setFrequenceIntervetion(const int frequenceIntervetion)
 {
@@ -74,7 +73,7 @@ void Statistiques::setFrequenceIntervetion(const int frequenceIntervetion)
 
 /**
  * @brief Mutateur de l'attribut poidsMoyenProduits
- * @param il prend en argument le poids moyen du produits concerné
+ * @param poidsMoyenProduits il prend en argument le poids moyen du produits concerné
  */
 void Statistiques::setPoidsMoyenProduits(const int poidsMoyenProduits)
 {
@@ -83,7 +82,7 @@ void Statistiques::setPoidsMoyenProduits(const int poidsMoyenProduits)
 
 /**
  * @brief Mutateur de l'attribut moyenneKilometres
- * @param il prend en argument la moyenne des kilometres effectués par le/les
+ * @param moyenneKilometres il prend en argument la moyenne des kilometres effectués par le/les
  * techniciens
  */
 void Statistiques::setMoyenneKilometres(const int moyenneKilometres)
