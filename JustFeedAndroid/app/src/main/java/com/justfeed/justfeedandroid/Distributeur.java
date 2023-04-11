@@ -23,9 +23,12 @@ public class Distributeur
     /**
      * Attributs
      */
-    private int id; //!< l'identifiant d'un ditributeur.
-    private List<Bac>
-      listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private int       id; //!< l'identifiant d'un ditributeur.
+    private int       codePostal; //!< Code postal de la ville où se trouve le distributeur.
+    private String    adresse; //!< Adresse du distributeur.
+    private String    ville; //!< Ville où se situe le distributeur.
+    private String    lieu; //!< Lieu où se trouve le distributeur.
+    private List<Bac> listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -39,17 +42,36 @@ public class Distributeur
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, List<Bac> listeBacs)
+     * @see Distributeur(int id, int codePostal, String adresse, String Ville, String lieu, List<Bac> listeBacs)
      * @param id L'identifiant du distributeur.
+     * @param codePostal Code postal de la ville.
+     * @param adresse Adresse du distributeur.
+     * @param ville Ville du distributeur.
+     * @param lieu Lieu du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
-    public Distributeur(int id, List<Bac> listeBacs)
+    public Distributeur(int id, int codePostal, String adresse, String ville, String lieu, List<Bac> listeBacs)
     {
-        this.id        = id;
-        this.listeBacs = listeBacs;
+        this.id         = id;
+        this.codePostal = codePostal;
+        this.adresse    = adresse;
+        this.ville      = ville;
+        this.lieu       = lieu;
+        this.listeBacs  = listeBacs;
     }
 
     // Accesseurs
+    /**
+     * @brief Accesseur de la localisation du distributeur.
+     */
+    public String getLocalisation()
+    {
+        String localisation = "";
+        localisation = localisation.concat(Integer.toString(this.codePostal)+", ");
+        localisation = localisation.concat(this.ville+" "+this.adresse+" "+this.lieu);
+
+        return adresse;
+    }
     /**
      * @brief Accesseur de l'identifiant du distributeur.
      * @return id du distributeur.

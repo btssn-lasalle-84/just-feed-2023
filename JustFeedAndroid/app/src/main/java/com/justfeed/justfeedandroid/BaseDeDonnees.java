@@ -677,9 +677,13 @@ public class BaseDeDonnees
               new Bac(new Produit("maïs séché", 1.45, 0.00035, 0.0004), 4.5, 7.0, 0),
               new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
 
-            this.listeDistributeurs = Arrays.asList(new Distributeur(8456, bacsDistributeur1),
-                                                    new Distributeur(8457, bacsDistributeur2),
-                                                    new Distributeur(8458, bacsDistributeur3));
+            this.listeDistributeurs = Arrays.asList(
+                    new Distributeur(8456, 84140, "rue Capitaine de Vaisseau Henri Bellet",
+                            "Montfavet", "Grand frais", bacsDistributeur1),
+                    new Distributeur(8457, 84200, "Avenue De La Gare",
+                            "Carpentras", "Gare de Carpentras", bacsDistributeur2),
+                    new Distributeur(8458, 84100, "Avenue Frédéric Mistral",
+                            "Gare Orange", "Orange", bacsDistributeur3));
         }
 
         return this.listeDistributeurs;
@@ -715,9 +719,15 @@ public class BaseDeDonnees
               new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
 
             this.listeInterventions = Arrays.asList(
-              new Intervention("10h", new Distributeur(8456, bacsDistributeur1), true),
-              new Intervention("11h", new Distributeur(8457, bacsDistributeur2), true),
-              new Intervention("12h", new Distributeur(8458, bacsDistributeur3), true));
+              new Intervention("10h",
+                      new Distributeur(8456, 84140, "rue Capitaine de Vaisseau Henri Bellet",
+                              "Montfavet", "Grand frais", bacsDistributeur1), true),
+              new Intervention("11h",
+                      new Distributeur(8457, 84200, "Avenue De La Gare",
+                              "Carpentras", "Gare de Carpentras", bacsDistributeur2), true),
+              new Intervention("12h",
+                      new Distributeur(8458, 84100, "Avenue Frédéric Mistral",
+                              "Gare Orange", "Orange", bacsDistributeur3) , true));
         }
 
         return this.listeInterventions;
