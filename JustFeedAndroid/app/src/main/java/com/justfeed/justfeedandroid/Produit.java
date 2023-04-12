@@ -21,7 +21,7 @@ public class Produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
-     * @see Produit(double prix, double poidsDuProduit, double volumeProduit, String nom)
+     * @see Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)
      * @param prix le prix du produit.
      * @param poidsDuProduit le poid du produit à l'unité.
      * @param volumeProduit le volume du produit.

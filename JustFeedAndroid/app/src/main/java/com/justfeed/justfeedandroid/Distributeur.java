@@ -16,7 +16,7 @@ import java.util.Map;
  * le prix du produit qu'il distribue, des indications sur son poids ainsi que
  * l'hydrométrie.
  * @author Fargier Mayeul
- * @version 0.1
+ * @version 0.2
  */
 public class Distributeur
 {
@@ -67,10 +67,10 @@ public class Distributeur
     public String getLocalisation()
     {
         String localisation = "";
-        localisation = localisation.concat(Integer.toString(this.codePostal)+", ");
-        localisation = localisation.concat(this.ville+" "+this.adresse+" "+this.lieu);
+        localisation = localisation.concat(Integer.toString(this.codePostal)+"\n");
+        localisation = localisation.concat(this.ville+"\n"+this.adresse+"\n"+this.lieu);
 
-        return adresse;
+        return localisation;
     }
     /**
      * @brief Accesseur de l'identifiant du distributeur.

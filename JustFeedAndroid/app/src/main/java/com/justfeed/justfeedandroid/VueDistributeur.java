@@ -24,6 +24,7 @@ public class VueDistributeur extends RecyclerView.ViewHolder
      * Ressources GUI
      */
     private TextView identifiant; //!< attribut GUI qui affiche l'identifiant du distributeur.
+    private TextView localisation; //!< attribut GUI qui affiche la localisation du distributeur.
     private RecyclerView
       vueListeBacs; //!< attribut GUI qui afficher la liste des bacs du distributeur.
 
@@ -37,6 +38,7 @@ public class VueDistributeur extends RecyclerView.ViewHolder
         super(itemView);
 
         identifiant  = ((TextView)itemView.findViewById(R.id.identifiant));
+        localisation = ((TextView)itemView.findViewById(R.id.localisation));
         vueListeBacs = itemView.findViewById(R.id.listeBacs);
     }
 
@@ -47,6 +49,7 @@ public class VueDistributeur extends RecyclerView.ViewHolder
     public void afficherDistributeur(Distributeur distributeur)
     {
         this.identifiant.setText("Identifant : " + Integer.toString(distributeur.getIdentifiant()));
+        this.localisation.setText("Localisation : \n"+distributeur.getLocalisation());
     }
 
     public RecyclerView modifierVueListeBacs()
