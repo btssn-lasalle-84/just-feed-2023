@@ -14,40 +14,55 @@
 /**
  * @brief Constructeur par défaut de la classe Intervention
  */
-Intervention::Intervention() : horodatage(), effectuee(false)
-{
-}
+Intervention::Intervention() : horodatage(), effectuee(false) {}
 
 /**
  * @brief Destructeur de la classe Intervention
  */
-Intervention::~Intervention()
-{
-}
+Intervention::~Intervention() {}
 
 /**
  * @brief Accesseur de l'attribut horodatage
- * @return QDateTime représente la date et l'heure de l'intervention sur le distributeur
+ * @return QDateTime représente la date et l'heure de l'intervention sur le
+ * distributeur
  */
-QDateTime Intervention::getHorodatage() const
-{
-    return this->horodatage;
-}
+QDateTime Intervention::getHorodatage() const { return this->horodatage; }
 
 /**
  * @brief Accesseur de l'attribut distributeurAIntervenir
- * @return QVector<Distributeur*> represente les distributeurs surlequels il faut intervenir
+ * @return QVector<Distributeur*> represente les distributeurs surlequels il
+ * faut intervenir
  */
-QVector<Distributeur*> Intervention::getDistributeurs() const
-{
-    return this->distributeurs;
+QVector<Distributeur *> Intervention::getDistributeurs() const {
+  return this->distributeurs;
 }
+
+/**
+ * @brief Accesseur de l'attribut effectuee
+ * @return effectuee
+ */
+double Intervention::getEffectuee() const { return this->effectuee; }
 
 /**
  * @brief Mutateur de l'attribut distributeurAIntervenir
  * @param distributeur distributeur sur lequel il faut intervenir
  */
-void Intervention::ajouterDistributeur(Distributeur* distributeur)
-{
-    this->distributeurs.push_back(distributeur);
+void Intervention::ajouterDistributeur(Distributeur *distributeur) {
+  this->distributeurs.push_back(distributeur);
+}
+
+/**
+ * @brief Mutateur de l'attribut horodatage
+ * @param horodatage
+ */
+void Intervention::setHorodatage(const QDateTime &horodatage) {
+  this->horodatage = horodatage;
+}
+
+/**
+ * @brief Mutateur de l'attribut effectuee
+ * @param effectuee
+ */
+void Intervention::setEffectuee(const bool effectuee) {
+  this->effectuee = effectuee;
 }
