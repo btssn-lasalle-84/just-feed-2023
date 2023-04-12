@@ -68,7 +68,6 @@ CREATE TABLE `Distributeur` (
   `longitude` varchar(255) DEFAULT NULL,
   `latitude` varchar(255) DEFAULT NULL,
   `deviceID` varchar(255) NOT NULL,
-  `hygrometrie` int DEFAULT '0',
   `nbBacs` int NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -79,6 +78,20 @@ ALTER TABLE `Distributeur`
 
 ALTER TABLE `Distributeur`
   ADD CONSTRAINT `Distributeur_fk_1` FOREIGN KEY (`idServeurTTN`) REFERENCES `ServeurTTN` (`idServeurTTN`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `Bac`
+--
+
+CREATE TABLE `Bac` (
+  `idDistributeur` int NOT NULL,
+  `poidsActuel` double,
+  `poidsTotal`  double NOT NULL,
+  `hygrometrie` int DEFAULT '0',
+  FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 

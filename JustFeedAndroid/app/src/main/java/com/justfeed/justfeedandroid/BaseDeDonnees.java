@@ -613,12 +613,10 @@ public class BaseDeDonnees
     {
         if(BaseDeDonnees.active)
         {
-            /**
-             * @todo récupérer les informations des distributeurs sur la base de données
-             */
             if(estConnecte())
             {
                 Thread requeteBDD = new Thread(new Runnable() {
+                    public List<Distributeur> listeDistributeurs;
                     public void run()
                     {
                         mutex.lock();
@@ -638,6 +636,9 @@ public class BaseDeDonnees
                                       "recupererDistributeurs() idDistributeur = " +
                                         resultatRequete.getInt("idDistributeur") +
                                         " - nom = " + resultatRequete.getString("nom"));
+                                /**
+                                 * @todo récupérer les distributeurs
+                                 */
                             }
                         }
                         catch(Exception e)
