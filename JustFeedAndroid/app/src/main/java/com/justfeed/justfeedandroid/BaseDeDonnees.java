@@ -60,7 +60,7 @@ public class BaseDeDonnees
     // données par défaut
     private static final int    PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
     public final static boolean active =
-      false; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
+      true; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
 
     /**
      * Attributs
@@ -483,10 +483,8 @@ public class BaseDeDonnees
         @Override
         protected void onPostExecute(Boolean result)
         {
-            // Log.d(TAG, "onPostExecute() result = " + result);
-            // Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
-            //  Ici on pourrait accéder à la partie UI d'une activité
-            //  et/ou appeler une méthode d'une activité
+            //Log.d(TAG, "onPostExecute() result = " + result);
+            //Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
         }
     }
 
@@ -560,6 +558,7 @@ public class BaseDeDonnees
      */
     public void selectionner(final String requeteSELECT)
     {
+        Log.d(TAG, "selectionner()");
         if(!BaseDeDonnees.active)
             return;
 
@@ -604,92 +603,6 @@ public class BaseDeDonnees
             Log.w(TAG, "Pas de connexion MySQL !");
         }
     }
-
-    /**
-     * @brief Méthode qui retourne une liste de distributeurs de la BDD.
-     * @return listeDistributeurs
-     */
-    public List<Distributeur> recupererDistributeurs()
-    {
-        if(BaseDeDonnees.active)
-        {
-            if(estConnecte())
-            {
-                Thread requeteBDD = new Thread(new Runnable() {
-                    public List<Distributeur> listeDistributeurs;
-                    public void run()
-                    {
-                        mutex.lock();
-                        try
-                        {
-                            String requeteSQL = "SELECT * FROM Distributeur";
-                            Log.d(TAG, "Requete : " + requeteSQL);
-                            Statement statement =
-                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
-                                                        ResultSet.CONCUR_READ_ONLY);
-                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            while(resultatRequete.next())
-                            {
-                                // Log.v(TAG, "recupererDistributeurs() numéro = " +
-                                // resultatRequete.getRow());
-                                Log.v(TAG,
-                                      "recupererDistributeurs() idDistributeur = " +
-                                        resultatRequete.getInt("idDistributeur") +
-                                        " - nom = " + resultatRequete.getString("nom"));
-                                /**
-                                 * @todo récupérer les distributeurs
-                                 */
-                            }
-                        }
-                        catch(Exception e)
-                        {
-                            // e.printStackTrace();
-                            Log.e(TAG, "recupererDistributeurs() Exception = " + e.toString());
-                        }
-                        finally
-                        {
-                            mutex.unlock();
-                        }
-                    }
-                });
-
-                // Démarrage
-                requeteBDD.start();
-            }
-            else
-            {
-                Log.w(TAG, "Pas de connexion MySQL !");
-            }
-        }
-        else
-        {
-            List<Bac> bacsDistributeur1 =
-              Arrays.asList(new Bac(new Produit("cacahuètes", 0.70, 0.001, 0.004), 1.5, 2.0, 0),
-                            new Bac(new Produit("riz", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-                            new Bac(new Produit("fèves", 0.50, 0.002, 0.003), 1.5, 8.0, 0));
-
-            List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane séchée", 3.10, 0.003, 0.002), 5.0, 12.0, 0),
-                            new Bac(new Produit("Abricot sec", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
-                            new Bac(new Produit("raisin sec", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
-
-            List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("pistache", 3.55, 0.0006, 0.0005), 9.6, 9.6, 1),
-              new Bac(new Produit("maïs séché", 1.45, 0.00035, 0.0004), 4.5, 7.0, 0),
-              new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
-
-            this.listeDistributeurs = Arrays.asList(
-                    new Distributeur(8456, 84140, "rue Capitaine de Vaisseau Henri Bellet",
-                            "Montfavet", "Grand frais", bacsDistributeur1),
-                    new Distributeur(8457, 84200, "Avenue De La Gare",
-                            "Carpentras", "Gare de Carpentras", bacsDistributeur2),
-                    new Distributeur(8458, 84100, "Avenue Frédéric Mistral",
-                            "Gare Orange", "Orange", bacsDistributeur3));
-        }
-
-        return this.listeDistributeurs;
-    }
-
     /**
      * @brief Méthode qui retourne une liste d'interventions de la BDD.
      * @return listeInterventions
@@ -707,12 +620,12 @@ public class BaseDeDonnees
             List<Bac> bacsDistributeur1 =
               Arrays.asList(new Bac(new Produit("cacahuètes", 0.70, 0.001, 0.004), 1.5, 2.0, 0),
                             new Bac(new Produit("riz", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-                            new Bac(new Produit("fèves", 0.50, 0.002, 0.003), 1.5, 8.0, 0));
+                            new Bac(new Produit("fèves", 0.30, 0.002, 0.003), 1.5, 8.0, 0));
 
             List<Bac> bacsDistributeur2 =
               Arrays.asList(new Bac(new Produit("Banane séchée", 3.10, 0.003, 0.002), 5.0, 12.0, 0),
-                            new Bac(new Produit("Abricot sec", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
-                            new Bac(new Produit("raisin sec", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
+                            new Bac(new Produit("Abricots secs", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
+                            new Bac(new Produit("raisins secs", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
 
             List<Bac> bacsDistributeur3 = Arrays.asList(
               new Bac(new Produit("pistache", 3.55, 0.0006, 0.0005), 9.6, 9.6, 1),
@@ -721,13 +634,13 @@ public class BaseDeDonnees
 
             this.listeInterventions = Arrays.asList(
               new Intervention("10h",
-                      new Distributeur(8456, 84140, "rue Capitaine de Vaisseau Henri Bellet",
+                      new Distributeur(8456, "84140", "rue Capitaine de Vaisseau Henri Bellet",
                               "Montfavet", "Grand frais", bacsDistributeur1), true),
               new Intervention("11h",
-                      new Distributeur(8457, 84200, "Avenue De La Gare",
+                      new Distributeur(8457, "84200", "Avenue De La Gare",
                               "Carpentras", "Gare de Carpentras", bacsDistributeur2), true),
               new Intervention("12h",
-                      new Distributeur(8458, 84100, "Avenue Frédéric Mistral",
+                      new Distributeur(8458, "84100", "Avenue Frédéric Mistral",
                               "Gare Orange", "Orange", bacsDistributeur3) , true));
         }
 

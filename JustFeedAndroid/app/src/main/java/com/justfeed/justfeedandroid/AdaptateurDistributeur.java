@@ -14,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @brief Définition de la classe AdaptateurDistributeur.
@@ -25,7 +27,7 @@ import java.util.List;
  */
 public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur>
 {
-    private List<Distributeur> distributeurs = null; //!< Liste des distributeurs à afficher.
+    private Map<Integer,Distributeur> distributeurs = new HashMap<Integer, Distributeur>(); //!< Liste des distributeurs à afficher.
     private RecyclerView.RecycledViewPool partageVue =
       new RecyclerView.RecycledViewPool(); //!< Partage des vues entre plusieurs recyclerview.
 
@@ -33,7 +35,7 @@ public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur
      * @brief Constructeur d'initialisation de la classe DistributeurAdapter.
      * @param distributeurs
      */
-    public AdaptateurDistributeur(List<Distributeur> distributeurs)
+    public AdaptateurDistributeur(Map<Integer, Distributeur> distributeurs)
     {
         if(distributeurs != null)
         {

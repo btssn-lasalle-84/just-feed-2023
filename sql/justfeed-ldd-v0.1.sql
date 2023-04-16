@@ -59,7 +59,7 @@ CREATE TABLE `Operateur` (
 CREATE TABLE `Distributeur` (
   `idDistributeur` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idServeurTTN` int NOT NULL,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomDistributeur` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
   `ville` varchar(255) DEFAULT NULL,
@@ -93,6 +93,16 @@ CREATE TABLE `Bac` (
   FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+<<<<<<< Updated upstream
+=======
+ALTER TABLE Bac
+ADD idProduit int NOT NULL;
+
+ALTER TABLE Bac
+ADD CONSTRAINT fk_idProduit
+FOREIGN KEY (idProduit) REFERENCES Produit(idProduit);
+
+>>>>>>> Stashed changes
 -- --------------------------------------------------------
 
 --
@@ -101,10 +111,10 @@ CREATE TABLE `Bac` (
 
 CREATE TABLE `Produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomProduit` varchar(255) DEFAULT NULL,
   `marque` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `codeEAN` varchar(12) DEFAULT NULL,
+  `codeEAN` varchar(13) DEFAULT NULL,
   `prix` double DEFAULT NULL,
   `poidsUnitaire` double DEFAULT NULL,
   `volumeUnitaire` double DEFAULT NULL

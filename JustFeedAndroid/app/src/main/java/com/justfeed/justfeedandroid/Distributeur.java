@@ -24,10 +24,10 @@ public class Distributeur
      * Attributs
      */
     private int       id; //!< l'identifiant d'un ditributeur.
-    private int       codePostal; //!< Code postal de la ville où se trouve le distributeur.
+    private String    codePostal; //!< Code postal de la ville où se trouve le distributeur.
     private String    adresse; //!< Adresse du distributeur.
     private String    ville; //!< Ville où se situe le distributeur.
-    private String    lieu; //!< Lieu où se trouve le distributeur.
+    private String    nomDistributeur; //!< Lieu où se trouve le distributeur.
     private List<Bac> listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
@@ -42,22 +42,22 @@ public class Distributeur
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, int codePostal, String adresse, String Ville, String lieu, List<Bac> listeBacs)
+     * @see Distributeur(int id, String codePostal, String adresse, String Ville, String nomDistributeur, List<Bac> listeBacs)
      * @param id L'identifiant du distributeur.
      * @param codePostal Code postal de la ville.
      * @param adresse Adresse du distributeur.
      * @param ville Ville du distributeur.
-     * @param lieu Lieu du distributeur.
+     * @param nomDistributeur Nom du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
-    public Distributeur(int id, int codePostal, String adresse, String ville, String lieu, List<Bac> listeBacs)
+    public Distributeur(int id, String codePostal, String adresse, String ville, String nomDistributeur, List<Bac> listeBacs)
     {
-        this.id         = id;
-        this.codePostal = codePostal;
-        this.adresse    = adresse;
-        this.ville      = ville;
-        this.lieu       = lieu;
-        this.listeBacs  = listeBacs;
+        this.id                    = id;
+        this.codePostal            = codePostal;
+        this.adresse               = adresse;
+        this.ville                 = ville;
+        this.nomDistributeur       = nomDistributeur;
+        this.listeBacs             = listeBacs;
     }
 
     // Accesseurs
@@ -67,8 +67,8 @@ public class Distributeur
     public String getLocalisation()
     {
         String localisation = "";
-        localisation = localisation.concat(Integer.toString(this.codePostal)+"\n");
-        localisation = localisation.concat(this.ville+"\n"+this.adresse+"\n"+this.lieu);
+        localisation = localisation.concat(this.codePostal+", ");
+        localisation = localisation.concat(this.ville+" "+this.adresse+" "+this.nomDistributeur);
 
         return localisation;
     }
@@ -98,5 +98,14 @@ public class Distributeur
     public void changerProduit(int numeroBac, Produit nouveauProduit)
     {
         this.listeBacs.get(numeroBac).changerTypeProduit(nouveauProduit);
+    }
+
+    /**
+     * @brief Mutateur de la liste des bacs.
+     * @param nouveauBac le bac à ajouter.
+     */
+    public void ajouterBac(Bac nouveauBac)
+    {
+        this.listeBacs.add(nouveauBac);
     }
 }
