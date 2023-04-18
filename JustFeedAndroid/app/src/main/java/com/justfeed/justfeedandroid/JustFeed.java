@@ -143,6 +143,11 @@ public class JustFeed extends AppCompatActivity
                   new Intent(JustFeed.this, ActiviteInterventions.class);
                 activiteIntervention.putExtra("listeInterventions", (Serializable) listeInterventions);
                 startActivity(activiteIntervention);
+                /**
+                 * @ FIXME: 4/18/2023
+                 * FATAL EXCEPTION
+                 * java.lang.RuntimeException: Parcel: unable to marshal value com.justfeed.justfeedandroid.Intervention@7dda1b4
+                 */
             }
         });
 
@@ -173,6 +178,10 @@ public class JustFeed extends AppCompatActivity
             this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
         }
         adapteurDistributeur.notifyDataSetChanged();
+        /**
+         * @ FIXME: 4/18/2023
+         * 2 bacs sur 3 sont affichés
+         */
     }
 
     /**

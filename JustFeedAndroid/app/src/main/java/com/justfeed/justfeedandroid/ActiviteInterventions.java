@@ -142,6 +142,10 @@ public class ActiviteInterventions extends AppCompatActivity
             this.vueListeInterventions.setAdapter(this.adapteurIntervention);
         }
         adapteurIntervention.notifyDataSetChanged();
+        /**
+         * @ FIXME: 4/18/2023
+         * L'interventions affichées en double
+         */
     }
 
     /**
