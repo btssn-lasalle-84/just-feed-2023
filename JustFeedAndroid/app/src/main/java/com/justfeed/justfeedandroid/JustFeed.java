@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.io.Serializable;
+import java.sql.Array;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class JustFeed extends AppCompatActivity
      * Attributs
      */
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
+    private List<Intervention>   listeInterventions;    //!< Liste des interventions
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler              handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -136,8 +138,10 @@ public class JustFeed extends AppCompatActivity
             @Override
             public void onClick(View vue)
             {
+                baseDeDonnees.recupererInterventions();
                 Intent activiteIntervention =
                   new Intent(JustFeed.this, ActiviteInterventions.class);
+                activiteIntervention.putExtra("listeInterventions", (Serializable) listeInterventions);
                 startActivity(activiteIntervention);
             }
         });
@@ -215,10 +219,11 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
-                        afficherDistributeurs((ArrayList)message.obj);
+                        afficherDistributeurs((ArrayList) message.obj);
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
+                        listeInterventions = (ArrayList) message.obj;
                         break;
                 }
             }
