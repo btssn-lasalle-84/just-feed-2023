@@ -42,7 +42,7 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private List <Distributeur> listeDistributeurs;    //!< Liste des distributeurs
+    private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler              handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -65,10 +65,11 @@ public class JustFeed extends AppCompatActivity
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
 
+        initialiserGUI();
         initialiserHandler();
 
         // Récupère l'instance de BaseDeDonnees
-        baseDeDonnees      = BaseDeDonnees.getInstance(handler);
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.recupererDistributeurs();
     }
 
@@ -153,16 +154,20 @@ public class JustFeed extends AppCompatActivity
         this.vueListeDistributeurs.setHasFixedSize(true);
         this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
         this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
-        this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
-        this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
     }
 
     /**
      * @brief Met à jour l'affichage de la liste des distributeurs
      */
-    private void afficherDistributeurs()
+    private void afficherDistributeurs(List<Distributeur> distributeurs)
     {
         Log.d(TAG, "afficherDistributeurs()");
+        this.listeDistributeurs = distributeurs;
+        if(this.adapteurDistributeur == null)
+        {
+            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+        }
         adapteurDistributeur.notifyDataSetChanged();
     }
 
@@ -210,8 +215,7 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
-                        listeDistributeurs = (ArrayList) message.obj;
-                        initialiserGUI();
+                        afficherDistributeurs((ArrayList)message.obj);
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
