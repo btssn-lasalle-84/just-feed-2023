@@ -49,6 +49,8 @@ public class BaseDeDonnees
     public final static int     REQUETE_SQL_OK     = 4;
     public final static int     REQUETE_SQL_ERREUR = 5;
     public final static int     REQUETE_SQL_SELECT = 6;
+    public final static int     REQUETE_SQL_SELECT_DISTRIBUTEURS = 7;
+    public final static int     REQUETE_SQL_SELECT_INTERVENTIONS = 8;
     private static final String NOM_BDD = "justfeed"; //!< Le nom par défaut de la base de données
     private static final String IDENTIFIANT =
       "justfeed"; //!< Le nom de l'utilisateur par défaut de la base de données
@@ -59,6 +61,7 @@ public class BaseDeDonnees
     // private static final String HOSTNAME = "127.0.0.1"; //!< L'adresse du serveur de base de
     // données par défaut
     private static final int    PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
+    private final int TRUE = 1; //!< Vérifie si l'intervention a été executée.
     public final static boolean active =
       true; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
 
@@ -152,11 +155,12 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees()
     {
-        this.nomBDD      = NOM_BDD;
-        this.identifiant = IDENTIFIANT;
-        this.motDePasse  = MOT_DE_PASSE;
-        this.hostName    = HOSTNAME;
-        this.port        = PORT_DEFAUT;
+        this.nomBDD             = NOM_BDD;
+        this.identifiant        = IDENTIFIANT;
+        this.motDePasse         = MOT_DE_PASSE;
+        this.hostName           = HOSTNAME;
+        this.port               = PORT_DEFAUT;
+        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -174,12 +178,13 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees(Handler handler)
     {
-        this.nomBDD      = NOM_BDD;
-        this.identifiant = IDENTIFIANT;
-        this.motDePasse  = MOT_DE_PASSE;
-        this.hostName    = HOSTNAME;
-        this.port        = PORT_DEFAUT;
-        this.handler     = handler;
+        this.nomBDD             = NOM_BDD;
+        this.identifiant        = IDENTIFIANT;
+        this.motDePasse         = MOT_DE_PASSE;
+        this.hostName           = HOSTNAME;
+        this.port               = PORT_DEFAUT;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -212,12 +217,13 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD      = nomBase;
-        this.identifiant = identifiant;
-        this.motDePasse  = motDePasse;
-        this.hostName    = hostName;
-        this.port        = port;
-        this.handler     = handler;
+        this.nomBDD             = nomBase;
+        this.identifiant        = identifiant;
+        this.motDePasse         = motDePasse;
+        this.hostName           = hostName;
+        this.port               = port;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -248,12 +254,13 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD      = nomBase;
-        this.identifiant = identifiant;
-        this.motDePasse  = motDePasse;
-        this.hostName    = hostName;
-        this.port        = port;
-        this.handler     = handler;
+        this.nomBDD             = nomBase;
+        this.identifiant        = identifiant;
+        this.motDePasse         = motDePasse;
+        this.hostName           = hostName;
+        this.port               = port;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -603,47 +610,155 @@ public class BaseDeDonnees
             Log.w(TAG, "Pas de connexion MySQL !");
         }
     }
+
+    /**
+     * @brief Méthode qui retourne une liste de distributeurs de la BDD.
+     * @return listeDistributeurs
+     */
+    public void recupererDistributeurs()
+    {
+        if(BaseDeDonnees.active)
+        {
+            if(estConnecte())
+            {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run()
+                    {
+                        mutex.lock();
+                        try
+                        {
+                            String requeteSQL = "SELECT * FROM Distributeur, Bac, Produit WHERE" +
+                                    " Bac.idDistributeur = Distributeur.idDistributeur AND Bac.idProduit = Produit.idProduit";
+                            Log.d(TAG, "Requete : " + requeteSQL);
+                            Statement statement =
+                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                            ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            Map<Integer, Distributeur> distributeurs = new HashMap<Integer, Distributeur>();
+                            while(resultatRequete.next())
+                            {
+                                Log.d(TAG, "recupererDistributeurs() idDistributeur : "+ resultatRequete.getInt("idDistributeur"));
+                                if(!distributeurs.containsKey(resultatRequete.getInt("idDistributeur")))
+                                {
+                                    List<Bac> listeBacs = new ArrayList<Bac>();
+                                    distributeurs.put(resultatRequete.getInt("idDistributeur"),
+                                            new Distributeur(
+                                                    resultatRequete.getInt("idDistributeur"),
+                                                    resultatRequete.getString("codepostal"),
+                                                    resultatRequete.getString("adresse"),
+                                                    resultatRequete.getString("ville"),
+                                                    resultatRequete.getString("nomDistributeur"),
+                                                    listeBacs)
+                                    );
+                                }
+                                else
+                                {
+                                    distributeurs.get(resultatRequete.getInt("idDistributeur")).ajouterBac(
+                                            new Bac(
+                                                    new Produit(
+                                                            resultatRequete.getString("nomProduit"),
+                                                            resultatRequete.getDouble("prix"),
+                                                            resultatRequete.getDouble("poidsUnitaire"),
+                                                            resultatRequete.getDouble("volumeUnitaire")
+                                                    ),
+                                                    resultatRequete.getDouble("poidsActuel"),
+                                                    resultatRequete.getDouble("poidsTotal"),
+                                                    resultatRequete.getInt("hygrometrie")
+                                            )
+                                    );
+                                }
+                            }
+                            listeDistributeurs = new ArrayList<Distributeur>(distributeurs.values());
+                            Message message    = new Message();
+                            message.what       = REQUETE_SQL_SELECT_DISTRIBUTEURS;
+                            message.obj        = listeDistributeurs;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        catch(Exception e)
+                        {
+                            // e.printStackTrace();
+                            Log.e(TAG, "recupererDistributeurs() Exception = " + e.toString());
+                        }
+                        finally
+                        {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                // Démarrage
+                requeteBDD.start();
+            }
+            else
+            {
+                Log.w(TAG, "Pas de connexion MySQL !");
+            }
+        }
+    }
+
     /**
      * @brief Méthode qui retourne une liste d'interventions de la BDD.
      * @return listeInterventions
      */
-    public List<Intervention> recupererInterventions()
+    public void recupererInterventions()
     {
         if(BaseDeDonnees.active)
         {
-            /**
-             * @todo récupérer les informations des interventions sur la base de données
-             */
+            if(estConnecte())
+            {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run()
+                    {
+                        mutex.lock();
+                        try
+                        {
+                            String requeteSQL = "SELECT * FROM Intervention, Distributeur WHERE Intervention.idDistributeur = Distributeur.idDistributeur";
+                            Log.d(TAG, "Requete : " + requeteSQL);
+                            Statement statement =
+                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                            ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            while(resultatRequete.next())
+                            {
+                                for(Distributeur distributeur : listeDistributeurs)
+                                {
+                                    if(distributeur.getIdentifiant() == resultatRequete.getInt("idDistributeur"))
+                                        listeInterventions.add(
+                                                new Intervention(
+                                                        resultatRequete.getString("heureIntervention"),
+                                                        distributeur,
+                                                        (resultatRequete.getInt("effectuee") == TRUE)
+                                                )
+                                        );
+                                }
+
+                            }
+                            Message message    = new Message();
+                            message.what       = REQUETE_SQL_SELECT_INTERVENTIONS;
+                            message.obj        = listeInterventions;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        catch(Exception e)
+                        {
+                            // e.printStackTrace();
+                            Log.e(TAG, "recupererInterventions() Exception = " + e.toString());
+                        }
+                        finally
+                        {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                // Démarrage
+                requeteBDD.start();
+            }
+            else
+            {
+                Log.w(TAG, "Pas de connexion MySQL !");
+            }
         }
-        else
-        {
-            List<Bac> bacsDistributeur1 =
-              Arrays.asList(new Bac(new Produit("cacahuètes", 0.70, 0.001, 0.004), 1.5, 2.0, 0),
-                            new Bac(new Produit("riz", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-                            new Bac(new Produit("fèves", 0.30, 0.002, 0.003), 1.5, 8.0, 0));
-
-            List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane séchée", 3.10, 0.003, 0.002), 5.0, 12.0, 0),
-                            new Bac(new Produit("Abricots secs", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
-                            new Bac(new Produit("raisins secs", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
-
-            List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("pistache", 3.55, 0.0006, 0.0005), 9.6, 9.6, 1),
-              new Bac(new Produit("maïs séché", 1.45, 0.00035, 0.0004), 4.5, 7.0, 0),
-              new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
-
-            this.listeInterventions = Arrays.asList(
-              new Intervention("10h",
-                      new Distributeur(8456, "84140", "rue Capitaine de Vaisseau Henri Bellet",
-                              "Montfavet", "Grand frais", bacsDistributeur1), true),
-              new Intervention("11h",
-                      new Distributeur(8457, "84200", "Avenue De La Gare",
-                              "Carpentras", "Gare de Carpentras", bacsDistributeur2), true),
-              new Intervention("12h",
-                      new Distributeur(8458, "84100", "Avenue Frédéric Mistral",
-                              "Gare Orange", "Orange", bacsDistributeur3) , true));
-        }
-
-        return this.listeInterventions;
     }
 }

@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,11 @@ import java.util.Map;
  */
 public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur>
 {
-    private Map<Integer,Distributeur> distributeurs = new HashMap<Integer, Distributeur>(); //!< Liste des distributeurs à afficher.
+    /**
+     * Constantes
+     */
+    private final String TAG = "_AdapteurDistributeur";
+    private List<Distributeur> distributeurs = null; //!< Liste des distributeurs à afficher.
     private RecyclerView.RecycledViewPool partageVue =
       new RecyclerView.RecycledViewPool(); //!< Partage des vues entre plusieurs recyclerview.
 
@@ -35,7 +40,7 @@ public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur
      * @brief Constructeur d'initialisation de la classe DistributeurAdapter.
      * @param distributeurs
      */
-    public AdaptateurDistributeur(Map<Integer, Distributeur> distributeurs)
+    public AdaptateurDistributeur(List<Distributeur> distributeurs)
     {
         if(distributeurs != null)
         {
@@ -90,6 +95,7 @@ public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur
     @Override
     public int getItemCount()
     {
+        Log.d(TAG,"getItemCount()");
         if(distributeurs != null)
         {
             return distributeurs.size();

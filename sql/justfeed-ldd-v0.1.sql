@@ -93,8 +93,6 @@ CREATE TABLE `Bac` (
   FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-<<<<<<< Updated upstream
-=======
 ALTER TABLE Bac
 ADD idProduit int NOT NULL;
 
@@ -102,7 +100,6 @@ ALTER TABLE Bac
 ADD CONSTRAINT fk_idProduit
 FOREIGN KEY (idProduit) REFERENCES Produit(idProduit);
 
->>>>>>> Stashed changes
 -- --------------------------------------------------------
 
 --
@@ -151,16 +148,14 @@ ALTER TABLE `StockDistributeur`
 
 CREATE TABLE `Intervention` (
   `idIntervention` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idOperateur` int NOT NULL,
-  `dateIntervention` date NOT NULL,
+  `idDistributeur` int NOT NULL,
+  `heureIntervention` time NOT NULL,
   `effectuee` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
-  ADD KEY `Intervention_fk_1` (`idOperateur`);
-
-ALTER TABLE `Intervention`
-  ADD CONSTRAINT `Intervention_fk_1` FOREIGN KEY (`idOperateur`) REFERENCES `Operateur` (`idOperateur`) ON DELETE CASCADE;
+ADD CONSTRAINT `Intervention_fk_2`
+FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
 
 -- --------------------------------------------------------
 

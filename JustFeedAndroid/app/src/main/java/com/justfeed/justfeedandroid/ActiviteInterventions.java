@@ -6,13 +6,22 @@
 
 package com.justfeed.justfeedandroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @brief Définition de la classe ActiviteInterventions.
@@ -31,11 +40,11 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * Attributs
      */
-    List<Intervention> listeInterventions; //!< Liste des interventions à afficher
-    BaseDeDonnees baseDeDonnees; //!< objet BaseDeDonnees pour pouvoir retrouver les informations
-                                 //!< sur les interventions dans une BDD.
-    private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
+    List<Intervention>                 listeInterventions; //!< Liste des interventions à afficher
+    BaseDeDonnees                      baseDeDonnees; //!< objet BaseDeDonnees pour pouvoir retrouver les informations
+                                                       //!< sur les interventions dans une BDD.
+    private RecyclerView               vueListeInterventions; //!< Affichage des Interventions
+    private RecyclerView.Adapter       adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
 
     /**
@@ -50,7 +59,7 @@ public class ActiviteInterventions extends AppCompatActivity
 
         // Récupère l'instance de BaseDeDonnees
         baseDeDonnees      = BaseDeDonnees.getInstance();
-        listeInterventions = baseDeDonnees.recupererInterventions();
+        baseDeDonnees.recupererInterventions();
 
         initialiserVueInterventions();
     }

@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class JustFeed extends AppCompatActivity
     /**
      * Attributs
      */
-    private Map<Integer,Distributeur> listeDistributeurs;    //!< Liste des distributeurs
+    private List <Distributeur> listeDistributeurs;    //!< Liste des distributeurs
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler              handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -64,16 +65,11 @@ public class JustFeed extends AppCompatActivity
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
 
-        this.listeDistributeurs = new HashMap<Integer, Distributeur>();
         initialiserHandler();
 
         // Récupère l'instance de BaseDeDonnees
         baseDeDonnees      = BaseDeDonnees.getInstance(handler);
-        baseDeDonnees.selectionner("SELECT * FROM Distributeur, Bac, Produit WHERE Bac.idDistributeur = Distributeur.idDistributeur AND Bac.idProduit = Produit.idProduit");
-
-        initialiserGUI();
-
-        afficherDistributeurs();
+        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -166,7 +162,8 @@ public class JustFeed extends AppCompatActivity
      */
     private void afficherDistributeurs()
     {
-        this.adapteurDistributeur.notifyDataSetChanged();
+        Log.d(TAG, "afficherDistributeurs()");
+        adapteurDistributeur.notifyDataSetChanged();
     }
 
     /**
@@ -210,49 +207,14 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
-
-                        ResultSet resultatRequete = (ResultSet)message.obj;
-                        try
-                        {
-                            while(resultatRequete.next())
-                             {
-                                Log.d(TAG, "[Handler] idDistributeur : "+resultatRequete.getInt("idDistributeur"));
-                                if(!listeDistributeurs.containsKey(resultatRequete.getInt("idDistributeur")))
-                                {
-                                    List<Bac> listeBacs = new ArrayList<Bac>();
-                                    listeDistributeurs.put(resultatRequete.getInt("idDistributeur"),
-                                            new Distributeur(
-                                                    resultatRequete.getInt("idDistributeur"),
-                                                    resultatRequete.getString("codepostal"),
-                                                    resultatRequete.getString("adresse"),
-                                                    resultatRequete.getString("ville"),
-                                                    resultatRequete.getString("nomDistributeur"),
-                                                    listeBacs)
-                                    );
-                                }
-                                else
-                                {
-                                    listeDistributeurs.get(resultatRequete.getInt("idDistributeur")).ajouterBac(
-                                            new Bac(
-                                                    new Produit(
-                                                            resultatRequete.getString("nomProduit"),
-                                                            resultatRequete.getDouble("prix"),
-                                                            resultatRequete.getDouble("poidsUnitaire"),
-                                                            resultatRequete.getDouble("volumeUnitaire")
-                                                    ),
-                                                    resultatRequete.getDouble("poidsActuel"),
-                                                    resultatRequete.getDouble("poidsTotal"),
-                                                    resultatRequete.getInt("hygrometrie")
-                                            )
-                                    );
-                                }
-                             }
-
-                         }
-                         catch(SQLException e)
-                         {
-                             e.printStackTrace();
-                         }
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
+                        listeDistributeurs = (ArrayList) message.obj;
+                        initialiserGUI();
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
                         break;
                 }
             }
