@@ -61,7 +61,7 @@ public class BaseDeDonnees
     // private static final String HOSTNAME = "127.0.0.1"; //!< L'adresse du serveur de base de
     // données par défaut
     private static final int    PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
-    private final int TRUE = 1; //!< Vérifie si l'intervention a été executée.
+    private final int           TRUE        = 1; //!< Vérifie si l'intervention a été executée.
     public final static boolean active =
       true; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
 
@@ -79,11 +79,8 @@ public class BaseDeDonnees
       new ReentrantLock(true);               //!< mutex pour l'exécution concurrente de requêtes
     private static BaseDeDonnees bdd = null; //!< l'instance unique de BaseDeDonnees (Singleton)
     private Handler handler = null; //<! Le handler pour l'échange de messages entre les threads
-
-    private List<Distributeur>
-      listeDistributeurs; //!< Simule la récupération d'une liste de Distributeurs sur une BDD
-    private List<Intervention>
-      listeInterventions; //!< Simule la récupération d'une liste d'interventions sur une BDD.
+    private List<Distributeur> listeDistributeurs = null; //<! La liste des distributeurs
+    private List<Intervention> listeInterventions = null; //<! La liste des interventions
 
     /**
      * @fn getInstance
@@ -490,8 +487,8 @@ public class BaseDeDonnees
         @Override
         protected void onPostExecute(Boolean result)
         {
-            //Log.d(TAG, "onPostExecute() result = " + result);
-            //Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
+            // Log.d(TAG, "onPostExecute() result = " + result);
+            // Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
         }
     }
 
@@ -627,51 +624,70 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQL = "SELECT * FROM Distributeur, Bac, Produit WHERE" +
-                                    " Bac.idDistributeur = Distributeur.idDistributeur AND Bac.idProduit = Produit.idProduit";
-                            Log.d(TAG, "Requete : " + requeteSQL);
+                            String requeteSQLDistributeurs = "SELECT * FROM Distributeur";
+                            Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
-                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
-                                            ResultSet.CONCUR_READ_ONLY);
-                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            Map<Integer, Distributeur> distributeurs = new HashMap<Integer, Distributeur>();
-                            while(resultatRequete.next())
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequeteDistributeurs =
+                              statement.executeQuery(requeteSQLDistributeurs);
+                            Map<Integer, Distributeur> distributeurs =
+                              new HashMap<Integer, Distributeur>();
+                            while(resultatRequeteDistributeurs.next())
                             {
-                                Log.d(TAG, "recupererDistributeurs() idDistributeur : "+ resultatRequete.getInt("idDistributeur"));
-                                if(!distributeurs.containsKey(resultatRequete.getInt("idDistributeur")))
-                                {
-                                    List<Bac> listeBacs = new ArrayList<Bac>();
-                                    distributeurs.put(resultatRequete.getInt("idDistributeur"),
-                                            new Distributeur(
-                                                    resultatRequete.getInt("idDistributeur"),
-                                                    resultatRequete.getString("codepostal"),
-                                                    resultatRequete.getString("adresse"),
-                                                    resultatRequete.getString("ville"),
-                                                    resultatRequete.getString("nomDistributeur"),
-                                                    listeBacs)
-                                    );
-                                }
-                                else
-                                {
-                                    distributeurs.get(resultatRequete.getInt("idDistributeur")).ajouterBac(
-                                            new Bac(
-                                                    new Produit(
-                                                            resultatRequete.getString("nomProduit"),
-                                                            resultatRequete.getDouble("prix"),
-                                                            resultatRequete.getDouble("poidsUnitaire"),
-                                                            resultatRequete.getDouble("volumeUnitaire")
-                                                    ),
-                                                    resultatRequete.getDouble("poidsActuel"),
-                                                    resultatRequete.getDouble("poidsTotal"),
-                                                    resultatRequete.getInt("hygrometrie")
-                                            )
-                                    );
-                                }
+                                Log.d(TAG,
+                                      "recupererDistributeurs() idDistributeur : " +
+                                        resultatRequeteDistributeurs.getInt("idDistributeur"));
+                                distributeurs.put(
+                                  resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                  new Distributeur(
+                                    resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                    resultatRequeteDistributeurs.getString("codepostal"),
+                                    resultatRequeteDistributeurs.getString("adresse"),
+                                    resultatRequeteDistributeurs.getString("ville"),
+                                    resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                    new ArrayList<Bac>()));
                             }
-                            listeDistributeurs = new ArrayList<Distributeur>(distributeurs.values());
-                            Message message    = new Message();
-                            message.what       = REQUETE_SQL_SELECT_DISTRIBUTEURS;
-                            message.obj        = listeDistributeurs;
+                            String requeteSQLBacs =
+                              "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
+                              +
+                              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur\n"
+                              + "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                              +
+                              "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            Log.d(TAG, "Requete : " + requeteSQLBacs);
+                            ResultSet resultatRequeteBacs = statement.executeQuery(requeteSQLBacs);
+                            while(resultatRequeteBacs.next())
+                            {
+                                Log.d(TAG,
+                                      "recupererDistributeurs() idDistributeur = " +
+                                        resultatRequeteBacs.getInt("idDistributeur"));
+                                if(distributeurs.containsKey(
+                                     resultatRequeteBacs.getInt("idDistributeur")))
+                                {
+                                    distributeurs.get(resultatRequeteBacs.getInt("idDistributeur"))
+                                      .ajouterBac(
+                                        new Bac(new Produit(
+                                                  resultatRequeteBacs.getString("nomProduit"),
+                                                  resultatRequeteBacs.getDouble("prix"),
+                                                  resultatRequeteBacs.getDouble("poidsUnitaire"),
+                                                  resultatRequeteBacs.getDouble("volumeUnitaire")),
+                                                resultatRequeteBacs.getDouble("poidsActuel"),
+                                                resultatRequeteBacs.getDouble("poidsTotal"),
+                                                resultatRequeteBacs.getInt("hygrometrie")));
+                                }
+                                Log.d(
+                                  TAG,
+                                  "recupererDistributeurs() idDistributeur = " +
+                                    resultatRequeteBacs.getInt("idDistributeur") + " nbBacs = " +
+                                    distributeurs.get(resultatRequeteBacs.getInt("idDistributeur"))
+                                      .getNbBacs());
+                            }
+                            listeDistributeurs =
+                              new ArrayList<Distributeur>(distributeurs.values());
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
+                            message.obj     = listeDistributeurs;
                             if(handler != null)
                                 handler.sendMessage(message);
                         }
@@ -695,6 +711,51 @@ public class BaseDeDonnees
                 Log.w(TAG, "Pas de connexion MySQL !");
             }
         }
+        else
+        {
+            // Pour les tests
+            // simule une base de données
+            List<Bac> bacsDistributeur1 = Arrays.asList(
+              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0),
+              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
+              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0));
+
+            List<Bac> bacsDistributeur2 =
+              Arrays.asList(new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0),
+                            new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0),
+                            new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0));
+
+            List<Bac> bacsDistributeur3 =
+              Arrays.asList(new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1),
+                            new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0),
+                            new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
+
+            listeDistributeurs =
+                    new ArrayList<Distributeur>();
+            listeDistributeurs.add(new Distributeur(1,
+                    "84100",
+                    "Avenue Frédéric Mistral",
+                    "Orange",
+                    "Gare Orange",
+                    bacsDistributeur1));
+            listeDistributeurs.add(new Distributeur(2,
+                    "84000",
+                    "Boulevard Saint-Roch",
+                    "Avignon",
+                    "Gare Avignon Centre",
+                    bacsDistributeur2));
+            listeDistributeurs.add(new Distributeur(3,
+                    "84200",
+                    "Avenue De La Gare",
+                    "Carpentras",
+                    "Gare de Carpentras",
+                    bacsDistributeur3));
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
+            message.obj     = listeDistributeurs;
+            if(handler != null)
+                handler.sendMessage(message);
+        }
     }
 
     /**
@@ -713,30 +774,41 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQL = "SELECT * FROM Intervention, Distributeur WHERE Intervention.idDistributeur = Distributeur.idDistributeur";
+                            String requeteSQL =
+                              "SELECT * FROM Intervention, Distributeur WHERE Intervention.idDistributeur = Distributeur.idDistributeur";
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
-                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
-                                            ResultSet.CONCUR_READ_ONLY);
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            listeInterventions = new ArrayList<Intervention>();
                             while(resultatRequete.next())
                             {
-                                for(Distributeur distributeur : listeDistributeurs)
+                                for(Distributeur distributeur: listeDistributeurs)
                                 {
-                                    if(distributeur.getIdentifiant() == resultatRequete.getInt("idDistributeur"))
-                                        listeInterventions.add(
-                                                new Intervention(
-                                                        resultatRequete.getString("heureIntervention"),
-                                                        distributeur,
-                                                        (resultatRequete.getInt("effectuee") == TRUE)
-                                                )
-                                        );
+                                    Log.d(TAG,
+                                            "recupererInterventions() idDistributeur = " +
+                                                    resultatRequete.getInt("idDistributeur"));
+                                    if(distributeur.getIdentifiant() ==
+                                       resultatRequete.getInt("idDistributeur")) {
+                                        Log.d(TAG,
+                                                "recupererInterventions() dateIntervention = " +
+                                                        resultatRequete.getString("dateIntervention"));
+                                        listeInterventions.add(new Intervention(
+                                                resultatRequete.getString("dateIntervention"),
+                                                distributeur,
+                                                (resultatRequete.getInt("effectuee") == 0)));
+                                    }
+                                    else
+                                    {
+                                        Log.d(TAG,
+                                                "recupererInterventions() pas d'intervention prévue");
+                                    }
                                 }
-
                             }
-                            Message message    = new Message();
-                            message.what       = REQUETE_SQL_SELECT_INTERVENTIONS;
-                            message.obj        = listeInterventions;
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
+                            message.obj     = listeInterventions;
                             if(handler != null)
                                 handler.sendMessage(message);
                         }

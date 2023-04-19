@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
+
 /**
  * @brief Définition de la classe Bac
  * @details La classe Bac \c Bac permet de décrire un
@@ -14,9 +16,13 @@ package com.justfeed.justfeedandroid;
  * @author Fargier Mayeul
  * @version 0.1
  */
-
 public class Bac
 {
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_Bac"; //!< TAG pour les logs (cf. Logcat)
+
     /**
      * Attributs
      */
@@ -31,6 +37,7 @@ public class Bac
      */
     public Bac()
     {
+        Log.d(TAG, "Bac()");
         this.typeProduit = null;
         this.poidsActuel = 0.0;
         this.poidsTotal  = 0.0;
@@ -46,6 +53,9 @@ public class Bac
      */
     public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie)
     {
+        Log.d(TAG,
+              "Bac() nomProduit = " + typeProduit.getNom() + " - poidsActuel = " + poidsActuel +
+                " - poidsTotal = " + poidsTotal + " - hygrometrie = " + hygrometrie);
         this.typeProduit = typeProduit;
         this.poidsActuel = poidsActuel;
         this.poidsTotal  = poidsTotal;

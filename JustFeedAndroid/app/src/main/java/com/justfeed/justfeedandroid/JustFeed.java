@@ -69,9 +69,8 @@ public class JustFeed extends AppCompatActivity
 
         initialiserGUI();
         initialiserHandler();
+        initialiserBaseDeDonnees();
 
-        // Récupère l'instance de BaseDeDonnees
-        baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.recupererDistributeurs();
     }
 
@@ -138,20 +137,22 @@ public class JustFeed extends AppCompatActivity
             @Override
             public void onClick(View vue)
             {
-                baseDeDonnees.recupererInterventions();
                 Intent activiteIntervention =
                   new Intent(JustFeed.this, ActiviteInterventions.class);
-                activiteIntervention.putExtra("listeInterventions", (Serializable) listeInterventions);
                 startActivity(activiteIntervention);
-                /**
-                 * @ FIXME: 4/18/2023
-                 * FATAL EXCEPTION
-                 * java.lang.RuntimeException: Parcel: unable to marshal value com.justfeed.justfeedandroid.Intervention@7dda1b4
-                 */
             }
         });
 
         initialiserVueListeDistributeurs();
+    }
+
+    /**
+     * @brief Initialise laccès à la base de données MySQL
+     */
+    private void initialiserBaseDeDonnees()
+    {
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
     }
 
     /**
@@ -178,10 +179,6 @@ public class JustFeed extends AppCompatActivity
             this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
         }
         adapteurDistributeur.notifyDataSetChanged();
-        /**
-         * @ FIXME: 4/18/2023
-         * 2 bacs sur 3 sont affichés
-         */
     }
 
     /**
@@ -228,11 +225,11 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
-                        afficherDistributeurs((ArrayList) message.obj);
+                        afficherDistributeurs((ArrayList)message.obj);
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
-                        listeInterventions = (ArrayList) message.obj;
+                        listeInterventions = (ArrayList)message.obj;
                         break;
                 }
             }

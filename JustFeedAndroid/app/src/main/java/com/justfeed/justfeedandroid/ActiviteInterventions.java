@@ -40,12 +40,12 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * Attributs
      */
-    List<Intervention>                 listeInterventions; //!< Liste des interventions à affiche
+    List<Intervention> listeInterventions; //!< Liste des interventions à affiche
 
-    private Handler                    handler; //!< Le handler utilisé par l'activité
-    private BaseDeDonnees              baseDeDonnees; //!< Identifiants pour la base de données
-    private RecyclerView               vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter       adapteurIntervention;  //!< Pour remplir les vues des Interventions
+    private Handler              handler;               //!< Le handler utilisé par l'activité
+    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
+    private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
+    private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
 
     /**
@@ -142,10 +142,6 @@ public class ActiviteInterventions extends AppCompatActivity
             this.vueListeInterventions.setAdapter(this.adapteurIntervention);
         }
         adapteurIntervention.notifyDataSetChanged();
-        /**
-         * @ FIXME: 4/18/2023
-         * L'interventions affichées en double
-         */
     }
 
     /**
@@ -161,8 +157,10 @@ public class ActiviteInterventions extends AppCompatActivity
                 Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 if(message.what == BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS)
-                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
-                        afficherInterventions((ArrayList) message.obj);
+                {
+                    Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
+                    afficherInterventions((ArrayList)message.obj);
+                }
             }
         };
     }

@@ -26,7 +26,7 @@ public class VueIntervention extends ViewHolder
     private final TextView identifiantDistributeur; //!< attribut GUI qui affiche l'identifiant du
                                                     //!< distributeur où intervenir.
     private final TextView
-      heureIntervention; //!< attribut GUI qui affiche l'heure de l'intervention.
+      dateIntervention; //!< attribut GUI qui affiche l'heure de l'intervention.
     private final TextView
       aRemplir; //!< attribut GUI qui affiche si le distributeur doit être rempli.
     private final TextView
@@ -37,15 +37,14 @@ public class VueIntervention extends ViewHolder
         super(itemView);
 
         identifiantDistributeur = ((TextView)itemView.findViewById(R.id.identifiantDistributeur));
-        heureIntervention       = ((TextView)itemView.findViewById(R.id.heureIntervention));
+        dateIntervention        = ((TextView)itemView.findViewById(R.id.dateIntervention));
         aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
     }
 
     public void afficherInterventions(Intervention intervention)
     {
-        identifiantDistributeur.setText("Identifiant du distributuer : " +
-                                        Integer.toString(intervention.getIdentifiantDistribteur()));
+        identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
         if(!(intervention.bacsADepanner().isEmpty()))
         {
             aDepanner.setText("Bacs à dépanner (Hygrométrie > 0%) : \n" +
@@ -53,9 +52,8 @@ public class VueIntervention extends ViewHolder
         }
         if(!(intervention.bacsARemplir().isEmpty()))
         {
-            aRemplir.setText("Bacs à remplir: \n" + intervention.bacsARemplir());
+            aRemplir.setText("Bac(s) à remplir : \n" + intervention.bacsARemplir());
         }
-        heureIntervention.setText("Heure de l'intervention : " +
-                                  intervention.getHeureIntervention());
+        dateIntervention.setText("Date de l'intervention : " + intervention.getDateIntervention());
     }
 }

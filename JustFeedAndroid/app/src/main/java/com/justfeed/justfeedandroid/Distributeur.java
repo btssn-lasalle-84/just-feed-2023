@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
+
 import java.util.List;
 import java.util.Map;
 
@@ -21,14 +23,20 @@ import java.util.Map;
 public class Distributeur
 {
     /**
+     * Constantes
+     */
+    private static final String TAG = "_Distributeur"; //!< TAG pour les logs (cf. Logcat)
+
+    /**
      * Attributs
      */
-    private int       id; //!< l'identifiant d'un ditributeur.
-    private String    codePostal; //!< Code postal de la ville où se trouve le distributeur.
-    private String    adresse; //!< Adresse du distributeur.
-    private String    ville; //!< Ville où se situe le distributeur.
-    private String    nomDistributeur; //!< Lieu où se trouve le distributeur.
-    private List<Bac> listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private int    id;              //!< l'identifiant d'un ditributeur.
+    private String codePostal;      //!< Code postal de la ville où se trouve le distributeur.
+    private String adresse;         //!< Adresse du distributeur.
+    private String ville;           //!< Ville où se situe le distributeur.
+    private String nomDistributeur; //!< Lieu où se trouve le distributeur.
+    private List<Bac>
+      listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -42,7 +50,8 @@ public class Distributeur
 
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
-     * @see Distributeur(int id, String codePostal, String adresse, String Ville, String nomDistributeur, List<Bac> listeBacs)
+     * @see Distributeur(int id, String codePostal, String adresse, String Ville, String
+     *   nomDistributeur, List<Bac> listeBacs)
      * @param id L'identifiant du distributeur.
      * @param codePostal Code postal de la ville.
      * @param adresse Adresse du distributeur.
@@ -50,28 +59,44 @@ public class Distributeur
      * @param nomDistributeur Nom du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
-    public Distributeur(int id, String codePostal, String adresse, String ville, String nomDistributeur, List<Bac> listeBacs)
+    public Distributeur(int       id,
+                        String    codePostal,
+                        String    adresse,
+                        String    ville,
+                        String    nomDistributeur,
+                        List<Bac> listeBacs)
     {
-        this.id                    = id;
-        this.codePostal            = codePostal;
-        this.adresse               = adresse;
-        this.ville                 = ville;
-        this.nomDistributeur       = nomDistributeur;
-        this.listeBacs             = listeBacs;
+        Log.d(TAG, "Distributeur() id = " + id + " - nomDistributeur = " + nomDistributeur + " - nb bacs = " + listeBacs.size() );
+        this.id              = id;
+        this.codePostal      = codePostal;
+        this.adresse         = adresse;
+        this.ville           = ville;
+        this.nomDistributeur = nomDistributeur;
+        this.listeBacs       = listeBacs;
     }
 
     // Accesseurs
+    /**
+     * @brief Accesseur de la localisation du nomDistributeur.
+     */
+    public String getNom()
+    {
+        return nomDistributeur;
+    }
+
     /**
      * @brief Accesseur de la localisation du distributeur.
      */
     public String getLocalisation()
     {
         String localisation = "";
-        localisation = localisation.concat(this.codePostal+", ");
-        localisation = localisation.concat(this.ville+" "+this.adresse+" "+this.nomDistributeur);
+        localisation        = localisation.concat(this.codePostal + ", ");
+        localisation =
+          localisation.concat(this.ville + " " + this.adresse + " " + this.nomDistributeur);
 
         return localisation;
     }
+
     /**
      * @brief Accesseur de l'identifiant du distributeur.
      * @return id du distributeur.
@@ -88,6 +113,15 @@ public class Distributeur
     public List<Bac> getListeBacs()
     {
         return this.listeBacs;
+    }
+
+    /**
+     * @brief Accesseur du nombre de bacs du distributeur
+     * @return int le nombre de bacs
+     */
+    public int getNbBacs()
+    {
+        return this.listeBacs.size();
     }
 
     /**
