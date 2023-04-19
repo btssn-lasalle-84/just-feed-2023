@@ -19,7 +19,8 @@
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
  */
-IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistributeur(nullptr)
+IHMJustFeed::IHMJustFeed(QWidget* parent) :
+    QWidget(parent), configurationDistributeur(nullptr), intervention(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
     initialiserDistributeurs();
@@ -138,8 +139,16 @@ void IHMJustFeed::configurerDistributeur()
  */
 void IHMJustFeed::planifierIntervention()
 {
-    qDebug() << Q_FUNC_INFO << "planifierIntervention" ;
-    new Intervention(this);
+    qDebug() << Q_FUNC_INFO;
+    if(intervention == nullptr)
+    {
+        intervention = new Intervention(this);
+    }
+    else
+        return;
+    intervention->exec();
+    delete intervention;
+    intervention = nullptr;
 }
 
 /**

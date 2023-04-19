@@ -14,46 +14,44 @@
 #include <QtWidgets>
 #include <QDate>
 
-
 /**
  * @def TITRE_INTERVENTION
  * @brief Définit le titre de la boîte de dialogue
  */
-#define TITRE_INTERVENTION QString("intervention")
+#define TITRE_INTERVENTION QString("Planifier une intervention")
 
 class Distributeur;
 class Produit;
 class IHMJustFeed;
 
-class Intervention : public QDialog {
+class Intervention : public QDialog
+{
     Q_OBJECT
-private:
-  IHMJustFeed *ihmJustFeed; //!< l'ihm principale
-  QDateTime horodatage;     //!< date et heure de l'intervention
-  QVector<Distributeur *>
-      distributeurs; //!< les distributeurs sur lesquels il faut intervenir
-  bool effectuee;    //!< si l'intervention a été effectuée
-  QDate dateIntervention; //!< date de l'intervention
-  QPushButton* boutonTest;
-  void initialiserBoiteDeDialogue();
-  void instancierWidgets();
-  void initialiserWidgets();
-  void positionnerWidgets();
-  void initialiserEvenements();
+  private:
+    IHMJustFeed*           ihmJustFeed;      //!< association vers l'ihm principale
+    QDate                  dateIntervention; //!< la date de l'intervention
+    QVector<Distributeur*> distributeurs;    //!< les distributeurs sur lesquels il faut intervenir
+    bool                   effectuee;        //!< si l'intervention a été effectuée
+    QPushButton*           boutonTest;
+    void                   initialiserBoiteDeDialogue();
+    void                   instancierWidgets();
+    void                   initialiserWidgets();
+    void                   positionnerWidgets();
+    void                   initialiserEvenements();
 
-public:
-  explicit Intervention(IHMJustFeed* parent = 0);
-  ~Intervention();
+  public:
+    explicit Intervention(IHMJustFeed* parent = 0);
+    ~Intervention();
 
-  // Accesseurs
-  QDateTime getHorodatage() const;
-  QVector<Distributeur *> getDistributeurs() const;
-  double getEffectuee() const;
+    // Accesseurs
+    QDate                  getDateIntervention() const;
+    QVector<Distributeur*> getDistributeurs() const;
+    double                 getEffectuee() const;
 
-  // Mutateurs
-  void setHorodatage(const QDateTime &horodatage);
-  void ajouterDistributeur(Distributeur *distributeur);
-  void setEffectuee(const bool effectuee);
+    // Mutateurs
+    void setDateIntervention(const QDate& dateIntervention);
+    void ajouterDistributeur(Distributeur* distributeur);
+    void setEffectuee(const bool effectuee);
 };
 
 #endif // INTERVENTION_H

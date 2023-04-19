@@ -1,6 +1,6 @@
 /**
  * @file        intervention.cpp
- * @brief       Définition de la classe intervention.
+ * @brief       Définition de la classe Intervention.
  * @details     La classe intervention \c Cette classe permet de définir une
  * intervention
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
@@ -15,19 +15,23 @@
 /**
  * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention(IHMJustFeed* parent) : QDialog(parent),
-    ihmJustFeed(parent), horodatage(), effectuee(false), dateIntervention(){
+Intervention::Intervention(IHMJustFeed* parent) :
+    QDialog(parent), ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false)
+{
+    qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
     initialiserBoiteDeDialogue();
 }
 
 /**
  * @brief Destructeur de la classe Intervention
  */
-Intervention::~Intervention() {}
-
+Intervention::~Intervention()
+{
+    qDebug() << Q_FUNC_INFO;
+}
 
 /**
- * @brief méthode qui initialise la boîte de dialogue
+ * @brief Méthode qui initialise la boîte de dialogue
  */
 void Intervention::initialiserBoiteDeDialogue()
 {
@@ -39,7 +43,7 @@ void Intervention::initialiserBoiteDeDialogue()
 }
 
 /**
- * @brief méthode qui instancie les widgets de la boîte de dialogue
+ * @brief Méthode qui instancie les widgets de la boîte de dialogue
  */
 void Intervention::instancierWidgets()
 {
@@ -47,72 +51,79 @@ void Intervention::instancierWidgets()
 }
 
 /**
- * @brief méthode qui initialise les widgets de la boîte de dialogue
+ * @brief Méthode qui initialise les widgets de la boîte de dialogue
  */
 void Intervention::initialiserWidgets()
 {
-    boutonTest->setText("Ajouter un bac");
+    boutonTest->setText("Ajouter une intervention");
 }
 
 /**
- * @brief méthode qui positionne les widgets dans la boîte de dialogue
+ * @brief Méthode qui positionne les widgets dans la boîte de dialogue
  */
 void Intervention::positionnerWidgets()
 {
-
 }
 
 /**
-* @brief méthode qui initialise les connexions signal/slot
-*/
+ * @brief Méthode qui initialise les connexions signal/slot
+ */
 void Intervention::initialiserEvenements()
 {
-
 }
 
-
 /**
- * @brief Accesseur de l'attribut horodatage
- * @return QDateTime représente la date et l'heure de l'intervention sur le
+ * @brief Accesseur de l'attribut dateIntervention
+ * @return QDate représente la date de l'intervention sur le
  * distributeur
  */
-QDateTime Intervention::getHorodatage() const { return this->horodatage; }
+QDate Intervention::getDateIntervention() const
+{
+    return this->dateIntervention;
+}
 
 /**
  * @brief Accesseur de l'attribut distributeurAIntervenir
  * @return QVector<Distributeur*> represente les distributeurs surlequels il
  * faut intervenir
  */
-QVector<Distributeur *> Intervention::getDistributeurs() const {
-  return this->distributeurs;
+QVector<Distributeur*> Intervention::getDistributeurs() const
+{
+    return this->distributeurs;
 }
 
 /**
  * @brief Accesseur de l'attribut effectuee
  * @return effectuee
  */
-double Intervention::getEffectuee() const { return this->effectuee; }
+double Intervention::getEffectuee() const
+{
+    return this->effectuee;
+}
 
 /**
  * @brief Mutateur de l'attribut distributeurAIntervenir
  * @param distributeur distributeur sur lequel il faut intervenir
  */
-void Intervention::ajouterDistributeur(Distributeur *distributeur) {
-  this->distributeurs.push_back(distributeur);
+void Intervention::ajouterDistributeur(Distributeur* distributeur)
+{
+    this->distributeurs.push_back(distributeur);
 }
 
 /**
- * @brief Mutateur de l'attribut horodatage
- * @param horodatage
+ * @brief Mutateur de l'attribut dateIntervention
+ * @param dateIntervention
  */
-void Intervention::setHorodatage(const QDateTime &horodatage) {
-  this->horodatage = horodatage;
+void Intervention::setDateIntervention(const QDate& dateIntervention)
+{
+    this->dateIntervention = dateIntervention;
 }
 
 /**
  * @brief Mutateur de l'attribut effectuee
  * @param effectuee
  */
-void Intervention::setEffectuee(const bool effectuee) {
-  this->effectuee = effectuee;
+void Intervention::setEffectuee(const bool effectuee)
+{
+    this->effectuee = effectuee;
 }
