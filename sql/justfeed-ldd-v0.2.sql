@@ -131,14 +131,21 @@ ALTER TABLE `Bac`
 
 CREATE TABLE `Intervention` (
   `idIntervention` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `idOperateur` int NOT NULL,
   `idDistributeur` int NOT NULL,
-  `heureIntervention` time NOT NULL,
+  `dateIntervention` date NOT NULL,
   `effectuee` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
-ADD CONSTRAINT `Intervention_fk_2`
-FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
+  ADD KEY `Intervention_fk_1` (`idOperateur`),
+  ADD KEY `Intervention_fk_2` (`idDistributeur`);
+
+ALTER TABLE `Intervention`
+  ADD CONSTRAINT `Intervention_fk_1` FOREIGN KEY (`idOperateur`) REFERENCES `Operateur` (`idOperateur`) ON DELETE CASCADE;
+
+ALTER TABLE `Intervention`
+  ADD CONSTRAINT `Intervention_fk_2` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
 
 -- --------------------------------------------------------
 
@@ -150,7 +157,7 @@ CREATE TABLE `Approvisionnement` (
   `idApprovisionnement` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idIntervention` int NOT NULL,
   `idBac` int NOT NULL,
-  `dateApprovisionnement` date NOT NULL,
+  `heureApprovisionnement` time NOT NULL,
   `effectue` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
