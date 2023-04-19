@@ -1,4 +1,6 @@
---- LDD (langage de définition de données)
+-- LDD (langage de définition de données)
+
+-- Voir aussi : https://www.db4free.net/phpMyAdmin/
 
 DROP DATABASE IF EXISTS `justfeed`;
 
@@ -12,7 +14,7 @@ USE justfeed;
 
 DROP TABLE IF EXISTS Approvisionnement;
 DROP TABLE IF EXISTS Intervention;
-DROP TABLE IF EXISTS StockDistributeur;
+DROP TABLE IF EXISTS Bac;
 DROP TABLE IF EXISTS Produit;
 DROP TABLE IF EXISTS Distributeur;
 DROP TABLE IF EXISTS Operateur;
@@ -57,7 +59,7 @@ CREATE TABLE `Operateur` (
 CREATE TABLE `Distributeur` (
   `idDistributeur` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idServeurTTN` int NOT NULL,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomDistributeur` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
   `ville` varchar(255) DEFAULT NULL,
@@ -66,7 +68,6 @@ CREATE TABLE `Distributeur` (
   `longitude` varchar(255) DEFAULT NULL,
   `latitude` varchar(255) DEFAULT NULL,
   `deviceID` varchar(255) NOT NULL,
-  `hygrometrie` int DEFAULT '0',
   `nbBacs` int NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -86,10 +87,10 @@ ALTER TABLE `Distributeur`
 
 CREATE TABLE `Produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomProduit` varchar(255) DEFAULT NULL,
   `marque` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `codeEAN` varchar(12) DEFAULT NULL,
+  `codeEAN` varchar(13) DEFAULT NULL,
   `prix` double DEFAULT NULL,
   `poidsUnitaire` double DEFAULT NULL,
   `volumeUnitaire` double DEFAULT NULL
@@ -101,22 +102,26 @@ ALTER TABLE `Produit`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `StockDistributeur`
+-- Structure de la table `Bac`
 --
 
-CREATE TABLE `StockDistributeur` (
-  `idStockDistributeur` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `Bac` (
+  `idBac` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idDistributeur` int NOT NULL,
   `idProduit` int NOT NULL,
+  `poidsActuel` double,
+  `poidsTotal`  double NOT NULL,
+  `hygrometrie` int DEFAULT '0',
   `remplissage` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `StockDistributeur`
-  ADD KEY `Stock_fk_2` (`idProduit`);
+ALTER TABLE `Bac`
+  ADD KEY `Bac_fk_1` (`idDistributeur`),
+  ADD KEY `Bac_fk_2` (`idProduit`);
 
-ALTER TABLE `StockDistributeur`
-  ADD CONSTRAINT `Stock_fk_1` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Stock_fk_2` FOREIGN KEY (`idProduit`) REFERENCES `Produit` (`idProduit`) ON DELETE CASCADE;
+ALTER TABLE `Bac`
+  ADD CONSTRAINT `Bac_fk_1` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Bac_fk_2` FOREIGN KEY (`idProduit`) REFERENCES `Produit` (`idProduit`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
 
@@ -126,16 +131,14 @@ ALTER TABLE `StockDistributeur`
 
 CREATE TABLE `Intervention` (
   `idIntervention` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `idOperateur` int NOT NULL,
-  `dateIntervention` date NOT NULL,
+  `idDistributeur` int NOT NULL,
+  `heureIntervention` time NOT NULL,
   `effectuee` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
-  ADD KEY `Intervention_fk_1` (`idOperateur`);
-
-ALTER TABLE `Intervention`
-  ADD CONSTRAINT `Intervention_fk_1` FOREIGN KEY (`idOperateur`) REFERENCES `Operateur` (`idOperateur`) ON DELETE CASCADE;
+ADD CONSTRAINT `Intervention_fk_2`
+FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
 
 -- --------------------------------------------------------
 
@@ -146,17 +149,17 @@ ALTER TABLE `Intervention`
 CREATE TABLE `Approvisionnement` (
   `idApprovisionnement` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idIntervention` int NOT NULL,
-  `idStockDistributeur` int NOT NULL,
+  `idBac` int NOT NULL,
   `dateApprovisionnement` date NOT NULL,
   `effectue` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Approvisionnement`
   ADD KEY `Approvisionnement_fk_1` (`idIntervention`),
-  ADD KEY `Approvisionnement_fk_2` (`idStockDistributeur`);
+  ADD KEY `Approvisionnement_fk_2` (`idBac`);
 
 ALTER TABLE `Approvisionnement`
   ADD CONSTRAINT `Approvisionnement_fk_1` FOREIGN KEY (`idIntervention`) REFERENCES `Intervention` (`idIntervention`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Approvisionnement_fk_2` FOREIGN KEY (`idStockDistributeur`) REFERENCES `StockDistributeur` (`idStockDistributeur`) ON DELETE CASCADE;
+  ADD CONSTRAINT `Approvisionnement_fk_2` FOREIGN KEY (`idBac`) REFERENCES `Bac` (`idBac`) ON DELETE CASCADE;
 
 -- --------------------------------------------------------
