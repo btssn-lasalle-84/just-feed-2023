@@ -14,6 +14,7 @@
 #include "produit.h"
 #include "bac.h"
 #include "configurationdistributeur.h"
+#include "intervention.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -130,6 +131,14 @@ void IHMJustFeed::configurerDistributeur()
     configurationDistributeur->exec();
     delete configurationDistributeur;
     configurationDistributeur = nullptr;
+}
+
+/**
+ * @brief méthode qui planifie une intervention
+ */
+void IHMJustFeed::planifierIntervention()
+{
+    new Intervention(this);
 }
 
 /**
@@ -319,6 +328,7 @@ void IHMJustFeed::initialiserEvenements()
             this,
             SLOT(selectionnerDistributeur(int)));
     connect(boutonConfigurer, SIGNAL(clicked()), this, SLOT(configurerDistributeur()));
+    connect(boutonIntervenir, SIGNAL(clicked()), this, SLOT(planifierIntervention()));
     connect(boutonValider, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
 }
 

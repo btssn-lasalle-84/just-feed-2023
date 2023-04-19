@@ -69,7 +69,7 @@ class BaseDeDonnees
     /* uniquement pour les requêtes SELECT */
     bool recuperer(QString requete, QString& donnees);          // 1 -> 1
     bool recuperer(QString requete, QStringList& donnees);      // 1 -> 1..*
-    bool recuperer(QString requete, QVector<QString>& donnees); // 1..* -> 1
+    //bool recuperer(QString requete, QVector<QString>& donnees); // 1..* -> 1
     bool recuperer(QString               requete,
                    QVector<QStringList>& donnees); // 1..* -> 1..*
 

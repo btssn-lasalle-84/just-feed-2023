@@ -12,14 +12,48 @@
 #include "distributeur.h"
 
 /**
- * @brief Constructeur par défaut de la classe Intervention
+ * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention() : horodatage(), effectuee(false) {}
+Intervention::Intervention(IHMJustFeed* parent) : ihmJustFeed(parent), horodatage(), effectuee(false), dateIntervention(){
+    initialiserBoiteDeDialogue();
+}
 
 /**
  * @brief Destructeur de la classe Intervention
  */
 Intervention::~Intervention() {}
+
+
+
+void Intervention::initialiserBoiteDeDialogue()
+{
+    instancierWidgets();
+    initialiserWidgets();
+    positionnerWidgets();
+    initialiserEvenements();
+    setWindowTitle(TITRE_INTERVENTION);
+}
+
+void Intervention::instancierWidgets()
+{
+
+}
+
+void Intervention::initialiserWidgets()
+{
+
+}
+
+void Intervention::positionnerWidgets()
+{
+
+}
+
+void Intervention::initialiserEvenements()
+{
+
+}
+
 
 /**
  * @brief Accesseur de l'attribut horodatage

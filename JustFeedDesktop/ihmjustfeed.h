@@ -81,6 +81,7 @@ class IHMJustFeed : public QWidget
     QStackedWidget* fenetres;                 //!< la pile de fenêtres
     QWidget*        fenetreAccueil;           //!< la fenêtre d'accueil
     QWidget*        fenetreDistributeur;      //!< la fenêtre d'un distributeur
+    //QWidget*        fenetreIntervention;      //!< la fenêtre intervention
     QTableWidget*   tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QPushButton*    boutonIntervenir;
     QPushButton*    boutonConfigurer;
@@ -107,6 +108,8 @@ class IHMJustFeed : public QWidget
     void afficherDistributeur(Distributeur* distributeur);
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
+    void afficherFenetreIntervention();
+
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
@@ -123,6 +126,7 @@ class IHMJustFeed : public QWidget
     void afficherFenetreAccueil();
     void afficherFenetreDistributeur();
     void configurerDistributeur();
+    void planifierIntervention();
     void selectionnerDistributeur(int numeroDistributeur);
     void selectionnerDistributeur(int ligne, int colonne);
 };

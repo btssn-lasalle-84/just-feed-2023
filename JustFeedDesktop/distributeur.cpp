@@ -336,7 +336,7 @@ void Distributeur::supprimerBac(const int numeroBacASupprimer)
     {
         qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
         delete bacs[numeroBacASupprimer];
-        bacs.removeAt(numeroBacASupprimer);
+        bacs.remove(numeroBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
 }

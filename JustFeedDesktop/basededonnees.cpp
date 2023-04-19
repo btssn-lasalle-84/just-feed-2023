@@ -334,7 +334,7 @@ bool BaseDeDonnees::recuperer(QString requete, QStringList& donnees)
  * QVector de QString
  * @return bool true si la requête a été exécutée avec succès sinon false
  */
-bool BaseDeDonnees::recuperer(QString requete, QVector<QString>& donnees)
+/*bool BaseDeDonnees::recuperer(QString requete, QVector<QString>& donnees)
 {
     QSqlQuery r;
     bool      retour;
@@ -390,7 +390,7 @@ bool BaseDeDonnees::recuperer(QString requete, QVector<QString>& donnees)
     }
     else
         return false;
-}
+}*/
 
 /**
  * @brief Exécute une requête SQL de type SELECT et récupère plusieurs champs de
