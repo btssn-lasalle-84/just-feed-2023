@@ -10,11 +10,13 @@
 
 #include "intervention.h"
 #include "distributeur.h"
+#include "ihmjustfeed.h"
 
 /**
  * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention(IHMJustFeed* parent) : ihmJustFeed(parent), horodatage(), effectuee(false), dateIntervention(){
+Intervention::Intervention(IHMJustFeed* parent) : QDialog(parent),
+    ihmJustFeed(parent), horodatage(), effectuee(false), dateIntervention(){
     initialiserBoiteDeDialogue();
 }
 
@@ -24,7 +26,9 @@ Intervention::Intervention(IHMJustFeed* parent) : ihmJustFeed(parent), horodatag
 Intervention::~Intervention() {}
 
 
-
+/**
+ * @brief méthode qui initialise la boîte de dialogue
+ */
 void Intervention::initialiserBoiteDeDialogue()
 {
     instancierWidgets();
@@ -34,21 +38,33 @@ void Intervention::initialiserBoiteDeDialogue()
     setWindowTitle(TITRE_INTERVENTION);
 }
 
+/**
+ * @brief méthode qui instancie les widgets de la boîte de dialogue
+ */
 void Intervention::instancierWidgets()
 {
-
+    boutonTest = new QPushButton(this);
 }
 
+/**
+ * @brief méthode qui initialise les widgets de la boîte de dialogue
+ */
 void Intervention::initialiserWidgets()
 {
-
+    boutonTest->setText("Ajouter un bac");
 }
 
+/**
+ * @brief méthode qui positionne les widgets dans la boîte de dialogue
+ */
 void Intervention::positionnerWidgets()
 {
 
 }
 
+/**
+* @brief méthode qui initialise les connexions signal/slot
+*/
 void Intervention::initialiserEvenements()
 {
 

@@ -138,6 +138,7 @@ void IHMJustFeed::configurerDistributeur()
  */
 void IHMJustFeed::planifierIntervention()
 {
+    qDebug() << Q_FUNC_INFO << "planifierIntervention" ;
     new Intervention(this);
 }
 

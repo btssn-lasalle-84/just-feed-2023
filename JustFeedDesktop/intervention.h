@@ -14,6 +14,11 @@
 #include <QtWidgets>
 #include <QDate>
 
+
+/**
+ * @def TITRE_INTERVENTION
+ * @brief Définit le titre de la boîte de dialogue
+ */
 #define TITRE_INTERVENTION QString("intervention")
 
 class Distributeur;
@@ -29,6 +34,7 @@ private:
       distributeurs; //!< les distributeurs sur lesquels il faut intervenir
   bool effectuee;    //!< si l'intervention a été effectuée
   QDate dateIntervention; //!< date de l'intervention
+  QPushButton* boutonTest;
   void initialiserBoiteDeDialogue();
   void instancierWidgets();
   void initialiserWidgets();

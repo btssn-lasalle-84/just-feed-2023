@@ -81,7 +81,6 @@ class IHMJustFeed : public QWidget
     QStackedWidget* fenetres;                 //!< la pile de fenêtres
     QWidget*        fenetreAccueil;           //!< la fenêtre d'accueil
     QWidget*        fenetreDistributeur;      //!< la fenêtre d'un distributeur
-    //QWidget*        fenetreIntervention;      //!< la fenêtre intervention
     QTableWidget*   tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QPushButton*    boutonIntervenir;
     QPushButton*    boutonConfigurer;
