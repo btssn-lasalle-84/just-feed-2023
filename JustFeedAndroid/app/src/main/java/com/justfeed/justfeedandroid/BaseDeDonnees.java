@@ -730,26 +730,25 @@ public class BaseDeDonnees
                             new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0),
                             new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
 
-            listeDistributeurs =
-                    new ArrayList<Distributeur>();
+            listeDistributeurs = new ArrayList<Distributeur>();
             listeDistributeurs.add(new Distributeur(1,
-                    "84100",
-                    "Avenue Frédéric Mistral",
-                    "Orange",
-                    "Gare Orange",
-                    bacsDistributeur1));
+                                                    "84100",
+                                                    "Avenue Frédéric Mistral",
+                                                    "Orange",
+                                                    "Gare Orange",
+                                                    bacsDistributeur1));
             listeDistributeurs.add(new Distributeur(2,
-                    "84000",
-                    "Boulevard Saint-Roch",
-                    "Avignon",
-                    "Gare Avignon Centre",
-                    bacsDistributeur2));
+                                                    "84000",
+                                                    "Boulevard Saint-Roch",
+                                                    "Avignon",
+                                                    "Gare Avignon Centre",
+                                                    bacsDistributeur2));
             listeDistributeurs.add(new Distributeur(3,
-                    "84200",
-                    "Avenue De La Gare",
-                    "Carpentras",
-                    "Gare de Carpentras",
-                    bacsDistributeur3));
+                                                    "84200",
+                                                    "Avenue De La Gare",
+                                                    "Carpentras",
+                                                    "Gare de Carpentras",
+                                                    bacsDistributeur3));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
             message.obj     = listeDistributeurs;
@@ -781,28 +780,29 @@ public class BaseDeDonnees
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                                         ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            listeInterventions = new ArrayList<Intervention>();
+                            listeInterventions        = new ArrayList<Intervention>();
                             while(resultatRequete.next())
                             {
                                 for(Distributeur distributeur: listeDistributeurs)
                                 {
                                     Log.d(TAG,
-                                            "recupererInterventions() idDistributeur = " +
-                                                    resultatRequete.getInt("idDistributeur"));
+                                          "recupererInterventions() idDistributeur = " +
+                                            resultatRequete.getInt("idDistributeur"));
                                     if(distributeur.getIdentifiant() ==
-                                       resultatRequete.getInt("idDistributeur")) {
+                                       resultatRequete.getInt("idDistributeur"))
+                                    {
                                         Log.d(TAG,
-                                                "recupererInterventions() dateIntervention = " +
-                                                        resultatRequete.getString("dateIntervention"));
+                                              "recupererInterventions() dateIntervention = " +
+                                                resultatRequete.getString("dateIntervention"));
                                         listeInterventions.add(new Intervention(
-                                                resultatRequete.getString("dateIntervention"),
-                                                distributeur,
-                                                (resultatRequete.getInt("effectuee") == 0)));
+                                          resultatRequete.getString("dateIntervention"),
+                                          distributeur,
+                                          (resultatRequete.getInt("effectuee") == 0)));
                                     }
                                     else
                                     {
                                         Log.d(TAG,
-                                                "recupererInterventions() pas d'intervention prévue");
+                                              "recupererInterventions() pas d'intervention prévue");
                                     }
                                 }
                             }
@@ -831,6 +831,17 @@ public class BaseDeDonnees
             {
                 Log.w(TAG, "Pas de connexion MySQL !");
             }
+        }
+        else
+        {
+            listeInterventions.clear();
+            listeInterventions.add(new Intervention(
+                    "2023-06-01", listeDistributeurs.get(0), true));
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
+            message.obj     = listeInterventions;
+            if(handler != null)
+                handler.sendMessage(message);
         }
     }
 }

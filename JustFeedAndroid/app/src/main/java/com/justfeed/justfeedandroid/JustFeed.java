@@ -44,7 +44,6 @@ public class JustFeed extends AppCompatActivity
      * Attributs
      */
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
-    private List<Intervention>   listeInterventions;    //!< Liste des interventions
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler              handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -93,6 +92,8 @@ public class JustFeed extends AppCompatActivity
     {
         super.onResume();
         Log.d(TAG, "onResume()");
+        baseDeDonnees.setHandler(handler);
+        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -171,7 +172,7 @@ public class JustFeed extends AppCompatActivity
      */
     private void afficherDistributeurs(List<Distributeur> distributeurs)
     {
-        Log.d(TAG, "afficherDistributeurs()");
+        Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
         this.listeDistributeurs = distributeurs;
         if(this.adapteurDistributeur == null)
         {
@@ -190,8 +191,8 @@ public class JustFeed extends AppCompatActivity
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                Log.d(TAG, "[Handler] id message = " + message.what);
-                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                //Log.d(TAG, "[Handler] id message = " + message.what);
+                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 switch(message.what)
                 {
@@ -226,10 +227,6 @@ public class JustFeed extends AppCompatActivity
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
                         afficherDistributeurs((ArrayList)message.obj);
-                        break;
-                    case BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS:
-                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
-                        listeInterventions = (ArrayList)message.obj;
                         break;
                 }
             }
