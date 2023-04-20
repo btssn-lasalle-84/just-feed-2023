@@ -64,12 +64,14 @@ class IHMJustFeed : public QWidget
         COLONNE_DISTRIBUTEUR_ADRESSE,
         COLONNE_DISTRIBUTEUR_VILLE,
         COLONNE_DISTRIBUTEUR_CODEPOSTAL,
+        COLONNE_INTERVENTION_CHECKBOX,
         NbColonnesDistributeur
     };
 
     Q_OBJECT
   private:
     QVector<Distributeur*> distributeurs;                 //!< les distributeur
+    QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeur à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     ConfigurationDistributeur*
@@ -77,6 +79,7 @@ class IHMJustFeed : public QWidget
     Intervention* intervention;
     QStringList   nomColonnes;           //!< la liste des noms de colonne
     int           nbLignesDistributeurs; //!< le nombre de lignes dans la table
+    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *checkBoxItem;
 
     // Widgets
     QWidget*        gui;                      //!< le widget central
@@ -96,6 +99,7 @@ class IHMJustFeed : public QWidget
     QLabel*         miseEnServiceDistributeur;
     QLabel*         positionDistributeur;
 
+
     void initialiserGUI();
     void instancierWidgets();
     void initialiserWidgets();
@@ -110,6 +114,7 @@ class IHMJustFeed : public QWidget
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
     void afficherFenetreIntervention();
+    void recupererEtatsCheckBox();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

@@ -15,8 +15,8 @@
 /**
  * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention(IHMJustFeed* parent) :
-    QDialog(parent), ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false)
+Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, IHMJustFeed* parent) :
+    QDialog(parent), ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false), distributeurs(listeDistributeursAIntervenir)
 {
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
     initialiserBoiteDeDialogue();
@@ -47,7 +47,7 @@ void Intervention::initialiserBoiteDeDialogue()
  */
 void Intervention::instancierWidgets()
 {
-    boutonTest = new QPushButton(this);
+
 }
 
 /**
@@ -55,7 +55,6 @@ void Intervention::instancierWidgets()
  */
 void Intervention::initialiserWidgets()
 {
-    boutonTest->setText("Ajouter une intervention");
 }
 
 /**
