@@ -15,10 +15,14 @@
 /**
  * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, IHMJustFeed* parent) :
-    QDialog(parent), ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false), distributeurs(listeDistributeursAIntervenir)
+Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir,
+                           IHMJustFeed*           parent) :
+    QDialog(parent),
+    ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false),
+    distributeurs(listeDistributeursAIntervenir)
 {
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
+    qDebug() << Q_FUNC_INFO << "nb distributeurs" << listeDistributeursAIntervenir.size();
     initialiserBoiteDeDialogue();
 }
 
@@ -47,7 +51,6 @@ void Intervention::initialiserBoiteDeDialogue()
  */
 void Intervention::instancierWidgets()
 {
-
 }
 
 /**

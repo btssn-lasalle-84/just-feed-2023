@@ -114,7 +114,7 @@ class IHMJustFeed : public QWidget
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
     void afficherFenetreIntervention();
-    void recupererEtatsCheckBox();
+    void recupererDistributeursAIntervenir();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

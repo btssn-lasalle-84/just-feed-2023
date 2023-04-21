@@ -139,7 +139,7 @@ void IHMJustFeed::configurerDistributeur()
  */
 void IHMJustFeed::planifierIntervention()
 {
-    recupererEtatsCheckBox();
+    recupererDistributeursAIntervenir();
     qDebug() << Q_FUNC_INFO;
     if(intervention == nullptr)
     {
@@ -474,7 +474,7 @@ void IHMJustFeed::chargerDistributeurs()
  */
 void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
 {
-    qDebug() << Q_FUNC_INFO << "nom";
+    qDebug() << Q_FUNC_INFO << distributeur.getNom();
 
     QFont texte;
     // texte.setPointSize(TAILLE_POLICE);
@@ -575,18 +575,18 @@ void IHMJustFeed::effacerTableDistributeurs()
     nbLignesDistributeurs = 0;
 }
 
-void IHMJustFeed::recupererEtatsCheckBox()
+void IHMJustFeed::recupererDistributeursAIntervenir()
 {
     for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
     {
         QTableWidgetItem* item =
           tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION);
-        Qt::CheckState etat = item->checkState();
-        if(etat == Qt::Checked)
+        if(item->checkState() == Qt::Checked)
         {
+            qDebug() << Q_FUNC_INFO << distributeurs[i]->getNom();
             listeDistributeursAIntervenir.push_back(distributeurs[i]);
+            tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
+              ->setCheckState(Qt::Unchecked);
         }
-        tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
-          ->setCheckState(Qt::Unchecked);
     }
 }
