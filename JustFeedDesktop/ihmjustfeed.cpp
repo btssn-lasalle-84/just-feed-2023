@@ -174,6 +174,18 @@ void IHMJustFeed::selectionnerDistributeur(int ligne, int colonne)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+/**
+ * @brief méthode qui sélectionne le distributeur pour l'affichage
+ */
+void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
+{
+    QTableWidgetItem* nomDistributeur;
+    nomDistributeur = tableWidgetDistributeurs->item(item->row(), COLONNE_DISTRIBUTEUR_NOM);
+    qDebug() << Q_FUNC_INFO << "distributeur"
+             << getDistributeur(nomDistributeur->data(0).toString())->getNom();
+    afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
+}
+
 // Méthodes privées
 
 /**
@@ -335,6 +347,10 @@ void IHMJustFeed::initialiserEvenements()
             SIGNAL(cellClicked(int, int)),
             this,
             SLOT(selectionnerDistributeur(int, int)));*/
+    connect(tableWidgetDistributeurs,
+            SIGNAL(itemPressed(QTableWidgetItem*)),
+            this,
+            SLOT(selectionnerDistributeur(QTableWidgetItem*)));
     connect(listeDistributeurs,
             SIGNAL(currentIndexChanged(int)),
             this,

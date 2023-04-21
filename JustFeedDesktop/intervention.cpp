@@ -18,8 +18,8 @@
 Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir,
                            IHMJustFeed*           parent) :
     QDialog(parent),
-    ihmJustFeed(parent), dateIntervention(QDate::currentDate()), effectuee(false),
-    distributeurs(listeDistributeursAIntervenir)
+    ihmJustFeed(parent), dateIntervention(QDate::currentDate()),
+    distributeurs(listeDistributeursAIntervenir), effectuee(false)
 {
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
     qDebug() << Q_FUNC_INFO << "nb distributeurs" << listeDistributeursAIntervenir.size();

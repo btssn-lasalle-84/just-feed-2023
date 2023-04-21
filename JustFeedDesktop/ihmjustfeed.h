@@ -134,6 +134,7 @@ class IHMJustFeed : public QWidget
     void planifierIntervention();
     void selectionnerDistributeur(int numeroDistributeur);
     void selectionnerDistributeur(int ligne, int colonne);
+    void selectionnerDistributeur(QTableWidgetItem* item);
 };
 
 #endif // IHMJUSTFEED_H
