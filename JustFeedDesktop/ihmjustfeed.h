@@ -64,7 +64,7 @@ class IHMJustFeed : public QWidget
         COLONNE_DISTRIBUTEUR_ADRESSE,
         COLONNE_DISTRIBUTEUR_VILLE,
         COLONNE_DISTRIBUTEUR_CODEPOSTAL,
-        COLONNE_INTERVENTION_CHECKBOX,
+        COLONNE_DISTRIBUTEUR_INTERVENTION,
         NbColonnesDistributeur
     };
 
@@ -79,31 +79,31 @@ class IHMJustFeed : public QWidget
     Intervention* intervention;
     QStringList   nomColonnes;           //!< la liste des noms de colonne
     int           nbLignesDistributeurs; //!< le nombre de lignes dans la table
-    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *checkBoxItem;
 
     // Widgets
-    QWidget*        gui;                      //!< le widget central
-    QStackedWidget* fenetres;                 //!< la pile de fenêtres
-    QWidget*        fenetreAccueil;           //!< la fenêtre d'accueil
-    QWidget*        fenetreDistributeur;      //!< la fenêtre d'un distributeur
-    QTableWidget*   tableWidgetDistributeurs; //!< l'affichage sous forme de table
-    QPushButton*    boutonIntervenir;
-    QPushButton*    boutonConfigurer;
-    QPushButton*    boutonValider;
-    QComboBox*      listeDistributeurs; //!< liste de distributeurs
-    QLabel*         nomDistributeur;
-    QLabel*         adresseDistributeur;
-    QLabel*         codePostalDistributeur;
-    QLabel*         villeDistributeur;
-    QLabel*         descriptionDistributeur;
-    QLabel*         miseEnServiceDistributeur;
-    QLabel*         positionDistributeur;
-
+    QWidget*          gui;                      //!< le widget central
+    QStackedWidget*   fenetres;                 //!< la pile de fenêtres
+    QWidget*          fenetreAccueil;           //!< la fenêtre d'accueil
+    QWidget*          fenetreDistributeur;      //!< la fenêtre d'un distributeur
+    QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
+    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
+      *itemIntervention; //!< les éléments de la table
+    QPushButton* boutonIntervenir;
+    QPushButton* boutonConfigurer;
+    QPushButton* boutonValider;
+    QComboBox*   listeDistributeurs; //!< liste de distributeurs
+    QLabel*      nomDistributeur;
+    QLabel*      adresseDistributeur;
+    QLabel*      codePostalDistributeur;
+    QLabel*      villeDistributeur;
+    QLabel*      descriptionDistributeur;
+    QLabel*      miseEnServiceDistributeur;
+    QLabel*      positionDistributeur;
 
     void initialiserGUI();
     void instancierWidgets();
     void initialiserWidgets();
-    void initialiseTable();
+    void initialiserTable();
     void positionnerWidgets();
     void initialiserEvenements();
     void initialiserDistributeurs();

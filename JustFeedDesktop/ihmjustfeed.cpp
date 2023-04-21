@@ -150,8 +150,6 @@ void IHMJustFeed::planifierIntervention()
     intervention->exec();
     delete intervention;
     intervention = nullptr;
-
-
 }
 
 /**
@@ -233,7 +231,7 @@ void IHMJustFeed::initialiserWidgets()
     fenetres->addWidget(fenetreDistributeur);
 
     // La table
-    initialiseTable();
+    initialiserTable();
 
     // Les listes
     for(int i = 0; i < distributeurs.size(); i++)
@@ -290,7 +288,7 @@ void IHMJustFeed::positionnerWidgets()
 /**
  * @brief méthode qui initialise le QTableWidget
  */
-void IHMJustFeed::initialiseTable()
+void IHMJustFeed::initialiserTable()
 {
     tableWidgetDistributeurs = new QTableWidget(this);
 
@@ -299,7 +297,7 @@ void IHMJustFeed::initialiseTable()
                 << "Adresse"
                 << "Ville"
                 << "Code Postal"
-                <<"intervention";
+                << "Intervention";
 
     tableWidgetDistributeurs->setColumnCount(nomColonnes.count());
     tableWidgetDistributeurs->setHorizontalHeaderLabels(nomColonnes);
@@ -482,11 +480,6 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     // texte.setPointSize(TAILLE_POLICE);
     texte.setBold(true);
 
-
-    checkBoxItem = new QTableWidgetItem();
-    checkBoxItem->setCheckState(Qt::Unchecked);
-    checkBoxItem->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     // Le nombre d'utilisateurs déjà présents dans la table
     int nb = tableWidgetDistributeurs->rowCount();
 
@@ -508,6 +501,10 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     itemCodePostal->setFlags(Qt::ItemIsEnabled);
     itemCodePostal->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
+    itemIntervention = new QTableWidgetItem();
+    itemIntervention->setCheckState(Qt::Unchecked);
+    itemIntervention->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+
     nbLignesDistributeurs += 1;
     qDebug() << Q_FUNC_INFO << "nbLignesDistributeur" << nbLignesDistributeurs;
 
@@ -518,7 +515,7 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_ADRESSE, itemAdresse);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_VILLE, itemVille);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_CODEPOSTAL, itemCodePostal);
-    tableWidgetDistributeurs->setItem(nb - 1, COLONNE_INTERVENTION_CHECKBOX, checkBoxItem);
+    tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_INTERVENTION, itemIntervention);
 
     // Se replace au début de la table
     tableWidgetDistributeurs->scrollToItem(tableWidgetDistributeurs->item(0, 1));
@@ -582,12 +579,14 @@ void IHMJustFeed::recupererEtatsCheckBox()
 {
     for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
     {
-        QTableWidgetItem* item = tableWidgetDistributeurs->item(i, COLONNE_INTERVENTION_CHECKBOX);
+        QTableWidgetItem* item =
+          tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION);
         Qt::CheckState etat = item->checkState();
         if(etat == Qt::Checked)
         {
             listeDistributeursAIntervenir.push_back(distributeurs[i]);
         }
-        tableWidgetDistributeurs->item(i, COLONNE_INTERVENTION_CHECKBOX)->setCheckState(Qt::Unchecked);
+        tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
+          ->setCheckState(Qt::Unchecked);
     }
 }
