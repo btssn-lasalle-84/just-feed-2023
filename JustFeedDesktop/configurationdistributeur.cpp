@@ -30,7 +30,7 @@ ConfigurationDistributeur::ConfigurationDistributeur(Distributeur* distributeur,
              << "codePostal" << distributeur->getCodePostal() << "ville" << distributeur->getVille()
              << "dateMiseEnService" << distributeur->getDateMiseService() << "description"
              << distributeur->getDescription() << "hygrometrie" << distributeur->getHygrometrie()
-             << "aIntervenir" << distributeur->getAIntervenir();
+             /*<< "aIntervenir" << distributeur->getAIntervenir()*/;
 
     initialiserBoiteDeDialogue();
 }

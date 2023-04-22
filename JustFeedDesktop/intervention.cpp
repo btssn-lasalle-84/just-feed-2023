@@ -51,6 +51,21 @@ void Intervention::initialiserBoiteDeDialogue()
  */
 void Intervention::instancierWidgets()
 {
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        nomDistributeurs.push_back(new QLabel(this));
+        nomDistributeurs[i]->setText("intervention : Distributeur -> " + distributeurs[i]->getNom());
+        nomDistributeurs[i]->setAlignment(Qt::AlignCenter);
+        for(int j = 0; j < distributeurs[i]->getNbBacs() ; j++)
+        {
+            distributeurs[i]->setAIntervenirBac(j);
+            if(distributeurs[i]->getAIntervenirBac(j) == true)
+            {
+                labelsBac.push_back(new QLabel(this));
+                labelsProduit.push_back(new QLabel(this));
+            }
+        }
+    }
 }
 
 /**
@@ -58,6 +73,7 @@ void Intervention::instancierWidgets()
  */
 void Intervention::initialiserWidgets()
 {
+
 }
 
 /**
@@ -65,6 +81,17 @@ void Intervention::initialiserWidgets()
  */
 void Intervention::positionnerWidgets()
 {
+    qDebug() << Q_FUNC_INFO ;
+    layoutBacs               = new QVBoxLayout();
+    QVector<QHBoxLayout*> layoutsDistributeur(nomDistributeurs.size());
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        layoutsDistributeur[i] = new QHBoxLayout();
+        layoutsDistributeur[i]->addWidget(nomDistributeurs[i]);
+
+        layoutBacs->addLayout(layoutsDistributeur[i]);
+    }
+    setLayout(layoutBacs);
 }
 
 /**

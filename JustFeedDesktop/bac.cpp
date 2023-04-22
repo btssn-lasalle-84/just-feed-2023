@@ -90,6 +90,24 @@ unsigned int Bac::getPoidsActuel() const
 }
 
 /**
+ * @brief Accesseur de l'attribut AIntervenir
+ * @return bool
+ */
+bool Bac::getAIntervenir() const
+{
+    return this->aIntervenir;
+}
+
+/**
+ * @brief Accesseur de l'attribut pourcentageRemplissage
+ * @return double
+ */
+double Bac::getPourcentageRemplissage() const
+{
+    return this->pourcentageRemplissage;
+}
+
+/**
  * @brief Mutateur de l'attribut Produit
  * @param produit le poduit que contient le bac
  */
@@ -125,4 +143,16 @@ void Bac::setPrixProduit(const double& prixProduit)
 void Bac::setPoidsActuel(int poidsActuel)
 {
     this->poidsActuel = poidsActuel;
+}
+
+/**
+ * @brief Mutateur de l'attribut AIntervenir
+ * @param aIntervenir
+ */
+void Bac::setAIntervenir()
+{
+    if(pourcentageRemplissage <= 30.)
+    {
+        this->aIntervenir = true;
+    }
 }

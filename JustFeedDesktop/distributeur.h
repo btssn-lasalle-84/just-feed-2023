@@ -44,8 +44,8 @@ class Distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
     float         hygrometrie;       //!< hygrometrie de l'interieur du distributeur
-    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
-                                     //!< distributeur
+    /*bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
+                                     //!< distributeur*/
 
   public:
     Distributeur();
@@ -62,7 +62,7 @@ class Distributeur
     // Accesseurs
     QString      getdeviceID() const;
     Localisation getPosition() const;
-    int          getAIntervenir() const;
+    //int          getAIntervenir() const;
     float        getHygrometrie() const;
     QString      getNom() const;
     QString      getAdresse() const;
@@ -75,12 +75,13 @@ class Distributeur
     Produit*     getProduitBac(int numeroBac) const;
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
+    bool         getAIntervenirBac(int numerobac) const;
 
     // mutateurs
     void setDeviceID(const QString deviceID);
     void setHygrometrie(float hydrometrie);
     void setPosition(const Localisation& localisation);
-    void setAIntervenir(bool aIntervenir);
+    //void setAIntervenir(bool aIntervenir);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
     void setCodePostal(const QString& codePostal);
@@ -88,6 +89,7 @@ class Distributeur
     void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
     void setPrixProduit(const int& numeroBac, const double& prix);
+    void setAIntervenirBac(const int numerobac);
     void ajouterBac(const Bac& bac);
     void supprimerBac(const int numeroBacASupprimer);
 };

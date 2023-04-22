@@ -17,7 +17,7 @@
  */
 Distributeur::Distributeur() :
     deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
-    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0), aIntervenir(false)
+    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0) /*aIntervenir(false)*/
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -35,14 +35,14 @@ Distributeur::Distributeur(QString      deviceID,
                            QDate        dateMiseEnService) :
     deviceID(deviceID),
     position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
-    aIntervenir(false)
+    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0)
+    /*aIntervenir(false)*/
 {
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
              << "longitude" << position.longitude << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
              << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
-             << "aIntervenir" << aIntervenir;
+             /*<< "aIntervenir" << aIntervenir*/;
 }
 
 /**
@@ -89,10 +89,10 @@ Localisation Distributeur::getPosition() const
  * @brief Accesseur de l'attribut AIntervenir
  * @return un bool qui permet de savoir s'il faut intervenir sur le
  */
-int Distributeur::getAIntervenir() const
+/*int Distributeur::getAIntervenir() const
 {
     return this->aIntervenir;
-}
+}*/
 
 /**
  * @brief Accesseur de l'attribut nom
@@ -210,6 +210,15 @@ int Distributeur::getNbBacs() const
 }
 
 /**
+ * @brief Accesseur pour savoir si le bac est a intervenir
+ * @return bool
+ */
+bool Distributeur::getAIntervenirBac(int numerobac) const
+{
+    return bacs[numerobac]->getAIntervenir();
+}
+
+/**
  * @brief Mutateur de l'attribut identifiant
  * @param deviceID identifiant du distributeur
  */
@@ -242,10 +251,10 @@ void Distributeur::setPosition(const Localisation& localisation)
  * @param aIntervenir un booleen qui détermine l'état du
  * distributeur
  */
-void Distributeur::setAIntervenir(bool aIntervenir)
+/*void Distributeur::setAIntervenir(bool aIntervenir)
 {
     this->aIntervenir = aIntervenir;
-}
+}*/
 
 /**
  * @brief Mutateur de l'attribut nom
@@ -339,4 +348,13 @@ void Distributeur::supprimerBac(const int numeroBacASupprimer)
         bacs.remove(numeroBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
+}
+
+/**
+ * @brief Supprime un bac dans le distributeur
+ * @param numeroBacASupprimer
+ */
+void Distributeur::setAIntervenirBac(const int numerobac)
+{
+    bacs[numerobac]->setAIntervenir();
 }

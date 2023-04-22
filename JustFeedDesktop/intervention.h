@@ -32,6 +32,10 @@ class Intervention : public QDialog
     QDate                  dateIntervention; //!< la date de l'intervention
     QVector<Distributeur*> distributeurs;    //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuee;        //!< si l'intervention a été effectuée
+    QVector<QLabel*>       nomDistributeurs;  //!< nom du distributeur et son numero
+    QVector<QLabel*>       labelsBac;        //!< conteneur de QLabel de bac
+    QVector<QLabel*>       labelsProduit;           //!< conteneur de QLabel de produit
+     QVBoxLayout*          layoutBacs; //!< positionnement des bacs dans la boîte de dialogue
     void                   initialiserBoiteDeDialogue();
     void                   instancierWidgets();
     void                   initialiserWidgets();

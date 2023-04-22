@@ -19,6 +19,7 @@ class Bac
     Produit*     produit;                //!< produit que contient le bac
     unsigned int poidsActuel;            //!< à définir
     double       pourcentageRemplissage; //!< pourcentage de remplissage du bu bac
+    bool         aIntervenir;
 
   public:
     Bac();
@@ -31,12 +32,15 @@ class Bac
     QString      getNomProduit() const;
     double       getPrixProduit() const;
     unsigned int getPoidsActuel() const;
+    double       getPourcentageRemplissage() const;
+    bool         getAIntervenir() const;
 
     // Mutateurs
     void setProduit(Produit* produit);
     void setNomProduit(const QString& nomProduit);
     void setPrixProduit(const double& prixProduit);
     void setPoidsActuel(int poidsActuel);
+    void setAIntervenir();
 };
 
 #endif // BAC_H
