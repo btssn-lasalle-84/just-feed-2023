@@ -51,6 +51,7 @@ class IHMJustFeed : public QWidget
     {
         FAccueil,
         FDistributeur,
+        FIntervention,
         NbFenetres
     };
     /**
@@ -88,7 +89,7 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
       *itemIntervention; //!< les éléments de la table
-    QPushButton* boutonIntervenir;
+    QPushButton* boutonPlanifier;
     QPushButton* boutonConfigurer;
     QPushButton* boutonValider;
     QComboBox*   listeDistributeurs; //!< liste de distributeurs
@@ -113,8 +114,8 @@ class IHMJustFeed : public QWidget
     void afficherDistributeur(Distributeur* distributeur);
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
-    void afficherFenetreIntervention();
-    void recupererDistributeursAIntervenir();
+    int  recupererDistributeursAIntervenir();
+    void effacerDistributeursAIntervenir();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
@@ -130,11 +131,13 @@ class IHMJustFeed : public QWidget
     void afficherFenetre(IHMJustFeed::Fenetre fenetre);
     void afficherFenetreAccueil();
     void afficherFenetreDistributeur();
+    void afficherFenetreIntervention();
     void configurerDistributeur();
     void planifierIntervention();
     void selectionnerDistributeur(int numeroDistributeur);
     void selectionnerDistributeur(int ligne, int colonne);
     void selectionnerDistributeur(QTableWidgetItem* item);
+    void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
 };
 
 #endif // IHMJUSTFEED_H
