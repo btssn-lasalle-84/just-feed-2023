@@ -228,7 +228,7 @@ void IHMJustFeed::positionnerWidgets()
     // Les layouts
     QVBoxLayout* layoutPrincipal           = new QVBoxLayout();
     QVBoxLayout* layoutFenetrePrincipale   = new QVBoxLayout();
-    QVBoxLayout* layoutFenetreDistributeur = new QVBoxLayout();
+    layoutFenetreDistributeur              = new QVBoxLayout();
     QHBoxLayout* layoutF1Table             = new QHBoxLayout();
     QHBoxLayout* layoutBoutonsAccueil      = new QHBoxLayout();
     QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
@@ -268,6 +268,7 @@ void IHMJustFeed::positionnerWidgets()
 /**
  * @brief méthode qui initialise le QTableWidget
  */
+
 void IHMJustFeed::initialiseTable()
 {
     tableWidgetDistributeurs = new QTableWidget(this);
@@ -304,7 +305,6 @@ void IHMJustFeed::initialiseTable()
     tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tableWidgetDistributeurs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
-
 /**
  * @brief méthode qui initialise les connexion signal/slot
  */
@@ -358,7 +358,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -507,17 +507,48 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
  */
 void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 {
-    /**
-     * @todo Afficher un distributeur
-     */
-    // pour les tests
-    nomDistributeur->setText(distributeur->getNom());
-    adresseDistributeur->setText(distributeur->getAdresse());
-    codePostalDistributeur->setText(distributeur->getCodePostal());
-    villeDistributeur->setText(distributeur->getVille());
-    descriptionDistributeur->setText(distributeur->getDescription());
-    miseEnServiceDistributeur->setText("");
-    positionDistributeur->setText("");
+    qDebug() << Q_FUNC_INFO;
+
+    effacerEtatDistributeur();
+    int nbBacs = distributeur->getNbBacs();
+
+    QGridLayout* layoutBacs = new QGridLayout();
+
+    for(int i = 0; i < nbBacs; i++)
+    {
+        QLabel* nomProduit = new QLabel(distributeur->getBac(i)->getNomProduit(), this);
+        nomProduit->setAlignment(Qt::AlignCenter);
+        layoutBacs->addWidget(nomProduit, 1, i, Qt::AlignCenter);
+
+        QProgressBar* volumeRestant = new QProgressBar(this);
+        volumeRestant->setOrientation(Qt::Vertical);
+        volumeRestant->setRange(0, 100);
+        volumeRestant->setValue(distributeur->getBac(i)->getPourcentageRemplissage());
+        volumeRestant->setFixedSize(100, 300);
+        volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
+        }
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
+        }
+        else
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: green; }");
+        }
+
+        layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
+
+        QLabel* hygrometrie = new QLabel(this);
+        hygrometrie->setText(QString("Hygrométrie : %1").arg(distributeur->getHygrometrie()));
+        layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
+    }
+
+    layoutFenetreDistributeur->addLayout(layoutBacs);
+
     afficherFenetreDistributeur();
 }
 
@@ -542,11 +573,39 @@ void IHMJustFeed::effacerTableau(int ligne, int colonne)
  * @brief méthode qui efface le QTableWidget
  * @fn IHMJustFeed::effacerTableDistributeurs
  */
-
 void IHMJustFeed::effacerTableDistributeurs()
 {
     qDebug() << Q_FUNC_INFO;
 
     effacerTableau(0, 0);
     nbLignesDistributeurs = 0;
+}
+
+/**
+ * @brief méthode qui efface le QGridLayout
+ * @fn IHMJustFeed::effacerEtat
+ */
+void IHMJustFeed::effacerEtatDistributeur()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QLayoutItem* item;
+    while((item = layoutFenetreDistributeur->takeAt(0)) != nullptr)
+    {
+        QGridLayout* layoutBacs = dynamic_cast<QGridLayout*>(item->layout());
+        if(layoutBacs != nullptr)
+        {
+            QLayoutItem* itemBac;
+            while((itemBac = layoutBacs->takeAt(0)) != nullptr)
+            {
+                QWidget* widget = itemBac->widget();
+                if(widget != nullptr)
+                {
+                    delete widget;
+                }
+                delete itemBac;
+            }
+        }
+        delete item;
+    }
 }

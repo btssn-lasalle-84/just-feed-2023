@@ -90,6 +90,15 @@ unsigned int Bac::getPoidsActuel() const
 }
 
 /**
+ * @brief Accesseur de l'attribut pourcentage remplissage
+ * @return un double qui represente le pourcentage de remplissage dans le bac
+ */
+double Bac::getPourcentageRemplissage() const
+{
+    return this->pourcentageRemplissage;
+}
+
+/**
  * @brief Mutateur de l'attribut Produit
  * @param produit le poduit que contient le bac
  */
