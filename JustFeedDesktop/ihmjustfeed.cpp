@@ -154,6 +154,18 @@ void IHMJustFeed::selectionnerDistributeur(int ligne, int colonne)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+/**
+ * @brief méthode qui sélectionne le distributeur pour l'affichage
+ */
+void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
+{
+    QTableWidgetItem* nomDistributeur;
+    nomDistributeur = tableWidgetDistributeurs->item(item->row(), COLONNE_DISTRIBUTEUR_NOM);
+    qDebug() << Q_FUNC_INFO << "distributeur"
+             << getDistributeur(nomDistributeur->data(0).toString())->getNom();
+    afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
+}
+
 // Méthodes privées
 
 /**
@@ -310,10 +322,14 @@ void IHMJustFeed::initialiseTable()
  */
 void IHMJustFeed::initialiserEvenements()
 {
-    connect(tableWidgetDistributeurs,
+    /*connect(tableWidgetDistributeurs,
             SIGNAL(cellClicked(int, int)),
             this,
-            SLOT(selectionnerDistributeur(int, int)));
+            SLOT(selectionnerDistributeur(int, int)));*/
+    connect(tableWidgetDistributeurs,
+            SIGNAL(itemPressed(QTableWidgetItem*)),
+            this,
+            SLOT(selectionnerDistributeur(QTableWidgetItem*)));
     connect(listeDistributeurs,
             SIGNAL(currentIndexChanged(int)),
             this,
@@ -358,7 +374,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -406,16 +422,19 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(soja);
     produits.push_back(basilic);
 
+    distributeurs[0]->setHygrometrie(25);
     distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
+    distributeurs[1]->setHygrometrie(18);
     distributeurs[1]->ajouterBac(Bac(banane, 0, 0.));
     distributeurs[1]->ajouterBac(Bac(raisin, 0, 0.));
     distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
              << distributeurs[1]->getNbBacs();
+    distributeurs[2]->setHygrometrie(21);
     distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
@@ -507,48 +526,10 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
  */
 void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "nom" << distributeur->getNom();
 
     effacerEtatDistributeur();
-    int nbBacs = distributeur->getNbBacs();
-
-    QGridLayout* layoutBacs = new QGridLayout();
-
-    for(int i = 0; i < nbBacs; i++)
-    {
-        QLabel* nomProduit = new QLabel(distributeur->getBac(i)->getNomProduit(), this);
-        nomProduit->setAlignment(Qt::AlignCenter);
-        layoutBacs->addWidget(nomProduit, 1, i, Qt::AlignCenter);
-
-        QProgressBar* volumeRestant = new QProgressBar(this);
-        volumeRestant->setOrientation(Qt::Vertical);
-        volumeRestant->setRange(0, 100);
-        volumeRestant->setValue(distributeur->getBac(i)->getPourcentageRemplissage());
-        volumeRestant->setFixedSize(100, 300);
-        volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
-
-        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
-        {
-            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
-        }
-        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
-        {
-            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
-        }
-        else
-        {
-            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: green; }");
-        }
-
-        layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
-
-        QLabel* hygrometrie = new QLabel(this);
-        hygrometrie->setText(QString("Hygrométrie : %1").arg(distributeur->getHygrometrie()));
-        layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
-    }
-
-    layoutFenetreDistributeur->addLayout(layoutBacs);
-
+    creerEtatDistributeur(distributeur);
     afficherFenetreDistributeur();
 }
 
@@ -582,8 +563,88 @@ void IHMJustFeed::effacerTableDistributeurs()
 }
 
 /**
- * @brief méthode qui efface le QGridLayout
- * @fn IHMJustFeed::effacerEtat
+ * @brief méthode qui crée les widgets de la fenêtre d'affichage d'un distributeur
+ * @fn IHMJustFeed::creerEtatDistributeur
+ * @param distributeur le distributeur à afficher
+ */
+void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
+{
+    // La fenêtre distributeur
+    QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
+    QGridLayout* layoutBacs                = new QGridLayout();
+    layoutFenetreDistributeur->addWidget(nomDistributeur);
+    layoutFenetreDistributeur->addWidget(adresseDistributeur);
+    layoutFenetreDistributeur->addWidget(codePostalDistributeur);
+    layoutFenetreDistributeur->addWidget(villeDistributeur);
+    layoutFenetreDistributeur->addWidget(descriptionDistributeur);
+    layoutFenetreDistributeur->addWidget(miseEnServiceDistributeur);
+    layoutFenetreDistributeur->addWidget(positionDistributeur);
+    layoutBoutonsDistributeur->addStretch();
+    layoutFenetreDistributeur->addLayout(layoutBacs);
+    layoutBoutonsDistributeur->addWidget(boutonValider);
+    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
+    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
+
+    // les informations d'un distributeur
+    nomDistributeur->setText(distributeur->getNom());
+    adresseDistributeur->setText(distributeur->getAdresse());
+    codePostalDistributeur->setText(distributeur->getCodePostal());
+    villeDistributeur->setText(distributeur->getVille());
+    descriptionDistributeur->setText(distributeur->getDescription());
+    /**
+     * @todo Afficher la date formatée et la localisation
+     */
+    miseEnServiceDistributeur->setText("");
+    positionDistributeur->setText("");
+    /**
+     * @todo Ajouter un bouton pour voir la localisation du distributeur sur une carte
+     */
+
+    int nbBacs = distributeur->getNbBacs();
+
+    for(int i = 0; i < nbBacs; i++)
+    {
+        QLabel* nomProduit = new QLabel(distributeur->getBac(i)->getNomProduit(), this);
+        nomProduit->setAlignment(Qt::AlignCenter);
+        layoutBacs->addWidget(nomProduit, 1, i, Qt::AlignCenter);
+
+        QProgressBar* volumeRestant = new QProgressBar(this);
+        volumeRestant->setOrientation(Qt::Vertical);
+        volumeRestant->setRange(0, 100);
+        volumeRestant->setValue(distributeur->getBac(i)->getPourcentageRemplissage());
+        // affichage du remplissage : 35% de l'écran
+        volumeRestant->setFixedSize(volumeRestant->width(),
+                                    QGuiApplication::primaryScreen()->availableGeometry().height() *
+                                      0.35);
+        volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+
+        /**
+         * @todo Définir des contantes pour les seuils de remplissage
+         */
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
+        }
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
+        }
+        else
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: green; }");
+        }
+
+        layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
+
+        QLabel* hygrometrie = new QLabel(this);
+        hygrometrie->setText(QString("Hygrométrie : %1 %").arg(distributeur->getHygrometrie()));
+        layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
+    }
+}
+
+/**
+ * @brief méthode qui efface les widgets de la fenêtre d'affichage d'un distributeur
+ * @fn IHMJustFeed::effacerEtatDistributeur
  */
 void IHMJustFeed::effacerEtatDistributeur()
 {

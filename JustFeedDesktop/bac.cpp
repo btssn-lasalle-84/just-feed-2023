@@ -95,6 +95,9 @@ unsigned int Bac::getPoidsActuel() const
  */
 double Bac::getPourcentageRemplissage() const
 {
+    /**
+     * @todo Calculer le pourcentage de remplissage
+     */
     return this->pourcentageRemplissage;
 }
 
