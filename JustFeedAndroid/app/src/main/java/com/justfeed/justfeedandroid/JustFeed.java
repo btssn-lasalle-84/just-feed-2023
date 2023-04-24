@@ -19,7 +19,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.Serializable;
+import java.sql.Array;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @class JustFeed
@@ -58,15 +66,11 @@ public class JustFeed extends AppCompatActivity
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
 
-        initialiserHandler();
-
-        // Récupère l'instance de BaseDeDonnees
-        baseDeDonnees      = BaseDeDonnees.getInstance(handler);
-        listeDistributeurs = baseDeDonnees.recupererDistributeurs();
-
         initialiserGUI();
+        initialiserHandler();
+        initialiserBaseDeDonnees();
 
-        afficherDistributeurs();
+        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -88,6 +92,8 @@ public class JustFeed extends AppCompatActivity
     {
         super.onResume();
         Log.d(TAG, "onResume()");
+        baseDeDonnees.setHandler(handler);
+        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -142,6 +148,15 @@ public class JustFeed extends AppCompatActivity
     }
 
     /**
+     * @brief Initialise laccès à la base de données MySQL
+     */
+    private void initialiserBaseDeDonnees()
+    {
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+    }
+
+    /**
      * @brief Initialise la vue pour afficher la liste des distributeurs
      */
     private void initialiserVueListeDistributeurs()
@@ -150,16 +165,21 @@ public class JustFeed extends AppCompatActivity
         this.vueListeDistributeurs.setHasFixedSize(true);
         this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
         this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
-        this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
-        this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
     }
 
     /**
      * @brief Met à jour l'affichage de la liste des distributeurs
      */
-    private void afficherDistributeurs()
+    private void afficherDistributeurs(List<Distributeur> distributeurs)
     {
-        // this.adapteurDistributeur.notifyDataSetChanged();
+        Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
+        this.listeDistributeurs = distributeurs;
+        if(this.adapteurDistributeur == null)
+        {
+            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+        }
+        adapteurDistributeur.notifyDataSetChanged();
     }
 
     /**
@@ -171,8 +191,8 @@ public class JustFeed extends AppCompatActivity
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                Log.d(TAG, "[Handler] id message = " + message.what);
-                Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                //Log.d(TAG, "[Handler] id message = " + message.what);
+                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 switch(message.what)
                 {
@@ -203,23 +223,10 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
-                        /**
-                         * Exemple de traitement d'une requête SELECT
-                         *
-                         * ResultSet resultatRequete = (ResultSet)message.obj;
-                         * try
-                         * {
-                         *    while(resultatRequete.next())
-                         *    {
-                         *        int numero = resultatRequete.getRow();
-                         *        Log.v(TAG, "[Handler] resultatRequete numéro = " + numero);
-                         *    }
-                         * }
-                         * catch(SQLException e)
-                         * {
-                         *    e.printStackTrace();
-                         * }
-                         */
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
+                        afficherDistributeurs((ArrayList)message.obj);
                         break;
                 }
             }

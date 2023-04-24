@@ -49,6 +49,8 @@ public class BaseDeDonnees
     public final static int     REQUETE_SQL_OK     = 4;
     public final static int     REQUETE_SQL_ERREUR = 5;
     public final static int     REQUETE_SQL_SELECT = 6;
+    public final static int     REQUETE_SQL_SELECT_DISTRIBUTEURS = 7;
+    public final static int     REQUETE_SQL_SELECT_INTERVENTIONS = 8;
     private static final String NOM_BDD = "justfeed"; //!< Le nom par défaut de la base de données
     private static final String IDENTIFIANT =
       "justfeed"; //!< Le nom de l'utilisateur par défaut de la base de données
@@ -59,8 +61,9 @@ public class BaseDeDonnees
     // private static final String HOSTNAME = "127.0.0.1"; //!< L'adresse du serveur de base de
     // données par défaut
     private static final int    PORT_DEFAUT = 3306; //!< Le numéro de port par défaut pour MySQL
+    private final int           TRUE        = 1; //!< Vérifie si l'intervention a été executée.
     public final static boolean active =
-      false; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
+      true; //!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)
 
     /**
      * Attributs
@@ -76,11 +79,8 @@ public class BaseDeDonnees
       new ReentrantLock(true);               //!< mutex pour l'exécution concurrente de requêtes
     private static BaseDeDonnees bdd = null; //!< l'instance unique de BaseDeDonnees (Singleton)
     private Handler handler = null; //<! Le handler pour l'échange de messages entre les threads
-
-    private List<Distributeur>
-      listeDistributeurs; //!< Simule la récupération d'une liste de Distributeurs sur une BDD
-    private List<Intervention>
-      listeInterventions; //!< Simule la récupération d'une liste d'interventions sur une BDD.
+    private List<Distributeur> listeDistributeurs = null; //<! La liste des distributeurs
+    private List<Intervention> listeInterventions = null; //<! La liste des interventions
 
     /**
      * @fn getInstance
@@ -152,11 +152,12 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees()
     {
-        this.nomBDD      = NOM_BDD;
-        this.identifiant = IDENTIFIANT;
-        this.motDePasse  = MOT_DE_PASSE;
-        this.hostName    = HOSTNAME;
-        this.port        = PORT_DEFAUT;
+        this.nomBDD             = NOM_BDD;
+        this.identifiant        = IDENTIFIANT;
+        this.motDePasse         = MOT_DE_PASSE;
+        this.hostName           = HOSTNAME;
+        this.port               = PORT_DEFAUT;
+        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -174,12 +175,13 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees(Handler handler)
     {
-        this.nomBDD      = NOM_BDD;
-        this.identifiant = IDENTIFIANT;
-        this.motDePasse  = MOT_DE_PASSE;
-        this.hostName    = HOSTNAME;
-        this.port        = PORT_DEFAUT;
-        this.handler     = handler;
+        this.nomBDD             = NOM_BDD;
+        this.identifiant        = IDENTIFIANT;
+        this.motDePasse         = MOT_DE_PASSE;
+        this.hostName           = HOSTNAME;
+        this.port               = PORT_DEFAUT;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -212,12 +214,13 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD      = nomBase;
-        this.identifiant = identifiant;
-        this.motDePasse  = motDePasse;
-        this.hostName    = hostName;
-        this.port        = port;
-        this.handler     = handler;
+        this.nomBDD             = nomBase;
+        this.identifiant        = identifiant;
+        this.motDePasse         = motDePasse;
+        this.hostName           = hostName;
+        this.port               = port;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -248,12 +251,13 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD      = nomBase;
-        this.identifiant = identifiant;
-        this.motDePasse  = motDePasse;
-        this.hostName    = hostName;
-        this.port        = port;
-        this.handler     = handler;
+        this.nomBDD             = nomBase;
+        this.identifiant        = identifiant;
+        this.motDePasse         = motDePasse;
+        this.hostName           = hostName;
+        this.port               = port;
+        this.handler            = handler;
+        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -485,8 +489,6 @@ public class BaseDeDonnees
         {
             // Log.d(TAG, "onPostExecute() result = " + result);
             // Log.d(TAG, "onPostExecute()) message = " + messageConnexion);
-            //  Ici on pourrait accéder à la partie UI d'une activité
-            //  et/ou appeler une méthode d'une activité
         }
     }
 
@@ -560,6 +562,7 @@ public class BaseDeDonnees
      */
     public void selectionner(final String requeteSELECT)
     {
+        Log.d(TAG, "selectionner()");
         if(!BaseDeDonnees.active)
             return;
 
@@ -609,13 +612,10 @@ public class BaseDeDonnees
      * @brief Méthode qui retourne une liste de distributeurs de la BDD.
      * @return listeDistributeurs
      */
-    public List<Distributeur> recupererDistributeurs()
+    public void recupererDistributeurs()
     {
         if(BaseDeDonnees.active)
         {
-            /**
-             * @todo récupérer les informations des distributeurs sur la base de données
-             */
             if(estConnecte())
             {
                 Thread requeteBDD = new Thread(new Runnable() {
@@ -624,21 +624,72 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQL = "SELECT * FROM Distributeur";
-                            Log.d(TAG, "Requete : " + requeteSQL);
+                            String requeteSQLDistributeurs = "SELECT * FROM Distributeur";
+                            Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                                         ResultSet.CONCUR_READ_ONLY);
-                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            while(resultatRequete.next())
+                            ResultSet resultatRequeteDistributeurs =
+                              statement.executeQuery(requeteSQLDistributeurs);
+                            Map<Integer, Distributeur> distributeurs =
+                              new HashMap<Integer, Distributeur>();
+                            while(resultatRequeteDistributeurs.next())
                             {
-                                // Log.v(TAG, "recupererDistributeurs() numéro = " +
-                                // resultatRequete.getRow());
-                                Log.v(TAG,
-                                      "recupererDistributeurs() idDistributeur = " +
-                                        resultatRequete.getInt("idDistributeur") +
-                                        " - nom = " + resultatRequete.getString("nom"));
+                                Log.d(TAG,
+                                      "recupererDistributeurs() idDistributeur : " +
+                                        resultatRequeteDistributeurs.getInt("idDistributeur"));
+                                distributeurs.put(
+                                  resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                  new Distributeur(
+                                    resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                    resultatRequeteDistributeurs.getString("codepostal"),
+                                    resultatRequeteDistributeurs.getString("adresse"),
+                                    resultatRequeteDistributeurs.getString("ville"),
+                                    resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                    new ArrayList<Bac>()));
                             }
+                            String requeteSQLBacs =
+                              "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
+                              +
+                              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur\n"
+                              + "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                              +
+                              "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            Log.d(TAG, "Requete : " + requeteSQLBacs);
+                            ResultSet resultatRequeteBacs = statement.executeQuery(requeteSQLBacs);
+                            while(resultatRequeteBacs.next())
+                            {
+                                Log.d(TAG,
+                                      "recupererDistributeurs() idDistributeur = " +
+                                        resultatRequeteBacs.getInt("idDistributeur"));
+                                if(distributeurs.containsKey(
+                                     resultatRequeteBacs.getInt("idDistributeur")))
+                                {
+                                    distributeurs.get(resultatRequeteBacs.getInt("idDistributeur"))
+                                      .ajouterBac(
+                                        new Bac(new Produit(
+                                                  resultatRequeteBacs.getString("nomProduit"),
+                                                  resultatRequeteBacs.getDouble("prix"),
+                                                  resultatRequeteBacs.getDouble("poidsUnitaire"),
+                                                  resultatRequeteBacs.getDouble("volumeUnitaire")),
+                                                resultatRequeteBacs.getDouble("poidsActuel"),
+                                                resultatRequeteBacs.getDouble("poidsTotal"),
+                                                resultatRequeteBacs.getInt("hygrometrie")));
+                                }
+                                Log.d(
+                                  TAG,
+                                  "recupererDistributeurs() idDistributeur = " +
+                                    resultatRequeteBacs.getInt("idDistributeur") + " nbBacs = " +
+                                    distributeurs.get(resultatRequeteBacs.getInt("idDistributeur"))
+                                      .getNbBacs());
+                            }
+                            listeDistributeurs =
+                              new ArrayList<Distributeur>(distributeurs.values());
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
+                            message.obj     = listeDistributeurs;
+                            if(handler != null)
+                                handler.sendMessage(message);
                         }
                         catch(Exception e)
                         {
@@ -662,64 +713,135 @@ public class BaseDeDonnees
         }
         else
         {
-            List<Bac> bacsDistributeur1 =
-              Arrays.asList(new Bac(new Produit("cacahuètes", 0.70, 0.001, 0.004), 1.5, 2.0, 0),
-                            new Bac(new Produit("riz", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-                            new Bac(new Produit("fèves", 0.50, 0.002, 0.003), 1.5, 8.0, 0));
+            // Pour les tests
+            // simule une base de données
+            List<Bac> bacsDistributeur1 = Arrays.asList(
+              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0),
+              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
+              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0));
 
             List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane séchée", 3.10, 0.003, 0.002), 5.0, 12.0, 0),
-                            new Bac(new Produit("Abricot sec", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
-                            new Bac(new Produit("raisin sec", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
+              Arrays.asList(new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0),
+                            new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0),
+                            new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0));
 
-            List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("pistache", 3.55, 0.0006, 0.0005), 9.6, 9.6, 1),
-              new Bac(new Produit("maïs séché", 1.45, 0.00035, 0.0004), 4.5, 7.0, 0),
-              new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
+            List<Bac> bacsDistributeur3 =
+              Arrays.asList(new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1),
+                            new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0),
+                            new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
 
-            this.listeDistributeurs = Arrays.asList(new Distributeur(8456, bacsDistributeur1),
-                                                    new Distributeur(8457, bacsDistributeur2),
-                                                    new Distributeur(8458, bacsDistributeur3));
+            listeDistributeurs = new ArrayList<Distributeur>();
+            listeDistributeurs.add(new Distributeur(1,
+                                                    "84100",
+                                                    "Avenue Frédéric Mistral",
+                                                    "Orange",
+                                                    "Gare Orange",
+                                                    bacsDistributeur1));
+            listeDistributeurs.add(new Distributeur(2,
+                                                    "84000",
+                                                    "Boulevard Saint-Roch",
+                                                    "Avignon",
+                                                    "Gare Avignon Centre",
+                                                    bacsDistributeur2));
+            listeDistributeurs.add(new Distributeur(3,
+                                                    "84200",
+                                                    "Avenue De La Gare",
+                                                    "Carpentras",
+                                                    "Gare de Carpentras",
+                                                    bacsDistributeur3));
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
+            message.obj     = listeDistributeurs;
+            if(handler != null)
+                handler.sendMessage(message);
         }
-
-        return this.listeDistributeurs;
     }
 
     /**
      * @brief Méthode qui retourne une liste d'interventions de la BDD.
      * @return listeInterventions
      */
-    public List<Intervention> recupererInterventions()
+    public void recupererInterventions()
     {
         if(BaseDeDonnees.active)
         {
-            /**
-             * @todo récupérer les informations des interventions sur la base de données
-             */
+            if(estConnecte())
+            {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run()
+                    {
+                        mutex.lock();
+                        try
+                        {
+                            String requeteSQL =
+                              "SELECT * FROM Intervention, Distributeur WHERE Intervention.idDistributeur = Distributeur.idDistributeur";
+                            Log.d(TAG, "Requete : " + requeteSQL);
+                            Statement statement =
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            listeInterventions        = new ArrayList<Intervention>();
+                            while(resultatRequete.next())
+                            {
+                                for(Distributeur distributeur: listeDistributeurs)
+                                {
+                                    Log.d(TAG,
+                                          "recupererInterventions() idDistributeur = " +
+                                            resultatRequete.getInt("idDistributeur"));
+                                    if(distributeur.getIdentifiant() ==
+                                       resultatRequete.getInt("idDistributeur"))
+                                    {
+                                        Log.d(TAG,
+                                              "recupererInterventions() dateIntervention = " +
+                                                resultatRequete.getString("dateIntervention"));
+                                        listeInterventions.add(new Intervention(
+                                          resultatRequete.getString("dateIntervention"),
+                                          distributeur,
+                                          (resultatRequete.getInt("effectuee") == 0)));
+                                    }
+                                    else
+                                    {
+                                        Log.d(TAG,
+                                              "recupererInterventions() pas d'intervention prévue");
+                                    }
+                                }
+                            }
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
+                            message.obj     = listeInterventions;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        catch(Exception e)
+                        {
+                            // e.printStackTrace();
+                            Log.e(TAG, "recupererInterventions() Exception = " + e.toString());
+                        }
+                        finally
+                        {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                // Démarrage
+                requeteBDD.start();
+            }
+            else
+            {
+                Log.w(TAG, "Pas de connexion MySQL !");
+            }
         }
         else
         {
-            List<Bac> bacsDistributeur1 =
-              Arrays.asList(new Bac(new Produit("cacahuètes", 0.70, 0.001, 0.004), 1.5, 2.0, 0),
-                            new Bac(new Produit("riz", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-                            new Bac(new Produit("fèves", 0.50, 0.002, 0.003), 1.5, 8.0, 0));
-
-            List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane séchée", 3.10, 0.003, 0.002), 5.0, 12.0, 0),
-                            new Bac(new Produit("Abricot sec", 3.20, 0.008, 0.004), 14.0, 16.0, 0),
-                            new Bac(new Produit("raisin sec", 2.15, 0.002, 0.001), 10.5, 16.0, 0));
-
-            List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("pistache", 3.55, 0.0006, 0.0005), 9.6, 9.6, 1),
-              new Bac(new Produit("maïs séché", 1.45, 0.00035, 0.0004), 4.5, 7.0, 0),
-              new Bac(new Produit("graine de café", 4.49, 0.00006, 0.0005), 1.0, 1.0, 0));
-
-            this.listeInterventions = Arrays.asList(
-              new Intervention("10h", new Distributeur(8456, bacsDistributeur1), true),
-              new Intervention("11h", new Distributeur(8457, bacsDistributeur2), true),
-              new Intervention("12h", new Distributeur(8458, bacsDistributeur3), true));
+            listeInterventions.clear();
+            listeInterventions.add(new Intervention(
+                    "2023-06-01", listeDistributeurs.get(0), true));
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
+            message.obj     = listeInterventions;
+            if(handler != null)
+                handler.sendMessage(message);
         }
-
-        return this.listeInterventions;
     }
 }

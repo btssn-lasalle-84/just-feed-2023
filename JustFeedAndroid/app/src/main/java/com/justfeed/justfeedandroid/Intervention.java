@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
+
 /**
  * @brief Définition de la classe Intervention.
  * @details La classe Intervention \c Intervention permet de décrire une Intervention pour
@@ -19,15 +21,16 @@ public class Intervention
     /**
      * Constantes
      */
+    private static final String TAG = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
     private final int SEUIL_HUMIDITE = 0; //!< Seuil du taux d'humidité d'un distributeur.
     private final int MOITIE         = 2; //!< Moitie d'un bac.
 
     /**
      * Attributs
      */
-    private String       heureIntervention; //!< Heure de l'intervention.
-    private Distributeur distributeur;      //!< Distributeur où intervenir.
-    private boolean      aIntervenir;       //!< Si l'intervention a été ménée ou non.
+    private String       dateIntervention; //!< Heure de l'intervention.
+    private Distributeur distributeur;     //!< Distributeur où intervenir.
+    private boolean      aIntervenir;      //!< Si l'intervention a été ménée ou non.
 
     /**
      * @brief Constructeur par défaut de classe Intervention.
@@ -39,15 +42,18 @@ public class Intervention
 
     /**
      * @brief Constructeur d'initialisation de la classe Intervention.
-     * @param heureIntervention
+     * @param dateIntervention
      * @param distributeur
      * @param aIntervenir
      */
-    public Intervention(String heureIntervention, Distributeur distributeur, boolean aIntervenir)
+    public Intervention(String dateIntervention, Distributeur distributeur, boolean aIntervenir)
     {
-        this.heureIntervention = heureIntervention;
-        this.distributeur      = distributeur;
-        this.aIntervenir       = true;
+        Log.d(TAG,
+                "Intervention() dateIntervention = " + dateIntervention + " - nomdistributeur = " + distributeur.getNom() +
+                        " - aIntervenir = " + aIntervenir);
+        this.dateIntervention = dateIntervention;
+        this.distributeur     = distributeur;
+        this.aIntervenir      = true;
     }
 
     // Accesseurs
@@ -56,9 +62,9 @@ public class Intervention
      * @brief Méthode d'accés à l'heure d'intervention.
      * @return l'heure de l'intervention.
      */
-    public String getHeureIntervention()
+    public String getDateIntervention()
     {
-        return this.heureIntervention;
+        return this.dateIntervention;
     }
 
     /**
@@ -68,6 +74,15 @@ public class Intervention
     public int getIdentifiantDistribteur()
     {
         return this.distributeur.getIdentifiant();
+    }
+
+    /**
+     * @brief Méthode d'accés au nom du distributeur.
+     * @return le nom du distributeur.
+     */
+    public String getNomDistribteur()
+    {
+        return this.distributeur.getNom();
     }
 
     /**
@@ -126,12 +141,12 @@ public class Intervention
     // Mutateurs
 
     /**
-     * @brief Méthode pour modifier l'heure d'intervention.
-     * @param nouvelleHeureIntervention
+     * @brief Méthode pour modifier la date d'intervention.
+     * @param nouvelleDateIntervention
      */
-    public void modifierHeureIntervention(String nouvelleHeureIntervention)
+    public void modifierdateIntervention(String nouvelleDateIntervention)
     {
-        this.heureIntervention = nouvelleHeureIntervention;
+        this.dateIntervention = nouvelleDateIntervention;
     }
 
     /**

@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @brief Définition de la classe AdaptateurDistributeur.
@@ -25,6 +28,10 @@ import java.util.List;
  */
 public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur>
 {
+    /**
+     * Constantes
+     */
+    private final String TAG = "_AdapteurDistributeur";
     private List<Distributeur> distributeurs = null; //!< Liste des distributeurs à afficher.
     private RecyclerView.RecycledViewPool partageVue =
       new RecyclerView.RecycledViewPool(); //!< Partage des vues entre plusieurs recyclerview.
@@ -88,6 +95,7 @@ public class AdaptateurDistributeur extends RecyclerView.Adapter<VueDistributeur
     @Override
     public int getItemCount()
     {
+        Log.d(TAG,"getItemCount()");
         if(distributeurs != null)
         {
             return distributeurs.size();
