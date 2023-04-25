@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.location.Location;
 import android.view.View;
 import android.widget.TextView;
 
@@ -52,11 +53,11 @@ public class VueDistributeur extends RecyclerView.ViewHolder
      */
     public void afficherDistributeur(Distributeur distributeur)
     {
-        List<Double> coordGeographiques = distributeur.getCoordGeographiques();
+        Location coordGeographiques = distributeur.getCoordGeographiques();
         this.identifiant.setText("Identifant : " + Integer.toString(distributeur.getIdentifiant()));
         this.localisation.setText("Localisation : \n"+distributeur.getLocalisation()+"\n");
-        this.geoLocalisation.setText(String.format("Coordonnées Géographiques : \n %.7f, %.7f",
-                coordGeographiques.get(0), coordGeographiques.get(1)) );
+        this.geoLocalisation.setText(String.format("Coordonnées Géographiques : \n %.1f, %.1f",
+                coordGeographiques.getLatitude(), coordGeographiques.getLongitude()));
     }
 
     public RecyclerView modifierVueListeBacs()

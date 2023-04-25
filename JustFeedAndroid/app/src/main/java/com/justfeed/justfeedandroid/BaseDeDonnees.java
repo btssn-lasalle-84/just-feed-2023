@@ -7,6 +7,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Message;
@@ -638,6 +639,9 @@ public class BaseDeDonnees
                                 Log.d(TAG,
                                       "recupererDistributeurs() idDistributeur : " +
                                         resultatRequeteDistributeurs.getInt("idDistributeur"));
+                                Location coordGeographiques = new Location("Non définis");
+                                coordGeographiques.setLatitude(resultatRequeteDistributeurs.getDouble("latitude"));
+                                coordGeographiques.setLongitude(resultatRequeteDistributeurs.getDouble("longitude"));
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   new Distributeur(
@@ -646,7 +650,7 @@ public class BaseDeDonnees
                                     resultatRequeteDistributeurs.getString("adresse"),
                                     resultatRequeteDistributeurs.getString("ville"),
                                     resultatRequeteDistributeurs.getString("nomDistributeur"),
-                                    Arrays.asList(resultatRequeteDistributeurs.getDouble("latitude"), resultatRequeteDistributeurs.getDouble("longitude")),
+                                    coordGeographiques,
                                     new ArrayList<Bac>()));
                             }
                             String requeteSQLBacs =
@@ -732,26 +736,35 @@ public class BaseDeDonnees
                             new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
 
             listeDistributeurs = new ArrayList<Distributeur>();
+            Location coordGeographiques1 = new Location("Non définis");
+            coordGeographiques1.setLatitude(44.137327);
+            coordGeographiques1.setLongitude(4.81958);
+            Location coordGeographiques2 = new Location("Non définis");
+            coordGeographiques2.setLatitude(43.9416435);
+            coordGeographiques2.setLongitude(4.8008485);
+            Location coordGeographiques3 = new Location("Non définis");
+            coordGeographiques3.setLatitude(44.048701);
+            coordGeographiques3.setLongitude(5.0424848);
             listeDistributeurs.add(new Distributeur(1,
                                                     "84100",
                                                     "Avenue Frédéric Mistral",
                                                     "Orange",
                                                     "Gare Orange",
-                                                    Arrays.asList(44.137327, 4.81958),
+                                                    coordGeographiques1,
                                                     bacsDistributeur1));
             listeDistributeurs.add(new Distributeur(2,
                                                     "84000",
                                                     "Boulevard Saint-Roch",
                                                     "Avignon",
                                                     "Gare Avignon Centre",
-                                                    Arrays.asList(43.9416435, 4.8008485),
+                                                    coordGeographiques2,
                                                     bacsDistributeur2));
             listeDistributeurs.add(new Distributeur(3,
                                                     "84200",
                                                     "Avenue De La Gare",
                                                     "Carpentras",
                                                     "Gare de Carpentras",
-                                                    Arrays.asList(44.048701, 5.0424848),
+                                                    coordGeographiques3,
                                                     bacsDistributeur3));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
