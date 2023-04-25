@@ -639,7 +639,7 @@ public class BaseDeDonnees
                                 Log.d(TAG,
                                       "recupererDistributeurs() idDistributeur : " +
                                         resultatRequeteDistributeurs.getInt("idDistributeur"));
-                                Location coordGeographiques = new Location("Non définis");
+                                Location coordGeographiques = new Location("Non défini");
                                 coordGeographiques.setLatitude(resultatRequeteDistributeurs.getDouble("latitude"));
                                 coordGeographiques.setLongitude(resultatRequeteDistributeurs.getDouble("longitude"));
                                 distributeurs.put(
@@ -736,13 +736,13 @@ public class BaseDeDonnees
                             new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
 
             listeDistributeurs = new ArrayList<Distributeur>();
-            Location coordGeographiques1 = new Location("Non définis");
+            Location coordGeographiques1 = new Location("Non défini");
             coordGeographiques1.setLatitude(44.137327);
             coordGeographiques1.setLongitude(4.81958);
-            Location coordGeographiques2 = new Location("Non définis");
+            Location coordGeographiques2 = new Location("Non défini");
             coordGeographiques2.setLatitude(43.9416435);
             coordGeographiques2.setLongitude(4.8008485);
-            Location coordGeographiques3 = new Location("Non définis");
+            Location coordGeographiques3 = new Location("Non défini");
             coordGeographiques3.setLatitude(44.048701);
             coordGeographiques3.setLongitude(5.0424848);
             listeDistributeurs.add(new Distributeur(1,
