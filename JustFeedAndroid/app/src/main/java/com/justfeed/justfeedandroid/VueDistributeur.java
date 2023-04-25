@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 /**
  * @brief Définition de la classe VueDistributeur.
  * @details La classe VueDistributeur \c VueDistributeur permet de gérer les vues
@@ -50,9 +52,11 @@ public class VueDistributeur extends RecyclerView.ViewHolder
      */
     public void afficherDistributeur(Distributeur distributeur)
     {
+        List<Double> coordGeographiques = distributeur.getCoordGeographiques();
         this.identifiant.setText("Identifant : " + Integer.toString(distributeur.getIdentifiant()));
         this.localisation.setText("Localisation : \n"+distributeur.getLocalisation()+"\n");
-        this.geoLocalisation.setText("Coordonnées Géographiques : \n"+distributeur.getCoordGeographiques());
+        this.geoLocalisation.setText(String.format("Coordonnées Géographiques : \n %.7f, %.7f",
+                coordGeographiques.get(0), coordGeographiques.get(1)) );
     }
 
     public RecyclerView modifierVueListeBacs()

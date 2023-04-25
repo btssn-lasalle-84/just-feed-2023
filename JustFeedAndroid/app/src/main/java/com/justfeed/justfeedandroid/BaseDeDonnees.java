@@ -646,7 +646,7 @@ public class BaseDeDonnees
                                     resultatRequeteDistributeurs.getString("adresse"),
                                     resultatRequeteDistributeurs.getString("ville"),
                                     resultatRequeteDistributeurs.getString("nomDistributeur"),
-                                    resultatRequeteDistributeurs.getString("latitude")+", "+resultatRequeteDistributeurs.getString("longitude"),
+                                    Arrays.asList(resultatRequeteDistributeurs.getDouble("latitude"), resultatRequeteDistributeurs.getDouble("longitude")),
                                     new ArrayList<Bac>()));
                             }
                             String requeteSQLBacs =
@@ -737,21 +737,21 @@ public class BaseDeDonnees
                                                     "Avenue Frédéric Mistral",
                                                     "Orange",
                                                     "Gare Orange",
-                                                    "44.137327, 4.81958",
+                                                    Arrays.asList(44.137327, 4.81958),
                                                     bacsDistributeur1));
             listeDistributeurs.add(new Distributeur(2,
                                                     "84000",
                                                     "Boulevard Saint-Roch",
                                                     "Avignon",
                                                     "Gare Avignon Centre",
-                                                    "43.9416435, 4.8008485",
+                                                    Arrays.asList(43.9416435, 4.8008485),
                                                     bacsDistributeur2));
             listeDistributeurs.add(new Distributeur(3,
                                                     "84200",
                                                     "Avenue De La Gare",
                                                     "Carpentras",
                                                     "Gare de Carpentras",
-                                                    "44.048701, 5.0424848",
+                                                    Arrays.asList(44.048701, 5.0424848),
                                                     bacsDistributeur3));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
