@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.location.Location;
 import android.util.Log;
 
 import java.util.List;
@@ -30,11 +31,12 @@ public class Distributeur
     /**
      * Attributs
      */
-    private int    id;              //!< l'identifiant d'un ditributeur.
-    private String codePostal;      //!< Code postal de la ville où se trouve le distributeur.
-    private String adresse;         //!< Adresse du distributeur.
-    private String ville;           //!< Ville où se situe le distributeur.
-    private String nomDistributeur; //!< Lieu où se trouve le distributeur.
+    private int          id;              //!< l'identifiant d'un ditributeur.
+    private String       codePostal;      //!< Code postal de la ville où se trouve le distributeur.
+    private String       adresse;         //!< Adresse du distributeur.
+    private String       ville;           //!< Ville où se situe le distributeur.
+    private String       nomDistributeur; //!< Lieu où se trouve le distributeur.
+    private Location     coordGeographiques; //!< Coordonnées Géographiques des distributeurs.
     private List<Bac>
       listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
 
@@ -51,12 +53,13 @@ public class Distributeur
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
      * @see Distributeur(int id, String codePostal, String adresse, String Ville, String
-     *   nomDistributeur, List<Bac> listeBacs)
+     *   nomDistributeur, Location coordGeographiques,List<Bac> listeBacs)
      * @param id L'identifiant du distributeur.
      * @param codePostal Code postal de la ville.
      * @param adresse Adresse du distributeur.
      * @param ville Ville du distributeur.
      * @param nomDistributeur Nom du distributeur.
+     * @param coordGeographiques Géo-localisation du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
     public Distributeur(int       id,
@@ -64,15 +67,17 @@ public class Distributeur
                         String    adresse,
                         String    ville,
                         String    nomDistributeur,
+                        Location  coordGeographiques,
                         List<Bac> listeBacs)
     {
         Log.d(TAG, "Distributeur() id = " + id + " - nomDistributeur = " + nomDistributeur + " - nb bacs = " + listeBacs.size() );
-        this.id              = id;
-        this.codePostal      = codePostal;
-        this.adresse         = adresse;
-        this.ville           = ville;
-        this.nomDistributeur = nomDistributeur;
-        this.listeBacs       = listeBacs;
+        this.id                 = id;
+        this.codePostal         = codePostal;
+        this.adresse            = adresse;
+        this.ville              = ville;
+        this.nomDistributeur    = nomDistributeur;
+        this.coordGeographiques = coordGeographiques;
+        this.listeBacs          = listeBacs;
     }
 
     // Accesseurs
@@ -96,6 +101,8 @@ public class Distributeur
 
         return localisation;
     }
+
+    public Location getCoordGeographiques() { return this.coordGeographiques; }
 
     /**
      * @brief Accesseur de l'identifiant du distributeur.
