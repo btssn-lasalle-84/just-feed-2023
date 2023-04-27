@@ -45,12 +45,12 @@ public class VueIntervention extends ViewHolder
     public void afficherInterventions(Intervention intervention)
     {
         identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
-        if(!(intervention.bacsADepanner().isEmpty()))
+        if(intervention.estADepanner())
         {
             aDepanner.setText("Bacs à dépanner (Hygrométrie > 0%) : \n" +
                               intervention.bacsADepanner());
         }
-        if(!(intervention.bacsARemplir().isEmpty()))
+        if(intervention.estARemplir())
         {
             aRemplir.setText("Bac(s) à remplir : \n" + intervention.bacsARemplir());
         }

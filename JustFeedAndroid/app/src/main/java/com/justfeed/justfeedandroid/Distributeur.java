@@ -39,6 +39,8 @@ public class Distributeur
     private Location     coordGeographiques; //!< Coordonnées Géographiques des distributeurs.
     private List<Bac>
       listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private boolean      aRemplir; //!< Le distributeur est à remplir.
+    private boolean      aDepanner; //!< Le Distributeur est à dépanner.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -53,7 +55,7 @@ public class Distributeur
     /**
      * @brief Constructeur d'initialisation de la classe Distributeur.
      * @see Distributeur(int id, String codePostal, String adresse, String Ville, String
-     *   nomDistributeur, Location coordGeographiques,List<Bac> listeBacs)
+     *   nomDistributeur, Location coordGeographiques,List<Bac> listeBacs, boolean aRemplir, boolean aDepanner)
      * @param id L'identifiant du distributeur.
      * @param codePostal Code postal de la ville.
      * @param adresse Adresse du distributeur.
@@ -61,6 +63,8 @@ public class Distributeur
      * @param nomDistributeur Nom du distributeur.
      * @param coordGeographiques Géo-localisation du distributeur.
      * @param listeBacs Les bacs du distributeur.
+     * @param aRemplir si le bac est à remplir.
+     * @param aDepanner si le bac est à depanner.
      */
     public Distributeur(int       id,
                         String    codePostal,
@@ -68,7 +72,9 @@ public class Distributeur
                         String    ville,
                         String    nomDistributeur,
                         Location  coordGeographiques,
-                        List<Bac> listeBacs)
+                        List<Bac> listeBacs,
+                        boolean   aRemplir,
+                        boolean   aDepanner)
     {
         Log.d(TAG, "Distributeur() id = " + id + " - nomDistributeur = " + nomDistributeur + " - nb bacs = " + listeBacs.size() );
         this.id                 = id;
@@ -78,11 +84,14 @@ public class Distributeur
         this.nomDistributeur    = nomDistributeur;
         this.coordGeographiques = coordGeographiques;
         this.listeBacs          = listeBacs;
+        this.aRemplir           = aRemplir;
+        this.aDepanner          = aDepanner;
     }
 
     // Accesseurs
     /**
      * @brief Accesseur de la localisation du nomDistributeur.
+     * @return String le nom du distributeur
      */
     public String getNom()
     {
@@ -91,6 +100,7 @@ public class Distributeur
 
     /**
      * @brief Accesseur de la localisation du distributeur.
+     * @return String la localisation du distributeur.
      */
     public String getLocalisation()
     {
@@ -102,6 +112,10 @@ public class Distributeur
         return localisation;
     }
 
+    /**
+     * @brief Accesseur des coordonnées géographiques d'un distributeur.
+     * @return Location un objet qui représente la localisation en latitude et longitude.
+     */
     public Location getCoordGeographiques() { return this.coordGeographiques; }
 
     /**
@@ -130,6 +144,18 @@ public class Distributeur
     {
         return this.listeBacs.size();
     }
+
+    /**
+     * @brief Accesseur de l'intervention à remplir.
+     * @return boolean , true si le distributeur est à remplir sinon false.
+     */
+    public boolean estARemplir() { return this.aRemplir; }
+
+    /**
+     * @brief Accesseur de l'intervention à dépanner.
+     * @return boolean , true si le distributeur est à dépanner sinon false.
+     */
+    public boolean estADepanner() { return this.aDepanner; }
 
     /**
      * @brief Mutateur du type de produit contenu dans un bac.

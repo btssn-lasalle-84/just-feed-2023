@@ -22,8 +22,7 @@ public class Intervention
      * Constantes
      */
     private static final String TAG = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
-    private final int SEUIL_HUMIDITE = 0; //!< Seuil du taux d'humidité d'un distributeur.
-    private final int MOITIE         = 2; //!< Moitie d'un bac.
+    private final int SEUIL_HUMIDITE = 12; //!< Seuil du taux d'humidité d'un distributeur.
 
     /**
      * Attributs
@@ -31,6 +30,8 @@ public class Intervention
     private String       dateIntervention; //!< Heure de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
     private boolean      aIntervenir;      //!< Si l'intervention a été ménée ou non.
+    private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
+    private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
     /**
      * @brief Constructeur par défaut de classe Intervention.
@@ -45,8 +46,10 @@ public class Intervention
      * @param dateIntervention
      * @param distributeur
      * @param aIntervenir
+     * @param aRemplir
+     * @param aDepanner
      */
-    public Intervention(String dateIntervention, Distributeur distributeur, boolean aIntervenir)
+    public Intervention(String dateIntervention, Distributeur distributeur, boolean aIntervenir, boolean aRemplir, boolean aDepanner)
     {
         Log.d(TAG,
                 "Intervention() dateIntervention = " + dateIntervention + " - nomdistributeur = " + distributeur.getNom() +
@@ -54,6 +57,8 @@ public class Intervention
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
         this.aIntervenir      = true;
+        this.aRemplir         = aRemplir;
+        this.aDepanner        = aDepanner;
     }
 
     // Accesseurs
@@ -95,6 +100,22 @@ public class Intervention
     }
 
     /**
+     * @brief Méthode d'accés à aRemplir.
+     * @return aRemplir
+     */
+    public boolean estARemplir() { return this.aRemplir; }
+
+    /**
+     * @brief Méthode d'accés à aDepanner.
+     * @return aDepanner
+     */
+    public boolean estADepanner() { return this.aDepanner; }
+
+    /**
+     * Services
+     */
+
+    /**
      * @brief Méthode qui renvoie la liste des bacs à remplir.
      * @return la liste des bacs à remplir.
      */
@@ -102,16 +123,14 @@ public class Intervention
     {
         String listeBacsARemplir = "";
         String typeProduit;
-        Double quantiteARemplir;
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
+            if(bac.getQuantiteARemplir() != 0.)
             {
-                quantiteARemplir  = bac.getPoidsTotalBac() - bac.getPoidsActuel();
                 typeProduit       = bac.getTypeProduit().getNom();
                 listeBacsARemplir = listeBacsARemplir.concat(
-                  typeProduit + " : " + String.format("%.2f kg", quantiteARemplir) + "\n");
+                  typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
             }
         }
 

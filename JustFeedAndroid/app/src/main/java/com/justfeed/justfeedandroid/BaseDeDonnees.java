@@ -625,7 +625,8 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs = "SELECT * FROM Distributeur";
+                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM \n" +
+                                    "Distributeur,Intervention WHERE Intervention.idDistributeur = Distributeur.idDistributeur;";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -651,7 +652,9 @@ public class BaseDeDonnees
                                     resultatRequeteDistributeurs.getString("ville"),
                                     resultatRequeteDistributeurs.getString("nomDistributeur"),
                                     coordGeographiques,
-                                    new ArrayList<Bac>()));
+                                    new ArrayList<Bac>(),
+                                    (resultatRequeteDistributeurs.getInt("aRemplir") == 0),
+                                    (resultatRequeteDistributeurs.getInt("aDepanner") == 0)));
                             }
                             String requeteSQLBacs =
                               "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
@@ -679,7 +682,8 @@ public class BaseDeDonnees
                                                   resultatRequeteBacs.getDouble("volumeUnitaire")),
                                                 resultatRequeteBacs.getDouble("poidsActuel"),
                                                 resultatRequeteBacs.getDouble("poidsTotal"),
-                                                resultatRequeteBacs.getInt("hygrometrie")));
+                                                resultatRequeteBacs.getInt("hygrometrie"),
+                                                resultatRequeteBacs.getDouble("remplissage")));
                                 }
                                 Log.d(
                                   TAG,
@@ -721,19 +725,19 @@ public class BaseDeDonnees
             // Pour les tests
             // simule une base de données
             List<Bac> bacsDistributeur1 = Arrays.asList(
-              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0),
-              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0),
-              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0));
+              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0, 0),
+              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0, 0),
+              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0, 6.5));
 
             List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0),
-                            new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0),
-                            new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0));
+              Arrays.asList(new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0),
+                            new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0),
+                            new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0));
 
             List<Bac> bacsDistributeur3 =
-              Arrays.asList(new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1),
-                            new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0),
-                            new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0));
+              Arrays.asList(new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0),
+                            new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5),
+                            new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0));
 
             listeDistributeurs = new ArrayList<Distributeur>();
             Location coordGeographiques1 = new Location("Non défini");
@@ -751,21 +755,27 @@ public class BaseDeDonnees
                                                     "Orange",
                                                     "Gare Orange",
                                                     coordGeographiques1,
-                                                    bacsDistributeur1));
+                                                    bacsDistributeur1,
+                                                    true,
+                                                    false));
             listeDistributeurs.add(new Distributeur(2,
                                                     "84000",
                                                     "Boulevard Saint-Roch",
                                                     "Avignon",
                                                     "Gare Avignon Centre",
                                                     coordGeographiques2,
-                                                    bacsDistributeur2));
+                                                    bacsDistributeur2,
+                                                    true,
+                                                    false));
             listeDistributeurs.add(new Distributeur(3,
                                                     "84200",
                                                     "Avenue De La Gare",
                                                     "Carpentras",
                                                     "Gare de Carpentras",
                                                     coordGeographiques3,
-                                                    bacsDistributeur3));
+                                                    bacsDistributeur3,
+                                                    true,
+                                                    false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
             message.obj     = listeDistributeurs;
@@ -814,7 +824,9 @@ public class BaseDeDonnees
                                         listeInterventions.add(new Intervention(
                                           resultatRequete.getString("dateIntervention"),
                                           distributeur,
-                                          (resultatRequete.getInt("effectuee") == 0)));
+                                          (resultatRequete.getInt("effectuee") == 0),
+                                          (resultatRequete.getInt("aRemplir") == 0),
+                                          (resultatRequete.getInt("aDepanner") == 0)));
                                     }
                                     else
                                     {
@@ -853,7 +865,7 @@ public class BaseDeDonnees
         {
             listeInterventions.clear();
             listeInterventions.add(new Intervention(
-                    "2023-06-01", listeDistributeurs.get(0), true));
+                    "2023-06-01", listeDistributeurs.get(0), true, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;
