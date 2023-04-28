@@ -92,7 +92,6 @@ class IHMJustFeed : public QWidget
     QProgressBar*   volumeRestant;
     QLabel*         nomDistributeur;
     QLabel*         adresseDistributeur;
-    QLabel*         codePostalDistributeur;
     QLabel*         villeDistributeur;
     QLabel*         descriptionDistributeur;
     QLabel*         miseEnServiceDistributeur;

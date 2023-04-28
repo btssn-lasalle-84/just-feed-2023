@@ -209,12 +209,11 @@ void IHMJustFeed::instancierWidgets()
     boutonIntervenir    = new QPushButton("Intervenir", this);
     boutonConfigurer    = new QPushButton("Configurer", this);
     boutonValider       = new QPushButton("Valider", this);
-    boutonAfficherCarte = new QPushButton("Afficher la carte");
+    boutonAfficherCarte = new QPushButton("Afficher la carte", this);
 
     // Les labels
     nomDistributeur           = new QLabel(this);
     adresseDistributeur       = new QLabel(this);
-    codePostalDistributeur    = new QLabel(this);
     villeDistributeur         = new QLabel(this);
     descriptionDistributeur   = new QLabel(this);
     miseEnServiceDistributeur = new QLabel(this);
@@ -273,14 +272,7 @@ void IHMJustFeed::positionnerWidgets()
     fenetreAccueil->setLayout(layoutFenetrePrincipale);
 
     // La fenêtre distributeur
-    layoutFenetreDistributeur->addWidget(nomDistributeur);
-    layoutFenetreDistributeur->addWidget(adresseDistributeur);
-    layoutFenetreDistributeur->addWidget(codePostalDistributeur);
-    layoutFenetreDistributeur->addWidget(villeDistributeur);
-    layoutFenetreDistributeur->addWidget(descriptionDistributeur);
-    layoutFenetreDistributeur->addWidget(miseEnServiceDistributeur);
-    layoutFenetreDistributeur->addWidget(positionDistributeur);
-    layoutBoutonsDistributeur->addStretch();
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
     layoutBoutonsDistributeur->addWidget(boutonValider);
     layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
     fenetreDistributeur->setLayout(layoutFenetreDistributeur);
@@ -362,29 +354,29 @@ void IHMJustFeed::initialiserDistributeurs()
      * @todo Récupérer les données depuis la base de données
      */
     distributeurs.push_back(new Distributeur("distributeur-1-sim",
-                                             { "44.11161", "4.84856", "0" },
                                              "Grand Frais",
-                                             "Distributeur de fruits secs",
                                              "Zone du Coudoulet Rond point du Péage Sud",
                                              "84100",
                                              "Orange",
-                                             QDate::fromString("2022-01-08", "yyyy-MM-dd")));
-    distributeurs.push_back(new Distributeur("distributeur-2-sim",
-                                             { "43.92844", "4.79247", "0" },
-                                             "Carrefour",
                                              "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-08", "yyyy-MM-dd"),
+                                             { "44.11161", "4.84856", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+                                             "Carrefour",
                                              "390 Rue Jean Marie Tjibaou",
                                              "84000",
                                              "Avignon",
-                                             QDate::fromString("2022-03-09", "yyyy-MM-dd")));
-    distributeurs.push_back(new Distributeur("distributeur-3",
-                                             { "43.90252", "4.75280", "0" },
-                                             "Cosy Primeurs",
                                              "Distributeur de fruits secs",
+                                             QDate::fromString("2022-03-09", "yyyy-MM-dd"),
+                                             { "43.92844", "4.79247", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-3",
+                                             "Cosy Primeurs",
                                              "292 Route de Boulbon",
                                              "13570",
                                              "Barbentane",
-                                             QDate::fromString("2022-01-10", "yyyy-MM-dd")));
+                                             "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-10", "yyyy-MM-dd"),
+                                             { "43.90252", "4.75280", "0" }));
 
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
@@ -591,11 +583,14 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     QHBoxLayout* layoutBoutonsDistributeur      = new QHBoxLayout();
     QGridLayout* layoutBacs                     = new QGridLayout();
 
+    QFont texte;
+    // texte.setPointSize(TAILLE_POLICE);
+    texte.setBold(true);
+    nomDistributeur->setFont(texte);
     layoutInformationsDistributeur->addWidget(nomDistributeur);
-    layoutInformationsDistributeur->addWidget(adresseDistributeur);
-    layoutInformationsDistributeur->addWidget(codePostalDistributeur);
-    layoutInformationsDistributeur->addWidget(villeDistributeur);
     layoutInformationsDistributeur->addWidget(descriptionDistributeur);
+    layoutInformationsDistributeur->addWidget(adresseDistributeur);
+    layoutInformationsDistributeur->addWidget(villeDistributeur);
     layoutInformationsDistributeur->addWidget(miseEnServiceDistributeur);
     layoutInformationsDistributeur->addWidget(positionDistributeur);
 
@@ -608,8 +603,8 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     // les informations d'un distributeur
     nomDistributeur->setText(distributeur->getNom());
     adresseDistributeur->setText(distributeur->getAdresse());
-    codePostalDistributeur->setText(distributeur->getCodePostal());
-    villeDistributeur->setText(distributeur->getVille());
+    villeDistributeur->setText(distributeur->getCodePostal() + QString(" ") +
+                               distributeur->getVille());
     descriptionDistributeur->setText(distributeur->getDescription());
     QDate   dateMiseService = distributeur->getDateMiseService();
     QString miseEnService =
