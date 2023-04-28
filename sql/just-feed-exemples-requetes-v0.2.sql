@@ -32,11 +32,20 @@ INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;
 
 --------------------------------
 
--- Une intervention
+-- Intervention
 
-SELECT Intervention.dateIntervention,Operateur.nom,Operateur.prenom,Distributeur.nom,Distributeur.ville, Distributeur.codepostal,Distributeur.deviceID,Produit.nom FROM Intervention
+SELECT * FROM Intervention
+INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur
 INNER JOIN Operateur ON Operateur.idOperateur=Intervention.idOperateur
-INNER JOIN Approvisionnement ON Approvisionnement.idIntervention=Intervention.idIntervention
-INNER JOIN Bac ON Bac.idBac=Approvisionnement.idBac
-INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur
+
+SELECT * FROM Intervention
+INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur
+INNER JOIN Operateur ON Operateur.idOperateur=Intervention.idOperateur
+INNER JOIN Bac ON Bac.idDistributeur=Distributeur.idDistributeur
+INNER JOIN Produit ON Produit.idProduit=Bac.idProduit
+
+SELECT Intervention.dateIntervention,Operateur.nom,Operateur.prenom,Distributeur.nomDistributeur,Distributeur.ville, Distributeur.codepostal,Distributeur.deviceID,Produit.nomProduit FROM Intervention
+INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur
+INNER JOIN Operateur ON Operateur.idOperateur=Intervention.idOperateur
+INNER JOIN Bac ON Bac.idDistributeur=Distributeur.idDistributeur
 INNER JOIN Produit ON Produit.idProduit=Bac.idProduit

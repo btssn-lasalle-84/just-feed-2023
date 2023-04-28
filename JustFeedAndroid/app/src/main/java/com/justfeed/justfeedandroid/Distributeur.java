@@ -10,7 +10,6 @@ import android.location.Location;
 import android.util.Log;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @brief Définition de la classe Distributeur
@@ -39,6 +38,8 @@ public class Distributeur
     private Location     coordGeographiques; //!< Coordonnées Géographiques des distributeurs.
     private List<Bac>
       listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
+    private boolean      aRemplir; //!< Le distributeur est à remplir.
+    private boolean      aDepanner; //!< Le Distributeur est à dépanner.
 
     /**
      * @brief Constructeur par défaut de la classe Distributeur.
@@ -78,11 +79,14 @@ public class Distributeur
         this.nomDistributeur    = nomDistributeur;
         this.coordGeographiques = coordGeographiques;
         this.listeBacs          = listeBacs;
+        this.aRemplir           = false;
+        this.aDepanner          = false;
     }
 
     // Accesseurs
     /**
      * @brief Accesseur de la localisation du nomDistributeur.
+     * @return String le nom du distributeur
      */
     public String getNom()
     {
@@ -91,6 +95,7 @@ public class Distributeur
 
     /**
      * @brief Accesseur de la localisation du distributeur.
+     * @return String la localisation du distributeur.
      */
     public String getLocalisation()
     {
@@ -102,6 +107,10 @@ public class Distributeur
         return localisation;
     }
 
+    /**
+     * @brief Accesseur des coordonnées géographiques d'un distributeur.
+     * @return Location un objet qui représente la localisation en latitude et longitude.
+     */
     public Location getCoordGeographiques() { return this.coordGeographiques; }
 
     /**
@@ -132,6 +141,18 @@ public class Distributeur
     }
 
     /**
+     * @brief Accesseur de l'intervention à remplir.
+     * @return boolean , true si le distributeur est à remplir sinon false.
+     */
+    public boolean estARemplir() { return this.aRemplir; }
+
+    /**
+     * @brief Accesseur de l'intervention à dépanner.
+     * @return boolean , true si le distributeur est à dépanner sinon false.
+     */
+    public boolean estADepanner() { return this.aDepanner; }
+
+    /**
      * @brief Mutateur du type de produit contenu dans un bac.
      * @param numeroBac le numéro du bac à changer.
      * @param nouveauProduit le nouveau produit.
@@ -149,4 +170,16 @@ public class Distributeur
     {
         this.listeBacs.add(nouveauBac);
     }
+
+    /**
+     * @brief Change l'état à remplir.
+     * @param aRemplir true si le bac est à remplir sinon false.
+     */
+    public void remplir(boolean aRemplir) { this.aRemplir = aRemplir; }
+
+    /**
+     * @brief Change l'état à dépanner.
+     * @param aDepanner true si le bac a un taux d'humidité élevé sinon false.
+     */
+    public void depanner(boolean aDepanner) { this.aDepanner = aDepanner; }
 }

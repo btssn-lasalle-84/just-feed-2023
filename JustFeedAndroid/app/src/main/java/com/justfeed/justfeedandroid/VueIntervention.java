@@ -6,9 +6,11 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 
 /**
@@ -21,6 +23,11 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder;
 public class VueIntervention extends ViewHolder
 {
     /**
+     * Constantes
+     */
+    private final static String ROUGE = "#ed3734"; //!< L'intervention n'a pas été effectuée
+    private final static String VERT  = "#4eea48";
+    /**
      * Ressources GUI
      */
     private final TextView identifiantDistributeur; //!< attribut GUI qui affiche l'identifiant du
@@ -31,6 +38,7 @@ public class VueIntervention extends ViewHolder
       aRemplir; //!< attribut GUI qui affiche si le distributeur doit être rempli.
     private final TextView
       aDepanner; //!< attribut GUI qui affiche si le distributeur doit être dépanné.
+    private final CardView carteIntervention; //!< attribut GUI qui contient les informations sur une intervention.
 
     public VueIntervention(final View itemView)
     {
@@ -40,20 +48,29 @@ public class VueIntervention extends ViewHolder
         dateIntervention        = ((TextView)itemView.findViewById(R.id.dateIntervention));
         aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
+        carteIntervention       = ((CardView)itemView.findViewById(R.id.carteIntervention));
     }
 
     public void afficherInterventions(Intervention intervention)
     {
+        if(!intervention.estEffectuee())
+        {
+            carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+        }
+        else
+        {
+            carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
+        }
         identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
-        if(!(intervention.bacsADepanner().isEmpty()))
+        if(intervention.estADepanner())
         {
-            aDepanner.setText("Bacs à dépanner (Hygrométrie > 0%) : \n" +
-                              intervention.bacsADepanner());
+            aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
+                    intervention.recupererBacsADepanner());
         }
-        if(!(intervention.bacsARemplir().isEmpty()))
+        if(intervention.estARemplir())
         {
-            aRemplir.setText("Bac(s) à remplir : \n" + intervention.bacsARemplir());
+            aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
         }
-        dateIntervention.setText("Date de l'intervention : " + intervention.getDateIntervention());
+        dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
     }
 }

@@ -1,0 +1,103 @@
+class JustFeed
+!!!144682.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.justfeed);
+        Log.d(TAG, "onCreate()");
+
+        initialiserGUI();
+        initialiserHandler();
+        initialiserBaseDeDonnees();
+
+        baseDeDonnees.recupererDistributeurs();
+!!!144810.java!!!	onStart() : void
+        super.onStart();
+        Log.d(TAG, "onStart()");
+!!!144938.java!!!	onResume() : void
+        super.onResume();
+        Log.d(TAG, "onResume()");
+        baseDeDonnees.setHandler(handler);
+        baseDeDonnees.recupererDistributeurs();
+!!!145066.java!!!	onPause() : void
+        super.onPause();
+        Log.d(TAG, "onPause()");
+!!!145194.java!!!	onStop() : void
+        super.onStop();
+        Log.d(TAG, "onStop()");
+!!!145322.java!!!	onDestroy() : void
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
+!!!145450.java!!!	initialiserGUI() : void
+        boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
+        boutonInterventions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vue)
+            {
+                Intent activiteIntervention =
+                  new Intent(JustFeed.this, ActiviteInterventions.class);
+                startActivity(activiteIntervention);
+            }
+        });
+
+        initialiserVueListeDistributeurs();
+!!!145578.java!!!	initialiserBaseDeDonnees() : void
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+!!!145706.java!!!	initialiserVueListeDistributeurs() : void
+        this.vueListeDistributeurs = (RecyclerView)findViewById(R.id.listeDistributeurs);
+        this.vueListeDistributeurs.setHasFixedSize(true);
+        this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
+        this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
+!!!145834.java!!!	afficherDistributeurs(inout distributeurs : List<Distributeur>) : void
+        Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
+        this.listeDistributeurs = distributeurs;
+        if(this.adapteurDistributeur == null)
+        {
+            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+        }
+        adapteurDistributeur.notifyDataSetChanged();
+!!!145962.java!!!	initialiserHandler() : void
+        this.handler = new Handler(this.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message message)
+            {
+                //Log.d(TAG, "[Handler] id message = " + message.what);
+                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
+
+                switch(message.what)
+                {
+                    case BaseDeDonnees.CONNEXION_OK:
+                        Log.d(TAG, "[Handler] CONNEXION_OK");
+                        /**
+                         * Exemples de requêtes
+                         *
+                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
+                         * WHERE Distributeur.idDistributeur = '1'");
+                         * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
+                         */
+                        break;
+                    case BaseDeDonnees.CONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] CONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_OK:
+                        Log.d(TAG, "[Handler] DECONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] DECONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_OK:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_ERREUR:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
+                        afficherDistributeurs((ArrayList)message.obj);
+                        break;
+                }
+            }
+        };

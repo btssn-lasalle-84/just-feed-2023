@@ -1,0 +1,20 @@
+class VueIntervention
+!!!147498.java!!!	VueIntervention(in itemView : View)
+        super(itemView);
+
+        identifiantDistributeur = ((TextView)itemView.findViewById(R.id.identifiantDistributeur));
+        dateIntervention        = ((TextView)itemView.findViewById(R.id.dateIntervention));
+        aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
+        aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
+!!!147626.java!!!	afficherInterventions(inout intervention : Intervention) : void
+        identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+        if(intervention.estADepanner())
+        {
+            aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
+                              intervention.recupererBacsADepanner());
+        }
+        if(intervention.estARemplir())
+        {
+            aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+        }
+        dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));

@@ -112,7 +112,7 @@ CREATE TABLE `Bac` (
   `poidsActuel` double,
   `poidsTotal`  double NOT NULL,
   `hygrometrie` int DEFAULT '0',
-  `remplissage` int DEFAULT '0'
+  `remplissage` double DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Bac`
@@ -134,6 +134,8 @@ CREATE TABLE `Intervention` (
   `idOperateur` int NOT NULL,
   `idDistributeur` int NOT NULL,
   `dateIntervention` date NOT NULL,
+  `aRemplir` int DEFAULT '0',
+  `aDepanner` int DEFAULT '0',
   `effectuee` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
