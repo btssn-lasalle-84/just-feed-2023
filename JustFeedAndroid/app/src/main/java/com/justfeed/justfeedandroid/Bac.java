@@ -137,5 +137,5 @@ public class Bac
      * @brief Change la quantité à remplir.
      * @param nouvelleQuantite la nouvelle quantité.
      */
-    public void chnagerQuantiteARemplir(double nouvelleQuantite) { this.quantiteARemplir = nouvelleQuantite; }
+    public void changerQuantiteARemplir(double nouvelleQuantite) { this.quantiteARemplir = nouvelleQuantite; }
 }

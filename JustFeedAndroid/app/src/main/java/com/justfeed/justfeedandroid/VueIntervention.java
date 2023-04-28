@@ -47,13 +47,13 @@ public class VueIntervention extends ViewHolder
         identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
         if(intervention.estADepanner())
         {
-            aDepanner.setText("Bacs à dépanner (Hygrométrie > 12%) : \n" +
-                              intervention.bacsADepanner());
+            aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
+                              intervention.recupererBacsADepanner());
         }
         if(intervention.estARemplir())
         {
-            aRemplir.setText("Bac(s) à remplir : \n" + intervention.bacsARemplir());
+            aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
         }
-        dateIntervention.setText("Date de l'intervention : " + intervention.getDateIntervention());
+        dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
     }
 }

@@ -8,6 +8,11 @@ package com.justfeed.justfeedandroid;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * @brief Définition de la classe Intervention.
  * @details La classe Intervention \c Intervention permet de décrire une Intervention pour
@@ -21,15 +26,15 @@ public class Intervention
     /**
      * Constantes
      */
-    private static final String TAG = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
-    private final int SEUIL_HUMIDITE = 12; //!< Seuil du taux d'humidité d'un distributeur.
+    private static final String TAG        = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
+    static public final int SEUIL_HUMIDITE = 12; //!< Seuil du taux d'humidité d'un distributeur.
 
     /**
      * Attributs
      */
-    private String       dateIntervention; //!< Heure de l'intervention.
+    private String       dateIntervention; //!< Date de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
-    private boolean      aIntervenir;      //!< Si l'intervention a été ménée ou non.
+    private boolean      effectuee;        //!< Si l'intervention a été ménée ou non.
     private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
     private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
@@ -45,18 +50,23 @@ public class Intervention
      * @brief Constructeur d'initialisation de la classe Intervention.
      * @param dateIntervention
      * @param distributeur
-     * @param aIntervenir
+     * @param effectuee
      * @param aRemplir
      * @param aDepanner
      */
-    public Intervention(String dateIntervention, Distributeur distributeur, boolean aIntervenir, boolean aRemplir, boolean aDepanner)
+    public Intervention(String       dateIntervention,
+                        Distributeur distributeur,
+                        boolean      effectuee,
+                        boolean      aRemplir,
+                        boolean      aDepanner)
     {
         Log.d(TAG,
-                "Intervention() dateIntervention = " + dateIntervention + " - nomdistributeur = " + distributeur.getNom() +
-                        " - aIntervenir = " + aIntervenir);
+              "Intervention() dateIntervention = " + dateIntervention +
+                " - nomdistributeur = " + distributeur.getNom() + " - effectuee = " + effectuee +
+                " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
-        this.aIntervenir      = true;
+        this.effectuee        = effectuee;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
     }
@@ -91,46 +101,61 @@ public class Intervention
     }
 
     /**
-     * @brief Méthode d'accés à aIntervenir.
-     * @return aIntervenir.
+     * @brief Méthode d'accés à effectuee.
+     * @return effectuee.
      */
-    public boolean estAIntervenir()
+    public boolean estEffectuee()
     {
-        return this.aIntervenir;
+        return this.effectuee;
     }
 
     /**
      * @brief Méthode d'accés à aRemplir.
      * @return aRemplir
      */
-    public boolean estARemplir() { return this.aRemplir; }
+    public boolean estARemplir()
+    {
+        return this.aRemplir;
+    }
 
     /**
      * @brief Méthode d'accés à aDepanner.
      * @return aDepanner
      */
-    public boolean estADepanner() { return this.aDepanner; }
+    public boolean estADepanner()
+    {
+        return this.aDepanner;
+    }
 
     /**
      * Services
      */
 
     /**
+     * @brief Méthode qui renvoie si l'intervention doit être réalisée
+     * @return boolean true si l'intervention doit être réalisée
+     */
+    public boolean estAIntervenir()
+    {
+        return !this.effectuee;
+    }
+
+    /**
      * @brief Méthode qui renvoie la liste des bacs à remplir.
      * @return la liste des bacs à remplir.
      */
-    public String bacsARemplir()
+    public String recupererBacsARemplir()
     {
         String listeBacsARemplir = "";
         String typeProduit;
 
         for(Bac bac: distributeur.getListeBacs())
         {
-            if(bac.getQuantiteARemplir() != 0.)
+            if(bac.getQuantiteARemplir() > 0.)
             {
                 typeProduit       = bac.getTypeProduit().getNom();
                 listeBacsARemplir = listeBacsARemplir.concat(
-                  typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
+                  "   " + typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
             }
         }
 
@@ -141,7 +166,7 @@ public class Intervention
      * @brief Méthode qui renvoie la liste des bacs à dépanner.
      * @return la liste des bacs à dépanner.
      */
-    public String bacsADepanner()
+    public String recupererBacsADepanner()
     {
         String listeBacsADepanner = "";
 
@@ -150,7 +175,7 @@ public class Intervention
             if(bac.getHygrometrie() > SEUIL_HUMIDITE)
             {
                 listeBacsADepanner =
-                  listeBacsADepanner.concat(bac.getTypeProduit().getNom() + "\n");
+                  listeBacsADepanner.concat("   " + bac.getTypeProduit().getNom() + "\n");
             }
         }
 
@@ -163,7 +188,7 @@ public class Intervention
      * @brief Méthode pour modifier la date d'intervention.
      * @param nouvelleDateIntervention
      */
-    public void modifierdateIntervention(String nouvelleDateIntervention)
+    public void modifierDateIntervention(String nouvelleDateIntervention)
     {
         this.dateIntervention = nouvelleDateIntervention;
     }
@@ -174,6 +199,24 @@ public class Intervention
      */
     public void modifierEtatIntervention(boolean estIntervenu)
     {
-        this.aIntervenir = estIntervenu;
+        this.effectuee = estIntervenu;
+    }
+
+    /**
+     * @brief Méthode statique qui convertit le format d'une date de "yyyy-MM-dd" en "dd/MM/yyyy"
+     * @param date au format "yyyy-MM-dd"
+     * @return String date au format "dd/MM/yyyy"
+     */
+    static public String formaterDate(String date)
+    {
+        try
+        {
+            Date horodatage = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH).parse(date);
+            return new SimpleDateFormat("dd/MM/yyyy").format(horodatage);
+        }
+        catch(ParseException e)
+        {
+            return new String();
+        }
     }
 }

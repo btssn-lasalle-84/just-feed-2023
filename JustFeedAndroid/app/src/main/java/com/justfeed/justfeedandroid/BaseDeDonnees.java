@@ -625,8 +625,10 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM \n" +
-                                    "Distributeur,Intervention WHERE Intervention.idDistributeur = Distributeur.idDistributeur;";
+                            String requeteSQLDistributeurs =
+                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM \n"
+                              +
+                              "Distributeur,Intervention WHERE Intervention.idDistributeur = Distributeur.idDistributeur;";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -641,22 +643,25 @@ public class BaseDeDonnees
                                       "recupererDistributeurs() idDistributeur : " +
                                         resultatRequeteDistributeurs.getInt("idDistributeur"));
                                 Location coordGeographiques = new Location("Non défini");
-                                coordGeographiques.setLatitude(resultatRequeteDistributeurs.getDouble("latitude"));
-                                coordGeographiques.setLongitude(resultatRequeteDistributeurs.getDouble("longitude"));
+                                coordGeographiques.setLatitude(
+                                  resultatRequeteDistributeurs.getDouble("latitude"));
+                                coordGeographiques.setLongitude(
+                                  resultatRequeteDistributeurs.getDouble("longitude"));
                                 Distributeur distributeur = new Distributeur(
-                                        resultatRequeteDistributeurs.getInt("idDistributeur"),
-                                        resultatRequeteDistributeurs.getString("codepostal"),
-                                        resultatRequeteDistributeurs.getString("adresse"),
-                                        resultatRequeteDistributeurs.getString("ville"),
-                                        resultatRequeteDistributeurs.getString("nomDistributeur"),
-                                        coordGeographiques,
-                                        new ArrayList<Bac>());
-                                distributeur.ARemplir((resultatRequeteDistributeurs.getInt("aRemplir") == 0));
-                                distributeur.ADepanner((resultatRequeteDistributeurs.getInt("aDepanner") == 0));
+                                  resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                  resultatRequeteDistributeurs.getString("codepostal"),
+                                  resultatRequeteDistributeurs.getString("adresse"),
+                                  resultatRequeteDistributeurs.getString("ville"),
+                                  resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                  coordGeographiques,
+                                  new ArrayList<Bac>());
+                                distributeur.remplir(
+                                  (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
+                                distributeur.depanner(
+                                  (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
-                                  distributeur
-                                  );
+                                  distributeur);
                             }
                             String requeteSQLBacs =
                               "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
@@ -731,17 +736,17 @@ public class BaseDeDonnees
               new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0, 0),
               new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0, 6.5));
 
-            List<Bac> bacsDistributeur2 =
-              Arrays.asList(new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0),
-                            new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0),
-                            new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0));
+            List<Bac> bacsDistributeur2 = Arrays.asList(
+              new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0),
+              new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0),
+              new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0));
 
-            List<Bac> bacsDistributeur3 =
-              Arrays.asList(new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0),
-                            new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5),
-                            new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0));
+            List<Bac> bacsDistributeur3 = Arrays.asList(
+              new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0),
+              new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5),
+              new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0));
 
-            listeDistributeurs = new ArrayList<Distributeur>();
+            listeDistributeurs           = new ArrayList<Distributeur>();
             Location coordGeographiques1 = new Location("Non défini");
             coordGeographiques1.setLatitude(44.137327);
             coordGeographiques1.setLongitude(4.81958);
@@ -797,7 +802,7 @@ public class BaseDeDonnees
                         try
                         {
                             String requeteSQL =
-                              "SELECT * FROM Intervention, Distributeur WHERE Intervention.idDistributeur = Distributeur.idDistributeur";
+                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur";
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -815,14 +820,21 @@ public class BaseDeDonnees
                                        resultatRequete.getInt("idDistributeur"))
                                     {
                                         Log.d(TAG,
-                                              "recupererInterventions() dateIntervention = " +
-                                                resultatRequete.getString("dateIntervention"));
+                                              "recupererInterventions() distributeur = " +
+                                                distributeur.getNom() + "dateIntervention = " +
+                                                resultatRequete.getString("dateIntervention") +
+                                                " - effectuée = " +
+                                                (resultatRequete.getInt("effectuee") == 1) +
+                                                " - aRemplir = " +
+                                                (resultatRequete.getInt("aRemplir") == 1) +
+                                                " - aDepanner = " +
+                                                (resultatRequete.getInt("aDepanner") == 1));
                                         listeInterventions.add(new Intervention(
                                           resultatRequete.getString("dateIntervention"),
                                           distributeur,
-                                          (resultatRequete.getInt("effectuee") == 0),
-                                          (resultatRequete.getInt("aRemplir") == 0),
-                                          (resultatRequete.getInt("aDepanner") == 0)));
+                                          (resultatRequete.getInt("effectuee") == 1),
+                                          (resultatRequete.getInt("aRemplir") == 1),
+                                          (resultatRequete.getInt("aDepanner") == 1)));
                                     }
                                     else
                                     {
@@ -860,8 +872,8 @@ public class BaseDeDonnees
         else
         {
             listeInterventions.clear();
-            listeInterventions.add(new Intervention(
-                    "2023-06-01", listeDistributeurs.get(0), true, true, false));
+            listeInterventions.add(
+              new Intervention("2023-06-01", listeDistributeurs.get(0), true, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;

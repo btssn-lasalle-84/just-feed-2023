@@ -10,7 +10,6 @@ import android.location.Location;
 import android.util.Log;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @brief Définition de la classe Distributeur
@@ -176,11 +175,11 @@ public class Distributeur
      * @brief Change l'état à remplir.
      * @param aRemplir true si le bac est à remplir sinon false.
      */
-    public void ARemplir(boolean aRemplir) { this.aRemplir = aRemplir; }
+    public void remplir(boolean aRemplir) { this.aRemplir = aRemplir; }
 
     /**
      * @brief Change l'état à dépanner.
      * @param aDepanner true si le bac a un taux d'humidité élevé sinon false.
      */
-    public void ADepanner(boolean aDepanner) { this.aDepanner = aDepanner; }
+    public void depanner(boolean aDepanner) { this.aDepanner = aDepanner; }
 }
