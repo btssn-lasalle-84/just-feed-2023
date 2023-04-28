@@ -1,0 +1,32 @@
+class VueDistributeur
+!!!147114.java!!!	VueDistributeur(in itemView : View)
+        super(itemView);
+
+        identifiant         = ((TextView)itemView.findViewById(R.id.identifiant));
+        localisation        = ((TextView)itemView.findViewById(R.id.localisation));
+        coordGeographiques  = ((TextView)itemView.findViewById(R.id.coordGeographiques));
+        intervention        = ((TextView)itemView.findViewById(R.id.intervention));
+        vueListeBacs        = itemView.findViewById(R.id.listeBacs);
+!!!147242.java!!!	afficherDistributeur(inout distributeur : Distributeur) : void
+        Location coordGeographiques = distributeur.getCoordGeographiques();
+        this.identifiant.setText("Identifant : " + Integer.toString(distributeur.getIdentifiant()));
+        if(distributeur.estARemplir())
+        {
+            this.intervention.setText("À remplir");
+        }
+        else if(distributeur.estADepanner())
+        {
+            this.intervention.setText("À dépanner");
+        }
+        this.localisation.setText("Localisation : \n" + distributeur.getLocalisation() + "\n");
+        // En Degrés décimaux (DD) généralement avec quatre décimales
+        // avec un point '.' pour la partie décimale
+        // et la virgule ',' pour séparer les deux valeurs
+        // La latitude doit être indiquée avant la longitude
+        DecimalFormatSymbols symbolesUS  = DecimalFormatSymbols.getInstance(Locale.US);
+        DecimalFormat        formateurUS = new DecimalFormat("###.#####", symbolesUS);
+        this.coordGeographiques.setText(formateurUS.format(coordGeographiques.getLatitude()) + ", " +
+                                     formateurUS.format(coordGeographiques.getLongitude()));
+        Log.d(TAG, "afficherDistributeur() coordGeographiques = " + coordGeographiques.toString());
+!!!147370.java!!!	modifierVueListeBacs() : RecyclerView
+        return this.vueListeBacs;

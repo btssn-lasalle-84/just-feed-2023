@@ -1,0 +1,21 @@
+class VueBac
+!!!146858.java!!!	VueBac(in itemView : View)
+        super(itemView);
+
+        remplissageBac = ((TextView)itemView.findViewById(R.id.remplissageBac));
+        produit        = ((TextView)itemView.findViewById(R.id.produit));
+        hydrometrie    = ((TextView)itemView.findViewById(R.id.hydrometrie));
+        prix           = ((TextView)itemView.findViewById(R.id.prix));
+!!!146986.java!!!	afficherBac(inout bac : Bac) : void
+        if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
+        {
+            remplissageBac.setBackgroundColor(Color.parseColor("#FFF200"));
+        }
+        if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / CRITIQUE))
+        {
+            remplissageBac.setBackgroundColor(Color.parseColor("#FF0000"));
+        }
+
+        produit.setText(bac.getTypeProduit().getNom());
+        hydrometrie.setText(Integer.toString(bac.getHygrometrie()) + " %");
+        prix.setText(String.format("%.2f €", bac.getTypeProduit().getPrix()));

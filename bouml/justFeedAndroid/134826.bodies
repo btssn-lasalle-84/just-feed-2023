@@ -1,0 +1,69 @@
+class Intervention
+!!!142890.java!!!	Intervention()
+        this.distributeur = null;
+!!!143018.java!!!	Intervention(in dateIntervention : String, inout distributeur : Distributeur, inout effectuee : boolean, inout aRemplir : boolean, inout aDepanner : boolean)
+        Log.d(TAG,
+              "Intervention() dateIntervention = " + dateIntervention +
+                " - nomdistributeur = " + distributeur.getNom() + " - effectuee = " + effectuee +
+                " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
+        this.dateIntervention = dateIntervention;
+        this.distributeur     = distributeur;
+        this.effectuee        = effectuee;
+        this.aRemplir         = aRemplir;
+        this.aDepanner        = aDepanner;
+!!!143146.java!!!	getDateIntervention() : String
+        return this.dateIntervention;
+!!!143274.java!!!	getIdentifiantDistribteur() : int
+        return this.distributeur.getIdentifiant();
+!!!143402.java!!!	getNomDistribteur() : String
+        return this.distributeur.getNom();
+!!!143530.java!!!	estEffectuee() : boolean
+        return this.effectuee;
+!!!143658.java!!!	estARemplir() : boolean
+        return this.aRemplir;
+!!!143786.java!!!	estADepanner() : boolean
+        return this.aDepanner;
+!!!143914.java!!!	estAIntervenir() : boolean
+        return !this.effectuee;
+!!!144042.java!!!	recupererBacsARemplir() : String
+        String listeBacsARemplir = "";
+        String typeProduit;
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getQuantiteARemplir() > 0.)
+            {
+                typeProduit       = bac.getTypeProduit().getNom();
+                listeBacsARemplir = listeBacsARemplir.concat(
+                  "   " + typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
+            }
+        }
+
+        return listeBacsARemplir;
+!!!144170.java!!!	recupererBacsADepanner() : String
+        String listeBacsADepanner = "";
+
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getHygrometrie() > SEUIL_HUMIDITE)
+            {
+                listeBacsADepanner =
+                  listeBacsADepanner.concat("   " + bac.getTypeProduit().getNom() + "\n");
+            }
+        }
+
+        return listeBacsADepanner;
+!!!144298.java!!!	modifierDateIntervention(in nouvelleDateIntervention : String) : void
+        this.dateIntervention = nouvelleDateIntervention;
+!!!144426.java!!!	modifierEtatIntervention(inout estIntervenu : boolean) : void
+        this.effectuee = estIntervenu;
+!!!144554.java!!!	formaterDate(in date : String) : String
+        try
+        {
+            Date horodatage = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH).parse(date);
+            return new SimpleDateFormat("dd/MM/yyyy").format(horodatage);
+        }
+        catch(ParseException e)
+        {
+            return new String();
+        }

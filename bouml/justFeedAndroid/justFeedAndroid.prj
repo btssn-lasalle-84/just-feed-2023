@@ -1,7 +1,8 @@
 format 224
 "justFeedAndroid"
-  revision 8
-  modified_by 2 "btssn2"
+  revision 9
+  modified_by 42 "tv"
+  java_root_dir "../../"
 
 
   
@@ -44,6 +45,7 @@ format 224
 
   mark_for_import
   
+  java_package "com.justfeed"
   usecaseview 128002 "justFeedAndroid"
     
     usecasediagramsettings end
@@ -651,4 +653,8 @@ ${members}}
         end
     end
   end
+
+  package_ref 134570 // justfeedandroid
+
+  package_ref 134698 // unknown
 end

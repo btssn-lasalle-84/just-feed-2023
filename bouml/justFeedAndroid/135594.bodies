@@ -1,0 +1,30 @@
+class AdaptateurDistributeur
+!!!136234.java!!!	AdaptateurDistributeur(inout distributeurs : List<Distributeur>)
+        if(distributeurs != null)
+        {
+            this.distributeurs = distributeurs;
+        }
+!!!136362.java!!!	onCreateViewHolder(inout parent : ViewGroup, in viewType : int) : VueDistributeur
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View           view     = inflater.inflate(R.layout.distributeur, parent, false);
+
+        return new VueDistributeur(view);
+!!!136490.java!!!	onBindViewHolder(inout holder : VueDistributeur, in position : int) : void
+        Distributeur distributeur = distributeurs.get(position);
+        holder.afficherDistributeur(distributeur);
+        LinearLayoutManager layoutVueListesBacs =
+          new LinearLayoutManager(holder.modifierVueListeBacs().getContext(),
+                                  LinearLayoutManager.HORIZONTAL,
+                                  false);
+        layoutVueListesBacs.setInitialPrefetchItemCount(distributeur.getListeBacs().size());
+        AdaptateurBac adapteurBacs = new AdaptateurBac(distributeur.getListeBacs());
+        holder.modifierVueListeBacs().setLayoutManager(layoutVueListesBacs);
+        holder.modifierVueListeBacs().setAdapter(adapteurBacs);
+        holder.modifierVueListeBacs().setRecycledViewPool(partageVue);
+!!!136618.java!!!	getItemCount() : int
+        Log.d(TAG,"getItemCount()");
+        if(distributeurs != null)
+        {
+            return distributeurs.size();
+        }
+        return 0;
