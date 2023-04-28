@@ -643,18 +643,20 @@ public class BaseDeDonnees
                                 Location coordGeographiques = new Location("Non défini");
                                 coordGeographiques.setLatitude(resultatRequeteDistributeurs.getDouble("latitude"));
                                 coordGeographiques.setLongitude(resultatRequeteDistributeurs.getDouble("longitude"));
+                                Distributeur distributeur = new Distributeur(
+                                        resultatRequeteDistributeurs.getInt("idDistributeur"),
+                                        resultatRequeteDistributeurs.getString("codepostal"),
+                                        resultatRequeteDistributeurs.getString("adresse"),
+                                        resultatRequeteDistributeurs.getString("ville"),
+                                        resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                        coordGeographiques,
+                                        new ArrayList<Bac>());
+                                distributeur.ARemplir((resultatRequeteDistributeurs.getInt("aRemplir") == 0));
+                                distributeur.ADepanner((resultatRequeteDistributeurs.getInt("aDepanner") == 0));
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
-                                  new Distributeur(
-                                    resultatRequeteDistributeurs.getInt("idDistributeur"),
-                                    resultatRequeteDistributeurs.getString("codepostal"),
-                                    resultatRequeteDistributeurs.getString("adresse"),
-                                    resultatRequeteDistributeurs.getString("ville"),
-                                    resultatRequeteDistributeurs.getString("nomDistributeur"),
-                                    coordGeographiques,
-                                    new ArrayList<Bac>(),
-                                    (resultatRequeteDistributeurs.getInt("aRemplir") == 0),
-                                    (resultatRequeteDistributeurs.getInt("aDepanner") == 0)));
+                                  distributeur
+                                  );
                             }
                             String requeteSQLBacs =
                               "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
@@ -755,27 +757,21 @@ public class BaseDeDonnees
                                                     "Orange",
                                                     "Gare Orange",
                                                     coordGeographiques1,
-                                                    bacsDistributeur1,
-                                                    true,
-                                                    false));
+                                                    bacsDistributeur1));
             listeDistributeurs.add(new Distributeur(2,
                                                     "84000",
                                                     "Boulevard Saint-Roch",
                                                     "Avignon",
                                                     "Gare Avignon Centre",
                                                     coordGeographiques2,
-                                                    bacsDistributeur2,
-                                                    true,
-                                                    false));
+                                                    bacsDistributeur2));
             listeDistributeurs.add(new Distributeur(3,
                                                     "84200",
                                                     "Avenue De La Gare",
                                                     "Carpentras",
                                                     "Gare de Carpentras",
                                                     coordGeographiques3,
-                                                    bacsDistributeur3,
-                                                    true,
-                                                    false));
+                                                    bacsDistributeur3));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_DISTRIBUTEURS;
             message.obj     = listeDistributeurs;

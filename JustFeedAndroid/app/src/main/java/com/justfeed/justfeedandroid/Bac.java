@@ -132,4 +132,10 @@ public class Bac
     {
         this.poidsActuel = nouveauPoids;
     }
+
+    /**
+     * @brief Change la quantité à remplir.
+     * @param nouvelleQuantite la nouvelle quantité.
+     */
+    public void chnagerQuantiteARemplir(double nouvelleQuantite) { this.quantiteARemplir = nouvelleQuantite; }
 }

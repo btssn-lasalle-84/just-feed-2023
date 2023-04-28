@@ -47,7 +47,7 @@ public class VueIntervention extends ViewHolder
         identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
         if(intervention.estADepanner())
         {
-            aDepanner.setText("Bacs à dépanner (Hygrométrie > 0%) : \n" +
+            aDepanner.setText("Bacs à dépanner (Hygrométrie > 12%) : \n" +
                               intervention.bacsADepanner());
         }
         if(intervention.estARemplir())
