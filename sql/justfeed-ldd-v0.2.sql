@@ -134,8 +134,8 @@ CREATE TABLE `Intervention` (
   `idOperateur` int NOT NULL,
   `idDistributeur` int NOT NULL,
   `dateIntervention` date NOT NULL,
-  `aRemplir` int DEFAULT '1',
-  `aDepanner` int DEFAULT '1',
+  `aRemplir` int DEFAULT '0',
+  `aDepanner` int DEFAULT '0',
   `effectuee` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
