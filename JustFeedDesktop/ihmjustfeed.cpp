@@ -14,7 +14,6 @@
 #include "produit.h"
 #include "bac.h"
 #include "configurationdistributeur.h"
-#include <QWebView>
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -167,6 +166,16 @@ void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+void IHMJustFeed::afficherCarte()
+{
+    qDebug() << Q_FUNC_INFO;
+    vueCarte->setVisible(!vueCarte->isVisible());
+    if(vueCarte->isVisible())
+        boutonAfficherCarte->setText("Masquer la carte");
+    else
+        boutonAfficherCarte->setText("Afficher la carte");
+}
+
 // Méthodes privées
 
 /**
@@ -197,9 +206,10 @@ void IHMJustFeed::instancierWidgets()
     fenetreDistributeur = new QWidget(this);
 
     // Les boutons
-    boutonIntervenir = new QPushButton("Intervenir", this);
-    boutonConfigurer = new QPushButton("Configurer", this);
-    boutonValider    = new QPushButton("Valider", this);
+    boutonIntervenir    = new QPushButton("Intervenir", this);
+    boutonConfigurer    = new QPushButton("Configurer", this);
+    boutonValider       = new QPushButton("Valider", this);
+    boutonAfficherCarte = new QPushButton("Afficher la carte");
 
     // Les labels
     nomDistributeur           = new QLabel(this);
@@ -209,6 +219,9 @@ void IHMJustFeed::instancierWidgets()
     descriptionDistributeur   = new QLabel(this);
     miseEnServiceDistributeur = new QLabel(this);
     positionDistributeur      = new QLabel(this);
+
+    // La vue pour la carte
+    vueCarte = new QWebView(this);
 
     // Les listes
     listeDistributeurs = new QComboBox(this);
@@ -376,7 +389,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -572,27 +585,25 @@ void IHMJustFeed::effacerTableDistributeurs()
 void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
 {
     // La fenêtre distributeur
-    QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
-    QGridLayout* layoutBacs                = new QGridLayout();
-    layoutFenetreDistributeur->addWidget(nomDistributeur);
-    layoutFenetreDistributeur->addWidget(adresseDistributeur);
-    layoutFenetreDistributeur->addWidget(codePostalDistributeur);
-    layoutFenetreDistributeur->addWidget(villeDistributeur);
-    layoutFenetreDistributeur->addWidget(descriptionDistributeur);
-    layoutFenetreDistributeur->addWidget(miseEnServiceDistributeur);
-    QDate   dateMiseService = distributeur->getDateMiseService();
-    QString miseEnService =
-      QString("Date de mise en service : %1").arg(dateMiseService.toString("dd/MM/yyyy"));
-    layoutFenetreDistributeur->addWidget(positionDistributeur);
-    QString localisation = QString("Latitude : %1\nLongitude : %2\nAltitude : %3")
-                             .arg(distributeur->getPosition().latitude)
-                             .arg(distributeur->getPosition().longitude)
-                             .arg(distributeur->getPosition().altitude);
+    QHBoxLayout* layoutDistributeur             = new QHBoxLayout();
+    QVBoxLayout* layoutInformationsDistributeur = new QVBoxLayout();
+    QVBoxLayout* layoutCarteDistributeur        = new QVBoxLayout();
+    QHBoxLayout* layoutBoutonsDistributeur      = new QHBoxLayout();
+    QGridLayout* layoutBacs                     = new QGridLayout();
+
+    layoutInformationsDistributeur->addWidget(nomDistributeur);
+    layoutInformationsDistributeur->addWidget(adresseDistributeur);
+    layoutInformationsDistributeur->addWidget(codePostalDistributeur);
+    layoutInformationsDistributeur->addWidget(villeDistributeur);
+    layoutInformationsDistributeur->addWidget(descriptionDistributeur);
+    layoutInformationsDistributeur->addWidget(miseEnServiceDistributeur);
+    layoutInformationsDistributeur->addWidget(positionDistributeur);
+
+    layoutCarteDistributeur->addWidget(vueCarte);
+
     layoutBoutonsDistributeur->addStretch();
-    layoutFenetreDistributeur->addLayout(layoutBacs);
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
     layoutBoutonsDistributeur->addWidget(boutonValider);
-    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
-    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
 
     // les informations d'un distributeur
     nomDistributeur->setText(distributeur->getNom());
@@ -600,11 +611,36 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     codePostalDistributeur->setText(distributeur->getCodePostal());
     villeDistributeur->setText(distributeur->getVille());
     descriptionDistributeur->setText(distributeur->getDescription());
+    QDate   dateMiseService = distributeur->getDateMiseService();
+    QString miseEnService =
+      QString("Date de mise en service : %1").arg(dateMiseService.toString("dd/MM/yyyy"));
+    QString localisation = QString("Localisation : %1°, %2°")
+                             .arg(distributeur->getPosition().latitude)
+                             .arg(distributeur->getPosition().longitude);
     positionDistributeur->setText(localisation);
     miseEnServiceDistributeur->setText(miseEnService);
 
-    boutonAfficherCarte = new QPushButton("Afficher la carte");
-    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
+    QString delimiteur = "%2C";
+    QString url =
+      "https://www.openstreetmap.org/export/embed.html?bbox=" +
+      distributeur->getPosition().longitude + delimiteur + distributeur->getPosition().latitude +
+      QString(",") + distributeur->getPosition().longitude + delimiteur +
+      distributeur->getPosition().latitude + QString("&marker=") +
+      distributeur->getPosition().latitude + QString(",") + distributeur->getPosition().longitude;
+    // vueCarte->load(QUrl(url));
+    vueCarte->setVisible(false);
+    boutonAfficherCarte->setText("Afficher la carte");
+    vueCarte->load(QUrl("https://www.google.fr/maps/@" + distributeur->getPosition().latitude +
+                        "," + distributeur->getPosition().longitude + ",15z"));
+    /**
+     * @see https://www.google.com/maps/search/?api=1&query=43.90252,4.75280
+     * @see https://maps.google.com/maps?&z=15&q=43.90252,4.75280&ll=43.90252,4.75280
+     * @see https://www.google.com/maps/place/43.90252+4.75280/@43.90252,4.75280,15z
+     * @see
+     * https://www.google.com/maps/@?api=1&map_action=map&basemap=satellite&center=43.90252,4.75280&zoom=15
+     * @see
+     * https://www.google.com/maps/dir/?api=1&origin=Paris%2CFrance&destination=Cherbourg%2CFrance&travelmode=driving
+     */
 
     int nbBacs = distributeur->getNbBacs();
 
@@ -646,6 +682,14 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
         hygrometrie->setText(QString("Hygrométrie : %1 %").arg(distributeur->getHygrometrie()));
         layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
     }
+
+    // positionnement
+    layoutDistributeur->addLayout(layoutInformationsDistributeur);
+    layoutDistributeur->addLayout(layoutCarteDistributeur);
+    layoutFenetreDistributeur->addLayout(layoutDistributeur);
+    layoutFenetreDistributeur->addLayout(layoutBacs);
+    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
+    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
 }
 
 /**
@@ -675,8 +719,4 @@ void IHMJustFeed::effacerEtatDistributeur()
         }
         delete item;
     }
-}
-
-void IHMJustFeed::afficherCarte()
-{
 }
