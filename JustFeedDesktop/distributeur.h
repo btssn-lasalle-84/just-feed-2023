@@ -23,7 +23,7 @@ struct Localisation
 {
     QString latitude;
     QString longitude;
-    QString atitude;
+    QString altitude;
 };
 
 /**

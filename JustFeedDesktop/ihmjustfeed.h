@@ -72,9 +72,9 @@ class IHMJustFeed : public QWidget
     QVector<Produit*>      produits;                      //!< les produits
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     ConfigurationDistributeur*
-      configurationDistributeur;       //!< la boîte de dialogue pour configurer un distributeur
-    QStringList nomColonnes;           //!< la liste des noms de colonne
-    int         nbLignesDistributeurs; //!< le nombre de lignes dans la table
+                configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
+    QStringList nomColonnes;               //!< la liste des noms de colonne
+    int         nbLignesDistributeurs;     //!< le nombre de lignes dans la table
 
     // Widgets
     QWidget*        gui;                      //!< le widget central
@@ -85,6 +85,7 @@ class IHMJustFeed : public QWidget
     QPushButton*    boutonIntervenir;
     QPushButton*    boutonConfigurer;
     QPushButton*    boutonValider;
+    QPushButton*    boutonAfficherCarte;
     QComboBox*      listeDistributeurs; //!< liste de distributeurs
     QVBoxLayout*    layoutFenetreDistributeur;
     QProgressBar*   volumeRestant;
@@ -111,6 +112,7 @@ class IHMJustFeed : public QWidget
     void effacerTableDistributeurs();
     void creerEtatDistributeur(Distributeur* distributeur);
     void effacerEtatDistributeur();
+    void afficherCarte();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

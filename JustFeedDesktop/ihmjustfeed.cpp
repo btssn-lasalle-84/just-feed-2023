@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file        ihmjustfeed.cpp
  * @brief       Définition de la classe IHMJustFeed.
  * @details     La classe IHMJustFeed \c Cette classe permet de définir la GUI
@@ -14,6 +14,7 @@
 #include "produit.h"
 #include "bac.h"
 #include "configurationdistributeur.h"
+#include <QWebView>
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -336,6 +337,7 @@ void IHMJustFeed::initialiserEvenements()
             SLOT(selectionnerDistributeur(int)));
     connect(boutonConfigurer, SIGNAL(clicked()), this, SLOT(configurerDistributeur()));
     connect(boutonValider, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
+    connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
 }
 
 /**
@@ -374,7 +376,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -578,7 +580,14 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     layoutFenetreDistributeur->addWidget(villeDistributeur);
     layoutFenetreDistributeur->addWidget(descriptionDistributeur);
     layoutFenetreDistributeur->addWidget(miseEnServiceDistributeur);
+    QDate   dateMiseService = distributeur->getDateMiseService();
+    QString miseEnService =
+      QString("Date de mise en service : %1").arg(dateMiseService.toString("dd/MM/yyyy"));
     layoutFenetreDistributeur->addWidget(positionDistributeur);
+    QString localisation = QString("Latitude : %1\nLongitude : %2\nAltitude : %3")
+                             .arg(distributeur->getPosition().latitude)
+                             .arg(distributeur->getPosition().longitude)
+                             .arg(distributeur->getPosition().altitude);
     layoutBoutonsDistributeur->addStretch();
     layoutFenetreDistributeur->addLayout(layoutBacs);
     layoutBoutonsDistributeur->addWidget(boutonValider);
@@ -591,14 +600,11 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     codePostalDistributeur->setText(distributeur->getCodePostal());
     villeDistributeur->setText(distributeur->getVille());
     descriptionDistributeur->setText(distributeur->getDescription());
-    /**
-     * @todo Afficher la date formatée et la localisation
-     */
-    miseEnServiceDistributeur->setText("");
-    positionDistributeur->setText("");
-    /**
-     * @todo Ajouter un bouton pour voir la localisation du distributeur sur une carte
-     */
+    positionDistributeur->setText(localisation);
+    miseEnServiceDistributeur->setText(miseEnService);
+
+    boutonAfficherCarte = new QPushButton("Afficher la carte");
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
 
     int nbBacs = distributeur->getNbBacs();
 
@@ -669,4 +675,8 @@ void IHMJustFeed::effacerEtatDistributeur()
         }
         delete item;
     }
+}
+
+void IHMJustFeed::afficherCarte()
+{
 }
