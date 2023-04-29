@@ -33,7 +33,7 @@ class Intervention : public QDialog
     QDate                  dateIntervention; //!< la date de l'intervention
     QVector<Distributeur*> distributeurs;    //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuee;        //!< si l'intervention a été effectuée
-    QVector<QLabel*>       nomDistributeurs;  //!< nom du distributeur et son numero
+    QVector<QLabel*>       nomDistributeurs; //!< nom du distributeur et son numero
     QVector<QLabel*>       labelsBac;        //!< conteneur de QLabel de bac
     QVector<QVector<QLabel*>> labelsDesBacs; //!< vecteur de vecteur de QLabel, pour stocker les bacs
     QVector<QLabel*>       labelsProduit;           //!< conteneur de QLabel de produit
@@ -50,7 +50,8 @@ class Intervention : public QDialog
     void                   initialiserEvenements();
 
   public:
-    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, IHMJustFeed* parent = 0);
+    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir,
+                          IHMJustFeed*           parent = 0);
     ~Intervention();
 
     // Accesseurs

@@ -54,7 +54,6 @@ void Intervention::instancierWidgets()
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs.push_back(new QLabel(this));
-
         for(int j = 0; j < distributeurs[i]->getNbBacs() ; j++)
         {
             labelsBac.push_back(new QLabel(this));

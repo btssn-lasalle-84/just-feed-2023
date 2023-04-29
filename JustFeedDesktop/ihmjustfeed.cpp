@@ -116,6 +116,14 @@ void IHMJustFeed::afficherFenetreDistributeur()
 }
 
 /**
+ * @brief méthode qui affiche la fenetre
+ */
+void IHMJustFeed::afficherFenetreIntervention()
+{
+    afficherFenetre(IHMJustFeed::Fenetre::FIntervention);
+}
+
+/**
  * @brief méthode qui configure un distributeur
  */
 void IHMJustFeed::configurerDistributeur()
@@ -140,8 +148,12 @@ void IHMJustFeed::configurerDistributeur()
  */
 void IHMJustFeed::planifierIntervention()
 {
-    recupererDistributeursAIntervenir();
     qDebug() << Q_FUNC_INFO;
+    recupererDistributeursAIntervenir();
+    // aucun distributeur sélectionné ?
+    if(listeDistributeursAIntervenir.size() < 1)
+        return;
+    // crée et affiche la boîte de dialogue
     if(intervention == nullptr)
     {
         intervention = new Intervention(listeDistributeursAIntervenir, this);
@@ -151,6 +163,8 @@ void IHMJustFeed::planifierIntervention()
     intervention->exec();
     delete intervention;
     intervention = nullptr;
+    effacerDistributeursAIntervenir();
+    boutonPlanifier->setEnabled(false);
 }
 
 /**
@@ -187,6 +201,17 @@ void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+void IHMJustFeed::selectionnerDistributeurAIntervenir(QTableWidgetItem* item)
+{
+    if(item->column() == COLONNE_DISTRIBUTEUR_INTERVENTION)
+    {
+        if(recupererDistributeursAIntervenir())
+            boutonPlanifier->setEnabled(true);
+        else
+            boutonPlanifier->setEnabled(false);
+    }
+}
+
 // Méthodes privées
 
 /**
@@ -217,7 +242,7 @@ void IHMJustFeed::instancierWidgets()
     fenetreDistributeur = new QWidget(this);
 
     // Les boutons
-    boutonIntervenir = new QPushButton("Intervenir", this);
+    boutonPlanifier  = new QPushButton("Planifier", this);
     boutonConfigurer = new QPushButton("Configurer", this);
     boutonValider    = new QPushButton("Valider", this);
 
@@ -251,6 +276,12 @@ void IHMJustFeed::initialiserWidgets()
     {
         listeDistributeurs->addItem(distributeurs[i]->getNom());
     }
+    if(distributeurs.size() < 1)
+        boutonConfigurer->setEnabled(false);
+    if(recupererDistributeursAIntervenir())
+        boutonPlanifier->setEnabled(true);
+    else
+        boutonPlanifier->setEnabled(false);
 }
 
 /**
@@ -273,7 +304,7 @@ void IHMJustFeed::positionnerWidgets()
     layoutBoutonsAccueil->addStretch();
     layoutBoutonsAccueil->addWidget(listeDistributeurs);
     layoutBoutonsAccueil->addWidget(boutonConfigurer);
-    layoutBoutonsAccueil->addWidget(boutonIntervenir);
+    layoutBoutonsAccueil->addWidget(boutonPlanifier);
     layoutFenetrePrincipale->addLayout(layoutF1Table);
     layoutFenetrePrincipale->addLayout(layoutBoutonsAccueil);
     layoutFenetrePrincipale->addStretch();
@@ -352,12 +383,16 @@ void IHMJustFeed::initialiserEvenements()
             SIGNAL(itemPressed(QTableWidgetItem*)),
             this,
             SLOT(selectionnerDistributeur(QTableWidgetItem*)));
+    connect(tableWidgetDistributeurs,
+            SIGNAL(itemClicked(QTableWidgetItem*)),
+            this,
+            SLOT(selectionnerDistributeurAIntervenir(QTableWidgetItem*)));
     connect(listeDistributeurs,
             SIGNAL(currentIndexChanged(int)),
             this,
             SLOT(selectionnerDistributeur(int)));
     connect(boutonConfigurer, SIGNAL(clicked()), this, SLOT(configurerDistributeur()));
-    connect(boutonIntervenir, SIGNAL(clicked()), this, SLOT(planifierIntervention()));
+    connect(boutonPlanifier, SIGNAL(clicked()), this, SLOT(planifierIntervention()));
     connect(boutonValider, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
 }
 
@@ -591,8 +626,14 @@ void IHMJustFeed::effacerTableDistributeurs()
     nbLignesDistributeurs = 0;
 }
 
-void IHMJustFeed::recupererDistributeursAIntervenir()
+/**
+ * @brief méthode qui détermine la liste des distributeurs à intervenir
+ * @fn IHMJustFeed::recupererDistributeursAIntervenir
+ * @return le nombre de distributeurs
+ */
+int IHMJustFeed::recupererDistributeursAIntervenir()
 {
+    listeDistributeursAIntervenir.clear();
     for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
     {
         QTableWidgetItem* item =
@@ -601,8 +642,19 @@ void IHMJustFeed::recupererDistributeursAIntervenir()
         {
             qDebug() << Q_FUNC_INFO << distributeurs[i]->getNom();
             listeDistributeursAIntervenir.push_back(distributeurs[i]);
-            tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
-              ->setCheckState(Qt::Unchecked);
         }
+    }
+    return listeDistributeursAIntervenir.size();
+}
+
+void IHMJustFeed::effacerDistributeursAIntervenir()
+{
+    listeDistributeursAIntervenir.clear();
+    for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
+    {
+        QTableWidgetItem* item =
+          tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION);
+        tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
+          ->setCheckState(Qt::Unchecked);
     }
 }
