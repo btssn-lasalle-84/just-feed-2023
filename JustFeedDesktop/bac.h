@@ -17,13 +17,14 @@ class Bac
 {
   private:
     Produit*     produit;                //!< produit que contient le bac
-    unsigned int poidsActuel;            //!< à définir
+    double       poidsActuel;            //!< à définir
+    double       poidsTotal;             //!< à définir
     double       pourcentageRemplissage; //!< pourcentage de remplissage du bu bac
     bool         aIntervenir;
 
   public:
     Bac();
-    Bac(Produit* produit, unsigned int poidsActuel, double pourcentageRemplissage = 100.);
+    Bac(Produit* produit, double poidsActuel, double poidsTotal, double pourcentageRemplissage = 100.);
     Bac(const Bac& bac);
     ~Bac();
 
@@ -31,7 +32,8 @@ class Bac
     Produit*     getProduit() const;
     QString      getNomProduit() const;
     double       getPrixProduit() const;
-    unsigned int getPoidsActuel() const;
+    double       getPoidsActuel() const;
+    double       getPoidsTotal() const;
     double       getPourcentageRemplissage() const;
     bool         getAIntervenir() const;
 
@@ -39,7 +41,8 @@ class Bac
     void setProduit(Produit* produit);
     void setNomProduit(const QString& nomProduit);
     void setPrixProduit(const double& prixProduit);
-    void setPoidsActuel(int poidsActuel);
+    void setPoidsActuel(const double poidsActuel);
+    void setPoidsTotal(const double poidsTotal);
     void setAIntervenir();
 };
 

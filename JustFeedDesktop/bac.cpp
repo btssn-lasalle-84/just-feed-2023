@@ -13,7 +13,7 @@
 /**
  * @brief Constructeur par défaut de la classe Bac
  */
-Bac::Bac() : produit(nullptr), poidsActuel(0), pourcentageRemplissage(0.)
+Bac::Bac() : produit(nullptr), poidsActuel(0.), pourcentageRemplissage(0.), aIntervenir(false), poidsTotal(0.)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -21,8 +21,8 @@ Bac::Bac() : produit(nullptr), poidsActuel(0), pourcentageRemplissage(0.)
 /**
  * @brief Constructeur d'initialisation du bac
  */
-Bac::Bac(Produit* produit, unsigned int poidsActuel, double pourcentageRemplissage) :
-    produit(produit), poidsActuel(poidsActuel), pourcentageRemplissage(pourcentageRemplissage)
+Bac::Bac(Produit* produit, double poidsActuel, double poidsTotal, double pourcentageRemplissage) :
+    produit(produit), poidsActuel(poidsActuel), poidsTotal(poidsTotal), pourcentageRemplissage(pourcentageRemplissage), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
              << "description" << produit->getDescription() << "codeProduit"
@@ -84,7 +84,7 @@ double Bac::getPrixProduit() const
  * @brief Accesseur de l'attribut poidsActuel
  * @return un entier qui represente le poids actuel dans le bac
  */
-unsigned int Bac::getPoidsActuel() const
+double Bac::getPoidsActuel() const
 {
     return this->poidsActuel;
 }
@@ -105,6 +105,15 @@ bool Bac::getAIntervenir() const
 double Bac::getPourcentageRemplissage() const
 {
     return this->pourcentageRemplissage;
+}
+
+/**
+ * @brief Accesseur de l'attribut poidsTotal
+ * @return double
+ */
+double Bac::getPoidsTotal() const
+{
+    return this->poidsTotal;
 }
 
 /**
@@ -140,19 +149,31 @@ void Bac::setPrixProduit(const double& prixProduit)
  * @brief Mutateur de l'attribut poidsActuel
  * @param poidsActuel le poids actuel du bac
  */
-void Bac::setPoidsActuel(int poidsActuel)
+void Bac::setPoidsActuel(const double poidsActuel)
 {
     this->poidsActuel = poidsActuel;
 }
 
+/**
+ * @brief Mutateur de l'attribut poidsTotal
+ * @param poidsActuel le poids max du bac
+ */
+void Bac::setPoidsTotal(const double poidsTotal)
+{
+    this->poidsTotal = poidsTotal;
+}
 /**
  * @brief Mutateur de l'attribut AIntervenir
  * @param aIntervenir
  */
 void Bac::setAIntervenir()
 {
-    if(pourcentageRemplissage <= 30.)
+    if(pourcentageRemplissage <= 30)
     {
         this->aIntervenir = true;
+    }
+    else
+    {
+        this->aIntervenir = false;
     }
 }

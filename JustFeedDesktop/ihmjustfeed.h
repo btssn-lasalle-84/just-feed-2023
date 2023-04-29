@@ -19,6 +19,7 @@ class Distributeur;
 class ConfigurationDistributeur;
 class Produit;
 class Intervention;
+class BaseDeDonnees;
 
 /**
  * @def TITRE_APPLICATION
@@ -79,6 +80,7 @@ class IHMJustFeed : public QWidget
     Intervention* intervention;
     QStringList   nomColonnes;           //!< la liste des noms de colonne
     int           nbLignesDistributeurs; //!< le nombre de lignes dans la table
+    BaseDeDonnees *baseDeDonnees;
 
     // Widgets
     QWidget*          gui;                      //!< le widget central

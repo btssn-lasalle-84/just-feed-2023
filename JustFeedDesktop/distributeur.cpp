@@ -215,7 +215,35 @@ int Distributeur::getNbBacs() const
  */
 bool Distributeur::getAIntervenirBac(int numerobac) const
 {
+    bacs[numerobac]->setAIntervenir();
     return bacs[numerobac]->getAIntervenir();
+}
+
+/**
+ * @brief Accesseur pour savoir le pourcentage de remplissage du bac
+ * @return double
+ */
+double Distributeur::getPourcentageBac(int numeroBac) const
+{
+    return bacs[numeroBac]->getPourcentageRemplissage();
+}
+
+/**
+ * @brief Accesseur pour savoir le poids du bac
+ * @return double
+ */
+double Distributeur::getPoidsBac(int numeroBac) const
+{
+    return bacs[numeroBac]->getPoidsActuel();
+}
+
+/**
+ * @brief Accesseur pour savoir le poids total du bac
+ * @return double
+ */
+double Distributeur::getPoidsTotalBac(int numeroBac) const
+{
+    return bacs[numeroBac]->getPoidsTotal();
 }
 
 /**
@@ -348,13 +376,4 @@ void Distributeur::supprimerBac(const int numeroBacASupprimer)
         bacs.remove(numeroBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
-}
-
-/**
- * @brief Supprime un bac dans le distributeur
- * @param numeroBacASupprimer
- */
-void Distributeur::setAIntervenirBac(const int numerobac)
-{
-    bacs[numerobac]->setAIntervenir();
 }

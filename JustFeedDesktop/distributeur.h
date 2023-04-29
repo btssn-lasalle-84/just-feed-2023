@@ -76,6 +76,9 @@ class Distributeur
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
     bool         getAIntervenirBac(int numerobac) const;
+    double       getPourcentageBac(int numeroBac) const;
+    double       getPoidsBac(int numeroBac) const;
+    double       getPoidsTotalBac(int numeroBac) const;
 
     // mutateurs
     void setDeviceID(const QString deviceID);
@@ -89,7 +92,6 @@ class Distributeur
     void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
     void setPrixProduit(const int& numeroBac, const double& prix);
-    void setAIntervenirBac(const int numerobac);
     void ajouterBac(const Bac& bac);
     void supprimerBac(const int numeroBacASupprimer);
 };

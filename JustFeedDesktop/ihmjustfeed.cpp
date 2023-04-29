@@ -15,6 +15,7 @@
 #include "bac.h"
 #include "configurationdistributeur.h"
 #include "intervention.h"
+#include "basededonnees.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -444,19 +445,19 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(soja);
     produits.push_back(basilic);
 
-    distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
+    distributeurs[0]->ajouterBac(Bac(pruneaux, 5, 10, 70));
+    distributeurs[0]->ajouterBac(Bac(abricot, 4, 15, 40));
+    distributeurs[0]->ajouterBac(Bac(cranberries, 3, 12, 20));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
-    distributeurs[1]->ajouterBac(Bac(banane, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(raisin, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(banane, 0, 12, 0.));
+    distributeurs[1]->ajouterBac(Bac(raisin, 0, 12, 0.));
+    distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 12, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
              << distributeurs[1]->getNbBacs();
-    distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
+    distributeurs[2]->ajouterBac(Bac(cacahuete, 0,12, 0.));
+    distributeurs[2]->ajouterBac(Bac(soja, 0,12, 0.));
+    distributeurs[2]->ajouterBac(Bac(basilic, 0,12, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
 
@@ -520,7 +521,6 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     itemIntervention = new QTableWidgetItem();
     itemIntervention->setCheckState(Qt::Unchecked);
     itemIntervention->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
-
     nbLignesDistributeurs += 1;
     qDebug() << Q_FUNC_INFO << "nbLignesDistributeur" << nbLignesDistributeurs;
 

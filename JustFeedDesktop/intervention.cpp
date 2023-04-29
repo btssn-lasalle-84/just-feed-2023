@@ -54,17 +54,16 @@ void Intervention::instancierWidgets()
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs.push_back(new QLabel(this));
-        nomDistributeurs[i]->setText("intervention : Distributeur -> " + distributeurs[i]->getNom());
-        nomDistributeurs[i]->setAlignment(Qt::AlignCenter);
+
         for(int j = 0; j < distributeurs[i]->getNbBacs() ; j++)
         {
-            distributeurs[i]->setAIntervenirBac(j);
-            if(distributeurs[i]->getAIntervenirBac(j) == true)
-            {
-                labelsBac.push_back(new QLabel(this));
-                labelsProduit.push_back(new QLabel(this));
-            }
+            labelsBac.push_back(new QLabel(this));
+            labelsProduit.push_back(new QLabel(this));
+            labelsPourcentage.push_back(new QLabel(this));
         }
+        labelsDesBacs.push_back(labelsBac);
+        labelsDesProduits.push_back(labelsProduit);
+        labelsDesPourcentage.push_back(labelsPourcentage);
     }
 }
 
@@ -73,7 +72,24 @@ void Intervention::instancierWidgets()
  */
 void Intervention::initialiserWidgets()
 {
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        nomDistributeurs[i]->setText("intervention : Distributeur -> " + distributeurs[i]->getNom());
+        nomDistributeurs[i]->setAlignment(Qt::AlignCenter);
 
+        for(int j = 0; j < distributeurs[i]->getNbBacs() ; j++)
+        {
+            if(distributeurs[i]->getAIntervenirBac(j) == true)
+            {
+                labelsDesBacs[i][j]->setText("Bac à Intervenir id : " + QString::number(j));
+                labelsDesBacs[i][j]->setAlignment(Qt::AlignCenter);
+                labelsDesProduits[i][j]->setText("Produit du bac : " + distributeurs[i]->getNomProduitBac(j));
+                labelsDesProduits[i][j]->setAlignment(Qt::AlignCenter);
+                labelsDesPourcentage[i][j]->setText("Poids à prevoir : " +  QString::number(poidsAPrevoir(i,j)) + " g ou Kg //à definir");
+                labelsDesPourcentage[i][j]->setAlignment(Qt::AlignCenter);
+            }
+        }
+    }
 }
 
 /**
@@ -82,16 +98,21 @@ void Intervention::initialiserWidgets()
 void Intervention::positionnerWidgets()
 {
     qDebug() << Q_FUNC_INFO ;
-    layoutBacs               = new QVBoxLayout();
-    QVector<QHBoxLayout*> layoutsDistributeur(nomDistributeurs.size());
+    layoutDistributeurs = new QHBoxLayout;
+    QVector<QVBoxLayout*> layoutInfoDistributeurs(nomDistributeurs.size());
     for(int i = 0; i < distributeurs.size(); i++)
     {
-        layoutsDistributeur[i] = new QHBoxLayout();
-        layoutsDistributeur[i]->addWidget(nomDistributeurs[i]);
-
-        layoutBacs->addLayout(layoutsDistributeur[i]);
+        layoutInfoDistributeurs[i] = new QVBoxLayout();
+        layoutInfoDistributeurs[i]->addWidget(nomDistributeurs[i]);
+        for(int j = 0; j < distributeurs[i]->getNbBacs() ; j++)
+        {
+            layoutInfoDistributeurs[i]->addWidget(labelsDesBacs[i][j]);
+            layoutInfoDistributeurs[i]->addWidget(labelsDesProduits[i][j]);
+            layoutInfoDistributeurs[i]->addWidget(labelsDesPourcentage[i][j]);
+        }
+        layoutDistributeurs->addLayout(layoutInfoDistributeurs[i]);
     }
-    setLayout(layoutBacs);
+    setLayout(layoutDistributeurs);
 }
 
 /**
@@ -155,4 +176,24 @@ void Intervention::setDateIntervention(const QDate& dateIntervention)
 void Intervention::setEffectuee(const bool effectuee)
 {
     this->effectuee = effectuee;
+}
+
+/**
+ * @brief fonction qui calcul le poids à ajouter dans un bac
+ * @param numeroDistributeur
+ * @param numeroBac
+ */
+double  Intervention::poidsAPrevoir(const int numeroDistributeur, const int numeroBac)
+{
+    if(distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac) != 0 && distributeurs[numeroDistributeur]->getPoidsBac(numeroBac) != 0)
+    {
+        double poids = ((100 * distributeurs[numeroDistributeur]->getPoidsBac(numeroBac)) / distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac));
+        //qDebug() << Q_FUNC_INFO << distributeurs[numeroDistributeur]->getPoidsBac(numeroBac) << distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac) << poids;
+        return poids;
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << distributeurs[numeroDistributeur]->getPoidsTotalBac(numeroBac);
+        return distributeurs[numeroDistributeur]->getPoidsTotalBac(numeroBac);
+    }
 }

@@ -23,6 +23,7 @@
 class Distributeur;
 class Produit;
 class IHMJustFeed;
+class bac;
 
 class Intervention : public QDialog
 {
@@ -34,8 +35,14 @@ class Intervention : public QDialog
     bool                   effectuee;        //!< si l'intervention a été effectuée
     QVector<QLabel*>       nomDistributeurs;  //!< nom du distributeur et son numero
     QVector<QLabel*>       labelsBac;        //!< conteneur de QLabel de bac
+    QVector<QVector<QLabel*>> labelsDesBacs; //!< vecteur de vecteur de QLabel, pour stocker les bacs
     QVector<QLabel*>       labelsProduit;           //!< conteneur de QLabel de produit
+    QVector<QVector<QLabel*>> labelsDesProduits;    //!< vecteur de vecteur de QLabel, pour stocker les produits
+    QVector<QLabel*>       labelsPourcentage;           //!< conteneur de QLabel de produit
+    QVector<QVector<QLabel*>> labelsDesPourcentage;
      QVBoxLayout*          layoutBacs; //!< positionnement des bacs dans la boîte de dialogue
+     QHBoxLayout* layoutDistributeurs;
+
     void                   initialiserBoiteDeDialogue();
     void                   instancierWidgets();
     void                   initialiserWidgets();
@@ -55,6 +62,7 @@ class Intervention : public QDialog
     void setDateIntervention(const QDate& dateIntervention);
     void ajouterDistributeur(Distributeur* distributeur);
     void setEffectuee(const bool effectuee);
+    double poidsAPrevoir(const int numeroDistributeur, const int numeroBac);
 };
 
 #endif // INTERVENTION_H
