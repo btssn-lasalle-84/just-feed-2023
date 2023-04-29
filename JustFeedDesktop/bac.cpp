@@ -34,7 +34,7 @@ Bac::Bac(Produit* produit, double poidsActuel, double poidsTotal, double pourcen
  * @brief Constructeur de copie
  */
 Bac::Bac(const Bac& bac) :
-    produit(bac.produit), poidsActuel(bac.poidsActuel),
+    produit(bac.produit), poidsActuel(bac.poidsActuel), poidsTotal(bac.poidsTotal),
     pourcentageRemplissage(bac.pourcentageRemplissage)
 {
     qDebug() << Q_FUNC_INFO;

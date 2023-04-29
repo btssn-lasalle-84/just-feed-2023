@@ -184,7 +184,7 @@ void Intervention::setEffectuee(const bool effectuee)
  */
 double  Intervention::poidsAPrevoir(const int numeroDistributeur, const int numeroBac)
 {
-    if(distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac) != 0 && distributeurs[numeroDistributeur]->getPoidsBac(numeroBac) != 0)
+    if((distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac) != 0) && (distributeurs[numeroDistributeur]->getPoidsBac(numeroBac) != 0))
     {
         double poids = ((100 * distributeurs[numeroDistributeur]->getPoidsBac(numeroBac)) / distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac));
         //qDebug() << Q_FUNC_INFO << distributeurs[numeroDistributeur]->getPoidsBac(numeroBac) << distributeurs[numeroDistributeur]->getPourcentageBac(numeroBac) << poids;
