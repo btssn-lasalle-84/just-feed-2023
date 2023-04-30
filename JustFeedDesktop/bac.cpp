@@ -13,7 +13,9 @@
 /**
  * @brief Constructeur par défaut de la classe Bac
  */
-Bac::Bac() : produit(nullptr), poidsActuel(0.), pourcentageRemplissage(0.), aIntervenir(false), poidsTotal(0.)
+Bac::Bac() :
+    produit(nullptr), poidsActuel(0.), poidsTotal(0.), pourcentageRemplissage(0.),
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -21,13 +23,29 @@ Bac::Bac() : produit(nullptr), poidsActuel(0.), pourcentageRemplissage(0.), aInt
 /**
  * @brief Constructeur d'initialisation du bac
  */
-Bac::Bac(Produit* produit, double poidsActuel, double poidsTotal, double pourcentageRemplissage) :
-    produit(produit), poidsActuel(poidsActuel), poidsTotal(poidsTotal), pourcentageRemplissage(pourcentageRemplissage), aIntervenir(false)
+Bac::Bac(Produit* produit, double poidsActuel, double poidsTotal) :
+    produit(produit), poidsActuel(poidsActuel), poidsTotal(poidsTotal),
+    pourcentageRemplissage((poidsActuel * 100.) / poidsTotal), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
              << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
-             << poidsActuel << "pourcentageRemplissage" << pourcentageRemplissage;
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage;
+}
+
+/**
+ * @brief Constructeur d'initialisation du bac
+ */
+Bac::Bac(Produit* produit, double poidsTotal) :
+    produit(produit), poidsActuel(poidsTotal), poidsTotal(poidsTotal), pourcentageRemplissage(100.),
+    aIntervenir(false)
+{
+    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
+             << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage;
 }
 
 /**
@@ -35,7 +53,7 @@ Bac::Bac(Produit* produit, double poidsActuel, double poidsTotal, double pourcen
  */
 Bac::Bac(const Bac& bac) :
     produit(bac.produit), poidsActuel(bac.poidsActuel), poidsTotal(bac.poidsTotal),
-    pourcentageRemplissage(bac.pourcentageRemplissage)
+    pourcentageRemplissage(bac.pourcentageRemplissage), aIntervenir(bac.aIntervenir)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -99,6 +117,15 @@ bool Bac::getAIntervenir() const
 }
 
 /**
+ * @brief Méthode qui détermine la quantité à remplir
+ * @return double la quantité à remplir
+ */
+double Bac::getQuantiteARemplir() const
+{
+    return (getPoidsTotal() * (100. - getPourcentageRemplissage()) / 100.);
+}
+
+/**
  * @brief Accesseur de l'attribut pourcentageRemplissage
  * @return double
  */
@@ -149,31 +176,46 @@ void Bac::setPrixProduit(const double& prixProduit)
  * @brief Mutateur de l'attribut poidsActuel
  * @param poidsActuel le poids actuel du bac
  */
-void Bac::setPoidsActuel(const double poidsActuel)
+void Bac::setPoidsActuel(const double& poidsActuel)
 {
-    this->poidsActuel = poidsActuel;
+    if(this->poidsActuel != poidsActuel)
+    {
+        this->poidsActuel            = poidsActuel;
+        this->pourcentageRemplissage = (poidsActuel * 100.) / poidsTotal;
+    }
 }
 
 /**
  * @brief Mutateur de l'attribut poidsTotal
  * @param poidsActuel le poids max du bac
  */
-void Bac::setPoidsTotal(const double poidsTotal)
+void Bac::setPoidsTotal(const double& poidsTotal)
 {
-    this->poidsTotal = poidsTotal;
+    if(this->poidsTotal != poidsTotal)
+    {
+        this->poidsTotal             = poidsTotal;
+        this->pourcentageRemplissage = (poidsActuel * 100.) / poidsTotal;
+    }
 }
+
+/**
+ * @brief Mutateur de l'attribut pourcentageRemplissage
+ * @param pourcentageRemplissage le % de remplissage du bac
+ */
+void Bac::setPourcentageRemplissage(const double& pourcentageRemplissage)
+{
+    if(this->pourcentageRemplissage != pourcentageRemplissage)
+    {
+        this->pourcentageRemplissage = pourcentageRemplissage;
+        this->poidsActuel            = (poidsTotal * pourcentageRemplissage) / 100.;
+    }
+}
+
 /**
  * @brief Mutateur de l'attribut AIntervenir
  * @param aIntervenir
  */
-void Bac::setAIntervenir()
+void Bac::setAIntervenir(bool aIntervenir)
 {
-    if(pourcentageRemplissage <= 30)
-    {
-        this->aIntervenir = true;
-    }
-    else
-    {
-        this->aIntervenir = false;
-    }
+    this->aIntervenir = aIntervenir;
 }
