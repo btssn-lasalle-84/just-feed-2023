@@ -8,6 +8,7 @@ package com.justfeed.justfeedandroid;
 
 import android.graphics.Color;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
@@ -26,7 +27,8 @@ public class VueIntervention extends ViewHolder
      * Constantes
      */
     private final static String ROUGE = "#ed3734"; //!< L'intervention n'a pas été effectuée
-    private final static String VERT  = "#4eea48";
+    private final static String VERT  = "#4eea48"; //!< L'intervention a été effectuée
+    private final static String BLEU  = "#039dfc"; //!< L'intervention est en cours
     /**
      * Ressources GUI
      */
@@ -39,6 +41,7 @@ public class VueIntervention extends ViewHolder
     private final TextView
       aDepanner; //!< attribut GUI qui affiche si le distributeur doit être dépanné.
     private final CardView carteIntervention; //!< attribut GUI qui contient les informations sur une intervention.
+    private final Spinner  menuEtats; //!< attribut GUI d'une liste déroulante pour trier les interventions.
 
     public VueIntervention(final View itemView)
     {
@@ -49,28 +52,37 @@ public class VueIntervention extends ViewHolder
         aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
         carteIntervention       = ((CardView)itemView.findViewById(R.id.carteIntervention));
+        menuEtats               = ((Spinner)itemView.findViewById(R.id.menuEtats));
     }
 
     public void afficherInterventions(Intervention intervention)
     {
-        if(!intervention.estEffectuee())
+        Intervention.Etats etat = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
+        if(etat == intervention.getEtat())
         {
-            carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+            switch (etat)
+            {
+                case VALIDE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
+                    break;
+                case A_FAIRE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+                    break;
+                case EN_COURS:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(BLEU));
+                    break;
+            }
+            identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            if(intervention.estADepanner())
+            {
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
+                        intervention.recupererBacsADepanner());
+            }
+            if(intervention.estARemplir())
+            {
+                aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+            }
+            dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
         }
-        else
-        {
-            carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
-        }
-        identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
-        if(intervention.estADepanner())
-        {
-            aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
-                    intervention.recupererBacsADepanner());
-        }
-        if(intervention.estARemplir())
-        {
-            aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
-        }
-        dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
     }
 }

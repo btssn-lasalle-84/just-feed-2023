@@ -27,11 +27,24 @@ public class Intervention
      * enum
      * @brief Les différents états d'une intervention.
      */
-    enum Etats
+    public enum Etats
     {
-        EN_COURS,
-        VALIDE,
-        A_FAIRE
+        EN_COURS("En cours"),
+        VALIDE("Validé"),
+        A_FAIRE("A faire");
+
+        private String nomsMenu;
+
+        private Etats(String nomsMenu)
+        {
+            this.nomsMenu = nomsMenu;
+        }
+
+        @Override
+        public String toString()
+        {
+            return nomsMenu;
+        }
     }
 
     /**

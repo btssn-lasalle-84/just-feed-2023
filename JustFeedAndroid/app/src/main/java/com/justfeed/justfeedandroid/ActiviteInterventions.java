@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -46,6 +48,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
     private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
+    private Spinner                    menuEtats; //!< Menu pour trier les interventions
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -127,6 +130,10 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
+        this.menuEtats.setAdapter(
+                new ArrayAdapter<Intervention.Etats>(
+                        this, android.R.layout.simple_spinner_item, Intervention.Etats.values())
+                );
     }
 
     /**
