@@ -64,16 +64,28 @@ bool Intervention::estEffectuee() const
     return this->effectuee;
 }
 
+/**
+ * @brief Accesseur de l'attribut ARemplir
+ * @return aRemplir
+ */
 bool Intervention::estARemplir() const
 {
     return this->aRemplir;
 }
 
+/**
+ * @brief Accesseur de l'attribut ADepanner
+ * @return aDepanner
+ */
 bool Intervention::estADepanner() const
 {
     return this->aDepanner;
 }
 
+/**
+ * @brief Accesseur de l'attribut AIntervenir
+ * @return !effectuee
+ */
 bool Intervention::estAIntervenir() const
 {
     return !this->effectuee;
@@ -130,6 +142,7 @@ void Intervention::initialiserBoiteDeDialogue()
 {
     instancierWidgets();
     initialiserWidgets();
+    initialiserEtatDistributeur();
     positionnerWidgets();
     initialiserEvenements();
     setWindowTitle(TITRE_INTERVENTION);
@@ -220,4 +233,30 @@ void Intervention::positionnerWidgets()
  */
 void Intervention::initialiserEvenements()
 {
+
+}
+
+void Intervention::initialiserEtatDistributeur()
+{
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
+        {
+            if((distributeurs[i]->getPourcentageBac(j) >= 0) && (distributeurs[i]->getPourcentageBac(j) <= 30))
+            {
+                qDebug() << Q_FUNC_INFO << "fonction rouge "<< distributeurs[i]->getPourcentageBac(j) ;
+                labelsDesBacs[i][j]->setStyleSheet("color: #FF0000;");
+            }
+            if((distributeurs[i]->getPourcentageBac(j) > 30) && (distributeurs[i]->getPourcentageBac(j) <= 60))
+            {
+                qDebug() << Q_FUNC_INFO << "fonction orange "<< distributeurs[i]->getPourcentageBac(j) ;
+                labelsDesBacs[i][j]->setStyleSheet("color: #FFA500;");
+            }
+            if((distributeurs[i]->getPourcentageBac(j) > 60) && (distributeurs[i]->getPourcentageBac(j) <= 100))
+            {
+                qDebug() << Q_FUNC_INFO << "fonction vert "<< distributeurs[i]->getPourcentageBac(j) ;
+                labelsDesBacs[i][j]->setStyleSheet("color: #023518;");
+            }
+        }
+    }
 }

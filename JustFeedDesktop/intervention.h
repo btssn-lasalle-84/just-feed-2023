@@ -49,6 +49,7 @@ class Intervention : public QDialog
     void initialiserBoiteDeDialogue();
     void instancierWidgets();
     void initialiserWidgets();
+    void initialiserEtatDistributeur();
     void positionnerWidgets();
     void initialiserEvenements();
 

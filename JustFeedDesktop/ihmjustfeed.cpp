@@ -481,9 +481,9 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(basilic);
 
     distributeurs[0]->setHygrometrie(25);
-    distributeurs[0]->ajouterBac(Bac(pruneaux, 5, 10));
-    distributeurs[0]->ajouterBac(Bac(abricot, 4.5, 15));
-    distributeurs[0]->ajouterBac(Bac(cranberries, 3, 12));
+    distributeurs[0]->ajouterBac(Bac(pruneaux, 50, 50));
+    distributeurs[0]->ajouterBac(Bac(abricot, 0, 100));
+    distributeurs[0]->ajouterBac(Bac(cranberries, 15, 30));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
     distributeurs[1]->setHygrometrie(18);
