@@ -24,6 +24,17 @@ import java.util.Locale;
 public class Intervention
 {
     /**
+     * enum
+     * @brief Les différents états d'une intervention.
+     */
+    enum Etats
+    {
+        EN_COURS,
+        VALIDE,
+        A_FAIRE
+    }
+
+    /**
      * Constantes
      */
     private static final String TAG        = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
@@ -34,7 +45,7 @@ public class Intervention
      */
     private String       dateIntervention; //!< Date de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
-    private boolean      effectuee;        //!< Si l'intervention a été ménée ou non.
+    private Etats      etat;               //!< Les états d'une intervention.
     private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
     private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
@@ -50,23 +61,23 @@ public class Intervention
      * @brief Constructeur d'initialisation de la classe Intervention.
      * @param dateIntervention
      * @param distributeur
-     * @param effectuee
+     * @param etat
      * @param aRemplir
      * @param aDepanner
      */
     public Intervention(String       dateIntervention,
                         Distributeur distributeur,
-                        boolean      effectuee,
+                        Etats        etat,
                         boolean      aRemplir,
                         boolean      aDepanner)
     {
         Log.d(TAG,
               "Intervention() dateIntervention = " + dateIntervention +
-                " - nomdistributeur = " + distributeur.getNom() + " - effectuee = " + effectuee +
+                " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
                 " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
-        this.effectuee        = effectuee;
+        this.etat             = etat;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
     }
@@ -101,13 +112,10 @@ public class Intervention
     }
 
     /**
-     * @brief Méthode d'accés à effectuee.
-     * @return effectuee.
+     * @brief Méthode d'accés à l'état de l'intervention.
+     * @return etat.
      */
-    public boolean estEffectuee()
-    {
-        return this.effectuee;
-    }
+    public Etats getEtat() { return this.etat; }
 
     /**
      * @brief Méthode d'accés à aRemplir.
@@ -130,15 +138,6 @@ public class Intervention
     /**
      * Services
      */
-
-    /**
-     * @brief Méthode qui renvoie si l'intervention doit être réalisée
-     * @return boolean true si l'intervention doit être réalisée
-     */
-    public boolean estAIntervenir()
-    {
-        return !this.effectuee;
-    }
 
     /**
      * @brief Méthode qui renvoie la liste des bacs à remplir.
@@ -195,11 +194,11 @@ public class Intervention
 
     /**
      * @brief Méthode pour modifier l'état de l'intervention.
-     * @param estIntervenu
+     * @param nouvelEtat
      */
-    public void modifierEtatIntervention(boolean estIntervenu)
+    public void modifierEtatIntervention(Etats nouvelEtat)
     {
-        this.effectuee = estIntervenu;
+        this.etat = nouvelEtat;
     }
 
     /**
