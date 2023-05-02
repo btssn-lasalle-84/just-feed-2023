@@ -19,6 +19,11 @@
  * @brief Définit le titre de la boîte de dialogue
  */
 #define TITRE_INTERVENTION QString("Planifier une intervention")
+#define ZERO 0
+#define TRENTE 30
+#define SOIXANTE 60
+#define CENT 100
+
 
 class Distributeur;
 class Produit;
@@ -44,8 +49,10 @@ class Intervention : public QDialog
     QVector<QLabel*> labelsPourcentage; //!< conteneur de QLabel de produit
     QVector<QVector<QLabel*> > labelsDesPourcentage;
     QVBoxLayout*               layoutBacs; //!< positionnement des bacs dans la boîte de dialogue
-    QHBoxLayout*               layoutDistributeurs;
-
+    QHBoxLayout*               layoutDistributeurs; //!< positionnement des distributeurs et le contenu dans la boîte de dialogue
+    QHBoxLayout*               layoutBac; //!< layout qui contient le nom du bac et un checkBox
+    QVector<QCheckBox*> labelsCheckbox ; //!< vecteur de checkBox
+    QVector<QVector<QCheckBox*>> labelsDesCheckbox; //!< vecteur de vecteur de checkBox
     void initialiserBoiteDeDialogue();
     void instancierWidgets();
     void initialiserWidgets();

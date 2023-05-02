@@ -160,12 +160,15 @@ void Intervention::instancierWidgets()
         labelsBac.clear();
         labelsProduit.clear();
         labelsPourcentage.clear();
+        labelsCheckbox.clear();
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
+            labelsCheckbox.push_back(new QCheckBox(this));
             labelsBac.push_back(new QLabel(this));
             labelsProduit.push_back(new QLabel(this));
             labelsPourcentage.push_back(new QLabel(this));
         }
+        labelsDesCheckbox.push_back(labelsCheckbox);
         labelsDesBacs.push_back(labelsBac);
         labelsDesProduits.push_back(labelsProduit);
         labelsDesPourcentage.push_back(labelsPourcentage);
@@ -201,6 +204,7 @@ void Intervention::initialiserWidgets()
               QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) +
               " g ou Kg (à définir)");
             labelsDesPourcentage[i][j]->setAlignment(Qt::AlignCenter);
+            labelsDesCheckbox[i][j]->setCheckState(Qt::Unchecked);
         }
     }
 }
@@ -212,14 +216,20 @@ void Intervention::positionnerWidgets()
 {
     qDebug() << Q_FUNC_INFO;
     layoutDistributeurs = new QHBoxLayout;
+    QVector<QHBoxLayout*> layoutBac(6);
+
     QVector<QVBoxLayout*> layoutInfoDistributeurs(nomDistributeurs.size());
     for(int i = 0; i < distributeurs.size(); i++)
     {
+
         layoutInfoDistributeurs[i] = new QVBoxLayout();
         layoutInfoDistributeurs[i]->addWidget(nomDistributeurs[i]);
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            layoutInfoDistributeurs[i]->addWidget(labelsDesBacs[i][j]);
+            layoutBac[j] = new QHBoxLayout();
+            layoutBac[j]->addWidget(labelsDesBacs[i][j]);
+            layoutBac[j]->addWidget(labelsDesCheckbox[i][j]);
+            layoutInfoDistributeurs[i]->addLayout(layoutBac[j]);
             layoutInfoDistributeurs[i]->addWidget(labelsDesProduits[i][j]);
             layoutInfoDistributeurs[i]->addWidget(labelsDesPourcentage[i][j]);
         }
@@ -236,23 +246,26 @@ void Intervention::initialiserEvenements()
 
 }
 
+/**
+ * @brief Méthode qui initialise les couleurs des bacs en fonction des pourcentages
+ */
 void Intervention::initialiserEtatDistributeur()
 {
     for(int i = 0; i < distributeurs.size(); i++)
     {
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            if((distributeurs[i]->getPourcentageBac(j) >= 0) && (distributeurs[i]->getPourcentageBac(j) <= 30))
+            if((distributeurs[i]->getPourcentageBac(j) >= ZERO) && (distributeurs[i]->getPourcentageBac(j) <= TRENTE ))
             {
                 qDebug() << Q_FUNC_INFO << "fonction rouge "<< distributeurs[i]->getPourcentageBac(j) ;
                 labelsDesBacs[i][j]->setStyleSheet("color: #FF0000;");
             }
-            if((distributeurs[i]->getPourcentageBac(j) > 30) && (distributeurs[i]->getPourcentageBac(j) <= 60))
+            if((distributeurs[i]->getPourcentageBac(j) > TRENTE) && (distributeurs[i]->getPourcentageBac(j) <= SOIXANTE))
             {
                 qDebug() << Q_FUNC_INFO << "fonction orange "<< distributeurs[i]->getPourcentageBac(j) ;
                 labelsDesBacs[i][j]->setStyleSheet("color: #FFA500;");
             }
-            if((distributeurs[i]->getPourcentageBac(j) > 60) && (distributeurs[i]->getPourcentageBac(j) <= 100))
+            if((distributeurs[i]->getPourcentageBac(j) > SOIXANTE) && (distributeurs[i]->getPourcentageBac(j) <= CENT))
             {
                 qDebug() << Q_FUNC_INFO << "fonction vert "<< distributeurs[i]->getPourcentageBac(j) ;
                 labelsDesBacs[i][j]->setStyleSheet("color: #023518;");
