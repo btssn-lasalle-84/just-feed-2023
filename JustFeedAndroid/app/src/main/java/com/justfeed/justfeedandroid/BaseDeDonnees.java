@@ -813,6 +813,7 @@ public class BaseDeDonnees
                             {
                                 for(Distributeur distributeur: listeDistributeurs)
                                 {
+                                    Intervention.Etats etat = Intervention.Etats.A_FAIRE;
                                     Log.d(TAG,
                                           "recupererInterventions() idDistributeur = " +
                                             resultatRequete.getInt("idDistributeur"));
@@ -823,7 +824,7 @@ public class BaseDeDonnees
                                               "recupererInterventions() distributeur = " +
                                                 distributeur.getNom() + "dateIntervention = " +
                                                 resultatRequete.getString("dateIntervention") +
-                                                " - effectuée = " +
+                                                " - état = " +
                                                 (resultatRequete.getInt("effectuee") == 1) +
                                                 " - aRemplir = " +
                                                 (resultatRequete.getInt("aRemplir") == 1) +
@@ -832,7 +833,7 @@ public class BaseDeDonnees
                                         listeInterventions.add(new Intervention(
                                           resultatRequete.getString("dateIntervention"),
                                           distributeur,
-                                          (resultatRequete.getInt("effectuee") == 1),
+                                          etat.valueOf(resultatRequete.getString("etat")),
                                           (resultatRequete.getInt("aRemplir") == 1),
                                           (resultatRequete.getInt("aDepanner") == 1)));
                                     }
@@ -871,9 +872,10 @@ public class BaseDeDonnees
         }
         else
         {
+            Intervention.Etats etat = Intervention.Etats.A_FAIRE;
             listeInterventions.clear();
             listeInterventions.add(
-              new Intervention("2023-06-01", listeDistributeurs.get(0), true, true, false));
+              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;

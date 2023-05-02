@@ -33,4 +33,4 @@ INSERT INTO `Bac` (`idDistributeur`, `poidsActuel`, `poidsTotal`, `hygrometrie`,
 INSERT INTO Operateur(nom,prenom,identifiant,email) VALUES('DUVAL','Robert','rduval','rduval@justfeed.fr');
 
 INSERT INTO `Intervention` (`idIntervention`, `idOperateur`, `idDistributeur`, `dateIntervention`) VALUES
-(1, 1, 1, '2023-06-01');
+(1, 1, "A_FAIRE", '2023-06-01');

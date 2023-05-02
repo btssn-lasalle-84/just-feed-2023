@@ -136,7 +136,7 @@ CREATE TABLE `Intervention` (
   `dateIntervention` date NOT NULL,
   `aRemplir` int DEFAULT '0',
   `aDepanner` int DEFAULT '0',
-  `effectuee` int DEFAULT '0'
+  `etat` VARCHAR(8)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
