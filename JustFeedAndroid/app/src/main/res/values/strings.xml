@@ -4,6 +4,6 @@
     <string-array name="menuEtats">
         <item>A faire</item>
         <item>En cours</item>
-        <item>Validé</item>
+        <item>Validée</item>
     </string-array>
 </resources>

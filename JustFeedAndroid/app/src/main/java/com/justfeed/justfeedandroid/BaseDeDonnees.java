@@ -825,7 +825,7 @@ public class BaseDeDonnees
                                                 distributeur.getNom() + "dateIntervention = " +
                                                 resultatRequete.getString("dateIntervention") +
                                                 " - état = " +
-                                                (resultatRequete.getInt("effectuee") == 1) +
+                                                etat.valueOf(resultatRequete.getString("etat")) +
                                                 " - aRemplir = " +
                                                 (resultatRequete.getInt("aRemplir") == 1) +
                                                 " - aDepanner = " +

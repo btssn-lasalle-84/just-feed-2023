@@ -24,7 +24,7 @@ import java.util.Locale;
 public class Intervention
 {
     /**
-     * enum
+     * @enum Etats
      * @brief Les différents états d'une intervention.
      */
     public enum Etats
@@ -58,7 +58,7 @@ public class Intervention
      */
     private String       dateIntervention; //!< Date de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
-    private Etats      etat;               //!< Les états d'une intervention.
+    private Etats        etat;             //!< Les états d'une intervention.
     private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
     private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
@@ -128,7 +128,10 @@ public class Intervention
      * @brief Méthode d'accés à l'état de l'intervention.
      * @return etat.
      */
-    public Etats getEtat() { return this.etat; }
+    public Etats getEtat()
+    {
+        return this.etat;
+    }
 
     /**
      * @brief Méthode d'accés à aRemplir.
@@ -167,7 +170,8 @@ public class Intervention
             {
                 typeProduit       = bac.getTypeProduit().getNom();
                 listeBacsARemplir = listeBacsARemplir.concat(
-                  "   " + typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
+                  "   " + typeProduit + " : " +
+                  String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
             }
         }
 

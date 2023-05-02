@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import static com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE;
+
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Spinner;
@@ -57,7 +59,9 @@ public class VueIntervention extends ViewHolder
 
     public void afficherInterventions(Intervention intervention)
     {
-        Intervention.Etats etat = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
+        Intervention.Etats etat = A_FAIRE;
+        if(menuEtats != null)
+            etat = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
         if(etat == intervention.getEtat())
         {
             switch (etat)

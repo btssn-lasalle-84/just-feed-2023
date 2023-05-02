@@ -42,7 +42,7 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * Attributs
      */
-    private List<Intervention> listeInterventions; //!< Liste des interventions à afficher
+    private List<Intervention>   listeInterventions;    //!< Liste des interventions à afficher
     private Handler              handler;               //!< Le handler utilisé par l'activité
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
@@ -130,10 +130,11 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
+        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
         this.menuEtats.setAdapter(
-                new ArrayAdapter<Intervention.Etats>(
-                        this, android.R.layout.simple_spinner_item, Intervention.Etats.values())
-                );
+          new ArrayAdapter<Intervention.Etats>(this,
+                                               android.R.layout.simple_spinner_item,
+                                               Intervention.Etats.values()));
     }
 
     /**
@@ -160,8 +161,8 @@ public class ActiviteInterventions extends AppCompatActivity
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                //Log.d(TAG, "[Handler] id message = " + message.what);
-                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] id message = " + message.what);
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 if(message.what == BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS)
                 {
