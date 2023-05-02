@@ -14,6 +14,8 @@
 #include <QtWidgets>
 #include <QString>
 #include <QVector>
+#include <QtSql/QSqlDatabase>
+#include <QtSql>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -68,9 +70,10 @@ class IHMJustFeed : public QWidget
 
     Q_OBJECT
   private:
-    QVector<Distributeur*> distributeurs;                 //!< les distributeur
-    QVector<Produit*>      produits;                      //!< les produits
-    int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    QVector<Distributeur*> distributeurs; //!< les distributeur
+    QVector<Produit*>      produits;      //!< les produits
+
+    int numeroDistributeurSelectionne; //!< le distributeur sélectionné
     ConfigurationDistributeur*
                 configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
     QStringList nomColonnes;               //!< la liste des noms de colonne
