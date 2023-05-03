@@ -328,31 +328,32 @@ void IHMJustFeed::initialiserEvenements()
 void IHMJustFeed::initialiserDistributeurs()
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("localhost");    // Mettez ici votre nom d'hôte
-    db.setDatabaseName("justfeed"); // Mettez ici le nom de votre base de données
-    db.setUserName("justfeed");     // Mettez ici votre nom d'utilisateur
-    db.setPassword("justfeed");     // Mettez ici votre mot de passe
+    db.setHostName("www.db4free.net");
+    db.setDatabaseName("justfeed");
+    db.setUserName("justfeed");
+    db.setPassword("justfeed");
+
+    qDebug() << Q_FUNC_INFO << "initialiserDistributeurs()";
 
     if(!db.open())
     {
         qDebug() << "Erreur de connexion à la base de données :" << db.lastError().text();
         return;
     }
-
-    // Récupération des données
-    QVector<Distributeur> distributeurs;
-    QSqlQuery             query("SELECT * FROM distributeurs");
-    while(query.next())
+    else
     {
-        Distributeur d;
-        d.setDeviceID(QString::number(query.value(0).toInt()));
-        d.setNom(query.value(1).toString());
-        d.setAdresse(query.value(2).toString());
-        distributeurs.push_back(d);
+        qDebug() << "Vous avez réussi a vous connecter";
+        return;
     }
 
-    // Fermeture de la connexion
-    db.close();
+    QSqlQuery query("SELECT * FROM distributeurs");
+
+    distributeur.setNom(query.value(1).toString());
+    distributeur.setAdresse(query.value(2).toString());
+    distributeur.setVille(query.value(3).toString());
+    distributeur.setCodePostal(query.value(4).toString());
+
+    // db.close();
 
     /*distributeurs.push_back(new Distributeur("distributeur-1-sim",
                                                { "44.11161", "4.84856", "0" },
@@ -430,21 +431,21 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(soja);
     produits.push_back(basilic);
 
-    distributeurs[0].ajouterBac(Bac(pruneaux, 0, 0.));
-    distributeurs[0].ajouterBac(Bac(abricot, 0, 0.));
-    distributeurs[0].ajouterBac(Bac(cranberries, 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0].getNom() << "NbBacs"
-             << distributeurs[0].getNbBacs();
-    distributeurs[1].ajouterBac(Bac(banane, 0, 0.));
-    distributeurs[1].ajouterBac(Bac(raisin, 0, 0.));
-    distributeurs[1].ajouterBac(Bac(fruitsSec, 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1].getNom() << "NbBacs"
-             << distributeurs[1].getNbBacs();
-    distributeurs[2].ajouterBac(Bac(cacahuete, 0, 0.));
-    distributeurs[2].ajouterBac(Bac(soja, 0, 0.));
-    distributeurs[2].ajouterBac(Bac(basilic, 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2].getNom() << "NbBacs"
-             << distributeurs[2].getNbBacs();
+    /*  distributeurs[0].ajouterBac(Bac(pruneaux, 0, 0.));
+      distributeurs[0].ajouterBac(Bac(abricot, 0, 0.));
+      distributeurs[0].ajouterBac(Bac(cranberries, 0, 0.));
+      qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0].getNom() << "NbBacs"
+               << distributeurs[0].getNbBacs();
+      distributeurs[1].ajouterBac(Bac(banane, 0, 0.));
+      distributeurs[1].ajouterBac(Bac(raisin, 0, 0.));
+      distributeurs[1].ajouterBac(Bac(fruitsSec, 0, 0.));
+      qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1].getNom() << "NbBacs"
+               << distributeurs[1].getNbBacs();
+      distributeurs[2].ajouterBac(Bac(cacahuete, 0, 0.));
+      distributeurs[2].ajouterBac(Bac(soja, 0, 0.));
+      distributeurs[2].ajouterBac(Bac(basilic, 0, 0.));
+      qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2].getNom() << "NbBacs"
+               << distributeurs[2].getNbBacs();*/
 
     numeroDistributeurSelectionne = 0; // pour les tests
 }
