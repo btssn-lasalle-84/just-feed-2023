@@ -23,7 +23,7 @@ struct Localisation
 {
     QString latitude;
     QString longitude;
-    QString atitude;
+    QString altitude;
 };
 
 /**
@@ -35,14 +35,14 @@ class Distributeur
 {
   private:
     QString       deviceID;          //!< identifiant du distributeur
-    Localisation  position;          //!< géolocalisation du distributeur
     QVector<Bac*> bacs;              //!< les bacs du distributeur
     QString       nom;               //!< nom du distributeur
     QString       adresse;           //!< adresse du distributeur
     QString       codePostal;        //!< code postal du distributeur
     QString       ville;             //!< ville du distributeur
-    QDate         dateMiseEnService; //!< date de mise en service du distributeur
     QString       description;       //!< description du distributeur
+    QDate         dateMiseEnService; //!< date de mise en service du distributeur
+    Localisation  position;          //!< géolocalisation du distributeur
     float         hygrometrie;       //!< hygrometrie de l'interieur du distributeur
     bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
@@ -50,13 +50,13 @@ class Distributeur
   public:
     Distributeur();
     Distributeur(QString      deviceID,
-                 Localisation position,
                  QString      nom,
                  QString      adresse,
                  QString      codePostal,
                  QString      ville,
                  QString      description,
-                 QDate        dateMiseEnService);
+                 QDate        dateMiseEnService,
+                 Localisation position);
     ~Distributeur();
 
     // Accesseurs

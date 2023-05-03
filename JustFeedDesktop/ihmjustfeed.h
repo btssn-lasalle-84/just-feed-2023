@@ -14,6 +14,7 @@
 #include <QtWidgets>
 #include <QString>
 #include <QVector>
+#include <QWebView>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -85,14 +86,17 @@ class IHMJustFeed : public QWidget
     QPushButton*    boutonIntervenir;
     QPushButton*    boutonConfigurer;
     QPushButton*    boutonValider;
+    QPushButton*    boutonAfficherCarte;
     QComboBox*      listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*    layoutFenetreDistributeur;
+    QProgressBar*   volumeRestant;
     QLabel*         nomDistributeur;
     QLabel*         adresseDistributeur;
-    QLabel*         codePostalDistributeur;
     QLabel*         villeDistributeur;
     QLabel*         descriptionDistributeur;
     QLabel*         miseEnServiceDistributeur;
     QLabel*         positionDistributeur;
+    QWebView*       vueCarte;
 
     void initialiserGUI();
     void instancierWidgets();
@@ -107,6 +111,8 @@ class IHMJustFeed : public QWidget
     void afficherDistributeur(Distributeur* distributeur);
     void effacerTableau(int ligne, int colonne);
     void effacerTableDistributeurs();
+    void creerEtatDistributeur(Distributeur* distributeur);
+    void effacerEtatDistributeur();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
@@ -125,6 +131,8 @@ class IHMJustFeed : public QWidget
     void configurerDistributeur();
     void selectionnerDistributeur(int numeroDistributeur);
     void selectionnerDistributeur(int ligne, int colonne);
+    void selectionnerDistributeur(QTableWidgetItem* item);
+    void afficherCarte();
 };
 
 #endif // IHMJUSTFEED_H

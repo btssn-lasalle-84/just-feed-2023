@@ -18,7 +18,7 @@ class Bac
   private:
     Produit*     produit;                //!< produit que contient le bac
     unsigned int poidsActuel;            //!< à définir
-    double       pourcentageRemplissage; //!< pourcentage de remplissage du bu bac
+    double       pourcentageRemplissage; //!< pourcentage de remplissage du bac
 
   public:
     Bac();
@@ -31,6 +31,7 @@ class Bac
     QString      getNomProduit() const;
     double       getPrixProduit() const;
     unsigned int getPoidsActuel() const;
+    double       getPourcentageRemplissage() const;
 
     // Mutateurs
     void setProduit(Produit* produit);

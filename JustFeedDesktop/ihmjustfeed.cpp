@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file        ihmjustfeed.cpp
  * @brief       Définition de la classe IHMJustFeed.
  * @details     La classe IHMJustFeed \c Cette classe permet de définir la GUI
@@ -154,6 +154,28 @@ void IHMJustFeed::selectionnerDistributeur(int ligne, int colonne)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+/**
+ * @brief méthode qui sélectionne le distributeur pour l'affichage
+ */
+void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
+{
+    QTableWidgetItem* nomDistributeur;
+    nomDistributeur = tableWidgetDistributeurs->item(item->row(), COLONNE_DISTRIBUTEUR_NOM);
+    qDebug() << Q_FUNC_INFO << "distributeur"
+             << getDistributeur(nomDistributeur->data(0).toString())->getNom();
+    afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
+}
+
+void IHMJustFeed::afficherCarte()
+{
+    qDebug() << Q_FUNC_INFO;
+    vueCarte->setVisible(!vueCarte->isVisible());
+    if(vueCarte->isVisible())
+        boutonAfficherCarte->setText("Masquer la carte");
+    else
+        boutonAfficherCarte->setText("Afficher la carte");
+}
+
 // Méthodes privées
 
 /**
@@ -184,18 +206,21 @@ void IHMJustFeed::instancierWidgets()
     fenetreDistributeur = new QWidget(this);
 
     // Les boutons
-    boutonIntervenir = new QPushButton("Intervenir", this);
-    boutonConfigurer = new QPushButton("Configurer", this);
-    boutonValider    = new QPushButton("Valider", this);
+    boutonIntervenir    = new QPushButton("Intervenir", this);
+    boutonConfigurer    = new QPushButton("Configurer", this);
+    boutonValider       = new QPushButton("Valider", this);
+    boutonAfficherCarte = new QPushButton("Afficher la carte", this);
 
     // Les labels
     nomDistributeur           = new QLabel(this);
     adresseDistributeur       = new QLabel(this);
-    codePostalDistributeur    = new QLabel(this);
     villeDistributeur         = new QLabel(this);
     descriptionDistributeur   = new QLabel(this);
     miseEnServiceDistributeur = new QLabel(this);
     positionDistributeur      = new QLabel(this);
+
+    // La vue pour la carte
+    vueCarte = new QWebView(this);
 
     // Les listes
     listeDistributeurs = new QComboBox(this);
@@ -228,7 +253,7 @@ void IHMJustFeed::positionnerWidgets()
     // Les layouts
     QVBoxLayout* layoutPrincipal           = new QVBoxLayout();
     QVBoxLayout* layoutFenetrePrincipale   = new QVBoxLayout();
-    QVBoxLayout* layoutFenetreDistributeur = new QVBoxLayout();
+    layoutFenetreDistributeur              = new QVBoxLayout();
     QHBoxLayout* layoutF1Table             = new QHBoxLayout();
     QHBoxLayout* layoutBoutonsAccueil      = new QHBoxLayout();
     QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
@@ -247,14 +272,7 @@ void IHMJustFeed::positionnerWidgets()
     fenetreAccueil->setLayout(layoutFenetrePrincipale);
 
     // La fenêtre distributeur
-    layoutFenetreDistributeur->addWidget(nomDistributeur);
-    layoutFenetreDistributeur->addWidget(adresseDistributeur);
-    layoutFenetreDistributeur->addWidget(codePostalDistributeur);
-    layoutFenetreDistributeur->addWidget(villeDistributeur);
-    layoutFenetreDistributeur->addWidget(descriptionDistributeur);
-    layoutFenetreDistributeur->addWidget(miseEnServiceDistributeur);
-    layoutFenetreDistributeur->addWidget(positionDistributeur);
-    layoutBoutonsDistributeur->addStretch();
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
     layoutBoutonsDistributeur->addWidget(boutonValider);
     layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
     fenetreDistributeur->setLayout(layoutFenetreDistributeur);
@@ -268,6 +286,7 @@ void IHMJustFeed::positionnerWidgets()
 /**
  * @brief méthode qui initialise le QTableWidget
  */
+
 void IHMJustFeed::initialiseTable()
 {
     tableWidgetDistributeurs = new QTableWidget(this);
@@ -304,22 +323,26 @@ void IHMJustFeed::initialiseTable()
     tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tableWidgetDistributeurs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
-
 /**
  * @brief méthode qui initialise les connexion signal/slot
  */
 void IHMJustFeed::initialiserEvenements()
 {
-    connect(tableWidgetDistributeurs,
+    /*connect(tableWidgetDistributeurs,
             SIGNAL(cellClicked(int, int)),
             this,
-            SLOT(selectionnerDistributeur(int, int)));
+            SLOT(selectionnerDistributeur(int, int)));*/
+    connect(tableWidgetDistributeurs,
+            SIGNAL(itemPressed(QTableWidgetItem*)),
+            this,
+            SLOT(selectionnerDistributeur(QTableWidgetItem*)));
     connect(listeDistributeurs,
             SIGNAL(currentIndexChanged(int)),
             this,
             SLOT(selectionnerDistributeur(int)));
     connect(boutonConfigurer, SIGNAL(clicked()), this, SLOT(configurerDistributeur()));
     connect(boutonValider, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
+    connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
 }
 
 /**
@@ -331,29 +354,29 @@ void IHMJustFeed::initialiserDistributeurs()
      * @todo Récupérer les données depuis la base de données
      */
     distributeurs.push_back(new Distributeur("distributeur-1-sim",
-                                             { "44.11161", "4.84856", "0" },
                                              "Grand Frais",
-                                             "Distributeur de fruits secs",
                                              "Zone du Coudoulet Rond point du Péage Sud",
                                              "84100",
                                              "Orange",
-                                             QDate::fromString("2022-01-08", "yyyy-MM-dd")));
-    distributeurs.push_back(new Distributeur("distributeur-2-sim",
-                                             { "43.92844", "4.79247", "0" },
-                                             "Carrefour",
                                              "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-08", "yyyy-MM-dd"),
+                                             { "44.11161", "4.84856", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+                                             "Carrefour",
                                              "390 Rue Jean Marie Tjibaou",
                                              "84000",
                                              "Avignon",
-                                             QDate::fromString("2022-03-09", "yyyy-MM-dd")));
-    distributeurs.push_back(new Distributeur("distributeur-3",
-                                             { "43.90252", "4.75280", "0" },
-                                             "Cosy Primeurs",
                                              "Distributeur de fruits secs",
+                                             QDate::fromString("2022-03-09", "yyyy-MM-dd"),
+                                             { "43.92844", "4.79247", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-3",
+                                             "Cosy Primeurs",
                                              "292 Route de Boulbon",
                                              "13570",
                                              "Barbentane",
-                                             QDate::fromString("2022-01-10", "yyyy-MM-dd")));
+                                             "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-10", "yyyy-MM-dd"),
+                                             { "43.90252", "4.75280", "0" }));
 
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
@@ -406,16 +429,19 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(soja);
     produits.push_back(basilic);
 
+    distributeurs[0]->setHygrometrie(25);
     distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
     distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
+    distributeurs[1]->setHygrometrie(18);
     distributeurs[1]->ajouterBac(Bac(banane, 0, 0.));
     distributeurs[1]->ajouterBac(Bac(raisin, 0, 0.));
     distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
              << distributeurs[1]->getNbBacs();
+    distributeurs[2]->setHygrometrie(21);
     distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
     distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
@@ -507,17 +533,10 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
  */
 void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 {
-    /**
-     * @todo Afficher un distributeur
-     */
-    // pour les tests
-    nomDistributeur->setText(distributeur->getNom());
-    adresseDistributeur->setText(distributeur->getAdresse());
-    codePostalDistributeur->setText(distributeur->getCodePostal());
-    villeDistributeur->setText(distributeur->getVille());
-    descriptionDistributeur->setText(distributeur->getDescription());
-    miseEnServiceDistributeur->setText("");
-    positionDistributeur->setText("");
+    qDebug() << Q_FUNC_INFO << "nom" << distributeur->getNom();
+
+    effacerEtatDistributeur();
+    creerEtatDistributeur(distributeur);
     afficherFenetreDistributeur();
 }
 
@@ -542,11 +561,157 @@ void IHMJustFeed::effacerTableau(int ligne, int colonne)
  * @brief méthode qui efface le QTableWidget
  * @fn IHMJustFeed::effacerTableDistributeurs
  */
-
 void IHMJustFeed::effacerTableDistributeurs()
 {
     qDebug() << Q_FUNC_INFO;
 
     effacerTableau(0, 0);
     nbLignesDistributeurs = 0;
+}
+
+/**
+ * @brief méthode qui crée les widgets de la fenêtre d'affichage d'un distributeur
+ * @fn IHMJustFeed::creerEtatDistributeur
+ * @param distributeur le distributeur à afficher
+ */
+void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
+{
+    // La fenêtre distributeur
+    QHBoxLayout* layoutDistributeur             = new QHBoxLayout();
+    QVBoxLayout* layoutInformationsDistributeur = new QVBoxLayout();
+    QVBoxLayout* layoutCarteDistributeur        = new QVBoxLayout();
+    QHBoxLayout* layoutBoutonsDistributeur      = new QHBoxLayout();
+    QGridLayout* layoutBacs                     = new QGridLayout();
+
+    QFont texte;
+    // texte.setPointSize(TAILLE_POLICE);
+    texte.setBold(true);
+    nomDistributeur->setFont(texte);
+    layoutInformationsDistributeur->addWidget(nomDistributeur);
+    layoutInformationsDistributeur->addWidget(descriptionDistributeur);
+    layoutInformationsDistributeur->addWidget(adresseDistributeur);
+    layoutInformationsDistributeur->addWidget(villeDistributeur);
+    layoutInformationsDistributeur->addWidget(miseEnServiceDistributeur);
+    layoutInformationsDistributeur->addWidget(positionDistributeur);
+
+    layoutCarteDistributeur->addWidget(vueCarte);
+
+    layoutBoutonsDistributeur->addStretch();
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
+    layoutBoutonsDistributeur->addWidget(boutonValider);
+
+    // les informations d'un distributeur
+    nomDistributeur->setText(distributeur->getNom());
+    adresseDistributeur->setText(distributeur->getAdresse());
+    villeDistributeur->setText(distributeur->getCodePostal() + QString(" ") +
+                               distributeur->getVille());
+    descriptionDistributeur->setText(distributeur->getDescription());
+    QDate   dateMiseService = distributeur->getDateMiseService();
+    QString miseEnService =
+      QString("Date de mise en service : %1").arg(dateMiseService.toString("dd/MM/yyyy"));
+    QString localisation = QString("Localisation : %1°, %2°")
+                             .arg(distributeur->getPosition().latitude)
+                             .arg(distributeur->getPosition().longitude);
+    positionDistributeur->setText(localisation);
+    miseEnServiceDistributeur->setText(miseEnService);
+
+    QString delimiteur = "%2C";
+    QString url =
+      "https://www.openstreetmap.org/export/embed.html?bbox=" +
+      distributeur->getPosition().longitude + delimiteur + distributeur->getPosition().latitude +
+      QString(",") + distributeur->getPosition().longitude + delimiteur +
+      distributeur->getPosition().latitude + QString("&marker=") +
+      distributeur->getPosition().latitude + QString(",") + distributeur->getPosition().longitude;
+    // vueCarte->load(QUrl(url));
+    vueCarte->setVisible(false);
+    boutonAfficherCarte->setText("Afficher la carte");
+    vueCarte->load(QUrl("https://www.google.fr/maps/@" + distributeur->getPosition().latitude +
+                        "," + distributeur->getPosition().longitude + ",15z"));
+    /**
+     * @see https://www.google.com/maps/search/?api=1&query=43.90252,4.75280
+     * @see https://maps.google.com/maps?&z=15&q=43.90252,4.75280&ll=43.90252,4.75280
+     * @see https://www.google.com/maps/place/43.90252+4.75280/@43.90252,4.75280,15z
+     * @see
+     * https://www.google.com/maps/@?api=1&map_action=map&basemap=satellite&center=43.90252,4.75280&zoom=15
+     * @see
+     * https://www.google.com/maps/dir/?api=1&origin=Paris%2CFrance&destination=Cherbourg%2CFrance&travelmode=driving
+     */
+
+    int nbBacs = distributeur->getNbBacs();
+
+    for(int i = 0; i < nbBacs; i++)
+    {
+        QLabel* nomProduit = new QLabel(distributeur->getBac(i)->getNomProduit(), this);
+        nomProduit->setAlignment(Qt::AlignCenter);
+        layoutBacs->addWidget(nomProduit, 1, i, Qt::AlignCenter);
+
+        QProgressBar* volumeRestant = new QProgressBar(this);
+        volumeRestant->setOrientation(Qt::Vertical);
+        volumeRestant->setRange(0, 100);
+        volumeRestant->setValue(distributeur->getBac(i)->getPourcentageRemplissage());
+        // affichage du remplissage : 35% de l'écran
+        volumeRestant->setFixedSize(volumeRestant->width(),
+                                    QGuiApplication::primaryScreen()->availableGeometry().height() *
+                                      0.35);
+        volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
+
+        /**
+         * @todo Définir des contantes pour les seuils de remplissage
+         */
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
+        }
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
+        }
+        else
+        {
+            volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: green; }");
+        }
+
+        layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
+
+        QLabel* hygrometrie = new QLabel(this);
+        hygrometrie->setText(QString("Hygrométrie : %1 %").arg(distributeur->getHygrometrie()));
+        layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
+    }
+
+    // positionnement
+    layoutDistributeur->addLayout(layoutInformationsDistributeur);
+    layoutDistributeur->addLayout(layoutCarteDistributeur);
+    layoutFenetreDistributeur->addLayout(layoutDistributeur);
+    layoutFenetreDistributeur->addLayout(layoutBacs);
+    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
+    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
+}
+
+/**
+ * @brief méthode qui efface les widgets de la fenêtre d'affichage d'un distributeur
+ * @fn IHMJustFeed::effacerEtatDistributeur
+ */
+void IHMJustFeed::effacerEtatDistributeur()
+{
+    qDebug() << Q_FUNC_INFO;
+
+    QLayoutItem* item;
+    while((item = layoutFenetreDistributeur->takeAt(0)) != nullptr)
+    {
+        QGridLayout* layoutBacs = dynamic_cast<QGridLayout*>(item->layout());
+        if(layoutBacs != nullptr)
+        {
+            QLayoutItem* itemBac;
+            while((itemBac = layoutBacs->takeAt(0)) != nullptr)
+            {
+                QWidget* widget = itemBac->widget();
+                if(widget != nullptr)
+                {
+                    delete widget;
+                }
+                delete itemBac;
+            }
+        }
+        delete item;
+    }
 }

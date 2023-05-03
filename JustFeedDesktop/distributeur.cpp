@@ -16,8 +16,9 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
-    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0), aIntervenir(false)
+    deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""), description(""),
+    dateMiseEnService(QDate::currentDate()), position{ "", "", "0" }, hygrometrie(0),
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -26,23 +27,23 @@ Distributeur::Distributeur() :
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
 Distributeur::Distributeur(QString      deviceID,
-                           Localisation position,
                            QString      nom,
                            QString      adresse,
                            QString      codePostal,
                            QString      ville,
                            QString      description,
-                           QDate        dateMiseEnService) :
+                           QDate        dateMiseEnService,
+                           Localisation position) :
     deviceID(deviceID),
-    position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
-    aIntervenir(false)
+    bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    description(description), dateMiseEnService(dateMiseEnService), position(position),
+    hygrometrie(0), aIntervenir(false)
 {
-    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
-             << "longitude" << position.longitude << "nom" << nom << "adresse"
+    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
-             << "aIntervenir" << aIntervenir;
+             << "description" << description << dateMiseEnService << "latitude" << position.latitude
+             << "longitude" << position.longitude << "hydrometrie" << hygrometrie << "aIntervenir"
+             << aIntervenir;
 }
 
 /**
