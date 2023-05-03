@@ -133,6 +133,16 @@ void Intervention::intervenir(bool aIntervenir)
     this->effectuee = !aIntervenir;
 }
 
+void Intervention::selectionnerBac()
+{
+    /**
+     * @todo Gérer tous les signaux des checkbox
+     */
+    QCheckBox* selectionBac = qobject_cast<QCheckBox*>(sender());
+    qDebug() << Q_FUNC_INFO << "checkbox bac" << selectionBac->objectName() << "etat"
+             << selectionBac->checkState();
+}
+
 // Méthodes privées
 
 /**
@@ -163,7 +173,9 @@ void Intervention::instancierWidgets()
         labelsCheckbox.clear();
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            labelsCheckbox.push_back(new QCheckBox(this));
+            QCheckBox* checkbox = new QCheckBox(this);
+            checkbox->setObjectName(QString::number(i) + "-" + QString::number(j));
+            labelsCheckbox.push_back(checkbox);
             labelsBac.push_back(new QLabel(this));
             labelsProduit.push_back(new QLabel(this));
             labelsPourcentage.push_back(new QLabel(this));
@@ -194,7 +206,7 @@ void Intervention::initialiserWidgets()
                      << "poidsTotal" << distributeurs[i]->getBac(j)->getPoidsTotal()
                      << "pourcentageRemplissage"
                      << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
-            labelsDesBacs[i][j]->setText("Numéro bac : " + QString::number(j + 1));
+            labelsDesBacs[i][j]->setText("Bac n°" + QString::number(j + 1));
             labelsDesBacs[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesProduits[i][j]->setText("Produit du bac : " +
                                              distributeurs[i]->getNomProduitBac(j));
@@ -221,14 +233,15 @@ void Intervention::positionnerWidgets()
     QVector<QVBoxLayout*> layoutInfoDistributeurs(nomDistributeurs.size());
     for(int i = 0; i < distributeurs.size(); i++)
     {
-
         layoutInfoDistributeurs[i] = new QVBoxLayout();
         layoutInfoDistributeurs[i]->addWidget(nomDistributeurs[i]);
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
             layoutBac[j] = new QHBoxLayout();
+            layoutBac[j]->addStretch();
             layoutBac[j]->addWidget(labelsDesBacs[i][j]);
             layoutBac[j]->addWidget(labelsDesCheckbox[i][j]);
+            layoutBac[j]->addStretch();
             layoutInfoDistributeurs[i]->addLayout(layoutBac[j]);
             layoutInfoDistributeurs[i]->addWidget(labelsDesProduits[i][j]);
             layoutInfoDistributeurs[i]->addWidget(labelsDesPourcentage[i][j]);
@@ -243,7 +256,13 @@ void Intervention::positionnerWidgets()
  */
 void Intervention::initialiserEvenements()
 {
-
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
+        {
+            connect(labelsDesCheckbox[i][j], SIGNAL(clicked(bool)), this, SLOT(selectionnerBac()));
+        }
+    }
 }
 
 /**
@@ -255,19 +274,25 @@ void Intervention::initialiserEtatDistributeur()
     {
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            if((distributeurs[i]->getPourcentageBac(j) >= ZERO) && (distributeurs[i]->getPourcentageBac(j) <= TRENTE ))
+            if((distributeurs[i]->getPourcentageBac(j) >= ZERO) &&
+               (distributeurs[i]->getPourcentageBac(j) <= TRENTE))
             {
-                qDebug() << Q_FUNC_INFO << "fonction rouge "<< distributeurs[i]->getPourcentageBac(j) ;
+                qDebug() << Q_FUNC_INFO << "fonction rouge "
+                         << distributeurs[i]->getPourcentageBac(j);
                 labelsDesBacs[i][j]->setStyleSheet("color: #FF0000;");
             }
-            if((distributeurs[i]->getPourcentageBac(j) > TRENTE) && (distributeurs[i]->getPourcentageBac(j) <= SOIXANTE))
+            if((distributeurs[i]->getPourcentageBac(j) > TRENTE) &&
+               (distributeurs[i]->getPourcentageBac(j) <= SOIXANTE))
             {
-                qDebug() << Q_FUNC_INFO << "fonction orange "<< distributeurs[i]->getPourcentageBac(j) ;
+                qDebug() << Q_FUNC_INFO << "fonction orange "
+                         << distributeurs[i]->getPourcentageBac(j);
                 labelsDesBacs[i][j]->setStyleSheet("color: #FFA500;");
             }
-            if((distributeurs[i]->getPourcentageBac(j) > SOIXANTE) && (distributeurs[i]->getPourcentageBac(j) <= CENT))
+            if((distributeurs[i]->getPourcentageBac(j) > SOIXANTE) &&
+               (distributeurs[i]->getPourcentageBac(j) <= CENT))
             {
-                qDebug() << Q_FUNC_INFO << "fonction vert "<< distributeurs[i]->getPourcentageBac(j) ;
+                qDebug() << Q_FUNC_INFO << "fonction vert "
+                         << distributeurs[i]->getPourcentageBac(j);
                 labelsDesBacs[i][j]->setStyleSheet("color: #023518;");
             }
         }
