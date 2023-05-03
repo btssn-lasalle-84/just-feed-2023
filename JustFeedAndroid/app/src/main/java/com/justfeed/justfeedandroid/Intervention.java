@@ -33,17 +33,17 @@ public class Intervention
         VALIDE("Validé"),
         A_FAIRE("A faire");
 
-        private String nomsMenu;
+        private String nomMenu;
 
-        private Etats(String nomsMenu)
+        private Etats(String nomMenu)
         {
-            this.nomsMenu = nomsMenu;
+            this.nomMenu = nomMenu;
         }
 
         @Override
         public String toString()
         {
-            return nomsMenu;
+            return nomMenu;
         }
     }
 

@@ -1,14 +1,14 @@
 class Intervention
 !!!142890.java!!!	Intervention()
         this.distributeur = null;
-!!!143018.java!!!	Intervention(in dateIntervention : String, inout distributeur : Distributeur, inout effectuee : boolean, inout aRemplir : boolean, inout aDepanner : boolean)
+!!!143018.java!!!	Intervention(in dateIntervention : String, inout distributeur : Distributeur, inout etat : Intervention::Etats, inout aRemplir : boolean, inout aDepanner : boolean)
         Log.d(TAG,
               "Intervention() dateIntervention = " + dateIntervention +
-                " - nomdistributeur = " + distributeur.getNom() + " - effectuee = " + effectuee +
+                " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
                 " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
-        this.effectuee        = effectuee;
+        this.etat             = etat;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
 !!!143146.java!!!	getDateIntervention() : String
@@ -17,14 +17,12 @@ class Intervention
         return this.distributeur.getIdentifiant();
 !!!143402.java!!!	getNomDistribteur() : String
         return this.distributeur.getNom();
-!!!143530.java!!!	estEffectuee() : boolean
-        return this.effectuee;
+!!!154154.java!!!	getEtat() : Intervention::Etats
+        return this.etat;
 !!!143658.java!!!	estARemplir() : boolean
         return this.aRemplir;
 !!!143786.java!!!	estADepanner() : boolean
         return this.aDepanner;
-!!!143914.java!!!	estAIntervenir() : boolean
-        return !this.effectuee;
 !!!144042.java!!!	recupererBacsARemplir() : String
         String listeBacsARemplir = "";
         String typeProduit;
@@ -35,7 +33,8 @@ class Intervention
             {
                 typeProduit       = bac.getTypeProduit().getNom();
                 listeBacsARemplir = listeBacsARemplir.concat(
-                  "   " + typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
+                  "   " + typeProduit + " : " +
+                  String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
             }
         }
 
@@ -55,8 +54,8 @@ class Intervention
         return listeBacsADepanner;
 !!!144298.java!!!	modifierDateIntervention(in nouvelleDateIntervention : String) : void
         this.dateIntervention = nouvelleDateIntervention;
-!!!144426.java!!!	modifierEtatIntervention(inout estIntervenu : boolean) : void
-        this.effectuee = estIntervenu;
+!!!144426.java!!!	modifierEtatIntervention(inout nouvelEtat : Intervention::Etats) : void
+        this.etat = nouvelEtat;
 !!!144554.java!!!	formaterDate(in date : String) : String
         try
         {

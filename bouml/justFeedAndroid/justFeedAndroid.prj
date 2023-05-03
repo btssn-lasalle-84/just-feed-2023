@@ -1,7 +1,7 @@
 format 224
 "justFeedAndroid"
-  revision 11
-  modified_by 2 "btssn2"
+  revision 12
+  modified_by 42 "tv"
   java_root_dir "../../"
 
 
@@ -275,7 +275,6 @@ ${members}}
       classdiagramsettings draw_all_relations no member_max_width 0 end
       size A4
     end
-
   end
 
   usecaseview 134530 "justFeedAndroidDSS"
@@ -370,7 +369,6 @@ ${members}}
       sequencediagramsettings end
       overlapping_bars size A4
     end
-
   end
 
   package_ref 134570 // justfeedandroid

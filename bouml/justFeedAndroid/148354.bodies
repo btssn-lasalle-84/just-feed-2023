@@ -1,5 +1,5 @@
 class Etats
-!!!128130.java!!!	Etats(in nomsMenu : String)
-            this.nomsMenu = nomsMenu;
+!!!128130.java!!!	Etats(in nomMenu : String)
+            this.nomMenu = nomMenu;
 !!!128258.java!!!	toString() : String
-            return nomsMenu;
+            return nomMenu;

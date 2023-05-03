@@ -1,7 +1,7 @@
 format 224
 "justfeedandroid" // justfeedandroid
-  revision 2
-  modified_by 2 "btssn2"
+  revision 3
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -94,13 +94,66 @@ activité pour l'application Android.
 !< TAG pour les logs (cf. Logcat)"
       end
 
+      attribute 151338 "AFAIRE"
+	const_attribute private explicit_type "String"
+	init_value " \"A faire\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 151466 "EN_COURS"
+	const_attribute private explicit_type "String"
+	init_value " \"En cours\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 151594 "VALIDE"
+	const_attribute private explicit_type "String"
+	init_value " \"Validé\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      classrelation 144042 // etat (<unidirectional association>)
+	relation 144042 --->
+	  a role_name "etat" private
+	    comment "
+Attributs
+
+!< Etat qui sert à trier les interventions"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144042 // etat (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
+      end
+
       classrelation 134698 // listeInterventions (<unidirectional association>)
 	relation 134698 --->
 	  stereotype "List"
 	  a role_name "listeInterventions" private
-	    comment "Attributs
-
-!< Liste des interventions à afficher"
+	    comment "!< Liste des interventions à afficher"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 134698 // listeInterventions (<unidirectional association>)
@@ -164,6 +217,19 @@ activité pour l'application Android.
 	mysql_decl ""
 	MysqlColumn
 	comment "!< Positionnement des vues"
+      end
+
+      attribute 151722 "menuEtats"
+	private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Menu pour trier les interventions"
       end
 
       operation 134570 "onCreate"
@@ -269,9 +335,10 @@ et détruite par le système Android)
 
       operation 135338 "initialiserVueInterventions"
 	private explicit_return_type "void"
-	nparams 0
+	nparams 1
+	  param inout name "interventions" explicit_type "List<Intervention>"
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -333,6 +400,93 @@ d'intervention, poids à remplir...
 @author Fargier Mayeul
 @version 0.1
 "
+      class 148354 "Etats"
+	visibility public stereotype "enum"
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 136834 "EN_COURS"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"En cours\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136962 "VALIDE"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"Validé\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 137090 "A_FAIRE"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"A faire\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 151850 "nomMenu"
+	  private explicit_type "String"
+	  stereotype "attribute"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 128130 "Etats"
+	  private explicit_return_type ""
+	  nparams 1
+	    param in name "nomMenu" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 128258 "toString"
+	  public explicit_return_type "String"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	end
+      end
+
       attribute 140714 "TAG"
 	class_attribute const_attribute private explicit_type "String"
 	init_value " \"_Intervention\""
@@ -388,17 +542,14 @@ d'intervention, poids à remplir...
 	  b parent class_ref 135850 // Distributeur
       end
 
-      attribute 141098 "effectuee"
-	private explicit_type "boolean"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 144170 // etat (<unidirectional association>)
+	relation 144170 --->
+	  a role_name "etat" private
+	    comment "!< Les états d'une intervention."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< Si l'intervention a été ménée ou non."
+	    classrelation_ref 144170 // etat (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
       end
 
       attribute 141226 "aRemplir"
@@ -446,7 +597,7 @@ d'intervention, poids à remplir...
 	nparams 5
 	  param in name "dateIntervention" explicit_type "String"
 	  param inout name "distributeur" type class_ref 135850 // Distributeur
-	  param inout name "effectuee" explicit_type "boolean"
+	  param inout name "etat" type class_ref 148354 // Etats
 	  param inout name "aRemplir" explicit_type "boolean"
 	  param inout name "aDepanner" explicit_type "boolean"
 	
@@ -459,7 +610,7 @@ d'intervention, poids à remplir...
 	comment "@brief Constructeur d'initialisation de la classe Intervention.
 @param dateIntervention
 @param distributeur
-@param effectuee
+@param etat
 @param aRemplir
 @param aDepanner
 "
@@ -512,8 +663,8 @@ d'intervention, poids à remplir...
 "
       end
 
-      operation 143530 "estEffectuee"
-	public explicit_return_type "boolean"
+      operation 154154 "getEtat"
+	public return_type class_ref 148354 // Etats
 	nparams 0
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -522,8 +673,8 @@ d'intervention, poids à remplir...
 	
 	
 	
-	comment "@brief Méthode d'accés à effectuee.
-@return effectuee.
+	comment "@brief Méthode d'accés à l'état de l'intervention.
+@return etat.
 "
       end
 
@@ -557,8 +708,8 @@ d'intervention, poids à remplir...
 "
       end
 
-      operation 143914 "estAIntervenir"
-	public explicit_return_type "boolean"
+      operation 144042 "recupererBacsARemplir"
+	public explicit_return_type "String"
 	nparams 0
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -570,22 +721,7 @@ d'intervention, poids à remplir...
 	comment "Services
 
 
-@brief Méthode qui renvoie si l'intervention doit être réalisée
-@return boolean true si l'intervention doit être réalisée
-"
-      end
-
-      operation 144042 "recupererBacsARemplir"
-	public explicit_return_type "String"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Méthode qui renvoie la liste des bacs à remplir.
+@brief Méthode qui renvoie la liste des bacs à remplir.
 @return la liste des bacs à remplir.
 "
       end
@@ -626,7 +762,7 @@ d'intervention, poids à remplir...
       operation 144426 "modifierEtatIntervention"
 	public explicit_return_type "void"
 	nparams 1
-	  param inout name "estIntervenu" explicit_type "boolean"
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
@@ -635,7 +771,7 @@ d'intervention, poids à remplir...
 	
 	
 	comment "@brief Méthode pour modifier l'état de l'intervention.
-@param estIntervenu
+@param nouvelEtat
 "
       end
 
@@ -654,93 +790,6 @@ d'intervention, poids à remplir...
 @param date au format \"yyyy-MM-dd\"
 @return String date au format \"dd/MM/yyyy\"
 "
-      end
-
-      class 148354 "Etats"
-	visibility public stereotype "enum"
-	cpp_decl ""
-	java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
-${items};
-${members}}
-"
-	php_decl ""
-	python_2_2 python_decl ""
-	idl_decl ""
-	explicit_switch_type ""
-	mysql_decl ""
-	
-	attribute 136834 "EN_COURS"
-	  public type class_ref 148354 // Etats
-	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"En cours\"),${comment}"
-	  php_decl ""
-	  python_decl ""
-	  idl_decl ""
-	  mysql_decl ""
-	  MysqlColumn
-	end
-
-	attribute 136962 "VALIDE"
-	  public type class_ref 148354 // Etats
-	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"Validé\"),${comment}"
-	  php_decl ""
-	  python_decl ""
-	  idl_decl ""
-	  mysql_decl ""
-	  MysqlColumn
-	end
-
-	attribute 137090 "A_FAIRE"
-	  public type class_ref 148354 // Etats
-	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"A faire\"),${comment}"
-	  php_decl ""
-	  python_decl ""
-	  idl_decl ""
-	  mysql_decl ""
-	  MysqlColumn
-	end
-
-	attribute 137218 "nomsMenu"
-	  private explicit_type "String"
-	  stereotype "attribute"
-	  cpp_decl ""
-	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	  php_decl ""
-	  python_decl ""
-	  idl_decl ""
-	  mysql_decl ""
-	  MysqlColumn
-	end
-
-	operation 128130 "Etats"
-	  private explicit_return_type ""
-	  nparams 1
-	    param in name "nomsMenu" explicit_type "String"
-	  
-	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	  
-	  
-	  
-	end
-
-	operation 128258 "toString"
-	  public explicit_return_type "String"
-	  nparams 0
-	  
-	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	  java_annotation "@Override
-"
-	  
-	  
-	  
-	end
       end
     end
 
@@ -2930,6 +2979,63 @@ pour afficher des interventions.
 	  b parent class_ref 136874 // ViewHolder
       end
 
+      attribute 151978 "ROUGE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#ed3734\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< L'intervention n'a pas été effectuée"
+      end
+
+      attribute 152106 "VERT"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#4eea48\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention a été effectuée"
+      end
+
+      attribute 152234 "BLEU"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#039dfc\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est en cours"
+      end
+
+      classrelation 144298 // etatAfiltrer (<unidirectional association>)
+	relation 144298 --->
+	  a role_name "etatAfiltrer" init_value " A_FAIRE" class_relation private
+	    comment "
+Membres statiques
+
+!< attribut utilisé pour trier les interventions"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144298 // etatAfiltrer (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
+      end
+
       attribute 144426 "identifiantDistributeur"
 	const_attribute private explicit_type "TextView"
 	cpp_decl ""
@@ -2985,6 +3091,32 @@ pour afficher des interventions.
 	comment "!< attribut GUI qui affiche si le distributeur doit être dépanné."
       end
 
+      attribute 152362 "carteIntervention"
+	const_attribute private explicit_type "CardView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui contient les informations sur une intervention."
+      end
+
+      attribute 152490 "menuEtats"
+	const_attribute private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI d'une liste déroulante pour trier les interventions."
+      end
+
       operation 147498 "VueIntervention"
 	public explicit_return_type ""
 	nparams 1
@@ -3009,6 +3141,38 @@ pour afficher des interventions.
 	
 	
 	
+      end
+
+      operation 154282 "getEtatAFiltrer"
+	class_operation public return_type class_ref 148354 // Etats
+	nparams 1
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode pour récuérer l'état qui permet de trier les interventions.
+"
+      end
+
+      operation 154410 "changerEtatAFiltrer"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Mutateurs
+
+@brief Méthode pour modifier l'état qui permet de trier les interventions.
+"
       end
     end
 
@@ -3509,147 +3673,6 @@ et détruite par le système Android)
       size A0
     end
 
-    class 148098 "BuildConfig"
-      visibility public 
-      cpp_decl ""
-      final java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      attribute 136194 "DEBUG"
-	class_attribute const_attribute public explicit_type "boolean"
-	init_value " Boolean.parseBoolean(\"true\")"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 136322 "APPLICATION_ID"
-	class_attribute const_attribute public explicit_type "String"
-	init_value " \"com.justfeed.justfeedandroid\""
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 136450 "BUILD_TYPE"
-	class_attribute const_attribute public explicit_type "String"
-	init_value " \"debug\""
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 136578 "VERSION_CODE"
-	class_attribute const_attribute public explicit_type "int"
-	init_value " 1"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-
-      attribute 136706 "VERSION_NAME"
-	class_attribute const_attribute public explicit_type "String"
-	init_value " \"1.0\""
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-      end
-    end
-
-    class 148226 "ExampleInstrumentedTest"
-      visibility public 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      java_annotation "@RunWith(AndroidJUnit4.class)
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      comment "Instrumented test, which will execute on an Android device.
-
-@see <a href=\"http://d.android.com/tools/testing\">Testing documentation</a>
-"
-      operation 128002 "useAppContext"
-	public explicit_return_type "void"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	java_annotation "@Test
-"
-	
-	
-	
-      end
-    end
-
-    class 148482 "ExampleUnitTest"
-      visibility public 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-      comment "Example local unit test, which will execute on the development machine (host).
-
-@see <a href=\"http://d.android.com/tools/testing\">Testing documentation</a>
-"
-      operation 128386 "addition_isCorrect"
-	public explicit_return_type "void"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	java_annotation "@Test
-"
-	
-	
-	
-      end
-    end
   end
 
   deploymentview 134570 "justfeedandroid"
@@ -3669,6 +3692,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -3939,9 +3966,13 @@ ${definition}"
       java_src "${comment}
 ${package}
 ${imports}
+import android.graphics.Color;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.TextView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import static com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE;
 ${definition}"
       associated_elems
 	class_ref 136106 // VueIntervention
@@ -3952,45 +3983,5 @@ ${definition}"
 "
     end
 
-    artifact 128002 "BuildConfig"
-      stereotype "source"
-      java_src "${comment}
-${package}
-${imports}
-${definition}"
-      associated_elems
-	class_ref 148098 // BuildConfig
-      end
-    end
-
-    artifact 128130 "ExampleInstrumentedTest"
-      stereotype "source"
-      java_src "${comment}
-${package}
-${imports}
-import android.content.Context;
-import androidx.test.platform.app.InstrumentationRegistry;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import static org.junit.Assert.*;
-${definition}"
-      associated_elems
-	class_ref 148226 // ExampleInstrumentedTest
-      end
-    end
-
-    artifact 128258 "ExampleUnitTest"
-      stereotype "source"
-      java_src "${comment}
-${package}
-${imports}
-import org.junit.Test;
-import static org.junit.Assert.*;
-${definition}"
-      associated_elems
-	class_ref 148482 // ExampleUnitTest
-      end
-    end
   end
 end

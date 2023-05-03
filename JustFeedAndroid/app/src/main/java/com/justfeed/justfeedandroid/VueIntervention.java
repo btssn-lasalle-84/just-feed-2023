@@ -28,10 +28,13 @@ public class VueIntervention extends ViewHolder
     /**
      * Constantes
      */
-    private final static String ROUGE     = "#ed3734"; //!< L'intervention n'a pas été effectuée
-    private final static String VERT      = "#4eea48"; //!< L'intervention a été effectuée
-    private final static String BLEU      = "#039dfc"; //!< L'intervention est en cours
-    public static Intervention.Etats ETAT = A_FAIRE; //!< attribut utilisé pour trier les interventions
+    private final static String ROUGE = "#ed3734"; //!< L'intervention n'a pas été effectuée
+    private final static String VERT  = "#4eea48"; //!< L'intervention a été effectuée
+    private final static String BLEU  = "#039dfc"; //!< L'intervention est en cours
+    /**
+     * Membres statiques
+     */
+    private static Intervention.Etats etatAfiltrer = A_FAIRE; //!< pour trier les interventions
     /**
      * Ressources GUI
      */
@@ -43,8 +46,10 @@ public class VueIntervention extends ViewHolder
       aRemplir; //!< attribut GUI qui affiche si le distributeur doit être rempli.
     private final TextView
       aDepanner; //!< attribut GUI qui affiche si le distributeur doit être dépanné.
-    private final CardView carteIntervention; //!< attribut GUI qui contient les informations sur une intervention.
-    private final Spinner  menuEtats; //!< attribut GUI d'une liste déroulante pour trier les interventions.
+    private final CardView
+      carteIntervention; //!< attribut GUI qui contient les informations sur une intervention.
+    private final Spinner
+      menuEtats; //!< attribut GUI d'une liste déroulante pour trier les interventions.
 
     public VueIntervention(final View itemView)
     {
@@ -61,10 +66,11 @@ public class VueIntervention extends ViewHolder
     public void afficherInterventions(Intervention intervention)
     {
         if(menuEtats != null)
-            ETAT = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
-        if(ETAT == intervention.getEtat())
+            etatAfiltrer = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
+        if(etatAfiltrer == intervention.getEtat())
         {
-            switch (ETAT)
+            carteIntervention.setVisibility(View.VISIBLE);
+            switch(etatAfiltrer)
             {
                 case VALIDE:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
@@ -79,15 +85,26 @@ public class VueIntervention extends ViewHolder
             identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
             if(intervention.estADepanner())
             {
-                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
-                        intervention.recupererBacsADepanner());
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
+                                  "%) : \n" + intervention.recupererBacsADepanner());
             }
             if(intervention.estARemplir())
             {
                 aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
             }
-            dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
+            dateIntervention.setText("Date de l'intervention : " +
+                                     Intervention.formaterDate(intervention.getDateIntervention()));
         }
+        else
+            carteIntervention.setVisibility(View.GONE);
+    }
+
+    /**
+     * @brief Méthode pour récuérer l'état qui permet de trier les interventions.
+     */
+    public static Intervention.Etats getEtatAFiltrer(Intervention.Etats nouvelEtat)
+    {
+        return etatAfiltrer;
     }
 
     // Mutateurs
@@ -95,5 +112,8 @@ public class VueIntervention extends ViewHolder
     /**
      * @brief Méthode pour modifier l'état qui permet de trier les interventions.
      */
-    public static void changerEtat(Intervention.Etats nouvelEtat) { ETAT = nouvelEtat; }
+    public static void changerEtatAFiltrer(Intervention.Etats nouvelEtat)
+    {
+        etatAfiltrer = nouvelEtat;
+    }
 }

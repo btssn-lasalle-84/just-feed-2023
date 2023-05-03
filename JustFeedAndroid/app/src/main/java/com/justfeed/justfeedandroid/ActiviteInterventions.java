@@ -41,16 +41,16 @@ public class ActiviteInterventions extends AppCompatActivity
      */
     private static final String TAG = "_ActiviteInterventions"; //!< TAG pour les logs (cf. Logcat)
     private final String AFAIRE     = "A faire"; //!< Constante utilisée pour configurer le filtre.
-    private final String EN_COURS   = "En cours"; //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDE     = "Validé"; //!< Constante utilisée pour configurer le filtre.
+    private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDE   = "Validé";    //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
      */
-    private Intervention.Etats   etat;                  //!< Etat qui sert à trier les interventions
-    private List<Intervention>   listeInterventions;    //!< Liste des interventions à afficher
-    private Handler              handler;               //!< Le handler utilisé par l'activité
-    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
+    private Intervention.Etats   etat;               //!< Etat qui sert à trier les interventions
+    private List<Intervention>   listeInterventions; //!< Liste des interventions à afficher
+    private Handler              handler;            //!< Le handler utilisé par l'activité
+    private BaseDeDonnees        baseDeDonnees;      //!< Identifiants pour la base de données
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
     private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
@@ -146,7 +146,7 @@ public class ActiviteInterventions extends AppCompatActivity
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
             {
                 String nouvelEtat = parent.getItemAtPosition(position).toString();
-                switch (nouvelEtat)
+                switch(nouvelEtat)
                 {
                     case AFAIRE:
                         etat = Intervention.Etats.A_FAIRE;
@@ -158,14 +158,16 @@ public class ActiviteInterventions extends AppCompatActivity
                         etat = Intervention.Etats.VALIDE;
                         break;
                 }
-                Log.d(TAG, "OnitemSelected() - état : "+etat);
-                VueIntervention.changerEtat(etat);
+                Log.d(TAG, "OnitemSelected() - état : " + etat);
+                VueIntervention.changerEtatAFiltrer(etat);
                 vueListeInterventions.removeAllViews();
                 afficherInterventions(interventions);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+            }
         });
     }
 
