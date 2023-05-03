@@ -28,9 +28,10 @@ public class VueIntervention extends ViewHolder
     /**
      * Constantes
      */
-    private final static String ROUGE = "#ed3734"; //!< L'intervention n'a pas été effectuée
-    private final static String VERT  = "#4eea48"; //!< L'intervention a été effectuée
-    private final static String BLEU  = "#039dfc"; //!< L'intervention est en cours
+    private final static String ROUGE     = "#ed3734"; //!< L'intervention n'a pas été effectuée
+    private final static String VERT      = "#4eea48"; //!< L'intervention a été effectuée
+    private final static String BLEU      = "#039dfc"; //!< L'intervention est en cours
+    public static Intervention.Etats ETAT = A_FAIRE; //!< attribut utilisé pour trier les interventions
     /**
      * Ressources GUI
      */
@@ -59,12 +60,11 @@ public class VueIntervention extends ViewHolder
 
     public void afficherInterventions(Intervention intervention)
     {
-        Intervention.Etats etat = A_FAIRE;
         if(menuEtats != null)
-            etat = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
-        if(etat == intervention.getEtat())
+            ETAT = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
+        if(ETAT == intervention.getEtat())
         {
-            switch (etat)
+            switch (ETAT)
             {
                 case VALIDE:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
@@ -89,4 +89,11 @@ public class VueIntervention extends ViewHolder
             dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
         }
     }
+
+    // Mutateurs
+
+    /**
+     * @brief Méthode pour modifier l'état qui permet de trier les interventions.
+     */
+    public static void changerEtat(Intervention.Etats nouvelEtat) { ETAT = nouvelEtat; }
 }
