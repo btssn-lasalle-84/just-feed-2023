@@ -15,6 +15,8 @@
 #include <QTime>
 #include <QVector>
 #include <QWidget>
+#include <QtSql/QSqlDatabase>
+#include <QtSql>
 #include <QtWidgets>
 
 /**
@@ -28,6 +30,7 @@
 #define CINQUANTE 50
 #define SOIXANTE 60
 #define CENT 100
+#define OPERATEUR 1
 
 class Distributeur;
 class Produit;

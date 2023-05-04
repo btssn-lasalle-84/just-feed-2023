@@ -155,6 +155,21 @@ void Intervention::creerUneIntervention() {
   qDebug() << Q_FUNC_INFO
            << "date intervention : " << this->getDateIntervention()
            << "heure : " << this->getHeureIntervention();
+  QSqlQuery query;
+  for (int i = 0; i < distributeurs.size(); ++i) {
+    for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
+      if ((labelsDesCheckboxDepannage[i][j]->checkState() == Qt::Checked) ||
+          (labelsDesCheckboxRemplissage[i][j]->checkState() == Qt::Checked)) {
+        query.exec("INSERT INTO Intervention (idOperateur, idDistributeur, "
+                   "IdBac, heure,"
+                   "dateIntervention, etat, aRemplir, aDepanner) "
+                   "VALUES (OPERATEUR, i, j, this->getHeureIntervention(),"
+                   "this->getDateIntervention(), "
+                   "'A_FAIRE',distributeurs[i]->getBac(j)->getARemplir() , "
+                   "distributeurs[i]->getBac(j)->getADepanner())");
+      }
+    }
+  }
   this->close();
 }
 // Méthodes privées
