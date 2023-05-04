@@ -367,9 +367,6 @@ void IHMJustFeed::initialiserEvenements() {
  * @brief méthode qui initialise les distributeurs avec les bacs et les produits
  */
 void IHMJustFeed::initialiserDistributeurs() {
-  /**
-   * @todo Récupérer les données depuis la base de données
-   */
   distributeurs.push_back(
       new Distributeur("distributeur-1-sim", "Grand Frais",
                        "Zone du Coudoulet Rond point du Péage Sud", "84100",

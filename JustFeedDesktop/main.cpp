@@ -1,6 +1,6 @@
-#include <QApplication>
-#include "ihmjustfeed.h"
 #include "basededonnees.h"
+#include "ihmjustfeed.h"
+#include <QApplication>
 
 /**
  * @file main.cpp
@@ -14,13 +14,12 @@
  * @param argv[]
  * @return int
  */
-int main(int argc, char* argv[])
-{
-    QApplication a(argc, argv);
-    IHMJustFeed  w;
-    BaseDeDonnees *baseDeDonnees = BaseDeDonnees::getInstance();
-    baseDeDonnees->connecter();
-    w.show();
+int main(int argc, char *argv[]) {
+  QApplication a(argc, argv);
+  IHMJustFeed w;
+  BaseDeDonnees *baseDeDonnees = BaseDeDonnees::getInstance();
+  baseDeDonnees->connecter();
+  w.show();
 
-    return a.exec();
+  return a.exec();
 }

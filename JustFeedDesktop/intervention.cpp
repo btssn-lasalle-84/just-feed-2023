@@ -142,6 +142,7 @@ void Intervention::selectionnerBac() {
  */
 void Intervention::creerUneIntervention() {
   // requettes sql pour créer l'intervention
+
   this->close();
 }
 // Méthodes privées
@@ -164,6 +165,8 @@ void Intervention::initialiserBoiteDeDialogue() {
 void Intervention::instancierWidgets() {
   qDebug() << Q_FUNC_INFO;
   boutonItervention = new QPushButton(this);
+  dateEdit = new QDateEdit(QDate::currentDate(), this);
+  heureEdit = new QTimeEdit(QTime::currentTime(), this);
   for (int i = 0; i < distributeurs.size(); i++) {
     nomDistributeurs.push_back(new QLabel(this));
     labelsBac.clear();
@@ -195,6 +198,8 @@ void Intervention::instancierWidgets() {
 void Intervention::initialiserWidgets() {
   qDebug() << Q_FUNC_INFO;
   boutonItervention->setText("créer intervention");
+  dateEdit->setDisplayFormat("dd/MM/yyyy");
+  heureEdit->setDisplayFormat("HH:mm");
   for (int i = 0; i < distributeurs.size(); i++) {
     nomDistributeurs[i]->setText("Distributeur -> " +
                                  distributeurs[i]->getNom());
@@ -255,6 +260,8 @@ void Intervention::positionnerWidgets() {
     }
     layoutDistributeurs->addLayout(layoutInfoDistributeurs[i]);
   }
+  layoutDistributeurs->addWidget(dateEdit);
+  layoutDistributeurs->addWidget(heureEdit);
   layoutDistributeurs->addWidget(boutonItervention);
   setLayout(layoutDistributeurs);
 }

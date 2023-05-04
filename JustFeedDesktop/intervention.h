@@ -10,8 +10,11 @@
 
 #include <QDate>
 #include <QDateTime>
+#include <QDateTimeEdit>
+#include <QHBoxLayout>
 #include <QTime>
 #include <QVector>
+#include <QWidget>
 #include <QtWidgets>
 
 /**
@@ -35,6 +38,7 @@ class Intervention : public QDialog {
 private:
   IHMJustFeed *ihmJustFeed; //!< association vers l'ihm principale
   QDate dateIntervention;   //!< la date de l'intervention
+  QTime heureIntervention;  //!< l'heure de l'intervention
   QVector<Distributeur *>
       distributeurs; //!< les distributeurs sur lesquels il faut intervenir
   bool effectuee;    //!< si l'intervention a été effectuée
@@ -65,6 +69,8 @@ private:
   QVector<QVector<QCheckBox *>>
       labelsDesCheckbox;          //!< vecteur de vecteur de checkBox
   QPushButton *boutonItervention; //!< bouton qui créé une intervention
+  QDateEdit *dateEdit;            //!< choix de la date
+  QTimeEdit *heureEdit;           //!< choix de l'heure
   void initialiserBoiteDeDialogue();
   void instancierWidgets();
   void initialiserWidgets();
@@ -97,5 +103,4 @@ public slots:
   void selectionnerBac();
   void creerUneIntervention();
 };
-
 #endif // INTERVENTION_H
