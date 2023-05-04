@@ -106,6 +106,10 @@ void Intervention::intervenir(bool aIntervenir) {
   this->effectuee = !aIntervenir;
 }
 
+/**
+ * @brief méthode qui permet de selectionner les bacs
+ * @return void
+ */
 void Intervention::selectionnerBac() {
   for (int i = 0; i < distributeurs.size(); ++i) {
     for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
@@ -125,6 +129,13 @@ void Intervention::selectionnerBac() {
            << "etat" << selectionBac->checkState();
 }
 
+/**
+ * @brief méthode pour créer une intervention
+ * @return void
+ */
+void Intervention::creerUneIntervention() {
+  // requettes sql pour créer l'intervention
+}
 // Méthodes privées
 
 /**
@@ -144,6 +155,7 @@ void Intervention::initialiserBoiteDeDialogue() {
  */
 void Intervention::instancierWidgets() {
   qDebug() << Q_FUNC_INFO;
+  boutonItervention = new QPushButton(this);
   for (int i = 0; i < distributeurs.size(); i++) {
     nomDistributeurs.push_back(new QLabel(this));
     labelsBac.clear();
@@ -174,6 +186,7 @@ void Intervention::instancierWidgets() {
  */
 void Intervention::initialiserWidgets() {
   qDebug() << Q_FUNC_INFO;
+  boutonItervention->setText("créer intervention");
   for (int i = 0; i < distributeurs.size(); i++) {
     nomDistributeurs[i]->setText("Distributeur -> " +
                                  distributeurs[i]->getNom());
@@ -212,7 +225,10 @@ void Intervention::initialiserWidgets() {
 void Intervention::positionnerWidgets() {
   qDebug() << Q_FUNC_INFO;
   layoutDistributeurs = new QHBoxLayout;
-  QVector<QHBoxLayout *> layoutBac(6);
+  for (int i = 0; i < distributeurs.size(); i++) {
+    totalBac += distributeurs[i]->getNbBacs();
+  }
+  QVector<QHBoxLayout *> layoutBac(totalBac);
 
   QVector<QVBoxLayout *> layoutInfoDistributeurs(nomDistributeurs.size());
   for (int i = 0; i < distributeurs.size(); i++) {
@@ -231,6 +247,7 @@ void Intervention::positionnerWidgets() {
     }
     layoutDistributeurs->addLayout(layoutInfoDistributeurs[i]);
   }
+  layoutDistributeurs->addWidget(boutonItervention);
   setLayout(layoutDistributeurs);
 }
 
@@ -244,6 +261,8 @@ void Intervention::initialiserEvenements() {
               SLOT(selectionnerBac()));
     }
   }
+  connect(boutonItervention, SIGNAL(clicked()), this,
+          SLOT(creerUneIntervention()));
 }
 
 /**

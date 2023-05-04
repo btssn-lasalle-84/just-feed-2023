@@ -40,6 +40,7 @@ private:
   bool effectuee;    //!< si l'intervention a été effectuée
   bool aRemplir;     //!< Si l'intervention consiste à remplir
   bool aDepanner;    //!< Si l'intervention consiste à dépanner
+  int totalBac;      //!< nombre total de bac
   QVector<QLabel *> nomDistributeurs;  //!< nom du distributeur et son numero
   QVector<QLabel *> labelsBac;         //!< conteneur de QLabel de bac
   QVector<QLabel *> labelsHygrometrie; //!< conteneur de QLabel d'hygrometrie
@@ -62,7 +63,8 @@ private:
   QHBoxLayout *layoutBac; //!< layout qui contient le nom du bac et un checkBox
   QVector<QCheckBox *> labelsCheckbox; //!< vecteur de checkBox
   QVector<QVector<QCheckBox *>>
-      labelsDesCheckbox; //!< vecteur de vecteur de checkBox
+      labelsDesCheckbox;          //!< vecteur de vecteur de checkBox
+  QPushButton *boutonItervention; //!< bouton qui créé une intervention
   void initialiserBoiteDeDialogue();
   void instancierWidgets();
   void initialiserWidgets();
@@ -93,6 +95,7 @@ public:
 
 public slots:
   void selectionnerBac();
+  void creerUneIntervention();
 };
 
 #endif // INTERVENTION_H
