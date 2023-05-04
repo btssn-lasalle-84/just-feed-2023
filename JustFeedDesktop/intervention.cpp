@@ -118,25 +118,17 @@ void Intervention::selectionnerBac() {
         qDebug() << Q_FUNC_INFO << "etat du bac depannage" << i << " " << j
                  << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
                  << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
-      } else {
-        distributeurs[i]->getBac(j)->setADepanner(false);
-        qDebug() << Q_FUNC_INFO << "etat du bac depannage" << i << " " << j
-                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
-                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       }
+
       if (labelsDesCheckboxRemplissage[i][j]->checkState() == Qt::Checked) {
         distributeurs[i]->getBac(j)->setARemplir(true);
-        qDebug() << Q_FUNC_INFO << "etat du bac remplissage" << i << " " << j
-                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
-                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
-      } else {
-        distributeurs[i]->getBac(j)->setARemplir(false);
         qDebug() << Q_FUNC_INFO << "etat du bac remplissage" << i << " " << j
                  << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
                  << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       }
     }
   }
+
   QCheckBox *selectionBac = qobject_cast<QCheckBox *>(sender());
   qDebug() << Q_FUNC_INFO << "checkbox bac" << selectionBac->objectName()
            << "etat" << selectionBac->checkState();
@@ -357,13 +349,10 @@ void Intervention::initialiserEtatDistributeur() {
 
       if ((distributeurs[i]->getBac(j)->getADepanner()) == true) {
         labelsDesCheckboxDepannage[i][j]->setEnabled(false);
-      } else {
-        labelsDesCheckboxDepannage[i][j]->setEnabled(true);
       }
+
       if ((distributeurs[i]->getBac(j)->getARemplir()) == true) {
         labelsDesCheckboxRemplissage[i][j]->setEnabled(false);
-      } else {
-        labelsDesCheckboxRemplissage[i][j]->setEnabled(true);
       }
     }
   }
