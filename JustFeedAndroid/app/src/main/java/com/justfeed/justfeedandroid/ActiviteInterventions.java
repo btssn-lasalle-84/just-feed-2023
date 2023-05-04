@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,6 +56,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
     private Spinner                    menuEtats; //!< Menu pour trier les interventions
+    private SwipeRefreshLayout         swipeConteneur; //!< Pull-to-refresh
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -160,13 +162,21 @@ public class ActiviteInterventions extends AppCompatActivity
                 }
                 Log.d(TAG, "OnitemSelected() - état : " + etat);
                 VueIntervention.changerEtatAFiltrer(etat);
-                vueListeInterventions.removeAllViews();
                 afficherInterventions(interventions);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView)
             {
+            }
+        });
+        this.swipeConteneur = (SwipeRefreshLayout)findViewById(R.id.conteneurSwipe);
+        swipeConteneur.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "_onRefresh()");
+                swipeConteneur.setRefreshing(false);
+                baseDeDonnees.recupererInterventions();
             }
         });
     }
@@ -177,6 +187,8 @@ public class ActiviteInterventions extends AppCompatActivity
     private void afficherInterventions(List<Intervention> interventions)
     {
         Log.d(TAG, "afficherInterventions() nb interventions = " + interventions.size());
+        vueListeInterventions.removeAllViews();
+        this.adapteurIntervention = null;
         this.listeInterventions = interventions;
         if(this.adapteurIntervention == null)
         {
