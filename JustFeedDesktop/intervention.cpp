@@ -42,6 +42,14 @@ QDate Intervention::getDateIntervention() const {
 }
 
 /**
+ * @brief Accesseur de l'attribut heureIntervention
+ * @return QTime représente l'heure de l'intervention sur le
+ * distributeur
+ */
+QTime Intervention::getHeureIntervention() const {
+  return this->heureIntervention;
+}
+/**
  * @brief Accesseur de l'attribut distributeurAIntervenir
  * @return QVector<Distributeur*> represente les distributeurs surlequels il
  * faut intervenir
@@ -55,18 +63,6 @@ QVector<Distributeur *> Intervention::getDistributeurs() const {
  * @return effectuee
  */
 bool Intervention::estEffectuee() const { return this->effectuee; }
-
-/**
- * @brief Accesseur de l'attribut ARemplir
- * @return aRemplir
- */
-bool Intervention::estARemplir() const { return this->aRemplir; }
-
-/**
- * @brief Accesseur de l'attribut ADepanner
- * @return aDepanner
- */
-bool Intervention::estADepanner() const { return this->aDepanner; }
 
 /**
  * @brief Accesseur de l'attribut AIntervenir
@@ -91,16 +87,20 @@ void Intervention::setDateIntervention(const QDate &dateIntervention) {
 }
 
 /**
+ * @brief Mutateur de l'attribut heureIntervention
+ * @param heureIntervention
+ */
+void Intervention::setHeureIntervention(const QTime &heureIntervention) {
+  this->heureIntervention = heureIntervention;
+}
+
+/**
  * @brief Mutateur de l'attribut effectuee
  * @param effectuee
  */
 void Intervention::effectuer(const bool effectuee) {
   this->effectuee = effectuee;
 }
-
-void Intervention::remplir(bool aRemplir) { this->aRemplir = aRemplir; }
-
-void Intervention::depanner(bool aDepanner) { this->aDepanner = aDepanner; }
 
 void Intervention::intervenir(bool aIntervenir) {
   this->effectuee = !aIntervenir;
@@ -113,19 +113,25 @@ void Intervention::intervenir(bool aIntervenir) {
 void Intervention::selectionnerBac() {
   for (int i = 0; i < distributeurs.size(); ++i) {
     for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
-      if (labelsDesCheckbox[i][j]->checkState() == Qt::Checked) {
-        if (distributeurs[i]->getBac(j)->getHygrometrie() <=
-            TRENTE /*à définir*/) {
-          distributeurs[i]->getBac(j)->setADepanner(true);
-        }
-        distributeurs[i]->getBac(j)->setARemplir(true);
-        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j
+      if (labelsDesCheckboxDepannage[i][j]->checkState() == Qt::Checked) {
+        distributeurs[i]->getBac(j)->setADepanner(true);
+        qDebug() << Q_FUNC_INFO << "etat du bac depannage" << i << " " << j
                  << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
                  << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       } else {
         distributeurs[i]->getBac(j)->setADepanner(false);
+        qDebug() << Q_FUNC_INFO << "etat du bac depannage" << i << " " << j
+                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
+                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
+      }
+      if (labelsDesCheckboxRemplissage[i][j]->checkState() == Qt::Checked) {
+        distributeurs[i]->getBac(j)->setARemplir(true);
+        qDebug() << Q_FUNC_INFO << "etat du bac remplissage" << i << " " << j
+                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
+                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
+      } else {
         distributeurs[i]->getBac(j)->setARemplir(false);
-        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j
+        qDebug() << Q_FUNC_INFO << "etat du bac remplissage" << i << " " << j
                  << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
                  << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       }
@@ -141,8 +147,14 @@ void Intervention::selectionnerBac() {
  * @return void
  */
 void Intervention::creerUneIntervention() {
-  // requettes sql pour créer l'intervention
-
+  // requettes sql pour créer l'intervention avec la date l'heure les
+  // distributeurs/bacs sur les quels intervenirs
+  dateIntervention = dateEdit->date();
+  heureIntervention = heureEdit->time();
+  intervenir(true);
+  qDebug() << Q_FUNC_INFO
+           << "date intervention : " << this->getDateIntervention()
+           << "heure : " << this->getHeureIntervention();
   this->close();
 }
 // Méthodes privées
@@ -172,18 +184,25 @@ void Intervention::instancierWidgets() {
     labelsBac.clear();
     labelsProduit.clear();
     labelsPourcentage.clear();
-    labelsCheckbox.clear();
+    labelsCheckboxDepannage.clear();
+    labelsCheckboxRemplissage.clear();
     labelsHygrometrie.clear();
     for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
-      QCheckBox *checkbox = new QCheckBox(this);
-      checkbox->setObjectName(QString::number(i) + "-" + QString::number(j));
-      labelsCheckbox.push_back(checkbox);
+      QCheckBox *checkboxDepannage = new QCheckBox(this);
+      QCheckBox *checkboxRemplissage = new QCheckBox(this);
+      checkboxDepannage->setObjectName(QString::number(i) + "-" +
+                                       QString::number(j));
+      checkboxRemplissage->setObjectName(QString::number(i) + "-" +
+                                         QString::number(j));
+      labelsCheckboxDepannage.push_back(checkboxDepannage);
+      labelsCheckboxRemplissage.push_back(checkboxRemplissage);
       labelsBac.push_back(new QLabel(this));
       labelsProduit.push_back(new QLabel(this));
       labelsPourcentage.push_back(new QLabel(this));
       labelsHygrometrie.push_back(new QLabel(this));
     }
-    labelsDesCheckbox.push_back(labelsCheckbox);
+    labelsDesCheckboxDepannage.push_back(labelsCheckboxDepannage);
+    labelsDesCheckboxRemplissage.push_back(labelsCheckboxRemplissage);
     labelsDesBacs.push_back(labelsBac);
     labelsDesProduits.push_back(labelsProduit);
     labelsDesPourcentage.push_back(labelsPourcentage);
@@ -222,7 +241,10 @@ void Intervention::initialiserWidgets() {
           QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) +
           " g ou Kg (à définir)");
       labelsDesPourcentage[i][j]->setAlignment(Qt::AlignCenter);
-      labelsDesCheckbox[i][j]->setCheckState(Qt::Unchecked);
+      labelsDesCheckboxDepannage[i][j]->setCheckState(Qt::Unchecked);
+      labelsDesCheckboxDepannage[i][j]->setText("D");
+      labelsDesCheckboxRemplissage[i][j]->setCheckState(Qt::Unchecked);
+      labelsDesCheckboxRemplissage[i][j]->setText("R");
 
       labelsDesHygrometries[i][j]->setText(
           "Hygrometrie : " +
@@ -251,7 +273,8 @@ void Intervention::positionnerWidgets() {
       layoutBac[j] = new QHBoxLayout();
       layoutBac[j]->addStretch();
       layoutBac[j]->addWidget(labelsDesBacs[i][j]);
-      layoutBac[j]->addWidget(labelsDesCheckbox[i][j]);
+      layoutBac[j]->addWidget(labelsDesCheckboxRemplissage[i][j]);
+      layoutBac[j]->addWidget(labelsDesCheckboxDepannage[i][j]);
       layoutBac[j]->addStretch();
       layoutInfoDistributeurs[i]->addLayout(layoutBac[j]);
       layoutInfoDistributeurs[i]->addWidget(labelsDesProduits[i][j]);
@@ -272,7 +295,9 @@ void Intervention::positionnerWidgets() {
 void Intervention::initialiserEvenements() {
   for (int i = 0; i < distributeurs.size(); i++) {
     for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
-      connect(labelsDesCheckbox[i][j], SIGNAL(clicked(bool)), this,
+      connect(labelsDesCheckboxDepannage[i][j], SIGNAL(clicked(bool)), this,
+              SLOT(selectionnerBac()));
+      connect(labelsDesCheckboxRemplissage[i][j], SIGNAL(clicked(bool)), this,
               SLOT(selectionnerBac()));
     }
   }
@@ -315,11 +340,15 @@ void Intervention::initialiserEtatDistributeur() {
         labelsDesHygrometries[i][j]->setStyleSheet("color: #023518;");
       }
 
-      if ((distributeurs[i]->getBac(j)->getADepanner()) == true ||
-          distributeurs[i]->getBac(j)->getARemplir() == true) {
-        labelsDesCheckbox[i][j]->setEnabled(false);
+      if ((distributeurs[i]->getBac(j)->getADepanner()) == true) {
+        labelsDesCheckboxDepannage[i][j]->setEnabled(false);
       } else {
-        labelsDesCheckbox[i][j]->setEnabled(true);
+        labelsDesCheckboxDepannage[i][j]->setEnabled(true);
+      }
+      if ((distributeurs[i]->getBac(j)->getARemplir()) == true) {
+        labelsDesCheckboxRemplissage[i][j]->setEnabled(false);
+      } else {
+        labelsDesCheckboxRemplissage[i][j]->setEnabled(true);
       }
     }
   }

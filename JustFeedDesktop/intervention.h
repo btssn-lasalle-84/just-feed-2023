@@ -42,8 +42,6 @@ private:
   QVector<Distributeur *>
       distributeurs; //!< les distributeurs sur lesquels il faut intervenir
   bool effectuee;    //!< si l'intervention a été effectuée
-  bool aRemplir;     //!< Si l'intervention consiste à remplir
-  bool aDepanner;    //!< Si l'intervention consiste à dépanner
   int totalBac;      //!< nombre total de bac
   QVector<QLabel *> nomDistributeurs;  //!< nom du distributeur et son numero
   QVector<QLabel *> labelsBac;         //!< conteneur de QLabel de bac
@@ -65,12 +63,18 @@ private:
   QHBoxLayout *layoutDistributeurs; //!< positionnement des distributeurs et le
                                     //!< contenu dans la boîte de dialogue
   QHBoxLayout *layoutBac; //!< layout qui contient le nom du bac et un checkBox
-  QVector<QCheckBox *> labelsCheckbox; //!< vecteur de checkBox
+  QVector<QCheckBox *>
+      labelsCheckboxDepannage; //!< vecteur de checkBox depannage
+  QVector<QCheckBox *>
+      labelsCheckboxRemplissage; //!< vecteur de checkBox remplissage
   QVector<QVector<QCheckBox *>>
-      labelsDesCheckbox;          //!< vecteur de vecteur de checkBox
-  QPushButton *boutonItervention; //!< bouton qui créé une intervention
-  QDateEdit *dateEdit;            //!< choix de la date
-  QTimeEdit *heureEdit;           //!< choix de l'heure
+      labelsDesCheckboxDepannage; //!< vecteur de vecteur de checkBox Depannage
+  QVector<QVector<QCheckBox *>>
+      labelsDesCheckboxRemplissage; //!< vecteur de vecteur de checkBox
+                                    //!< Remplissage
+  QPushButton *boutonItervention;   //!< bouton qui créé une intervention
+  QDateEdit *dateEdit;              //!< choix de la date
+  QTimeEdit *heureEdit;             //!< choix de l'heure
   void initialiserBoiteDeDialogue();
   void instancierWidgets();
   void initialiserWidgets();
@@ -85,18 +89,16 @@ public:
 
   // Accesseurs
   QDate getDateIntervention() const;
+  QTime getHeureIntervention() const;
   QVector<Distributeur *> getDistributeurs() const;
   bool estEffectuee() const;
-  bool estARemplir() const;
-  bool estADepanner() const;
   bool estAIntervenir() const;
 
   // Mutateurs
   void setDateIntervention(const QDate &dateIntervention);
+  void setHeureIntervention(const QTime &heureIntervention);
   void ajouterDistributeur(Distributeur *distributeur);
   void effectuer(bool effectuee);
-  void remplir(bool aRemplir);
-  void depanner(bool aDepanner);
   void intervenir(bool aIntervenir);
 
 public slots:
