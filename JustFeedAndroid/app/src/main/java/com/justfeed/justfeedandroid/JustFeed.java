@@ -191,8 +191,8 @@ public class JustFeed extends AppCompatActivity
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                //Log.d(TAG, "[Handler] id message = " + message.what);
-                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] id message = " + message.what);
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 switch(message.what)
                 {

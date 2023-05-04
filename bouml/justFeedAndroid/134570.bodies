@@ -3,9 +3,9 @@ class ActiviteInterventions
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interventions);
 
-        initialiserVueInterventions();
         initialiserHandler();
 
+        etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
         baseDeDonnees.recupererInterventions();
@@ -21,11 +21,42 @@ class ActiviteInterventions
         super.onStop();
 !!!135210.java!!!	onDestroy() : void
         super.onDestroy();
-!!!135338.java!!!	initialiserVueInterventions() : void
+!!!135338.java!!!	initialiserVueInterventions(inout interventions : List<Intervention>) : void
         this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
+        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
+        this.menuEtats.setAdapter(
+          new ArrayAdapter<Intervention.Etats>(this,
+                                               android.R.layout.simple_spinner_item,
+                                               Intervention.Etats.values()));
+        menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
+            {
+                String nouvelEtat = parent.getItemAtPosition(position).toString();
+                switch (nouvelEtat)
+                {
+                    case AFAIRE:
+                        etat = Intervention.Etats.A_FAIRE;
+                        break;
+                    case EN_COURS:
+                        etat = Intervention.Etats.EN_COURS;
+                        break;
+                    case VALIDE:
+                        etat = Intervention.Etats.VALIDE;
+                        break;
+                }
+                Log.d(TAG, "OnitemSelected() - état : "+etat);
+                VueIntervention.changerEtatAFiltrer(etat);
+                vueListeInterventions.removeAllViews();
+                afficherInterventions(interventions);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {}
+        });
 !!!135466.java!!!	afficherInterventions(inout interventions : List<Intervention>) : void
         Log.d(TAG, "afficherInterventions() nb interventions = " + interventions.size());
         this.listeInterventions = interventions;
@@ -40,13 +71,13 @@ class ActiviteInterventions
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                //Log.d(TAG, "[Handler] id message = " + message.what);
-                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] id message = " + message.what);
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 if(message.what == BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS)
                 {
                     Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
-                    afficherInterventions((ArrayList)message.obj);
+                    initialiserVueInterventions((ArrayList)message.obj);
                 }
             }
         };

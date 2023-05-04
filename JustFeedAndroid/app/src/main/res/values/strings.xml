@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">JustFeedAndroid</string>
     <string name="interventions">interventions</string>
+    <string-array name="menuEtats">
+        <item>A faire</item>
+        <item>En cours</item>
+        <item>Validée</item>
+    </string-array>
 </resources>

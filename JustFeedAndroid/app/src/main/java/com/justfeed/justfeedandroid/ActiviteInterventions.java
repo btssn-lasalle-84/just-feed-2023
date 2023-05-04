@@ -15,6 +15,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,16 +40,21 @@ public class ActiviteInterventions extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_ActiviteInterventions"; //!< TAG pour les logs (cf. Logcat)
+    private final String AFAIRE     = "A faire"; //!< Constante utilisée pour configurer le filtre.
+    private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDE   = "Validé";    //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
      */
-    private List<Intervention> listeInterventions; //!< Liste des interventions à afficher
-    private Handler              handler;               //!< Le handler utilisé par l'activité
-    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
+    private Intervention.Etats   etat;               //!< Etat qui sert à trier les interventions
+    private List<Intervention>   listeInterventions; //!< Liste des interventions à afficher
+    private Handler              handler;            //!< Le handler utilisé par l'activité
+    private BaseDeDonnees        baseDeDonnees;      //!< Identifiants pour la base de données
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
     private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
+    private Spinner                    menuEtats; //!< Menu pour trier les interventions
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -57,9 +66,9 @@ public class ActiviteInterventions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interventions);
 
-        initialiserVueInterventions();
         initialiserHandler();
 
+        etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
         baseDeDonnees.recupererInterventions();
@@ -121,12 +130,45 @@ public class ActiviteInterventions extends AppCompatActivity
      * d'afficher les interventions, de placer les interventions et de remplir les vues
      * des interventions
      */
-    private void initialiserVueInterventions()
+    private void initialiserVueInterventions(List<Intervention> interventions)
     {
         this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
+        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
+        this.menuEtats.setAdapter(
+          new ArrayAdapter<Intervention.Etats>(this,
+                                               android.R.layout.simple_spinner_item,
+                                               Intervention.Etats.values()));
+        menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
+            {
+                String nouvelEtat = parent.getItemAtPosition(position).toString();
+                switch(nouvelEtat)
+                {
+                    case AFAIRE:
+                        etat = Intervention.Etats.A_FAIRE;
+                        break;
+                    case EN_COURS:
+                        etat = Intervention.Etats.EN_COURS;
+                        break;
+                    case VALIDE:
+                        etat = Intervention.Etats.VALIDE;
+                        break;
+                }
+                Log.d(TAG, "OnitemSelected() - état : " + etat);
+                VueIntervention.changerEtatAFiltrer(etat);
+                vueListeInterventions.removeAllViews();
+                afficherInterventions(interventions);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+            }
+        });
     }
 
     /**
@@ -153,13 +195,13 @@ public class ActiviteInterventions extends AppCompatActivity
             @Override
             public void handleMessage(@NonNull Message message)
             {
-                //Log.d(TAG, "[Handler] id message = " + message.what);
-                //Log.d(TAG, "[Handler] message = " + message.obj.toString());
+                // Log.d(TAG, "[Handler] id message = " + message.what);
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
 
                 if(message.what == BaseDeDonnees.REQUETE_SQL_SELECT_INTERVENTIONS)
                 {
                     Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
-                    afficherInterventions((ArrayList)message.obj);
+                    initialiserVueInterventions((ArrayList)message.obj);
                 }
             }
         };

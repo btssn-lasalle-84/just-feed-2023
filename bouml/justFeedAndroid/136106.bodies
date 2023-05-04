@@ -6,15 +6,41 @@ class VueIntervention
         dateIntervention        = ((TextView)itemView.findViewById(R.id.dateIntervention));
         aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
+        carteIntervention       = ((CardView)itemView.findViewById(R.id.carteIntervention));
+        menuEtats               = ((Spinner)itemView.findViewById(R.id.menuEtats));
 !!!147626.java!!!	afficherInterventions(inout intervention : Intervention) : void
-        identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
-        if(intervention.estADepanner())
+        if(menuEtats != null)
+            etatAfiltrer = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
+        if(etatAfiltrer == intervention.getEtat())
         {
-            aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
-                              intervention.recupererBacsADepanner());
+            carteIntervention.setVisibility(View.VISIBLE);
+            switch (etatAfiltrer)
+            {
+                case VALIDE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
+                    break;
+                case A_FAIRE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+                    break;
+                case EN_COURS:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(BLEU));
+                    break;
+            }
+            identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            if(intervention.estADepanner())
+            {
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
+                        intervention.recupererBacsADepanner());
+            }
+            if(intervention.estARemplir())
+            {
+                aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+            }
+            dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
         }
-        if(intervention.estARemplir())
-        {
-            aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
-        }
-        dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
+        else
+            carteIntervention.setVisibility(View.GONE);
+!!!154282.java!!!	getEtatAFiltrer(inout nouvelEtat : Intervention::Etats) : Intervention::Etats
+ return etatAfiltrer;
+!!!154410.java!!!	changerEtatAFiltrer(inout nouvelEtat : Intervention::Etats) : void
+ etatAfiltrer = nouvelEtat;

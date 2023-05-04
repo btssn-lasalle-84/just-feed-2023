@@ -24,6 +24,30 @@ import java.util.Locale;
 public class Intervention
 {
     /**
+     * @enum Etats
+     * @brief Les différents états d'une intervention.
+     */
+    public enum Etats
+    {
+        EN_COURS("En cours"),
+        VALIDE("Validé"),
+        A_FAIRE("A faire");
+
+        private String nomMenu;
+
+        private Etats(String nomMenu)
+        {
+            this.nomMenu = nomMenu;
+        }
+
+        @Override
+        public String toString()
+        {
+            return nomMenu;
+        }
+    }
+
+    /**
      * Constantes
      */
     private static final String TAG        = "_Intervention"; //!< TAG pour les logs (cf. Logcat)
@@ -34,7 +58,7 @@ public class Intervention
      */
     private String       dateIntervention; //!< Date de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
-    private boolean      effectuee;        //!< Si l'intervention a été ménée ou non.
+    private Etats        etat;             //!< Les états d'une intervention.
     private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
     private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
@@ -50,23 +74,23 @@ public class Intervention
      * @brief Constructeur d'initialisation de la classe Intervention.
      * @param dateIntervention
      * @param distributeur
-     * @param effectuee
+     * @param etat
      * @param aRemplir
      * @param aDepanner
      */
     public Intervention(String       dateIntervention,
                         Distributeur distributeur,
-                        boolean      effectuee,
+                        Etats        etat,
                         boolean      aRemplir,
                         boolean      aDepanner)
     {
         Log.d(TAG,
               "Intervention() dateIntervention = " + dateIntervention +
-                " - nomdistributeur = " + distributeur.getNom() + " - effectuee = " + effectuee +
+                " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
                 " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
-        this.effectuee        = effectuee;
+        this.etat             = etat;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
     }
@@ -101,12 +125,12 @@ public class Intervention
     }
 
     /**
-     * @brief Méthode d'accés à effectuee.
-     * @return effectuee.
+     * @brief Méthode d'accés à l'état de l'intervention.
+     * @return etat.
      */
-    public boolean estEffectuee()
+    public Etats getEtat()
     {
-        return this.effectuee;
+        return this.etat;
     }
 
     /**
@@ -132,15 +156,6 @@ public class Intervention
      */
 
     /**
-     * @brief Méthode qui renvoie si l'intervention doit être réalisée
-     * @return boolean true si l'intervention doit être réalisée
-     */
-    public boolean estAIntervenir()
-    {
-        return !this.effectuee;
-    }
-
-    /**
      * @brief Méthode qui renvoie la liste des bacs à remplir.
      * @return la liste des bacs à remplir.
      */
@@ -155,7 +170,8 @@ public class Intervention
             {
                 typeProduit       = bac.getTypeProduit().getNom();
                 listeBacsARemplir = listeBacsARemplir.concat(
-                  "   " + typeProduit + " : " + String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
+                  "   " + typeProduit + " : " +
+                  String.format("%.2f kg", bac.getQuantiteARemplir()) + "\n");
             }
         }
 
@@ -195,11 +211,11 @@ public class Intervention
 
     /**
      * @brief Méthode pour modifier l'état de l'intervention.
-     * @param estIntervenu
+     * @param nouvelEtat
      */
-    public void modifierEtatIntervention(boolean estIntervenu)
+    public void modifierEtatIntervention(Etats nouvelEtat)
     {
-        this.effectuee = estIntervenu;
+        this.etat = nouvelEtat;
     }
 
     /**
