@@ -139,6 +139,7 @@ public class ActiviteInterventions extends AppCompatActivity
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
         this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
+        this.menuEtats.bringToFront();
         this.menuEtats.setAdapter(
           new ArrayAdapter<Intervention.Etats>(this,
                                                android.R.layout.simple_spinner_item,
