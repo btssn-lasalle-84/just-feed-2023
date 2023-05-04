@@ -41,9 +41,7 @@ private:
   QString description;     //!< description du distributeur
   QDate dateMiseEnService; //!< date de mise en service du distributeur
   Localisation position;   //!< géolocalisation du distributeur
-  bool aRemplir;  //!< permet de savoir s'il faut remplir ce distributeur
-  bool aDepanner; //!< permet de savoir s'il faut intervenir sur le
-                  //!< distributeur
+  bool aIntervenir;
 
 public:
   Distributeur();
@@ -55,8 +53,6 @@ public:
   // Accesseurs
   QString getDeviceID() const;
   Localisation getPosition() const;
-  bool getARemplir() const;
-  bool getADepanner() const;
   bool getAIntervenir() const;
   int getHygrometrieBac(int numeroBac) const;
   QString getNom() const;
@@ -70,16 +66,14 @@ public:
   Produit *getProduitBac(int numeroBac) const;
   Bac *getBac(int numeroBac) const;
   int getNbBacs() const;
-  bool getAIntervenirBac(int numeroBac) const;
   double getPourcentageBac(int numeroBac) const;
   double getPoidsBac(int numeroBac) const;
   double getPoidsTotalBac(int numeroBac) const;
 
   // mutateurs
+  void setAIntervenir(bool aIntervenir);
   void setDeviceID(const QString deviceID);
   void setPosition(const Localisation &localisation);
-  void setARemplir(bool aRemplir);
-  void setADepanner(bool aDepanner);
   void setNom(const QString &nom);
   void setAdresse(const QString &adresse);
   void setCodePostal(const QString &codePostal);

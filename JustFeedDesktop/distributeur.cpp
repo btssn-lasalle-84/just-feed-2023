@@ -19,7 +19,7 @@ Distributeur::Distributeur()
     : deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
       description(""),
       dateMiseEnService(QDate::currentDate()), position{"", "", "0"},
-      aRemplir(false), aDepanner(false) {
+      aIntervenir(false) {
   qDebug() << Q_FUNC_INFO;
 }
 
@@ -32,14 +32,14 @@ Distributeur::Distributeur(QString deviceID, QString nom, QString adresse,
                            Localisation position)
     : deviceID(deviceID), bacs(), nom(nom), adresse(adresse),
       codePostal(codePostal), ville(ville), description(description),
-      dateMiseEnService(dateMiseEnService), position(position), aRemplir(false),
-      aDepanner(false) {
+      dateMiseEnService(dateMiseEnService), position(position),
+      aIntervenir(false) {
   qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
            << "codePostal" << codePostal << "ville" << ville
            << "dateMiseEnService"
            << "description" << description << dateMiseEnService << "latitude"
            << position.latitude << "longitude" << position.longitude
-           << "aRemplir" << aRemplir << "aDepanner" << aDepanner;
+           << "aIntervenir" << aIntervenir;
 }
 
 /**
@@ -75,24 +75,10 @@ int Distributeur::getHygrometrieBac(int numeroBac) const {
 Localisation Distributeur::getPosition() const { return this->position; }
 
 /**
- * @brief Accesseur de l'attribut aRemplir
- * @return un bool qui permet de savoir s'il faut remplir le distributeur
+ * @brief Accesseur de l'attribut AIntervenir
+ * @return bool
  */
-bool Distributeur::getARemplir() const { return this->aRemplir; }
-
-/**
- * @brief Accesseur de l'attribut aDepanner
- * @return un bool qui permet de savoir s'il faut dépanner le distributeur
- */
-bool Distributeur::getADepanner() const { return this->aDepanner; }
-
-/**
- * @brief Méthode qui retourne l'état d'une intervenion sur ce distributeur
- * @return un bool qui permet de savoir s'il faut intervenir sur le distributeur
- */
-bool Distributeur::getAIntervenir() const {
-  return (this->aRemplir || this->aDepanner);
-}
+bool Distributeur::getAIntervenir() const { return this->aIntervenir; }
 
 /**
  * @brief Accesseur de l'attribut nom
@@ -183,17 +169,6 @@ Bac *Distributeur::getBac(int numeroBac) const {
 int Distributeur::getNbBacs() const { return bacs.size(); }
 
 /**
- * @brief Accesseur pour savoir si le bac est a intervenir
- * @return bool
- */
-bool Distributeur::getAIntervenirBac(int numeroBac) const {
-  if (numeroBac >= 0 && numeroBac < bacs.size()) {
-    return bacs[numeroBac]->getAIntervenir();
-  }
-  return false;
-}
-
-/**
  * @brief Accesseur pour savoir le pourcentage de remplissage du bac
  * @return double
  */
@@ -241,20 +216,6 @@ void Distributeur::setDeviceID(const QString deviceID) {
 void Distributeur::setPosition(const Localisation &localisation) {
   this->position = localisation;
 }
-
-/**
- * @brief Mutateur de l'attribut aRemplir
- * @param aRemplir un booleen qui détermine l'état du
- * distributeur
- */
-void Distributeur::setARemplir(bool aRemplir) { this->aRemplir = aRemplir; }
-
-/**
- * @brief Mutateur de l'attribut aDepanner
- * @param aDepanner un booleen qui détermine l'état du
- * distributeur
- */
-void Distributeur::setADepanner(bool aDepanner) { this->aDepanner = aDepanner; }
 
 /**
  * @brief Mutateur de l'attribut nom
@@ -313,6 +274,14 @@ void Distributeur::setDescription(const QString &description) {
 void Distributeur::setPrixProduit(const int &numeroBac, const double &prix) {
   if (numeroBac >= 0 && numeroBac < bacs.size())
     this->bacs[numeroBac]->setPrixProduit(prix);
+}
+
+/**
+ * @brief Mutateur de l'attribut AIntervenir
+ * @param aIntervenir
+ */
+void Distributeur::setAIntervenir(bool aIntervenir) {
+  this->aIntervenir = aIntervenir;
 }
 
 /**

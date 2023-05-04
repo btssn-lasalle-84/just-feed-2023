@@ -19,7 +19,9 @@ private:
   double poidsActuel;            //!< à définir
   double poidsTotal;             //!< à définir
   double pourcentageRemplissage; //!< pourcentage de remplissage du bac
-  bool aIntervenir;
+  bool aRemplir;   //!< permet de savoir s'il faut remplir ce distributeur
+  bool aDepanner;  //!< permet de savoir s'il faut intervenir sur le
+                   //!< distributeur
   int hygrometrie; //!< hygrometrie de l'interieur du distributeur
 
 public:
@@ -36,9 +38,10 @@ public:
   double getPoidsActuel() const;
   double getPoidsTotal() const;
   double getPourcentageRemplissage() const;
-  bool getAIntervenir() const;
   double getQuantiteARemplir() const;
   int getHygrometrie() const;
+  bool getARemplir() const;
+  bool getADepanner() const;
 
   // Mutateurs
   void setProduit(Produit *produit);
@@ -47,8 +50,9 @@ public:
   void setPoidsActuel(const double &poidsActuel);
   void setPoidsTotal(const double &poidsTotal);
   void setPourcentageRemplissage(const double &pourcentageRemplissage);
-  void setAIntervenir(bool aIntervenir);
   void setHygrometrie(int hydrometrie);
+  void setARemplir(bool aRemplir);
+  void setADepanner(bool aDepanner);
 };
 
 #endif // BAC_H

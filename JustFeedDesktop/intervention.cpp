@@ -114,13 +114,20 @@ void Intervention::selectionnerBac() {
   for (int i = 0; i < distributeurs.size(); ++i) {
     for (int j = 0; j < distributeurs[i]->getNbBacs(); j++) {
       if (labelsDesCheckbox[i][j]->checkState() == Qt::Checked) {
-        distributeurs[i]->getBac(j)->setAIntervenir(true);
-        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j << " "
-                 << distributeurs[i]->getBac(j)->getAIntervenir();
+        if (distributeurs[i]->getBac(j)->getHygrometrie() <=
+            TRENTE /*à définir*/) {
+          distributeurs[i]->getBac(j)->setADepanner(true);
+        }
+        distributeurs[i]->getBac(j)->setARemplir(true);
+        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j
+                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
+                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       } else {
-        distributeurs[i]->getBac(j)->setAIntervenir(false);
-        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j << " "
-                 << distributeurs[i]->getBac(j)->getAIntervenir();
+        distributeurs[i]->getBac(j)->setADepanner(false);
+        distributeurs[i]->getBac(j)->setARemplir(false);
+        qDebug() << Q_FUNC_INFO << "etat du bac " << i << " " << j
+                 << " à depanner" << distributeurs[i]->getBac(j)->getADepanner()
+                 << " à remplir" << distributeurs[i]->getBac(j)->getARemplir();
       }
     }
   }
@@ -135,6 +142,7 @@ void Intervention::selectionnerBac() {
  */
 void Intervention::creerUneIntervention() {
   // requettes sql pour créer l'intervention
+  this->close();
 }
 // Méthodes privées
 
@@ -300,7 +308,8 @@ void Intervention::initialiserEtatDistributeur() {
         labelsDesHygrometries[i][j]->setStyleSheet("color: #023518;");
       }
 
-      if (distributeurs[i]->getBac(j)->getAIntervenir() == true) {
+      if ((distributeurs[i]->getBac(j)->getADepanner()) == true ||
+          distributeurs[i]->getBac(j)->getARemplir() == true) {
         labelsDesCheckbox[i][j]->setEnabled(false);
       } else {
         labelsDesCheckbox[i][j]->setEnabled(true);
