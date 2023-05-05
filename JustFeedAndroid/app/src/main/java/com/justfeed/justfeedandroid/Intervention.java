@@ -29,9 +29,11 @@ public class Intervention
      */
     public enum Etats
     {
+        TOUTES("Toutes"),
         EN_COURS("En cours"),
         VALIDE("Validé"),
         A_FAIRE("A faire");
+
 
         private String nomMenu;
 

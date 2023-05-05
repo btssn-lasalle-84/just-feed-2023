@@ -9,6 +9,7 @@ package com.justfeed.justfeedandroid;
 import static com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -67,10 +68,10 @@ public class VueIntervention extends ViewHolder
     {
         if(menuEtats != null)
             etatAfiltrer = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
-        if(etatAfiltrer == intervention.getEtat())
+        if(etatAfiltrer == intervention.getEtat() && etatAfiltrer != Intervention.Etats.TOUTES)
         {
             carteIntervention.setVisibility(View.VISIBLE);
-            switch(etatAfiltrer)
+            switch(intervention.getEtat())
             {
                 case VALIDE:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
@@ -95,8 +96,39 @@ public class VueIntervention extends ViewHolder
             dateIntervention.setText("Date de l'intervention : " +
                                      Intervention.formaterDate(intervention.getDateIntervention()));
         }
+        else if (etatAfiltrer == Intervention.Etats.TOUTES)
+        {
+            Log.d("VueIntervention", "TOUTES");
+            carteIntervention.setVisibility(View.VISIBLE);
+            switch(intervention.getEtat())
+            {
+                case VALIDE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
+                    break;
+                case A_FAIRE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+                    break;
+                case EN_COURS:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(BLEU));
+                    break;
+            }
+            identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            if(intervention.estADepanner())
+            {
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
+                        "%) : \n" + intervention.recupererBacsADepanner());
+            }
+            if(intervention.estARemplir())
+            {
+                aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+            }
+            dateIntervention.setText("Date de l'intervention : " +
+                    Intervention.formaterDate(intervention.getDateIntervention()));
+        }
         else
+        {
             carteIntervention.setVisibility(View.GONE);
+        }
     }
 
     /**
