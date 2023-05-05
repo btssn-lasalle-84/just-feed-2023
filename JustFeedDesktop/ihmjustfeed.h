@@ -11,9 +11,9 @@
 #ifndef IHMJUSTFEED_H
 #define IHMJUSTFEED_H
 
-#include <QtWidgets>
 #include <QString>
 #include <QVector>
+#include <QtWidgets>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -41,105 +41,99 @@ class BaseDeDonnees;
  * @details     La classe IHMJustFeed \c Cette classe permet de définir la GUI
  * de l'application JustFeed
  */
-class IHMJustFeed : public QWidget
-{
-    /**
-     * @enum Fenetre
-     * @brief Définit les différentes fenêtres de l'IHM
-     *
-     */
-    enum Fenetre
-    {
-        FAccueil,
-        FDistributeur,
-        FIntervention,
-        NbFenetres
-    };
-    /**
-     * @enum ColonneDistributeur
-     * @brief Définit les différentes colonnes du QTableWidget
-     *
-     */
-    enum ColonneDistributeur
-    {
-        COLONNE_DISTRIBUTEUR_NOM, //!< Emplacement du nom
-        COLONNE_DISTRIBUTEUR_ADRESSE,
-        COLONNE_DISTRIBUTEUR_VILLE,
-        COLONNE_DISTRIBUTEUR_CODEPOSTAL,
-        COLONNE_DISTRIBUTEUR_INTERVENTION,
-        NbColonnesDistributeur
-    };
+class IHMJustFeed : public QWidget {
+  /**
+   * @enum Fenetre
+   * @brief Définit les différentes fenêtres de l'IHM
+   *
+   */
+  enum Fenetre { FAccueil, FDistributeur, FIntervention, NbFenetres };
+  /**
+   * @enum ColonneDistributeur
+   * @brief Définit les différentes colonnes du QTableWidget
+   *
+   */
+  enum ColonneDistributeur {
+    COLONNE_DISTRIBUTEUR_NOM, //!< Emplacement du nom
+    COLONNE_DISTRIBUTEUR_ADRESSE,
+    COLONNE_DISTRIBUTEUR_VILLE,
+    COLONNE_DISTRIBUTEUR_CODEPOSTAL,
+    COLONNE_DISTRIBUTEUR_INTERVENTION,
+    NbColonnesDistributeur
+  };
 
-    Q_OBJECT
-  private:
-    QVector<Distributeur*> distributeurs;                 //!< les distributeur
-    QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeur à intervenir
-    QVector<Produit*>      produits;                      //!< les produits
-    int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
-    ConfigurationDistributeur*
-      configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
-    Intervention* intervention;
-    QStringList   nomColonnes;           //!< la liste des noms de colonne
-    int           nbLignesDistributeurs; //!< le nombre de lignes dans la table
-    BaseDeDonnees *baseDeDonnees;
+  Q_OBJECT
+private:
+  QVector<Distributeur *> distributeurs; //!< les distributeur
+  QVector<Distributeur *>
+      listeDistributeursAIntervenir; //!< les distributeur à intervenir
+  QVector<Produit *> produits;       //!< les produits
+  int numeroDistributeurSelectionne; //!< le distributeur sélectionné
+  ConfigurationDistributeur
+      *configurationDistributeur; //!< la boîte de dialogue pour configurer un
+                                  //!< distributeur
+  Intervention *intervention;
+  QStringList nomColonnes;   //!< la liste des noms de colonne
+  int nbLignesDistributeurs; //!< le nombre de lignes dans la table
+  BaseDeDonnees *baseDeDonnees;
 
-    // Widgets
-    QWidget*          gui;                      //!< le widget central
-    QStackedWidget*   fenetres;                 //!< la pile de fenêtres
-    QWidget*          fenetreAccueil;           //!< la fenêtre d'accueil
-    QWidget*          fenetreDistributeur;      //!< la fenêtre d'un distributeur
-    QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
-    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
+  // Widgets
+  QWidget *gui;                           //!< le widget central
+  QStackedWidget *fenetres;               //!< la pile de fenêtres
+  QWidget *fenetreAccueil;                //!< la fenêtre d'accueil
+  QWidget *fenetreDistributeur;           //!< la fenêtre d'un distributeur
+  QTableWidget *tableWidgetDistributeurs; //!< l'affichage sous forme de table
+  QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
       *itemIntervention; //!< les éléments de la table
-    QPushButton* boutonPlanifier;
-    QPushButton* boutonConfigurer;
-    QPushButton* boutonValider;
-    QComboBox*   listeDistributeurs; //!< liste de distributeurs
-    QLabel*      nomDistributeur;
-    QLabel*      adresseDistributeur;
-    QLabel*      codePostalDistributeur;
-    QLabel*      villeDistributeur;
-    QLabel*      descriptionDistributeur;
-    QLabel*      miseEnServiceDistributeur;
-    QLabel*      positionDistributeur;
+  QPushButton *boutonPlanifier;
+  QPushButton *boutonConfigurer;
+  QPushButton *boutonValider;
+  QComboBox *listeDistributeurs; //!< liste de distributeurs
+  QLabel *nomDistributeur;
+  QLabel *adresseDistributeur;
+  QLabel *codePostalDistributeur;
+  QLabel *villeDistributeur;
+  QLabel *descriptionDistributeur;
+  QLabel *miseEnServiceDistributeur;
+  QLabel *positionDistributeur;
 
-    void initialiserGUI();
-    void instancierWidgets();
-    void initialiserWidgets();
-    void initialiserTable();
-    void positionnerWidgets();
-    void initialiserEvenements();
-    void initialiserDistributeurs();
-    void initialiserProduits();
-    void chargerDistributeurs();
-    void afficherDistributeurTable(const Distributeur& distributeur);
-    void afficherDistributeur(Distributeur* distributeur);
-    void effacerTableau(int ligne, int colonne);
-    void effacerTableDistributeurs();
-    int  recupererDistributeursAIntervenir();
-    void effacerDistributeursAIntervenir();
+  void initialiserGUI();
+  void instancierWidgets();
+  void initialiserWidgets();
+  void initialiserTable();
+  void positionnerWidgets();
+  void initialiserEvenements();
+  void initialiserDistributeurs();
+  void initialiserProduits();
+  void chargerDistributeurs();
+  void afficherDistributeurTable(const Distributeur &distributeur);
+  void afficherDistributeur(Distributeur *distributeur);
+  void effacerTableau(int ligne, int colonne);
+  void effacerTableDistributeurs();
+  int recupererDistributeursAIntervenir();
+  void effacerDistributeursAIntervenir();
 
-  public:
-    IHMJustFeed(QWidget* parent = nullptr);
-    ~IHMJustFeed();
+public:
+  IHMJustFeed(QWidget *parent = nullptr);
+  ~IHMJustFeed();
 
-    Distributeur* getDistributeur(QString nom) const;
-    Produit*      getProduit(int index) const;
-    QString       getNomProduit(int index) const;
-    double        getPrixProduit(int index) const;
-    int           getNbProduits() const;
+  Distributeur *getDistributeur(QString nom) const;
+  Produit *getProduit(int index) const;
+  QString getNomProduit(int index) const;
+  double getPrixProduit(int index) const;
+  int getNbProduits() const;
 
-  public slots:
-    void afficherFenetre(IHMJustFeed::Fenetre fenetre);
-    void afficherFenetreAccueil();
-    void afficherFenetreDistributeur();
-    void afficherFenetreIntervention();
-    void configurerDistributeur();
-    void planifierIntervention();
-    void selectionnerDistributeur(int numeroDistributeur);
-    void selectionnerDistributeur(int ligne, int colonne);
-    void selectionnerDistributeur(QTableWidgetItem* item);
-    void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
+public slots:
+  void afficherFenetre(IHMJustFeed::Fenetre fenetre);
+  void afficherFenetreAccueil();
+  void afficherFenetreDistributeur();
+  void afficherFenetreIntervention();
+  void configurerDistributeur();
+  void planifierIntervention();
+  void selectionnerDistributeur(int numeroDistributeur);
+  void selectionnerDistributeur(int ligne, int colonne);
+  void selectionnerDistributeur(QTableWidgetItem *item);
+  void selectionnerDistributeurAIntervenir(QTableWidgetItem *item);
 };
 
 #endif // IHMJUSTFEED_H

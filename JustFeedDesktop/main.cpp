@@ -17,8 +17,6 @@
 int main(int argc, char *argv[]) {
   QApplication a(argc, argv);
   IHMJustFeed w;
-  BaseDeDonnees *baseDeDonnees = BaseDeDonnees::getInstance();
-  baseDeDonnees->connecter();
   w.show();
 
   return a.exec();
