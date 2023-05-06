@@ -73,7 +73,7 @@ public class VueIntervention extends ViewHolder
             carteIntervention.setVisibility(View.VISIBLE);
             switch(intervention.getEtat())
             {
-                case VALIDE:
+                case VALIDEES:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
                     break;
                 case A_FAIRE:
@@ -102,7 +102,7 @@ public class VueIntervention extends ViewHolder
             carteIntervention.setVisibility(View.VISIBLE);
             switch(intervention.getEtat())
             {
-                case VALIDE:
+                case VALIDEES:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
                     break;
                 case A_FAIRE:

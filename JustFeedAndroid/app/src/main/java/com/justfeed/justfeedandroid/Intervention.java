@@ -30,10 +30,9 @@ public class Intervention
     public enum Etats
     {
         TOUTES("Toutes"),
+        A_FAIRE("A faire"),
         EN_COURS("En cours"),
-        VALIDE("Validé"),
-        A_FAIRE("A faire");
-
+        VALIDEES("Validées");
 
         private String nomMenu;
 
