@@ -14,17 +14,18 @@
 #include "basededonnees.h"
 #include "configurationdistributeur.h"
 #include "distributeur.h"
-#include "intervention.h"
+#include "planificationintervention.h"
 #include "produit.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
  */
 IHMJustFeed::IHMJustFeed(QWidget* parent) :
-    QWidget(parent), configurationDistributeur(nullptr), intervention(nullptr)
+    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
+    configurationDistributeur(nullptr), planificationIntervention(nullptr),
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
 {
     qDebug() << Q_FUNC_INFO;
-    BaseDeDonnees* baseDeDonnees = BaseDeDonnees::getInstance();
     baseDeDonnees->connecter();
     initialiserDistributeurs();
     initialiserProduits();
@@ -41,6 +42,7 @@ IHMJustFeed::~IHMJustFeed()
     {
         delete distributeurs[i];
     }
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
 
@@ -157,15 +159,16 @@ void IHMJustFeed::planifierIntervention()
     if(listeDistributeursAIntervenir.size() < 1)
         return;
     // crée et affiche la boîte de dialogue
-    if(intervention == nullptr)
+    if(planificationIntervention == nullptr)
     {
-        intervention = new Intervention(listeDistributeursAIntervenir, baseDeDonnees, this);
+        planificationIntervention =
+          new PlanificationIntervention(listeDistributeursAIntervenir, this);
     }
     else
         return;
-    intervention->exec();
-    delete intervention;
-    intervention = nullptr;
+    planificationIntervention->exec();
+    delete planificationIntervention;
+    planificationIntervention = nullptr;
     effacerDistributeursAIntervenir();
     boutonPlanifier->setEnabled(false);
 }
@@ -432,7 +435,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
