@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +21,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @brief Définition de la classe ActiviteInterventions.
@@ -40,9 +37,10 @@ public class ActiviteInterventions extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_ActiviteInterventions"; //!< TAG pour les logs (cf. Logcat)
-    private final String AFAIRE     = "A faire"; //!< Constante utilisée pour configurer le filtre.
+    private final String TOUTES   = "Toutes";    //!< Constante utilisée pour configurer le filtre.
+    private final String A_FAIRE = "A faire"; //!< Constante utilisée pour configurer le filtre.
     private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDE   = "Validé";    //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDEES = "Validé";    //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
@@ -52,9 +50,10 @@ public class ActiviteInterventions extends AppCompatActivity
     private Handler              handler;            //!< Le handler utilisé par l'activité
     private BaseDeDonnees        baseDeDonnees;      //!< Identifiants pour la base de données
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter adapteurIntervention;  //!< Pour remplir les vues des Interventions
+    private RecyclerView.Adapter adapteurIntervention = null;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
-    private Spinner                    menuEtats; //!< Menu pour trier les interventions
+    private Spinner                    menuEtats;      //!< Menu pour trier les interventions
+    private SwipeRefreshLayout         rafraichisseur; //!< Pull-to-refresh
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -67,7 +66,11 @@ public class ActiviteInterventions extends AppCompatActivity
         setContentView(R.layout.interventions);
 
         initialiserHandler();
-
+        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
+        this.menuEtats.setAdapter(
+          new ArrayAdapter<Intervention.Etats>(this,
+                                               android.R.layout.simple_spinner_item,
+                                               Intervention.Etats.values()));
         etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
@@ -136,11 +139,7 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
-        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
-        this.menuEtats.setAdapter(
-          new ArrayAdapter<Intervention.Etats>(this,
-                                               android.R.layout.simple_spinner_item,
-                                               Intervention.Etats.values()));
+        menuEtats.setSelection(1); // Intervention.Etats.A_FAIRE
         menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
@@ -148,25 +147,37 @@ public class ActiviteInterventions extends AppCompatActivity
                 String nouvelEtat = parent.getItemAtPosition(position).toString();
                 switch(nouvelEtat)
                 {
-                    case AFAIRE:
+                    case A_FAIRE:
                         etat = Intervention.Etats.A_FAIRE;
                         break;
                     case EN_COURS:
                         etat = Intervention.Etats.EN_COURS;
                         break;
-                    case VALIDE:
-                        etat = Intervention.Etats.VALIDE;
+                    case VALIDEES:
+                        etat = Intervention.Etats.VALIDEES;
+                        break;
+                    case TOUTES:
+                        etat = Intervention.Etats.TOUTES;
                         break;
                 }
-                Log.d(TAG, "OnitemSelected() - état : " + etat);
+                Log.d(TAG, "onItemSelected() - état : " + etat);
                 VueIntervention.changerEtatAFiltrer(etat);
-                vueListeInterventions.removeAllViews();
                 afficherInterventions(interventions);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView)
             {
+            }
+        });
+        this.rafraichisseur = (SwipeRefreshLayout)findViewById(R.id.rafraichisseur);
+        rafraichisseur.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                Log.d(TAG, "_onRefresh()");
+                rafraichisseur.setRefreshing(false);
+                baseDeDonnees.recupererInterventions();
             }
         });
     }
@@ -177,7 +188,8 @@ public class ActiviteInterventions extends AppCompatActivity
     private void afficherInterventions(List<Intervention> interventions)
     {
         Log.d(TAG, "afficherInterventions() nb interventions = " + interventions.size());
-        this.listeInterventions = interventions;
+        vueListeInterventions.removeAllViews();
+        this.listeInterventions   = interventions;
         if(this.adapteurIntervention == null)
         {
             this.adapteurIntervention = new AdaptateurIntervention(this.listeInterventions);
