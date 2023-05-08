@@ -23,7 +23,7 @@ ConfigurationDistributeur::ConfigurationDistributeur(Distributeur* distributeur,
     distributeur(distributeur), ihmJustFeed(parent)
 {
     qDebug() << Q_FUNC_INFO;
-    qDebug() << Q_FUNC_INFO << "deviceID" << distributeur->getdeviceID() << "latitude"
+    qDebug() << Q_FUNC_INFO << "deviceID" << distributeur->getDeviceID() << "latitude"
              << distributeur->getPosition().latitude << "longitude"
              << distributeur->getPosition().longitude << "nom" << distributeur->getNom()
              << "adresse"

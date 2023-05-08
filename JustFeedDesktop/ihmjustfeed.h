@@ -20,6 +20,7 @@
 class Distributeur;
 class ConfigurationDistributeur;
 class Produit;
+class BaseDeDonnees;
 
 /**
  * @def TITRE_APPLICATION
@@ -31,7 +32,13 @@ class Produit;
  * @def VERSION_APPLICATION
  * @brief Définit la version de l'application
  */
-#define VERSION_APPLICATION QString("v0.1")
+#define VERSION_APPLICATION QString("v0.2")
+
+/**
+ * @def SANS_BDD
+ * @brief À définir pour ne pas utiliser l'accès à la base de données
+ */
+//#define SANS_BDD
 
 #define TAILLE_POLICE 14
 
@@ -70,14 +77,14 @@ class IHMJustFeed : public QWidget
 
     Q_OBJECT
   private:
-    QVector<Distributeur*> distributeurs; //!< les distributeur
-    QVector<Produit*>      produits;      //!< les produits
-
-    int numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    BaseDeDonnees* baseDeDonnees; //!< association vers la classe BaseDeDonnees
     ConfigurationDistributeur*
-                configurationDistributeur; //!< la boîte de dialogue pour configurer un distributeur
-    QStringList nomColonnes;               //!< la liste des noms de colonne
-    int         nbLignesDistributeurs;     //!< le nombre de lignes dans la table
+      configurationDistributeur;          //!< la boîte de dialogue pour configurer un distributeur
+    QVector<Distributeur*> distributeurs; //!< les distributeurs
+    QVector<Produit*>      produits;      //!< les produits
+    int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
+    QStringList            nomColonnes;                   //!< la liste des noms de colonne
+    int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
 
     // Widgets
     QWidget*        gui;                      //!< le widget central

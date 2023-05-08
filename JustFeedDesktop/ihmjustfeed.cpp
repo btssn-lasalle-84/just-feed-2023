@@ -10,19 +10,23 @@
  */
 
 #include "ihmjustfeed.h"
+#include "bac.h"
+#include "basededonnees.h"
+#include "configurationdistributeur.h"
 #include "distributeur.h"
 #include "produit.h"
-#include "bac.h"
-#include "configurationdistributeur.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
  */
-IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistributeur(nullptr)
+IHMJustFeed::IHMJustFeed(QWidget* parent) :
+    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
+    configurationDistributeur(nullptr), numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
 {
     qDebug() << Q_FUNC_INFO;
-    initialiserDistributeurs();
+    baseDeDonnees->connecter();
     initialiserProduits();
+    initialiserDistributeurs();
     initialiserGUI();
     chargerDistributeurs();
 }
@@ -36,6 +40,7 @@ IHMJustFeed::~IHMJustFeed()
     {
         delete distributeurs[i];
     }
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
 
@@ -327,55 +332,61 @@ void IHMJustFeed::initialiserEvenements()
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL");
-    db.setHostName("www.db4free.net");
-    db.setDatabaseName("justfeed");
-    db.setUserName("justfeed");
-    db.setPassword("justfeed");
+#ifdef SANS_BDD
+    qDebug() << Q_FUNC_INFO << "SANS BDD";
+    distributeurs.push_back(new Distributeur("distributeur-1-sim",
+                                             "Grand Frais",
+                                             "Zone du Coudoulet Rond point du Péage Sud",
+                                             "84100",
+                                             "Orange",
+                                             "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-08", "yyyy-MM-dd"),
+                                             { "44.11161", "4.84856", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+                                             "Carrefour",
+                                             "390 Rue Jean Marie Tjibaou",
+                                             "84000",
+                                             "Avignon",
+                                             "Distributeur de fruits secs",
+                                             QDate::fromString("2022-03-09", "yyyy-MM-dd"),
+                                             { "43.92844", "4.79247", "0" }));
+    distributeurs.push_back(new Distributeur("distributeur-3",
+                                             "Cosy Primeurs",
+                                             "292 Route de Boulbon",
+                                             "13570",
+                                             "Barbentane",
+                                             "Distributeur de fruits secs",
+                                             QDate::fromString("2022-01-10", "yyyy-MM-dd"),
+                                             { "43.90252", "4.75280", "0" }));
 
-    qDebug() << Q_FUNC_INFO << "initialiserDistributeurs()";
-
-    if(!db.open())
-    {
-        qDebug() << "Erreur de connexion à la base de données :" << db.lastError().text();
-        return;
-    }
-    else
-    {
-        qDebug() << "Vous avez réussi a vous connecter";
-    }
-
-    QSqlQuery query("SELECT * FROM Distributeur");
-
-    while(query.next())
-    {
-        QString deviceID = query.value(10).toString();
-        qDebug() << "Device ID:" << deviceID;
-        Localisation position;
-        position.latitude  = query.value(9).toString();
-        position.longitude = query.value(8).toString();
-        QString nom        = query.value(2).toString();
-        qDebug() << "Nom:" << nom;
-        QString adresse           = query.value(4).toString();
-        QString ville             = query.value(5).toString();
-        QString codePostal        = query.value(6).toString();
-        QString description       = query.value(3).toString();
-        QDate   dateMiseEnService = QDate::fromString(query.value(7).toString(), "yyyy-MM-dd");
-
-        qDebug() << "Device ID:" << deviceID;
-
-        Distributeur* distributeur = new Distributeur(deviceID,
-                                                      position,
-                                                      nom,
-                                                      adresse,
-                                                      codePostal,
-                                                      ville,
-                                                      description,
-                                                      dateMiseEnService);
-        distributeurs.append(distributeur);
-    }
+    distributeurs[0]->ajouterBac(Bac(1, produits[0], 50, 50, 25));
+    distributeurs[0]->ajouterBac(Bac(2, produits[1], 0, 100, 25));
+    distributeurs[0]->ajouterBac(Bac(3, produits[2], 15, 30, 25));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
+             << distributeurs[0]->getNbBacs();
+    distributeurs[1]->ajouterBac(Bac(4, produits[3], 0, 12, 18));
+    distributeurs[1]->ajouterBac(Bac(5, produits[4], 0, 12, 18));
+    distributeurs[1]->ajouterBac(Bac(6, produits[5], 0, 12, 18));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
+             << distributeurs[1]->getNbBacs();
+    distributeurs[2]->ajouterBac(Bac(7, produits[6], 9, 12, 21));
+    distributeurs[2]->ajouterBac(Bac(8, produits[7], 6, 12, 21));
+    distributeurs[2]->ajouterBac(Bac(9, produits[8], 10.8, 12, 21));
+    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
+             << distributeurs[2]->getNbBacs();
 
     numeroDistributeurSelectionne = 0; // pour les tests
+#else
+    /**
+     * @see
+     * http://tvaira.free.fr/projets/activites/activite-base-donnees.html#s%C3%A9quence-2-mise-en-oeuvre-dune-classe-basededonnees
+     */
+    QString requete = "SELECT * FROM Distributeur";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    QVector<QStringList> distributeursRecuperes;
+    baseDeDonnees->recuperer(requete, distributeursRecuperes);
+    qDebug() << Q_FUNC_INFO << "distributeursRecuperes" << distributeursRecuperes;
+#endif
 }
 
 /**
@@ -383,43 +394,62 @@ void IHMJustFeed::initialiserDistributeurs()
  */
 void IHMJustFeed::initialiserProduits()
 {
-    qDebug() << "Produit";
+#ifdef SANS_BDD
+    qDebug() << Q_FUNC_INFO << "SANS BDD";
+    Produit* pruneaux    = new Produit("Pruneaux",
+                                    "Maître Prunille",
+                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "761234567890",
+                                    1.15);
+    Produit* abricot     = new Produit("Abricots secs",
+                                   "Maître Prunille",
+                                   "L'abricot moelleux, une gourmandise tendre et fruitée !",
+                                   "761234566000",
+                                   1.13);
+    Produit* cranberries = new Produit("Cranberries",
+                                       "SEEBERGER",
+                                       "Cranberries tranchées sucrées séchées",
+                                       "761234569000",
+                                       2.1);
+    Produit* banane =
+      new Produit("Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
+    Produit* raisin    = new Produit("Raisin sec",
+                                  "Petit Prix",
+                                  "Raisins secs, huile végétale (graine de coton)",
+                                  "761264569090",
+                                  0.39);
+    Produit* fruitsSec = new Produit("fruits sec",
+                                     "FRUIDYLLIC",
+                                     "Peut se manger tel que sans préparation.",
+                                     "761234960940",
+                                     1.06);
+    Produit* cacahuete =
+      new Produit("Cacahuète",
+                  "Carrefour",
+                  "Arachide crue blanche décortiquée pour cuisiner ou pâtisserie",
+                  "761234561000",
+                  0.49);
+    Produit* soja = new Produit("Soja", "OFAL BIO", "SOJA jaune biologique.", "761234529000", 0.96);
+    Produit* basilic = new Produit("Basilic",
+                                   "DUCROS",
+                                   "Basilic déshydraté issu de l'agriculture biologique",
+                                   "761234679900",
+                                   17.18);
 
-    QSqlQuery query("SELECT * FROM Produit");
-
-    while(query.next())
-    {
-        QString nom = query.value(1).toString();
-        qDebug() << "Nom:" << nom;
-        QString codeProduit = query.value(4).toString();
-        qDebug() << "codeProduit:" << codeProduit;
-        QString marque = query.value(2).toString();
-        qDebug() << "marque:" << marque;
-        QString description = query.value(3).toString();
-        qDebug() << "description:" << description;
-        double prix = query.value(5).toDouble();
-        ;
-        qDebug() << "Prix:" << prix;
-
-        Produit* produit = new Produit(nom, marque, description, codeProduit, prix);
-        produits.append(produit);
-    }
-
-    distributeurs[0]->ajouterBac(Bac(produits[0], 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(produits[1], 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(produits[2], 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
-             << distributeurs[0]->getNbBacs();
-    distributeurs[1]->ajouterBac(Bac(produits[0], 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(produits[1], 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(produits[2], 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
-             << distributeurs[1]->getNbBacs();
-    distributeurs[2]->ajouterBac(Bac(produits[0], 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(produits[0], 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(produits[0], 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
-             << distributeurs[2]->getNbBacs();
+    produits.push_back(pruneaux);
+    produits.push_back(abricot);
+    produits.push_back(cranberries);
+    produits.push_back(banane);
+    produits.push_back(raisin);
+    produits.push_back(fruitsSec);
+    produits.push_back(cacahuete);
+    produits.push_back(soja);
+    produits.push_back(basilic);
+#else
+    qDebug() << Q_FUNC_INFO;
+    QString requete = "SELECT * FROM Produit";
+#endif
 }
 
 /**

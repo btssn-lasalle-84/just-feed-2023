@@ -16,28 +16,46 @@ class Produit;
 class Bac
 {
   private:
-    Produit*     produit;                //!< produit que contient le bac
-    unsigned int poidsActuel;            //!< à définir
-    double       pourcentageRemplissage; //!< pourcentage de remplissage du bac
+    int      idBac;                  //!< identifiant du bac
+    Produit* produit;                //!< produit que contient le bac
+    double   poidsActuel;            //!< à définir
+    double   poidsTotal;             //!< à définir
+    double   pourcentageRemplissage; //!< pourcentage de remplissage du bac
+    bool     aRemplir;               //!< permet de savoir s'il faut remplir ce distributeur
+    bool     aDepanner;              //!< permet de savoir s'il faut intervenir sur le
+                                     //!< distributeur
+    int hygrometrie;                 //!< hygrometrie de l'interieur du distributeur
 
   public:
     Bac();
-    Bac(Produit* produit, unsigned int poidsActuel, double pourcentageRemplissage = 100.);
+    Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie);
+    Bac(int idBac, Produit* produit, double poidsTotal);
     Bac(const Bac& bac);
     ~Bac();
 
     // Accesseurs
-    Produit*     getProduit() const;
-    QString      getNomProduit() const;
-    double       getPrixProduit() const;
-    unsigned int getPoidsActuel() const;
-    double       getPourcentageRemplissage() const;
+    Produit* getProduit() const;
+    QString  getNomProduit() const;
+    double   getPrixProduit() const;
+    double   getPoidsActuel() const;
+    double   getPoidsTotal() const;
+    double   getPourcentageRemplissage() const;
+    double   getQuantiteARemplir() const;
+    int      getHygrometrie() const;
+    bool     getARemplir() const;
+    bool     getADepanner() const;
+    int      getIdBac() const;
 
     // Mutateurs
     void setProduit(Produit* produit);
     void setNomProduit(const QString& nomProduit);
     void setPrixProduit(const double& prixProduit);
-    void setPoidsActuel(int poidsActuel);
+    void setPoidsActuel(const double& poidsActuel);
+    void setPoidsTotal(const double& poidsTotal);
+    void setPourcentageRemplissage(const double& pourcentageRemplissage);
+    void setHygrometrie(int hydrometrie);
+    void setARemplir(bool aRemplir);
+    void setADepanner(bool aDepanner);
 };
 
 #endif // BAC_H

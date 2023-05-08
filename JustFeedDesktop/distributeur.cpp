@@ -16,8 +16,9 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), position(), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
-    dateMiseEnService(QDate::currentDate()), description(""), hygrometrie(0), aIntervenir(false)
+    deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""), description(""),
+    dateMiseEnService(QDate::currentDate()), position{ "", "", "0" }, aIntervenir(false),
+    hygrometrie(0)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -26,23 +27,22 @@ Distributeur::Distributeur() :
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
 Distributeur::Distributeur(QString      deviceID,
-                           Localisation position,
                            QString      nom,
                            QString      adresse,
                            QString      codePostal,
                            QString      ville,
                            QString      description,
-                           QDate        dateMiseEnService) :
+                           QDate        dateMiseEnService,
+                           Localisation position) :
     deviceID(deviceID),
-    position(position), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
-    dateMiseEnService(dateMiseEnService), description(description), hygrometrie(0),
-    aIntervenir(false)
+    bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    description(description), dateMiseEnService(dateMiseEnService), position(position),
+    aIntervenir(false), hygrometrie(0)
 {
-    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "latitude" << position.latitude
-             << "longitude" << position.longitude << "nom" << nom << "adresse"
+    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << dateMiseEnService << "description" << description << "hydrometrie" << hygrometrie
-             << "aIntervenir" << aIntervenir;
+             << "description" << description << dateMiseEnService << "latitude" << position.latitude
+             << "longitude" << position.longitude << "aIntervenir" << aIntervenir;
 }
 
 /**
@@ -61,19 +61,20 @@ Distributeur::~Distributeur()
  * @brief Accesseur de l'attribut identifiant
  * @return un QString qui represente l'identifiant du distributeur
  */
-QString Distributeur::getdeviceID() const
+QString Distributeur::getDeviceID() const
 {
     return this->deviceID;
 }
 
 /**
  * @brief Accesseur de l'attribut hygrometrie
- * @return un entier qui represente la mesure de la quantité de vapeur d'eau contenue de l'air
- * humide du distributeur
+ * @return un entier qui represente la mesure de la quantité de vapeur d'eau
+ * contenue de l'air humide du distributeur
+ * @param numeroBac
  */
-float Distributeur::getHygrometrie() const
+int Distributeur::getHygrometrieBac(int numeroBac) const
 {
-    return this->hygrometrie;
+    return bacs[numeroBac]->getHygrometrie();
 }
 
 /**
@@ -87,11 +88,20 @@ Localisation Distributeur::getPosition() const
 
 /**
  * @brief Accesseur de l'attribut AIntervenir
- * @return un bool qui permet de savoir s'il faut intervenir sur le
+ * @return bool
  */
-int Distributeur::getAIntervenir() const
+bool Distributeur::getAIntervenir() const
 {
     return this->aIntervenir;
+}
+
+/**
+ * @brief Accesseur de l'attribut hygrometrie
+ * @return bool
+ */
+int Distributeur::getHygrometrie() const
+{
+    return this->hygrometrie;
 }
 
 /**
@@ -210,6 +220,45 @@ int Distributeur::getNbBacs() const
 }
 
 /**
+ * @brief Accesseur pour savoir le pourcentage de remplissage du bac
+ * @return double
+ */
+double Distributeur::getPourcentageBac(int numeroBac) const
+{
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPourcentageRemplissage();
+    }
+    return 0.;
+}
+
+/**
+ * @brief Accesseur pour savoir le poids du bac
+ * @return double
+ */
+double Distributeur::getPoidsBac(int numeroBac) const
+{
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPoidsActuel();
+    }
+    return 0.;
+}
+
+/**
+ * @brief Accesseur pour savoir le poids total du bac
+ * @return double
+ */
+double Distributeur::getPoidsTotalBac(int numeroBac) const
+{
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPoidsTotal();
+    }
+    return 0.;
+}
+
+/**
  * @brief Mutateur de l'attribut identifiant
  * @param deviceID identifiant du distributeur
  */
@@ -219,32 +268,12 @@ void Distributeur::setDeviceID(const QString deviceID)
 }
 
 /**
- * @brief Mutateur de l'attribut Hygrometrie
- * @param Hygrometrie l'Hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du
- * distributeur
- */
-void Distributeur::setHygrometrie(float Hygrometrie)
-{
-    this->hygrometrie = Hygrometrie;
-}
-
-/**
  * @brief Mutateur de l'attribut localisation
  * @param localisation la localisation du distributeur
  */
 void Distributeur::setPosition(const Localisation& localisation)
 {
     this->position = localisation;
-}
-
-/**
- * @brief Mutateur de l'attribut aIntervenir
- * @param aIntervenir un booleen qui détermine l'état du
- * distributeur
- */
-void Distributeur::setAIntervenir(bool aIntervenir)
-{
-    this->aIntervenir = aIntervenir;
 }
 
 /**
@@ -318,6 +347,15 @@ void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 }
 
 /**
+ * @brief Mutateur de l'attribut AIntervenir
+ * @param aIntervenir
+ */
+void Distributeur::setAIntervenir(bool aIntervenir)
+{
+    this->aIntervenir = aIntervenir;
+}
+
+/**
  * @brief Ajoute un bac dans le distributeur
  * @param bac
  */
@@ -336,7 +374,7 @@ void Distributeur::supprimerBac(const int numeroBacASupprimer)
     {
         qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
         delete bacs[numeroBacASupprimer];
-        bacs.removeAt(numeroBacASupprimer);
+        bacs.remove(numeroBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
 }
