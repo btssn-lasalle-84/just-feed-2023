@@ -11,6 +11,7 @@ import static com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -51,6 +52,8 @@ public class VueIntervention extends ViewHolder
       carteIntervention; //!< attribut GUI qui contient les informations sur une intervention.
     private final Spinner
       menuEtats; //!< attribut GUI d'une liste déroulante pour trier les interventions.
+    private final Spinner
+      listeEtats; //!< attribut GUI d'une liste déroulante pour changer l'état d'une intervention.
 
     public VueIntervention(final View itemView)
     {
@@ -62,6 +65,7 @@ public class VueIntervention extends ViewHolder
         aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
         carteIntervention       = ((CardView)itemView.findViewById(R.id.carteIntervention));
         menuEtats               = ((Spinner)itemView.findViewById(R.id.menuEtats));
+        listeEtats              = ((Spinner)itemView.findViewById(R.id.listeEtats));
     }
 
     public void afficherInterventions(Intervention intervention)
@@ -129,6 +133,14 @@ public class VueIntervention extends ViewHolder
         {
             carteIntervention.setVisibility(View.GONE);
         }
+    }
+
+    public void afficherListeDeroulante()
+    {
+
+        /**
+         * @// TODO: 09/05/2023  
+         */
     }
 
     /**
