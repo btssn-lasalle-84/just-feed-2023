@@ -95,7 +95,6 @@ void PlanificationIntervention::creerUneIntervention()
     intervention = new Intervention(distributeurs);
     intervention->setDateIntervention(editionDate->date());
     intervention->creer();
-
     this->close();
 }
 // Méthodes privées

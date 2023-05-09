@@ -136,16 +136,43 @@ void Intervention::creer()
      * @todo Fabriquer la requête pour insérer une nouvelle intervention pour chaque distributeur
      * dans la table Intervention
      */
-    /*
-     * Exemple :
-     * INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, etat, aRemplir,
-     * aDepanner) VALUES (1, 1, '2023-06-01', 'A_FAIRE', 1, 0);
-     */
+
+    for(int i = 0; i < distributeurs.size(); i++)
+    {
+        this->setARemplir(false);
+        this->setADepanner(false);
+        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
+        {
+            if(distributeurs[i]->getBac(j)->getARemplir() &&
+               distributeurs[i]->getBac(j)->getADepanner())
+            {
+                this->setARemplir(true);
+                this->setADepanner(true);
+                break;
+            }
+            else if((distributeurs[i]->getBac(j)->getARemplir()) &&
+                    (!distributeurs[i]->getBac(j)->getARemplir()))
+            {
+                this->setARemplir(true);
+            }
+            else if(distributeurs[i]->getBac(j)->getADepanner() &&
+                    (!distributeurs[i]->getBac(j)->getADepanner()))
+            {
+                this->setADepanner(true);
+            }
+        }
+        requete =
+          "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, etat, "
+          "aRemplir, aDepanner) VALUES (1, i , 2023-06-01, 'A_FAIRE',  this->getARemplir(), "
+          "this->getADepanner());";
+        baseDeDonnees->executer(requete);
+    }
+
     intervenir(true);
 
     /**
-     * @todo Fabriquer la requête pour insérer un nouvel approvisionnement pour chaque bac si besoin
-     * et finaliser la structure de la table Approvisionnement
+     * @todo Fabriquer la requête pour insérer un nouvel approvisionnement pour chaque bac si
+     * besoin et finaliser la structure de la table Approvisionnement
      */
     for(int i = 0; i < distributeurs.size(); ++i)
     {
@@ -156,4 +183,24 @@ void Intervention::creer()
             }
         }
     }
+}
+
+bool Intervention::getARemplir() const
+{
+    return this->remplir;
+}
+
+bool Intervention::getADepanner() const
+{
+    return this->depanner;
+}
+
+void Intervention::setARemplir(const bool& aRemplir)
+{
+    this->remplir = aRemplir;
+}
+
+void Intervention::setADepanner(const bool& aDepanner)
+{
+    this->depanner = aDepanner;
 }

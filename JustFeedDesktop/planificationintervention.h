@@ -49,8 +49,8 @@ class PlanificationIntervention : public QDialog
     QVector<QVector<QLabel*> >
       labelsDesHygrometries; //!< conteneur de vecteurs de QLabel pour les hygrometries
     QVector<QVector<QLabel*> >
-                     labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
-    QVector<QLabel*> labelsProduit; //!< conteneur de QLabel de produit
+                               labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
+    QVector<QLabel*>           labelsProduit;     //!< conteneur de QLabel de produit
     QVector<QVector<QLabel*> > labelsDesProduits; //!< conteneur de vecteurs de QLabel pour stocker
                                                   //!< les produits
     QVector<QLabel*>           labelsPourcentage; //!< conteneur de QLabel de produit
@@ -62,7 +62,7 @@ class PlanificationIntervention : public QDialog
     QVector<QCheckBox*> labelsCheckboxDepannage;   //!< vecteur de checkBox depannage
     QVector<QCheckBox*> labelsCheckboxRemplissage; //!< vecteur de checkBox remplissage
     QVector<QVector<QCheckBox*> >
-      labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
+                                  labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
     QVector<QVector<QCheckBox*> > labelsDesCheckboxRemplissage; //!< conteneur de vecteurs de
                                                                 //!< checkBox Remplissage
     QPushButton* boutonItervention; //!< bouton pour créer une intervention
