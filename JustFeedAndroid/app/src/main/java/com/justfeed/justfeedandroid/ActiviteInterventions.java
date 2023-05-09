@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,7 +49,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private Intervention.Etats   etat;               //!< Etat qui sert à trier les interventions
     private List<Intervention>   listeInterventions; //!< Liste des interventions à afficher
     private Handler              handler;            //!< Le handler utilisé par l'activité
-    private BaseDeDonnees        baseDeDonnees;      //!< Identifiants pour la base de données
+    private static BaseDeDonnees baseDeDonnees;      //!< Identifiants pour la base de données
     private RecyclerView         vueListeInterventions; //!< Affichage des Interventions
     private RecyclerView.Adapter adapteurIntervention = null;  //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
@@ -71,6 +72,7 @@ public class ActiviteInterventions extends AppCompatActivity
           new ArrayAdapter<Intervention.Etats>(this,
                                                android.R.layout.simple_spinner_item,
                                                Intervention.Etats.values()));
+        VueIntervention.setContext(this);
         etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
@@ -139,7 +141,6 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
-        menuEtats.setSelection(1); // Intervention.Etats.A_FAIRE
         menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
@@ -215,7 +216,19 @@ public class ActiviteInterventions extends AppCompatActivity
                     Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
                     initialiserVueInterventions((ArrayList)message.obj);
                 }
+                else if(message.what == BaseDeDonnees.REQUETE_SQL_OK)
+                {
+                    Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                }
             }
         };
+    }
+
+    /**
+     * @brief Execute une requête UPDATE, INSERT, DELETE
+     */
+    public static void executeRequete(final String requete)
+    {
+        baseDeDonnees.executerRequete(requete);
     }
 }
