@@ -41,7 +41,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private final String TOUTES   = "Toutes";    //!< Constante utilisée pour configurer le filtre.
     private final String A_FAIRE = "A faire"; //!< Constante utilisée pour configurer le filtre.
     private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDEES = "Validé";    //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDEES = "Validées";    //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
@@ -55,6 +55,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
     private Spinner                    menuEtats;      //!< Menu pour trier les interventions
     private SwipeRefreshLayout         rafraichisseur; //!< Pull-to-refresh
+    private int                        positionListe; //!< La position actuelle de la liste déroulante
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -67,11 +68,7 @@ public class ActiviteInterventions extends AppCompatActivity
         setContentView(R.layout.interventions);
 
         initialiserHandler();
-        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
-        this.menuEtats.setAdapter(
-          new ArrayAdapter<Intervention.Etats>(this,
-                                               android.R.layout.simple_spinner_item,
-                                               Intervention.Etats.values()));
+        this.positionListe = 0;
         VueIntervention.setContext(this);
         etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
@@ -141,10 +138,17 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
+        this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
+        this.menuEtats.setAdapter(
+                new ArrayAdapter<Intervention.Etats>(this,
+                        android.R.layout.simple_spinner_item,
+                        Intervention.Etats.values()));
+        this.menuEtats.setSelection(positionListe);
         menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
             {
+                positionListe = position;
                 String nouvelEtat = parent.getItemAtPosition(position).toString();
                 switch(nouvelEtat)
                 {
@@ -227,8 +231,9 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * @brief Execute une requête UPDATE, INSERT, DELETE
      */
-    public static void executeRequete(final String requete)
+    public static void modifierEtatIntervention(final String requete, Intervention intervention, Intervention.Etats nouvelEtat)
     {
         baseDeDonnees.executerRequete(requete);
+        intervention.modifierEtatIntervention(nouvelEtat);
     }
 }

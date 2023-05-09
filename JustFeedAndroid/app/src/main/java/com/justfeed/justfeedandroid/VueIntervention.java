@@ -35,9 +35,6 @@ public class VueIntervention extends ViewHolder {
     private final static String ROUGE    = "#ed3734"; //!< L'intervention n'a pas été effectuée
     private final static String VERT     = "#4eea48"; //!< L'intervention a été effectuée
     private final static String BLEU     = "#039dfc"; //!< L'intervention est en cours
-    private final static String VALIDER  = "Valider"; //!< L'intervention est validée
-    private final static String EN_COURS = "En cours"; //!< L'intervention est en cours
-    private final static String AFAIRE   = "A faire"; //!< L'intervention est à faire
     private final static String TAG      = "_VueIntervention"; //!< TAG pour le débug
     /**
      * Membres statiques
@@ -102,7 +99,7 @@ public class VueIntervention extends ViewHolder {
             dateIntervention.setText("Date de l'intervention : " +
                     Intervention.formaterDate(intervention.getDateIntervention()));
         } else if (etatAfiltrer == Intervention.Etats.TOUTES) {
-            Log.d("VueIntervention", "TOUTES");
+            Log.d(TAG, "TOUTES");
             carteIntervention.setVisibility(View.VISIBLE);
             switch (intervention.getEtat()) {
                 case VALIDEES:
@@ -135,48 +132,10 @@ public class VueIntervention extends ViewHolder {
         ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
                 R.array.listeEtats, android.R.layout.simple_spinner_item);
         listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ListeDeroulanteGestionnaire gestionnaire = new ListeDeroulanteGestionnaire(intervention);
         this.listeEtats.setAdapter(listeAdapteur);
-        this.listeEtats.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View vue, MotionEvent motionEvent) {
-                interactionDetectee = true;
-                return false;
-            }
-        });
-        this.listeEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
-            {
-                Log.d(TAG, "onItemSelected()");
-                String nouvelEtat = parent.getItemAtPosition(position).toString();
-
-                if(interactionDetectee)
-                {
-                    switch (nouvelEtat)
-                    {
-                        case VALIDER:
-                            Log.d(TAG, "valider");
-                            ActiviteInterventions.executeRequete("UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = "
-                                    +intervention.getIdentifiantDistribteur()+";");
-                            break;
-                        case EN_COURS:
-                            Log.d(TAG, "en cours");
-                            ActiviteInterventions.executeRequete("UPDATE `Intervention` SET `etat` = 'EN_COURS' WHERE `Intervention`.`idDistributeur` = "
-                                    +intervention.getIdentifiantDistribteur()+";");
-                            break;
-                        case AFAIRE:
-                            Log.d(TAG, "A faire");
-                            ActiviteInterventions.executeRequete("UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = "
-                                    +intervention.getIdentifiantDistribteur()+";");
-                            break;
-                    }
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView){};
-        });
+        this.listeEtats.setOnTouchListener(gestionnaire);
+        this.listeEtats.setOnItemSelectedListener(gestionnaire);
     }
 
     /**
