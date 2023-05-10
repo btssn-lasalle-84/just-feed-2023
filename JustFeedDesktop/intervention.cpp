@@ -139,13 +139,11 @@ void Intervention::creer()
         this->setARemplir(false);
         this->setADepanner(false);
         affecterEtatIntervention(i);
-
         qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "aRemplir"
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
         ajouterIntervention(i);
     }
     intervenir(true);
-
     for(int i = 0; i < distributeurs.size(); ++i)
     {
         ajouterApprovisionnement(i);
@@ -218,6 +216,20 @@ void Intervention::ajouterIntervention(const int idDistributeur)
             bool conversion;
             this->numeroIntervention = recuperationNumeroIntervention.toInt(&conversion);
             qDebug() << Q_FUNC_INFO << "numeroIntervention" << this->numeroIntervention;
+        }
+
+        if(interventionEstPlanifie(distributeurs[idDistributeur]->getIdDistributeur()) &&
+           this->getADepanner())
+        {
+            requete = "UPDATE Intervention SET aDepanner = 1 WHERE idDistributeur = " +
+                      QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
+        }
+
+        if(interventionEstPlanifie(distributeurs[idDistributeur]->getIdDistributeur()) &&
+           this->getARemplir())
+        {
+            requete = "UPDATE Intervention SET aRemplir = 1 WHERE idDistributeur = " +
+                      QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
         }
     }
 }
