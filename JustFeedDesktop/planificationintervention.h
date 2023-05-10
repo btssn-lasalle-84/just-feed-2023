@@ -37,10 +37,10 @@ class PlanificationIntervention : public QDialog
 {
     Q_OBJECT
   private:
-    IHMJustFeed*           ihmJustFeed;       //!< association vers l'ihm principale
-    BaseDeDonnees*         baseDeDonnees;     //!< association vers la base de données
-    Intervention*          intervention;      //!< association vers la classe Intervention
-    QDate                  dateIntervention;  //!< la date de l'intervention
+    IHMJustFeed*           ihmJustFeed;        //!< association vers l'ihm principale
+    BaseDeDonnees*         baseDeDonnees;      //!< association vers la base de données
+    Intervention*          intervention;       //!< association vers la classe Intervention
+    QDate                  dateIntervention;   //!< la date de l'intervention
     QVector<QTime>         heuresIntervention; //!< les heures d'intervention
     QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuable;       //!< si l'intervention peut être créé
@@ -50,8 +50,8 @@ class PlanificationIntervention : public QDialog
     QVector<QVector<QLabel*> >
       labelsDesHygrometries; //!< conteneur de vecteurs de QLabel pour les hygrometries
     QVector<QVector<QLabel*> >
-                               labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
-    QVector<QLabel*>           labelsProduit;     //!< conteneur de QLabel de produit
+                     labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
+    QVector<QLabel*> labelsProduit; //!< conteneur de QLabel de produit
     QVector<QVector<QLabel*> > labelsDesProduits; //!< conteneur de vecteurs de QLabel pour stocker
                                                   //!< les produits
     QVector<QLabel*>           labelsPourcentage; //!< conteneur de QLabel de produit
@@ -63,12 +63,11 @@ class PlanificationIntervention : public QDialog
     QVector<QCheckBox*> labelsCheckboxDepannage;   //!< vecteur de checkBox depannage
     QVector<QCheckBox*> labelsCheckboxRemplissage; //!< vecteur de checkBox remplissage
     QVector<QVector<QCheckBox*> >
-                                  labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
+      labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
     QVector<QVector<QCheckBox*> > labelsDesCheckboxRemplissage; //!< conteneur de vecteurs de
                                                                 //!< checkBox Remplissage
-    QPushButton*        boutonItervention; //!< bouton pour créer une intervention
-    QDateEdit*          editionDate;       //!< choix de la date
-    QVector<QTimeEdit*> editionHeure;      //!< choix de l'heure d'intervention
+    QPushButton* boutonItervention; //!< bouton pour créer une intervention
+    QDateEdit*   editionDate;       //!< choix de la date
 
     void initialiserBoiteDeDialogue();
     void instancierWidgets();

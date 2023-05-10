@@ -29,24 +29,23 @@ class Intervention
 {
   private:
     BaseDeDonnees*         baseDeDonnees;
-    QDate                  dateIntervention;  //!< la date de l'intervention
+    QDate                  dateIntervention;   //!< la date de l'intervention
     QVector<QTime>         heuresIntervention; //!< l'heure de l'intervention
-    QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
-    bool                   effectuee;         //!< si l'intervention a été effectuée
-    bool                   remplir;           //!<
-    bool                   depanner;          //!<
-    int                    numeroIntervention; //!<
+    QVector<Distributeur*> distributeurs;  //!< les distributeurs sur lesquels il faut intervenir
+    bool                   effectuee;      //!< si l'intervention a été effectuée
+    bool                   remplir;        //!<
+    bool                   depanner;       //!<
+    int                    idIntervention; //!<
 
   public:
-    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, QVector<QTime> listeHeureIntervention);
+    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
     ~Intervention();
 
     QDate                  getDateIntervention() const;
-    QTime                  getHeuresIntervention(int idDistributeur) const;
     QVector<Distributeur*> getDistributeurs() const;
     bool                   getARemplir() const;
     bool                   getADepanner() const;
-    int                    getNumeroIntervention() const;
+    int                    getIdIntervention() const;
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
@@ -56,11 +55,11 @@ class Intervention
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);
     void                   creer();
-    void                   setNumeroIntervention(const int numeroIntervention);
-    void                   affecterEtatIntervention(int const idDistributeur);
-    void                   ajouterIntervention(const int idDistributeur);
-    void                   ajouterApprovisionnement(int const idDistributeur);
-    bool                   interventionEstPlanifie(const int idDistributeur);
+    void                   setIdIntervention(const int numeroIntervention);
+    void                   affecterEtatIntervention(int const indexDistributeur);
+    int                    ajouterIntervention(const int indexDistributeur);
+    void                   ajouterApprovisionnement(int const indexDistributeur);
+    bool                   estPlanifiee(const int idDistributeur);
 };
 
 #endif // INTERVENTION_H
