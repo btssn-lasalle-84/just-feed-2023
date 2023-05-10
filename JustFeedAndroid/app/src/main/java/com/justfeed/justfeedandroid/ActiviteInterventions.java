@@ -38,24 +38,25 @@ public class ActiviteInterventions extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_ActiviteInterventions"; //!< TAG pour les logs (cf. Logcat)
-    private final String TOUTES     = "Toutes";    //!< Constante utilisée pour configurer le filtre.
+    private final String TOUTES     = "Toutes";  //!< Constante utilisée pour configurer le filtre.
     private final String A_FAIRE    = "A faire"; //!< Constante utilisée pour configurer le filtre.
-    private final String EN_COURS   = "En cours";  //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDEES   = "Validées";    //!< Constante utilisée pour configurer le filtre.
+    private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDEES = "Validées";  //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
      */
-    private Intervention.Etats         etat;               //!< Etat qui sert à trier les interventions
-    private static List<Intervention>  listeInterventions; //!< Liste des interventions à afficher
-    private Handler                    handler;            //!< Le handler utilisé par l'activité
-    private static BaseDeDonnees       baseDeDonnees;      //!< Identifiants pour la base de données
-    private RecyclerView               vueListeInterventions; //!< Affichage des Interventions
-    private RecyclerView.Adapter       adapteurIntervention = null;  //!< Pour remplir les vues des Interventions
+    private Intervention.Etats        etat; //!< Etat qui sert à trier les interventions
+    private static List<Intervention> listeInterventions; //!< Liste des interventions à afficher
+    private Handler                   handler;            //!< Le handler utilisé par l'activité
+    private static BaseDeDonnees      baseDeDonnees;      //!< Identifiants pour la base de données
+    private RecyclerView              vueListeInterventions; //!< Affichage des Interventions
+    private RecyclerView.Adapter      adapteurIntervention =
+      null; //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
     private Spinner                    menuEtats;      //!< Menu pour trier les interventions
     private static SwipeRefreshLayout  rafraichisseur; //!< Pull-to-refresh
-    private int                        positionListe; //!< La position actuelle de la liste déroulante
+    private int positionListe; //!< La position actuelle de la liste déroulante
 
     /**
      * @brief Méthode appelé à la création d'une seconde activité
@@ -140,15 +141,15 @@ public class ActiviteInterventions extends AppCompatActivity
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
         this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
         this.menuEtats.setAdapter(
-                new ArrayAdapter<Intervention.Etats>(this,
-                        android.R.layout.simple_spinner_item,
-                        Intervention.Etats.values()));
+          new ArrayAdapter<Intervention.Etats>(this,
+                                               android.R.layout.simple_spinner_item,
+                                               Intervention.Etats.values()));
         this.menuEtats.setSelection(positionListe);
         menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
             {
-                positionListe = position;
+                positionListe     = position;
                 String nouvelEtat = parent.getItemAtPosition(position).toString();
                 switch(nouvelEtat)
                 {
@@ -194,7 +195,7 @@ public class ActiviteInterventions extends AppCompatActivity
     {
         Log.d(TAG, "afficherInterventions() nb interventions = " + interventions.size());
         vueListeInterventions.removeAllViews();
-        this.listeInterventions   = interventions;
+        this.listeInterventions = interventions;
         if(this.adapteurIntervention == null)
         {
             this.adapteurIntervention = new AdaptateurIntervention(this.listeInterventions);
@@ -231,7 +232,9 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * @brief Execute une requête UPDATE, INSERT, DELETE
      */
-    public static void modifierEtatIntervention(final String requete, Intervention intervention, Intervention.Etats nouvelEtat)
+    public static void modifierEtatIntervention(final String       requete,
+                                                Intervention       intervention,
+                                                Intervention.Etats nouvelEtat)
     {
         baseDeDonnees.executerRequete(requete);
         intervention.modifierEtatIntervention(nouvelEtat);
