@@ -175,20 +175,15 @@ void Intervention::creer()
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
         if(this->getARemplir() || this->getADepanner())
         {
-            requete =
-              "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, etat, "
-              "aRemplir, aDepanner) VALUES (1, " +
-              QString::number(distributeurs[i]->getIdDistributeur()) + ", " +
-              this->getDateIntervention().toString("yyyy-MM-dd") + ", 'A_FAIRE', " +
-              QString::number(this->getARemplir()) + ", " + QString::number(this->getADepanner()) +
-              ");";
+            requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
+                      "etat, aRemplir, aDepanner) VALUES (1, " +
+                      QString::number(distributeurs[i]->getIdDistributeur()) + ", " + "'" +
+                      this->getDateIntervention().toString("yyyy-MM-dd") + "'" + ", 'A_FAIRE', " +
+                      QString::number(this->getARemplir()) + ", " +
+                      QString::number(this->getADepanner()) + ");";
             qDebug() << Q_FUNC_INFO << "requete INSERT" << requete;
-            // baseDeDonnees->executer(requete);
-
+            baseDeDonnees->executer(requete);
             requete = "SELECT LAST_INSERT_ID(idIntervention) FROM Intervention;";
-            /**
-             *@todo refaire la requete, mauvaise id recuperé
-             */
             qDebug() << Q_FUNC_INFO << "requete LAST_INSERT_ID" << requete;
             QString recuperationNumeroIntervention;
             baseDeDonnees->recuperer(requete, recuperationNumeroIntervention);
@@ -210,10 +205,11 @@ void Intervention::creer()
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
                           "heureApprovisionnement) VALUES (" +
                           QString::number(this->numeroIntervention) + ", " +
-                          QString::number(distributeurs[i]->getBac(j)->getIdBac()) + ", " +
-                          this->getHeureIntervention().toString("hh:mm:ss") + ");";
-                baseDeDonnees->executer(requete);
+                          QString::number(distributeurs[i]->getBac(j)->getIdBac()) + ", " + "'" +
+                          this->getHeureIntervention().toString("hh:mm:ss") + "'" + ");";
+                // baseDeDonnees->executer(requete);
                 distributeurs[i]->getBac(j)->setAttribuer(true);
+                qDebug() << Q_FUNC_INFO << "requete approvisonnement" << requete;
             }
         }
     }
