@@ -9,6 +9,12 @@
 #ifndef BAC_H
 #define BAC_H
 
+/**
+ * @def ID_BAC_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
+#define ID_BAC_NON_DEFINI -1
+
 #include <QString>
 
 class Produit;

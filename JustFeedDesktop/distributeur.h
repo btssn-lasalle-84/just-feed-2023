@@ -12,6 +12,12 @@
 #include <QDate>
 #include <QVector>
 
+/**
+ * @def ID_DISTRIBUTEUR_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
+#define ID_DISTRIBUTEUR_NON_DEFINI -1
+
 class Bac;
 class Produit;
 
@@ -34,6 +40,7 @@ struct Localisation
 class Distributeur
 {
   private:
+    int           id;
     QString       deviceID;          //!< identifiant du distributeur
     QVector<Bac*> bacs;              //!< les bacs du distributeur
     QString       nom;               //!< nom du distributeur
@@ -47,7 +54,8 @@ class Distributeur
 
   public:
     Distributeur();
-    Distributeur(QString      deviceID,
+    Distributeur(int          id,
+                 QString      deviceID,
                  QString      nom,
                  QString      adresse,
                  QString      codePostal,
@@ -58,6 +66,7 @@ class Distributeur
     ~Distributeur();
 
     // Accesseurs
+    int          getIdDistributeur() const;
     QString      getDeviceID() const;
     Localisation getPosition() const;
     bool         getAIntervenir() const;
@@ -78,6 +87,7 @@ class Distributeur
     double       getPoidsTotalBac(int numeroBac) const;
 
     // mutateurs
+    void setIdDistributeur(int id);
     void setAIntervenir(bool aIntervenir);
     void setDeviceID(const QString deviceID);
     void setPosition(const Localisation& localisation);

@@ -127,22 +127,24 @@ void Intervention::intervenir(bool aIntervenir)
  */
 void Intervention::creer()
 {
+    /**
+     * @todo Gérer l'opérateur à qui est affectée l'intervention
+     */
     qDebug() << Q_FUNC_INFO << "dateIntervention" << this->getDateIntervention();
     QString dateFormatee = this->getDateIntervention().toString("yyyy/MM/dd");
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateFormatee;
 
     QString requete;
-    /**
-     * @todo Fabriquer la requête pour insérer une nouvelle intervention pour chaque distributeur
-     * dans la table Intervention
-     */
-
     for(int i = 0; i < distributeurs.size(); i++)
     {
         this->setARemplir(false);
         this->setADepanner(false);
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
+            qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "bac"
+                     << distributeurs[i]->getBac(j)->getNomProduit() << "aRemplir"
+                     << distributeurs[i]->getBac(j)->getARemplir() << "aDepanner"
+                     << distributeurs[i]->getBac(j)->getADepanner();
             if(distributeurs[i]->getBac(j)->getARemplir() &&
                distributeurs[i]->getBac(j)->getADepanner())
             {
@@ -154,18 +156,36 @@ void Intervention::creer()
                     (!distributeurs[i]->getBac(j)->getARemplir()))
             {
                 this->setARemplir(true);
+                break;
             }
             else if(distributeurs[i]->getBac(j)->getADepanner() &&
                     (!distributeurs[i]->getBac(j)->getADepanner()))
             {
                 this->setADepanner(true);
+                break;
             }
         }
-        requete =
-          "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, etat, "
-          "aRemplir, aDepanner) VALUES (1, i , 2023-06-01, 'A_FAIRE',  this->getARemplir(), "
-          "this->getADepanner());";
-        baseDeDonnees->executer(requete);
+        /**
+         * @fixme Corriger le problème de détection d'une intervention pour un distributeur
+         */
+        qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "aRemplir"
+                 << this->getARemplir() << "aDepanner" << this->getADepanner();
+        if(this->getARemplir() || this->getADepanner())
+        {
+            requete =
+              "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, etat, "
+              "aRemplir, aDepanner) VALUES (1, " +
+              QString::number(distributeurs[i]->getIdDistributeur()) + ", " +
+              this->getDateIntervention().toString("yyyy-MM-dd") + ", 'A_FAIRE', " +
+              QString::number(this->getARemplir()) + ", " + QString::number(this->getADepanner()) +
+              ");";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            // baseDeDonnees->executer(requete);
+            /**
+             * @todo Récupérer l'id de l'intervention avec SELECT LAST_INSERT_ID() et ajouter un
+             * attribut pour cela
+             */
+        }
     }
 
     intervenir(true);
@@ -173,6 +193,7 @@ void Intervention::creer()
     /**
      * @todo Fabriquer la requête pour insérer un nouvel approvisionnement pour chaque bac si
      * besoin et finaliser la structure de la table Approvisionnement
+     * @see Il faut l'id de l'intervention créée précédemment
      */
     for(int i = 0; i < distributeurs.size(); ++i)
     {

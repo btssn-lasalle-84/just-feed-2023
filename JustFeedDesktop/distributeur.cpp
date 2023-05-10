@@ -16,8 +16,9 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""), description(""),
-    dateMiseEnService(QDate::currentDate()), position{ "", "", "0" }, aIntervenir(false)
+    id(ID_DISTRIBUTEUR_NON_DEFINI), deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
+    description(""), dateMiseEnService(QDate::currentDate()), position{ "", "", "0" },
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -25,7 +26,8 @@ Distributeur::Distributeur() :
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
-Distributeur::Distributeur(QString      deviceID,
+Distributeur::Distributeur(int          id,
+                           QString      deviceID,
                            QString      nom,
                            QString      adresse,
                            QString      codePostal,
@@ -33,8 +35,8 @@ Distributeur::Distributeur(QString      deviceID,
                            QString      description,
                            QDate        dateMiseEnService,
                            Localisation position) :
-    deviceID(deviceID),
-    bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    id(id),
+    deviceID(deviceID), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
     description(description), dateMiseEnService(dateMiseEnService), position(position),
     aIntervenir(false)
 {
@@ -54,6 +56,15 @@ Distributeur::~Distributeur()
         delete bacs[i];
     }
     qDebug() << Q_FUNC_INFO;
+}
+
+/**
+ * @brief Accesseur de l'attribut id
+ * @return un QString qui represente l'id du distributeur
+ */
+int Distributeur::getIdDistributeur() const
+{
+    return this->id;
 }
 
 /**
@@ -246,6 +257,15 @@ double Distributeur::getPoidsTotalBac(int numeroBac) const
         return bacs[numeroBac]->getPoidsTotal();
     }
     return 0.;
+}
+
+/**
+ * @brief Mutateur de l'attribut id
+ * @param deviceID id du distributeur
+ */
+void Distributeur::setIdDistributeur(const int id)
+{
+    this->id = id;
 }
 
 /**

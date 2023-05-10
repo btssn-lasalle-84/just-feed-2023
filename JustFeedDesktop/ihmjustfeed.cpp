@@ -407,7 +407,8 @@ void IHMJustFeed::initialiserEvenements()
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
-    distributeurs.push_back(new Distributeur("distributeur-1-sim",
+    distributeurs.push_back(new Distributeur(1,
+                                             "distributeur-1-sim",
                                              "Grand Frais",
                                              "Zone du Coudoulet Rond point du Péage Sud",
                                              "84100",
@@ -415,7 +416,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-01-08", "yyyy-MM-dd"),
                                              { "44.11161", "4.84856", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+    distributeurs.push_back(new Distributeur(2,
+                                             "distributeur-2-sim",
                                              "Carrefour",
                                              "390 Rue Jean Marie Tjibaou",
                                              "84000",
@@ -423,7 +425,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-03-09", "yyyy-MM-dd"),
                                              { "43.92844", "4.79247", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-3",
+    distributeurs.push_back(new Distributeur(3,
+                                             "distributeur-3",
                                              "Cosy Primeurs",
                                              "292 Route de Boulbon",
                                              "13570",

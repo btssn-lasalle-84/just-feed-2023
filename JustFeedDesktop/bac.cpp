@@ -14,8 +14,8 @@
  * @brief Constructeur par défaut de la classe Bac
  */
 Bac::Bac() :
-    produit(nullptr), poidsActuel(0.), poidsTotal(0.), pourcentageRemplissage(0.), aRemplir(false),
-    aDepanner(false), hygrometrie(0)
+    produit(nullptr), idBac(ID_BAC_NON_DEFINI), poidsActuel(0.), poidsTotal(0.),
+    pourcentageRemplissage(0.), aRemplir(false), aDepanner(false), hygrometrie(0)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -24,7 +24,7 @@ Bac::Bac() :
  * @brief Constructeur d'initialisation du bac
  */
 Bac::Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie) :
-    idBac(idBac), produit(produit), poidsActuel(poidsActuel), poidsTotal(poidsTotal),
+    produit(produit), idBac(idBac), poidsActuel(poidsActuel), poidsTotal(poidsTotal),
     pourcentageRemplissage((poidsActuel * 100.) / poidsTotal), aRemplir(false), aDepanner(false),
     hygrometrie(hygrometrie)
 {
@@ -39,7 +39,7 @@ Bac::Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int
  * @brief Constructeur d'initialisation du bac
  */
 Bac::Bac(int idBac, Produit* produit, double poidsTotal) :
-    idBac(idBac), produit(produit), poidsActuel(poidsTotal), poidsTotal(poidsTotal),
+    produit(produit), idBac(idBac), poidsActuel(poidsTotal), poidsTotal(poidsTotal),
     pourcentageRemplissage(100.), aRemplir(false), aDepanner(false), hygrometrie(0)
 {
     qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
@@ -53,7 +53,7 @@ Bac::Bac(int idBac, Produit* produit, double poidsTotal) :
  * @brief Constructeur de copie
  */
 Bac::Bac(const Bac& bac) :
-    idBac(bac.idBac), produit(bac.produit), poidsActuel(bac.poidsActuel),
+    produit(bac.produit), idBac(bac.idBac), poidsActuel(bac.poidsActuel),
     poidsTotal(bac.poidsTotal), pourcentageRemplissage(bac.pourcentageRemplissage),
     aRemplir(bac.aRemplir), aDepanner(bac.aDepanner), hygrometrie(bac.hygrometrie)
 {
