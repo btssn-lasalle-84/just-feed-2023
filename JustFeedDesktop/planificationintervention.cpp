@@ -92,7 +92,13 @@ void PlanificationIntervention::creerUneIntervention()
 {
     if(!effectuable)
         return;
-    intervention = new Intervention(distributeurs);
+    QVector<QTime> heures;
+    for(int i = 0 ; i < editionHeure.size(); i++)
+    {
+        heures.push_back(editionHeure[i]->time());
+    }
+
+    intervention = new Intervention(distributeurs, heures);
     intervention->setDateIntervention(editionDate->date());
     intervention->creer();
     this->close();
@@ -120,6 +126,7 @@ void PlanificationIntervention::instancierWidgets()
     qDebug() << Q_FUNC_INFO;
     boutonItervention = new QPushButton(this);
     editionDate       = new QDateEdit(QDate::currentDate(), this);
+    editionHeure.clear();
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs.push_back(new QLabel(this));
@@ -129,6 +136,7 @@ void PlanificationIntervention::instancierWidgets()
         labelsCheckboxDepannage.clear();
         labelsCheckboxRemplissage.clear();
         labelsHygrometrie.clear();
+        editionHeure.push_back(new QTimeEdit(QTime::currentTime(), this));
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
             QCheckBox* checkboxDepannage   = new QCheckBox(this);
@@ -165,6 +173,8 @@ void PlanificationIntervention::initialiserWidgets()
     {
         nomDistributeurs[i]->setText("Distributeur -> " + distributeurs[i]->getNom());
         nomDistributeurs[i]->setAlignment(Qt::AlignCenter);
+        editionHeure[i]->setDisplayFormat("hh:mm:ss");
+        editionHeure[i]->setAlignment(Qt::AlignCenter);
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
             qDebug() << Q_FUNC_INFO << "produit" << distributeurs[i]->getNomProduitBac(j)
@@ -227,6 +237,7 @@ void PlanificationIntervention::positionnerWidgets()
             layoutInfoDistributeurs[i]->addWidget(labelsDesHygrometries[i][j]);
         }
         layoutDistributeurs->addLayout(layoutInfoDistributeurs[i]);
+        layoutFormulaire->addWidget(editionHeure[i]);
     }
     layoutFormulaire->addWidget(editionDate);
     layoutFormulaire->addWidget(boutonItervention);

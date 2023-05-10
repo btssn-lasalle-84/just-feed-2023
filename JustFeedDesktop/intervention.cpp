@@ -16,9 +16,9 @@
 /**
  * @brief Constructeur de la classe Intervention
  */
-Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir) :
+Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, QVector<QTime> listeHeureIntervention) :
     baseDeDonnees(BaseDeDonnees::getInstance()), dateIntervention(QDate::currentDate()),
-    heureIntervention(QTime::currentTime()), distributeurs(listeDistributeursAIntervenir),
+    heuresIntervention(listeHeureIntervention), distributeurs(listeDistributeursAIntervenir),
     effectuee(false)
 {
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
@@ -48,9 +48,9 @@ QDate Intervention::getDateIntervention() const
  * @return QTime représente l'heure de l'intervention sur le
  * distributeur
  */
-QTime Intervention::getHeureIntervention() const
+QTime Intervention::getHeuresIntervention(int idDistributeur) const
 {
-    return this->heureIntervention;
+    return this->heuresIntervention[idDistributeur];
 }
 /**
  * @brief Accesseur de l'attribut distributeurAIntervenir
@@ -99,15 +99,6 @@ void Intervention::setDateIntervention(const QDate& dateIntervention)
 }
 
 /**
- * @brief Mutateur de l'attribut heureIntervention
- * @param heureIntervention
- */
-void Intervention::setHeureIntervention(const QTime& heureIntervention)
-{
-    this->heureIntervention = heureIntervention;
-}
-
-/**
  * @brief Mutateur de l'attribut effectuee
  * @param effectuee
  */
@@ -136,8 +127,6 @@ void Intervention::creer()
 
     for(int i = 0; i < distributeurs.size(); i++)
     {
-        this->setARemplir(false);
-        this->setADepanner(false);
         affecterEtatIntervention(i);
         qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "aRemplir"
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
@@ -156,6 +145,8 @@ void Intervention::creer()
  */
 void Intervention::affecterEtatIntervention(int const idDistributeur)
 {
+    this->setARemplir(false);
+    this->setADepanner(false);
     for(int j = 0; j < distributeurs[idDistributeur]->getNbBacs(); j++)
     {
         qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[idDistributeur]->getNom()
@@ -171,15 +162,13 @@ void Intervention::affecterEtatIntervention(int const idDistributeur)
             break;
         }
         else if((distributeurs[idDistributeur]->getBac(j)->getARemplir()) &&
-                (!distributeurs[idDistributeur]->getBac(j)->getADepanner() &&
-                 !distributeurs[idDistributeur]->getBac(j)->getAttribuer()))
+                !distributeurs[idDistributeur]->getBac(j)->getAttribuer())
         {
             this->setARemplir(true);
             break;
         }
         else if(distributeurs[idDistributeur]->getBac(j)->getADepanner() &&
-                (!distributeurs[idDistributeur]->getBac(j)->getARemplir() &&
-                 !distributeurs[idDistributeur]->getBac(j)->getAttribuer()))
+                 !distributeurs[idDistributeur]->getBac(j)->getAttribuer())
         {
             this->setADepanner(true);
             break;
@@ -205,8 +194,8 @@ void Intervention::ajouterIntervention(const int idDistributeur)
                       ", 'A_FAIRE', " + QString::number(this->getARemplir()) + ", " +
                       QString::number(this->getADepanner()) + ");";
             qDebug() << Q_FUNC_INFO << "requete INSERT" << requete;
-            // baseDeDonnees->executer(requete);
-            requete = "SELECT LAST_INSERT_ID(idIntervention) FROM Intervention;";
+            baseDeDonnees->executer(requete);
+            requete = "SELECT MAX(idIntervention) FROM Intervention;";
             /**
              *@todo refaire cette requete, elle ne prend la bonne valeur
              */
@@ -223,6 +212,8 @@ void Intervention::ajouterIntervention(const int idDistributeur)
         {
             requete = "UPDATE Intervention SET aDepanner = 1 WHERE idDistributeur = " +
                       QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
+            baseDeDonnees->executer(requete);
+            qDebug() << Q_FUNC_INFO << "requete ajouterIntervention si depanner" << requete;
         }
 
         if(interventionEstPlanifie(distributeurs[idDistributeur]->getIdDistributeur()) &&
@@ -230,6 +221,8 @@ void Intervention::ajouterIntervention(const int idDistributeur)
         {
             requete = "UPDATE Intervention SET aRemplir = 1 WHERE idDistributeur = " +
                       QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
+            baseDeDonnees->executer(requete);
+            qDebug() << Q_FUNC_INFO << "requete ajouterIntervention si remplir" << requete;
         }
     }
 }
@@ -257,9 +250,9 @@ void Intervention::ajouterApprovisionnement(const int idDistributeur)
                           "heureApprovisionnement) VALUES (" +
                           idIntervention + ", " +
                           QString::number(distributeurs[idDistributeur]->getBac(j)->getIdBac()) +
-                          ", " + "'" + this->getHeureIntervention().toString("hh:mm:ss") + "'" +
+                          ", " + "'" + this->getHeuresIntervention(idDistributeur).toString("hh:mm:ss") + "'" +
                           ");";
-                // baseDeDonnees->executer(requete);
+                baseDeDonnees->executer(requete);
                 distributeurs[idDistributeur]->getBac(j)->setAttribuer(true);
                 qDebug() << Q_FUNC_INFO << "requete approvisonnement" << requete;
             }
@@ -269,9 +262,9 @@ void Intervention::ajouterApprovisionnement(const int idDistributeur)
                           "heureApprovisionnement) VALUES (" +
                           QString::number(this->numeroIntervention) + ", " +
                           QString::number(distributeurs[idDistributeur]->getBac(j)->getIdBac()) +
-                          ", " + "'" + this->getHeureIntervention().toString("hh:mm:ss") + "'" +
+                          ", " + "'" + this->getHeuresIntervention(idDistributeur).toString("hh:mm:ss") + "'" +
                           ");";
-                // baseDeDonnees->executer(requete);
+                baseDeDonnees->executer(requete);
                 distributeurs[idDistributeur]->getBac(j)->setAttribuer(true);
                 qDebug() << Q_FUNC_INFO << "requete approvisonnement" << requete;
             }

@@ -11,6 +11,7 @@
 #include <QDateTime>
 #include <QVector>
 #include <QString>
+#include <QTime>
 
 #define ZERO      0
 #define QUINZE    15
@@ -29,7 +30,7 @@ class Intervention
   private:
     BaseDeDonnees*         baseDeDonnees;
     QDate                  dateIntervention;  //!< la date de l'intervention
-    QTime                  heureIntervention; //!< l'heure de l'intervention
+    QVector<QTime>         heuresIntervention; //!< l'heure de l'intervention
     QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuee;         //!< si l'intervention a été effectuée
     bool                   remplir;           //!<
@@ -37,11 +38,11 @@ class Intervention
     int                    numeroIntervention; //!<
 
   public:
-    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
+    explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir, QVector<QTime> listeHeureIntervention);
     ~Intervention();
 
     QDate                  getDateIntervention() const;
-    QTime                  getHeureIntervention() const;
+    QTime                  getHeuresIntervention(int idDistributeur) const;
     QVector<Distributeur*> getDistributeurs() const;
     bool                   getARemplir() const;
     bool                   getADepanner() const;
@@ -49,7 +50,6 @@ class Intervention
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
-    void                   setHeureIntervention(const QTime& heureIntervention);
     void                   setARemplir(const bool& aRemplir);
     void                   setADepanner(const bool& aDepanner);
     void                   ajouterDistributeur(Distributeur* distributeur);

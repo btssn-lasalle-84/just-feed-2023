@@ -41,6 +41,7 @@ class PlanificationIntervention : public QDialog
     BaseDeDonnees*         baseDeDonnees;     //!< association vers la base de données
     Intervention*          intervention;      //!< association vers la classe Intervention
     QDate                  dateIntervention;  //!< la date de l'intervention
+    QVector<QTime>         heuresIntervention; //!< les heures d'intervention
     QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuable;       //!< si l'intervention peut être créé
     QVector<QLabel*>       nomDistributeurs;  //!< nom du distributeur et son numero
@@ -65,8 +66,9 @@ class PlanificationIntervention : public QDialog
                                   labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
     QVector<QVector<QCheckBox*> > labelsDesCheckboxRemplissage; //!< conteneur de vecteurs de
                                                                 //!< checkBox Remplissage
-    QPushButton* boutonItervention; //!< bouton pour créer une intervention
-    QDateEdit*   editionDate;       //!< choix de la date
+    QPushButton*        boutonItervention; //!< bouton pour créer une intervention
+    QDateEdit*          editionDate;       //!< choix de la date
+    QVector<QTimeEdit*> editionHeure;      //!< choix de l'heure d'intervention
 
     void initialiserBoiteDeDialogue();
     void instancierWidgets();
