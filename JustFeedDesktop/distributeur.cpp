@@ -160,45 +160,6 @@ QString Distributeur::getDescription() const
 }
 
 /**
- * @brief Accesseur pour récupérer le nom du produit dans le bac voulu
- * @return QString  qui permet de connaitre le nom du produit
- */
-QString Distributeur::getNomProduitBac(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getNomProduit();
-    }
-    return QString();
-}
-
-/**
- * @brief Accesseur pour récupérer le prix du produit dans le bac voulu
- * @return double qui permet de connaitre le prix du produit
- */
-double Distributeur::getProduitPrix(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getPrixProduit();
-    }
-    return 0.;
-}
-
-/**
- * @brief Accesseur pour récupérer le produit dans le bac voulu
- * @return Produit qui permet de connaitre le produit
- */
-Produit* Distributeur::getProduitBac(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getProduit();
-    }
-    return nullptr;
-}
-
-/**
  * @brief Accesseur pour récupérer un bac
  * @return Bac
  */
@@ -218,45 +179,6 @@ Bac* Distributeur::getBac(int numeroBac) const
 int Distributeur::getNbBacs() const
 {
     return bacs.size();
-}
-
-/**
- * @brief Accesseur pour savoir le pourcentage de remplissage du bac
- * @return double
- */
-double Distributeur::getPourcentageBac(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getPourcentageRemplissage();
-    }
-    return 0.;
-}
-
-/**
- * @brief Accesseur pour savoir le poids du bac
- * @return double
- */
-double Distributeur::getPoidsBac(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getPoidsActuel();
-    }
-    return 0.;
-}
-
-/**
- * @brief Accesseur pour savoir le poids total du bac
- * @return double
- */
-double Distributeur::getPoidsTotalBac(int numeroBac) const
-{
-    if(numeroBac >= 0 && numeroBac < bacs.size())
-    {
-        return bacs[numeroBac]->getPoidsTotal();
-    }
-    return 0.;
 }
 
 /**

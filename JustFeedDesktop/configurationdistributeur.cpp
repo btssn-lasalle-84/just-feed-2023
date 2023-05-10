@@ -145,9 +145,9 @@ void ConfigurationDistributeur::initialiserWidgets()
     {
         labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
         labelsBac[i]->setAlignment(Qt::AlignCenter);
-        labelsProduit[i]->setText(" : " + distributeur->getNomProduitBac(i));
+        labelsProduit[i]->setText(" : " + distributeur->getBac(i)->getNomProduit());
         labelsProduit[i]->setAlignment(Qt::AlignCenter);
-        labelsPrix[i]->setText("Prix : " + QString::number(distributeur->getProduitPrix(i)) + " €");
+        labelsPrix[i]->setText("Prix : " + QString::number(distributeur->getBac(i)->getPrixProduit()) + " €");
         labelsPrix[i]->setAlignment(Qt::AlignCenter);
         // editionsNouveauPrix[i]->setValue(distributeur->getProduitPrix(i));
         editionsNouveauPrix[i]->setAlignment(Qt::AlignCenter);
@@ -257,10 +257,10 @@ void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
 {
     labelsBac[numeroBac]->setText("Bac numero : " + QString::number(numeroBac));
     labelsBac[numeroBac]->setAlignment(Qt::AlignCenter);
-    labelsProduit[numeroBac]->setText(" : " + distributeur->getNomProduitBac(numeroBac));
+    labelsProduit[numeroBac]->setText(" : " + distributeur->getBac(numeroBac)->getNomProduit());
     labelsProduit[numeroBac]->setAlignment(Qt::AlignCenter);
     labelsPrix[numeroBac]->setText(
-      "Prix : " + QString::number(distributeur->getProduitPrix(numeroBac)) + " €");
+      "Prix : " + QString::number(distributeur->getBac(numeroBac)->getPrixProduit()) + " €");
     labelsPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     editionsNouveauPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     boutonsChangerPrix[numeroBac]->setText("Changer prix");

@@ -177,14 +177,14 @@ void PlanificationIntervention::initialiserWidgets()
         editionHeure[i]->setAlignment(Qt::AlignCenter);
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            qDebug() << Q_FUNC_INFO << "produit" << distributeurs[i]->getNomProduitBac(j)
+            qDebug() << Q_FUNC_INFO << "produit" << distributeurs[i]->getBac(j)->getNomProduit()
                      << "poidsActuel" << distributeurs[i]->getBac(j)->getPoidsActuel()
                      << "poidsTotal" << distributeurs[i]->getBac(j)->getPoidsTotal()
                      << "pourcentageRemplissage"
                      << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
             labelsDesBacs[i][j]->setText("Bac n°" + QString::number(j + 1));
             labelsDesBacs[i][j]->setAlignment(Qt::AlignCenter);
-            labelsDesProduits[i][j]->setText("Produit : " + distributeurs[i]->getNomProduitBac(j));
+            labelsDesProduits[i][j]->setText("Produit : " + distributeurs[i]->getBac(j)->getNomProduit());
             labelsDesProduits[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesPourcentage[i][j]->setText(
               "Poids à prévoir : " +
@@ -303,25 +303,25 @@ void PlanificationIntervention::initialiserEtatDistributeur()
     {
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            if((distributeurs[i]->getPourcentageBac(j) >= ZERO) &&
-               (distributeurs[i]->getPourcentageBac(j) <= TRENTE))
+            if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() >= ZERO) &&
+               (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= TRENTE))
             {
                 qDebug() << Q_FUNC_INFO << "fonction rouge "
-                         << distributeurs[i]->getPourcentageBac(j);
+                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
                 labelsDesBacs[i][j]->setStyleSheet("color: #FF0000;");
             }
-            else if((distributeurs[i]->getPourcentageBac(j) > TRENTE) &&
-                    (distributeurs[i]->getPourcentageBac(j) <= SOIXANTE))
+            else if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() > TRENTE) &&
+                    (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= SOIXANTE))
             {
                 qDebug() << Q_FUNC_INFO << "fonction orange "
-                         << distributeurs[i]->getPourcentageBac(j);
+                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
                 labelsDesBacs[i][j]->setStyleSheet("color: #FFA500;");
             }
-            else if((distributeurs[i]->getPourcentageBac(j) > SOIXANTE) &&
-                    (distributeurs[i]->getPourcentageBac(j) <= CENT))
+            else if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() > SOIXANTE) &&
+                    (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= CENT))
             {
                 qDebug() << Q_FUNC_INFO << "fonction vert "
-                         << distributeurs[i]->getPourcentageBac(j);
+                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
                 labelsDesBacs[i][j]->setStyleSheet("color: #023518;");
             }
 

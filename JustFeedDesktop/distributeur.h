@@ -77,14 +77,9 @@ class Distributeur
     QString      getVille() const;
     QDate        getDateMiseService() const;
     QString      getDescription() const;
-    QString      getNomProduitBac(int numeroBac) const;
-    double       getProduitPrix(int numeroBac) const;
-    Produit*     getProduitBac(int numeroBac) const;
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
-    double       getPourcentageBac(int numeroBac) const;
-    double       getPoidsBac(int numeroBac) const;
-    double       getPoidsTotalBac(int numeroBac) const;
+
 
     // mutateurs
     void setIdDistributeur(int id);

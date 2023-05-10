@@ -196,10 +196,7 @@ void Intervention::ajouterIntervention(const int idDistributeur)
             qDebug() << Q_FUNC_INFO << "requete INSERT" << requete;
             baseDeDonnees->executer(requete);
             requete = "SELECT MAX(idIntervention) FROM Intervention;";
-            /**
-             *@todo refaire cette requete, elle ne prend la bonne valeur
-             */
-            qDebug() << Q_FUNC_INFO << "requete LAST_INSERT_ID" << requete;
+            qDebug() << Q_FUNC_INFO << "requete MAX" << requete;
             QString recuperationNumeroIntervention;
             baseDeDonnees->recuperer(requete, recuperationNumeroIntervention);
             bool conversion;
