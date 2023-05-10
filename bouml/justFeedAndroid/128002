@@ -1,6 +1,6 @@
 format 224
-"unknown" // unknown
-  revision 2
+"AdapterView" // unknown::AdapterView
+  revision 1
   modified_by 2 "btssn2"
   // class settings
   
@@ -30,8 +30,9 @@ format 224
   activitydiagramsettings
    end
   
-  java_dir "<unknown>"
-  classview 134698 "unknown"
+  java_dir "<unknown>/AdapterView/"
+  java_package "AdapterView"
+  classview 134530 "AdapterView"
     
     classdiagramsettings member_max_width 0 end
     
@@ -51,35 +52,7 @@ format 224
     
     activitydiagramsettings
      end
-    class 134698 "AppCompatActivity"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-    end
-
-    class 136490 "AsyncTask"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      mysql_decl ""
-      
-    end
-
-    class 136874 "ViewHolder"
+    class 155010 "OnItemSelectedListener"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
@@ -93,10 +66,4 @@ ${members}}
       
     end
   end
-
-  package_ref 134826 // RecyclerView
-
-  package_ref 128002 // AdapterView
-
-  package_ref 128130 // View
 end

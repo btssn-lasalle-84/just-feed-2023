@@ -1,0 +1,43 @@
+class ListeDeroulanteGestionnaire
+!!!135042.java!!!	ListeDeroulanteGestionnaire(inout intervention : Intervention)
+        super();
+
+        this.intervention = intervention;
+!!!135170.java!!!	onTouch(inout vue : View, inout event : MotionEvent) : boolean
+        interactionDetectee = true;
+        return false;
+!!!135298.java!!!	onItemSelected(inout parent : AdapterView<?>, inout vue : View, in position : int, in id : long) : void
+        Log.d(TAG, "onItemSelected()");
+        String nouvelEtat = parent.getItemAtPosition(position).toString();
+
+        if(interactionDetectee)
+        {
+            switch (nouvelEtat)
+            {
+                case TERMINER:
+                    Log.d(TAG, "Terminer");
+                    ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.VALIDEES);
+                    break;
+                case DEMARRER:
+                    Log.d(TAG, "Démarrer");
+                    ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'EN_COURS' WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.EN_COURS);
+                    break;
+                case AFAIRE:
+                    Log.d(TAG, "A faire");
+                    ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.A_FAIRE);
+                    break;
+                case RECOMMENCER:
+                    Log.d(TAG, "Recommencer");
+                    ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.A_FAIRE);
+                    break;
+                case SUPPRIMER:
+                    Log.d(TAG, "Supprimer");
+                    ActiviteInterventions.supprimerIntervention("DELETE FROM `Intervention` WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention);
+                    break;
+            }
+        }

@@ -4,7 +4,8 @@ class ActiviteInterventions
         setContentView(R.layout.interventions);
 
         initialiserHandler();
-
+        this.positionListe = 0;
+        VueIntervention.setContext(this);
         etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
@@ -28,38 +29,55 @@ class ActiviteInterventions
         this.vueListeInterventions.setLayoutManager(this.layoutVueListeInterventions);
         this.menuEtats = (Spinner)findViewById(R.id.menuEtats);
         this.menuEtats.setAdapter(
-          new ArrayAdapter<Intervention.Etats>(this,
-                                               android.R.layout.simple_spinner_item,
-                                               Intervention.Etats.values()));
+                new ArrayAdapter<Intervention.Etats>(this,
+                        android.R.layout.simple_spinner_item,
+                        Intervention.Etats.values()));
+        this.menuEtats.setSelection(positionListe);
         menuEtats.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View vue, int position, long id)
             {
+                positionListe = position;
                 String nouvelEtat = parent.getItemAtPosition(position).toString();
-                switch (nouvelEtat)
+                switch(nouvelEtat)
                 {
-                    case AFAIRE:
+                    case A_FAIRE:
                         etat = Intervention.Etats.A_FAIRE;
                         break;
                     case EN_COURS:
                         etat = Intervention.Etats.EN_COURS;
                         break;
-                    case VALIDE:
-                        etat = Intervention.Etats.VALIDE;
+                    case VALIDEES:
+                        etat = Intervention.Etats.VALIDEES;
+                        break;
+                    case TOUTES:
+                        etat = Intervention.Etats.TOUTES;
                         break;
                 }
-                Log.d(TAG, "OnitemSelected() - état : "+etat);
+                Log.d(TAG, "onItemSelected() - état : " + etat);
                 VueIntervention.changerEtatAFiltrer(etat);
-                vueListeInterventions.removeAllViews();
                 afficherInterventions(interventions);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+            }
+        });
+        this.rafraichisseur = (SwipeRefreshLayout)findViewById(R.id.rafraichisseur);
+        rafraichisseur.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh()
+            {
+                Log.d(TAG, "_onRefresh()");
+                rafraichisseur.setRefreshing(false);
+                baseDeDonnees.recupererInterventions();
+            }
         });
 !!!135466.java!!!	afficherInterventions(inout interventions : List<Intervention>) : void
         Log.d(TAG, "afficherInterventions() nb interventions = " + interventions.size());
-        this.listeInterventions = interventions;
+        vueListeInterventions.removeAllViews();
+        this.listeInterventions   = interventions;
         if(this.adapteurIntervention == null)
         {
             this.adapteurIntervention = new AdaptateurIntervention(this.listeInterventions);
@@ -79,5 +97,19 @@ class ActiviteInterventions
                     Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_INTERVENTIONS");
                     initialiserVueInterventions((ArrayList)message.obj);
                 }
+                else if(message.what == BaseDeDonnees.REQUETE_SQL_OK)
+                {
+                    Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                }
             }
         };
+!!!134786.java!!!	modifierEtatIntervention(in requete : String, inout intervention : Intervention, inout nouvelEtat : Intervention::Etats) : void
+        baseDeDonnees.executerRequete(requete);
+        intervention.modifierEtatIntervention(nouvelEtat);
+        rafraichisseur.setRefreshing(false);
+        baseDeDonnees.recupererInterventions();
+!!!134914.java!!!	supprimerIntervention(in requete : String, inout intervention : Intervention) : void
+        baseDeDonnees.executerRequete(requete);
+        listeInterventions.remove(intervention);
+        rafraichisseur.setRefreshing(false);
+        baseDeDonnees.recupererInterventions();

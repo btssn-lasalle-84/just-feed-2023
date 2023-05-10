@@ -1,7 +1,7 @@
 format 224
 "justfeedandroid" // justfeedandroid
-  revision 3
-  modified_by 42 "tv"
+  revision 4
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -94,7 +94,21 @@ activité pour l'application Android.
 !< TAG pour les logs (cf. Logcat)"
       end
 
-      attribute 151338 "AFAIRE"
+      attribute 143618 "TOUTES"
+	const_attribute private explicit_type "String"
+	init_value " \"Toutes\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 143746 "A_FAIRE"
 	const_attribute private explicit_type "String"
 	init_value " \"A faire\""
 	cpp_decl ""
@@ -122,9 +136,9 @@ activité pour l'application Android.
 	comment "!< Constante utilisée pour configurer le filtre."
       end
 
-      attribute 151594 "VALIDE"
+      attribute 143874 "VALIDEES"
 	const_attribute private explicit_type "String"
-	init_value " \"Validé\""
+	init_value " \"Validées\""
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -152,7 +166,7 @@ Attributs
       classrelation 134698 // listeInterventions (<unidirectional association>)
 	relation 134698 --->
 	  stereotype "List"
-	  a role_name "listeInterventions" private
+	  a role_name "listeInterventions" class_relation private
 	    comment "!< Liste des interventions à afficher"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
@@ -175,7 +189,7 @@ Attributs
 
       classrelation 134826 // baseDeDonnees (<unidirectional association>)
 	relation 134826 --->
-	  a role_name "baseDeDonnees" private
+	  a role_name "baseDeDonnees" class_relation private
 	    comment "!< Identifiants pour la base de données"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -198,7 +212,7 @@ Attributs
 
       classrelation 137386 // adapteurIntervention (<unidirectional association>)
 	relation 137386 --->
-	  a role_name "adapteurIntervention" private
+	  a role_name "adapteurIntervention" init_value " null" private
 	    comment "!< Pour remplir les vues des Interventions"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -230,6 +244,32 @@ Attributs
 	mysql_decl ""
 	MysqlColumn
 	comment "!< Menu pour trier les interventions"
+      end
+
+      attribute 144002 "rafraichisseur"
+	class_attribute private explicit_type "SwipeRefreshLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Pull-to-refresh"
+      end
+
+      attribute 144130 "positionListe"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< La position actuelle de la liste déroulante"
       end
 
       operation 134570 "onCreate"
@@ -379,6 +419,40 @@ des interventions
 	comment "@brief Initialise la gestion des messages en provenance des threads
 "
       end
+
+      operation 134786 "modifierEtatIntervention"
+	class_operation public explicit_return_type "void"
+	nparams 3
+	  param in name "requete" explicit_type "String"
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Execute une requête UPDATE, INSERT, DELETE
+"
+      end
+
+      operation 134914 "supprimerIntervention"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param in name "requete" explicit_type "String"
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Supprimer une intervention
+"
+      end
+
     end
 
     class 134826 "Intervention"
@@ -413,21 +487,10 @@ ${members}}
 	explicit_switch_type ""
 	mysql_decl ""
 	
-	attribute 136834 "EN_COURS"
+	attribute 144258 "TOUTES"
 	  public type class_ref 148354 // Etats
 	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"En cours\"),${comment}"
-	  php_decl ""
-	  python_decl ""
-	  idl_decl ""
-	  mysql_decl ""
-	  MysqlColumn
-	end
-
-	attribute 136962 "VALIDE"
-	  public type class_ref 148354 // Etats
-	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"Validé\"),${comment}"
+	  java_decl "  ${@}${name}(\"Toutes\"),${comment}"
 	  php_decl ""
 	  python_decl ""
 	  idl_decl ""
@@ -439,6 +502,28 @@ ${members}}
 	  public type class_ref 148354 // Etats
 	  cpp_decl ""
 	  java_decl "  ${@}${name}(\"A faire\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136834 "EN_COURS"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"En cours\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 144386 "VALIDEES"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"Validées\"),${comment}"
 	  php_decl ""
 	  python_decl ""
 	  idl_decl ""
@@ -485,6 +570,7 @@ ${members}}
 	  
 	  
 	end
+
       end
 
       attribute 140714 "TAG"
@@ -3023,17 +3109,57 @@ pour afficher des interventions.
 	comment "!< L'intervention est en cours"
       end
 
+      attribute 145410 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_VueIntervention\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< TAG pour le débug"
+      end
+
       classrelation 144298 // etatAfiltrer (<unidirectional association>)
 	relation 144298 --->
 	  a role_name "etatAfiltrer" init_value " A_FAIRE" class_relation private
-	    comment "
-Membres statiques
+	    comment "Membres statiques
 
-!< attribut utilisé pour trier les interventions"
+!< pour trier les interventions."
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 144298 // etatAfiltrer (<unidirectional association>)
 	  b parent class_ref 148354 // Etats
+      end
+
+      attribute 145538 "contexte"
+	class_attribute private explicit_type "Context"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut qui contient le contexte de l'application."
+      end
+
+      attribute 145666 "interactionDetectee"
+	class_attribute private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut utilisé pour détecter évènement."
       end
 
       attribute 144426 "identifiantDistributeur"
@@ -3117,6 +3243,19 @@ Membres statiques
 	comment "!< attribut GUI d'une liste déroulante pour trier les interventions."
       end
 
+      attribute 145794 "listeEtats"
+	const_attribute private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI d'une liste déroulante pour changer l'état d'une intervention."
+      end
+
       operation 147498 "VueIntervention"
 	public explicit_return_type ""
 	nparams 1
@@ -3131,6 +3270,19 @@ Membres statiques
       end
 
       operation 147626 "afficherInterventions"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135554 "afficherListeDeroulante"
 	public explicit_return_type "void"
 	nparams 1
 	  param inout name "intervention" type class_ref 134826 // Intervention
@@ -3172,6 +3324,21 @@ Membres statiques
 	comment " Mutateurs
 
 @brief Méthode pour modifier l'état qui permet de trier les interventions.
+"
+      end
+
+      operation 135682 "setContext"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouveauContexte" explicit_type "Context"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode pour modifier le contexte.
 "
       end
     end
@@ -3673,6 +3840,211 @@ et détruite par le système Android)
       size A0
     end
 
+    class 154882 "ListeDeroulanteGestionnaire"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128002 // <realization>
+	relation 128002 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128002 // <realization>
+	  b parent class_ref 155010 // OnItemSelectedListener
+      end
+
+      classrelation 128130 // <realization>
+	relation 128130 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128130 // <realization>
+	  b parent class_ref 155138 // OnTouchListener
+      end
+
+      attribute 144514 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_ListeDeroulante\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+"
+      end
+
+      attribute 144642 "TERMINER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Terminer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est validée"
+      end
+
+      attribute 144770 "DEMARRER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Démarrer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est en cours"
+      end
+
+      attribute 144898 "AFAIRE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"A faire\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est à faire"
+      end
+
+      attribute 145026 "RECOMMENCER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Recommencer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'opérateur recommence l'intervention"
+      end
+
+      attribute 145154 "SUPPRIMER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Supprimer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'opérateur supprime de la liste l'intervention"
+      end
+
+      attribute 145282 "interactionDetectee"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attribut
+
+!< Attribut utilisé pour détecter l'interaction d'un utilisateur."
+      end
+
+      classrelation 128258 // intervention (<unidirectional association>)
+	relation 128258 --->
+	  a role_name "intervention" private
+	    comment "!< Intervention où gérer l'évènement."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128258 // intervention (<unidirectional association>)
+	  b parent class_ref 134826 // Intervention
+      end
+
+      operation 135042 "ListeDeroulanteGestionnaire"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la Classe ListeDeroulanteGestionnaire
+@param intervention, l'intervention affichée
+"
+      end
+
+      operation 135170 "onTouch"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "vue" explicit_type "View"
+	  param inout name "event" explicit_type "MotionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 135298 "onItemSelected"
+	public explicit_return_type "void"
+	nparams 4
+	  param inout name "parent" explicit_type "AdapterView<?>"
+	  param inout name "vue" explicit_type "View"
+	  param in name "position" explicit_type "int"
+	  param in name "id" explicit_type "long"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 135426 "onNothingSelected"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "adapterView" explicit_type "AdapterView<?>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
   end
 
   deploymentview 134570 "justfeedandroid"
@@ -3688,6 +4060,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -3696,12 +4070,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 ${definition}"
       associated_elems
 	class_ref 134570 // ActiviteInterventions
@@ -3966,8 +4336,13 @@ ${definition}"
       java_src "${comment}
 ${package}
 ${imports}
+import android.content.Context;
 import android.graphics.Color;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import androidx.cardview.widget.CardView;
@@ -3983,5 +4358,19 @@ ${definition}"
 "
     end
 
+    artifact 128002 "ListeDeroulanteGestionnaire"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+${definition}"
+      associated_elems
+	class_ref 154882 // ListeDeroulanteGestionnaire
+      end
+    end
   end
 end

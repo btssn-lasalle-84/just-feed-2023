@@ -2,21 +2,20 @@ class VueIntervention
 !!!147498.java!!!	VueIntervention(in itemView : View)
         super(itemView);
 
-        identifiantDistributeur = ((TextView)itemView.findViewById(R.id.identifiantDistributeur));
-        dateIntervention        = ((TextView)itemView.findViewById(R.id.dateIntervention));
-        aRemplir                = ((TextView)itemView.findViewById(R.id.aRemplir));
-        aDepanner               = ((TextView)itemView.findViewById(R.id.aDepanner));
-        carteIntervention       = ((CardView)itemView.findViewById(R.id.carteIntervention));
-        menuEtats               = ((Spinner)itemView.findViewById(R.id.menuEtats));
+        identifiantDistributeur = ((TextView) itemView.findViewById(R.id.identifiantDistributeur));
+        dateIntervention = ((TextView) itemView.findViewById(R.id.dateIntervention));
+        aRemplir = ((TextView) itemView.findViewById(R.id.aRemplir));
+        aDepanner = ((TextView) itemView.findViewById(R.id.aDepanner));
+        carteIntervention = ((CardView) itemView.findViewById(R.id.carteIntervention));
+        menuEtats = ((Spinner) itemView.findViewById(R.id.menuEtats));
+        listeEtats = ((Spinner) itemView.findViewById(R.id.listeEtats));
 !!!147626.java!!!	afficherInterventions(inout intervention : Intervention) : void
-        if(menuEtats != null)
+        if (menuEtats != null)
             etatAfiltrer = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
-        if(etatAfiltrer == intervention.getEtat())
-        {
+        if (etatAfiltrer == intervention.getEtat() && etatAfiltrer != Intervention.Etats.TOUTES) {
             carteIntervention.setVisibility(View.VISIBLE);
-            switch (etatAfiltrer)
-            {
-                case VALIDE:
+            switch (intervention.getEtat()) {
+                case VALIDEES:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
                     break;
                 case A_FAIRE:
@@ -27,20 +26,73 @@ class VueIntervention
                     break;
             }
             identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
-            if(intervention.estADepanner())
-            {
-                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE + "%) : \n" +
-                        intervention.recupererBacsADepanner());
+            if (intervention.estADepanner()) {
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
+                        "%) : \n" + intervention.recupererBacsADepanner());
             }
-            if(intervention.estARemplir())
-            {
+            if (intervention.estARemplir()) {
                 aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
             }
-            dateIntervention.setText("Date de l'intervention : " + Intervention.formaterDate(intervention.getDateIntervention()));
-        }
-        else
+            dateIntervention.setText("Date de l'intervention : " +
+                    Intervention.formaterDate(intervention.getDateIntervention()));
+        } else if (etatAfiltrer == Intervention.Etats.TOUTES) {
+            Log.d(TAG, "TOUTES");
+            carteIntervention.setVisibility(View.VISIBLE);
+            switch (intervention.getEtat()) {
+                case VALIDEES:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
+                    break;
+                case A_FAIRE:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(ROUGE));
+                    break;
+                case EN_COURS:
+                    carteIntervention.setCardBackgroundColor(Color.parseColor(BLEU));
+                    break;
+            }
+            identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            if (intervention.estADepanner()) {
+                aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
+                        "%) : \n" + intervention.recupererBacsADepanner());
+            }
+            if (intervention.estARemplir()) {
+                aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+            }
+            dateIntervention.setText("Date de l'intervention : " +
+                    Intervention.formaterDate(intervention.getDateIntervention()));
+        } else {
             carteIntervention.setVisibility(View.GONE);
+        }
+        afficherListeDeroulante(intervention);
+!!!135554.java!!!	afficherListeDeroulante(inout intervention : Intervention) : void
+
+        if(intervention.getEtat() == A_FAIRE)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsAFaire, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+        else if(intervention.getEtat() == Intervention.Etats.EN_COURS)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsEnCours, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+        else if(intervention.getEtat() == Intervention.Etats.VALIDEES)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsValider, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+
+        ListeDeroulanteGestionnaire gestionnaire = new ListeDeroulanteGestionnaire(intervention);
+        this.listeEtats.setOnTouchListener(gestionnaire);
+        this.listeEtats.setOnItemSelectedListener(gestionnaire);
 !!!154282.java!!!	getEtatAFiltrer(inout nouvelEtat : Intervention::Etats) : Intervention::Etats
  return etatAfiltrer;
 !!!154410.java!!!	changerEtatAFiltrer(inout nouvelEtat : Intervention::Etats) : void
  etatAfiltrer = nouvelEtat;
+!!!135682.java!!!	setContext(inout nouveauContexte : Context) : void
+ contexte = nouveauContexte;
