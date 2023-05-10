@@ -146,20 +146,23 @@ void Intervention::creer()
                      << distributeurs[i]->getBac(j)->getARemplir() << "aDepanner"
                      << distributeurs[i]->getBac(j)->getADepanner();
             if(distributeurs[i]->getBac(j)->getARemplir() &&
-               distributeurs[i]->getBac(j)->getADepanner())
+               distributeurs[i]->getBac(j)->getADepanner() &&
+               !distributeurs[i]->getBac(j)->getAttribuer())
             {
                 this->setARemplir(true);
                 this->setADepanner(true);
                 break;
             }
             else if((distributeurs[i]->getBac(j)->getARemplir()) &&
-                    (!distributeurs[i]->getBac(j)->getARemplir()))
+                    (!distributeurs[i]->getBac(j)->getADepanner() &&
+                     !distributeurs[i]->getBac(j)->getAttribuer()))
             {
                 this->setARemplir(true);
                 break;
             }
             else if(distributeurs[i]->getBac(j)->getADepanner() &&
-                    (!distributeurs[i]->getBac(j)->getADepanner()))
+                    (!distributeurs[i]->getBac(j)->getARemplir() &&
+                     !distributeurs[i]->getBac(j)->getAttribuer()))
             {
                 this->setADepanner(true);
                 break;
@@ -179,49 +182,93 @@ void Intervention::creer()
               this->getDateIntervention().toString("yyyy-MM-dd") + ", 'A_FAIRE', " +
               QString::number(this->getARemplir()) + ", " + QString::number(this->getADepanner()) +
               ");";
-            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            qDebug() << Q_FUNC_INFO << "requete INSERT" << requete;
             // baseDeDonnees->executer(requete);
+
+            requete = "SELECT LAST_INSERT_ID(idIntervention) FROM Intervention;";
             /**
-             * @todo Récupérer l'id de l'intervention avec SELECT LAST_INSERT_ID() et ajouter un
-             * attribut pour cela
+             *@todo refaire la requete, mauvaise id recuperé
              */
+            qDebug() << Q_FUNC_INFO << "requete LAST_INSERT_ID" << requete;
+            QString recuperationNumeroIntervention;
+            baseDeDonnees->recuperer(requete, recuperationNumeroIntervention);
+            bool conversion;
+            this->numeroIntervention = recuperationNumeroIntervention.toInt(&conversion);
+            qDebug() << Q_FUNC_INFO << "numeroIntervention" << this->numeroIntervention;
         }
     }
 
     intervenir(true);
 
-    /**
-     * @todo Fabriquer la requête pour insérer un nouvel approvisionnement pour chaque bac si
-     * besoin et finaliser la structure de la table Approvisionnement
-     * @see Il faut l'id de l'intervention créée précédemment
-     */
     for(int i = 0; i < distributeurs.size(); ++i)
     {
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
-            if(distributeurs[i]->getBac(j)->getARemplir())
+            if(distributeurs[i]->getBac(j)->getARemplir() &&
+               !distributeurs[i]->getBac(j)->getAttribuer())
             {
+                requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
+                          "heureApprovisionnement) VALUES (" +
+                          QString::number(this->numeroIntervention) + ", " +
+                          QString::number(distributeurs[i]->getBac(j)->getIdBac()) + ", " +
+                          this->getHeureIntervention().toString("hh:mm:ss") + ");";
+                baseDeDonnees->executer(requete);
+                distributeurs[i]->getBac(j)->setAttribuer(true);
             }
         }
     }
 }
 
+/**
+ * @brief Accesseur de l'attribut aRemplir
+ * @return un bool
+ */
 bool Intervention::getARemplir() const
 {
     return this->remplir;
 }
 
+/**
+ * @brief Accesseur de l'attribut aDepanner
+ * @return bool
+ */
 bool Intervention::getADepanner() const
 {
     return this->depanner;
 }
 
+/**
+ * @brief Accesseur de l'attribut numeroIntervention
+ * @return int
+ */
+int Intervention::getNumeroIntervention() const
+{
+    return numeroIntervention;
+}
+
+/**
+ * @brief Mutateur de l'attribut aRemplir
+ * @param aRemplir
+ */
 void Intervention::setARemplir(const bool& aRemplir)
 {
     this->remplir = aRemplir;
 }
 
+/**
+ * @brief Mutateur de l'attribut aDepanner
+ * @param aDepanner
+ */
 void Intervention::setADepanner(const bool& aDepanner)
 {
     this->depanner = aDepanner;
+}
+
+/**
+ * @brief Mutateur de l'attribut numeroIntervention
+ * @param numeroIntervention
+ */
+void Intervention::setNumeroIntervention(const int numeroIntervention)
+{
+    this->numeroIntervention = numeroIntervention;
 }

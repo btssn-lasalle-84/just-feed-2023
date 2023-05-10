@@ -32,8 +32,9 @@ class Intervention
     QTime                  heureIntervention; //!< l'heure de l'intervention
     QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuee;         //!< si l'intervention a été effectuée
-    bool                   remplir;
-    bool                   depanner;
+    bool                   remplir;           //!<
+    bool                   depanner;          //!<
+    int                    numeroIntervention; //!<
 
   public:
     explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
@@ -42,18 +43,20 @@ class Intervention
     QDate                  getDateIntervention() const;
     QTime                  getHeureIntervention() const;
     QVector<Distributeur*> getDistributeurs() const;
+    bool                   getARemplir() const;
+    bool                   getADepanner() const;
+    int                    getNumeroIntervention() const;
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
     void                   setHeureIntervention(const QTime& heureIntervention);
+    void                   setARemplir(const bool& aRemplir);
+    void                   setADepanner(const bool& aDepanner);
     void                   ajouterDistributeur(Distributeur* distributeur);
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);
     void                   creer();
-    bool                   getARemplir() const;
-    bool                   getADepanner() const;
-    void                   setARemplir(const bool& aRemplir);
-    void                   setADepanner(const bool& aDepanner);
+    void                   setNumeroIntervention(const int numeroIntervention);
 };
 
 #endif // INTERVENTION_H

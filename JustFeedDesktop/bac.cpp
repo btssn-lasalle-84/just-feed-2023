@@ -173,6 +173,15 @@ int Bac::getHygrometrie() const
 }
 
 /**
+ * @brief Accesseur de l'attribut attribue
+ * @return bool
+ */
+bool Bac::getAttribuer() const
+{
+    return this->attribuer;
+}
+
+/**
  * @brief Mutateur de l'attribut Produit
  * @param produit le poduit que contient le bac
  */
@@ -268,4 +277,13 @@ void Bac::setADepanner(bool aDepanner)
 void Bac::setHygrometrie(int hygrometrie)
 {
     this->hygrometrie = hygrometrie;
+}
+
+/**
+ * @brief Mutateur de l'attribut attribue
+ * @param attribue
+ */
+void Bac::setAttribuer(bool attribue)
+{
+    this->attribuer = attribue;
 }

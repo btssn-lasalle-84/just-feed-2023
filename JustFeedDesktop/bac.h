@@ -30,7 +30,8 @@ class Bac
     bool     aRemplir;               //!< permet de savoir s'il faut remplir ce distributeur
     bool     aDepanner;              //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
-    int hygrometrie;                 //!< hygrometrie de l'interieur du distributeur
+    int  hygrometrie;                //!< hygrometrie de l'interieur du distributeur
+    bool attribuer;                  //!< bac attribué à une intervention
 
   public:
     Bac();
@@ -51,6 +52,7 @@ class Bac
     bool     getARemplir() const;
     bool     getADepanner() const;
     int      getIdBac() const;
+    bool     getAttribuer() const;
 
     // Mutateurs
     void setProduit(Produit* produit);
@@ -62,6 +64,7 @@ class Bac
     void setHygrometrie(int hydrometrie);
     void setARemplir(bool aRemplir);
     void setADepanner(bool aDepanner);
+    void setAttribuer(bool attribue);
 };
 
 #endif // BAC_H
