@@ -134,56 +134,84 @@ void Intervention::creer()
     QString dateFormatee = this->getDateIntervention().toString("yyyy/MM/dd");
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateFormatee;
 
-    QString requete;
     for(int i = 0; i < distributeurs.size(); i++)
     {
         this->setARemplir(false);
         this->setADepanner(false);
-        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
-        {
-            qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "bac"
-                     << distributeurs[i]->getBac(j)->getNomProduit() << "aRemplir"
-                     << distributeurs[i]->getBac(j)->getARemplir() << "aDepanner"
-                     << distributeurs[i]->getBac(j)->getADepanner();
-            if(distributeurs[i]->getBac(j)->getARemplir() &&
-               distributeurs[i]->getBac(j)->getADepanner() &&
-               !distributeurs[i]->getBac(j)->getAttribuer())
-            {
-                this->setARemplir(true);
-                this->setADepanner(true);
-                break;
-            }
-            else if((distributeurs[i]->getBac(j)->getARemplir()) &&
-                    (!distributeurs[i]->getBac(j)->getADepanner() &&
-                     !distributeurs[i]->getBac(j)->getAttribuer()))
-            {
-                this->setARemplir(true);
-                break;
-            }
-            else if(distributeurs[i]->getBac(j)->getADepanner() &&
-                    (!distributeurs[i]->getBac(j)->getARemplir() &&
-                     !distributeurs[i]->getBac(j)->getAttribuer()))
-            {
-                this->setADepanner(true);
-                break;
-            }
-        }
-        /**
-         * @fixme Corriger le problème de détection d'une intervention pour un distributeur
-         */
+        affecterEtatIntervention(i);
+
         qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[i]->getNom() << "aRemplir"
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
-        if(this->getARemplir() || this->getADepanner())
+        ajouterIntervention(i);
+    }
+    intervenir(true);
+
+    for(int i = 0; i < distributeurs.size(); ++i)
+    {
+        ajouterApprovisionnement(i);
+    }
+}
+
+/**
+ * @brief méthode qui affecte a l'intervention si elle est à remplir, depanner ou les deux
+ * @return void
+ */
+void Intervention::affecterEtatIntervention(int const idDistributeur)
+{
+    for(int j = 0; j < distributeurs[idDistributeur]->getNbBacs(); j++)
+    {
+        qDebug() << Q_FUNC_INFO << "distributeur" << distributeurs[idDistributeur]->getNom()
+                 << "bac" << distributeurs[idDistributeur]->getBac(j)->getNomProduit() << "aRemplir"
+                 << distributeurs[idDistributeur]->getBac(j)->getARemplir() << "aDepanner"
+                 << distributeurs[idDistributeur]->getBac(j)->getADepanner();
+        if(distributeurs[idDistributeur]->getBac(j)->getARemplir() &&
+           distributeurs[idDistributeur]->getBac(j)->getADepanner() &&
+           !distributeurs[idDistributeur]->getBac(j)->getAttribuer())
+        {
+            this->setARemplir(true);
+            this->setADepanner(true);
+            break;
+        }
+        else if((distributeurs[idDistributeur]->getBac(j)->getARemplir()) &&
+                (!distributeurs[idDistributeur]->getBac(j)->getADepanner() &&
+                 !distributeurs[idDistributeur]->getBac(j)->getAttribuer()))
+        {
+            this->setARemplir(true);
+            break;
+        }
+        else if(distributeurs[idDistributeur]->getBac(j)->getADepanner() &&
+                (!distributeurs[idDistributeur]->getBac(j)->getARemplir() &&
+                 !distributeurs[idDistributeur]->getBac(j)->getAttribuer()))
+        {
+            this->setADepanner(true);
+            break;
+        }
+    }
+}
+
+/**
+ * @brief méthode qui ajoute dans la bdd une intervention
+ * @return void
+ */
+void Intervention::ajouterIntervention(const int idDistributeur)
+{
+    QString requete;
+    if(this->getARemplir() || this->getADepanner())
+    {
+        if(!interventionEstPlanifie(distributeurs[idDistributeur]->getIdDistributeur()))
         {
             requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
                       "etat, aRemplir, aDepanner) VALUES (1, " +
-                      QString::number(distributeurs[i]->getIdDistributeur()) + ", " + "'" +
-                      this->getDateIntervention().toString("yyyy-MM-dd") + "'" + ", 'A_FAIRE', " +
-                      QString::number(this->getARemplir()) + ", " +
+                      QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ", " +
+                      "'" + this->getDateIntervention().toString("yyyy-MM-dd") + "'" +
+                      ", 'A_FAIRE', " + QString::number(this->getARemplir()) + ", " +
                       QString::number(this->getADepanner()) + ");";
             qDebug() << Q_FUNC_INFO << "requete INSERT" << requete;
-            baseDeDonnees->executer(requete);
+            // baseDeDonnees->executer(requete);
             requete = "SELECT LAST_INSERT_ID(idIntervention) FROM Intervention;";
+            /**
+             *@todo refaire cette requete, elle ne prend la bonne valeur
+             */
             qDebug() << Q_FUNC_INFO << "requete LAST_INSERT_ID" << requete;
             QString recuperationNumeroIntervention;
             baseDeDonnees->recuperer(requete, recuperationNumeroIntervention);
@@ -192,27 +220,72 @@ void Intervention::creer()
             qDebug() << Q_FUNC_INFO << "numeroIntervention" << this->numeroIntervention;
         }
     }
+}
 
-    intervenir(true);
-
-    for(int i = 0; i < distributeurs.size(); ++i)
+/**
+ * @brief méthode qui ajoute dans la bdd les approvisionnement des bacs
+ * @return void
+ */
+void Intervention::ajouterApprovisionnement(const int idDistributeur)
+{
+    QString requete;
+    for(int j = 0; j < distributeurs[idDistributeur]->getNbBacs(); j++)
     {
-        for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
+        if(distributeurs[idDistributeur]->getBac(j)->getARemplir() &&
+           !distributeurs[idDistributeur]->getBac(j)->getAttribuer())
         {
-            if(distributeurs[i]->getBac(j)->getARemplir() &&
-               !distributeurs[i]->getBac(j)->getAttribuer())
+            if(interventionEstPlanifie(distributeurs[idDistributeur]->getIdDistributeur()))
+            {
+                requete = "SELECT idIntervention FROM Intervention WHERE idDistributeur = " +
+                          QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
+                QString idIntervention;
+                baseDeDonnees->recuperer(requete, idIntervention);
+
+                requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
+                          "heureApprovisionnement) VALUES (" +
+                          idIntervention + ", " +
+                          QString::number(distributeurs[idDistributeur]->getBac(j)->getIdBac()) +
+                          ", " + "'" + this->getHeureIntervention().toString("hh:mm:ss") + "'" +
+                          ");";
+                // baseDeDonnees->executer(requete);
+                distributeurs[idDistributeur]->getBac(j)->setAttribuer(true);
+                qDebug() << Q_FUNC_INFO << "requete approvisonnement" << requete;
+            }
+            else
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
                           "heureApprovisionnement) VALUES (" +
                           QString::number(this->numeroIntervention) + ", " +
-                          QString::number(distributeurs[i]->getBac(j)->getIdBac()) + ", " + "'" +
-                          this->getHeureIntervention().toString("hh:mm:ss") + "'" + ");";
+                          QString::number(distributeurs[idDistributeur]->getBac(j)->getIdBac()) +
+                          ", " + "'" + this->getHeureIntervention().toString("hh:mm:ss") + "'" +
+                          ");";
                 // baseDeDonnees->executer(requete);
-                distributeurs[i]->getBac(j)->setAttribuer(true);
+                distributeurs[idDistributeur]->getBac(j)->setAttribuer(true);
                 qDebug() << Q_FUNC_INFO << "requete approvisonnement" << requete;
             }
         }
     }
+}
+
+/**
+ * @brief méthode qui vérifie si le distributeur à déja une intervention en cour sur celui-ci
+ * @return void
+ */
+bool Intervention::interventionEstPlanifie(const int idDistributeur)
+{
+    QString requete;
+    requete = "SELECT idDistributeur FROM Intervention";
+    QVector<QString> interventionBdd;
+    baseDeDonnees->recuperer(requete, interventionBdd);
+    bool conversion;
+    for(int i = 0; i < interventionBdd.size(); i++)
+    {
+        if(interventionBdd[i].toInt(&conversion) == idDistributeur)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**

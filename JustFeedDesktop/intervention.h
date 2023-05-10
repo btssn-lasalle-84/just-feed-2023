@@ -57,6 +57,10 @@ class Intervention
     void                   intervenir(bool aIntervenir);
     void                   creer();
     void                   setNumeroIntervention(const int numeroIntervention);
+    void                   affecterEtatIntervention(int const idDistributeur);
+    void                   ajouterIntervention(const int idDistributeur);
+    void                   ajouterApprovisionnement(int const idDistributeur);
+    bool                   interventionEstPlanifie(const int idDistributeur);
 };
 
 #endif // INTERVENTION_H
