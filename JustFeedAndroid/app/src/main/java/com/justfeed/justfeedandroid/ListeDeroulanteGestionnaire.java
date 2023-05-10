@@ -11,9 +11,11 @@ public class ListeDeroulanteGestionnaire implements AdapterView.OnItemSelectedLi
      * Constantes
      */
     private static final String TAG = "_ListeDeroulante";
-    private final static String VALIDER  = "Valider"; //!< L'intervention est validée
-    private final static String EN_COURS = "En cours"; //!< L'intervention est en cours
+    private final static String TERMINER  = "Terminer"; //!< L'intervention est validée
+    private final static String DEMARRER = "Démarrer"; //!< L'intervention est en cours
     private final static String AFAIRE   = "A faire"; //!< L'intervention est à faire
+    private final static String RECOMMENCER = "Recommencer"; //!< L'opérateur recommence l'intervention
+    private final static String SUPPRIMER   = "Supprimer"; //!< L'opérateur supprime de la liste l'intervention
 
     /**
      * Attribut
@@ -49,13 +51,13 @@ public class ListeDeroulanteGestionnaire implements AdapterView.OnItemSelectedLi
         {
             switch (nouvelEtat)
             {
-                case VALIDER:
-                    Log.d(TAG, "valider");
+                case TERMINER:
+                    Log.d(TAG, "Terminer");
                     ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = "
                             +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.VALIDEES);
                     break;
-                case EN_COURS:
-                    Log.d(TAG, "en cours");
+                case DEMARRER:
+                    Log.d(TAG, "Démarrer");
                     ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'EN_COURS' WHERE `Intervention`.`idDistributeur` = "
                             +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.EN_COURS);
                     break;
@@ -63,6 +65,16 @@ public class ListeDeroulanteGestionnaire implements AdapterView.OnItemSelectedLi
                     Log.d(TAG, "A faire");
                     ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = "
                             +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.A_FAIRE);
+                    break;
+                case RECOMMENCER:
+                    Log.d(TAG, "Recommencer");
+                    ActiviteInterventions.modifierEtatIntervention("UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention, Intervention.Etats.A_FAIRE);
+                    break;
+                case SUPPRIMER:
+                    Log.d(TAG, "Supprimer");
+                    ActiviteInterventions.supprimerIntervention("DELETE FROM `Intervention` WHERE `Intervention`.`idDistributeur` = "
+                            +intervention.getIdentifiantDistribteur()+";", intervention);
                     break;
             }
         }

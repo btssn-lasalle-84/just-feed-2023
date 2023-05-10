@@ -129,11 +129,30 @@ public class VueIntervention extends ViewHolder {
     }
 
     public void afficherListeDeroulante(Intervention intervention) {
-        ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
-                R.array.listeEtats, android.R.layout.simple_spinner_item);
-        listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        if(intervention.getEtat() == A_FAIRE)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsAFaire, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+        else if(intervention.getEtat() == Intervention.Etats.EN_COURS)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsEnCours, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+        else if(intervention.getEtat() == Intervention.Etats.VALIDEES)
+        {
+            ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
+                    R.array.listeEtatsValider, android.R.layout.simple_spinner_item);
+            listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            this.listeEtats.setAdapter(listeAdapteur);
+        }
+
         ListeDeroulanteGestionnaire gestionnaire = new ListeDeroulanteGestionnaire(intervention);
-        this.listeEtats.setAdapter(listeAdapteur);
         this.listeEtats.setOnTouchListener(gestionnaire);
         this.listeEtats.setOnItemSelectedListener(gestionnaire);
     }
