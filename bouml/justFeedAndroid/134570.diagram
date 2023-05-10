@@ -26,7 +26,7 @@ classcanvas 130474 class_ref 135978 // AdaptateurIntervention
 end
 relationcanvas 129194 relation_ref 134698 // <unidirectional association>
   from ref 128810 z 2023 stereotype "<<List>>" xyz 2818 1277 2023 to ref 129066
-  role_a_pos 2924 1844 3000 no_role_b
+  role_a_pos 2963 1844 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129962 relation_ref 135338 // <unidirectional association>
@@ -45,7 +45,7 @@ relationcanvas 130218 relation_ref 136490 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130602 relation_ref 135594 // <unidirectional association>
-  from ref 130474 z 2023 stereotype "<<List>>" xyz 2914.5 2583 3000 to ref 129066
+  from ref 130474 z 2023 stereotype "<<List>>" xyz 2914 2583 3000 to ref 129066
   role_a_pos 2974 2518 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end

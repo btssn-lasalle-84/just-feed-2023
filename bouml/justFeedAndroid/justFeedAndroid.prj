@@ -1,7 +1,7 @@
 format 224
 "justFeedAndroid"
-  revision 13
-  modified_by 2 "btssn2"
+  revision 14
+  modified_by 42 "tv"
   java_root_dir "../../"
 
 
@@ -372,7 +372,7 @@ ${members}}
 
     sequencediagram 160770 "GestionInterventions"
       sequencediagramsettings end
-      overlapping_bars size A4
+      overlapping_bars size A0
     end
   end
 

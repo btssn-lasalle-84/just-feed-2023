@@ -1,125 +1,104 @@
 format 224
 
 classinstance 128002 class_ref 128002 // operateur
-  name ""   xyz 152 4 2005 life_line_z 2000
+  name ""   xyz 11 4 2005 life_line_z 2000
+classinstance 128042 class_ref 154882 // ListeDeroulanteGestionnaire
+  name ""   xyz 260 4 2000 life_line_z 2000
 classinstance 128130 class_ref 134570 // ActiviteInterventions
-  name ""   xyz 351 11 2005 life_line_z 2000
+  name ""   xyz 779 4 2005 life_line_z 2000
 classinstance 128258 class_ref 134954 // BaseDeDonnees
-  name ""   xyz 626 13 2005 life_line_z 2000
-durationcanvas 128386 classinstance_ref 128002 // :operateur
-  xyzwh 182 80 2010 11 40
+  name ""   xyz 1362 4 2005 life_line_z 2000
+note 128554 "clic sur un élément de la liste déroulante"
+  xyzwh 17 173 2000 307 97
+classinstance 129322 class_ref 134826 // Intervention
+  name ""   xyz 1127 4 2000 life_line_z 2000
+fragment 129962 "alt"
+  xyzwh 368 135 1995 1266 634
+  separator 4680
 end
-durationcanvas 128514 classinstance_ref 128130 // :ActiviteInterventions
-  xyzwh 419 82 2010 11 118
-  overlappingdurationcanvas 128770
-    xyzwh 425 110 2020 11 70
-  end
+textcanvas 130090 "[DEMARRER]"
+  xyzwh 471 147 3005 186 30
+textcanvas 130346 "[SUPPRIMER]"
+  xyzwh 470 443 2000 190 30
+note 131242 "Idem pour TERMINER, AFAIRE et RECOMMENCER"
+  xyzwh 483 272 2000 357 121
+durationcanvas 128170 classinstance_ref 128002 // :operateur
+  xyzwh 74 108 2010 11 41
 end
-durationcanvas 129026 classinstance_ref 128258 // :BaseDeDonnees
-  xyzwh 684 156 2010 11 25
+durationcanvas 128298 classinstance_ref 128042 // :ListeDeroulanteGestionnaire
+  xyzwh 450 108 2010 11 640
 end
-durationcanvas 129282 classinstance_ref 128002 // :operateur
-  xyzwh 182 246 2010 11 40
+durationcanvas 128810 classinstance_ref 128130 // :ActiviteInterventions
+  xyzwh 914 218 2010 11 172
 end
-durationcanvas 129410 classinstance_ref 128130 // :ActiviteInterventions
-  xyzwh 419 248 2010 11 93
-  overlappingdurationcanvas 129666
-    xyzwh 425 265 2020 11 61
-  end
+durationcanvas 129066 classinstance_ref 128258 // :BaseDeDonnees
+  xyzwh 1477 258 2010 11 25
 end
-durationcanvas 129922 classinstance_ref 128258 // :BaseDeDonnees
-  xyzwh 684 306 2010 11 25
+durationcanvas 129450 classinstance_ref 129322 // :Intervention
+  xyzwh 1208 311 2010 11 25
 end
-durationcanvas 130178 classinstance_ref 128002 // :operateur
-  xyzwh 182 388 2010 11 40
+durationcanvas 129706 classinstance_ref 128258 // :BaseDeDonnees
+  xyzwh 1477 359 2010 11 25
 end
-durationcanvas 130306 classinstance_ref 128130 // :ActiviteInterventions
-  xyzwh 419 389 2010 11 82
-  overlappingdurationcanvas 130562
-    xyzwh 425 410 2020 11 52
-  end
+durationcanvas 130474 classinstance_ref 128130 // :ActiviteInterventions
+  xyzwh 914 515 2010 11 161
 end
-durationcanvas 130818 classinstance_ref 128258 // :BaseDeDonnees
-  xyzwh 684 437 2010 11 25
+durationcanvas 130730 classinstance_ref 128258 // :BaseDeDonnees
+  xyzwh 1477 550 2010 11 25
 end
-durationcanvas 131074 classinstance_ref 128002 // :operateur
-  xyzwh 182 519 2010 11 40
+durationcanvas 130986 classinstance_ref 128258 // :BaseDeDonnees
+  xyzwh 1477 636 2010 11 25
 end
-durationcanvas 131202 classinstance_ref 128130 // :ActiviteInterventions
-  xyzwh 419 520 2010 11 75
-  overlappingdurationcanvas 131458
-    xyzwh 425 540 2020 11 42
-  end
-end
-durationcanvas 131714 classinstance_ref 128258 // :BaseDeDonnees
-  xyzwh 684 566 2010 11 25
-end
-msg 128642 synchronous
-  from durationcanvas_ref 128386
-  to durationcanvas_ref 128514
-  yz 82 2015 explicitmsg "demarrerIntervention"
+msg 128426 asynchronous
+  from durationcanvas_ref 128170
+  to durationcanvas_ref 128298
+  yz 108 2015 msg operation_ref 135298 // "onItemSelected(inout parent : AdapterView<?>, inout vue : View, in position : int, in id : long) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 224 67
-reflexivemsg 128898 synchronous
-  to durationcanvas_ref 128770
-  yz 110 2025 explicitmsg "modifierEtatIntervention()"
+  label_xy 155 78
+msg 128938 synchronous
+  from durationcanvas_ref 128298
+  to durationcanvas_ref 128810
+  yz 218 2015 msg operation_ref 134786 // "modifierEtatIntervention(in requete : String, inout intervention : Intervention, inout nouvelEtat : Intervention::Etats) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 441 93
-msg 129154 asynchronous
-  from durationcanvas_ref 128770
-  to durationcanvas_ref 129026
-  yz 156 2025 explicitmsg "executerRequete()"
+  label_xy 523 188
+msg 129194 synchronous
+  from durationcanvas_ref 128810
+  to durationcanvas_ref 129066
+  yz 258 2015 msg operation_ref 140586 // "executerRequete(in requete : String) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 499 141
-msg 129538 synchronous
-  from durationcanvas_ref 129282
-  to durationcanvas_ref 129410
-  yz 248 2015 explicitmsg "terminerIntervention"
+  label_xy 1194 228
+msg 129578 synchronous
+  from durationcanvas_ref 128810
+  to durationcanvas_ref 129450
+  yz 311 2015 msg operation_ref 144426 // "modifierEtatIntervention(inout nouvelEtat : Intervention::Etats) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 241 233
-reflexivemsg 129794 synchronous
-  to durationcanvas_ref 129666
-  yz 265 2025 explicitmsg "modifierEtatIntervention()"
+  label_xy 1015 281
+msg 129834 synchronous
+  from durationcanvas_ref 128810
+  to durationcanvas_ref 129706
+  yz 359 2015 msg operation_ref 140970 // "recupererInterventions() : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 434 248
-msg 130050 asynchronous
-  from durationcanvas_ref 129666
-  to durationcanvas_ref 129922
-  yz 306 2025 explicitmsg "executerRequete()"
+  label_xy 1158 329
+msg 130602 synchronous
+  from durationcanvas_ref 128298
+  to durationcanvas_ref 130474
+  yz 515 2015 msg operation_ref 134914 // "supprimerIntervention(in requete : String, inout intervention : Intervention) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 499 291
-msg 130434 synchronous
-  from durationcanvas_ref 130178
-  to durationcanvas_ref 130306
-  yz 389 2015 explicitmsg "supprimerIntervention"
+  label_xy 536 485
+msg 130858 synchronous
+  from durationcanvas_ref 130474
+  to durationcanvas_ref 130730
+  yz 550 2015 msg operation_ref 140586 // "executerRequete(in requete : String) : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 235 374
-reflexivemsg 130690 synchronous
-  to durationcanvas_ref 130562
-  yz 410 2025 explicitmsg "supprimerIntervention()"
+  label_xy 1202 520
+msg 131114 synchronous
+  from durationcanvas_ref 130474
+  to durationcanvas_ref 130986
+  yz 636 2015 msg operation_ref 140970 // "recupererInterventions() : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 436 394
-msg 130946 asynchronous
-  from durationcanvas_ref 130562
-  to durationcanvas_ref 130818
-  yz 437 2025 explicitmsg "executerRequete()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 499 422
-msg 131330 synchronous
-  from durationcanvas_ref 131074
-  to durationcanvas_ref 131202
-  yz 520 2015 explicitmsg "recommencerIntervention"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 223 505
-reflexivemsg 131586 synchronous
-  to durationcanvas_ref 131458
-  yz 540 2025 explicitmsg "modifierEtatIntervention()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 433 526
-msg 131842 asynchronous
-  from durationcanvas_ref 131458
-  to durationcanvas_ref 131714
-  yz 566 2025 explicitmsg "executerRequete()"
-  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 499 551
+  label_xy 1166 606
+line 128682 -_-_
+  from ref 128554 z 2016 to ref 128426
+line 131370 -_-_
+  from ref 131242 z 3006 to ref 130090
 end

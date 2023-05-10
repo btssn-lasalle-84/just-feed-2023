@@ -1,7 +1,7 @@
 format 224
 "justfeedandroid" // justfeedandroid
-  revision 4
-  modified_by 2 "btssn2"
+  revision 5
+  modified_by 42 "tv"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -452,7 +452,6 @@ des interventions
 	comment "@brief Supprimer une intervention
 "
       end
-
     end
 
     class 134826 "Intervention"
@@ -570,7 +569,6 @@ ${members}}
 	  
 	  
 	end
-
       end
 
       attribute 140714 "TAG"
