@@ -383,9 +383,59 @@ void IHMJustFeed::initialiserDistributeurs()
      */
     QString requete = "SELECT * FROM Distributeur";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
+    QStringList          distributeur;
     QVector<QStringList> distributeursRecuperes;
-    baseDeDonnees->recuperer(requete, distributeursRecuperes);
     qDebug() << Q_FUNC_INFO << "distributeursRecuperes" << distributeursRecuperes;
+
+    bool retour;
+
+    retour = baseDeDonnees->recuperer(requete, distributeursRecuperes);
+    if(retour != false)
+    {
+        for(int i = 0; i < distributeursRecuperes.size(); i++)
+        {
+            distributeur          = distributeursRecuperes.at(i);
+            QString      deviceID = distributeur.at(0);
+            Localisation position;
+            position.latitude         = distributeur.at(9);
+            position.longitude        = distributeur.at(8);
+            QString nom               = distributeur.at(2);
+            QString adresse           = distributeur.at(4);
+            QString ville             = distributeur.at(5);
+            QString codePostal        = distributeur.at(6);
+            QString description       = distributeur.at(3);
+            QDate   dateMiseEnService = QDate::fromString(distributeur.at(7), "yyyy-MM-dd");
+
+            Distributeur* nouveauDistributeur = new Distributeur(deviceID,
+                                                                 nom,
+                                                                 adresse,
+                                                                 codePostal,
+                                                                 ville,
+                                                                 description,
+                                                                 dateMiseEnService,
+                                                                 position);
+            distributeurs.append(nouveauDistributeur);
+        }
+        distributeurs[0]->ajouterBac(Bac(0, produits[0], 0.));
+        distributeurs[0]->ajouterBac(Bac(0, produits[1], 0.));
+        distributeurs[0]->ajouterBac(Bac(0, produits[2], 0.));
+        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
+                 << distributeurs[0]->getNbBacs();
+        distributeurs[1]->ajouterBac(Bac(0, produits[0], 0.));
+        distributeurs[1]->ajouterBac(Bac(0, produits[1], 0.));
+        distributeurs[1]->ajouterBac(Bac(0, produits[2], 0.));
+        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
+                 << distributeurs[1]->getNbBacs();
+        distributeurs[2]->ajouterBac(Bac(0, produits[0], 0.));
+        distributeurs[2]->ajouterBac(Bac(0, produits[1], 0.));
+        distributeurs[2]->ajouterBac(Bac(0, produits[2], 0.));
+        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
+                 << distributeurs[2]->getNbBacs();
+    }
+    else
+    {
+        qDebug() << QString::fromUtf8("erreur Base de donnees!");
+    }
 #endif
 }
 
@@ -399,7 +449,7 @@ void IHMJustFeed::initialiserProduits()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -449,6 +499,30 @@ void IHMJustFeed::initialiserProduits()
 #else
     qDebug() << Q_FUNC_INFO;
     QString requete = "SELECT * FROM Produit";
+
+    bool retour;
+    qDebug() << QString::fromUtf8("requête : ") << requete;
+
+    QStringList          produit;
+    QVector<QStringList> listeProduits;
+
+    retour = baseDeDonnees->recuperer(requete, listeProduits);
+    if(retour != false)
+    {
+        for(int i = 0; i < listeProduits.size(); i++)
+        {
+            produit             = listeProduits.at(i);
+            QString nom         = produit.at(1);
+            QString marque      = produit.at(2);
+            QString description = produit.at(3);
+            QString codeProduit = produit.at(4);
+            double  prix        = produit.at(5).toDouble();
+
+            Produit* nouveauProduit = new Produit(nom, marque, description, codeProduit, prix);
+            produits.append(nouveauProduit);
+        }
+    }
+
 #endif
 }
 
