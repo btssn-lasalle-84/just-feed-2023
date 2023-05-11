@@ -108,10 +108,6 @@ void Intervention::intervenir(bool aIntervenir)
  */
 void Intervention::creer()
 {
-    /**
-     * @todo Gérer l'opérateur à qui est affectée l'intervention (une liste déroulante d'opérateurs
-     * dans planificationintervention ?)
-     */
     qDebug() << Q_FUNC_INFO << "dateIntervention" << this->getDateIntervention();
     QString dateFormatee = this->getDateIntervention().toString("yyyy/MM/dd");
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateFormatee;
@@ -184,16 +180,14 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
         if(!estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
         {
             requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
-                      "etat, aRemplir, aDepanner) VALUES (1, " +
+                      "etat, aRemplir, aDepanner) VALUES (" +
+                      QString::number(getIdOperateur()) + ", " +
                       QString::number(distributeurs[indexDistributeur]->getIdDistributeur()) +
                       ", " + "'" + this->getDateIntervention().toString("yyyy-MM-dd") + "'" +
                       ", 'A_FAIRE', " + QString::number(this->getARemplir()) + ", " +
                       QString::number(this->getADepanner()) + ");";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
-            baseDeDonnees->executer(requete);
-            /*
-             * @fixme MAX() ce n'est pas pareil que LAST_INSERT_ID()
-             */
+            // baseDeDonnees->executer(requete);
             requete = "SELECT MAX(idIntervention) FROM Intervention;";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QString idIntervention;
@@ -213,7 +207,7 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
             requete = "UPDATE Intervention SET aDepanner = 1 WHERE idDistributeur = " +
                       QString::number(distributeurs[indexDistributeur]->getIdDistributeur()) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
-            baseDeDonnees->executer(requete);
+            // baseDeDonnees->executer(requete);
         }
 
         if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()) &&
@@ -222,7 +216,7 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
             requete = "UPDATE Intervention SET aRemplir = 1 WHERE idDistributeur = " +
                       QString::number(distributeurs[indexDistributeur]->getIdDistributeur()) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
-            baseDeDonnees->executer(requete);
+            // baseDeDonnees->executer(requete);
         }
     }
     return numeroIntervention;
@@ -242,16 +236,16 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
         {
             if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
             {
-                /**
-                 * @todo On laisse tomber le poids à prévoir ?
-                 */
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
-                          "heureApprovisionnement) VALUES (" +
+                          "poidsAPrevoir) VALUES (" +
                           QString::number(idIntervention) + ", " +
                           QString::number(distributeurs[indexDistributeur]->getBac(j)->getIdBac()) +
+                          "," +
+                          QString::number(
+                            distributeurs[indexDistributeur]->getBac(j)->getQuantiteARemplir()) +
                           ", " + "'');";
                 qDebug() << Q_FUNC_INFO << "requete" << requete;
-                baseDeDonnees->executer(requete);
+                // baseDeDonnees->executer(requete);
                 distributeurs[indexDistributeur]->getBac(j)->setAttribuer(true);
             }
         }
@@ -266,13 +260,19 @@ bool Intervention::estPlanifiee(const int idDistributeur)
 {
     qDebug() << Q_FUNC_INFO << "idDistributeur" << idDistributeur;
     QString requete;
-    requete = "SELECT COUNT(*) FROM Intervention WHERE idDistributeur = " +
-              QString::number(idDistributeur) + " AND (etat = 'A_FAIRE' OR etat = 'EN_COURS');";
+    requete = "SELECT idDistributeur FROM Intervention";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
-    QString nbInterventions;
-    baseDeDonnees->recuperer(requete, nbInterventions);
-    qDebug() << Q_FUNC_INFO << "nbInterventions" << nbInterventions;
-    return (nbInterventions.size() > 0);
+    QVector<QString> idInterventionsBdd;
+    baseDeDonnees->recuperer(requete, idInterventionsBdd);
+
+    for(int i = 0; i < idInterventionsBdd.size(); i++)
+    {
+        if(idInterventionsBdd[i].toInt() == idDistributeur)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
@@ -303,6 +303,15 @@ int Intervention::getIdIntervention() const
 }
 
 /**
+ * @brief Accesseur de l'attribut idOperateur
+ * @return int
+ */
+int Intervention::getIdOperateur() const
+{
+    return this->idOperateur;
+}
+
+/**
  * @brief Mutateur de l'attribut aRemplir
  * @param aRemplir
  */
@@ -318,6 +327,15 @@ void Intervention::setARemplir(const bool& aRemplir)
 void Intervention::setADepanner(const bool& aDepanner)
 {
     this->depanner = aDepanner;
+}
+
+/**
+ * @brief Mutateur de l'attribut idOperateur
+ * @param idOperateur
+ */
+void Intervention::setIdOperateur(const int& idOperateur)
+{
+    this->idOperateur = idOperateur;
 }
 
 /**

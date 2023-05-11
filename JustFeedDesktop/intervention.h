@@ -35,7 +35,8 @@ class Intervention
     bool                   effectuee;      //!< si l'intervention a été effectuée
     bool                   remplir;        //!<
     bool                   depanner;       //!<
-    int                    idIntervention; //!<
+    int                    idIntervention; //!< id de l'intervention
+    int                    idOperateur;    //!< id de operateur
 
   public:
     explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
@@ -46,11 +47,13 @@ class Intervention
     bool                   getARemplir() const;
     bool                   getADepanner() const;
     int                    getIdIntervention() const;
+    int                    getIdOperateur() const;
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
     void                   setARemplir(const bool& aRemplir);
     void                   setADepanner(const bool& aDepanner);
+    void                   setIdOperateur(const int& idOperateur);
     void                   ajouterDistributeur(Distributeur* distributeur);
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);

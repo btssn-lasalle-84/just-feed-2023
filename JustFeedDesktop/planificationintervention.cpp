@@ -94,7 +94,10 @@ void PlanificationIntervention::creerUneIntervention()
         return;
     intervention = new Intervention(distributeurs);
     intervention->setDateIntervention(editionDate->date());
+    int idOperateurInt = recupererIdOperateurBdd();
+    intervention->setIdOperateur(idOperateurInt);
     intervention->creer();
+
     this->close();
 }
 // Méthodes privées
@@ -120,6 +123,8 @@ void PlanificationIntervention::instancierWidgets()
     qDebug() << Q_FUNC_INFO;
     boutonItervention = new QPushButton(this);
     editionDate       = new QDateEdit(QDate::currentDate(), this);
+    listeOperateur    = new QComboBox(this);
+
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs.push_back(new QLabel(this));
@@ -161,6 +166,7 @@ void PlanificationIntervention::initialiserWidgets()
     boutonItervention->setText("Créer l'intervention");
     boutonItervention->setEnabled(false);
     editionDate->setDisplayFormat("dd/MM/yyyy");
+    setListeOperateur();
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs[i]->setText("Distributeur -> " + distributeurs[i]->getNom());
@@ -210,6 +216,7 @@ void PlanificationIntervention::positionnerWidgets()
     QVector<QHBoxLayout*> layoutBac(totalBac);
     QVector<QVBoxLayout*> layoutInfoDistributeurs(nomDistributeurs.size());
     QHBoxLayout*          layoutFormulaire = new QHBoxLayout;
+    layoutFormulaire->addWidget(listeOperateur);
     for(int i = 0; i < distributeurs.size(); i++)
     {
         layoutInfoDistributeurs[i] = new QVBoxLayout();
@@ -342,4 +349,27 @@ void PlanificationIntervention::initialiserEtatDistributeur()
             }
         }
     }
+}
+
+void PlanificationIntervention::setListeOperateur()
+{
+    QString          requete = "SELECT nom FROM Operateur";
+    QVector<QString> listeOperateurBdd;
+    baseDeDonnees->recuperer(requete, listeOperateurBdd);
+    listeOperateur->addItem("Opérateur");
+    for(int i = 0; i < listeOperateurBdd.size(); i++)
+    {
+        listeOperateur->addItem(listeOperateurBdd[i]);
+    }
+}
+
+int PlanificationIntervention::recupererIdOperateurBdd()
+{
+    QString requete =
+      "SELECT idOperateur FROM Operateur WHERE nom =  '" + listeOperateur->currentText() + "';";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    QString idOperateur;
+    baseDeDonnees->recuperer(requete, idOperateur);
+    int idOperateurInt = idOperateur.toInt();
+    return idOperateurInt;
 }
