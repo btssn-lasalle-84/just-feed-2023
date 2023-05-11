@@ -1,6 +1,6 @@
 format 224
 "justFeedAndroid"
-  revision 12
+  revision 14
   modified_by 42 "tv"
   java_root_dir "../../"
 
@@ -365,9 +365,14 @@ ${members}}
     
     activitydiagramsettings
      end
-    sequencediagram 154242 "justFeedAndroidDS1"
+    sequencediagram 154242 "LancementActivitesDS"
       sequencediagramsettings end
-      overlapping_bars size A4
+      overlapping_bars size A1
+    end
+
+    sequencediagram 160770 "GestionInterventions"
+      sequencediagramsettings end
+      overlapping_bars size A0
     end
   end
 

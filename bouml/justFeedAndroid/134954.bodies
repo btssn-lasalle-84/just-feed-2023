@@ -467,10 +467,11 @@ class BaseDeDonnees
                             {
                                 for(Distributeur distributeur: listeDistributeurs)
                                 {
-                                    Intervention.Etats etat = Intervention.Etats.A_FAIRE;
                                     Log.d(TAG,
-                                          "recupererInterventions() idDistributeur = " +
-                                            resultatRequete.getInt("idDistributeur"));
+                                          "recupererInterventions() pour le distributeur : " +
+                                            distributeur.getIdentifiant() +
+                                            " == " + resultatRequete.getInt("idDistributeur"));
+                                    Intervention.Etats etat = Intervention.Etats.A_FAIRE;
                                     if(distributeur.getIdentifiant() ==
                                        resultatRequete.getInt("idDistributeur"))
                                     {
