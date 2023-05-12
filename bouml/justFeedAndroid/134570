@@ -1,7 +1,7 @@
 format 224
 "justfeedandroid" // justfeedandroid
-  revision 5
-  modified_by 42 "tv"
+  revision 6
+  modified_by 2 "btssn2"
   // class settings
   
   classdiagramsettings member_max_width 0 end
@@ -2229,6 +2229,15 @@ Attributs
 @param nouvelleQuantite la nouvelle quantité.
 "
       end
+
+      classrelation 134914 // (typeProduit)
+	relation 134914 o--> name "typeProduit"
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134914 // (typeProduit)
+	  b parent class_ref 136234 // Produit
+      end
     end
 
     class 135594 "AdaptateurDistributeur"
@@ -2918,6 +2927,15 @@ l'hydrométrie.
 	comment "@brief Change l'état à dépanner.
 @param aDepanner true si le bac a un taux d'humidité élevé sinon false.
 "
+      end
+
+      classrelation 134786 // (listeBacs)
+	relation 134786 *--> name "listeBacs"
+	  a role_name "" multiplicity "1..*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 134786 // (listeBacs)
+	  b parent class_ref 135466 // Bac
       end
     end
 
@@ -3830,6 +3848,24 @@ et détruite par le système Android)
 	
 	comment "@brief Initialise la gestion des messages en provenance des threads
 "
+      end
+
+      classrelation 135042 // (listeDistributeurs)
+	relation 135042 o--> name "listeDistributeurs"
+	  a role_name "" multiplicity "1..*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135042 // (listeDistributeurs)
+	  b parent class_ref 135850 // Distributeur
+      end
+
+      classrelation 135170 // (baseDeDonnees)
+	relation 135170 o--> name "baseDeDonnees"
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135170 // (baseDeDonnees)
+	  b parent class_ref 134954 // BaseDeDonnees
       end
     end
 

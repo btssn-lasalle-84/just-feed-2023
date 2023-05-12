@@ -1,7 +1,7 @@
 format 224
 "justFeedAndroid"
-  revision 14
-  modified_by 42 "tv"
+  revision 15
+  modified_by 2 "btssn2"
   java_root_dir "../../"
 
 
@@ -46,7 +46,7 @@ format 224
   mark_for_import
   
   java_package "com.justfeed"
-  usecaseview 128002 "justFeedAndroid"
+  usecaseview 128002 "justFeedAndroidCU"
     
     usecasediagramsettings end
     
@@ -69,7 +69,7 @@ format 224
      end
     usecasediagram 128002 "JustFeedAndroidDiagramme"
       usecasediagramsettings draw_all_relations no end
-      size A4
+      size A3
     end
 
     class 128002 "operateur"
@@ -273,7 +273,7 @@ ${members}}
      end
     classdiagram 134530 "JustFeedAndroid"
       classdiagramsettings draw_all_relations no member_max_width 0 end
-      size A4
+      size A3
     end
   end
 
