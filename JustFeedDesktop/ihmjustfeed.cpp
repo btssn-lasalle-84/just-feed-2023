@@ -5,22 +5,28 @@
  * de l'application JustFeed (Desktop)
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.1
+ * @version     0.2
  * @date        2023
  */
 
 #include "ihmjustfeed.h"
-#include "distributeur.h"
-#include "produit.h"
 #include "bac.h"
+#include "basededonnees.h"
 #include "configurationdistributeur.h"
+#include "distributeur.h"
+#include "planificationintervention.h"
+#include "produit.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
  */
-IHMJustFeed::IHMJustFeed(QWidget* parent) : QWidget(parent), configurationDistributeur(nullptr)
+IHMJustFeed::IHMJustFeed(QWidget* parent) :
+    QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
+    configurationDistributeur(nullptr), planificationIntervention(nullptr),
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
 {
     qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->connecter();
     initialiserDistributeurs();
     initialiserProduits();
     initialiserGUI();
@@ -36,13 +42,15 @@ IHMJustFeed::~IHMJustFeed()
     {
         delete distributeurs[i];
     }
+    BaseDeDonnees::detruireInstance();
     qDebug() << Q_FUNC_INFO;
 }
 
 // Méthodes publiques
 
 /**
- * @brief méthode qui retourne le distributeur dont le nom est passé en paramètre
+ * @brief retourne le distributeur dont le nom est passé en
+ * paramètre
  */
 Distributeur* IHMJustFeed::getDistributeur(QString nom) const
 {
@@ -55,7 +63,7 @@ Distributeur* IHMJustFeed::getDistributeur(QString nom) const
 }
 
 /**
- * @brief méthode qui retourne le produit
+ * @brief retourne le produit
  */
 Produit* IHMJustFeed::getProduit(int index) const
 {
@@ -63,7 +71,7 @@ Produit* IHMJustFeed::getProduit(int index) const
 }
 
 /**
- * @brief méthode qui retourne le nom du produit
+ * @brief retourne le nom du produit
  */
 QString IHMJustFeed::getNomProduit(int index) const
 {
@@ -71,7 +79,7 @@ QString IHMJustFeed::getNomProduit(int index) const
 }
 
 /**
- * @brief méthode qui retourne le prix de produit
+ * @brief retourne le prix de produit
  */
 double IHMJustFeed::getPrixProduit(int index) const
 {
@@ -79,7 +87,7 @@ double IHMJustFeed::getPrixProduit(int index) const
 }
 
 /**
- * @brief méthode qui retourne le nombre de produits disponibles
+ * @brief retourne le nombre de produits disponibles
  */
 int IHMJustFeed::getNbProduits() const
 {
@@ -89,7 +97,7 @@ int IHMJustFeed::getNbProduits() const
 // Slots
 
 /**
- * @brief méthode qui affiche les fenetres
+ * @brief affiche une fenetre
  */
 void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
 {
@@ -97,7 +105,7 @@ void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
 }
 
 /**
- * @brief méthode qui affiche la fenetre principale
+ * @brief affiche la fenetre principale
  */
 void IHMJustFeed::afficherFenetreAccueil()
 {
@@ -105,7 +113,7 @@ void IHMJustFeed::afficherFenetreAccueil()
 }
 
 /**
- * @brief méthode qui affiche la fenetre d'un distributeur
+ * @brief affiche la fenetre d'un distributeur
  */
 void IHMJustFeed::afficherFenetreDistributeur()
 {
@@ -113,7 +121,15 @@ void IHMJustFeed::afficherFenetreDistributeur()
 }
 
 /**
- * @brief méthode qui configure un distributeur
+ * @brief affiche la fenetre intervention
+ */
+void IHMJustFeed::afficherFenetreIntervention()
+{
+    afficherFenetre(IHMJustFeed::Fenetre::FIntervention);
+}
+
+/**
+ * @brief configure un distributeur
  */
 void IHMJustFeed::configurerDistributeur()
 {
@@ -133,7 +149,32 @@ void IHMJustFeed::configurerDistributeur()
 }
 
 /**
- * @brief méthode qui sélectionne un distributeur à configurer
+ * @brief planifie une intervention
+ */
+void IHMJustFeed::planifierIntervention()
+{
+    qDebug() << Q_FUNC_INFO;
+    recupererDistributeursAIntervenir();
+    // aucun distributeur sélectionné ?
+    if(listeDistributeursAIntervenir.size() < 1)
+        return;
+    // crée et affiche la boîte de dialogue
+    if(planificationIntervention == nullptr)
+    {
+        planificationIntervention =
+          new PlanificationIntervention(listeDistributeursAIntervenir, this);
+    }
+    else
+        return;
+    planificationIntervention->exec();
+    delete planificationIntervention;
+    planificationIntervention = nullptr;
+    effacerDistributeursAIntervenir();
+    boutonPlanifier->setEnabled(false);
+}
+
+/**
+ * @brief sélectionne un distributeur à configurer
  */
 void IHMJustFeed::selectionnerDistributeur(int numeroDistributeur)
 {
@@ -142,7 +183,7 @@ void IHMJustFeed::selectionnerDistributeur(int numeroDistributeur)
 }
 
 /**
- * @brief méthode qui sélectionne le distributeur pour l'affichage
+ * @brief sélectionne le distributeur pour l'affichage
  */
 void IHMJustFeed::selectionnerDistributeur(int ligne, int colonne)
 {
@@ -155,7 +196,7 @@ void IHMJustFeed::selectionnerDistributeur(int ligne, int colonne)
 }
 
 /**
- * @brief méthode qui sélectionne le distributeur pour l'affichage
+ * @brief sélectionne le distributeur pour l'affichage
  */
 void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
 {
@@ -166,6 +207,23 @@ void IHMJustFeed::selectionnerDistributeur(QTableWidgetItem* item)
     afficherDistributeur(getDistributeur(nomDistributeur->data(0).toString()));
 }
 
+/**
+ * @brief sélectionne le distributeur pour intervenir
+ */
+void IHMJustFeed::selectionnerDistributeurAIntervenir(QTableWidgetItem* item)
+{
+    if(item->column() == COLONNE_DISTRIBUTEUR_INTERVENTION)
+    {
+        if(recupererDistributeursAIntervenir())
+            boutonPlanifier->setEnabled(true);
+        else
+            boutonPlanifier->setEnabled(false);
+    }
+}
+
+/**
+ * @brief affiche ou cache la carte
+ */
 void IHMJustFeed::afficherCarte()
 {
     qDebug() << Q_FUNC_INFO;
@@ -179,7 +237,7 @@ void IHMJustFeed::afficherCarte()
 // Méthodes privées
 
 /**
- * @brief méthode qui initialise la GUI
+ * @brief initialise la GUI
  */
 void IHMJustFeed::initialiserGUI()
 {
@@ -195,7 +253,7 @@ void IHMJustFeed::initialiserGUI()
 }
 
 /**
- * @brief méthode qui instancie les widgets de la GUI
+ * @brief instancie les widgets de la GUI
  */
 void IHMJustFeed::instancierWidgets()
 {
@@ -206,7 +264,7 @@ void IHMJustFeed::instancierWidgets()
     fenetreDistributeur = new QWidget(this);
 
     // Les boutons
-    boutonIntervenir    = new QPushButton("Intervenir", this);
+    boutonPlanifier     = new QPushButton("Planifier", this);
     boutonConfigurer    = new QPushButton("Configurer", this);
     boutonValider       = new QPushButton("Valider", this);
     boutonAfficherCarte = new QPushButton("Afficher la carte", this);
@@ -227,7 +285,7 @@ void IHMJustFeed::instancierWidgets()
 }
 
 /**
- * @brief méthode qui initialise les widgets de la GUI
+ * @brief initialise les widgets de la GUI
  */
 void IHMJustFeed::initialiserWidgets()
 {
@@ -236,58 +294,29 @@ void IHMJustFeed::initialiserWidgets()
     fenetres->addWidget(fenetreDistributeur);
 
     // La table
-    initialiseTable();
+    initialiserTable();
 
     // Les listes
     for(int i = 0; i < distributeurs.size(); i++)
     {
         listeDistributeurs->addItem(distributeurs[i]->getNom());
     }
+
+    // Le bouton configurer
+    if(distributeurs.size() < 1)
+        boutonConfigurer->setEnabled(false);
+
+    // Les distributeurs sélectionnés
+    if(recupererDistributeursAIntervenir())
+        boutonPlanifier->setEnabled(true);
+    else
+        boutonPlanifier->setEnabled(false);
 }
 
 /**
- * @brief méthode qui positionne les widgets dans la GUI
+ * @brief initialise le QTableWidget des distributeurs
  */
-void IHMJustFeed::positionnerWidgets()
-{
-    // Les layouts
-    QVBoxLayout* layoutPrincipal           = new QVBoxLayout();
-    QVBoxLayout* layoutFenetrePrincipale   = new QVBoxLayout();
-    layoutFenetreDistributeur              = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table             = new QHBoxLayout();
-    QHBoxLayout* layoutBoutonsAccueil      = new QHBoxLayout();
-    QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
-
-    // Positionnement
-    // La fenêtre accueil
-    layoutF1Table->addWidget(tableWidgetDistributeurs);
-    layoutF1Table->setAlignment(Qt::AlignCenter);
-    layoutBoutonsAccueil->addStretch();
-    layoutBoutonsAccueil->addWidget(listeDistributeurs);
-    layoutBoutonsAccueil->addWidget(boutonConfigurer);
-    layoutBoutonsAccueil->addWidget(boutonIntervenir);
-    layoutFenetrePrincipale->addLayout(layoutF1Table);
-    layoutFenetrePrincipale->addLayout(layoutBoutonsAccueil);
-    layoutFenetrePrincipale->addStretch();
-    fenetreAccueil->setLayout(layoutFenetrePrincipale);
-
-    // La fenêtre distributeur
-    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
-    layoutBoutonsDistributeur->addWidget(boutonValider);
-    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
-    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
-
-    // La GUI
-    layoutPrincipal->addWidget(fenetres);
-    gui->setLayout(layoutPrincipal);
-    this->setLayout(layoutPrincipal);
-}
-
-/**
- * @brief méthode qui initialise le QTableWidget
- */
-
-void IHMJustFeed::initialiseTable()
+void IHMJustFeed::initialiserTable()
 {
     tableWidgetDistributeurs = new QTableWidget(this);
 
@@ -295,7 +324,8 @@ void IHMJustFeed::initialiseTable()
     nomColonnes << "Enseigne"
                 << "Adresse"
                 << "Ville"
-                << "Code Postal";
+                << "Code Postal"
+                << "Intervention";
 
     tableWidgetDistributeurs->setColumnCount(nomColonnes.count());
     tableWidgetDistributeurs->setHorizontalHeaderLabels(nomColonnes);
@@ -323,8 +353,47 @@ void IHMJustFeed::initialiseTable()
     tableWidgetDistributeurs->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     tableWidgetDistributeurs->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
+
 /**
- * @brief méthode qui initialise les connexion signal/slot
+ * @brief positionne les widgets dans la GUI
+ */
+void IHMJustFeed::positionnerWidgets()
+{
+    // Les layouts
+    QVBoxLayout* layoutPrincipal           = new QVBoxLayout();
+    QVBoxLayout* layoutFenetrePrincipale   = new QVBoxLayout();
+    layoutFenetreDistributeur              = new QVBoxLayout();
+    QHBoxLayout* layoutF1Table             = new QHBoxLayout();
+    QHBoxLayout* layoutBoutonsAccueil      = new QHBoxLayout();
+    QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
+
+    // Positionnement
+    // La fenêtre accueil
+    layoutF1Table->addWidget(tableWidgetDistributeurs);
+    layoutF1Table->setAlignment(Qt::AlignCenter);
+    layoutBoutonsAccueil->addStretch();
+    layoutBoutonsAccueil->addWidget(listeDistributeurs);
+    layoutBoutonsAccueil->addWidget(boutonConfigurer);
+    layoutBoutonsAccueil->addWidget(boutonPlanifier);
+    layoutFenetrePrincipale->addLayout(layoutF1Table);
+    layoutFenetrePrincipale->addLayout(layoutBoutonsAccueil);
+    layoutFenetrePrincipale->addStretch();
+    fenetreAccueil->setLayout(layoutFenetrePrincipale);
+
+    // La fenêtre distributeur
+    layoutBoutonsDistributeur->addWidget(boutonAfficherCarte);
+    layoutBoutonsDistributeur->addWidget(boutonValider);
+    layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
+    fenetreDistributeur->setLayout(layoutFenetreDistributeur);
+
+    // La GUI
+    layoutPrincipal->addWidget(fenetres);
+    gui->setLayout(layoutPrincipal);
+    this->setLayout(layoutPrincipal);
+}
+
+/**
+ * @brief initialise les connexions signal/slot
  */
 void IHMJustFeed::initialiserEvenements()
 {
@@ -336,24 +405,30 @@ void IHMJustFeed::initialiserEvenements()
             SIGNAL(itemPressed(QTableWidgetItem*)),
             this,
             SLOT(selectionnerDistributeur(QTableWidgetItem*)));
+    connect(tableWidgetDistributeurs,
+            SIGNAL(itemClicked(QTableWidgetItem*)),
+            this,
+            SLOT(selectionnerDistributeurAIntervenir(QTableWidgetItem*)));
     connect(listeDistributeurs,
             SIGNAL(currentIndexChanged(int)),
             this,
             SLOT(selectionnerDistributeur(int)));
     connect(boutonConfigurer, SIGNAL(clicked()), this, SLOT(configurerDistributeur()));
+    connect(boutonPlanifier, SIGNAL(clicked()), this, SLOT(planifierIntervention()));
     connect(boutonValider, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
 }
 
 /**
- * @brief méthode qui initialise les distributeurs avec les bacs et les produits
+ * @brief initialise les distributeurs avec les bacs et les produits
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
     /**
      * @todo Récupérer les données depuis la base de données
      */
-    distributeurs.push_back(new Distributeur("distributeur-1-sim",
+    distributeurs.push_back(new Distributeur(1,
+                                             "distributeur-1-sim",
                                              "Grand Frais",
                                              "Zone du Coudoulet Rond point du Péage Sud",
                                              "84100",
@@ -361,7 +436,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-01-08", "yyyy-MM-dd"),
                                              { "44.11161", "4.84856", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+    distributeurs.push_back(new Distributeur(2,
+                                             "distributeur-2-sim",
                                              "Carrefour",
                                              "390 Rue Jean Marie Tjibaou",
                                              "84000",
@@ -369,7 +445,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-03-09", "yyyy-MM-dd"),
                                              { "43.92844", "4.79247", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-3",
+    distributeurs.push_back(new Distributeur(3,
+                                             "distributeur-3",
                                              "Cosy Primeurs",
                                              "292 Route de Boulbon",
                                              "13570",
@@ -429,30 +506,29 @@ void IHMJustFeed::initialiserDistributeurs()
     produits.push_back(soja);
     produits.push_back(basilic);
 
-    distributeurs[0]->setHygrometrie(25);
-    distributeurs[0]->ajouterBac(Bac(pruneaux, 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(abricot, 0, 0.));
-    distributeurs[0]->ajouterBac(Bac(cranberries, 0, 0.));
+    distributeurs[0]->ajouterBac(Bac(1, pruneaux, 50, 50, 25));
+    distributeurs[0]->ajouterBac(Bac(2, abricot, 0, 100, 25));
+    distributeurs[0]->ajouterBac(Bac(3, cranberries, 15, 30, 25));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
-    distributeurs[1]->setHygrometrie(18);
-    distributeurs[1]->ajouterBac(Bac(banane, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(raisin, 0, 0.));
-    distributeurs[1]->ajouterBac(Bac(fruitsSec, 0, 0.));
+    distributeurs[1]->ajouterBac(Bac(4, banane, 0, 12, 18));
+    distributeurs[1]->ajouterBac(Bac(5, raisin, 0, 12, 18));
+    distributeurs[1]->ajouterBac(Bac(6, fruitsSec, 0, 12, 18));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
              << distributeurs[1]->getNbBacs();
+    distributeurs[2]->ajouterBac(Bac(7, cacahuete, 9, 12, 21));
+    distributeurs[2]->ajouterBac(Bac(8, soja, 6, 12, 21));
+    distributeurs[2]->ajouterBac(Bac(9, basilic, 10.8, 12, 21));
+
+    distributeurs[0]->setHygrometrie(25);
+    distributeurs[1]->setHygrometrie(18);
     distributeurs[2]->setHygrometrie(21);
-    distributeurs[2]->ajouterBac(Bac(cacahuete, 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(soja, 0, 0.));
-    distributeurs[2]->ajouterBac(Bac(basilic, 0, 0.));
-    qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
-             << distributeurs[2]->getNbBacs();
 
     numeroDistributeurSelectionne = 0; // pour les tests
 }
 
 /**
- * @brief méthode qui initialise les différents produits disponibles
+ * @brief méthode initialise les différents produits disponibles
  */
 void IHMJustFeed::initialiserProduits()
 {
@@ -462,7 +538,7 @@ void IHMJustFeed::initialiserProduits()
 }
 
 /**
- * @brief méthode qui charge et affiche les distributeurs disponibles
+ * @brief charge et affiche les distributeurs disponibles
  */
 void IHMJustFeed::chargerDistributeurs()
 {
@@ -473,18 +549,15 @@ void IHMJustFeed::chargerDistributeurs()
 }
 
 /**
- * @brief méthode qui affiche un distributeur dans le QTableWidget
- * @fn IHMJustFeed::afficherDistributeurTable
+ * @brief affiche un distributeur dans le QTableWidget
  */
 void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
 {
-    qDebug() << Q_FUNC_INFO << "nom";
+    qDebug() << Q_FUNC_INFO << distributeur.getNom();
 
     QFont texte;
     // texte.setPointSize(TAILLE_POLICE);
     texte.setBold(true);
-
-    QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal;
 
     // Le nombre d'utilisateurs déjà présents dans la table
     int nb = tableWidgetDistributeurs->rowCount();
@@ -507,6 +580,9 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     itemCodePostal->setFlags(Qt::ItemIsEnabled);
     itemCodePostal->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
+    itemIntervention = new QTableWidgetItem();
+    itemIntervention->setCheckState(Qt::Unchecked);
+    itemIntervention->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     nbLignesDistributeurs += 1;
     qDebug() << Q_FUNC_INFO << "nbLignesDistributeur" << nbLignesDistributeurs;
 
@@ -517,6 +593,7 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_ADRESSE, itemAdresse);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_VILLE, itemVille);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_CODEPOSTAL, itemCodePostal);
+    tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_INTERVENTION, itemIntervention);
 
     // Se replace au début de la table
     tableWidgetDistributeurs->scrollToItem(tableWidgetDistributeurs->item(0, 1));
@@ -529,7 +606,7 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
 }
 
 /**
- * @brief méthode qui affiche les détails d'un distributeur
+ * @brief affiche les détails d'un distributeur
  */
 void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 {
@@ -541,7 +618,7 @@ void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 }
 
 /**
- * @brief méthode qui efface le tableau
+ * @brief efface le contenu du QTableWidget des distributeurs
  */
 void IHMJustFeed::effacerTableau(int ligne, int colonne)
 {
@@ -558,7 +635,7 @@ void IHMJustFeed::effacerTableau(int ligne, int colonne)
 }
 
 /**
- * @brief méthode qui efface le QTableWidget
+ * @brief initialise le contenu du QTableWidget des distributeurs
  * @fn IHMJustFeed::effacerTableDistributeurs
  */
 void IHMJustFeed::effacerTableDistributeurs()
@@ -570,8 +647,40 @@ void IHMJustFeed::effacerTableDistributeurs()
 }
 
 /**
- * @brief méthode qui crée les widgets de la fenêtre d'affichage d'un distributeur
- * @fn IHMJustFeed::creerEtatDistributeur
+ * @brief détermine la liste des distributeurs à intervenir
+ * @return int le nombre de distributeurs
+ */
+int IHMJustFeed::recupererDistributeursAIntervenir()
+{
+    listeDistributeursAIntervenir.clear();
+    for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
+    {
+        QTableWidgetItem* item =
+          tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION);
+        if(item->checkState() == Qt::Checked)
+        {
+            qDebug() << Q_FUNC_INFO << distributeurs[i]->getNom();
+            listeDistributeursAIntervenir.push_back(distributeurs[i]);
+        }
+    }
+    return listeDistributeursAIntervenir.size();
+}
+
+/**
+ * @brief efface la liste des distributeurs à intervenir
+ */
+void IHMJustFeed::effacerDistributeursAIntervenir()
+{
+    listeDistributeursAIntervenir.clear();
+    for(int i = 0; i < tableWidgetDistributeurs->rowCount(); ++i)
+    {
+        tableWidgetDistributeurs->item(i, COLONNE_DISTRIBUTEUR_INTERVENTION)
+          ->setCheckState(Qt::Unchecked);
+    }
+}
+
+/**
+ * @brief crée les widgets de la fenêtre d 'affichage d'un distributeur
  * @param distributeur le distributeur à afficher
  */
 void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)

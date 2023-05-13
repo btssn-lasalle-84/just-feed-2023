@@ -2,15 +2,22 @@
  * @file        distributeur.h
  * @brief       Déclaration de la classe Distributeur.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @author      Rouanet Nicolas
+ * @version     0.2
  * @date        2023
  */
 
 #ifndef DISTRIBUTEUR_H
 #define DISTRIBUTEUR_H
 
-#include <QVector>
 #include <QDate>
+#include <QVector>
+
+/**
+ * @def ID_DISTRIBUTEUR_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
+#define ID_DISTRIBUTEUR_NON_DEFINI -1
 
 class Bac;
 class Produit;
@@ -34,6 +41,7 @@ struct Localisation
 class Distributeur
 {
   private:
+    int           id;
     QString       deviceID;          //!< identifiant du distributeur
     QVector<Bac*> bacs;              //!< les bacs du distributeur
     QString       nom;               //!< nom du distributeur
@@ -43,13 +51,14 @@ class Distributeur
     QString       description;       //!< description du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     Localisation  position;          //!< géolocalisation du distributeur
-    float         hygrometrie;       //!< hygrometrie de l'interieur du distributeur
-    bool          aIntervenir;       //!< permet de savoir s'il faut intervenir sur le
+    int           hygrometrie;       //!< hygrometrie de l'interieur du distributeur
+    bool          aIntervenir;       //!< pour savoir s'il faut intervenir sur le
                                      //!< distributeur
 
   public:
     Distributeur();
-    Distributeur(QString      deviceID,
+    Distributeur(int          id,
+                 QString      deviceID,
                  QString      nom,
                  QString      adresse,
                  QString      codePostal,
@@ -60,27 +69,27 @@ class Distributeur
     ~Distributeur();
 
     // Accesseurs
-    QString      getdeviceID() const;
+    int          getIdDistributeur() const;
+    QString      getDeviceID() const;
     Localisation getPosition() const;
-    int          getAIntervenir() const;
-    float        getHygrometrie() const;
+    bool         getAIntervenir() const;
+    int          getHygrometrie() const;
+    int          getHygrometrieBac(int numeroBac) const;
     QString      getNom() const;
     QString      getAdresse() const;
     QString      getCodePostal() const;
     QString      getVille() const;
     QDate        getDateMiseService() const;
     QString      getDescription() const;
-    QString      getNomProduitBac(int numeroBac) const;
-    double       getProduitPrix(int numeroBac) const;
-    Produit*     getProduitBac(int numeroBac) const;
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
 
     // mutateurs
-    void setDeviceID(const QString deviceID);
-    void setHygrometrie(float hydrometrie);
-    void setPosition(const Localisation& localisation);
+    void setIdDistributeur(int id);
     void setAIntervenir(bool aIntervenir);
+    void setDeviceID(const QString deviceID);
+    void setHygrometrie(int hygrometrie);
+    void setPosition(const Localisation& localisation);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
     void setCodePostal(const QString& codePostal);

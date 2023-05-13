@@ -1,18 +1,18 @@
 /**
  * @file        configurationdistributeur.cpp
  * @brief       Définition de la classe ConfigurationDistributeur.
- * @details     La classe ConfigurationDistributeur \c Cette classe permet de définir la
- * configuration d'un distributeur
+ * @details     La classe ConfigurationDistributeur \c Cette classe permet de
+ * définir la configuration d'un distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
  * @date        2023
  */
 
 #include "configurationdistributeur.h"
-#include "ihmjustfeed.h"
-#include "distributeur.h"
-#include "produit.h"
 #include "bac.h"
+#include "distributeur.h"
+#include "ihmjustfeed.h"
+#include "produit.h"
 
 /**
  * @brief constructeur par défaut de la classe ConfigurationDistributeur
@@ -23,14 +23,14 @@ ConfigurationDistributeur::ConfigurationDistributeur(Distributeur* distributeur,
     distributeur(distributeur), ihmJustFeed(parent)
 {
     qDebug() << Q_FUNC_INFO;
-    qDebug() << Q_FUNC_INFO << "deviceID" << distributeur->getdeviceID() << "latitude"
-             << distributeur->getPosition().latitude << "longitude"
-             << distributeur->getPosition().longitude << "nom" << distributeur->getNom()
+    qDebug() << Q_FUNC_INFO << "deviceID" << distributeur->getDeviceID() << "nom"
+             << distributeur->getNom() << "description" << distributeur->getDescription()
              << "adresse"
              << "codePostal" << distributeur->getCodePostal() << "ville" << distributeur->getVille()
-             << "dateMiseEnService" << distributeur->getDateMiseService() << "description"
-             << distributeur->getDescription() << "hygrometrie" << distributeur->getHygrometrie()
-             << "aIntervenir" << distributeur->getAIntervenir();
+             << "latitude" << distributeur->getPosition().latitude << "longitude"
+             << distributeur->getPosition().longitude << "dateMiseEnService"
+             << distributeur->getDateMiseService() << "aIntervenir"
+             << distributeur->getAIntervenir();
 
     initialiserBoiteDeDialogue();
 }
@@ -73,7 +73,7 @@ void ConfigurationDistributeur::changerLePrix(const int numeroBac)
 void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
 {
     QString nouveauProduit = choixNouveauProduit[numeroBac]->currentText();
-    labelsProduit[numeroBac]->setText("Produit : " + nouveauProduit);
+    labelsProduit[numeroBac]->setText(" : " + nouveauProduit);
     distributeur->getBac(numeroBac)->setProduit(
       ihmJustFeed->getProduit(choixNouveauProduit[numeroBac]->currentIndex()));
 
@@ -94,7 +94,7 @@ void ConfigurationDistributeur::ajouterBac()
     positionnerNouveauBac(numeroBac);
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        labelsBac[i]->setText("Bac numéro : " + QString::number(i));
+        labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
     }
     connecterNouveauBac(numeroBac);
 }
@@ -143,11 +143,11 @@ void ConfigurationDistributeur::initialiserWidgets()
 {
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        labelsBac[i]->setText("Bac numéro : " + QString::number(i));
+        labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
         labelsBac[i]->setAlignment(Qt::AlignCenter);
-        labelsProduit[i]->setText("Produit : " + distributeur->getNomProduitBac(i));
+        labelsProduit[i]->setText(" : " + distributeur->getBac(i)->getNomProduit());
         labelsProduit[i]->setAlignment(Qt::AlignCenter);
-        labelsPrix[i]->setText("Prix : " + QString::number(distributeur->getProduitPrix(i)) + " €");
+        labelsPrix[i]->setText("Prix : " + QString::number(distributeur->getBac(i)->getPrixProduit()) + " €");
         labelsPrix[i]->setAlignment(Qt::AlignCenter);
         // editionsNouveauPrix[i]->setValue(distributeur->getProduitPrix(i));
         editionsNouveauPrix[i]->setAlignment(Qt::AlignCenter);
@@ -170,6 +170,7 @@ void ConfigurationDistributeur::positionnerWidgets()
     QHBoxLayout* layoutTitre = new QHBoxLayout();
 
     layoutTitre->addWidget(nomDistributeur);
+    layoutTitre->addStretch();
     layoutTitre->addWidget(boutonAjoutBac);
     layoutBacs->addLayout(layoutTitre);
     QVector<QHBoxLayout*> layoutsDistributeur(distributeur->getNbBacs());
@@ -182,8 +183,10 @@ void ConfigurationDistributeur::positionnerWidgets()
         layoutsDistributeur[i]->addWidget(boutonsChangerProduit[i]);
         layoutsDistributeur[i]->addWidget(labelsPrix[i]);
         layoutsDistributeur[i]->addWidget(editionsNouveauPrix[i]);
+        layoutsDistributeur[i]->addStretch();
         layoutsDistributeur[i]->addWidget(boutonsChangerPrix[i]);
         layoutsDistributeur[i]->addWidget(boutonSuppressionBac[i]);
+        // layoutsDistributeur[i]->addStretch();
         layoutBacs->addLayout(layoutsDistributeur[i]);
     }
     setLayout(layoutBacs);
@@ -254,10 +257,10 @@ void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
 {
     labelsBac[numeroBac]->setText("Bac numero : " + QString::number(numeroBac));
     labelsBac[numeroBac]->setAlignment(Qt::AlignCenter);
-    labelsProduit[numeroBac]->setText("Produit : " + distributeur->getNomProduitBac(numeroBac));
+    labelsProduit[numeroBac]->setText(" : " + distributeur->getBac(numeroBac)->getNomProduit());
     labelsProduit[numeroBac]->setAlignment(Qt::AlignCenter);
     labelsPrix[numeroBac]->setText(
-      "Prix : " + QString::number(distributeur->getProduitPrix(numeroBac)) + " €");
+      "Prix : " + QString::number(distributeur->getBac(numeroBac)->getPrixProduit()) + " €");
     labelsPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     editionsNouveauPrix[numeroBac]->setAlignment(Qt::AlignCenter);
     boutonsChangerPrix[numeroBac]->setText("Changer prix");
@@ -343,6 +346,6 @@ void ConfigurationDistributeur::supprimerBac(const int numeroBac)
 
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        labelsBac[i]->setText("Bac numéro : " + QString::number(i));
+        labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
     }
 }

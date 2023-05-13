@@ -30,7 +30,10 @@ INSERT INTO `Bac` (`idDistributeur`, `poidsActuel`, `poidsTotal`, `hygrometrie`,
 (3, 7.5, 16, 0, 1),
 (3, 6.2, 7, 0, 6);
 
-INSERT INTO Operateur(nom,prenom,identifiant,email) VALUES('DUVAL','Robert','rduval','rduval@justfeed.fr');
+INSERT INTO `Operateur` (`idOperateur`, `nom`, `prenom`, `identifiant`, `email`) VALUES
+(1, 'FARGIER', 'Mayeul', 'mfargier', 'mfargier@justfeed.fr'),
+(2, 'ROUANET', 'Nicolas', 'nrouanet', 'nrouanet@justfeed.fr'),
+(3, 'SALAUN', 'Matthieu', 'msalaun', 'msalaun@justfeed.fr');
 
 INSERT INTO `Intervention` (`idIntervention`, `idOperateur`, `idDistributeur`, `dateIntervention`) VALUES
 (1, 1, "A_FAIRE", '2023-06-01');
