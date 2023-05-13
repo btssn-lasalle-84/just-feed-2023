@@ -19,13 +19,28 @@
  * @brief Définit le titre de la boîte de dialogue
  */
 #define TITRE_INTERVENTION QString("Planifier une intervention")
-#define ZERO               0
-#define QUINZE             15
-#define TRENTE             30
-#define CINQUANTE          50
-#define SOIXANTE           60
-#define CENT               100
-#define OPERATEUR          1
+
+// Pourcentage de remplissage
+#define ZERO      0
+#define QUINZE    15
+#define TRENTE    30
+#define CINQUANTE 50
+#define SOIXANTE  60
+#define CENT      100
+
+// Couleurs des niveaux
+#define COULEUR_BAC_VIDE         QString("color: #FF0000;")
+#define COULEUR_PRESQUE_BAC_VIDE QString("color: #FFA500;")
+#define COULEUR_BAC_PLEIN        QString("color: #023518;")
+
+#define COULEUR_HYGROMETRIE_ANORMALE     QString("color: #FF0000;")
+#define COULEUR_HYGROMETRIE_A_SURVEILLER QString("color: #FFA500;")
+#define COULEUR_HYGROMETRIE_NORMALE      QString("color: #023518;")
+
+// Table Operateur
+#define CHAMP_NOM_IDOPERATEUR  0
+#define CHAMP_NOM_OPERATEUR    1
+#define CHAMP_PRENOM_OPERATEUR 2
 
 class Intervention;
 class Distributeur;
@@ -33,26 +48,29 @@ class Produit;
 class IHMJustFeed;
 class BaseDeDonnees;
 
+/**
+ * @brief permet de planifier une intervention
+ */
 class PlanificationIntervention : public QDialog
 {
     Q_OBJECT
   private:
-    IHMJustFeed*           ihmJustFeed;        //!< association vers l'ihm principale
-    BaseDeDonnees*         baseDeDonnees;      //!< association vers la base de données
-    Intervention*          intervention;       //!< association vers la classe Intervention
-    QDate                  dateIntervention;   //!< la date de l'intervention
-    QVector<QTime>         heuresIntervention; //!< les heures d'intervention
+    IHMJustFeed*           ihmJustFeed;       //!< association vers l'ihm principale
+    BaseDeDonnees*         baseDeDonnees;     //!< association vers la base de données
+    Intervention*          intervention;      //!< association vers la classe Intervention
+    QDate                  dateIntervention;  //!< la date de l'intervention
     QVector<Distributeur*> distributeurs;     //!< les distributeurs sur lesquels il faut intervenir
-    bool                   effectuable;       //!< si l'intervention peut être créé
-    QComboBox*             listeOperateur;    //!< liste d'operateur
-    QVector<QLabel*>       nomDistributeurs;  //!< nom du distributeur et son numero
-    QVector<QLabel*>       labelsBac;         //!< conteneur de QLabel de bac
-    QVector<QLabel*>       labelsHygrometrie; //!< conteneur de QLabel d'hygrometrie
+    bool                   effectuable;       //!< si l'intervention peut être créée
+    QComboBox*             listeOperateurs;   //!< liste d'operateurs
+    QVector<int>           idOperateurs;      //!< les idOperateur
+    QVector<QLabel*>       nomDistributeurs;  //!< les noms de distributeur et leur numero
+    QVector<QLabel*>       labelsBac;         //!< les bac
+    QVector<QLabel*>       labelsHygrometrie; //!< les hygrometries
     QVector<QVector<QLabel*> >
       labelsDesHygrometries; //!< conteneur de vecteurs de QLabel pour les hygrometries
     QVector<QVector<QLabel*> >
-                               labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
-    QVector<QLabel*>           labelsProduit;     //!< conteneur de QLabel de produit
+                     labelsDesBacs; //!< conteneur de vecteurs de QLabel pour stocker les bacs
+    QVector<QLabel*> labelsProduit; //!< conteneur de QLabel de produit
     QVector<QVector<QLabel*> > labelsDesProduits; //!< conteneur de vecteurs de QLabel pour stocker
                                                   //!< les produits
     QVector<QLabel*>           labelsPourcentage; //!< conteneur de QLabel de produit
@@ -64,11 +82,11 @@ class PlanificationIntervention : public QDialog
     QVector<QCheckBox*> labelsCheckboxDepannage;   //!< vecteur de checkBox depannage
     QVector<QCheckBox*> labelsCheckboxRemplissage; //!< vecteur de checkBox remplissage
     QVector<QVector<QCheckBox*> >
-                                  labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
+      labelsDesCheckboxDepannage; //!< conteneur de vecteurs de checkBox Depannage
     QVector<QVector<QCheckBox*> > labelsDesCheckboxRemplissage; //!< conteneur de vecteurs de
                                                                 //!< checkBox Remplissage
     QPushButton* boutonItervention; //!< bouton pour créer une intervention
-    QDateEdit*   editionDate;       //!< choix de la date
+    QDateEdit*   editionDate;       //!< choix de la date d'intervention
 
     void initialiserBoiteDeDialogue();
     void instancierWidgets();
@@ -77,8 +95,9 @@ class PlanificationIntervention : public QDialog
     void positionnerWidgets();
     void initialiserEvenements();
     bool estEffectuable();
-    void setListeOperateur();
+    void chargerListeOperateurs();
     int  recupererIdOperateurBdd();
+    void autoriserCreation();
 
   public:
     explicit PlanificationIntervention(QVector<Distributeur*> listeDistributeursAIntervenir,
@@ -87,6 +106,7 @@ class PlanificationIntervention : public QDialog
 
   public slots:
     void selectionnerBac();
+    void selectionnerOperateur();
     void creerUneIntervention();
 };
 

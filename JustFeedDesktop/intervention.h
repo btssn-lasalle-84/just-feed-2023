@@ -2,7 +2,7 @@
  * @file        Intervention.h
  * @brief       Déclaration de la classe Intervention.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     0.2
  * @date        2023
  */
 #ifndef INTERVENTION_H
@@ -13,13 +13,8 @@
 #include <QString>
 #include <QTime>
 
-#define ZERO      0
-#define QUINZE    15
-#define TRENTE    30
-#define CINQUANTE 50
-#define SOIXANTE  60
-#define CENT      100
-#define OPERATEUR 1
+#define INTERVENTION_PAS_DEFINIE -1
+#define OPERATEUR_NON_DEFINI     -1
 
 class Distributeur;
 class Produit;
@@ -28,15 +23,15 @@ class BaseDeDonnees;
 class Intervention
 {
   private:
-    BaseDeDonnees*         baseDeDonnees;
+    BaseDeDonnees*         baseDeDonnees;      //!< association avec la base de données
     QDate                  dateIntervention;   //!< la date de l'intervention
     QVector<QTime>         heuresIntervention; //!< l'heure de l'intervention
     QVector<Distributeur*> distributeurs;  //!< les distributeurs sur lesquels il faut intervenir
     bool                   effectuee;      //!< si l'intervention a été effectuée
-    bool                   remplir;        //!<
-    bool                   depanner;       //!<
+    bool                   aRemplir;       //!< si on doit remplir au moins un distributeur
+    bool                   aDepanner;      //!< si on doit dépanner au moins un distributeur
     int                    idIntervention; //!< id de l'intervention
-    int                    idOperateur;    //!< id de operateur
+    int                    idOperateur;    //!< id de l'opérateur
 
   public:
     explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
@@ -54,15 +49,15 @@ class Intervention
     void                   setARemplir(const bool& aRemplir);
     void                   setADepanner(const bool& aDepanner);
     void                   setIdOperateur(const int& idOperateur);
+    void                   setIdIntervention(const int numeroIntervention);
     void                   ajouterDistributeur(Distributeur* distributeur);
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);
     void                   creer();
-    void                   setIdIntervention(const int numeroIntervention);
     void                   affecterEtatIntervention(int const indexDistributeur);
     int                    ajouterIntervention(const int indexDistributeur);
     void                   ajouterApprovisionnement(int const indexDistributeur);
-    bool                   estPlanifiee(const int idDistributeur);
+    int                    estPlanifiee(const int idDistributeur);
 };
 
 #endif // INTERVENTION_H

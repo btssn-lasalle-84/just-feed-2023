@@ -1,7 +1,7 @@
 /**
  * @file        planificationintervention.cpp
  * @brief       Définition de la classe PlanificationIntervention.
- * @details     La classe PlanificationIntervention \c Cette classe permet de créer une
+ * @details     La classe PlanificationIntervention \c Cette classe permet de planifier une
  * intervention
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.2
@@ -16,6 +16,10 @@
 #include "ihmjustfeed.h"
 
 /**
+ * @todo Améliorer la gestion des interventions (à faire et en cours) déjà planifiées
+ */
+
+/**
  * @brief Constructeur de la classe PlanificationIntervention
  */
 PlanificationIntervention::PlanificationIntervention(
@@ -26,8 +30,8 @@ PlanificationIntervention::PlanificationIntervention(
     dateIntervention(QDate::currentDate()), distributeurs(listeDistributeursAIntervenir),
     effectuable(false)
 {
-    qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention;
-    qDebug() << Q_FUNC_INFO << "nb distributeurs" << listeDistributeursAIntervenir.size();
+    qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention << "nb distributeurs"
+             << listeDistributeursAIntervenir.size();
     initialiserBoiteDeDialogue();
 }
 
@@ -78,14 +82,20 @@ void PlanificationIntervention::selectionnerBac()
         distributeurs[numeroDistributeur]->getBac(numeroBac)->setARemplir(false);
     }
 
-    if(estEffectuable())
-        boutonItervention->setEnabled(true);
-    else
-        boutonItervention->setEnabled(false);
+    autoriserCreation();
 }
 
 /**
- * @brief méthode pour créer une intervention
+ * @brief Si un changement dans le choix de l'opérateur
+ * @return void
+ */
+void PlanificationIntervention::selectionnerOperateur()
+{
+    autoriserCreation();
+}
+
+/**
+ * @brief Pour créer une intervention planifiée
  * @return void
  */
 void PlanificationIntervention::creerUneIntervention()
@@ -95,18 +105,21 @@ void PlanificationIntervention::creerUneIntervention()
     intervention = new Intervention(distributeurs);
     intervention->setDateIntervention(editionDate->date());
     int idOperateurInt = recupererIdOperateurBdd();
-    intervention->setIdOperateur(idOperateurInt);
-    intervention->creer();
-
-    this->close();
+    if(idOperateurInt > 0)
+    {
+        intervention->setIdOperateur(idOperateurInt);
+        intervention->creer();
+        this->close();
+    }
 }
 // Méthodes privées
 
 /**
- * @brief Méthode qui initialise la boîte de dialogue
+ * @brief Initialise la boîte de dialogue
  */
 void PlanificationIntervention::initialiserBoiteDeDialogue()
 {
+    qDebug() << Q_FUNC_INFO;
     instancierWidgets();
     initialiserWidgets();
     initialiserEtatDistributeur();
@@ -116,14 +129,14 @@ void PlanificationIntervention::initialiserBoiteDeDialogue()
 }
 
 /**
- * @brief Méthode qui instancie les widgets de la boîte de dialogue
+ * @brief Instancie les widgets de la boîte de dialogue
  */
 void PlanificationIntervention::instancierWidgets()
 {
     qDebug() << Q_FUNC_INFO;
     boutonItervention = new QPushButton(this);
     editionDate       = new QDateEdit(QDate::currentDate(), this);
-    listeOperateur    = new QComboBox(this);
+    listeOperateurs   = new QComboBox(this);
 
     for(int i = 0; i < distributeurs.size(); i++)
     {
@@ -154,11 +167,10 @@ void PlanificationIntervention::instancierWidgets()
         labelsDesPourcentage.push_back(labelsPourcentage);
         labelsDesHygrometries.push_back(labelsHygrometrie);
     }
-    qDebug() << Q_FUNC_INFO << labelsDesBacs;
 }
 
 /**
- * @brief Méthode qui initialise les widgets de la boîte de dialogue
+ * @brief Initialise les widgets de la boîte de dialogue
  */
 void PlanificationIntervention::initialiserWidgets()
 {
@@ -166,7 +178,7 @@ void PlanificationIntervention::initialiserWidgets()
     boutonItervention->setText("Créer l'intervention");
     boutonItervention->setEnabled(false);
     editionDate->setDisplayFormat("dd/MM/yyyy");
-    setListeOperateur();
+    chargerListeOperateurs();
     for(int i = 0; i < distributeurs.size(); i++)
     {
         nomDistributeurs[i]->setText("Distributeur -> " + distributeurs[i]->getNom());
@@ -201,7 +213,7 @@ void PlanificationIntervention::initialiserWidgets()
 }
 
 /**
- * @brief Méthode qui positionne les widgets dans la boîte de dialogue
+ * @brief Positionne les widgets dans la boîte de dialogue
  */
 void PlanificationIntervention::positionnerWidgets()
 {
@@ -216,7 +228,7 @@ void PlanificationIntervention::positionnerWidgets()
     QVector<QHBoxLayout*> layoutBac(totalBac);
     QVector<QVBoxLayout*> layoutInfoDistributeurs(nomDistributeurs.size());
     QHBoxLayout*          layoutFormulaire = new QHBoxLayout;
-    layoutFormulaire->addWidget(listeOperateur);
+    layoutFormulaire->addWidget(listeOperateurs);
     for(int i = 0; i < distributeurs.size(); i++)
     {
         layoutInfoDistributeurs[i] = new QVBoxLayout();
@@ -244,7 +256,7 @@ void PlanificationIntervention::positionnerWidgets()
 }
 
 /**
- * @brief Méthode qui initialise les connexions signal/slot
+ * @brief Initialise la gestion d'évènements (signal/slot)
  */
 void PlanificationIntervention::initialiserEvenements()
 {
@@ -263,13 +275,16 @@ void PlanificationIntervention::initialiserEvenements()
         }
     }
     connect(boutonItervention, SIGNAL(clicked()), this, SLOT(creerUneIntervention()));
+    connect(listeOperateurs, SIGNAL(currentIndexChanged(int)), this, SLOT(selectionnerOperateur()));
 }
 
 /**
- * @brief Méthode qui vérifie si une opération d'intervention a été sélectionnée
+ * @brief Vérifie si une opération d'intervention a été sélectionnée
  */
 bool PlanificationIntervention::estEffectuable()
 {
+    if(listeOperateurs->currentIndex() == 0)
+        return false;
     effectuable = false;
     for(int i = 0; i < distributeurs.size(); ++i)
     {
@@ -291,7 +306,7 @@ bool PlanificationIntervention::estEffectuable()
 }
 
 /**
- * @brief Méthode qui initialise les couleurs des bacs en fonction des
+ * @brief Initialise les couleurs des bacs en fonction des
  * pourcentages
  */
 void PlanificationIntervention::initialiserEtatDistributeur()
@@ -300,49 +315,48 @@ void PlanificationIntervention::initialiserEtatDistributeur()
     {
         for(int j = 0; j < distributeurs[i]->getNbBacs(); j++)
         {
+            qDebug() << Q_FUNC_INFO << "PourcentageRemplissage"
+                     << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
             if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() >= ZERO) &&
                (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= TRENTE))
             {
-                qDebug() << Q_FUNC_INFO << "fonction rouge "
-                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
-                labelsDesBacs[i][j]->setStyleSheet("color: #FF0000;");
+                labelsDesBacs[i][j]->setStyleSheet(COULEUR_BAC_VIDE);
             }
             else if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() > TRENTE) &&
                     (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= SOIXANTE))
             {
-                qDebug() << Q_FUNC_INFO << "fonction orange "
-                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
-                labelsDesBacs[i][j]->setStyleSheet("color: #FFA500;");
+                labelsDesBacs[i][j]->setStyleSheet(COULEUR_PRESQUE_BAC_VIDE);
             }
             else if((distributeurs[i]->getBac(j)->getPourcentageRemplissage() > SOIXANTE) &&
                     (distributeurs[i]->getBac(j)->getPourcentageRemplissage() <= CENT))
             {
-                qDebug() << Q_FUNC_INFO << "fonction vert "
-                         << distributeurs[i]->getBac(j)->getPourcentageRemplissage();
-                labelsDesBacs[i][j]->setStyleSheet("color: #023518;");
+                labelsDesBacs[i][j]->setStyleSheet(COULEUR_BAC_PLEIN);
             }
 
+            qDebug() << Q_FUNC_INFO << "HygrometrieBac" << distributeurs[i]->getHygrometrieBac(j);
             if((distributeurs[i]->getHygrometrieBac(j)) >= ZERO &&
                (distributeurs[i]->getHygrometrieBac(j) <= QUINZE))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet("color: #FF0000;");
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_ANORMALE);
             }
             else if((distributeurs[i]->getHygrometrieBac(j)) > QUINZE &&
                     (distributeurs[i]->getHygrometrieBac(j) <= CINQUANTE))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet("color: #FFA500;");
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_A_SURVEILLER);
             }
             else if((distributeurs[i]->getHygrometrieBac(j)) > CINQUANTE &&
                     (distributeurs[i]->getHygrometrieBac(j) <= CENT))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet("color: #023518;");
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_NORMALE);
             }
 
+            qDebug() << Q_FUNC_INFO << "ADepanner" << distributeurs[i]->getBac(j)->getADepanner();
             if((distributeurs[i]->getBac(j)->getADepanner()))
             {
                 labelsDesCheckboxDepannage[i][j]->setEnabled(false);
             }
 
+            qDebug() << Q_FUNC_INFO << "ARemplir" << distributeurs[i]->getBac(j)->getARemplir();
             if((distributeurs[i]->getBac(j)->getARemplir()))
             {
                 labelsDesCheckboxRemplissage[i][j]->setEnabled(false);
@@ -351,25 +365,40 @@ void PlanificationIntervention::initialiserEtatDistributeur()
     }
 }
 
-void PlanificationIntervention::setListeOperateur()
+/**
+ * @brief Charge la liste des opérateurs connus
+ */
+void PlanificationIntervention::chargerListeOperateurs()
 {
-    QString          requete = "SELECT nom FROM Operateur";
-    QVector<QString> listeOperateurBdd;
-    baseDeDonnees->recuperer(requete, listeOperateurBdd);
-    listeOperateur->addItem("Opérateur");
-    for(int i = 0; i < listeOperateurBdd.size(); i++)
+    QString              requete = "SELECT idOperateur,nom,prenom FROM Operateur";
+    QVector<QStringList> listeOperateursBdd;
+    baseDeDonnees->recuperer(requete, listeOperateursBdd);
+    listeOperateurs->addItem("Opérateur"); // nom de la liste
+    for(int i = 0; i < listeOperateursBdd.size(); i++)
     {
-        listeOperateur->addItem(listeOperateurBdd[i]);
+        idOperateurs.push_back(listeOperateursBdd[i].at(CHAMP_NOM_IDOPERATEUR).toInt());
+        listeOperateurs->addItem(listeOperateursBdd[i].at(CHAMP_NOM_OPERATEUR) + " " +
+                                 listeOperateursBdd[i].at(CHAMP_PRENOM_OPERATEUR));
     }
 }
 
+/**
+ * @brief Récupère l'id d'un opérateur
+ */
 int PlanificationIntervention::recupererIdOperateurBdd()
 {
-    QString requete =
-      "SELECT idOperateur FROM Operateur WHERE nom =  '" + listeOperateur->currentText() + "';";
-    qDebug() << Q_FUNC_INFO << "requete" << requete;
-    QString idOperateur;
-    baseDeDonnees->recuperer(requete, idOperateur);
-    int idOperateurInt = idOperateur.toInt();
-    return idOperateurInt;
+    if(listeOperateurs->currentIndex() == 0)
+        return 0;
+    return idOperateurs[listeOperateurs->currentIndex() - 1];
+}
+
+/**
+ * @brief Permet de gérer le bouton de création d'une intervention
+ */
+void PlanificationIntervention::autoriserCreation()
+{
+    if(estEffectuable())
+        boutonItervention->setEnabled(true);
+    else
+        boutonItervention->setEnabled(false);
 }
