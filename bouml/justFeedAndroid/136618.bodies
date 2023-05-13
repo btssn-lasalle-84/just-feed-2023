@@ -1,67 +1,5 @@
-/**
- * @file JustFeed.java
- * @brief Déclaration de l'activité principale JustFeed
- * @author FARGIER Mayeul
- */
-
-package com.justfeed.justfeedandroid;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-
-import java.io.Serializable;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-/**
- * @class JustFeed
- * @brief L'activité principale
- */
-public class JustFeed extends AppCompatActivity
-{
-    /**
-     * Constantes
-     */
-    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
-
-    /**
-     * Attributs
-     */
-    private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
-    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
-    private Handler              handler = null;        //<! Le handler utilisé par l'activité
-    private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
-    private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
-    private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
-
-    /**
-     * Ressources GUI
-     */
-    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
-                                        //!< les interventions
-
-    /**
-     * @brief Méthode appelée à la création de l'activité
-     */
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+class JustFeed
+!!!144682.java!!!	onCreate(inout savedInstanceState : Bundle) : void
         super.onCreate(savedInstanceState);
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
@@ -71,68 +9,24 @@ public class JustFeed extends AppCompatActivity
         initialiserBaseDeDonnees();
 
         baseDeDonnees.recupererDistributeurs();
-    }
-
-    /**
-     * @brief Méthode appelée au démarrage après le onCreate() ou un restart
-     * après un onStop()
-     */
-    @Override
-    protected void onStart()
-    {
+!!!144810.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
-    }
-
-    /**
-     * @brief Méthode appelée après onStart() ou après onPause()
-     */
-    @Override
-    protected void onResume()
-    {
+!!!144938.java!!!	onResume() : void
         super.onResume();
         Log.d(TAG, "onResume()");
         baseDeDonnees.setHandler(handler);
         baseDeDonnees.recupererDistributeurs();
-    }
-
-    /**
-     * @brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on
-     * reprend sur un onResume()) ou avant onStop() (activité plus visible)
-     */
-    @Override
-    protected void onPause()
-    {
+!!!145066.java!!!	onPause() : void
         super.onPause();
         Log.d(TAG, "onPause()");
-    }
-
-    /**
-     * @brief Méthode appelée lorsque l'activité n'est plus visible
-     */
-    @Override
-    protected void onStop()
-    {
+!!!145194.java!!!	onStop() : void
         super.onStop();
         Log.d(TAG, "onStop()");
-    }
-
-    /**
-     * @brief Méthode appelée à la destruction de l'application (après onStop()
-     * et détruite par le système Android)
-     */
-    @Override
-    protected void onDestroy()
-    {
+!!!145322.java!!!	onDestroy() : void
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
-    }
-
-    /**
-     * @brief Initialise la vue de l'activité
-     */
-    private void initialiserGUI()
-    {
+!!!145450.java!!!	initialiserGUI() : void
         boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
         boutonInterventions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,33 +39,15 @@ public class JustFeed extends AppCompatActivity
         });
 
         initialiserVueListeDistributeurs();
-    }
-
-    /**
-     * @brief Initialise laccès à la base de données MySQL
-     */
-    private void initialiserBaseDeDonnees()
-    {
+!!!145578.java!!!	initialiserBaseDeDonnees() : void
         // Récupère l'instance de BaseDeDonnees
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
-    }
-
-    /**
-     * @brief Initialise la vue pour afficher la liste des distributeurs
-     */
-    private void initialiserVueListeDistributeurs()
-    {
+!!!145706.java!!!	initialiserVueListeDistributeurs() : void
         this.vueListeDistributeurs = (RecyclerView)findViewById(R.id.listeDistributeurs);
         this.vueListeDistributeurs.setHasFixedSize(true);
         this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
         this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
-    }
-
-    /**
-     * @brief Met à jour l'affichage de la liste des distributeurs
-     */
-    private void afficherDistributeurs(List<Distributeur> distributeurs)
-    {
+!!!145834.java!!!	afficherDistributeurs(inout distributeurs : List<Distributeur>) : void
         Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
         this.listeDistributeurs = distributeurs;
         if(this.adapteurDistributeur == null)
@@ -180,13 +56,7 @@ public class JustFeed extends AppCompatActivity
             this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
         }
         adapteurDistributeur.notifyDataSetChanged();
-    }
-
-    /**
-     * @brief Initialise la gestion des messages en provenance des threads
-     */
-    private void initialiserHandler()
-    {
+!!!145962.java!!!	initialiserHandler() : void
         this.handler = new Handler(this.getMainLooper()) {
             @Override
             public void handleMessage(@NonNull Message message)
@@ -231,5 +101,3 @@ public class JustFeed extends AppCompatActivity
                 }
             }
         };
-    }
-}

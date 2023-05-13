@@ -217,20 +217,20 @@ void Intervention::affecterEtatIntervention(int const indexDistributeur)
                  << "aDepanner" << distributeurs[indexDistributeur]->getBac(j)->getADepanner();
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
            distributeurs[indexDistributeur]->getBac(j)->getADepanner() &&
-           !distributeurs[indexDistributeur]->getBac(j)->getAttribuer())
+           !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
         {
             this->setARemplir(true);
             this->setADepanner(true);
             break;
         }
         else if((distributeurs[indexDistributeur]->getBac(j)->getARemplir()) &&
-                !distributeurs[indexDistributeur]->getBac(j)->getAttribuer())
+                !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
         {
             this->setARemplir(true);
             break;
         }
         else if(distributeurs[indexDistributeur]->getBac(j)->getADepanner() &&
-                !distributeurs[indexDistributeur]->getBac(j)->getAttribuer())
+                !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
         {
             this->setADepanner(true);
             break;
@@ -306,7 +306,7 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
     for(int j = 0; j < distributeurs[indexDistributeur]->getNbBacs(); j++)
     {
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
-           !distributeurs[indexDistributeur]->getBac(j)->getAttribuer())
+           !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
         {
             if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
             {
@@ -320,7 +320,7 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
                           ", " + "'');";
                 qDebug() << Q_FUNC_INFO << "requete" << requete;
                 baseDeDonnees->executer(requete);
-                distributeurs[indexDistributeur]->getBac(j)->setAttribuer(true);
+                distributeurs[indexDistributeur]->getBac(j)->setAIntervenir(true);
             }
         }
     }

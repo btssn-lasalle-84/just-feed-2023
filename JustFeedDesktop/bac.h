@@ -27,11 +27,10 @@ class Bac
     double   poidsActuel;            //!< à définir
     double   poidsTotal;             //!< à définir
     double   pourcentageRemplissage; //!< pourcentage de remplissage du bac
-    bool     aRemplir;               //!< permet de savoir s'il faut remplir ce distributeur
-    bool     aDepanner;              //!< permet de savoir s'il faut intervenir sur le
-                                     //!< distributeur
-    int  hygrometrie;                //!< hygrometrie de l'interieur du distributeur
-    bool attribuer;                  //!< bac attribué à une intervention
+    bool     aRemplir;               //!< pour savoir s'il faut remplir ce distributeur
+    bool     aDepanner;              //!< poursavoir s'il faut intervenir sur le distributeur
+    int      hygrometrie;            //!< hygrometrie de l'interieur du distributeur
+    bool     aIntervenir;            //!< bac attribué à une intervention
 
   public:
     Bac();
@@ -42,6 +41,7 @@ class Bac
 
     // Accesseurs
     Produit* getProduit() const;
+    int      getIdBac() const;
     QString  getNomProduit() const;
     double   getPrixProduit() const;
     double   getPoidsActuel() const;
@@ -51,8 +51,7 @@ class Bac
     int      getHygrometrie() const;
     bool     getARemplir() const;
     bool     getADepanner() const;
-    int      getIdBac() const;
-    bool     getAttribuer() const;
+    bool     getAIntervenir() const;
 
     // Mutateurs
     void setProduit(Produit* produit);
@@ -64,7 +63,7 @@ class Bac
     void setHygrometrie(int hydrometrie);
     void setARemplir(bool aRemplir);
     void setADepanner(bool aDepanner);
-    void setAttribuer(bool attribue);
+    void setAIntervenir(bool attribue);
 };
 
 #endif // BAC_H

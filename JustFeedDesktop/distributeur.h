@@ -2,7 +2,8 @@
  * @file        distributeur.h
  * @brief       Déclaration de la classe Distributeur.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @author      Rouanet Nicolas
+ * @version     0.2
  * @date        2023
  */
 
@@ -50,7 +51,9 @@ class Distributeur
     QString       description;       //!< description du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     Localisation  position;          //!< géolocalisation du distributeur
-    bool          aIntervenir;
+    int           hygrometrie;       //!< hygrometrie de l'interieur du distributeur
+    bool          aIntervenir;       //!< pour savoir s'il faut intervenir sur le
+                                     //!< distributeur
 
   public:
     Distributeur();
@@ -70,6 +73,7 @@ class Distributeur
     QString      getDeviceID() const;
     Localisation getPosition() const;
     bool         getAIntervenir() const;
+    int          getHygrometrie() const;
     int          getHygrometrieBac(int numeroBac) const;
     QString      getNom() const;
     QString      getAdresse() const;
@@ -80,11 +84,11 @@ class Distributeur
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
 
-
     // mutateurs
     void setIdDistributeur(int id);
     void setAIntervenir(bool aIntervenir);
     void setDeviceID(const QString deviceID);
+    void setHygrometrie(int hygrometrie);
     void setPosition(const Localisation& localisation);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);

@@ -5,7 +5,7 @@
  * de l'application JustFeed (Desktop)
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.1
+ * @version     0.2
  * @date        2023
  */
 
@@ -15,6 +15,7 @@
 #include <QString>
 #include <QVector>
 #include <QtWidgets>
+#include <QWebView>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -93,17 +94,21 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
       *itemIntervention; //!< les éléments de la table
-    QPushButton* boutonPlanifier;
-    QPushButton* boutonConfigurer;
-    QPushButton* boutonValider;
-    QComboBox*   listeDistributeurs; //!< liste de distributeurs
-    QLabel*      nomDistributeur;
-    QLabel*      adresseDistributeur;
-    QLabel*      codePostalDistributeur;
-    QLabel*      villeDistributeur;
-    QLabel*      descriptionDistributeur;
-    QLabel*      miseEnServiceDistributeur;
-    QLabel*      positionDistributeur;
+    QPushButton*  boutonPlanifier;
+    QPushButton*  boutonConfigurer;
+    QPushButton*  boutonValider;
+    QPushButton*  boutonAfficherCarte;
+    QComboBox*    listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*  layoutFenetreDistributeur;
+    QProgressBar* volumeRestant;
+    QLabel*       nomDistributeur;
+    QLabel*       adresseDistributeur;
+    QLabel*       codePostalDistributeur;
+    QLabel*       villeDistributeur;
+    QLabel*       descriptionDistributeur;
+    QLabel*       miseEnServiceDistributeur;
+    QLabel*       positionDistributeur;
+    QWebView*     vueCarte;
 
     void initialiserGUI();
     void instancierWidgets();
@@ -120,6 +125,8 @@ class IHMJustFeed : public QWidget
     void effacerTableDistributeurs();
     int  recupererDistributeursAIntervenir();
     void effacerDistributeursAIntervenir();
+    void creerEtatDistributeur(Distributeur* distributeur);
+    void effacerEtatDistributeur();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
@@ -142,6 +149,7 @@ class IHMJustFeed : public QWidget
     void selectionnerDistributeur(int ligne, int colonne);
     void selectionnerDistributeur(QTableWidgetItem* item);
     void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
+    void afficherCarte();
 };
 
 #endif // IHMJUSTFEED_H

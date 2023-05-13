@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
+
 /**
  * @brief Définition de la Classe Produit.
  * @details La classe Produit décrit un type de produit, avec ses propriétés : nom, poids, prix.
@@ -14,6 +16,14 @@ package com.justfeed.justfeedandroid;
  */
 public class Produit
 {
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_Produit"; //!< TAG pour les logs (cf. Logcat)
+
+    /**
+     * Attributs
+     */
     private final String nom;            //!< nom du produit
     private double       prix;           //!< prix du produit pour 100g
     private double       poidsDuProduit; //!< poids en kg à l'unité du produit
@@ -21,7 +31,7 @@ public class Produit
 
     /**
      * @brief Constructeur d'initialisation de la classe Produit.
-     * @see Produit(double prix, double poidsDuProduit, double volumeProduit, String nom)
+     * @see Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)
      * @param prix le prix du produit.
      * @param poidsDuProduit le poid du produit à l'unité.
      * @param volumeProduit le volume du produit.
@@ -29,6 +39,7 @@ public class Produit
      */
     public Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)
     {
+        Log.d(TAG, "Produit() nom = " + nom + " - prix = " + prix + " - poidsDuProduit = " + poidsDuProduit + " - volumeProduit = " + volumeProduit);
         this.nom            = nom;
         this.prix           = prix;
         this.poidsDuProduit = poidsDuProduit;

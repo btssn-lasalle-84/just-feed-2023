@@ -4,7 +4,8 @@
  * @details     La classe Distributeur \c Cette classe permet définir un
  * distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @author      Rouanet Nicolas
+ * @version     0.2
  * @date        2023
  */
 #include "distributeur.h"
@@ -16,9 +17,9 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    id(ID_DISTRIBUTEUR_NON_DEFINI), deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""),
-    description(""), dateMiseEnService(QDate::currentDate()), position{ "", "", "0" },
-    aIntervenir(false)
+    id(ID_DISTRIBUTEUR_NON_DEFINI), deviceID(""), bacs(), nom(""), adresse(""), codePostal(""),
+    ville(""), description(""), dateMiseEnService(QDate::currentDate()), position{ "", "", "0" },
+    hygrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -38,12 +39,13 @@ Distributeur::Distributeur(int          id,
     id(id),
     deviceID(deviceID), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
     description(description), dateMiseEnService(dateMiseEnService), position(position),
-    aIntervenir(false)
+    hygrometrie(0), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
              << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
              << "description" << description << dateMiseEnService << "latitude" << position.latitude
-             << "longitude" << position.longitude << "aIntervenir" << aIntervenir;
+             << "longitude" << position.longitude << "hygrometrie" << hygrometrie << "aIntervenir"
+             << aIntervenir;
 }
 
 /**
@@ -74,6 +76,16 @@ int Distributeur::getIdDistributeur() const
 QString Distributeur::getDeviceID() const
 {
     return this->deviceID;
+}
+
+/**
+ * @brief Accesseur de l'attribut hygrometrie
+ * @return un entier qui represente la mesure de la quantité de vapeur d'eau
+ * contenue de l'air humide du distributeur
+ */
+int Distributeur::getHygrometrie() const
+{
+    return this->hygrometrie;
 }
 
 /**
@@ -197,6 +209,15 @@ void Distributeur::setIdDistributeur(const int id)
 void Distributeur::setDeviceID(const QString deviceID)
 {
     this->deviceID = deviceID;
+}
+
+/**
+ * @brief Mutateur de l'attribut hygrometrie
+ * @param hygrometrie
+ */
+void Distributeur::setHygrometrie(int hygrometrie)
+{
+    this->hygrometrie = hygrometrie;
 }
 
 /**

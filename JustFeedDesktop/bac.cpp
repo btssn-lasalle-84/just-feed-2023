@@ -79,6 +79,15 @@ Produit* Bac::getProduit() const
 }
 
 /**
+ * @brief Accesseur de l'attribut aDepanner
+ * @return un bool qui permet de savoir s'il faut dépanner le distributeur
+ */
+int Bac::getIdBac() const
+{
+    return this->idBac;
+}
+
+/**
  * @brief Retourne le nom du produit
  * @return le nom du Produit que contient le bac
  */
@@ -128,15 +137,6 @@ bool Bac::getADepanner() const
 }
 
 /**
- * @brief Accesseur de l'attribut aDepanner
- * @return un bool qui permet de savoir s'il faut dépanner le distributeur
- */
-int Bac::getIdBac() const
-{
-    return this->idBac;
-}
-
-/**
  * @brief Méthode qui détermine la quantité à remplir
  * @return double la quantité à remplir
  */
@@ -147,7 +147,7 @@ double Bac::getQuantiteARemplir() const
 
 /**
  * @brief Accesseur de l'attribut pourcentageRemplissage
- * @return double
+ * @return un double qui represente le pourcentage de remplissage dans le bac
  */
 double Bac::getPourcentageRemplissage() const
 {
@@ -173,12 +173,12 @@ int Bac::getHygrometrie() const
 }
 
 /**
- * @brief Accesseur de l'attribut attribue
+ * @brief Accesseur de l'attribut aIntervenir
  * @return bool
  */
-bool Bac::getAttribuer() const
+bool Bac::getAIntervenir() const
 {
-    return this->attribuer;
+    return this->aIntervenir;
 }
 
 /**
@@ -250,6 +250,16 @@ void Bac::setPourcentageRemplissage(const double& pourcentageRemplissage)
 }
 
 /**
+ * @brief Mutateur de l'attribut hygrometrie
+ * @param hygrometrie l'hygrometrie, mesure de la quantité de vapeur d'eau
+ * contenue de l'air du distributeur
+ */
+void Bac::setHygrometrie(int hygrometrie)
+{
+    this->hygrometrie = hygrometrie;
+}
+
+/**
  * @brief Mutateur de l'attribut aRemplir
  * @param aRemplir un booleen qui détermine l'état du
  * bac
@@ -270,20 +280,10 @@ void Bac::setADepanner(bool aDepanner)
 }
 
 /**
- * @brief Mutateur de l'attribut hygrometrie
- * @param hygrometrie l'hygrometrie, mesure de la quantité de vapeur d'eau
- * contenue de l'air du distributeur
- */
-void Bac::setHygrometrie(int hygrometrie)
-{
-    this->hygrometrie = hygrometrie;
-}
-
-/**
- * @brief Mutateur de l'attribut attribue
+ * @brief Mutateur de l'attribut aIntervenir
  * @param attribue
  */
-void Bac::setAttribuer(bool attribue)
+void Bac::setAIntervenir(bool attribue)
 {
-    this->attribuer = attribue;
+    this->aIntervenir = attribue;
 }

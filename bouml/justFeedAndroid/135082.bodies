@@ -1,0 +1,21 @@
+class AdaptateurBac
+!!!135722.java!!!	AdaptateurBac(inout listeBacs : List<Bac>)
+        if(listeBacs != null)
+        {
+            this.listeBacs = listeBacs;
+        }
+!!!135850.java!!!	onCreateViewHolder(inout parent : ViewGroup, in viewType : int) : VueBac
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View           vue      = inflater.inflate(R.layout.bac, parent, false);
+
+        return new VueBac(vue);
+!!!135978.java!!!	onBindViewHolder(inout holder : VueBac, in position : int) : void
+        Bac bac = listeBacs.get(position);
+        holder.afficherBac(bac);
+!!!136106.java!!!	getItemCount() : int
+        if(listeBacs != null)
+        {
+            return listeBacs.size();
+        }
+
+        return 0;
