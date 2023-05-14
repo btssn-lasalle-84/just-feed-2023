@@ -27,18 +27,18 @@ relationcanvas 128682 relation_ref 134570 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 141226 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1780.5 1055.5 3000 to ref 128170
-  role_a_pos 2532 1521 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1772 1060.5 3000 to ref 128170
+  role_a_pos 2516 1521 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128938 relation_ref 148138 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2385 2009.5 3000 to ref 128298
-  role_a_pos 2722 2020 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2385 2015 3000 to ref 128298
+  role_a_pos 2722 2026 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129066 relation_ref 155178 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2530 1612 3000 to ref 128170
-  role_a_pos 2532 1521 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2522 1617.5 3000 to ref 128170
+  role_a_pos 2516 1521 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

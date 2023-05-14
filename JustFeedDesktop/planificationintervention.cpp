@@ -104,7 +104,7 @@ void PlanificationIntervention::creerUneIntervention()
         return;
     intervention = new Intervention(distributeurs);
     intervention->setDateIntervention(editionDate->date());
-    int idOperateurInt = recupererIdOperateurBdd();
+    int idOperateurInt = recupererIdOperateur();
     if(idOperateurInt > 0)
     {
         intervention->setIdOperateur(idOperateurInt);
@@ -385,7 +385,7 @@ void PlanificationIntervention::chargerListeOperateurs()
 /**
  * @brief Récupère l'id d'un opérateur
  */
-int PlanificationIntervention::recupererIdOperateurBdd()
+int PlanificationIntervention::recupererIdOperateur()
 {
     if(listeOperateurs->currentIndex() == 0)
         return 0;

@@ -1,6 +1,6 @@
 format 224
 "justFeedDesktop"
-  revision 12
+  revision 13
   modified_by 42 "tv"
   cpp_root_dir "../../"
 
@@ -389,6 +389,43 @@ ${inlines}
     classdiagram 128024 "Diagramme de classe"
       classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 show_relation_visibility yes end
       size A0
+    end
+  end
+
+  usecaseview 134570 "planification"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    sequencediagram 134570 "Planifier une intervention"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    sequencediagram 134698 "Créer une intervention"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    sequencediagram 134826 "Visualiser l'Ã©tat du distributeur"
+      sequencediagramsettings end
+      overlapping_bars size A0
     end
   end
 end
