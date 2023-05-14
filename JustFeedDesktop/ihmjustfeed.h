@@ -127,6 +127,7 @@ class IHMJustFeed : public QWidget
     void effacerDistributeursAIntervenir();
     void creerEtatDistributeur(Distributeur* distributeur);
     void effacerEtatDistributeur();
+    void chargerCarte(Distributeur* distributeur);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

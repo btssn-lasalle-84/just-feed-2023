@@ -96,7 +96,7 @@ class PlanificationIntervention : public QDialog
     void initialiserEvenements();
     bool estEffectuable();
     void chargerListeOperateurs();
-    int  recupererIdOperateurBdd();
+    int  recupererIdOperateur();
     void autoriserCreation();
 
   public:

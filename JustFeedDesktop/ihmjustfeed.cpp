@@ -724,27 +724,7 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     positionDistributeur->setText(localisation);
     miseEnServiceDistributeur->setText(miseEnService);
 
-    QString delimiteur = "%2C";
-    QString url =
-      "https://www.openstreetmap.org/export/embed.html?bbox=" +
-      distributeur->getPosition().longitude + delimiteur + distributeur->getPosition().latitude +
-      QString(",") + distributeur->getPosition().longitude + delimiteur +
-      distributeur->getPosition().latitude + QString("&marker=") +
-      distributeur->getPosition().latitude + QString(",") + distributeur->getPosition().longitude;
-    // vueCarte->load(QUrl(url));
-    vueCarte->setVisible(false);
-    boutonAfficherCarte->setText("Afficher la carte");
-    vueCarte->load(QUrl("https://www.google.fr/maps/@" + distributeur->getPosition().latitude +
-                        "," + distributeur->getPosition().longitude + ",15z"));
-    /**
-     * @see https://www.google.com/maps/search/?api=1&query=43.90252,4.75280
-     * @see https://maps.google.com/maps?&z=15&q=43.90252,4.75280&ll=43.90252,4.75280
-     * @see https://www.google.com/maps/place/43.90252+4.75280/@43.90252,4.75280,15z
-     * @see
-     * https://www.google.com/maps/@?api=1&map_action=map&basemap=satellite&center=43.90252,4.75280&zoom=15
-     * @see
-     * https://www.google.com/maps/dir/?api=1&origin=Paris%2CFrance&destination=Cherbourg%2CFrance&travelmode=driving
-     */
+    chargerCarte(distributeur);
 
     int nbBacs = distributeur->getNbBacs();
 
@@ -823,4 +803,34 @@ void IHMJustFeed::effacerEtatDistributeur()
         }
         delete item;
     }
+}
+
+/**
+ * @brief charge la carte de localisation d'un distributeur
+ * @param distributeur
+ */
+void IHMJustFeed::chargerCarte(Distributeur* distributeur)
+{
+    /**
+     * @see https://www.google.com/maps/search/?api=1&query=43.90252,4.75280
+     * @see https://maps.google.com/maps?&z=15&q=43.90252,4.75280&ll=43.90252,4.75280
+     * @see https://www.google.com/maps/place/43.90252+4.75280/@43.90252,4.75280,15z
+     * @see
+     * https://www.google.com/maps/@?api=1&map_action=map&basemap=satellite&center=43.90252,4.75280&zoom=15
+     * @see
+     * https://www.google.com/maps/dir/?api=1&origin=Paris%2CFrance&destination=Cherbourg%2CFrance&travelmode=driving
+     */
+
+    QString delimiteur = "%2C";
+    QString url =
+      "https://www.openstreetmap.org/export/embed.html?bbox=" +
+      distributeur->getPosition().longitude + delimiteur + distributeur->getPosition().latitude +
+      QString(",") + distributeur->getPosition().longitude + delimiteur +
+      distributeur->getPosition().latitude + QString("&marker=") +
+      distributeur->getPosition().latitude + QString(",") + distributeur->getPosition().longitude;
+    // vueCarte->load(QUrl(url));
+    vueCarte->setVisible(false);
+    boutonAfficherCarte->setText("Afficher la carte");
+    vueCarte->load(QUrl("https://www.google.fr/maps/@" + distributeur->getPosition().latitude +
+                        "," + distributeur->getPosition().longitude + ",15z"));
 }
