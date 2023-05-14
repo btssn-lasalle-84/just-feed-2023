@@ -1,6 +1,6 @@
 format 224
 "JustFeedDesktop" // JustFeedDesktop
-  revision 7
+  revision 8
   modified_by 42 "tv"
   // class settings
   
@@ -485,7 +485,6 @@ ${inlines}
 	mysql_decl ""
 	MysqlColumn
       end
-
     end
 
     class 128408 "Distributeur"
@@ -1249,7 +1248,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 128536 "IHMJustFeed"
@@ -2128,6 +2126,25 @@ ${body}}
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 188586 "chargerCarte"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief charge la carte de localisation d'un distributeur
+//@param distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3032,7 +3049,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 128920 "Serveur"
@@ -4183,7 +4199,6 @@ ${body}}
 	
 	
       end
-
     end
 
     class 141098 "ConfigurationDistributeur"
@@ -5525,7 +5540,7 @@ ${body}}
 	
       end
 
-      operation 181162 "recupererIdOperateurBdd"
+      operation 188458 "recupererIdOperateur"
 	preserve_cpp_body_indent private explicit_return_type "int"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};

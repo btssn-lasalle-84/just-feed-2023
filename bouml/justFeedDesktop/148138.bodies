@@ -218,7 +218,7 @@ class PlanificationIntervention
         listeOperateurs->addItem(listeOperateursBdd[i].at(CHAMP_NOM_OPERATEUR) + " " +
                                  listeOperateursBdd[i].at(CHAMP_PRENOM_OPERATEUR));
     }
-!!!181162.cpp!!!	recupererIdOperateurBdd() : int
+!!!188458.cpp!!!	recupererIdOperateur() : int
     if(listeOperateurs->currentIndex() == 0)
         return 0;
     return idOperateurs[listeOperateurs->currentIndex() - 1];
@@ -275,7 +275,7 @@ class PlanificationIntervention
         return;
     intervention = new Intervention(distributeurs);
     intervention->setDateIntervention(editionDate->date());
-    int idOperateurInt = recupererIdOperateurBdd();
+    int idOperateurInt = recupererIdOperateur();
     if(idOperateurInt > 0)
     {
         intervention->setIdOperateur(idOperateurInt);
