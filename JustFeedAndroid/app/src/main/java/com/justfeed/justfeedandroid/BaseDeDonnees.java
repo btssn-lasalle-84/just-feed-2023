@@ -625,12 +625,9 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs =
-                              "SELECT DISTINCT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM\n"
-                                      +
-                                      " Distributeur,Intervention WHERE Intervention.idDistributeur = Distributeur.idDistributeur\n"
-                                      +
-                                      "OR Intervention.idDistributeur != Distributeur.idDistributeur;";
+                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                    +
+                                    " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
