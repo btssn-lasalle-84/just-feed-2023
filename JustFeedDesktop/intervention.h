@@ -58,6 +58,7 @@ class Intervention
     int                    ajouterIntervention(const int indexDistributeur);
     void                   ajouterApprovisionnement(int const indexDistributeur);
     int                    estPlanifiee(const int idDistributeur);
+    bool                   bacEstAttribue(const int idDistributeur, const int idBac);
 };
 
 #endif // INTERVENTION_H

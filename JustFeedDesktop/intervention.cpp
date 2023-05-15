@@ -298,16 +298,16 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
  */
 void Intervention::ajouterApprovisionnement(const int indexDistributeur)
 {
-    /**
-     * @todo Améliorer la gestion des approvisionnements pour des interventions (à faire et en
-     * cours) déjà plainifiées
-     */
-    QString requete;
+    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QVector<QString> listeDeBacPlanifie;
+    baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
+
     for(int j = 0; j < distributeurs[indexDistributeur]->getNbBacs(); j++)
     {
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
-           !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
+           !bacEstAttribue(indexDistributeur, j))
         {
+            qDebug() << Q_FUNC_INFO << "bacEstAttribue" << bacEstAttribue(indexDistributeur, j);
             if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
@@ -320,10 +320,33 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
                           ", " + "'');";
                 qDebug() << Q_FUNC_INFO << "requete" << requete;
                 baseDeDonnees->executer(requete);
-                distributeurs[indexDistributeur]->getBac(j)->setAIntervenir(true);
             }
         }
     }
+}
+
+/**
+ * @brief Vérifie si le bac est deja attribué
+ * @param idDistributeur
+ * @param idBac
+ * @return bool
+ */
+bool Intervention::bacEstAttribue(const int idDistributeur, const int idBac)
+{
+    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QVector<QString> listeDeBacPlanifie;
+    baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
+    qDebug() << Q_FUNC_INFO << "idIntervention" << requete;
+
+    for(int i = 0; i < listeDeBacPlanifie.size(); i++)
+    {
+        if(listeDeBacPlanifie[i].toInt() ==
+           distributeurs[idDistributeur]->getBac(idBac)->getIdBac())
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 /**
