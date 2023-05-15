@@ -625,10 +625,9 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs =
-                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM \n"
-                              +
-                              "Distributeur,Intervention WHERE Intervention.idDistributeur = Distributeur.idDistributeur;";
+                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                    +
+                                    " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -659,6 +658,7 @@ public class BaseDeDonnees
                                   (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
                                 distributeur.depanner(
                                   (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
+                                Log.d(TAG, "Nouveau distributeur : "+distributeur);
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   distributeur);
