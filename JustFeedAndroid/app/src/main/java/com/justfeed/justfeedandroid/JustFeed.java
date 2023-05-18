@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -39,6 +40,13 @@ public class JustFeed extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
+    public static final String PREFERENCES = "justfeed"; //!< Clé pour le titre du stockage
+    public static final String PREFERENCES_NOM_OPERATEUR = "nomOperateur"; //!< Clé pour le nom de l'opérateur
+    public static final String PREFERENCES_PRENOM_OPERATEUR = "prenomOperateur"; //!< Clé pour le prénom de l'opérateur
+    public static final String PREFERENCES_ID_OPERATEUR = "idOperateur"; //!< Clé pour l'id de l'opérateur
+    public static final String PREFERENCES_IDENTIFIANT = "identifiant"; //!< Clé pour l'identifiant de l'opérateur
+    public static final String PREFERENCES_EMAIL = "email"; //!< Clé pour l'email de l'opérateur
+
 
     /**
      * Attributs
@@ -49,6 +57,13 @@ public class JustFeed extends AppCompatActivity
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
     private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
+    private Operateur operateur; //!< Opérateur qui va être utilisé
+    private String nomOperateur; //!< Nom de l'opérateur
+    private String prenomOperateur; //!< Prénom de l'opérateur
+    private String identifiantOperateur; //!< Identifiant de l'opérateur
+    private String emailOperateur; //!< Email de l'opérateur
+    private int idOperateur; //!< numéro de  l'opérateur
+    private SharedPreferences preferencesPartagees; //!< système de persistance des données pour l'application
 
     /**
      * Ressources GUI
@@ -71,6 +86,7 @@ public class JustFeed extends AppCompatActivity
         initialiserBaseDeDonnees();
 
         baseDeDonnees.recupererDistributeurs();
+        //TODO baseDeDonnees.recupererOperateurs();
     }
 
     /**
@@ -126,6 +142,12 @@ public class JustFeed extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
+
+        preferencesPartagees.edit().putString(PREFERENCES_NOM_OPERATEUR, operateur.getNom()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_PRENOM_OPERATEUR, operateur.getPrenom()).apply();
+        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, operateur.getIdOperateur()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_IDENTIFIANT, operateur.getIdentifiant()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_EMAIL, operateur.getEmail()).apply();
     }
 
     /**
@@ -145,6 +167,10 @@ public class JustFeed extends AppCompatActivity
         });
 
         initialiserVueListeDistributeurs();
+        /**
+         * TODO condition pour vérifier si l'opérateur a été récupéré localement
+         * sinon on instancie operateur avec l'opérateur choisie dans la liste
+         */
     }
 
     /**
@@ -231,5 +257,43 @@ public class JustFeed extends AppCompatActivity
                 }
             }
         };
+    }
+
+    private boolean operateurLocalExiste() {
+        preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        if(preferencesPartagees.contains(PREFERENCES_NOM_OPERATEUR))
+        {
+            nomOperateur = preferencesPartagees.getString(PREFERENCES_NOM_OPERATEUR, "");
+        }
+        if(preferencesPartagees.contains(PREFERENCES_PRENOM_OPERATEUR))
+        {
+            prenomOperateur = preferencesPartagees.getString(PREFERENCES_PRENOM_OPERATEUR, "");
+        }
+        if(preferencesPartagees.contains(PREFERENCES_ID_OPERATEUR))
+        {
+            idOperateur = preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1);
+        }
+        if(preferencesPartagees.contains(PREFERENCES_IDENTIFIANT))
+        {
+            identifiantOperateur = preferencesPartagees.getString(PREFERENCES_IDENTIFIANT, "");
+        }
+        if(preferencesPartagees.contains(PREFERENCES_EMAIL))
+        {
+            emailOperateur = preferencesPartagees.getString(PREFERENCES_EMAIL,"");
+        }
+        if(idOperateur != -1) {
+            operateur = new Operateur(
+                    nomOperateur,
+                    prenomOperateur,
+                    identifiantOperateur,
+                    emailOperateur,
+                    idOperateur);
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
