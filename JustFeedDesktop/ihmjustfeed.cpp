@@ -377,25 +377,24 @@ void IHMJustFeed::initialiserDistributeurs()
 
     numeroDistributeurSelectionne = 0; // pour les tests
 #else
-    /**
-     * @see
-     * http://tvaira.free.fr/projets/activites/activite-base-donnees.html#s%C3%A9quence-2-mise-en-oeuvre-dune-classe-basededonnees
-     */
+    qDebug() << Q_FUNC_INFO << "BDD";
     QString requete = "SELECT * FROM Distributeur";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     QStringList          distributeur;
     QVector<QStringList> distributeursRecuperes;
-    qDebug() << Q_FUNC_INFO << "distributeursRecuperes" << distributeursRecuperes;
-
-    bool retour;
-
+    bool                 retour;
     retour = baseDeDonnees->recuperer(requete, distributeursRecuperes);
+    qDebug() << Q_FUNC_INFO << "distributeursRecuperes" << distributeursRecuperes;
     if(retour != false)
     {
         for(int i = 0; i < distributeursRecuperes.size(); i++)
         {
-            distributeur          = distributeursRecuperes.at(i);
-            QString      deviceID = distributeur.at(0);
+            distributeur = distributeursRecuperes.at(i);
+            /**
+             * @todo Ajouter un constructeur Distributeur avec un QStringList et créer un enum de
+             * constantes pour les champs de la table Distributeur
+             */
+            QString      deviceID = distributeur.at(10);
             Localisation position;
             position.latitude         = distributeur.at(9);
             position.longitude        = distributeur.at(8);
@@ -414,27 +413,24 @@ void IHMJustFeed::initialiserDistributeurs()
                                                                  description,
                                                                  dateMiseEnService,
                                                                  position);
-            distributeurs.append(nouveauDistributeur);
+            distributeurs.push_back(nouveauDistributeur);
+            /**
+             * @todo Ajouter les bacs au distributeur
+             */
+            /**
+             * @see
+             * SELECT Produit.*,Bac.* FROM Bac
+             * INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur
+             * INNER JOIN Produit ON Produit.idProduit=Bac.idProduit
+             * WHERE Distributeur.idDistributeur=id;
+             *
+             * Avec id = distributeur.at(0)
+             */
         }
-        distributeurs[0]->ajouterBac(Bac(0, produits[0], 0.));
-        distributeurs[0]->ajouterBac(Bac(0, produits[1], 0.));
-        distributeurs[0]->ajouterBac(Bac(0, produits[2], 0.));
-        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
-                 << distributeurs[0]->getNbBacs();
-        distributeurs[1]->ajouterBac(Bac(0, produits[0], 0.));
-        distributeurs[1]->ajouterBac(Bac(0, produits[1], 0.));
-        distributeurs[1]->ajouterBac(Bac(0, produits[2], 0.));
-        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[1]->getNom() << "NbBacs"
-                 << distributeurs[1]->getNbBacs();
-        distributeurs[2]->ajouterBac(Bac(0, produits[0], 0.));
-        distributeurs[2]->ajouterBac(Bac(0, produits[1], 0.));
-        distributeurs[2]->ajouterBac(Bac(0, produits[2], 0.));
-        qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
-                 << distributeurs[2]->getNbBacs();
     }
     else
     {
-        qDebug() << QString::fromUtf8("erreur Base de donnees!");
+        qDebug() << Q_FUNC_INFO << "retour" << retour;
     }
 #endif
 }
@@ -449,7 +445,7 @@ void IHMJustFeed::initialiserProduits()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -497,33 +493,22 @@ void IHMJustFeed::initialiserProduits()
     produits.push_back(soja);
     produits.push_back(basilic);
 #else
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "BDD";
     QString requete = "SELECT * FROM Produit";
-
-    bool retour;
-    qDebug() << QString::fromUtf8("requête : ") << requete;
-
-    QStringList          produit;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    bool                 retour;
     QVector<QStringList> listeProduits;
-
     retour = baseDeDonnees->recuperer(requete, listeProduits);
     if(retour != false)
     {
         for(int i = 0; i < listeProduits.size(); i++)
         {
-            produit             = listeProduits.at(i);
-            QString nom         = produit.at(1);
-            QString marque      = produit.at(2);
-            QString description = produit.at(3);
-            QString codeProduit = produit.at(4);
-            double  prix        = produit.at(5).toDouble();
-
-            Produit* nouveauProduit = new Produit(nom, marque, description, codeProduit, prix);
-            produits.append(nouveauProduit);
+            Produit* nouveauProduit = new Produit(listeProduits.at(i));
+            produits.push_back(nouveauProduit);
         }
     }
-
 #endif
+    qDebug() << Q_FUNC_INFO << "produits" << produits;
 }
 
 /**
