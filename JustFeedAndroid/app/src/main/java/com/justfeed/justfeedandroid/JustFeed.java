@@ -57,12 +57,6 @@ public class JustFeed extends AppCompatActivity
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
     private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
-    private Operateur operateur; //!< Opérateur qui va être utilisé
-    private String nomOperateur; //!< Nom de l'opérateur
-    private String prenomOperateur; //!< Prénom de l'opérateur
-    private String identifiantOperateur; //!< Identifiant de l'opérateur
-    private String emailOperateur; //!< Email de l'opérateur
-    private int idOperateur; //!< numéro de  l'opérateur
     private SharedPreferences preferencesPartagees; //!< système de persistance des données pour l'application
 
     /**
@@ -143,11 +137,7 @@ public class JustFeed extends AppCompatActivity
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
 
-        preferencesPartagees.edit().putString(PREFERENCES_NOM_OPERATEUR, operateur.getNom()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_PRENOM_OPERATEUR, operateur.getPrenom()).apply();
-        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, operateur.getIdOperateur()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_IDENTIFIANT, operateur.getIdentifiant()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_EMAIL, operateur.getEmail()).apply();
+        enregistrerPreferences();
     }
 
     /**
@@ -259,7 +249,13 @@ public class JustFeed extends AppCompatActivity
         };
     }
 
-    private boolean operateurLocalExiste() {
+    private boolean aPreferencesOperateur() {
+        String nomOperateur;
+        String prenomOperateur;
+        String identifiantOperateur;
+        String emailOperateur;
+        int idOperateur;
+
         preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
         if(preferencesPartagees.contains(PREFERENCES_NOM_OPERATEUR))
         {
@@ -295,5 +291,13 @@ public class JustFeed extends AppCompatActivity
         {
             return false;
         }
+    }
+
+    private void enregistrerPreferences() {
+        preferencesPartagees.edit().putString(PREFERENCES_NOM_OPERATEUR, operateur.getNom()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_PRENOM_OPERATEUR, operateur.getPrenom()).apply();
+        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, operateur.getIdOperateur()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_IDENTIFIANT, operateur.getIdentifiant()).apply();
+        preferencesPartagees.edit().putString(PREFERENCES_EMAIL, operateur.getEmail()).apply();
     }
 }
