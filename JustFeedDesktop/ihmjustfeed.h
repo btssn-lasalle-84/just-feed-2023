@@ -109,6 +109,16 @@ class IHMJustFeed : public QWidget
     QLabel*       miseEnServiceDistributeur;
     QLabel*       positionDistributeur;
     QWebView*     vueCarte;
+    QLabel* titreIntervention;
+    QVector<QLabel*> idIntervention;
+    QVector<QLabel*> InterventionIdOperateur;
+    QVector<QLabel*> InterventionIdDistributeur;
+    QVector<QLabel*> dateIntervention;
+    QVector<QLabel*> aRemplirIntervention;
+    QVector<QLabel*> aDepannerIntervention;
+    QVector<QLabel*> etatIntervention;
+    QVector<QStringList> interventionsBdd;
+
 
     void initialiserGUI();
     void instancierWidgets();
