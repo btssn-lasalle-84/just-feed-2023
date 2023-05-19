@@ -13,6 +13,17 @@
 
 class Produit;
 
+enum infoBac
+{
+    ID_BAC          = 8,
+    ID_DISTRIBUTEUR = 9,
+    ID_PRODUIT      = 10,
+    POIDS_ACTUEL    = 11,
+    POID_TOTAL      = 12,
+    HYGROMETRIE     = 13,
+    REMPLISSAGE     = 14,
+};
+
 class Bac
 {
   private:
@@ -31,6 +42,7 @@ class Bac
     Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie);
     Bac(int idBac, Produit* produit, double poidsTotal);
     Bac(const Bac& bac);
+    Bac(QStringList& bacs);
     ~Bac();
 
     // Accesseurs

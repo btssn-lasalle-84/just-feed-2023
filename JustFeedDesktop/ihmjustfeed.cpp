@@ -389,43 +389,41 @@ void IHMJustFeed::initialiserDistributeurs()
     {
         for(int i = 0; i < distributeursRecuperes.size(); i++)
         {
-            distributeur = distributeursRecuperes.at(i);
-            /**
-             * @todo Ajouter un constructeur Distributeur avec un QStringList et créer un enum de
-             * constantes pour les champs de la table Distributeur
-             */
-            QString      deviceID = distributeur.at(10);
-            Localisation position;
-            position.latitude         = distributeur.at(9);
-            position.longitude        = distributeur.at(8);
-            QString nom               = distributeur.at(2);
-            QString adresse           = distributeur.at(4);
-            QString ville             = distributeur.at(5);
-            QString codePostal        = distributeur.at(6);
-            QString description       = distributeur.at(3);
-            QDate   dateMiseEnService = QDate::fromString(distributeur.at(7), "yyyy-MM-dd");
-
-            Distributeur* nouveauDistributeur = new Distributeur(deviceID,
-                                                                 nom,
-                                                                 adresse,
-                                                                 codePostal,
-                                                                 ville,
-                                                                 description,
-                                                                 dateMiseEnService,
-                                                                 position);
+            distributeur                      = distributeursRecuperes.at(i);
+            Distributeur* nouveauDistributeur = new Distributeur(distributeur);
             distributeurs.push_back(nouveauDistributeur);
-            /**
-             * @todo Ajouter les bacs au distributeur
-             */
-            /**
-             * @see
-             * SELECT Produit.*,Bac.* FROM Bac
-             * INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur
-             * INNER JOIN Produit ON Produit.idProduit=Bac.idProduit
-             * WHERE Distributeur.idDistributeur=id;
-             *
-             * Avec id = distributeur.at(0)
-             */
+
+            QString idDistributeur = distributeur.at(0);
+            QString requeteBacs =
+              "SELECT Produit.*, Bac.* FROM Bac "
+              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur "
+              "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit "
+              "WHERE Distributeur.idDistributeur='" +
+              idDistributeur + "'";
+
+            QStringList          bacs;
+            QVector<QStringList> bacsRecuperes;
+            bool                 retourBacs = baseDeDonnees->recuperer(requeteBacs, bacsRecuperes);
+
+            if(retourBacs)
+            {
+                for(int j = 0; j < bacsRecuperes.size(); j++)
+                {
+                    bacs            = bacsRecuperes.at(j);
+                    Bac* nouveauBac = new Bac(bacs);
+                    nouveauDistributeur->ajouterBac(*nouveauBac);
+
+                    qDebug() << "Informations du Bac :"
+                             << "Id Produit :" << bacs.at(0) << "Nom Produit" << bacs.at(1)
+                             << "Marque :" << bacs.at(2) << "Description :" << bacs.at(3)
+                             << "Code EAN :" << bacs.at(4) << "Prix :" << bacs.at(5)
+                             << "Poids Unitaire :" << bacs.at(6)
+                             << "Volume Unitaire :" << bacs.at(7) << "Id Bac :" << bacs.at(8)
+                             << "Id Distributeur :" << bacs.at(9) << "Id Porduit :" << bacs.at(10)
+                             << "Poid Actuel :" << bacs.at(11) << "Poid total :" << bacs.at(12)
+                             << "Hygrometrie :" << bacs.at(13) << "Remplissage :" << bacs.at(14);
+                }
+            }
         }
     }
     else
@@ -445,7 +443,7 @@ void IHMJustFeed::initialiserProduits()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",

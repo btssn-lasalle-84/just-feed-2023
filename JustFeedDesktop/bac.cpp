@@ -60,6 +60,13 @@ Bac::Bac(const Bac& bac) :
     qDebug() << Q_FUNC_INFO;
 }
 
+Bac::Bac(QStringList& bacs) :
+    idBac(bacs.at(ID_BAC).toInt()), poidsActuel(bacs.at(POIDS_ACTUEL).toDouble()),
+    poidsTotal(bacs.at(POID_TOTAL).toDouble()), hygrometrie(bacs.at(HYGROMETRIE).toInt()),
+    pourcentageRemplissage(bacs.at(REMPLISSAGE).toDouble())
+{
+}
+
 /**
  * @brief Destructeur de la classe Bac
  */

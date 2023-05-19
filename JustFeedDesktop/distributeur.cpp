@@ -45,6 +45,14 @@ Distributeur::Distributeur(QString      deviceID,
              << "longitude" << position.longitude << "aIntervenir" << aIntervenir;
 }
 
+Distributeur::Distributeur(QStringList& distributeurs) :
+    deviceID(distributeurs.at(DEVICE_ID)),
+    position({ distributeurs.at(LATITUDE), distributeurs.at(LONGITUDE) }),
+    nom(distributeurs.at(NOM)), adresse(distributeurs.at(ADRESSE)), ville(distributeurs.at(VILLE)),
+    codePostal(distributeurs.at(CODE_POSTAL)), description(distributeurs.at(DESCRIPTION)),
+    dateMiseEnService(QDate::fromString(distributeurs.at(DATE_MISE_EN_SERVICE), "yyyy-MM-dd"))
+{
+}
 /**
  * @brief Destructeur de la classe Distributeur
  */

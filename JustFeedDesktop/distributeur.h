@@ -26,6 +26,19 @@ struct Localisation
     QString altitude;
 };
 
+enum infoDistributeur
+{
+    NOM                  = 2,
+    DESCRIPTION          = 3,
+    ADRESSE              = 4,
+    VILLE                = 5,
+    CODE_POSTAL          = 6,
+    DATE_MISE_EN_SERVICE = 7,
+    LONGITUDE            = 8,
+    LATITUDE             = 9,
+    DEVICE_ID            = 10,
+};
+
 /**
  * @class       Distributeur
  * @brief       Déclaration de la classe Distributeur.
@@ -56,6 +69,7 @@ class Distributeur
                  QString      description,
                  QDate        dateMiseEnService,
                  Localisation position);
+    Distributeur(QStringList& distributeurs);
     ~Distributeur();
 
     // Accesseurs
