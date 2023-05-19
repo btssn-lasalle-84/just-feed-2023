@@ -36,7 +36,8 @@ class BaseDeDonnees;
 #define VERSION_APPLICATION QString("v0.1")
 
 #define TAILLE_POLICE 14
-
+#define ROUGE 30
+#define ORANGE 50
 /**
  * @class       IHMJustFeed
  * @brief       Déclaration de la classe IHMJustFeed.

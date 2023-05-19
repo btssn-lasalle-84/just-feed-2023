@@ -838,14 +838,11 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
                                       0.35);
         volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
 
-        /**
-         * @todo Définir des contantes pour les seuils de remplissage
-         */
-        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < COULEUR_BAC_VIDE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
         }
-        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < COULEUR_BAC_MOITIE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
         }
