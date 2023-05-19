@@ -838,11 +838,11 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
                                       0.35);
         volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
 
-        if(distributeur->getBac(i)->getPourcentageRemplissage() < COULEUR_BAC_VIDE)
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < BAC_VIDE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
         }
-        else if(distributeur->getBac(i)->getPourcentageRemplissage() < COULEUR_BAC_MOITIE)
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < BAC_MOITIE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
         }
