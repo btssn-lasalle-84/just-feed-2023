@@ -37,8 +37,8 @@ class Operateur;
 #define VERSION_APPLICATION QString("v0.1")
 
 #define TAILLE_POLICE 14
-#define BAC_VIDE 30
-#define BAC_MOITIE 50
+#define BAC_VIDE      30
+#define BAC_MOITIE    50
 
 /**
  * @class       IHMJustFeed
@@ -74,20 +74,6 @@ class IHMJustFeed : public QWidget
         COLONNE_DISTRIBUTEUR_INTERVENTION,
         NbColonnesDistributeur
     };
-    /**
-     * @enum OperateursBdd
-     * @brief
-     */
-    enum IndexInterventionBdd
-    {
-       IdIntervention = 0,
-       IdOperateur = 1,
-       IdDistributeur = 2,
-       DateIntervention = 3,
-       ARemplir = 4,
-       ADepanner = 5,
-       Etat = 6
-    };
 
     Q_OBJECT
   private:
@@ -98,7 +84,7 @@ class IHMJustFeed : public QWidget
     PlanificationIntervention*
       planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
     QVector<Distributeur*> distributeurs; //!< les distributeurs
-    QVector<Operateur*>    operateurs; //!< les operateurs
+    QVector<Operateur*>    operateurs;    //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
@@ -112,31 +98,30 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal,
       *itemIntervention; //!< les éléments de la table
-    QPushButton*  boutonPlanifier;
-    QPushButton*  boutonConfigurer;
-    QPushButton*  boutonValider;
-    QPushButton*  boutonAfficherCarte;
-    QComboBox*    listeDistributeurs; //!< liste de distributeurs
-    QVBoxLayout*  layoutFenetreDistributeur;
-    QProgressBar* volumeRestant;
-    QLabel*       nomDistributeur;
-    QLabel*       adresseDistributeur;
-    QLabel*       codePostalDistributeur;
-    QLabel*       villeDistributeur;
-    QLabel*       descriptionDistributeur;
-    QLabel*       miseEnServiceDistributeur;
-    QLabel*       positionDistributeur;
-    QWebView*     vueCarte;
-    QLabel* titreIntervention;
-    QVector<QLabel*> idIntervention;
-    QVector<QLabel*> InterventionIdOperateur;
-    QVector<QLabel*> InterventionIdDistributeur;
-    QVector<QLabel*> dateIntervention;
-    QVector<QLabel*> aRemplirIntervention;
-    QVector<QLabel*> aDepannerIntervention;
-    QVector<QLabel*> etatIntervention;
+    QPushButton*         boutonPlanifier;
+    QPushButton*         boutonConfigurer;
+    QPushButton*         boutonValider;
+    QPushButton*         boutonAfficherCarte;
+    QComboBox*           listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*         layoutFenetreDistributeur;
+    QProgressBar*        volumeRestant;
+    QLabel*              nomDistributeur;
+    QLabel*              adresseDistributeur;
+    QLabel*              codePostalDistributeur;
+    QLabel*              villeDistributeur;
+    QLabel*              descriptionDistributeur;
+    QLabel*              miseEnServiceDistributeur;
+    QLabel*              positionDistributeur;
+    QWebView*            vueCarte;
+    QLabel*              titreIntervention;
+    QVector<QLabel*>     idIntervention;
+    QVector<QLabel*>     InterventionIdOperateur;
+    QVector<QLabel*>     InterventionIdDistributeur;
+    QVector<QLabel*>     dateIntervention;
+    QVector<QLabel*>     aRemplirIntervention;
+    QVector<QLabel*>     aDepannerIntervention;
+    QVector<QLabel*>     etatIntervention;
     QVector<QStringList> interventionsBdd;
-
 
     void initialiserGUI();
     void instancierWidgets();
@@ -146,7 +131,7 @@ class IHMJustFeed : public QWidget
     void initialiserEvenements();
     void initialiserDistributeurs();
     void initialiserProduits();
-    void initialiserOerateur();
+    void initialiserOperateurs();
     void chargerDistributeurs();
     void afficherDistributeurTable(const Distributeur& distributeur);
     void afficherDistributeur(Distributeur* distributeur);

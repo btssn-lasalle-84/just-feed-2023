@@ -1,26 +1,52 @@
+/**
+ * @file        operateur.h
+ * @brief       Déclaration de la classe Operateur.
+ * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
+ * @version     0.2
+ * @date        2023
+ */
+
 #ifndef OPERATEUR_H
 #define OPERATEUR_H
 
 #include <QVector>
 #include <QString>
+#include <QStringList>
+
 class Operateur
 {
-private :
-    unsigned int idOperateur; //!< id de l'operateur
-    QString nom; //!< nom de l'operateur
-    QString prenom; //!< prenom de l'operateur
-    QString identifiant; //!< identifiant de l'operateur
-    QString email; //!< email de l'operateur
+  public:
+    /**
+     * @enum TableOperateur
+     * @brief Définit les champs de la table Operateur
+     *
+     */
+    enum TableOperateur
+    {
+        ID          = 0,
+        NOM         = 1,
+        PRENOM      = 2,
+        IDENTIFIANT = 3,
+        EMAIL       = 4
+    };
 
-public:
+  private:
+    int     id;          //!< id de l'operateur
+    QString nom;         //!< nom de l'operateur
+    QString prenom;      //!< prenom de l'operateur
+    QString identifiant; //!< identifiant de l'operateur
+    QString email;       //!< email de l'operateur
+
+  public:
     Operateur(int idOperateur, QString nom, QString prenom, QString identifiant, QString email);
-    int getIdOperateur() const;
+    Operateur(const QStringList operateur);
+    int     getId() const;
     QString getNom() const;
     QString getPrenom() const;
     QString getIdentifiant() const;
     QString getEmail() const;
 
-    void setIdOerateur(const int idOperateur);
+    void setId(const int idOperateur);
     void setNom(const QString nom);
     void setPrenom(const QString prenom);
     void setIdentifiant(const QString identifiant);

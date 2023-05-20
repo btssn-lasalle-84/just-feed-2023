@@ -1,5 +1,5 @@
 /**
- * @file        Intervention.h
+ * @file        intervention.h
  * @brief       Déclaration de la classe Intervention.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.2
@@ -22,6 +22,22 @@ class BaseDeDonnees;
 
 class Intervention
 {
+  public:
+    /**
+     * @enum TableIntervention
+     * @brief
+     */
+    enum TableIntervention
+    {
+        ID                = 0,
+        ID_OPERATEUR      = 1,
+        ID_DISTRIBUTEUR   = 2,
+        DATE_INTERVENTION = 3,
+        A_REMPLIR         = 4,
+        A_DEPANNER        = 5,
+        ETAT              = 6
+    };
+
   private:
     BaseDeDonnees*         baseDeDonnees;      //!< association avec la base de données
     QDate                  dateIntervention;   //!< la date de l'intervention

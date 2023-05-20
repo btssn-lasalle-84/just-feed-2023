@@ -1,5 +1,5 @@
 /**
- * @file        Bac.h
+ * @file        bac.h
  * @brief       Déclaration de la classe Bac.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
