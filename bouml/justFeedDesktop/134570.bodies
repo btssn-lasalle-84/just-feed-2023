@@ -2,25 +2,35 @@ class Bac
 !!!134570.cpp!!!	Bac()
     qDebug() << Q_FUNC_INFO;
 !!!170794.cpp!!!	Bac(in idBac : int, inout produit : Produit, in poidsActuel : double, in poidsTotal : double, in hygrometrie : int)
-    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
-             << "description" << produit->getDescription() << "codeProduit"
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
              << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
-             << pourcentageRemplissage;
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 !!!170922.cpp!!!	Bac(in idBac : int, inout produit : Produit, in poidsTotal : double)
-    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
-             << "description" << produit->getDescription() << "codeProduit"
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
              << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
-             << pourcentageRemplissage;
-!!!134826.cpp!!!	Bac(in bac : Bac)
-    qDebug() << Q_FUNC_INFO;
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+!!!134826.cpp!!!	Bac(in bac : QStringList, inout produit : Produit)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+!!!195114.cpp!!!	Bac(in bac : Bac)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 !!!134954.cpp!!!	~Bac()
     qDebug() << Q_FUNC_INFO;
-!!!135082.cpp!!!	getProduit() : Produit
-    return produit;
 !!!171050.cpp!!!	getIdBac() : int
     return this->idBac;
+!!!135082.cpp!!!	getProduit() : Produit
+    return produit;
 !!!135210.cpp!!!	getNomProduit() : QString
     if(produit != nullptr)
         return produit->getNom();

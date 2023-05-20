@@ -21,27 +21,46 @@ class Produit;
 
 class Bac
 {
+  public:
+    /**
+     * @enum TableBac
+     * @brief Définit les champs de la table Bac
+     *
+     */
+    enum TableBac
+    {
+        ID_BAC          = 0,
+        ID_DISTRIBUTEUR = 1,
+        ID_PRODUIT      = 2,
+        POIDS_ACTUEL    = 3,
+        POID_TOTAL      = 4,
+        HYGROMETRIE     = 5,
+        REMPLISSAGE     = 6,
+    };
+
   private:
-    Produit* produit;                //!< produit que contient le bac
     int      idBac;                  //!< identifiant du bac
+    Produit* produit;                //!< produit que contient le bac
     double   poidsActuel;            //!< à définir
     double   poidsTotal;             //!< à définir
     double   pourcentageRemplissage; //!< pourcentage de remplissage du bac
-    bool     aRemplir;               //!< pour savoir s'il faut remplir ce distributeur
-    bool     aDepanner;              //!< poursavoir s'il faut intervenir sur le distributeur
-    int      hygrometrie;            //!< hygrometrie de l'interieur du distributeur
-    bool     aIntervenir;            //!< bac attribué à une intervention
+    bool     aRemplir;               //!< permet de savoir s'il faut remplir ce distributeur
+    bool     aDepanner;              //!< permet de savoir s'il faut intervenir sur le
+                                     //!< distributeur
+    int  hygrometrie;                //!< hygrometrie de l'interieur du distributeur
+    bool aIntervenir;                //!< bac attribué à une intervention
 
   public:
     Bac();
     Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie);
     Bac(int idBac, Produit* produit, double poidsTotal);
+    Bac(const QStringList& bac, Produit* produit);
     Bac(const Bac& bac);
     ~Bac();
 
     // Accesseurs
-    Produit* getProduit() const;
     int      getIdBac() const;
+    Produit* getProduit() const;
     QString  getNomProduit() const;
     double   getPrixProduit() const;
     double   getPoidsActuel() const;

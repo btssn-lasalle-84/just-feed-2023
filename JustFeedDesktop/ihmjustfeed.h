@@ -33,7 +33,13 @@ class BaseDeDonnees;
  * @def VERSION_APPLICATION
  * @brief Définit la version de l'application
  */
-#define VERSION_APPLICATION QString("v0.1")
+#define VERSION_APPLICATION QString("v0.2")
+
+/**
+ * @def SANS_BDD
+ * @brief À définir pour ne pas utiliser l'accès à la base de données
+ */
+//#define SANS_BDD
 
 #define TAILLE_POLICE 14
 
@@ -75,7 +81,7 @@ class IHMJustFeed : public QWidget
     Q_OBJECT
   private:
     // Attributs
-    BaseDeDonnees*             baseDeDonnees;
+    BaseDeDonnees*             baseDeDonnees; //!< association vers la classe BaseDeDonnees
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
@@ -86,6 +92,7 @@ class IHMJustFeed : public QWidget
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     QStringList            nomColonnes;                   //!< la liste des noms de colonne
     int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
+
     // Widgets
     QWidget*          gui;                      //!< le widget central
     QStackedWidget*   fenetres;                 //!< la pile de fenêtres
@@ -110,24 +117,25 @@ class IHMJustFeed : public QWidget
     QLabel*       positionDistributeur;
     QWebView*     vueCarte;
 
-    void initialiserGUI();
-    void instancierWidgets();
-    void initialiserWidgets();
-    void initialiserTable();
-    void positionnerWidgets();
-    void initialiserEvenements();
-    void initialiserDistributeurs();
-    void initialiserProduits();
-    void chargerDistributeurs();
-    void afficherDistributeurTable(const Distributeur& distributeur);
-    void afficherDistributeur(Distributeur* distributeur);
-    void effacerTableau(int ligne, int colonne);
-    void effacerTableDistributeurs();
-    int  recupererDistributeursAIntervenir();
-    void effacerDistributeursAIntervenir();
-    void creerEtatDistributeur(Distributeur* distributeur);
-    void effacerEtatDistributeur();
-    void chargerCarte(Distributeur* distributeur);
+    void     initialiserGUI();
+    void     instancierWidgets();
+    void     initialiserWidgets();
+    void     initialiserTable();
+    void     positionnerWidgets();
+    void     initialiserEvenements();
+    void     initialiserDistributeurs();
+    void     initialiserProduits();
+    void     chargerDistributeurs();
+    void     afficherDistributeurTable(const Distributeur& distributeur);
+    void     afficherDistributeur(Distributeur* distributeur);
+    void     effacerTableau(int ligne, int colonne);
+    void     effacerTableDistributeurs();
+    int      recupererDistributeursAIntervenir();
+    void     effacerDistributeursAIntervenir();
+    void     creerEtatDistributeur(Distributeur* distributeur);
+    void     effacerEtatDistributeur();
+    Produit* recupererProduit(int idProduit);
+    void     chargerCarte(Distributeur* distributeur);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

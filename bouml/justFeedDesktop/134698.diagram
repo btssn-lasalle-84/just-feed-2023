@@ -43,7 +43,7 @@ end
 textcanvas 134954 "[intervention]"
   xyzwh 150 1330 3005 280 30
 textcanvas 135594 "[pour chaque distributeur  à intervenir]"
-  xyzwh 153.5 1474 3005 495 30
+  xyzwh 153 1474 3005 495 30
 fragment 135722 "loop"
   xyzwh 55.5 1466.5 1980 1026 228
 end

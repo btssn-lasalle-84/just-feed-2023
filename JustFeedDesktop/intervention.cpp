@@ -244,7 +244,7 @@ void Intervention::affecterEtatIntervention(int const indexDistributeur)
  */
 int Intervention::ajouterIntervention(const int indexDistributeur)
 {
-    int numeroIntervention = estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur());
+    int     numeroIntervention = estPlanifiee(distributeurs[indexDistributeur]->getId());
     QString requete;
     if(this->getARemplir() || this->getADepanner())
     {
@@ -253,9 +253,9 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
             requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
                       "etat, aRemplir, aDepanner) VALUES (" +
                       QString::number(getIdOperateur()) + ", " +
-                      QString::number(distributeurs[indexDistributeur]->getIdDistributeur()) +
-                      ", " + "'" + this->getDateIntervention().toString("yyyy-MM-dd") + "'" +
-                      ", 'A_FAIRE', " + QString::number(this->getARemplir()) + ", " +
+                      QString::number(distributeurs[indexDistributeur]->getId()) + ", " + "'" +
+                      this->getDateIntervention().toString("yyyy-MM-dd") + "'" + ", 'A_FAIRE', " +
+                      QString::number(this->getARemplir()) + ", " +
                       QString::number(this->getADepanner()) + ");";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
@@ -308,7 +308,7 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
            !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
         {
-            if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
+            if(estPlanifiee(distributeurs[indexDistributeur]->getId()))
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
                           "poidsAPrevoir, heureApprovisionnement) VALUES (" +

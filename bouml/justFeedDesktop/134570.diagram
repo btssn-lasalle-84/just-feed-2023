@@ -12,7 +12,7 @@ end
 note 131882 "clic sur la case à cocher d'un distributeur"
   xyzwh 101 233 2000 367 87
 textcanvas 132266 "[chaque bac à remplir ou à dépanner]"
-  xyzwh 123 1083.5 2000 500 41
+  xyzwh 123 1083 2000 500 41
 note 132394 "clic sur le bouton \"Planifier\""
   xyzwh 105 484 2000 279 91
 fragment 132650 "alt"
@@ -24,7 +24,7 @@ fragment 133546 "loop"
   xyzwh 22 1075.5 1975 1298 261
 end
 textcanvas 133674 "[chaque distributeur à intervenir]"
-  xyzwh 137 93.5 2000 438 33
+  xyzwh 137 93 2000 438 33
 note 135082 "clic sur une case à cocher associée à l'opération sur un bac"
   xyzwh 104 1203 2000 331 115
 note 135466 "clic sur le nom d'un opérateur dans la liste déroulante"
