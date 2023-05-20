@@ -1,0 +1,32 @@
+class Bac
+!!!137258.java!!!	Bac()
+        Log.d(TAG, "Bac()");
+        this.typeProduit = null;
+        this.poidsActuel = 0.0;
+        this.poidsTotal  = 0.0;
+        this.hygrometrie = 0;
+!!!137386.java!!!	Bac(inout typeProduit : Produit, in poidsActuel : double, in poidsTotal : double, in hygrometrie : int, in quantiteARemplir : double)
+        Log.d(TAG,
+              "Bac() nomProduit = " + typeProduit.getNom() + " - poidsActuel = " + poidsActuel +
+                " - poidsTotal = " + poidsTotal + " - hygrometrie = " + hygrometrie);
+        this.typeProduit      = typeProduit;
+        this.poidsActuel      = poidsActuel;
+        this.poidsTotal       = poidsTotal;
+        this.hygrometrie      = hygrometrie;
+        this.quantiteARemplir = quantiteARemplir;
+!!!137514.java!!!	getTypeProduit() : Produit
+        return this.typeProduit;
+!!!137642.java!!!	getPoidsActuel() : double
+        return this.poidsActuel;
+!!!137770.java!!!	getPoidsTotalBac() : double
+        return this.poidsTotal;
+!!!137898.java!!!	getHygrometrie() : int
+        return this.hygrometrie;
+!!!138026.java!!!	getQuantiteARemplir() : double
+ return this.quantiteARemplir;
+!!!138154.java!!!	changerTypeProduit(inout nouveauProduit : Produit) : void
+        this.typeProduit = nouveauProduit;
+!!!138282.java!!!	changerPoidsActuel(in nouveauPoids : double) : void
+        this.poidsActuel = nouveauPoids;
+!!!138410.java!!!	changerQuantiteARemplir(in nouvelleQuantite : double) : void
+ this.quantiteARemplir = nouvelleQuantite;

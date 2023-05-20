@@ -14,8 +14,9 @@
  * @brief Constructeur par défaut de la classe Bac
  */
 Bac::Bac() :
-    idBac(0), produit(nullptr), poidsActuel(0.), poidsTotal(0.), pourcentageRemplissage(0.),
-    aRemplir(false), aDepanner(false), hygrometrie(0)
+    idBac(ID_BAC_NON_DEFINI), produit(nullptr), poidsActuel(0.), poidsTotal(0.),
+    pourcentageRemplissage(0.), aRemplir(false), aDepanner(false), hygrometrie(0),
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO;
 }
@@ -26,7 +27,7 @@ Bac::Bac() :
 Bac::Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie) :
     idBac(idBac), produit(produit), poidsActuel(poidsActuel), poidsTotal(poidsTotal),
     pourcentageRemplissage((poidsActuel * 100.) / poidsTotal), aRemplir(false), aDepanner(false),
-    hygrometrie(hygrometrie)
+    hygrometrie(hygrometrie), aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
              << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
@@ -40,13 +41,14 @@ Bac::Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int
  */
 Bac::Bac(int idBac, Produit* produit, double poidsTotal) :
     idBac(idBac), produit(produit), poidsActuel(poidsTotal), poidsTotal(poidsTotal),
-    pourcentageRemplissage(100.), aRemplir(false), aDepanner(false), hygrometrie(0)
+    pourcentageRemplissage(100.), aRemplir(false), aDepanner(false), hygrometrie(0),
+    aIntervenir(false)
 {
     qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
              << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
              << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
-             << pourcentageRemplissage;
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 }
 
 /**
@@ -58,7 +60,7 @@ Bac::Bac(const QStringList& bac, Produit* produit) :
     poidsActuel(bac.at(TableBac::POIDS_ACTUEL).toDouble()),
     poidsTotal(bac.at(TableBac::POID_TOTAL).toDouble()),
     pourcentageRemplissage(bac.at(TableBac::REMPLISSAGE).toDouble()), aRemplir(false),
-    aDepanner(false), hygrometrie(bac.at(TableBac::HYGROMETRIE).toInt())
+    aDepanner(false), hygrometrie(bac.at(TableBac::HYGROMETRIE).toInt()), aIntervenir(false)
 
 {
     qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
@@ -74,7 +76,8 @@ Bac::Bac(const QStringList& bac, Produit* produit) :
 Bac::Bac(const Bac& bac) :
     idBac(bac.idBac), produit(bac.produit), poidsActuel(bac.poidsActuel),
     poidsTotal(bac.poidsTotal), pourcentageRemplissage(bac.pourcentageRemplissage),
-    aRemplir(bac.aRemplir), aDepanner(bac.aDepanner), hygrometrie(bac.hygrometrie)
+    aRemplir(bac.aRemplir), aDepanner(bac.aDepanner), hygrometrie(bac.hygrometrie),
+    aIntervenir(bac.aIntervenir)
 {
     qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
              << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
@@ -89,6 +92,15 @@ Bac::Bac(const Bac& bac) :
 Bac::~Bac()
 {
     qDebug() << Q_FUNC_INFO;
+}
+
+/**
+ * @brief Accesseur de l'attribut aDepanner
+ * @return un bool qui permet de savoir s'il faut dépanner le distributeur
+ */
+int Bac::getIdBac() const
+{
+    return this->idBac;
 }
 
 /**
@@ -151,15 +163,6 @@ bool Bac::getADepanner() const
 }
 
 /**
- * @brief Accesseur de l'attribut aDepanner
- * @return un bool qui permet de savoir s'il faut dépanner le distributeur
- */
-int Bac::getIdBac() const
-{
-    return this->idBac;
-}
-
-/**
  * @brief Méthode qui détermine la quantité à remplir
  * @return double la quantité à remplir
  */
@@ -170,7 +173,7 @@ double Bac::getQuantiteARemplir() const
 
 /**
  * @brief Accesseur de l'attribut pourcentageRemplissage
- * @return double
+ * @return un double qui represente le pourcentage de remplissage dans le bac
  */
 double Bac::getPourcentageRemplissage() const
 {
@@ -193,6 +196,15 @@ double Bac::getPoidsTotal() const
 int Bac::getHygrometrie() const
 {
     return this->hygrometrie;
+}
+
+/**
+ * @brief Accesseur de l'attribut aIntervenir
+ * @return bool
+ */
+bool Bac::getAIntervenir() const
+{
+    return this->aIntervenir;
 }
 
 /**
@@ -264,9 +276,18 @@ void Bac::setPourcentageRemplissage(const double& pourcentageRemplissage)
 }
 
 /**
+ * @brief Mutateur de l'attribut hygrometrie
+ * @param hygrometrie l'hygrometrie, mesure de la quantité de vapeur d'eau
+ * contenue de l'air du distributeur
+ */
+void Bac::setHygrometrie(int hygrometrie)
+{
+    this->hygrometrie = hygrometrie;
+}
+
+/**
  * @brief Mutateur de l'attribut aRemplir
- * @param aRemplir un booleen qui détermine l'état du
- * bac
+ * @param aRemplir un booleen qui détermine l'état du bac
  */
 void Bac::setARemplir(bool aRemplir)
 {
@@ -275,8 +296,7 @@ void Bac::setARemplir(bool aRemplir)
 
 /**
  * @brief Mutateur de l'attribut aDepanner
- * @param aDepanner un booleen qui détermine l'état du
- * bac
+ * @param aDepanner un booleen qui détermine l'état du bac
  */
 void Bac::setADepanner(bool aDepanner)
 {
@@ -284,11 +304,10 @@ void Bac::setADepanner(bool aDepanner)
 }
 
 /**
- * @brief Mutateur de l'attribut hygrometrie
- * @param hygrometrie l'hygrometrie, mesure de la quantité de vapeur d'eau
- * contenue de l'air du distributeur
+ * @brief Mutateur de l'attribut aIntervenir
+ * @param attribue
  */
-void Bac::setHygrometrie(int hygrometrie)
+void Bac::setAIntervenir(bool attribue)
 {
-    this->hygrometrie = hygrometrie;
+    this->aIntervenir = attribue;
 }

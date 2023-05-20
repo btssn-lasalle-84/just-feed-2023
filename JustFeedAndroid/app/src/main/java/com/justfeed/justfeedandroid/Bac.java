@@ -6,6 +6,8 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
+
 /**
  * @brief Définition de la classe Bac
  * @details La classe Bac \c Bac permet de décrire un
@@ -14,9 +16,13 @@ package com.justfeed.justfeedandroid;
  * @author Fargier Mayeul
  * @version 0.1
  */
-
 public class Bac
 {
+    /**
+     * Constantes
+     */
+    private static final String TAG = "_Bac"; //!< TAG pour les logs (cf. Logcat)
+
     /**
      * Attributs
      */
@@ -24,6 +30,7 @@ public class Bac
     private double  poidsActuel; //!< Poids actuel du bac en Kg
     private double  poidsTotal;  //!< Poids total du bac en kg
     private int     hygrometrie; //!< Taux d'humidité dans un bac
+    private double  quantiteARemplir; //!< Quantité à remplir en kg
 
     /**
      * @brief Constructeur par défaut de la classe Bac
@@ -31,6 +38,7 @@ public class Bac
      */
     public Bac()
     {
+        Log.d(TAG, "Bac()");
         this.typeProduit = null;
         this.poidsActuel = 0.0;
         this.poidsTotal  = 0.0;
@@ -43,13 +51,18 @@ public class Bac
      * @param poidsActuel poids actuel d'un bac
      * @param poidsTotal  poids total d'un bac
      * @param hygrometrie
+     * @param quantiteARemplir
      */
-    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie)
+    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie, double quantiteARemplir)
     {
-        this.typeProduit = typeProduit;
-        this.poidsActuel = poidsActuel;
-        this.poidsTotal  = poidsTotal;
-        this.hygrometrie = hygrometrie;
+        Log.d(TAG,
+              "Bac() nomProduit = " + typeProduit.getNom() + " - poidsActuel = " + poidsActuel +
+                " - poidsTotal = " + poidsTotal + " - hygrometrie = " + hygrometrie);
+        this.typeProduit      = typeProduit;
+        this.poidsActuel      = poidsActuel;
+        this.poidsTotal       = poidsTotal;
+        this.hygrometrie      = hygrometrie;
+        this.quantiteARemplir = quantiteARemplir;
     }
 
     /**
@@ -93,6 +106,12 @@ public class Bac
     }
 
     /**
+     * @brief Accesseur de la quantité à remplir.
+     * @return quantiteARemplir , la quantité en kg à remplir
+     */
+    public double getQuantiteARemplir() { return this.quantiteARemplir; }
+
+    /**
      * Services
      */
 
@@ -113,4 +132,10 @@ public class Bac
     {
         this.poidsActuel = nouveauPoids;
     }
+
+    /**
+     * @brief Change la quantité à remplir.
+     * @param nouvelleQuantite la nouvelle quantité.
+     */
+    public void changerQuantiteARemplir(double nouvelleQuantite) { this.quantiteARemplir = nouvelleQuantite; }
 }

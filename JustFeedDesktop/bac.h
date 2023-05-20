@@ -9,6 +9,12 @@
 #ifndef BAC_H
 #define BAC_H
 
+/**
+ * @def ID_BAC_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
+#define ID_BAC_NON_DEFINI -1
+
 #include <QString>
 
 class Produit;
@@ -41,7 +47,8 @@ class Bac
     bool     aRemplir;               //!< permet de savoir s'il faut remplir ce distributeur
     bool     aDepanner;              //!< permet de savoir s'il faut intervenir sur le
                                      //!< distributeur
-    int hygrometrie;                 //!< hygrometrie de l'interieur du distributeur
+    int  hygrometrie;                //!< hygrometrie de l'interieur du distributeur
+    bool aIntervenir;                //!< bac attribué à une intervention
 
   public:
     Bac();
@@ -52,6 +59,7 @@ class Bac
     ~Bac();
 
     // Accesseurs
+    int      getIdBac() const;
     Produit* getProduit() const;
     QString  getNomProduit() const;
     double   getPrixProduit() const;
@@ -62,7 +70,7 @@ class Bac
     int      getHygrometrie() const;
     bool     getARemplir() const;
     bool     getADepanner() const;
-    int      getIdBac() const;
+    bool     getAIntervenir() const;
 
     // Mutateurs
     void setProduit(Produit* produit);
@@ -74,6 +82,7 @@ class Bac
     void setHygrometrie(int hydrometrie);
     void setARemplir(bool aRemplir);
     void setADepanner(bool aDepanner);
+    void setAIntervenir(bool attribue);
 };
 
 #endif // BAC_H

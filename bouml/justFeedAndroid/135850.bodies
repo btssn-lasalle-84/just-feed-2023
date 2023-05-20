@@ -1,0 +1,44 @@
+class Distributeur
+!!!141098.java!!!	Distributeur()
+        this.id        = 0;
+        this.listeBacs = null;
+!!!141226.java!!!	Distributeur(in id : int, in codePostal : String, in adresse : String, in ville : String, in nomDistributeur : String, inout coordGeographiques : Location, inout listeBacs : List<Bac>)
+        Log.d(TAG, "Distributeur() id = " + id + " - nomDistributeur = " + nomDistributeur + " - nb bacs = " + listeBacs.size() );
+        this.id                 = id;
+        this.codePostal         = codePostal;
+        this.adresse            = adresse;
+        this.ville              = ville;
+        this.nomDistributeur    = nomDistributeur;
+        this.coordGeographiques = coordGeographiques;
+        this.listeBacs          = listeBacs;
+        this.aRemplir           = false;
+        this.aDepanner          = false;
+!!!141354.java!!!	getNom() : String
+        return nomDistributeur;
+!!!141482.java!!!	getLocalisation() : String
+        String localisation = "";
+        localisation        = localisation.concat(this.codePostal + ", ");
+        localisation =
+          localisation.concat(this.ville + " " + this.adresse + " " + this.nomDistributeur);
+
+        return localisation;
+!!!141610.java!!!	getCoordGeographiques() : Location
+ return this.coordGeographiques;
+!!!141738.java!!!	getIdentifiant() : int
+        return this.id;
+!!!141866.java!!!	getListeBacs() : Bac
+        return this.listeBacs;
+!!!141994.java!!!	getNbBacs() : int
+        return this.listeBacs.size();
+!!!142122.java!!!	estARemplir() : boolean
+ return this.aRemplir;
+!!!142250.java!!!	estADepanner() : boolean
+ return this.aDepanner;
+!!!142378.java!!!	changerProduit(in numeroBac : int, inout nouveauProduit : Produit) : void
+        this.listeBacs.get(numeroBac).changerTypeProduit(nouveauProduit);
+!!!142506.java!!!	ajouterBac(inout nouveauBac : Bac) : void
+        this.listeBacs.add(nouveauBac);
+!!!142634.java!!!	remplir(inout aRemplir : boolean) : void
+ this.aRemplir = aRemplir;
+!!!142762.java!!!	depanner(inout aDepanner : boolean) : void
+ this.aDepanner = aDepanner;

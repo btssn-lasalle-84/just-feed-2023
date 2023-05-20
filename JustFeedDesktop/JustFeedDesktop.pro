@@ -1,6 +1,5 @@
-QT       += core gui sql
-
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT       += core gui widgets sql
+QT       += webkitwidgets
 
 CONFIG += c++11
 
@@ -15,6 +14,7 @@ SOURCES += \
     intervention.cpp \
     main.cpp \
     ihmjustfeed.cpp \
+    planificationintervention.cpp \
     produit.cpp \
     serveur.cpp \
     statistiques.cpp
@@ -27,6 +27,7 @@ HEADERS += \
     distributeur.h \
     ihmjustfeed.h \
     intervention.h \
+    planificationintervention.h \
     produit.h \
     serveur.h \
     statistiques.h

@@ -9,35 +9,60 @@
         android:id="@+id/carteIntervention"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:padding="5dp"
+        <TableLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/identifiantDistributeur"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/heureIntervention"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/identifiantDistributeur"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:layout_column="1"/>
+                <Spinner
+                    android:id="@+id/listeEtats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_column="2"/>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/aRemplir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
 
-            <TextView
-                android:id="@+id/aDepanner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/dateIntervention"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="1"/>
+            </TableRow>
 
-        </LinearLayout>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <TextView
+                    android:id="@+id/aRemplir"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_column="1"/>
+
+                <TextView
+                    android:id="@+id/aDepanner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:layout_column="2"/>
+            </TableRow>
+        </TableLayout>
 
     </androidx.cardview.widget.CardView>
 

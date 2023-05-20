@@ -1,0 +1,17 @@
+class Produit
+!!!146090.java!!!	Produit(in nom : String, in prix : double, in poidsDuProduit : double, in volumeProduit : double)
+        Log.d(TAG, "Produit() nom = " + nom + " - prix = " + prix + " - poidsDuProduit = " + poidsDuProduit + " - volumeProduit = " + volumeProduit);
+        this.nom            = nom;
+        this.prix           = prix;
+        this.poidsDuProduit = poidsDuProduit;
+        this.volumeProduit  = volumeProduit;
+!!!146218.java!!!	getPrix() : double
+        return this.prix;
+!!!146346.java!!!	getPoidsDuProduit() : double
+        return this.poidsDuProduit;
+!!!146474.java!!!	getVolume() : double
+        return this.volumeProduit;
+!!!146602.java!!!	getNom() : String
+        return this.nom;
+!!!146730.java!!!	modifierPrix(in nouveauPrix : double) : void
+        this.prix = nouveauPrix;

@@ -17,23 +17,28 @@ classcanvas 128426 class_ref 134570 // Bac
   xyz 268 1871 2005
 end
 relationcanvas 128554 relation_ref 134698 // <directional composition>
-  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 931 1760 3000 to ref 128426
-  role_a_pos 993 1830 3000 no_role_b
+  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 1076.5 1776 3000 to ref 128426
+  role_a_pos 1152 1830 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128682 relation_ref 134570 // <unidirectional association>
   from ref 128426 z 2006 to ref 128298
-  role_a_pos 1585 2076 3000 no_role_b
+  role_a_pos 1704 2346 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 141226 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1825.5 644 3000 to ref 128170
-  role_a_pos 2621 1152 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1852.5 1139 3000 to ref 128170
+  role_a_pos 2677 1649 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128938 relation_ref 148138 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2421 1678.5 3000 to ref 128298
-  role_a_pos 2706 1766 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2385 2071 3000 to ref 128298
+  role_a_pos 2722 2082 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129066 relation_ref 155178 // <unidirectional association>
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2602.5 1696 3000 to ref 128170
+  role_a_pos 2677 1649 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

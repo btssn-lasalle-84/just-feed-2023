@@ -2,7 +2,8 @@
  * @file        distributeur.h
  * @brief       Déclaration de la classe Distributeur.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @author      Rouanet Nicolas
+ * @version     0.2
  * @date        2023
  */
 
@@ -11,6 +12,12 @@
 
 #include <QDate>
 #include <QVector>
+
+/**
+ * @def ID_DISTRIBUTEUR_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
+#define ID_DISTRIBUTEUR_NON_DEFINI -1
 
 class Bac;
 class Produit;
@@ -66,8 +73,9 @@ class Distributeur
     QString       description;       //!< description du distributeur
     QDate         dateMiseEnService; //!< date de mise en service du distributeur
     Localisation  position;          //!< géolocalisation du distributeur
-    bool          aIntervenir;
-    int           hygrometrie;
+    int           hygrometrie;       //!< hygrometrie de l'interieur du distributeur
+    bool          aIntervenir;       //!< pour savoir s'il faut intervenir sur le
+                                     //!< distributeur
 
   public:
     Distributeur();
@@ -86,35 +94,34 @@ class Distributeur
     // Accesseurs
     int          getId() const;
     QString      getDeviceID() const;
-    Localisation getPosition() const;
-    bool         getAIntervenir() const;
-    int          getHygrometrie() const;
-    int          getHygrometrieBac(int numeroBac) const;
     QString      getNom() const;
     QString      getAdresse() const;
     QString      getCodePostal() const;
     QString      getVille() const;
-    QDate        getDateMiseService() const;
     QString      getDescription() const;
-    QString      getNomProduitBac(int numeroBac) const;
-    double       getProduitPrix(int numeroBac) const;
-    Produit*     getProduitBac(int numeroBac) const;
+    QDate        getDateMiseService() const;
+    Localisation getPosition() const;
+    int          getHygrometrie() const;
+    bool         getAIntervenir() const;
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
     double       getPourcentageBac(int numeroBac) const;
     double       getPoidsBac(int numeroBac) const;
     double       getPoidsTotalBac(int numeroBac) const;
+    int          getHygrometrieBac(int numeroBac) const;
 
     // mutateurs
-    void setAIntervenir(bool aIntervenir);
+    void setId(int id);
     void setDeviceID(const QString deviceID);
-    void setPosition(const Localisation& localisation);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
     void setCodePostal(const QString& codePostal);
     void setVille(const QString& ville);
-    void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
+    void setDateMiseEnService(const QDate& dateMiseEnService);
+    void setPosition(const Localisation& localisation);
+    void setHygrometrie(int hygrometrie);
+    void setAIntervenir(bool aIntervenir);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
     void supprimerBac(const int numeroBacASupprimer);
