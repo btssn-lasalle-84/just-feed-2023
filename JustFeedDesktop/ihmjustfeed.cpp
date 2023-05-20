@@ -16,6 +16,7 @@
 #include "distributeur.h"
 #include "planificationintervention.h"
 #include "produit.h"
+#include "operateur.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -29,6 +30,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
     baseDeDonnees->connecter();
     initialiserDistributeurs();
     initialiserProduits();
+    initialiserOerateur();
     initialiserGUI();
     chargerDistributeurs();
 }
@@ -285,7 +287,7 @@ void IHMJustFeed::instancierWidgets()
 
     //interventions
     QString requete = "SELECT * FROM Intervention";
-    qDebug() << Q_FUNC_INFO << "requete Intervention SELECT *" << requete;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->recuperer(requete, interventionsBdd);
     titreIntervention = new QLabel(this);
     for(int i = 0; i < interventionsBdd.size(); i++)
@@ -332,42 +334,37 @@ void IHMJustFeed::initialiserWidgets()
     titreIntervention->setText("Intervention : ");
     for(int i = 0; i < interventionsBdd.size(); i++)
     {
-       idIntervention[i]->setText("id intervention : " + interventionsBdd[i][0]);
-       QString requete = "SELECT nom FROM Operateur WHERE idOperateur = "+
-               interventionsBdd[i][1] + ";";
-       qDebug() << Q_FUNC_INFO << "requete Operateur" << requete;
+        QString nomOperateur;
+        for(int j = 0; j < operateurs.size(); j++)
+        {
+            if(operateurs[j]->getIdOperateur() == interventionsBdd[i][IndexInterventionBdd::IdOperateur].toInt())
+            {
+                nomOperateur = operateurs[j]->getNom();
+            }
+        }
 
-       QString nomOperateur;
-       baseDeDonnees->recuperer(requete, nomOperateur);
        InterventionIdOperateur[i]->setText("id operateur : " + nomOperateur);
-
-       requete = "SELECT nomDistributeur FROM Distributeur WHERE idDistributeur = "+
-                      interventionsBdd[i][2] + ";";
-              qDebug() << Q_FUNC_INFO << "requete Operateur" << requete;
-
-              QString nomDistributeur;
-              baseDeDonnees->recuperer(requete, nomDistributeur);
-       InterventionIdDistributeur[i]->setText("id distributeur : " + nomDistributeur);
-       dateIntervention[i]->setText("date intervention : " + interventionsBdd[i][3]);
-       if(interventionsBdd[i][4] == "1")
+       InterventionIdDistributeur[i]->setText("emplacement distributeur : " + distributeurs[i]->getNom());
+       dateIntervention[i]->setText("date intervention : " + interventionsBdd[i][IndexInterventionBdd::DateIntervention]);
+       if(interventionsBdd[i][IndexInterventionBdd::ARemplir] == "1")
        {
-           interventionsBdd[i][4] = "Oui";
+           interventionsBdd[i][IndexInterventionBdd::ARemplir] = "Oui";
        }
        else
        {
-          interventionsBdd[i][4] = "Non";
+          interventionsBdd[i][IndexInterventionBdd::ARemplir] = "Non";
        }
-       if(interventionsBdd[i][5] == "1")
+       if(interventionsBdd[i][IndexInterventionBdd::ADepanner] == "1")
        {
-           interventionsBdd[i][5] = "Oui";
+           interventionsBdd[i][IndexInterventionBdd::ADepanner] = "Oui";
        }
        else
        {
-          interventionsBdd[i][5] = "Non";
+          interventionsBdd[i][IndexInterventionBdd::ADepanner] = "Non";
        }
-       aRemplirIntervention[i]->setText("a remplir  : " + interventionsBdd[i][4]);
-       aDepannerIntervention[i]->setText("a depanner : " + interventionsBdd[i][5]);
-       etatIntervention[i]->setText(interventionsBdd[i][6]);
+       aRemplirIntervention[i]->setText("a remplir  : " + interventionsBdd[i][IndexInterventionBdd::ARemplir]);
+       aDepannerIntervention[i]->setText("a depanner : " + interventionsBdd[i][IndexInterventionBdd::ADepanner]);
+       etatIntervention[i]->setText(interventionsBdd[i][IndexInterventionBdd::Etat]);
 
        titreIntervention->setAlignment(Qt::AlignCenter);
        idIntervention[i]->setAlignment(Qt::AlignCenter);
@@ -629,6 +626,24 @@ void IHMJustFeed::initialiserProduits()
     /**
      * @todo Récupérer les données depuis la base de données
      */
+}
+
+/**
+ * @brief méthode initialise les différents operateur
+ */
+void IHMJustFeed::initialiserOerateur()
+{
+    operateurs.clear();
+    QString requete = "SELECT * FROM Operateur";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    QVector<QStringList> operateurBdd;
+    baseDeDonnees->recuperer(requete, operateurBdd);
+    for(int i = 0; i < operateurBdd.size(); i++)
+    {
+        Operateur* operateur = new Operateur(operateurBdd[i][0].toInt(), operateurBdd[i][1], operateurBdd[i][2], operateurBdd[i][3], operateurBdd[i][4]);
+        operateurs.push_back(operateur);
+        qDebug() << Q_FUNC_INFO << "Operateur" << operateurs[i];
+    }
 }
 
 /**

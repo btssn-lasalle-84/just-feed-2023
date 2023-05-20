@@ -22,6 +22,7 @@ class ConfigurationDistributeur;
 class Produit;
 class PlanificationIntervention;
 class BaseDeDonnees;
+class Operateur;
 
 /**
  * @def TITRE_APPLICATION
@@ -73,6 +74,20 @@ class IHMJustFeed : public QWidget
         COLONNE_DISTRIBUTEUR_INTERVENTION,
         NbColonnesDistributeur
     };
+    /**
+     * @enum OperateursBdd
+     * @brief
+     */
+    enum IndexInterventionBdd
+    {
+       IdIntervention = 0,
+       IdOperateur = 1,
+       IdDistributeur = 2,
+       DateIntervention = 3,
+       ARemplir = 4,
+       ADepanner = 5,
+       Etat = 6
+    };
 
     Q_OBJECT
   private:
@@ -83,6 +98,7 @@ class IHMJustFeed : public QWidget
     PlanificationIntervention*
       planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
     QVector<Distributeur*> distributeurs; //!< les distributeurs
+    QVector<Operateur*>    operateurs; //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
@@ -130,6 +146,7 @@ class IHMJustFeed : public QWidget
     void initialiserEvenements();
     void initialiserDistributeurs();
     void initialiserProduits();
+    void initialiserOerateur();
     void chargerDistributeurs();
     void afficherDistributeurTable(const Distributeur& distributeur);
     void afficherDistributeur(Distributeur* distributeur);
