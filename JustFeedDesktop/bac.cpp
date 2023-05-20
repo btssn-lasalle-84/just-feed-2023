@@ -28,11 +28,11 @@ Bac::Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int
     pourcentageRemplissage((poidsActuel * 100.) / poidsTotal), aRemplir(false), aDepanner(false),
     hygrometrie(hygrometrie)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
-             << "description" << produit->getDescription() << "codeProduit"
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
              << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
-             << pourcentageRemplissage;
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 }
 
 /**
@@ -42,11 +42,30 @@ Bac::Bac(int idBac, Produit* produit, double poidsTotal) :
     idBac(idBac), produit(produit), poidsActuel(poidsTotal), poidsTotal(poidsTotal),
     pourcentageRemplissage(100.), aRemplir(false), aDepanner(false), hygrometrie(0)
 {
-    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
-             << "description" << produit->getDescription() << "codeProduit"
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
              << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
              << pourcentageRemplissage;
+}
+
+/**
+ * @brief Constructeur d'initialisation du bac
+ * @param bac un bac sous forme de QStringList issu de la table Bac
+ */
+Bac::Bac(const QStringList& bac, Produit* produit) :
+    idBac(bac.at(TableBac::ID_BAC).toInt()), produit(produit),
+    poidsActuel(bac.at(TableBac::POIDS_ACTUEL).toDouble()),
+    poidsTotal(bac.at(TableBac::POID_TOTAL).toDouble()),
+    pourcentageRemplissage(bac.at(TableBac::REMPLISSAGE).toDouble()), aRemplir(false),
+    aDepanner(false), hygrometrie(bac.at(TableBac::HYGROMETRIE).toInt())
+
+{
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 }
 
 /**
@@ -57,14 +76,11 @@ Bac::Bac(const Bac& bac) :
     poidsTotal(bac.poidsTotal), pourcentageRemplissage(bac.pourcentageRemplissage),
     aRemplir(bac.aRemplir), aDepanner(bac.aDepanner), hygrometrie(bac.hygrometrie)
 {
-    qDebug() << Q_FUNC_INFO;
-}
-
-Bac::Bac(QStringList& bacs) :
-    idBac(bacs.at(ID_BAC).toInt()), poidsActuel(bacs.at(POIDS_ACTUEL).toDouble()),
-    poidsTotal(bacs.at(POID_TOTAL).toDouble()), hygrometrie(bacs.at(HYGROMETRIE).toInt()),
-    pourcentageRemplissage(bacs.at(REMPLISSAGE).toDouble())
-{
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 }
 
 /**

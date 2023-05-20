@@ -22,12 +22,13 @@ Produit::Produit() : id(0), nom(""), marque(""), description(""), codeProduit(""
 /**
  * @brief Constructeur d'initialisation de la classe Produit
  */
-Produit::Produit(QString nom,
+Produit::Produit(int     id,
+                 QString nom,
                  QString marque,
                  QString description,
                  QString codeProduit,
                  double  prix) :
-    id(0),
+    id(id),
     nom(nom), marque(marque), description(description), codeProduit(codeProduit), prix(prix)
 {
     qDebug() << Q_FUNC_INFO << "nom" << nom << "marque" << marque << "description" << description

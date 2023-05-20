@@ -26,19 +26,6 @@ struct Localisation
     QString altitude;
 };
 
-enum infoDistributeur
-{
-    NOM                  = 2,
-    DESCRIPTION          = 3,
-    ADRESSE              = 4,
-    VILLE                = 5,
-    CODE_POSTAL          = 6,
-    DATE_MISE_EN_SERVICE = 7,
-    LONGITUDE            = 8,
-    LATITUDE             = 9,
-    DEVICE_ID            = 10,
-};
-
 /**
  * @class       Distributeur
  * @brief       Déclaration de la classe Distributeur.
@@ -46,8 +33,31 @@ enum infoDistributeur
  */
 class Distributeur
 {
+  public:
+    /**
+     * @enum TableDistributeur
+     * @brief Définit les champs de la table Distributeur
+     *
+     */
+    enum TableDistributeur
+    {
+        ID                   = 0,
+        ID_SERVEUR_TTN       = 1,
+        NOM                  = 2,
+        DESCRIPTION          = 3,
+        ADRESSE              = 4,
+        VILLE                = 5,
+        CODE_POSTAL          = 6,
+        DATE_MISE_EN_SERVICE = 7,
+        LONGITUDE            = 8,
+        LATITUDE             = 9,
+        DEVICE_ID            = 10,
+        NB_BACS              = 11,
+    };
+
   private:
-    QString       deviceID;          //!< identifiant du distributeur
+    int           id;                //!< identifiant du distributeur
+    QString       deviceID;          //!< identifiant TTN du distributeur
     QVector<Bac*> bacs;              //!< les bacs du distributeur
     QString       nom;               //!< nom du distributeur
     QString       adresse;           //!< adresse du distributeur
@@ -61,7 +71,8 @@ class Distributeur
 
   public:
     Distributeur();
-    Distributeur(QString      deviceID,
+    Distributeur(int          id,
+                 QString      deviceID,
                  QString      nom,
                  QString      adresse,
                  QString      codePostal,
@@ -69,10 +80,11 @@ class Distributeur
                  QString      description,
                  QDate        dateMiseEnService,
                  Localisation position);
-    Distributeur(QStringList& distributeurs);
+    Distributeur(const QStringList& distributeur);
     ~Distributeur();
 
     // Accesseurs
+    int          getId() const;
     QString      getDeviceID() const;
     Localisation getPosition() const;
     bool         getAIntervenir() const;

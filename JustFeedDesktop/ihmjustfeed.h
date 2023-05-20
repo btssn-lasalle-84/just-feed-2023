@@ -106,20 +106,21 @@ class IHMJustFeed : public QWidget
     QLabel*         miseEnServiceDistributeur;
     QLabel*         positionDistributeur;
 
-    void initialiserGUI();
-    void instancierWidgets();
-    void initialiserWidgets();
-    void initialiseTable();
-    void positionnerWidgets();
-    void initialiserEvenements();
-    void initialiserDistributeurs();
-    void initialiserProduits();
-    void chargerDistributeurs();
-    void afficherDistributeurTable(const Distributeur& distributeur);
-    void afficherDistributeur(Distributeur* distributeur);
-    void effacerTableau(int ligne, int colonne);
-    void effacerTableDistributeurs();
-    void effacerEtatDistributeur();
+    void     initialiserGUI();
+    void     instancierWidgets();
+    void     initialiserWidgets();
+    void     initialiseTable();
+    void     positionnerWidgets();
+    void     initialiserEvenements();
+    void     initialiserDistributeurs();
+    void     initialiserProduits();
+    void     chargerDistributeurs();
+    void     afficherDistributeurTable(const Distributeur& distributeur);
+    void     afficherDistributeur(Distributeur* distributeur);
+    void     effacerTableau(int ligne, int colonne);
+    void     effacerTableDistributeurs();
+    void     effacerEtatDistributeur();
+    Produit* recupererProduit(int idProduit);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);

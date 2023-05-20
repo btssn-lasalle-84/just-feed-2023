@@ -41,7 +41,12 @@ class Produit
 
   public:
     Produit();
-    Produit(QString nom, QString marque, QString description, QString codeProduit, double prix);
+    Produit(int     id,
+            QString nom,
+            QString marque,
+            QString description,
+            QString codeProduit,
+            double  prix);
     Produit(QStringList produit);
     ~Produit();
 

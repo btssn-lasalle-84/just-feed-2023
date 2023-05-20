@@ -13,19 +13,25 @@
 
 class Produit;
 
-enum infoBac
-{
-    ID_BAC          = 8,
-    ID_DISTRIBUTEUR = 9,
-    ID_PRODUIT      = 10,
-    POIDS_ACTUEL    = 11,
-    POID_TOTAL      = 12,
-    HYGROMETRIE     = 13,
-    REMPLISSAGE     = 14,
-};
-
 class Bac
 {
+  public:
+    /**
+     * @enum TableBac
+     * @brief Définit les champs de la table Bac
+     *
+     */
+    enum TableBac
+    {
+        ID_BAC          = 0,
+        ID_DISTRIBUTEUR = 1,
+        ID_PRODUIT      = 2,
+        POIDS_ACTUEL    = 3,
+        POID_TOTAL      = 4,
+        HYGROMETRIE     = 5,
+        REMPLISSAGE     = 6,
+    };
+
   private:
     int      idBac;                  //!< identifiant du bac
     Produit* produit;                //!< produit que contient le bac
@@ -41,8 +47,8 @@ class Bac
     Bac();
     Bac(int idBac, Produit* produit, double poidsActuel, double poidsTotal, int hygrometrie);
     Bac(int idBac, Produit* produit, double poidsTotal);
+    Bac(const QStringList& bac, Produit* produit);
     Bac(const Bac& bac);
-    Bac(QStringList& bacs);
     ~Bac();
 
     // Accesseurs

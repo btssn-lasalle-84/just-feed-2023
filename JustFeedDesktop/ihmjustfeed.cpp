@@ -334,7 +334,8 @@ void IHMJustFeed::initialiserDistributeurs()
 {
 #ifdef SANS_BDD
     qDebug() << Q_FUNC_INFO << "SANS BDD";
-    distributeurs.push_back(new Distributeur("distributeur-1-sim",
+    distributeurs.push_back(new Distributeur(1,
+                                             "distributeur-1-sim",
                                              "Grand Frais",
                                              "Zone du Coudoulet Rond point du Péage Sud",
                                              "84100",
@@ -342,7 +343,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-01-08", "yyyy-MM-dd"),
                                              { "44.11161", "4.84856", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-2-sim",
+    distributeurs.push_back(new Distributeur(2,
+                                             "distributeur-2-sim",
                                              "Carrefour",
                                              "390 Rue Jean Marie Tjibaou",
                                              "84000",
@@ -350,7 +352,8 @@ void IHMJustFeed::initialiserDistributeurs()
                                              "Distributeur de fruits secs",
                                              QDate::fromString("2022-03-09", "yyyy-MM-dd"),
                                              { "43.92844", "4.79247", "0" }));
-    distributeurs.push_back(new Distributeur("distributeur-3",
+    distributeurs.push_back(new Distributeur(3,
+                                             "distributeur-3",
                                              "Cosy Primeurs",
                                              "292 Route de Boulbon",
                                              "13570",
@@ -393,35 +396,26 @@ void IHMJustFeed::initialiserDistributeurs()
             Distributeur* nouveauDistributeur = new Distributeur(distributeur);
             distributeurs.push_back(nouveauDistributeur);
 
-            QString idDistributeur = distributeur.at(0);
-            QString requeteBacs =
-              "SELECT Produit.*, Bac.* FROM Bac "
-              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur "
-              "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit "
-              "WHERE Distributeur.idDistributeur='" +
-              idDistributeur + "'";
-
-            QStringList          bacs;
+            QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
+            requete                = "SELECT Bac.* FROM Bac "
+                                     "WHERE Bac.idDistributeur='" +
+                      idDistributeur + "'";
+            qDebug() << Q_FUNC_INFO << "requete" << requete;
+            QStringList          bac;
             QVector<QStringList> bacsRecuperes;
-            bool                 retourBacs = baseDeDonnees->recuperer(requeteBacs, bacsRecuperes);
-
-            if(retourBacs)
+            retour = baseDeDonnees->recuperer(requete, bacsRecuperes);
+            qDebug() << Q_FUNC_INFO << "bacsRecuperes" << bacsRecuperes;
+            if(retour)
             {
                 for(int j = 0; j < bacsRecuperes.size(); j++)
                 {
-                    bacs            = bacsRecuperes.at(j);
-                    Bac* nouveauBac = new Bac(bacs);
-                    nouveauDistributeur->ajouterBac(*nouveauBac);
-
-                    qDebug() << "Informations du Bac :"
-                             << "Id Produit :" << bacs.at(0) << "Nom Produit" << bacs.at(1)
-                             << "Marque :" << bacs.at(2) << "Description :" << bacs.at(3)
-                             << "Code EAN :" << bacs.at(4) << "Prix :" << bacs.at(5)
-                             << "Poids Unitaire :" << bacs.at(6)
-                             << "Volume Unitaire :" << bacs.at(7) << "Id Bac :" << bacs.at(8)
-                             << "Id Distributeur :" << bacs.at(9) << "Id Porduit :" << bacs.at(10)
-                             << "Poid Actuel :" << bacs.at(11) << "Poid total :" << bacs.at(12)
-                             << "Hygrometrie :" << bacs.at(13) << "Remplissage :" << bacs.at(14);
+                    bac              = bacsRecuperes.at(j);
+                    Produit* produit = recupererProduit(bac.at(Bac::TableBac::ID_PRODUIT).toInt());
+                    if(produit != nullptr)
+                    {
+                        Bac* nouveauBac = new Bac(bac, produit);
+                        nouveauDistributeur->ajouterBac(*nouveauBac);
+                    }
                 }
             }
         }
@@ -440,42 +434,50 @@ void IHMJustFeed::initialiserProduits()
 {
 #ifdef SANS_BDD
     qDebug() << Q_FUNC_INFO << "SANS BDD";
-    Produit* pruneaux    = new Produit("Pruneaux",
+    Produit* pruneaux    = new Produit(1,
+                                    "Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
-    Produit* abricot     = new Produit("Abricots secs",
+    Produit* abricot     = new Produit(2,
+                                   "Abricots secs",
                                    "Maître Prunille",
                                    "L'abricot moelleux, une gourmandise tendre et fruitée !",
                                    "761234566000",
                                    1.13);
-    Produit* cranberries = new Produit("Cranberries",
+    Produit* cranberries = new Produit(3,
+                                       "Cranberries",
                                        "SEEBERGER",
                                        "Cranberries tranchées sucrées séchées",
                                        "761234569000",
                                        2.1);
     Produit* banane =
-      new Produit("Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
-    Produit* raisin    = new Produit("Raisin sec",
+      new Produit(4, "Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
+    Produit* raisin    = new Produit(5,
+                                  "Raisin sec",
                                   "Petit Prix",
                                   "Raisins secs, huile végétale (graine de coton)",
                                   "761264569090",
                                   0.39);
-    Produit* fruitsSec = new Produit("fruits sec",
+    Produit* fruitsSec = new Produit(6,
+                                     "fruits sec",
                                      "FRUIDYLLIC",
                                      "Peut se manger tel que sans préparation.",
                                      "761234960940",
                                      1.06);
     Produit* cacahuete =
-      new Produit("Cacahuète",
+      new Produit(7,
+                  "Cacahuète",
                   "Carrefour",
                   "Arachide crue blanche décortiquée pour cuisiner ou pâtisserie",
                   "761234561000",
                   0.49);
-    Produit* soja = new Produit("Soja", "OFAL BIO", "SOJA jaune biologique.", "761234529000", 0.96);
-    Produit* basilic = new Produit("Basilic",
+    Produit* soja =
+      new Produit(8, "Soja", "OFAL BIO", "SOJA jaune biologique.", "761234529000", 0.96);
+    Produit* basilic = new Produit(9,
+                                   "Basilic",
                                    "DUCROS",
                                    "Basilic déshydraté issu de l'agriculture biologique",
                                    "761234679900",
@@ -506,7 +508,7 @@ void IHMJustFeed::initialiserProduits()
         }
     }
 #endif
-    qDebug() << Q_FUNC_INFO << "produits" << produits;
+    qDebug() << Q_FUNC_INFO << "nbProduits" << produits.size();
 }
 
 /**
@@ -526,7 +528,7 @@ void IHMJustFeed::chargerDistributeurs()
  */
 void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
 {
-    qDebug() << Q_FUNC_INFO << "nom";
+    qDebug() << Q_FUNC_INFO << "nom" << distributeur.getNom();
 
     QFont texte;
     // texte.setPointSize(TAILLE_POLICE);
@@ -556,7 +558,6 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     itemCodePostal->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
 
     nbLignesDistributeurs += 1;
-    qDebug() << Q_FUNC_INFO << "nbLignesDistributeur" << nbLignesDistributeurs;
 
     // Ajoute une nouvelle ligne
     tableWidgetDistributeurs->setRowCount(++nb);
@@ -617,7 +618,8 @@ void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
         layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
 
         QLabel* hygrometrie = new QLabel(this);
-        hygrometrie->setText(QString("Hygrométrie : %1").arg(distributeur->getHygrometrie()));
+        hygrometrie->setText(
+          QString("Hygrométrie : %1 %").arg(distributeur->getBac(i)->getHygrometrie()));
         layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
     }
 
@@ -682,4 +684,19 @@ void IHMJustFeed::effacerEtatDistributeur()
         }
         delete item;
     }
+}
+
+/**
+ * @brief méthode qui récupére un Produit à partir de son id
+ * @fn IHMJustFeed::recupererProduit
+ * @param idProduit
+ */
+Produit* IHMJustFeed::recupererProduit(int idProduit)
+{
+    for(int i = 0; i < produits.size(); ++i)
+    {
+        if(produits[i]->getId() == idProduit)
+            return produits[i];
+    }
+    return nullptr;
 }

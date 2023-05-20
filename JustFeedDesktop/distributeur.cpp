@@ -16,7 +16,7 @@
  * @brief Constructeur par défaut de la classe Distributeur
  */
 Distributeur::Distributeur() :
-    deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""), description(""),
+    id(0), deviceID(""), bacs(), nom(""), adresse(""), codePostal(""), ville(""), description(""),
     dateMiseEnService(QDate::currentDate()), position{ "", "", "0" }, aIntervenir(false),
     hygrometrie(0)
 {
@@ -26,7 +26,8 @@ Distributeur::Distributeur() :
 /**
  * @brief Constructeur d'initialisation de la classe Distributeur
  */
-Distributeur::Distributeur(QString      deviceID,
+Distributeur::Distributeur(int          id,
+                           QString      deviceID,
                            QString      nom,
                            QString      adresse,
                            QString      codePostal,
@@ -34,25 +35,44 @@ Distributeur::Distributeur(QString      deviceID,
                            QString      description,
                            QDate        dateMiseEnService,
                            Localisation position) :
-    deviceID(deviceID),
-    bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
+    id(id),
+    deviceID(deviceID), bacs(), nom(nom), adresse(adresse), codePostal(codePostal), ville(ville),
     description(description), dateMiseEnService(dateMiseEnService), position(position),
     aIntervenir(false), hygrometrie(0)
 {
-    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
-             << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << "description" << description << dateMiseEnService << "latitude" << position.latitude
-             << "longitude" << position.longitude << "aIntervenir" << aIntervenir;
+    qDebug() << Q_FUNC_INFO << "id" << id << "deviceID" << deviceID << "nom" << nom << "adresse"
+             << adresse << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
+             << "description" << description << "dateMiseEnService" << dateMiseEnService
+             << "latitude" << position.latitude << "longitude" << position.longitude
+             << "aIntervenir" << aIntervenir;
 }
 
-Distributeur::Distributeur(QStringList& distributeurs) :
-    deviceID(distributeurs.at(DEVICE_ID)),
-    position({ distributeurs.at(LATITUDE), distributeurs.at(LONGITUDE) }),
-    nom(distributeurs.at(NOM)), adresse(distributeurs.at(ADRESSE)), ville(distributeurs.at(VILLE)),
-    codePostal(distributeurs.at(CODE_POSTAL)), description(distributeurs.at(DESCRIPTION)),
-    dateMiseEnService(QDate::fromString(distributeurs.at(DATE_MISE_EN_SERVICE), "yyyy-MM-dd"))
+/**
+ * @brief Constructeur d'initialisation de la classe Distributeur
+ * @param distributeur
+ */
+Distributeur::Distributeur(const QStringList& distributeur) :
+    id(distributeur.at(TableDistributeur::ID).toInt()),
+    deviceID(distributeur.at(TableDistributeur::DEVICE_ID)), bacs(),
+    nom(distributeur.at(TableDistributeur::NOM)),
+    adresse(distributeur.at(TableDistributeur::ADRESSE)),
+    codePostal(distributeur.at(TableDistributeur::CODE_POSTAL)),
+    ville(distributeur.at(TableDistributeur::VILLE)),
+    description(distributeur.at(TableDistributeur::DESCRIPTION)),
+    dateMiseEnService(
+      QDate::fromString(distributeur.at(TableDistributeur::DATE_MISE_EN_SERVICE), "yyyy-MM-dd")),
+    position({ distributeur.at(TableDistributeur::LATITUDE),
+               distributeur.at(TableDistributeur::LONGITUDE),
+               0 }),
+    aIntervenir(false), hygrometrie(0)
 {
+    qDebug() << Q_FUNC_INFO << "id" << id << "deviceID" << deviceID << "nom" << nom << "adresse"
+             << adresse << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
+             << "description" << description << "dateMiseEnService" << dateMiseEnService
+             << "latitude" << position.latitude << "longitude" << position.longitude
+             << "aIntervenir" << aIntervenir;
 }
+
 /**
  * @brief Destructeur de la classe Distributeur
  */
@@ -63,6 +83,15 @@ Distributeur::~Distributeur()
         delete bacs[i];
     }
     qDebug() << Q_FUNC_INFO;
+}
+
+/**
+ * @brief Accesseur de l'attribut id
+ * @return un QString qui represente l'id du distributeur dans la BDD
+ */
+int Distributeur::getId() const
+{
+    return this->id;
 }
 
 /**
