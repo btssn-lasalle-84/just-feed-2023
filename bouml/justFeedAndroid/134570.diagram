@@ -35,8 +35,8 @@ relationcanvas 129962 relation_ref 135338 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130090 relation_ref 136746 // <unidirectional association>
-  from ref 128042 z 3006 stereotype "<<List>>" xyz 1019 797 3006 to ref 129834
-  role_a_pos 1119 935 3000 no_role_b
+  from ref 128042 z 3006 stereotype "<<List>>" xyz 1037.5 973 3006 to ref 129834
+  role_a_pos 878 997 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130218 relation_ref 136490 // <unidirectional association>

@@ -7,7 +7,7 @@ classinstance 130050 class_ref 136618 // JustFeed
 classinstance 130818 class_ref 134954 // BaseDeDonnees
   name ""   xyz 813.574 4.29766 2005 life_line_z 2000
 classinstance 131842 class_ref 134570 // ActiviteInterventions
-  name ""   xyz 518.326 3.2 2010 life_line_z 2000
+  name ""   xyz 518.326 4 2010 life_line_z 2000
 fragment 132994 "loop"
   xyzwh 207.8 163.36 2005 297 117
 end
@@ -15,43 +15,43 @@ fragment 134146 "loop"
   xyzwh 504.12 431.44 2000 257 107
 end
 durationcanvas 130178 classinstance_ref 129922 // :operateur
-  xyzwh 130 66.4883 2010 11 40
+  xyzwh 163 66 2010 11 40
 end
 durationcanvas 130306 classinstance_ref 130050 // :JustFeed
-  xyzwh 350 67.8888 2010 11 158
+  xyzwh 382 67 2010 11 158
   overlappingdurationcanvas 130562
-    xyzwh 356 67.2888 2020 11 89
+    xyzwh 388 67 2020 11 89
     overlappingdurationcanvas 132738
-      xyzwh 362 92.64 2030 11 25
+      xyzwh 394 92 2030 11 25
     end
   end
   overlappingdurationcanvas 133122
-    xyzwh 356 190.32 2020 11 25
+    xyzwh 388 190 2020 11 25
   end
 end
 durationcanvas 130946 classinstance_ref 130818 // :BaseDeDonnees
-  xyzwh 871 92.0674 2010 11 63
+  xyzwh 928 92 2010 11 63
 end
 durationcanvas 131458 classinstance_ref 129922 // :operateur
-  xyzwh 130 316.092 2010 11 97
+  xyzwh 163 316 2010 11 97
 end
 durationcanvas 131586 classinstance_ref 130050 // :JustFeed
-  xyzwh 350 327.18 2010 11 98
+  xyzwh 382 327 2010 11 98
 end
 durationcanvas 132226 classinstance_ref 131842 // :ActiviteInterventions
-  xyzwh 586 327.04 2010 11 235
+  xyzwh 653 327 2010 11 235
   overlappingdurationcanvas 132482
-    xyzwh 592 327.28 2020 11 64
+    xyzwh 659 327 2020 11 64
   end
   overlappingdurationcanvas 133634
-    xyzwh 592 407.6 2020 11 107
+    xyzwh 659 407 2020 11 107
     overlappingdurationcanvas 133890
-      xyzwh 598 469.44 2030 11 32
+      xyzwh 665 469 2030 11 32
     end
   end
 end
 durationcanvas 133378 classinstance_ref 130818 // :BaseDeDonnees
-  xyzwh 870 356.88 2010 11 25
+  xyzwh 928 356 2010 11 25
 end
 msg 130434 synchronous
   from durationcanvas_ref 130178
