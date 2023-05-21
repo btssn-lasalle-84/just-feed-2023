@@ -81,8 +81,9 @@ public class BaseDeDonnees
       new ReentrantLock(true);               //!< mutex pour l'exécution concurrente de requêtes
     private static BaseDeDonnees bdd = null; //!< l'instance unique de BaseDeDonnees (Singleton)
     private Handler handler = null; //<! Le handler pour l'échange de messages entre les threads
-    private List<Distributeur> listeDistributeurs = null; //<! La liste des distributeurs
-    private List<Intervention> listeInterventions = null; //<! La liste des interventions
+    private List<Distributeur> listeDistributeurs = null; //!< La liste des distributeurs
+    private List<Intervention> listeInterventions = null; //!< La liste des interventions
+    private List<Operateur>    listeOperateurs    = null; //!< La liste des operateurs
 
     /**
      * @fn getInstance
@@ -890,30 +891,60 @@ public class BaseDeDonnees
      */
     public void recupererOperateurs()
     {
-        List<Operateur> listeOperateurs = new ArrayList<Operateur>();
-        if(BaseDeDonnees.active)
-        {
-            if(estConnecte())
-            {
-                /**
-                 * @todo Récupérer les opérateur à partir de la BDD
-                 */
+        if(BaseDeDonnees.active) {
+            if (estConnecte()) {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run() {
+                        mutex.lock();
+                        try {
+                            String requeteSQL =
+                                    "SELECT Operateur.* FROM Operateur;";
+                            Log.d(TAG, "Requete : " + requeteSQL);
+                            Statement statement =
+                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                            ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            listeOperateurs = new ArrayList<Operateur>();
+                            while (resultatRequete.next()) {
+                                listeOperateurs.add(new Operateur(
+                                        resultatRequete.getString("nom"),
+                                        resultatRequete.getString("prenom"),
+                                        resultatRequete.getString("identifiant"),
+                                        resultatRequete.getString("email"),
+                                        resultatRequete.getInt("idOperateur")
+                                ));
+                            }
+                            Message message = new Message();
+                            message.what = REQUETE_SQL_SELECT_OPERATEURS;
+                            message.obj = listeOperateurs;
+                            if (handler != null)
+                                handler.sendMessage(message);
+                        } catch (Exception e) {
+                            // e.printStackTrace();
+                            Log.e(TAG, "recupererOperateurs() Exception = " + e.toString());
+                        } finally {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                requeteBDD.start();
+
+            } else {
+                listeOperateurs.clear();
+                listeOperateurs.add(
+                        new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
+                listeOperateurs.add(
+                        new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
+                listeOperateurs.add(
+                        new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
+                Message message = new Message();
+                message.what = REQUETE_SQL_SELECT_OPERATEURS;
+                message.obj = listeOperateurs;
+                if (handler != null)
+                    handler.sendMessage(message);
             }
         }
-        else
-        {
-            listeOperateurs.clear();
-            listeOperateurs.add(
-              new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
-            listeOperateurs.add(
-              new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
-            listeOperateurs.add(
-              new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
-            Message message = new Message();
-            message.what    = REQUETE_SQL_SELECT_OPERATEURS;
-            message.obj     = listeOperateurs;
-            if(handler != null)
-                handler.sendMessage(message);
-        }
     }
+
 }
