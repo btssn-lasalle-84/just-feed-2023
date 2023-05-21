@@ -52,6 +52,7 @@ public class BaseDeDonnees
     public final static int     REQUETE_SQL_SELECT = 6;
     public final static int     REQUETE_SQL_SELECT_DISTRIBUTEURS = 7;
     public final static int     REQUETE_SQL_SELECT_INTERVENTIONS = 8;
+    public final static int     REQUETE_SQL_SELECT_OPERATEURS    = 9;
     private static final String NOM_BDD = "justfeed"; //!< Le nom par défaut de la base de données
     private static final String IDENTIFIANT =
       "justfeed"; //!< Le nom de l'utilisateur par défaut de la base de données
@@ -610,8 +611,7 @@ public class BaseDeDonnees
     }
 
     /**
-     * @brief Méthode qui retourne une liste de distributeurs de la BDD.
-     * @return listeDistributeurs
+     * @brief Méthode qui récupère une liste de distributeurs de la BDD.
      */
     public void recupererDistributeurs()
     {
@@ -625,9 +625,10 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
-                                    +
-                                    " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
+                            String requeteSQLDistributeurs =
+                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                              +
+                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -658,7 +659,7 @@ public class BaseDeDonnees
                                   (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
                                 distributeur.depanner(
                                   (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
-                                Log.d(TAG, "Nouveau distributeur : "+distributeur);
+                                Log.d(TAG, "Nouveau distributeur : " + distributeur);
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   distributeur);
@@ -786,8 +787,7 @@ public class BaseDeDonnees
     }
 
     /**
-     * @brief Méthode qui retourne une liste d'interventions de la BDD.
-     * @return listeInterventions
+     * @brief Méthode qui récupère une liste d'interventions de la BDD.
      */
     public void recupererInterventions()
     {
@@ -880,6 +880,38 @@ public class BaseDeDonnees
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;
+            if(handler != null)
+                handler.sendMessage(message);
+        }
+    }
+
+    /**
+     * @brief Méthode qui récupère une liste d'opérateur de la BDD.
+     */
+    public void recupererOperateurs()
+    {
+        List<Operateur> listeOperateurs = new ArrayList<Operateur>();
+        if(BaseDeDonnees.active)
+        {
+            if(estConnecte())
+            {
+                /**
+                 * @todo Récupérer les opérateur à partir de la BDD
+                 */
+            }
+        }
+        else
+        {
+            listeOperateurs.clear();
+            listeOperateurs.add(
+              new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
+            listeOperateurs.add(
+              new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
+            listeOperateurs.add(
+              new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
+            Message message = new Message();
+            message.what    = REQUETE_SQL_SELECT_OPERATEURS;
+            message.obj     = listeOperateurs;
             if(handler != null)
                 handler.sendMessage(message);
         }
