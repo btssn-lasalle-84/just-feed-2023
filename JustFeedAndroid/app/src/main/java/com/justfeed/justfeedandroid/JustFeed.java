@@ -9,33 +9,30 @@ package com.justfeed.justfeedandroid;
 import static android.app.usage.UsageEvents.Event.NONE;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.view.View;
 import android.widget.Button;
 import android.widget.PopupMenu;
 
-import java.io.Serializable;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @class JustFeed
@@ -46,32 +43,34 @@ public class JustFeed extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
-    private static final int OPERATEURS_INDEX = 0; //!< Index de l'item Opérateurs dans le menu
-    private static final int AUCUNE_PREFERENCES = -1; //!< Aucun identifiant enregistré
-    private static final int AUCUN_CHOIX = -1; //!< Aucun opérateur séléctionné
-    public static final String PREFERENCES = "justfeed"; //!< Clé pour le titre du stockage
-    public static final String PREFERENCES_ID_OPERATEUR = "idOperateur"; //!< Clé pour l'id de l'opérateur
+    private static final String TAG = "_JustFeed";      //!< TAG pour les logs (cf. Logcat)
+    private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
+    public static final String PREFERENCES         = "justfeed"; //!< Clé pour le titre du stockage
+    public static final String PREFERENCES_ID_OPERATEUR =
+      "idOperateur"; //!< Clé pour l'id de l'opérateur
+    public static final int OPERATEUR_NON_DEFINI =
+      -1; //!< L'id de l'opérateur actif n'est pas défini
 
     /**
      * Attributs
      */
-    private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
-    private List<Operateur>      listeOperateurs;       //!< Liste des opérateurs
-    private int                  idOperateur;           //!< Identifiant de l'opérateur
-    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
-    private Handler              handler = null;        //<! Le handler utilisé par l'activité
-    private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
-    private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
+    private List<Distributeur> listeDistributeurs;                 //!< Liste des distributeurs
+    private List<Operateur>    listeOperateurs;                    //!< Liste des opérateurs
+    private int                idOperateur = OPERATEUR_NON_DEFINI; //!< Identifiant de l'opérateur
+    private BaseDeDonnees      baseDeDonnees;         //!< Identifiants pour la base de données
+    private Handler            handler = null;        //<! Le handler utilisé par l'activité
+    private RecyclerView       vueListeDistributeurs; //!< Affichage de la liste des distributeurs
+    private RecyclerView.Adapter       adapteurDistributeur; //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
-    private SharedPreferences preferencesPartagees; //!< système de persistance des données pour l'application
+    private SharedPreferences          preferencesPartagees =
+      null; //!< système de persistance des données pour l'application
 
     /**
      * Ressources GUI
      */
     private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
                                         //!< les interventions
-    private Menu menu; //!< Menu de l'application
+    private Menu menu;                  //!< Menu de l'application
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -82,6 +81,8 @@ public class JustFeed extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
+
+        chargerPreferences();
 
         initialiserVueListeDistributeurs();
         initialiserHandler();
@@ -102,16 +103,54 @@ public class JustFeed extends AppCompatActivity
         return true;
     }
 
+    /**
+     * @brief Initialise le sous menu
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        SubMenu sousMenu = menu.getItem(INDEX_MENU_OPERATEURS).getSubMenu();
+        sousMenu.clear();
+
+        if(listeOperateurs != null)
+        {
+            int index = 0;
+            for(Operateur operateur: listeOperateurs)
+            {
+                sousMenu.add(NONE, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
+                if(operateur.getIdOperateur() == idOperateur)
+                {
+                    sousMenu.getItem(index).setChecked(true);
+                    SpannableString s =
+                      new SpannableString(sousMenu.getItem(index).getTitle().toString());
+                    s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+                    sousMenu.getItem(index).setTitle(s);
+                }
+                ++index;
+            }
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * @brief Méthode appelée quand on sélectionne une entrée du menu
+     * @return boolean
+     */
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        switch (item.getItemId())
+        switch(item.getItemId())
         {
-            case R.id.menuOperateurs:
-                setIdOperateur(item);
-                return true;
             case R.id.interventions:
                 lancerActiviteIntervention();
                 return true;
+            case R.id.aPropos:
+                afficherAPropos();
+                return true;
+            default:
+                // donc c'est une sélection dans le sous menu Opérateurs !
+                idOperateur = item.getItemId();
+                sauvegarderIdOperateur();
         }
 
         return super.onOptionsItemSelected(item);
@@ -168,33 +207,12 @@ public class JustFeed extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        super.onDestroy();
         Log.d(TAG, "onDestroy()");
+        enregistrerPreferences();
+        super.onDestroy();
     }
-
     /**
-     * @brief Initialise le sous menu
-     */
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu)
-    {
-        SubMenu sousMenu = menu.getItem(OPERATEURS_INDEX).getSubMenu();
-        sousMenu.clear();
-
-        if(listeOperateurs != null)
-        {
-            for(Operateur operateur : listeOperateurs)
-            {
-                MenuItem nouvelOperateur = sousMenu.add(R.id.operateurs, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
-                nouvelOperateur.setCheckable(true);
-            }
-        }
-
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    /**
-     * @brief Initialise laccès à la base de données MySQL
+     * @brief Initialise l'accès à la base de données MySQL
      */
     private void initialiserBaseDeDonnees()
     {
@@ -284,71 +302,86 @@ public class JustFeed extends AppCompatActivity
     }
 
     /**
-     * @brief Méthode utilisé pour lancer l'activité Intervention
+     * @brief Méthode utilisée pour lancer l'activité ActiviteInterventions
      */
-    private void lancerActiviteIntervention() {
-        int idOperateur = getIdOperateur();
-
-        if(idOperateur != AUCUN_CHOIX)
+    private void lancerActiviteIntervention()
+    {
+        if(idOperateur != OPERATEUR_NON_DEFINI)
         {
-            Intent activiteIntervention =
-                    new Intent(JustFeed.this, ActiviteInterventions.class);
+            Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
             activiteIntervention.putExtra("idOperateur", idOperateur);
             startActivity(activiteIntervention);
         }
         else
         {
-            //TODO Boîte de dialogue
+            afficherMessage("JustFeed", "Il faut sélectionner un opérateur dans le menu !");
         }
     }
 
     /**
-     * @brief Méthode utilisée pour accéder à l'identifiant de l'opérateur
-     * @return
+     * @brief Récupère l'id de l'opérateur qui utilise l'application
      */
-    private int getIdOperateur() {
-        preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-
-        if(preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1) != AUCUNE_PREFERENCES) {
-            return preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1);
-        }
-        else if(idOperateur != AUCUN_CHOIX)
+    private void recupererIdOperateur()
+    {
+        if(preferencesPartagees.contains(PREFERENCES_ID_OPERATEUR))
         {
-            return idOperateur;
-        }
-        else
-        {
-            return AUCUN_CHOIX;
+            idOperateur =
+              preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, OPERATEUR_NON_DEFINI);
+            Log.d(TAG, "recupererIdOperateur() idOperateur = " + idOperateur);
         }
     }
-
     /**
-     * @brief Méthode pour changer l'identifiant de l'opérateur
-     * @param item
+     * @brief Sauvegarde l'id de l'opérateur qui utilise l'application
      */
-    private void setIdOperateur(MenuItem item) {
-        /**
-         * @// FIXME: 5/22/2023
-         * L'item n'est pas séléctionné quand on click dessus
-         * Surement un problème d'accès aux items du menu
-         */
-        SubMenu sousMenuOperateurs = item.getSubMenu();
-        for(int i = 0; i < sousMenuOperateurs.size(); i++)
-        {
-            if(sousMenuOperateurs.getItem(i).isChecked())
-            {
-                sousMenuOperateurs.getItem(i).setChecked(true);
-                idOperateur = sousMenuOperateurs.getItem(i).getItemId();
-                Log.d(TAG, "Identifiant Opérateur :"+idOperateur);
-            }
-            else
-            {
-                sousMenuOperateurs.getItem(i).setChecked(false);
-            }
-        }
-    }
-
-    private void enregistrerPreferences(int idOperateur) {
+    private void sauvegarderIdOperateur()
+    {
+        Log.d(TAG, "sauvegarderIdOperateur() idOperateur = " + idOperateur);
         preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, idOperateur).apply();
+    }
+
+    /**
+     * @brief Charge les préfèrences de l'application
+     */
+    private void chargerPreferences()
+    {
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        recupererIdOperateur();
+    }
+
+    /**
+     * @brief Enregistre les préfèrences de l'application
+     */
+    private void enregistrerPreferences()
+    {
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        sauvegarderIdOperateur();
+    }
+
+    /**
+     * @brief Affiche la fenêtre A propos
+     */
+    private void afficherAPropos()
+    {
+        afficherMessage("JustFeed 2023", "BTS SN LaSalle Avignon\nFARGIER Mayeul");
+    }
+
+    /**
+     * @brief Affiche un message dans une boîte de dialogue
+     */
+    private void afficherMessage(String titre, String message)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)
+            {
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.show();
     }
 }
