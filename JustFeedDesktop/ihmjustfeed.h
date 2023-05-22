@@ -79,8 +79,8 @@ class IHMJustFeed : public QWidget
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
-      planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
-    QVector<Distributeur*> distributeurs; //!< les distributeurs
+                           planificationIntervention; //!< la boîte de dialogue pour créer une intervention
+    QVector<Distributeur*> distributeurs;             //!< les distributeurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
