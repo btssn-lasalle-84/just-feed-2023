@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/operateurs"
-        android:title="Opérateurs" >
+    <item android:id="@+id/menuOperateurs"
+        android:title="Opérateurs">
         <menu>
-            <item android:id="@+id/emplacement" android:title="Emplacement"></item>
+            <group android:checkableBehavior="single" android:id="@+id/operateurs">
+                <item android:id="@+id/emplacement" android:title="Emplacement"></item>
+            </group>
         </menu>
     </item>
     <item android:id="@+id/interventions"

@@ -25,6 +25,7 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.PopupMenu;
 
 import java.io.Serializable;
 import java.sql.Array;
@@ -105,7 +106,8 @@ public class JustFeed extends AppCompatActivity
     {
         switch (item.getItemId())
         {
-            case R.id.operateurs:
+            case R.id.menuOperateurs:
+                setIdOperateur(item);
                 return true;
             case R.id.interventions:
                 lancerActiviteIntervention();
@@ -183,7 +185,8 @@ public class JustFeed extends AppCompatActivity
         {
             for(Operateur operateur : listeOperateurs)
             {
-                sousMenu.add(NONE, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
+                MenuItem nouvelOperateur = sousMenu.add(R.id.operateurs, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
+                nouvelOperateur.setCheckable(true);
             }
         }
 
@@ -299,6 +302,10 @@ public class JustFeed extends AppCompatActivity
         }
     }
 
+    /**
+     * @brief Méthode utilisée pour accéder à l'identifiant de l'opérateur
+     * @return
+     */
     private int getIdOperateur() {
         preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
 
@@ -312,6 +319,32 @@ public class JustFeed extends AppCompatActivity
         else
         {
             return AUCUN_CHOIX;
+        }
+    }
+
+    /**
+     * @brief Méthode pour changer l'identifiant de l'opérateur
+     * @param item
+     */
+    private void setIdOperateur(MenuItem item) {
+        /**
+         * @// FIXME: 5/22/2023
+         * L'item n'est pas séléctionné quand on click dessus
+         * Surement un problème d'accès aux items du menu
+         */
+        SubMenu sousMenuOperateurs = item.getSubMenu();
+        for(int i = 0; i < sousMenuOperateurs.size(); i++)
+        {
+            if(sousMenuOperateurs.getItem(i).isChecked())
+            {
+                sousMenuOperateurs.getItem(i).setChecked(true);
+                idOperateur = sousMenuOperateurs.getItem(i).getItemId();
+                Log.d(TAG, "Identifiant Opérateur :"+idOperateur);
+            }
+            else
+            {
+                sousMenuOperateurs.getItem(i).setChecked(false);
+            }
         }
     }
 

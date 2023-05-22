@@ -783,7 +783,7 @@ public class BaseDeDonnees
     /**
      * @brief Méthode qui récupère une liste d'interventions de la BDD.
      */
-    public void recupererInterventions()
+    public void recupererInterventions(final int idOperateur)
     {
         List<Intervention> listeInterventions = new ArrayList<Intervention>();
         if(BaseDeDonnees.active)
@@ -797,7 +797,11 @@ public class BaseDeDonnees
                         try
                         {
                             String requeteSQL =
-                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur";
+                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur"
+                               +
+                               " ON Intervention.idDistributeur = Distributeur.idDistributeur"
+                               +
+                               " INNER JOIN Operateur ON Intervention.idOperateur = "+idOperateur;
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -830,6 +834,7 @@ public class BaseDeDonnees
                                           resultatRequete.getString("dateIntervention"),
                                           distributeur,
                                           etat.valueOf(resultatRequete.getString("etat")),
+                                          resultatRequete.getInt("idOperateur"),
                                           (resultatRequete.getInt("aRemplir") == 1),
                                           (resultatRequete.getInt("aDepanner") == 1)));
                                     }
@@ -871,7 +876,7 @@ public class BaseDeDonnees
             Intervention.Etats etat = Intervention.Etats.A_FAIRE;
             listeInterventions.clear();
             listeInterventions.add(
-              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, true, false));
+              new Intervention("2023-06-01", listeDistributeurs.get(0), etat,1, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;

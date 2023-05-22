@@ -60,6 +60,7 @@ public class Intervention
     private String       dateIntervention; //!< Date de l'intervention.
     private Distributeur distributeur;     //!< Distributeur où intervenir.
     private Etats        etat;             //!< Les états d'une intervention.
+    private int          idOperateur;      //!< L'identifiant de l'opérateur qui s'occupe de l'intervention
     private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
     private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
 
@@ -76,12 +77,14 @@ public class Intervention
      * @param dateIntervention
      * @param distributeur
      * @param etat
+     * @parem idOperateur
      * @param aRemplir
      * @param aDepanner
      */
     public Intervention(String       dateIntervention,
                         Distributeur distributeur,
                         Etats        etat,
+                        int          idOperateur,
                         boolean      aRemplir,
                         boolean      aDepanner)
     {
@@ -92,6 +95,7 @@ public class Intervention
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
         this.etat             = etat;
+        this.idOperateur      = idOperateur;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
     }
@@ -115,6 +119,12 @@ public class Intervention
     {
         return this.distributeur.getIdentifiant();
     }
+
+    /**
+     * @brief Méthode d'accés à l'identifiant de l'opérateur
+     * @return l'identifiant de l'opérateur
+     */
+    public int getIdOperateur(){ return this.idOperateur; }
 
     /**
      * @brief Méthode d'accés au nom du distributeur.
