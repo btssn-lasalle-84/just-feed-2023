@@ -68,12 +68,16 @@ public class ActiviteInterventions extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interventions);
+
         this.positionListe = 0;
         Bundle extras = getIntent().getExtras();
         if(extras != null)
         {
             idOperateur = extras.getInt("idOperateur");
         }
+        else
+            idOperateur = JustFeed.OPERATEUR_NON_DEFINI;
+        Log.d(TAG, "onCreate() idOperateur = " + idOperateur);
 
         initialiserHandler();
         VueIntervention.setContext(this);

@@ -152,11 +152,11 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees()
     {
-        this.nomBDD             = NOM_BDD;
-        this.identifiant        = IDENTIFIANT;
-        this.motDePasse         = MOT_DE_PASSE;
-        this.hostName           = HOSTNAME;
-        this.port               = PORT_DEFAUT;
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -174,12 +174,12 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees(Handler handler)
     {
-        this.nomBDD             = NOM_BDD;
-        this.identifiant        = IDENTIFIANT;
-        this.motDePasse         = MOT_DE_PASSE;
-        this.hostName           = HOSTNAME;
-        this.port               = PORT_DEFAUT;
-        this.handler            = handler;
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
+        this.handler     = handler;
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -212,12 +212,12 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD             = nomBase;
-        this.identifiant        = identifiant;
-        this.motDePasse         = motDePasse;
-        this.hostName           = hostName;
-        this.port               = port;
-        this.handler            = handler;
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -248,12 +248,12 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD             = nomBase;
-        this.identifiant        = identifiant;
-        this.motDePasse         = motDePasse;
-        this.hostName           = hostName;
-        this.port               = port;
-        this.handler            = handler;
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -886,59 +886,66 @@ public class BaseDeDonnees
     public void recupererOperateurs()
     {
         List<Operateur> listeOperateurs = new ArrayList<Operateur>();
-        if(BaseDeDonnees.active) {
-            if (estConnecte()) {
+        if(BaseDeDonnees.active)
+        {
+            if(estConnecte())
+            {
                 Thread requeteBDD = new Thread(new Runnable() {
-                    public void run() {
+                    public void run()
+                    {
                         mutex.lock();
-                        try {
-                            String requeteSQL =
-                                    "SELECT Operateur.* FROM Operateur;";
+                        try
+                        {
+                            String requeteSQL = "SELECT Operateur.* FROM Operateur;";
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
-                                    connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
-                                            ResultSet.CONCUR_READ_ONLY);
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            while (resultatRequete.next()) {
-                                listeOperateurs.add(new Operateur(
-                                        resultatRequete.getString("nom"),
-                                        resultatRequete.getString("prenom"),
-                                        resultatRequete.getString("identifiant"),
-                                        resultatRequete.getString("email"),
-                                        resultatRequete.getInt("idOperateur")
-                                ));
+                            while(resultatRequete.next())
+                            {
+                                listeOperateurs.add(
+                                  new Operateur(resultatRequete.getString("nom"),
+                                                resultatRequete.getString("prenom"),
+                                                resultatRequete.getString("identifiant"),
+                                                resultatRequete.getString("email"),
+                                                resultatRequete.getInt("idOperateur")));
                             }
                             Message message = new Message();
-                            message.what = REQUETE_SQL_SELECT_OPERATEURS;
-                            message.obj = listeOperateurs;
-                            if (handler != null)
+                            message.what    = REQUETE_SQL_SELECT_OPERATEURS;
+                            message.obj     = listeOperateurs;
+                            if(handler != null)
                                 handler.sendMessage(message);
-                        } catch (Exception e) {
+                        }
+                        catch(Exception e)
+                        {
                             // e.printStackTrace();
                             Log.e(TAG, "recupererOperateurs() Exception = " + e.toString());
-                        } finally {
+                        }
+                        finally
+                        {
                             mutex.unlock();
                         }
                     }
                 });
 
                 requeteBDD.start();
-
-            } else {
+            }
+            else
+            {
                 listeOperateurs.clear();
                 listeOperateurs.add(
-                        new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
+                  new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
                 listeOperateurs.add(
-                        new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
+                  new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
                 listeOperateurs.add(
-                        new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
+                  new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
                 Message message = new Message();
-                message.what = REQUETE_SQL_SELECT_OPERATEURS;
-                message.obj = listeOperateurs;
-                if (handler != null)
+                message.what    = REQUETE_SQL_SELECT_OPERATEURS;
+                message.obj     = listeOperateurs;
+                if(handler != null)
                     handler.sendMessage(message);
             }
         }
     }
-
 }
