@@ -66,7 +66,6 @@ public class JustFeed extends AppCompatActivity
     private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
     private SharedPreferences preferencesPartagees; //!< système de persistance des données pour l'application
-    private Operateur         operateur; //!< Opérateur qui réalisera les interventions
 
     /**
      * Ressources GUI
@@ -173,8 +172,6 @@ public class JustFeed extends AppCompatActivity
     {
         super.onDestroy();
         Log.d(TAG, "onDestroy()");
-
-        enregistrerPreferences();
     }
 
     /**
@@ -287,42 +284,21 @@ public class JustFeed extends AppCompatActivity
         };
     }
 
-    private boolean aPreferencesOperateur() {
-        String nomOperateur;
-        String prenomOperateur;
-        String identifiantOperateur;
-        String emailOperateur;
+    private int getIdOperateur() {
         int idOperateur;
-
         preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-
-        nomOperateur = preferencesPartagees.getString(PREFERENCES_NOM_OPERATEUR, "");
-        prenomOperateur = preferencesPartagees.getString(PREFERENCES_PRENOM_OPERATEUR, "");
         idOperateur = preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1);
-        identifiantOperateur = preferencesPartagees.getString(PREFERENCES_IDENTIFIANT, "");
-        emailOperateur = preferencesPartagees.getString(PREFERENCES_EMAIL,"");
 
         if(idOperateur != -1) {
-            operateur = new Operateur(
-                    nomOperateur,
-                    prenomOperateur,
-                    identifiantOperateur,
-                    emailOperateur,
-                    idOperateur);
-
-            return true;
+            return idOperateur;
         }
         else
         {
-            return false;
+            return -1;
         }
     }
 
-    private void enregistrerPreferences() {
-        preferencesPartagees.edit().putString(PREFERENCES_NOM_OPERATEUR, operateur.getNom()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_PRENOM_OPERATEUR, operateur.getPrenom()).apply();
-        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, operateur.getIdOperateur()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_IDENTIFIANT, operateur.getIdentifiant()).apply();
-        preferencesPartagees.edit().putString(PREFERENCES_EMAIL, operateur.getEmail()).apply();
+    private void enregistrerPreferences(int idOperateur) {
+        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, idOperateur).apply();
     }
 }

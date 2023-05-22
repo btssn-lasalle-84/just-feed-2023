@@ -82,9 +82,6 @@ public class BaseDeDonnees
     private static BaseDeDonnees bdd = null; //!< l'instance unique de BaseDeDonnees (Singleton)
     private Handler handler = null; //<! Le handler pour l'échange de messages entre les threads
     private List<Distributeur> listeDistributeurs = null; //!< La liste des distributeurs
-    private List<Intervention> listeInterventions = null; //!< La liste des interventions
-    private List<Operateur>    listeOperateurs    = null; //!< La liste des operateurs
-
     /**
      * @fn getInstance
      * @brief Retourne l'instance BaseDeDonnees
@@ -160,7 +157,6 @@ public class BaseDeDonnees
         this.motDePasse         = MOT_DE_PASSE;
         this.hostName           = HOSTNAME;
         this.port               = PORT_DEFAUT;
-        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -184,7 +180,6 @@ public class BaseDeDonnees
         this.hostName           = HOSTNAME;
         this.port               = PORT_DEFAUT;
         this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -223,7 +218,6 @@ public class BaseDeDonnees
         this.hostName           = hostName;
         this.port               = port;
         this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -260,7 +254,6 @@ public class BaseDeDonnees
         this.hostName           = hostName;
         this.port               = port;
         this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -792,6 +785,7 @@ public class BaseDeDonnees
      */
     public void recupererInterventions()
     {
+        List<Intervention> listeInterventions = new ArrayList<Intervention>();
         if(BaseDeDonnees.active)
         {
             if(estConnecte())
@@ -809,7 +803,7 @@ public class BaseDeDonnees
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                                         ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            listeInterventions        = new ArrayList<Intervention>();
+
                             while(resultatRequete.next())
                             {
                                 for(Distributeur distributeur: listeDistributeurs)
@@ -891,6 +885,7 @@ public class BaseDeDonnees
      */
     public void recupererOperateurs()
     {
+        List<Operateur> listeOperateurs = new ArrayList<Operateur>();
         if(BaseDeDonnees.active) {
             if (estConnecte()) {
                 Thread requeteBDD = new Thread(new Runnable() {
@@ -904,7 +899,6 @@ public class BaseDeDonnees
                                     connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                             ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            listeOperateurs = new ArrayList<Operateur>();
                             while (resultatRequete.next()) {
                                 listeOperateurs.add(new Operateur(
                                         resultatRequete.getString("nom"),
