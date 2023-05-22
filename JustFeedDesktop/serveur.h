@@ -1,5 +1,5 @@
 /**
- * @file        Serveur.h
+ * @file        serveur.h
  * @brief       Déclaration de la classe Serveur.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
@@ -21,10 +21,7 @@ class Serveur
 
   public:
     Serveur();
-    Serveur(int     port,
-            QString hostName,
-            QString utilisateur,
-            QString motDePasse);
+    Serveur(int port, QString hostName, QString utilisateur, QString motDePasse);
     ~Serveur();
 
     // Accesseurs

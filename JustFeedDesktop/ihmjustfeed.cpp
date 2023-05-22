@@ -14,8 +14,10 @@
 #include "basededonnees.h"
 #include "configurationdistributeur.h"
 #include "distributeur.h"
+#include "intervention.h"
 #include "planificationintervention.h"
 #include "produit.h"
+#include "operateur.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -27,8 +29,9 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
-    initialiserDistributeurs();
     initialiserProduits();
+    initialiserDistributeurs();
+    initialiserOperateurs();
     initialiserGUI();
     chargerDistributeurs();
 }
@@ -282,6 +285,22 @@ void IHMJustFeed::instancierWidgets()
 
     // Les listes
     listeDistributeurs = new QComboBox(this);
+
+    // interventions
+    QString requete = "SELECT * FROM Intervention";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->recuperer(requete, interventionsBdd);
+    titreIntervention = new QLabel(this);
+    for(int i = 0; i < interventionsBdd.size(); i++)
+    {
+        idIntervention.push_back(new QLabel(this));
+        InterventionIdOperateur.push_back(new QLabel(this));
+        InterventionIdDistributeur.push_back(new QLabel(this));
+        dateIntervention.push_back(new QLabel(this));
+        aRemplirIntervention.push_back(new QLabel(this));
+        aDepannerIntervention.push_back(new QLabel(this));
+        etatIntervention.push_back(new QLabel(this));
+    }
 }
 
 /**
@@ -311,6 +330,59 @@ void IHMJustFeed::initialiserWidgets()
         boutonPlanifier->setEnabled(true);
     else
         boutonPlanifier->setEnabled(false);
+
+    // interventions
+    titreIntervention->setText("Intervention : ");
+    for(int i = 0; i < interventionsBdd.size(); i++)
+    {
+        QString nomOperateur;
+        for(int j = 0; j < operateurs.size(); j++)
+        {
+            if(operateurs[j]->getId() ==
+               interventionsBdd[i][Intervention::TableIntervention::ID_OPERATEUR].toInt())
+            {
+                nomOperateur = operateurs[j]->getNom();
+                break;
+            }
+        }
+
+        InterventionIdOperateur[i]->setText("operateur : " + nomOperateur);
+        InterventionIdDistributeur[i]->setText("emplacement distributeur : " +
+                                               distributeurs[i]->getNom());
+        dateIntervention[i]->setText(
+          "date intervention : " +
+          interventionsBdd[i][Intervention::TableIntervention::DATE_INTERVENTION]);
+        if(interventionsBdd[i][Intervention::TableIntervention::A_REMPLIR] == "1")
+        {
+            interventionsBdd[i][Intervention::TableIntervention::A_REMPLIR] = "Oui";
+        }
+        else
+        {
+            interventionsBdd[i][Intervention::TableIntervention::A_REMPLIR] = "Non";
+        }
+        if(interventionsBdd[i][Intervention::TableIntervention::A_DEPANNER] == "1")
+        {
+            interventionsBdd[i][Intervention::TableIntervention::A_DEPANNER] = "Oui";
+        }
+        else
+        {
+            interventionsBdd[i][Intervention::TableIntervention::A_DEPANNER] = "Non";
+        }
+        aRemplirIntervention[i]->setText(
+          "à remplir  : " + interventionsBdd[i][Intervention::TableIntervention::A_REMPLIR]);
+        aDepannerIntervention[i]->setText(
+          "à depanner : " + interventionsBdd[i][Intervention::TableIntervention::A_DEPANNER]);
+        etatIntervention[i]->setText(interventionsBdd[i][Intervention::TableIntervention::ETAT]);
+
+        titreIntervention->setAlignment(Qt::AlignCenter);
+        idIntervention[i]->setAlignment(Qt::AlignCenter);
+        InterventionIdOperateur[i]->setAlignment(Qt::AlignCenter);
+        InterventionIdDistributeur[i]->setAlignment(Qt::AlignCenter);
+        dateIntervention[i]->setAlignment(Qt::AlignCenter);
+        aRemplirIntervention[i]->setAlignment(Qt::AlignCenter);
+        aDepannerIntervention[i]->setAlignment(Qt::AlignCenter);
+        etatIntervention[i]->setAlignment(Qt::AlignCenter);
+    }
 }
 
 /**
@@ -360,12 +432,15 @@ void IHMJustFeed::initialiserTable()
 void IHMJustFeed::positionnerWidgets()
 {
     // Les layouts
-    QVBoxLayout* layoutPrincipal           = new QVBoxLayout();
-    QVBoxLayout* layoutFenetrePrincipale   = new QVBoxLayout();
-    layoutFenetreDistributeur              = new QVBoxLayout();
-    QHBoxLayout* layoutF1Table             = new QHBoxLayout();
-    QHBoxLayout* layoutBoutonsAccueil      = new QHBoxLayout();
-    QHBoxLayout* layoutBoutonsDistributeur = new QHBoxLayout();
+    QVBoxLayout* layoutPrincipal                    = new QVBoxLayout();
+    QVBoxLayout* layoutFenetrePrincipale            = new QVBoxLayout();
+    layoutFenetreDistributeur                       = new QVBoxLayout();
+    QHBoxLayout*          layoutF1Table             = new QHBoxLayout();
+    QHBoxLayout*          layoutBoutonsAccueil      = new QHBoxLayout();
+    QHBoxLayout*          layoutBoutonsDistributeur = new QHBoxLayout();
+    QHBoxLayout*          layoutIntervention        = new QHBoxLayout();
+    QVector<QVBoxLayout*> layoutInfoIntervention(interventionsBdd.size());
+    QVBoxLayout*          titre = new QVBoxLayout;
 
     // Positionnement
     // La fenêtre accueil
@@ -386,9 +461,28 @@ void IHMJustFeed::positionnerWidgets()
     layoutFenetreDistributeur->addLayout(layoutBoutonsDistributeur);
     fenetreDistributeur->setLayout(layoutFenetreDistributeur);
 
+    // interventions
+    layoutInfoIntervention.clear();
+
+    titre->addWidget(titreIntervention);
+    layoutIntervention->addLayout(titre);
+    for(int i = 0; i < interventionsBdd.size(); i++)
+    {
+        layoutInfoIntervention.push_back(new QVBoxLayout());
+        layoutInfoIntervention[i]->addWidget(idIntervention[i]);
+        layoutInfoIntervention[i]->addWidget(InterventionIdOperateur[i]);
+        layoutInfoIntervention[i]->addWidget(InterventionIdDistributeur[i]);
+        layoutInfoIntervention[i]->addWidget(dateIntervention[i]);
+        layoutInfoIntervention[i]->addWidget(aRemplirIntervention[i]);
+        layoutInfoIntervention[i]->addWidget(aDepannerIntervention[i]);
+        layoutInfoIntervention[i]->addWidget(etatIntervention[i]);
+        layoutIntervention->addLayout(layoutInfoIntervention[i]);
+    }
+
     // La GUI
     layoutPrincipal->addWidget(fenetres);
     gui->setLayout(layoutPrincipal);
+    layoutPrincipal->addLayout(layoutIntervention);
     this->setLayout(layoutPrincipal);
 }
 
@@ -535,6 +629,24 @@ void IHMJustFeed::initialiserProduits()
     /**
      * @todo Récupérer les données depuis la base de données
      */
+}
+
+/**
+ * @brief méthode initialise les différents operateur
+ */
+void IHMJustFeed::initialiserOperateurs()
+{
+    operateurs.clear();
+    QString requete = "SELECT * FROM Operateur";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    QVector<QStringList> operateursRecupereres;
+    baseDeDonnees->recuperer(requete, operateursRecupereres);
+    for(int i = 0; i < operateursRecupereres.size(); i++)
+    {
+        Operateur* operateur = new Operateur(operateursRecupereres[i]);
+        operateurs.push_back(operateur);
+    }
+    qDebug() << Q_FUNC_INFO << "nbOperateurs" << operateurs.size();
 }
 
 /**
@@ -744,14 +856,11 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
                                       0.35);
         volumeRestant->setAlignment(Qt::AlignBottom | Qt::AlignHCenter);
 
-        /**
-         * @todo Définir des contantes pour les seuils de remplissage
-         */
-        if(distributeur->getBac(i)->getPourcentageRemplissage() < 25)
+        if(distributeur->getBac(i)->getPourcentageRemplissage() < BAC_VIDE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: red; }");
         }
-        else if(distributeur->getBac(i)->getPourcentageRemplissage() < 50)
+        else if(distributeur->getBac(i)->getPourcentageRemplissage() < BAC_MOITIE)
         {
             volumeRestant->setStyleSheet("QProgressBar::chunk { background-color: orange; }");
         }

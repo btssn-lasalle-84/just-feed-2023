@@ -14,6 +14,7 @@ SOURCES += \
     intervention.cpp \
     main.cpp \
     ihmjustfeed.cpp \
+    operateur.cpp \
     planificationintervention.cpp \
     produit.cpp \
     serveur.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     distributeur.h \
     ihmjustfeed.h \
     intervention.h \
+    operateur.h \
     planificationintervention.h \
     produit.h \
     serveur.h \
