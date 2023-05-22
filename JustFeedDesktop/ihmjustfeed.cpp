@@ -854,8 +854,8 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QVBoxLayout* layoutInformationsIntervention = new QVBoxLayout();
     QLabel*      titreIntervention              = new QLabel(this);
     QLabel*      idIntervention                 = new QLabel(this);
-    QLabel*      InterventionIdOperateur        = new QLabel(this);
-    QLabel*      InterventionIdDistributeur     = new QLabel(this);
+    QLabel*      interventionIdOperateur        = new QLabel(this);
+    QLabel*      interventionIdDistributeur     = new QLabel(this);
     QLabel*      dateIntervention               = new QLabel(this);
     QLabel*      aRemplirIntervention           = new QLabel(this);
     QLabel*      aDepannerIntervention          = new QLabel(this);
@@ -863,8 +863,8 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 
     titreIntervention->setAlignment(Qt::AlignCenter);
     idIntervention->setAlignment(Qt::AlignCenter);
-    InterventionIdOperateur->setAlignment(Qt::AlignCenter);
-    InterventionIdDistributeur->setAlignment(Qt::AlignCenter);
+    interventionIdOperateur->setAlignment(Qt::AlignCenter);
+    interventionIdDistributeur->setAlignment(Qt::AlignCenter);
     dateIntervention->setAlignment(Qt::AlignCenter);
     aRemplirIntervention->setAlignment(Qt::AlignCenter);
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
