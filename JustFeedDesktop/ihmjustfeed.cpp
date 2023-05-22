@@ -852,7 +852,6 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QHBoxLayout* layoutIntervention             = new QHBoxLayout();
     QHBoxLayout* layoutBoutonsDistributeur      = new QHBoxLayout();
     QVBoxLayout* layoutInformationsIntervention = new QVBoxLayout();
-    QLabel*      titreIntervention              = new QLabel(this);
     QLabel*      idIntervention                 = new QLabel(this);
     QLabel*      interventionIdOperateur        = new QLabel(this);
     QLabel*      interventionIdDistributeur     = new QLabel(this);
@@ -861,7 +860,6 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QLabel*      aDepannerIntervention          = new QLabel(this);
     QLabel*      etatIntervention               = new QLabel(this);
 
-    titreIntervention->setAlignment(Qt::AlignCenter);
     idIntervention->setAlignment(Qt::AlignCenter);
     interventionIdOperateur->setAlignment(Qt::AlignCenter);
     interventionIdDistributeur->setAlignment(Qt::AlignCenter);
@@ -889,8 +887,8 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
                     break;
                 }
             }
-            InterventionIdOperateur->setText("operateur : " + nomOperateur);
-            InterventionIdDistributeur->setText("emplacement distributeur : " +
+            interventionIdOperateur->setText("operateur : " + nomOperateur);
+            interventionIdDistributeur->setText("emplacement distributeur : " +
                                                 distributeur->getNom());
             dateIntervention->setText(
               "date intervention : " +
@@ -921,8 +919,6 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     // positionnement
     layoutIntervention->addWidget(titreIntervention);
     layoutIntervention->addWidget(idIntervention);
-    layoutIntervention->addWidget(InterventionIdOperateur);
-    layoutIntervention->addWidget(InterventionIdDistributeur);
     layoutIntervention->addWidget(dateIntervention);
     layoutIntervention->addWidget(aRemplirIntervention);
     layoutIntervention->addWidget(aDepannerIntervention);
