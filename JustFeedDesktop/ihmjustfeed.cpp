@@ -870,6 +870,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     layoutBoutonsDistributeur->addStretch();
     layoutBoutonsDistributeur->addWidget(boutonValider);
     // interventions
+
     QString nomOperateur;
 
     for(int i = 0; i < interventionsBdd.size(); i++)
@@ -917,6 +918,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     }
     // positionnement
     layoutIntervention->addWidget(idIntervention);
+    layoutIntervention->addWidget(interventionIdOperateur);
     layoutIntervention->addWidget(dateIntervention);
     layoutIntervention->addWidget(aRemplirIntervention);
     layoutIntervention->addWidget(aDepannerIntervention);
