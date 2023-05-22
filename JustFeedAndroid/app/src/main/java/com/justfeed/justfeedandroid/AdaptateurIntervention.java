@@ -24,6 +24,7 @@ import java.util.List;
 public class AdaptateurIntervention extends RecyclerView.Adapter<VueIntervention>
 {
     private List<Intervention> interventions = null; //!< Liste des interventions à afficher.
+    private int idOperateur; //!< Identifiant de l'opérateur
 
     /**
      * @brief Constructeur d'initialisation de la classe InterventionAdapter

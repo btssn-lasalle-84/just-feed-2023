@@ -60,6 +60,11 @@ public class VueIntervention extends ViewHolder {
     private final Spinner
             listeEtats; //!< attribut GUI d'une liste déroulante pour changer l'état d'une intervention.
 
+    /**
+     * Attribut
+     */
+    private int idOperateur; //!< Identifiant de l'opérateur
+
     public VueIntervention(final View itemView) {
         super(itemView);
 
@@ -73,6 +78,7 @@ public class VueIntervention extends ViewHolder {
     }
 
     public void afficherInterventions(Intervention intervention) {
+        //TODO afficher les interventions selon idOperateur
         if (menuEtats != null)
             etatAfiltrer = Intervention.Etats.valueOf(menuEtats.getSelectedItem().toString());
         if (etatAfiltrer == intervention.getEtat() && etatAfiltrer != Intervention.Etats.TOUTES) {

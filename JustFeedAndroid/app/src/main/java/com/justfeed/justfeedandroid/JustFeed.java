@@ -46,20 +46,18 @@ public class JustFeed extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
-    private static final int OPERATEURS_INDEX = 0; //!< Index de l'item Opérateurs dans le menSu
+    private static final int OPERATEURS_INDEX = 0; //!< Index de l'item Opérateurs dans le menu
+    private static final int AUCUNE_PREFERENCES = -1; //!< Aucun identifiant enregistré
+    private static final int AUCUN_CHOIX = -1; //!< Aucun opérateur séléctionné
     public static final String PREFERENCES = "justfeed"; //!< Clé pour le titre du stockage
-    public static final String PREFERENCES_NOM_OPERATEUR = "nomOperateur"; //!< Clé pour le nom de l'opérateur
-    public static final String PREFERENCES_PRENOM_OPERATEUR = "prenomOperateur"; //!< Clé pour le prénom de l'opérateur
     public static final String PREFERENCES_ID_OPERATEUR = "idOperateur"; //!< Clé pour l'id de l'opérateur
-    public static final String PREFERENCES_IDENTIFIANT = "identifiant"; //!< Clé pour l'identifiant de l'opérateur
-    public static final String PREFERENCES_EMAIL = "email"; //!< Clé pour l'email de l'opérateur
-
 
     /**
      * Attributs
      */
     private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
     private List<Operateur>      listeOperateurs;       //!< Liste des opérateurs
+    private int                  idOperateur;           //!< Identifiant de l'opérateur
     private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler              handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -110,9 +108,7 @@ public class JustFeed extends AppCompatActivity
             case R.id.operateurs:
                 return true;
             case R.id.interventions:
-                Intent activiteIntervention =
-                        new Intent(JustFeed.this, ActiviteInterventions.class);
-                startActivity(activiteIntervention);
+                lancerActiviteIntervention();
                 return true;
         }
 
@@ -284,17 +280,38 @@ public class JustFeed extends AppCompatActivity
         };
     }
 
-    private int getIdOperateur() {
-        int idOperateur;
-        preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-        idOperateur = preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1);
+    /**
+     * @brief Méthode utilisé pour lancer l'activité Intervention
+     */
+    private void lancerActiviteIntervention() {
+        int idOperateur = getIdOperateur();
 
-        if(idOperateur != -1) {
+        if(idOperateur != AUCUN_CHOIX)
+        {
+            Intent activiteIntervention =
+                    new Intent(JustFeed.this, ActiviteInterventions.class);
+            activiteIntervention.putExtra("idOperateur", idOperateur);
+            startActivity(activiteIntervention);
+        }
+        else
+        {
+            //TODO Boîte de dialogue
+        }
+    }
+
+    private int getIdOperateur() {
+        preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+
+        if(preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1) != AUCUNE_PREFERENCES) {
+            return preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, -1);
+        }
+        else if(idOperateur != AUCUN_CHOIX)
+        {
             return idOperateur;
         }
         else
         {
-            return -1;
+            return AUCUN_CHOIX;
         }
     }
 
