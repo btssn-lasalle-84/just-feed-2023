@@ -846,6 +846,10 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
     fenetreDistributeur->setLayout(layoutFenetreDistributeur);
 }
 
+/**
+ * @brief crée les widgets de la fenêtre d 'affichage d'une intervention
+ * @param distributeur, le distributeur lié à l'intervention
+ */
 void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 {
     qDebug() << Q_FUNC_INFO << distributeur->getIdDistributeur();
@@ -860,6 +864,10 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QLabel*      aDepannerIntervention          = new QLabel(this);
     QLabel*      etatIntervention               = new QLabel(this);
 
+    QVector<QVBoxLayout*> layoutlisteApprovisionnement;
+    QHBoxLayout*          layoutPositionnementApprovisionnement;
+    QVector<QLabel*>      idBac;
+    QVector<QLabel*>      poidsAPrevoir;
     idIntervention->setAlignment(Qt::AlignCenter);
     interventionIdOperateur->setAlignment(Qt::AlignCenter);
     interventionIdDistributeur->setAlignment(Qt::AlignCenter);
@@ -878,6 +886,11 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
         if(interventionsBdd[i][Intervention::TableIntervention::ID_DISTRIBUTEUR].toInt() ==
            distributeur->getIdDistributeur())
         {
+            QString requete =
+              "SELECT idBac, poidsAPrevoir FROM Approvisionnement WHERE idIntervention = " +
+              interventionsBdd[i][Intervention::TableIntervention::ID] + ";";
+            QVector<QStringList> listeApprovisionnementBdd;
+            baseDeDonnees->recuperer(requete, listeApprovisionnementBdd);
             for(int j = 0; j < operateurs.size(); j++)
             {
                 if(operateurs[j]->getId() ==
@@ -916,6 +929,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             etatIntervention->setText(interventionsBdd[i][Intervention::TableIntervention::ETAT]);
         }
     }
+
     // positionnement
     layoutIntervention->addWidget(idIntervention);
     layoutIntervention->addWidget(interventionIdOperateur);

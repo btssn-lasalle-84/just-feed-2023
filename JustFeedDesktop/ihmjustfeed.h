@@ -75,6 +75,16 @@ class IHMJustFeed : public QWidget
         COLONNE_DISTRIBUTEUR_INTERVENTION,        //!< Emplacement check box intervention
         NbColonnesDistributeur
     };
+    /**
+     * @enum TableApprovisionnement
+     * @brief Définit les colonnes de la table approvisionnement
+     *
+     */
+    enum TableApprovisionnement
+    {
+        ID_BAC,
+        POIDS_A_PREVOIR
+    };
 
     Q_OBJECT
   private:

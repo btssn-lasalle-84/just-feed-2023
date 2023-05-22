@@ -175,7 +175,7 @@ void PlanificationIntervention::instancierWidgets()
 void PlanificationIntervention::initialiserWidgets()
 {
     qDebug() << Q_FUNC_INFO;
-    boutonItervention->setText("Créer l'intervention");
+    boutonItervention->setText("Créer intervention/s");
     boutonItervention->setEnabled(false);
     editionDate->setDisplayFormat("dd/MM/yyyy");
     chargerListeOperateurs();
