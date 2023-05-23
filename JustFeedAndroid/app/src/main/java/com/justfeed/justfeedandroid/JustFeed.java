@@ -262,13 +262,6 @@ public class JustFeed extends AppCompatActivity
                 {
                     case BaseDeDonnees.CONNEXION_OK:
                         Log.d(TAG, "[Handler] CONNEXION_OK");
-                        /**
-                         * Exemples de requêtes
-                         *
-                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
-                         * WHERE Distributeur.idDistributeur = '1'");
-                         * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
-                         */
                         break;
                     case BaseDeDonnees.CONNEXION_ERREUR:
                         Log.d(TAG, "[Handler] CONNEXION_ERREUR");

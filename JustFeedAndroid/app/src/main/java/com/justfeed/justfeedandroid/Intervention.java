@@ -57,20 +57,14 @@ public class Intervention
     /**
      * Attributs
      */
-    private String       dateIntervention; //!< Date de l'intervention.
-    private Distributeur distributeur;     //!< Distributeur où intervenir.
-    private Etats        etat;             //!< Les états d'une intervention.
-    private int          idOperateur;      //!< L'identifiant de l'opérateur qui s'occupe de l'intervention
-    private boolean      aRemplir;         //!< Si l'intervention consiste à remplir.
-    private boolean      aDepanner;        //!< Si l'intervention consiste à dépanner.
-
-    /**
-     * @brief Constructeur par défaut de classe Intervention.
-     */
-    public Intervention()
-    {
-        this.distributeur = null;
-    }
+    private String       dateIntervention = "";   //!< Date de l'intervention.
+    private Distributeur distributeur     = null; //!< Distributeur où intervenir.
+    private Etats        etat;                    //!< Les états d'une intervention.
+    private int          idOperateur =
+      JustFeed
+        .OPERATEUR_NON_DEFINI; //!< L'identifiant de l'opérateur qui s'occupe de l'intervention
+    private boolean aRemplir  = false; //!< Si l'intervention consiste à remplir.
+    private boolean aDepanner = false; //!< Si l'intervention consiste à dépanner.
 
     /**
      * @brief Constructeur d'initialisation de la classe Intervention.
@@ -124,7 +118,10 @@ public class Intervention
      * @brief Méthode d'accés à l'identifiant de l'opérateur
      * @return l'identifiant de l'opérateur
      */
-    public int getIdOperateur(){ return this.idOperateur; }
+    public int getIdOperateur()
+    {
+        return this.idOperateur;
+    }
 
     /**
      * @brief Méthode d'accés au nom du distributeur.

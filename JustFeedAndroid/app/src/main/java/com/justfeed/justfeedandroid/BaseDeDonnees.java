@@ -798,10 +798,8 @@ public class BaseDeDonnees
                         {
                             String requeteSQL =
                               "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur"
-                               +
-                               " ON Intervention.idDistributeur = Distributeur.idDistributeur"
-                               +
-                               " INNER JOIN Operateur ON Intervention.idOperateur = "+idOperateur;
+                              + " ON Intervention.idDistributeur = Distributeur.idDistributeur"
+                              + " WHERE Intervention.idOperateur = " + idOperateur;
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -876,7 +874,7 @@ public class BaseDeDonnees
             Intervention.Etats etat = Intervention.Etats.A_FAIRE;
             listeInterventions.clear();
             listeInterventions.add(
-              new Intervention("2023-06-01", listeDistributeurs.get(0), etat,1, true, false));
+              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, 1, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;
