@@ -2,17 +2,17 @@ format 224
 
 classinstance 128042 class_ref 128536 // IHMJustFeed
   name ""   xyz 402.4 4.6 2000 life_line_z 2000
-classinstance 128170 class_ref 128002 // Opérateur
+classinstance 128170 class_ref 128002 // OpÃ©rateur
   name ""   xyz 23.2 8.2 2000 life_line_z 2000
 classinstance 129834 class_ref 148138 // PlanificationIntervention
   name ""   xyz 816.6 4.6 2000 life_line_z 2000
 fragment 131754 "loop"
   xyzwh 31.6 87.6 1995 982 261
 end
-note 131882 "clic sur la case � cocher d'un distributeur"
+note 131882 "clic sur la case à cocher d'un distributeur"
   xyzwh 101.2 233.8 2000 367 87
-textcanvas 132266 "[chaque bac � remplir ou � d�panner]"
-  xyzwh 123 1083.5 2000 500 41
+textcanvas 132266 "[chaque bac à remplir ou à dépanner]"
+  xyzwh 123 1083 2000 500 41
 note 132394 "clic sur le bouton \"Planifier\""
   xyzwh 105.2 484.2 2000 279 91
 fragment 132650 "alt"
@@ -23,13 +23,13 @@ textcanvas 132778 "[nbDistributeursAIntervenir > 0]"
 fragment 133546 "loop"
   xyzwh 22 1075.5 1975 1298 261
 end
-textcanvas 133674 "[chaque distributeur � intervenir]"
+textcanvas 133674 "[chaque distributeur à intervenir]"
   xyzwh 137.5 93.5 2000 438 33
-note 135082 "clic sur une case � cocher associ�e � l'op�ration sur un bac"
+note 135082 "clic sur une case à cocher associée à l'opération sur un bac"
   xyzwh 104.2 1203 2000 331 115
-note 135466 "clic sur le nom d'un op�rateur dans la liste d�roulante"
+note 135466 "clic sur le nom d'un opérateur dans la liste déroulante"
   xyzwh 105.4 1514.6 2000 407 87
-note 135722 "clic sur le bouton \"Cr�er\""
+note 135722 "clic sur le bouton \"Créer\""
   xyzwh 114 1835.6 2000 343 55
 classinstance 136106 class_ref 128792 // Intervention
   name ""   xyz 1509 4.6 2000 life_line_z 2000
@@ -39,10 +39,10 @@ end
 textcanvas 136874 "[effectuable]"
   xyzwh 937 1912 2025 160 30
 fragment 138026 "ref"
-  refer sequencediagram_ref 134698 // Cr�er une intervention
+  refer sequencediagram_ref 134698 // Créer une intervention
   xyzwh 1128.2 2322.2 2000 323 105
 end
-durationcanvas 128298 classinstance_ref 128170 // :Opérateur
+durationcanvas 128298 classinstance_ref 128170 // :OpÃ©rateur
   xyzwh 61 163.5 2010 11 40
 end
 durationcanvas 128426 classinstance_ref 128042 // :IHMJustFeed
@@ -51,7 +51,7 @@ durationcanvas 128426 classinstance_ref 128042 // :IHMJustFeed
     xyzwh 454 195 2020 11 120
   end
 end
-durationcanvas 128938 classinstance_ref 128170 // :Opérateur
+durationcanvas 128938 classinstance_ref 128170 // :OpÃ©rateur
   xyzwh 61 428.5 2010 11 40
 end
 durationcanvas 129066 classinstance_ref 128042 // :IHMJustFeed
@@ -84,7 +84,7 @@ durationcanvas 129962 classinstance_ref 129834 // :PlanificationIntervention
     end
   end
 end
-durationcanvas 132906 classinstance_ref 128170 // :Opérateur
+durationcanvas 132906 classinstance_ref 128170 // :OpÃ©rateur
   xyzwh 62 1148.5 2010 11 40
 end
 durationcanvas 133034 classinstance_ref 129834 // :PlanificationIntervention
@@ -93,7 +93,7 @@ durationcanvas 133034 classinstance_ref 129834 // :PlanificationIntervention
     xyzwh 903 1172 2020 11 25
   end
 end
-durationcanvas 133802 classinstance_ref 128170 // :Opérateur
+durationcanvas 133802 classinstance_ref 128170 // :OpÃ©rateur
   xyzwh 61 1453.5 2010 11 41
 end
 durationcanvas 133930 classinstance_ref 129834 // :PlanificationIntervention
@@ -102,7 +102,7 @@ durationcanvas 133930 classinstance_ref 129834 // :PlanificationIntervention
     xyzwh 903 1463.5 2020 11 25
   end
 end
-durationcanvas 134442 classinstance_ref 128170 // :Opérateur
+durationcanvas 134442 classinstance_ref 128170 // :OpÃ©rateur
   xyzwh 62 1778.5 2010 11 43
 end
 durationcanvas 134570 classinstance_ref 129834 // :PlanificationIntervention

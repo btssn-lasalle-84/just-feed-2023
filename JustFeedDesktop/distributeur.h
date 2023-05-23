@@ -40,9 +40,31 @@ struct Localisation
  */
 class Distributeur
 {
+  public:
+    /**
+     * @enum TableDistributeur
+     * @brief Définit les champs de la table Distributeur
+     *
+     */
+    enum TableDistributeur
+    {
+        ID                   = 0,
+        ID_SERVEUR_TTN       = 1,
+        NOM                  = 2,
+        DESCRIPTION          = 3,
+        ADRESSE              = 4,
+        VILLE                = 5,
+        CODE_POSTAL          = 6,
+        DATE_MISE_EN_SERVICE = 7,
+        LONGITUDE            = 8,
+        LATITUDE             = 9,
+        DEVICE_ID            = 10,
+        NB_BACS              = 11,
+    };
+
   private:
-    int           id;
-    QString       deviceID;          //!< identifiant du distributeur
+    int           id;                //!< identifiant du distributeur
+    QString       deviceID;          //!< identifiant TTN du distributeur
     QVector<Bac*> bacs;              //!< les bacs du distributeur
     QString       nom;               //!< nom du distributeur
     QString       adresse;           //!< adresse du distributeur
@@ -66,36 +88,40 @@ class Distributeur
                  QString      description,
                  QDate        dateMiseEnService,
                  Localisation position);
+    Distributeur(const QStringList& distributeur);
     ~Distributeur();
 
     // Accesseurs
-    int          getIdDistributeur() const;
+    int          getId() const;
     QString      getDeviceID() const;
-    Localisation getPosition() const;
-    bool         getAIntervenir() const;
-    int          getHygrometrie() const;
-    int          getHygrometrieBac(int numeroBac) const;
     QString      getNom() const;
     QString      getAdresse() const;
     QString      getCodePostal() const;
     QString      getVille() const;
-    QDate        getDateMiseService() const;
     QString      getDescription() const;
+    QDate        getDateMiseService() const;
+    Localisation getPosition() const;
+    int          getHygrometrie() const;
+    bool         getAIntervenir() const;
     Bac*         getBac(int numeroBac) const;
     int          getNbBacs() const;
+    double       getPourcentageBac(int numeroBac) const;
+    double       getPoidsBac(int numeroBac) const;
+    double       getPoidsTotalBac(int numeroBac) const;
+    int          getHygrometrieBac(int numeroBac) const;
 
     // mutateurs
-    void setIdDistributeur(int id);
-    void setAIntervenir(bool aIntervenir);
+    void setId(int id);
     void setDeviceID(const QString deviceID);
-    void setHygrometrie(int hygrometrie);
-    void setPosition(const Localisation& localisation);
     void setNom(const QString& nom);
     void setAdresse(const QString& adresse);
     void setCodePostal(const QString& codePostal);
     void setVille(const QString& ville);
-    void setDateMiseEnService(const QDate& dateMiseEnService);
     void setDescription(const QString& description);
+    void setDateMiseEnService(const QDate& dateMiseEnService);
+    void setPosition(const Localisation& localisation);
+    void setHygrometrie(int hygrometrie);
+    void setAIntervenir(bool aIntervenir);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
     void supprimerBac(const int numeroBacASupprimer);

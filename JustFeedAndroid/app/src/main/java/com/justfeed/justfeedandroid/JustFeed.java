@@ -6,28 +6,33 @@
 
 package com.justfeed.justfeedandroid;
 
+import static android.app.usage.UsageEvents.Event.NONE;
+
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
-import android.view.View;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.SubMenu;
 import android.widget.Button;
+import android.widget.PopupMenu;
 
-import java.io.Serializable;
-import java.sql.Array;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @class JustFeed
@@ -38,23 +43,34 @@ public class JustFeed extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_JustFeed";      //!< TAG pour les logs (cf. Logcat)
+    private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
+    public static final String PREFERENCES         = "justfeed"; //!< Clé pour le titre du stockage
+    public static final String PREFERENCES_ID_OPERATEUR =
+      "idOperateur"; //!< Clé pour l'id de l'opérateur
+    public static final int OPERATEUR_NON_DEFINI =
+      -1; //!< L'id de l'opérateur actif n'est pas défini
 
     /**
      * Attributs
      */
-    private List<Distributeur>   listeDistributeurs;    //!< Liste des distributeurs
-    private BaseDeDonnees        baseDeDonnees;         //!< Identifiants pour la base de données
-    private Handler              handler = null;        //<! Le handler utilisé par l'activité
-    private RecyclerView         vueListeDistributeurs; //!< Affichage de la liste des distributeurs
-    private RecyclerView.Adapter adapteurDistributeur;  //!< Remplit les vues des distributeurs
+    private List<Distributeur> listeDistributeurs;                 //!< Liste des distributeurs
+    private List<Operateur>    listeOperateurs;                    //!< Liste des opérateurs
+    private int                idOperateur = OPERATEUR_NON_DEFINI; //!< Identifiant de l'opérateur
+    private BaseDeDonnees      baseDeDonnees;         //!< Identifiants pour la base de données
+    private Handler            handler = null;        //<! Le handler utilisé par l'activité
+    private RecyclerView       vueListeDistributeurs; //!< Affichage de la liste des distributeurs
+    private RecyclerView.Adapter       adapteurDistributeur; //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
+    private SharedPreferences          preferencesPartagees =
+      null; //!< système de persistance des données pour l'application
 
     /**
      * Ressources GUI
      */
     private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
                                         //!< les interventions
+    private Menu menu;                  //!< Menu de l'application
 
     /**
      * @brief Méthode appelée à la création de l'activité
@@ -66,11 +82,78 @@ public class JustFeed extends AppCompatActivity
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
 
-        initialiserGUI();
+        chargerPreferences();
+
+        initialiserVueListeDistributeurs();
         initialiserHandler();
         initialiserBaseDeDonnees();
 
+        baseDeDonnees.recupererOperateurs();
         baseDeDonnees.recupererDistributeurs();
+    }
+
+    /**
+     * @brief Méthode appelée pour initialiser le menu
+     */
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return true;
+    }
+
+    /**
+     * @brief Initialise le sous menu
+     */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        SubMenu sousMenu = menu.getItem(INDEX_MENU_OPERATEURS).getSubMenu();
+        sousMenu.clear();
+
+        if(listeOperateurs != null)
+        {
+            int index = 0;
+            for(Operateur operateur: listeOperateurs)
+            {
+                sousMenu.add(NONE, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
+                if(operateur.getIdOperateur() == idOperateur)
+                {
+                    sousMenu.getItem(index).setChecked(true);
+                    SpannableString s =
+                      new SpannableString(sousMenu.getItem(index).getTitle().toString());
+                    s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+                    sousMenu.getItem(index).setTitle(s);
+                }
+                ++index;
+            }
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    /**
+     * @brief Méthode appelée quand on sélectionne une entrée du menu
+     * @return boolean
+     */
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.interventions:
+                lancerActiviteIntervention();
+                return true;
+            case R.id.aPropos:
+                afficherAPropos();
+                return true;
+            default:
+                // donc c'est une sélection dans le sous menu Opérateurs !
+                idOperateur = item.getItemId();
+                sauvegarderIdOperateur();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     /**
@@ -124,31 +207,12 @@ public class JustFeed extends AppCompatActivity
     @Override
     protected void onDestroy()
     {
-        super.onDestroy();
         Log.d(TAG, "onDestroy()");
+        enregistrerPreferences();
+        super.onDestroy();
     }
-
     /**
-     * @brief Initialise la vue de l'activité
-     */
-    private void initialiserGUI()
-    {
-        boutonInterventions = (Button)findViewById(R.id.boutonInterventions);
-        boutonInterventions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View vue)
-            {
-                Intent activiteIntervention =
-                  new Intent(JustFeed.this, ActiviteInterventions.class);
-                startActivity(activiteIntervention);
-            }
-        });
-
-        initialiserVueListeDistributeurs();
-    }
-
-    /**
-     * @brief Initialise laccès à la base de données MySQL
+     * @brief Initialise l'accès à la base de données MySQL
      */
     private void initialiserBaseDeDonnees()
     {
@@ -198,13 +262,6 @@ public class JustFeed extends AppCompatActivity
                 {
                     case BaseDeDonnees.CONNEXION_OK:
                         Log.d(TAG, "[Handler] CONNEXION_OK");
-                        /**
-                         * Exemples de requêtes
-                         *
-                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
-                         * WHERE Distributeur.idDistributeur = '1'");
-                         * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
-                         */
                         break;
                     case BaseDeDonnees.CONNEXION_ERREUR:
                         Log.d(TAG, "[Handler] CONNEXION_ERREUR");
@@ -228,8 +285,96 @@ public class JustFeed extends AppCompatActivity
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
                         afficherDistributeurs((ArrayList)message.obj);
                         break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_OPERATEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
+                        listeOperateurs = (ArrayList)message.obj;
+                        invalidateOptionsMenu();
                 }
             }
         };
+    }
+
+    /**
+     * @brief Méthode utilisée pour lancer l'activité ActiviteInterventions
+     */
+    private void lancerActiviteIntervention()
+    {
+        if(idOperateur != OPERATEUR_NON_DEFINI)
+        {
+            Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+            activiteIntervention.putExtra("idOperateur", idOperateur);
+            startActivity(activiteIntervention);
+        }
+        else
+        {
+            afficherMessage("JustFeed", "Il faut sélectionner un opérateur dans le menu !");
+        }
+    }
+
+    /**
+     * @brief Récupère l'id de l'opérateur qui utilise l'application
+     */
+    private void recupererIdOperateur()
+    {
+        if(preferencesPartagees.contains(PREFERENCES_ID_OPERATEUR))
+        {
+            idOperateur =
+              preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, OPERATEUR_NON_DEFINI);
+            Log.d(TAG, "recupererIdOperateur() idOperateur = " + idOperateur);
+        }
+    }
+    /**
+     * @brief Sauvegarde l'id de l'opérateur qui utilise l'application
+     */
+    private void sauvegarderIdOperateur()
+    {
+        Log.d(TAG, "sauvegarderIdOperateur() idOperateur = " + idOperateur);
+        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, idOperateur).apply();
+    }
+
+    /**
+     * @brief Charge les préfèrences de l'application
+     */
+    private void chargerPreferences()
+    {
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        recupererIdOperateur();
+    }
+
+    /**
+     * @brief Enregistre les préfèrences de l'application
+     */
+    private void enregistrerPreferences()
+    {
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        sauvegarderIdOperateur();
+    }
+
+    /**
+     * @brief Affiche la fenêtre A propos
+     */
+    private void afficherAPropos()
+    {
+        afficherMessage("JustFeed 2023", "BTS SN LaSalle Avignon\nFARGIER Mayeul");
+    }
+
+    /**
+     * @brief Affiche un message dans une boîte de dialogue
+     */
+    private void afficherMessage(String titre, String message)
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(message);
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)
+            {
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.show();
     }
 }

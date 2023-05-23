@@ -2,29 +2,27 @@ class Distributeur
 !!!128280.cpp!!!	Distributeur()
     qDebug() << Q_FUNC_INFO;
 !!!128408.cpp!!!	Distributeur(in id : int, in deviceID : QString, in nom : QString, in adresse : QString, in codePostal : QString, in ville : QString, in description : QString, in dateMiseEnService : QDate, in position : Localisation)
-    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID << "nom" << nom << "adresse"
-             << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
-             << "description" << description << dateMiseEnService << "latitude" << position.latitude
-             << "longitude" << position.longitude << "hygrometrie" << hygrometrie << "aIntervenir"
-             << aIntervenir;
+    qDebug() << Q_FUNC_INFO << "id" << id << "deviceID" << deviceID << "nom" << nom << "adresse"
+             << adresse << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
+             << "description" << description << "dateMiseEnService" << dateMiseEnService
+             << "latitude" << position.latitude << "longitude" << position.longitude
+             << "aIntervenir" << aIntervenir;
+!!!195242.cpp!!!	Distributeur(in distributeur : QStringList)
+    qDebug() << Q_FUNC_INFO << "id" << id << "deviceID" << deviceID << "nom" << nom << "adresse"
+             << adresse << "codePostal" << codePostal << "ville" << ville << "dateMiseEnService"
+             << "description" << description << "dateMiseEnService" << dateMiseEnService
+             << "latitude" << position.latitude << "longitude" << position.longitude
+             << "aIntervenir" << aIntervenir;
 !!!128536.cpp!!!	~Distributeur()
     for(int i = 0; i < bacs.size(); ++i)
     {
         delete bacs[i];
     }
     qDebug() << Q_FUNC_INFO;
-!!!174250.cpp!!!	getIdDistributeur() : int
+!!!195370.cpp!!!	getId() : int
     return this->id;
 !!!174378.cpp!!!	getDeviceID() : QString
     return this->deviceID;
-!!!129048.cpp!!!	getPosition() : Localisation
-    return this->position;
-!!!129432.cpp!!!	getAIntervenir() : bool
-    return this->aIntervenir;
-!!!162346.cpp!!!	getHygrometrie() : int
-    return this->hygrometrie;
-!!!174506.cpp!!!	getHygrometrieBac(in numeroBac : int) : int
-    return bacs[numeroBac]->getHygrometrie();
 !!!143786.cpp!!!	getNom() : QString
     return this->nom;
 !!!143914.cpp!!!	getAdresse() : QString
@@ -33,10 +31,16 @@ class Distributeur
     return this->codePostal;
 !!!144170.cpp!!!	getVille() : QString
     return this->ville;
-!!!144298.cpp!!!	getDateMiseService() : QDate
-    return this->dateMiseEnService;
 !!!144426.cpp!!!	getDescription() : QString
     return this->description;
+!!!144298.cpp!!!	getDateMiseService() : QDate
+    return this->dateMiseEnService;
+!!!129048.cpp!!!	getPosition() : Localisation
+    return this->position;
+!!!162346.cpp!!!	getHygrometrie() : int
+    return hygrometrie;
+!!!129432.cpp!!!	getAIntervenir() : bool
+    return this->aIntervenir;
 !!!162474.cpp!!!	getBac(in numeroBac : int) : Bac
     if(numeroBac >= 0 && numeroBac < bacs.size())
     {
@@ -45,14 +49,28 @@ class Distributeur
     return nullptr;
 !!!153258.cpp!!!	getNbBacs() : int
     return bacs.size();
-!!!130200.cpp!!!	setAIntervenir(in aIntervenir : bool) : void
-    this->aIntervenir = aIntervenir;
+!!!195498.cpp!!!	getPourcentageBac(in numeroBac : int) : double
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPourcentageRemplissage();
+    }
+    return 0.;
+!!!195626.cpp!!!	getPoidsBac(in numeroBac : int) : double
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPoidsActuel();
+    }
+    return 0.;
+!!!195754.cpp!!!	getPoidsTotalBac(in numeroBac : int) : double
+    if(numeroBac >= 0 && numeroBac < bacs.size())
+    {
+        return bacs[numeroBac]->getPoidsTotal();
+    }
+    return 0.;
+!!!174506.cpp!!!	getHygrometrieBac(in numeroBac : int) : int
+    return bacs[numeroBac]->getHygrometrie();
 !!!162602.cpp!!!	setDeviceID(in deviceID : QString) : void
     this->deviceID = deviceID;
-!!!162730.cpp!!!	setHygrometrie(in hygrometrie : int) : void
-    this->hygrometrie = hygrometrie;
-!!!129816.cpp!!!	setPosition(in localisation : Localisation) : void
-    this->position = localisation;
 !!!144682.cpp!!!	setNom(in nom : QString) : void
     this->nom = nom;
 !!!144810.cpp!!!	setAdresse(in adresse : QString) : void
@@ -61,10 +79,16 @@ class Distributeur
     this->codePostal = codePostal;
 !!!145066.cpp!!!	setVille(in ville : QString) : void
     this->ville = ville;
-!!!145194.cpp!!!	setDateMiseEnService(in dateMiseEnService : QDate) : void
-    this->dateMiseEnService = dateMiseEnService;
 !!!145322.cpp!!!	setDescription(in description : QString) : void
     this->description = description;
+!!!145194.cpp!!!	setDateMiseEnService(in dateMiseEnService : QDate) : void
+    this->dateMiseEnService = dateMiseEnService;
+!!!129816.cpp!!!	setPosition(in localisation : Localisation) : void
+    this->position = localisation;
+!!!162730.cpp!!!	setHygrometrie(in hygrometrie : int) : void
+    this->hygrometrie = hygrometrie;
+!!!130200.cpp!!!	setAIntervenir(in aIntervenir : bool) : void
+    this->aIntervenir = aIntervenir;
 !!!153386.cpp!!!	setPrixProduit(in numeroBac : int, in prix : double) : void
     if(numeroBac >= 0 && numeroBac < bacs.size())
         this->bacs[numeroBac]->setPrixProduit(prix);

@@ -22,12 +22,11 @@ ConfigurationDistributeur::ConfigurationDistributeur(Distributeur* distributeur,
     QDialog(parent),
     distributeur(distributeur), ihmJustFeed(parent)
 {
-    qDebug() << Q_FUNC_INFO;
     qDebug() << Q_FUNC_INFO << "deviceID" << distributeur->getDeviceID() << "nom"
              << distributeur->getNom() << "description" << distributeur->getDescription()
-             << "adresse"
-             << "codePostal" << distributeur->getCodePostal() << "ville" << distributeur->getVille()
-             << "latitude" << distributeur->getPosition().latitude << "longitude"
+             << "adresse" << distributeur->getAdresse() << "codePostal"
+             << distributeur->getCodePostal() << "ville" << distributeur->getVille() << "latitude"
+             << distributeur->getPosition().latitude << "longitude"
              << distributeur->getPosition().longitude << "dateMiseEnService"
              << distributeur->getDateMiseService() << "aIntervenir"
              << distributeur->getAIntervenir();
@@ -147,7 +146,8 @@ void ConfigurationDistributeur::initialiserWidgets()
         labelsBac[i]->setAlignment(Qt::AlignCenter);
         labelsProduit[i]->setText(" : " + distributeur->getBac(i)->getNomProduit());
         labelsProduit[i]->setAlignment(Qt::AlignCenter);
-        labelsPrix[i]->setText("Prix : " + QString::number(distributeur->getBac(i)->getPrixProduit()) + " €");
+        labelsPrix[i]->setText(
+          "Prix : " + QString::number(distributeur->getBac(i)->getPrixProduit()) + " €");
         labelsPrix[i]->setAlignment(Qt::AlignCenter);
         // editionsNouveauPrix[i]->setValue(distributeur->getProduitPrix(i));
         editionsNouveauPrix[i]->setAlignment(Qt::AlignCenter);

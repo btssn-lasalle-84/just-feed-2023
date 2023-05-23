@@ -71,7 +71,7 @@ format 224
       size A0
     end
 
-    class 128002 "Opérateur"
+    class 128002 "OpÃ©rateur"
       visibility package stereotype "actor"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -175,7 +175,7 @@ ${inlines}
       end
     end
 
-    usecase 128386 "Visualiser l'état du distributeur"
+    usecase 128386 "Visualiser l'Ã©tat du distributeur"
       
       usecasediagramsettings end
       
@@ -259,7 +259,7 @@ ${inlines}
       end
     end
 
-    usecase 128770 "Géolocaliser un distributeur"
+    usecase 128770 "GÃ©olocaliser un distributeur"
       
       usecasediagramsettings end
       
@@ -288,7 +288,7 @@ ${inlines}
 
       simplerelation 129048
 	-_->
-	  on usecase_ref 128386 // Visualiser l'état du distributeur
+	  on usecase_ref 128386 // Visualiser l'Ã©tat du distributeur
       end
     end
 
@@ -415,7 +415,7 @@ ${inlines}
       end
     end
 
-    usecase 128536 "cr�er un bac"
+    usecase 128536 "créer un bac"
       
       usecasediagramsettings end
       
@@ -471,7 +471,7 @@ ${inlines}
 
   end
 
-  usecaseview 134530 "Diagramme de séquence"
+  usecaseview 134530 "Diagramme de sÃ©quence"
     
     usecasediagramsettings end
     
@@ -492,13 +492,13 @@ ${inlines}
     
     activitydiagramsettings
      end
-    sequencediagram 141314 "Diagramme de séquence"
+    sequencediagram 141314 "Diagramme de sÃ©quence"
       sequencediagramsettings end
       overlapping_bars size A0
     end
 
     classinstance 128258 ""
-      type class_ref 128002 // Opérateur
+      type class_ref 128002 // OpÃ©rateur
       attributes
         end
       relations
@@ -528,7 +528,7 @@ ${inlines}
         end
     end
 
-    class 129176 "système"
+    class 129176 "systÃ¨me"
       visibility package 
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -544,7 +544,7 @@ ${inlines}
     end
 
     classinstance 128024 ""
-      type class_ref 129176 // système
+      type class_ref 129176 // systÃ¨me
       attributes
         end
       relations
@@ -606,12 +606,12 @@ ${inlines}
       overlapping_bars size A0
     end
 
-    sequencediagram 134698 "Cr�er une intervention"
+    sequencediagram 134698 "Créer une intervention"
       sequencediagramsettings end
       overlapping_bars size A0
     end
 
-    sequencediagram 134826 "Visualiser l'état du distributeur"
+    sequencediagram 134826 "Visualiser l'Ã©tat du distributeur"
       sequencediagramsettings end
       overlapping_bars size A0
     end
@@ -637,7 +637,7 @@ ${inlines}
     end
 
     classinstance 134552 ""
-      type class_ref 128002 // Opérateur
+      type class_ref 128002 // OpÃ©rateur
       attributes
         end
       relations
@@ -744,7 +744,7 @@ ${inlines}
     end
 
     classinstance 134936 ""
-      type class_ref 128002 // Opérateur
+      type class_ref 128002 // OpÃ©rateur
       attributes
         end
       relations

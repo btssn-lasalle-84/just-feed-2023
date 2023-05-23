@@ -35,7 +35,13 @@ class Intervention;
  * @def VERSION_APPLICATION
  * @brief Définit la version de l'application
  */
-#define VERSION_APPLICATION QString("v0.1")
+#define VERSION_APPLICATION QString("v0.2")
+
+/**
+ * @def SANS_BDD
+ * @brief À définir pour ne pas utiliser l'accès à la base de données
+ */
+//#define SANS_BDD
 
 #define TAILLE_POLICE 14
 #define BAC_VIDE      30
@@ -85,7 +91,7 @@ class IHMJustFeed : public QWidget
     Q_OBJECT
   private:
     // Attributs
-    BaseDeDonnees*             baseDeDonnees;
+    BaseDeDonnees*             baseDeDonnees; //!< association vers la classe BaseDeDonnees
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
@@ -98,6 +104,7 @@ class IHMJustFeed : public QWidget
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     QStringList            nomColonnes;                   //!< la liste des noms de colonne
     int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
+
     // Widgets
     QWidget*          gui;                      //!< le widget central
     QStackedWidget*   fenetres;                 //!< la pile de fenêtres
@@ -159,6 +166,7 @@ class IHMJustFeed : public QWidget
     void effacerEtatsFenetre();
     void chargerCarte(Distributeur* distributeur);
     void chargerListeOperateurs();
+    Produit* recupererProduit(int idProduit);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
