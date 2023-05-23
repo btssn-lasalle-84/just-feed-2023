@@ -659,10 +659,12 @@ public class BaseDeDonnees
                                   distributeur);
                             }
                             String requeteSQLBacs =
-                              "SELECT Distributeur.*,Produit.*,Bac.* FROM Bac\n"
+                              "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
                               +
                               "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur\n"
                               + "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                              +
+                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
                               +
                               "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             Log.d(TAG, "Requete : " + requeteSQLBacs);
@@ -685,7 +687,7 @@ public class BaseDeDonnees
                                                 resultatRequeteBacs.getDouble("poidsActuel"),
                                                 resultatRequeteBacs.getDouble("poidsTotal"),
                                                 resultatRequeteBacs.getInt("hygrometrie"),
-                                                resultatRequeteBacs.getDouble("remplissage")));
+                                                resultatRequeteBacs.getDouble("poidsAPrevoir")));
                                 }
                                 Log.d(
                                   TAG,
@@ -796,10 +798,12 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
+                            Log.d(TAG, "id operateur : "+idOperateur);
                             String requeteSQL =
-                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur"
-                              + " ON Intervention.idDistributeur = Distributeur.idDistributeur"
-                              + " WHERE Intervention.idOperateur = " + idOperateur;
+                              "SELECT Intervention.* FROM Intervention\n"
+                              + "INNER JOIN Distributeur\n"
+                              + "ON Intervention.idDistributeur = Distributeur.idDistributeur\n"
+                              + "WHERE Intervention.idOperateur = " + idOperateur;
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -833,6 +837,7 @@ public class BaseDeDonnees
                                           distributeur,
                                           etat.valueOf(resultatRequete.getString("etat")),
                                           resultatRequete.getInt("idOperateur"),
+                                          resultatRequete.getInt("idIntervention"),
                                           (resultatRequete.getInt("aRemplir") == 1),
                                           (resultatRequete.getInt("aDepanner") == 1)));
                                     }
@@ -874,7 +879,7 @@ public class BaseDeDonnees
             Intervention.Etats etat = Intervention.Etats.A_FAIRE;
             listeInterventions.clear();
             listeInterventions.add(
-              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, 1, true, false));
+              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, 1,1, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;

@@ -63,6 +63,7 @@ public class Intervention
     private int          idOperateur =
       JustFeed
         .OPERATEUR_NON_DEFINI; //!< L'identifiant de l'opérateur qui s'occupe de l'intervention
+    private int idIntervention; //!< Identifiant de l'intervention
     private boolean aRemplir  = false; //!< Si l'intervention consiste à remplir.
     private boolean aDepanner = false; //!< Si l'intervention consiste à dépanner.
 
@@ -71,7 +72,8 @@ public class Intervention
      * @param dateIntervention
      * @param distributeur
      * @param etat
-     * @parem idOperateur
+     * @param idOperateur
+     * @param idIntervention
      * @param aRemplir
      * @param aDepanner
      */
@@ -79,6 +81,7 @@ public class Intervention
                         Distributeur distributeur,
                         Etats        etat,
                         int          idOperateur,
+                        int          idIntervention,
                         boolean      aRemplir,
                         boolean      aDepanner)
     {
@@ -86,19 +89,20 @@ public class Intervention
               "Intervention() dateIntervention = " + dateIntervention +
                 " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
                 " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
-        this.dateIntervention = dateIntervention;
-        this.distributeur     = distributeur;
-        this.etat             = etat;
-        this.idOperateur      = idOperateur;
-        this.aRemplir         = aRemplir;
-        this.aDepanner        = aDepanner;
+        this.dateIntervention  = dateIntervention;
+        this.distributeur      = distributeur;
+        this.etat              = etat;
+        this.idOperateur       = idOperateur;
+        this.idIntervention    = idIntervention;
+        this.aRemplir          = aRemplir;
+        this.aDepanner         = aDepanner;
     }
 
     // Accesseurs
 
     /**
-     * @brief Méthode d'accés à l'heure d'intervention.
-     * @return l'heure de l'intervention.
+     * @brief Méthode d'accés à la date d'intervention.
+     * @return la date de l'intervention.
      */
     public String getDateIntervention()
     {
@@ -122,6 +126,12 @@ public class Intervention
     {
         return this.idOperateur;
     }
+
+    /**
+     * @brief Méthode d'accès à l'identifiant de l'intervention
+     * @return l'identifiant de l'intervention
+     */
+    public int getIdIntervention() { return this.idIntervention; }
 
     /**
      * @brief Méthode d'accés au nom du distributeur.

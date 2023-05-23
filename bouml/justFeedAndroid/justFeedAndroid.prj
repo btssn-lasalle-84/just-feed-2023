@@ -1,7 +1,7 @@
 format 224
 "justFeedAndroid"
-  revision 16
-  modified_by 42 "tv"
+  revision 17
+  modified_by 2 "btssn2"
   java_root_dir "../../"
 
 
@@ -373,6 +373,71 @@ ${members}}
     sequencediagram 160770 "GestionInterventions"
       sequencediagramsettings end
       overlapping_bars size A0
+    end
+
+    sequencediagram 167298 "ChoixOperateur"
+      sequencediagramsettings end
+      overlapping_bars size A3
+    end
+
+    classinstance 134786 ""
+      type class_ref 128002 // operateur
+      attributes
+        end
+      relations
+        end
+    end
+
+    classinstance 134914 ""
+      type class_ref 136618 // JustFeed
+      attributes
+        end
+      relations
+        end
+    end
+
+    class 161794 "Preferences"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 135042 "SharedPreferences"
+      type class_ref 161794 // Preferences
+      attributes
+        end
+      relations
+        end
+    end
+
+    class 161922 "Tablette"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 135170 ""
+      type class_ref 161922 // Tablette
+      attributes
+        end
+      relations
+        end
     end
   end
 

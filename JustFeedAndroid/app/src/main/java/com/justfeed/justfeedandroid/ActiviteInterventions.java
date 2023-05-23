@@ -247,18 +247,12 @@ public class ActiviteInterventions extends AppCompatActivity
                                                 Intervention.Etats nouvelEtat)
     {
         baseDeDonnees.executerRequete(requete);
+        baseDeDonnees.executerRequete("UPDATE Approvisionnement SET heureApprovisionnement = CURRENT_TIME()\n"
+                +
+                "WHERE Approvisionnement.idIntervention IN\n"
+                +
+                "(SELECT Intervention.idIntervention FROM Intervention WHERE Approvisionnement.idIntervention = 28); ");
         intervention.modifierEtatIntervention(nouvelEtat);
-        rafraichisseur.setRefreshing(false);
-        baseDeDonnees.recupererInterventions(idOperateur);
-    }
-
-    /**
-     * @brief Supprimer une intervention
-     */
-    public static void supprimerIntervention(final String requete, Intervention intervention)
-    {
-        baseDeDonnees.executerRequete(requete);
-        listeInterventions.remove(intervention);
         rafraichisseur.setRefreshing(false);
         baseDeDonnees.recupererInterventions(idOperateur);
     }

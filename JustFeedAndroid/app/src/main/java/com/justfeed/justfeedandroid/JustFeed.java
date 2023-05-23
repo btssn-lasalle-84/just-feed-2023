@@ -148,7 +148,6 @@ public class JustFeed extends AppCompatActivity
                 afficherAPropos();
                 return true;
             default:
-                // donc c'est une sélection dans le sous menu Opérateurs !
                 idOperateur = item.getItemId();
                 sauvegarderIdOperateur();
         }
