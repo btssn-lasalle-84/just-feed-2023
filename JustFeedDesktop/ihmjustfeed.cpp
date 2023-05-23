@@ -25,16 +25,16 @@
 IHMJustFeed::IHMJustFeed(QWidget* parent) :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
     configurationDistributeur(nullptr), planificationIntervention(nullptr),
-    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0), listeOperateurs(nullptr)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
     initialiserProduits();
     initialiserDistributeurs();
     initialiserOperateurs();
-    initialiserIntervention();
+    initialiserInterventions();
     initialiserGUI();
-    // chargerListeOperateurs();
+    chargerListeOperateurs();
     chargerDistributeurs();
 }
 
@@ -489,7 +489,7 @@ void IHMJustFeed::initialiserDistributeurs()
     Produit* pruneaux    = new Produit("Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
+                                       "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit("Abricots secs",
@@ -589,7 +589,7 @@ void IHMJustFeed::initialiserOperateurs()
 /**
  * @brief méthode initialise les différentes interventions
  */
-void IHMJustFeed::initialiserIntervention()
+void IHMJustFeed::initialiserInterventions()
 {
     interventions.clear();
     QVector<QStringList> interventionsBdd;
@@ -616,7 +616,7 @@ void IHMJustFeed::initialiserIntervention()
           interventionsBdd[i][Intervention::TableIntervention::ID_OPERATEUR].toInt(),
           interventionsBdd[i][Intervention::TableIntervention::ID_DISTRIBUTEUR].toInt(),
           QDate::fromString(interventionsBdd[i][Intervention::TableIntervention::DATE_INTERVENTION],
-                            "yyyy/MM/dd"),
+                            "yyyy-MM-dd"),
           aRemplir,
           aDepanner,
           interventionsBdd[i][Intervention::TableIntervention::ETAT]));
@@ -671,21 +671,15 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     itemIntervention->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
     nbLignesDistributeurs += 1;
 
-    QString infoIntervention = nullptr;
+    QString infoIntervention;
     for(int i = 0; i < interventions.size(); i++)
     {
-        qDebug() << Q_FUNC_INFO << "id distributeur" << distributeur.getIdDistributeur();
-        /*qDebug() << Q_FUNC_INFO << "id intervention"
-                 << interventions[i][Intervention::TableIntervention::ID_DISTRIBUTEUR];*/
         if(distributeur.getIdDistributeur() == interventions[i]->getIdDistributeur())
         {
-            infoIntervention = "Etat : " + interventions[i]->getEtat();
+            infoIntervention = interventions[i]->getEtatFormate();
         }
     }
-    if(infoIntervention == nullptr)
-    {
-        infoIntervention = "Etat : non attribué";
-    }
+
     itemDetailIntervention = new QTableWidgetItem(infoIntervention);
     itemDetailIntervention->setFlags(Qt::ItemIsEnabled);
     itemDetailIntervention->setTextAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
@@ -715,6 +709,7 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
 
 /**
  * @brief affiche les détails d'un distributeur
+ * @param distributeur
  */
 void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
 {
@@ -725,6 +720,10 @@ void IHMJustFeed::afficherDistributeur(Distributeur* distributeur)
     afficherFenetreDistributeur();
 }
 
+/**
+ * @brief affiche les détails d'une intervention pour ce distributeur
+ * @param distributeur
+ */
 void IHMJustFeed::afficherIntervention(Distributeur* distributeur)
 {
     qDebug() << Q_FUNC_INFO << "nom" << distributeur->getNom();
@@ -732,6 +731,7 @@ void IHMJustFeed::afficherIntervention(Distributeur* distributeur)
     creerEtatIntervention(distributeur);
     afficherFenetreIntervention();
 }
+
 /**
  * @brief efface le contenu du QTableWidget des distributeurs
  */
@@ -920,32 +920,31 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
                     break;
                 }
             }
-            qDebug() << Q_FUNC_INFO << "nomOperateur" << nomOperateur;
-            interventionIdOperateur->setText("operateur : " + nomOperateur);
-            interventionIdDistributeur->setText("emplacement distributeur : " +
-                                                distributeur->getNom());
+
+            interventionIdOperateur->setText("Opérateur : " + nomOperateur);
+            interventionIdDistributeur->setText("Distributeur : " + distributeur->getNom());
             dateIntervention->setText(
-              "date intervention : " +
-              interventions[i]->getDateIntervention().toString("yyyy-MM-dd"));
+              "Date : " + interventions[i]->getDateIntervention().toString("dd/MM/yyyy"));
+            qDebug() << Q_FUNC_INFO << "dateIntervention"
+                     << interventions[i]->getDateIntervention();
             if(interventions[i]->getARemplir())
             {
-                aRemplirIntervention->setText("à remplir  : Oui");
+                aRemplirIntervention->setText("À remplir  : Oui");
             }
             else
             {
-                aRemplirIntervention->setText("à depanner : Non");
+                aRemplirIntervention->setText("À depanner : Non");
             }
             if(interventions[i]->getADepanner())
             {
-                aDepannerIntervention->setText("à remplir  : Oui");
+                aDepannerIntervention->setText("À remplir  : Oui");
             }
             else
             {
-                aDepannerIntervention->setText("à depanner : Non");
+                aDepannerIntervention->setText("À depanner : Non");
             }
 
-            qDebug() << Q_FUNC_INFO << "etat" << interventions[i]->getEtat();
-            etatIntervention->setText("etat : " + interventions[i]->getEtat());
+            etatIntervention->setText(interventions[i]->getEtatFormate());
         }
     }
 
@@ -1070,13 +1069,12 @@ void IHMJustFeed::chargerCarte(Distributeur* distributeur)
  */
 void IHMJustFeed::chargerListeOperateurs()
 {
-    QString              requete = "SELECT idOperateur,nom,prenom FROM Operateur";
-    QVector<QStringList> listeOperateursBdd;
-    baseDeDonnees->recuperer(requete, listeOperateursBdd);
-    listeOperateurs->addItem("Changer d'opérateur");
-    for(int i = 0; i < listeOperateursBdd.size(); i++)
+    if(listeOperateurs != nullptr)
     {
-        listeOperateurs->addItem(listeOperateursBdd[i].at(CHAMP_NOM_OPERATEUR) + " " +
-                                 listeOperateursBdd[i].at(CHAMP_PRENOM_OPERATEUR));
+        listeOperateurs->addItem("Opérateur");
+        for(int i = 0; i < operateurs.size(); i++)
+        {
+            listeOperateurs->addItem(operateurs[i]->getNom() + " " + operateurs[i]->getPrenom());
+        }
     }
 }

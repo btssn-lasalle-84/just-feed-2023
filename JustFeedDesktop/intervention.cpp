@@ -12,14 +12,16 @@
 #include "bac.h"
 #include "basededonnees.h"
 #include "distributeur.h"
+#include "operateur.h"
 
 /**
  * @brief Constructeur de la classe Intervention
  */
 Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir) :
     baseDeDonnees(BaseDeDonnees::getInstance()), dateIntervention(QDate::currentDate()),
-    distributeurs(listeDistributeursAIntervenir), effectuee(false), aRemplir(false),
-    aDepanner(false), idIntervention(INTERVENTION_PAS_DEFINIE), idOperateur()
+    distributeurs(listeDistributeursAIntervenir), aRemplir(false), aDepanner(false),
+    idIntervention(ID_INTERVENTION_NON_DEFINI), idOperateur(ID_OPERATEUR_NON_DEFINI),
+    idDistributeur(ID_DISTRIBUTEUR_NON_DEFINI), etat(INCONNU)
 {
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention << "nb distributeurs"
              << listeDistributeursAIntervenir.size();
@@ -35,12 +37,14 @@ Intervention::Intervention(int     idIntervention,
                            bool    aRemplir,
                            bool    aDepanner,
                            QString etat) :
-    idIntervention(idIntervention),
-    idOperateur(idOperateur), idDistributeur(idDistributeur), dateIntervention(dateIntervention),
-    aRemplir(aRemplir), aDepanner(aDepanner), etat(etat)
+    baseDeDonnees(BaseDeDonnees::getInstance()),
+    dateIntervention(dateIntervention), aRemplir(aRemplir), aDepanner(aDepanner),
+    idIntervention(idIntervention), idOperateur(idOperateur), idDistributeur(idDistributeur),
+    etat(Intervention::getEtat(etat))
 {
-    qDebug() << Q_FUNC_INFO << "idIntervention " << idIntervention << " idOperateur " << idOperateur
-             << " dateIntervention " << dateIntervention;
+    qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention << "idIntervention"
+             << idIntervention << "idOperateur" << idOperateur << "idDistributeur" << idDistributeur
+             << "aRemplir" << aRemplir << "aDepanner" << aDepanner << "etat" << etat;
 }
 
 /**
@@ -71,21 +75,27 @@ QVector<Distributeur*> Intervention::getDistributeurs() const
 }
 
 /**
- * @brief Accesseur de l'attribut effectuee
- * @return effectuee
+ * @brief Retourne l'état effectuee de l'intervention
+ * @return bool
  */
 bool Intervention::estEffectuee() const
 {
-    return this->effectuee;
+    if(etat == VALIDEE)
+        return true;
+    else
+        return false;
 }
 
 /**
- * @brief Retourne un booléen si il faut intervenir sur au moins un distributeur
- * @return !effectuee
+ * @brief Retourne un booléen s'il faut intervenir
+ * @return bool
  */
 bool Intervention::estAIntervenir() const
 {
-    return !this->effectuee;
+    if(etat == A_FAIRE)
+        return true;
+    else
+        return false;
 }
 
 /**
@@ -116,7 +126,7 @@ bool Intervention::getADepanner() const
 }
 
 /**
- * @brief Accesseur de l'attribut numeroIntervention
+ * @brief Accesseur de l'attribut idIntervention
  * @return int
  */
 int Intervention::getIdIntervention() const
@@ -134,7 +144,7 @@ int Intervention::getIdOperateur() const
 }
 
 /**
- * @brief Accesseur de l'attribut idOperateur
+ * @brief Accesseur de l'attribut idDistributeur
  * @return int
  */
 int Intervention::getIdDistributeur() const
@@ -144,11 +154,20 @@ int Intervention::getIdDistributeur() const
 
 /**
  * @brief Accesseur de l'attribut etat
- * @return QString
+ * @return QString formaté pour la base de données
  */
 QString Intervention::getEtat() const
 {
-    return this->etat;
+    return Intervention::getEtat(this->etat);
+}
+
+/**
+ * @brief Accesseur de l'attribut etat
+ * @return QString formatée pour un affichage
+ */
+QString Intervention::getEtatFormate() const
+{
+    return Intervention::getEtatFormate(this->etat);
 }
 
 /**
@@ -179,7 +198,7 @@ void Intervention::setIdOperateur(const int& idOperateur)
 }
 
 /**
- * @brief Mutateur de l'attribut numeroIntervention
+ * @brief Mutateur de l'attribut idIntervention
  * @param numeroIntervention
  */
 void Intervention::setIdIntervention(const int& numeroIntervention)
@@ -188,7 +207,7 @@ void Intervention::setIdIntervention(const int& numeroIntervention)
 }
 
 /**
- * @brief Mutateur de l'attribut numeroIntervention
+ * @brief Mutateur de l'attribut idDistributeur
  * @param numeroDistributeur
  */
 void Intervention::setIdDistributeur(const int& numeroDistributeur)
@@ -202,7 +221,7 @@ void Intervention::setIdDistributeur(const int& numeroDistributeur)
  */
 void Intervention::setEtat(const QString& etat)
 {
-    this->etat = etat;
+    this->etat = Intervention::getEtat(etat);
 }
 
 /**
@@ -215,26 +234,28 @@ void Intervention::ajouterDistributeur(Distributeur* distributeur)
 }
 
 /**
- * @brief Mutateur de l'attribut effectuee
+ * @brief Modifie l'état de l'intervention
  * @param effectuee
  */
-void Intervention::effectuer(const bool effectuee)
+void Intervention::effectuer(bool effectuee)
 {
-    this->effectuee = effectuee;
+    if(effectuee)
+        this->etat = VALIDEE;
+    else
+        this->etat = A_FAIRE;
 }
 
 /**
- * @brief Modifie l'état effectue de l'intervention
- * @param effectuee
+ * @brief Modifie l'état de l'intervention
+ * @param aIntervenir
  */
 void Intervention::intervenir(bool aIntervenir)
 {
-    this->effectuee = !aIntervenir;
+    effectuer(!aIntervenir);
 }
 
 /**
  * @brief Crée une nouvelle intervention
- * @return void
  */
 void Intervention::creer()
 {
@@ -245,7 +266,7 @@ void Intervention::creer()
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
         this->idIntervention = ajouterIntervention(i);
     }
-    if(this->idIntervention != INTERVENTION_PAS_DEFINIE)
+    if(this->idIntervention != ID_INTERVENTION_NON_DEFINI)
     {
         intervenir(true);
         for(int i = 0; i < distributeurs.size(); ++i)
@@ -256,10 +277,10 @@ void Intervention::creer()
 }
 
 /**
- * @brief Modifie l'état de l'intervention si elle est à remplir, depanner ou les deux
- * @return void
+ * @brief Modifie l'état de l'intervention si elle est à remplir, à depanner ou les deux
+ * @param indexDistributeur
  */
-void Intervention::affecterEtatIntervention(int const indexDistributeur)
+void Intervention::affecterEtatIntervention(int indexDistributeur)
 {
     this->setARemplir(false);
     this->setADepanner(false);
@@ -294,15 +315,16 @@ void Intervention::affecterEtatIntervention(int const indexDistributeur)
 
 /**
  * @brief Insére une nouvelle intervention dans la bdd
+ * @param indexDistributeur
  * @return int le numéro d'intervention ou -1 en cas d'échec
  */
-int Intervention::ajouterIntervention(const int indexDistributeur)
+int Intervention::ajouterIntervention(int indexDistributeur)
 {
     int numeroIntervention = estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur());
     QString requete;
     if(this->getARemplir() || this->getADepanner())
     {
-        if(numeroIntervention == INTERVENTION_PAS_DEFINIE)
+        if(numeroIntervention == ID_INTERVENTION_NON_DEFINI)
         {
             requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
                       "etat, aRemplir, aDepanner) VALUES (" +
@@ -323,7 +345,7 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
             if(conversion)
                 return numeroIntervention;
             else
-                return INTERVENTION_PAS_DEFINIE;
+                return ID_INTERVENTION_NON_DEFINI;
         }
 
         if(this->getADepanner())
@@ -350,9 +372,9 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
 
 /**
  * @brief Ajoute les approvisionnements nécessaires des bacs dans la bdd
- * @return void
+ * @param indexDistributeur
  */
-void Intervention::ajouterApprovisionnement(const int indexDistributeur)
+void Intervention::ajouterApprovisionnement(int indexDistributeur)
 {
     QString          requete = "SELECT idBac FROM Approvisionnement";
     QVector<QString> listeDeBacPlanifie;
@@ -361,9 +383,9 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
     for(int j = 0; j < distributeurs[indexDistributeur]->getNbBacs(); j++)
     {
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
-           !bacEstAttribue(indexDistributeur, j))
+           !estBacAttribue(indexDistributeur, j))
         {
-            qDebug() << Q_FUNC_INFO << "bacEstAttribue" << bacEstAttribue(indexDistributeur, j);
+            qDebug() << Q_FUNC_INFO << "bacEstAttribue" << estBacAttribue(indexDistributeur, j);
             if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
@@ -387,12 +409,15 @@ void Intervention::ajouterApprovisionnement(const int indexDistributeur)
  * @param idBac
  * @return bool
  */
-bool Intervention::bacEstAttribue(const int idDistributeur, const int idBac)
+bool Intervention::estBacAttribue(int idDistributeur, int idBac)
 {
+    /**
+     * @todo Cette requête me semble insuffisante
+     */
     QString          requete = "SELECT idBac FROM Approvisionnement";
     QVector<QString> listeDeBacPlanifie;
     baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
-    qDebug() << Q_FUNC_INFO << "idIntervention" << requete;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
 
     for(int i = 0; i < listeDeBacPlanifie.size(); i++)
     {
@@ -409,7 +434,7 @@ bool Intervention::bacEstAttribue(const int idDistributeur, const int idBac)
  * @brief Vérifie si le distributeur a déja une intervention à faire ou en cours
  * @return bool l'idIntervention ou -1 sinon
  */
-int Intervention::estPlanifiee(const int idDistributeur)
+int Intervention::estPlanifiee(int idDistributeur)
 {
     QString requete;
     requete = "SELECT idIntervention,idDistributeur FROM Intervention WHERE idDistributeur = " +
@@ -425,5 +450,51 @@ int Intervention::estPlanifiee(const int idDistributeur)
             return idInterventionsBdd[i].at(0).toInt();
         }
     }
-    return INTERVENTION_PAS_DEFINIE;
+    return ID_INTERVENTION_NON_DEFINI;
+}
+
+/**
+ * @brief Retourne l'état sous forme de QString
+ * @param etat
+ * @return QString
+ */
+QString Intervention::getEtat(EtatIntervention etat)
+{
+    if(etat >= A_FAIRE && etat < NB_ETATS)
+    {
+        QVector<QString> etats = { "A_FAIRE", "VALIDEE", "EN_COURS" };
+        return etats[etat];
+    }
+    return QString();
+}
+
+/**
+ * @brief Retourne l'état sous forme de EtatIntervention
+ * @param etat
+ * @return EtatIntervention
+ */
+Intervention::EtatIntervention Intervention::getEtat(const QString& etat)
+{
+    QVector<QString> etats = { "A_FAIRE", "VALIDEE", "EN_COURS" };
+    for(int i = 0; i < etats.size(); ++i)
+    {
+        if(etats[i] == etat)
+            return EtatIntervention(i);
+    }
+    return INCONNU;
+}
+
+/**
+ * @brief Retourne l'état sous forme de QString
+ * @param etat
+ * @return QString
+ */
+QString Intervention::getEtatFormate(EtatIntervention etat)
+{
+    if(etat >= A_FAIRE && etat < NB_ETATS)
+    {
+        QVector<QString> etats = { "À FAIRE", "VALIDÉE", "EN COURS" };
+        return etats[etat];
+    }
+    return QString();
 }

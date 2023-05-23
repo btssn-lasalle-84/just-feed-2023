@@ -13,6 +13,8 @@
 #include <QString>
 #include <QStringList>
 
+#define ID_OPERATEUR_NON_DEFINI -1
+
 class Operateur
 {
   public:

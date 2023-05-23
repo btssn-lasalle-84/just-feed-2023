@@ -89,9 +89,9 @@ class IHMJustFeed : public QWidget
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
-                           planificationIntervention; //!< la boîte de dialogue pour créer une intervention
-    QVector<Distributeur*> distributeurs;             //!< les distributeurs
-    QVector<Operateur*>    operateurs;                //!< les operateurs
+      planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
+    QVector<Distributeur*> distributeurs; //!< les distributeurs
+    QVector<Operateur*>    operateurs;    //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
@@ -134,7 +134,6 @@ class IHMJustFeed : public QWidget
     QLabel*               etatIntervention;
     QComboBox*            listeOperateurs;
     QWebView*             vueCarte;
-    int                   identifiantIntervention;
 
     void initialiserGUI();
     void instancierWidgets();
@@ -145,7 +144,7 @@ class IHMJustFeed : public QWidget
     void initialiserDistributeurs();
     void initialiserProduits();
     void initialiserOperateurs();
-    void initialiserIntervention();
+    void initialiserInterventions();
     void chargerDistributeurs();
     void afficherDistributeurTable(const Distributeur& distributeur);
     void afficherDistributeur(Distributeur* distributeur);

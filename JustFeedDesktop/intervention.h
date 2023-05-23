@@ -13,8 +13,7 @@
 #include <QString>
 #include <QTime>
 
-#define INTERVENTION_PAS_DEFINIE -1
-#define OPERATEUR_NON_DEFINI     -1
+#define ID_INTERVENTION_NON_DEFINI -1
 
 class Distributeur;
 class Produit;
@@ -25,7 +24,7 @@ class Intervention
   public:
     /**
      * @enum TableIntervention
-     * @brief
+     * @brief Les colonnes de la table Intervention
      */
     enum TableIntervention
     {
@@ -46,19 +45,30 @@ class Intervention
         POIDS_A_PREVOIR,
         HEURE_APPROVISIONNEMENT
     };
+    /**
+     * @enum EtatIntervention
+     * @brief Les différents états d'une intervention
+     */
+    enum EtatIntervention
+    {
+        INCONNU = -1,
+        A_FAIRE,
+        VALIDEE,
+        EN_COURS,
+        NB_ETATS
+    };
 
   private:
     BaseDeDonnees*         baseDeDonnees;      //!< association avec la base de données
     QDate                  dateIntervention;   //!< la date de l'intervention
     QVector<QTime>         heuresIntervention; //!< l'heure de l'intervention
     QVector<Distributeur*> distributeurs;  //!< les distributeurs sur lesquels il faut intervenir
-    bool                   effectuee;      //!< si l'intervention a été effectuée
     bool                   aRemplir;       //!< si on doit remplir au moins un distributeur
     bool                   aDepanner;      //!< si on doit dépanner au moins un distributeur
     int                    idIntervention; //!< id de l'intervention
     int                    idOperateur;    //!< id de l'opérateur
     int                    idDistributeur; //!< id du distributeur au quel l'intervention appartient
-    QString                etat;           //!< etat de l'intervention
+    EtatIntervention       etat;           //!< etat de l'intervention
 
   public:
     explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
@@ -79,6 +89,7 @@ class Intervention
     int                    getIdOperateur() const;
     int                    getIdDistributeur() const;
     QString                getEtat() const;
+    QString                getEtatFormate() const;
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
@@ -92,11 +103,15 @@ class Intervention
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);
     void                   creer();
-    void                   affecterEtatIntervention(int const indexDistributeur);
-    int                    ajouterIntervention(const int indexDistributeur);
-    void                   ajouterApprovisionnement(int const indexDistributeur);
-    int                    estPlanifiee(const int idDistributeur);
-    bool                   bacEstAttribue(const int idDistributeur, const int idBac);
+    void                   affecterEtatIntervention(int indexDistributeur);
+    int                    ajouterIntervention(int indexDistributeur);
+    void                   ajouterApprovisionnement(int indexDistributeur);
+    int                    estPlanifiee(int idDistributeur);
+    bool                   estBacAttribue(int idDistributeur, int idBac);
+
+    static QString          getEtat(EtatIntervention etat);
+    static EtatIntervention getEtat(const QString& etat);
+    static QString          getEtatFormate(EtatIntervention etat);
 };
 
 #endif // INTERVENTION_H
