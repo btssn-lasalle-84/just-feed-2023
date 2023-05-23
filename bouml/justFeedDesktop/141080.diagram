@@ -1,0 +1,74 @@
+format 224
+
+classinstancecanvas 128152 classinstance_ref 134552 // 
+  xyz 70 4 2005 life_line_z 2000
+end
+classinstance 128280 class_ref 128536 // IHMJustFeed
+  name ""   xyz 310 4 2005 life_line_z 2000
+note 128792 "clic sur l'une des cases de la colonne etat intervention
+"
+  xyzwh 141 140 2000 163 73
+textcanvas 129048 "<<Signal>>"
+  xyzwh 248 118 2000 75 15
+textcanvas 129432 "<<slot>>"
+  xyzwh 421.5 106.5 2000 75 15
+fragment 129816 "alt"
+  xyzwh 5 218 3005 641 212
+end
+textcanvas 129944 "[Si un l'item de la colonne intervention a etait cliqué]"
+  xyzwh 15 251 2000 355 29
+durationcanvas 128408 classinstance_ref 128152 // :OpÃ©rateur
+  xyzwh 108 92 2010 11 40
+end
+durationcanvas 128536 classinstance_ref 128280 // :IHMJustFeed
+  xyzwh 356 94 2010 11 290
+  overlappingdurationcanvas 129176
+    xyzwh 362 109 2020 11 269
+    overlappingdurationcanvas 129560
+      xyzwh 368 232 2030 11 140
+      overlappingdurationcanvas 130072
+	xyzwh 374 265 2040 11 25
+      end
+      overlappingdurationcanvas 130328
+	xyzwh 374 308 2040 11 25
+      end
+      overlappingdurationcanvas 130584
+	xyzwh 374 341 2040 11 25
+      end
+    end
+  end
+end
+msg 128664 asynchronous
+  from durationcanvas_ref 128408
+  to durationcanvas_ref 128536
+  yz 94 2015 explicitmsg "itemClicked()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 194 79
+reflexivemsg 129304 synchronous
+  to durationcanvas_ref 129176
+  yz 109 2025 explicitmsg "selectionnerDistributeur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 380 89
+reflexivemsg 129688 synchronous
+  to durationcanvas_ref 129560
+  yz 232 2035 explicitmsg "afficherIntervention()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 412 226
+reflexivemsg 130200 synchronous
+  to durationcanvas_ref 130072
+  yz 265 2045 msg operation_ref 175914 // "effacerEtatDistributeur() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 393 249
+reflexivemsg 130456 synchronous
+  to durationcanvas_ref 130328
+  yz 308 2045 explicitmsg "creerEtatIntervention()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 386 292
+reflexivemsg 130712 synchronous
+  to durationcanvas_ref 130584
+  yz 341 2045 msg operation_ref 176554 // "afficherFenetreIntervention() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 394 326
+line 128920 -_-_
+  from ref 128664 z 2016 to ref 128792
+end

@@ -1,6 +1,6 @@
 format 224
 "justFeedDesktop"
-  revision 14
+  revision 16
   modified_by 24 "btssn2"
   cpp_root_dir "../../"
 
@@ -252,6 +252,11 @@ ${inlines}
 	  stereotype "extend"
 	  on usecase_ref 128002 // Planifier une intervention
       end
+
+      simplerelation 128152
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
     end
 
     usecase 128770 "Géolocaliser un distributeur"
@@ -278,6 +283,188 @@ ${inlines}
       simplerelation 128770
 	-_->
 	  stereotype "extend"
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+
+      simplerelation 129048
+	-_->
+	  on usecase_ref 128386 // Visualiser l'état du distributeur
+      end
+    end
+
+    usecase 128024 "visualiser une intervention"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128024
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+
+      simplerelation 128536
+	-_->
+	  on usecase_ref 128152 // selectionner un distributeur qui a une intervention
+      end
+    end
+
+    usecase 128152 "selectionner un distributeur qui a une intervention"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128280
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+
+      simplerelation 128408
+	-_->
+	  on usecase_ref 128130 // Lister les distributeurs
+      end
+    end
+
+    usecase 128280 "changer le prix"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128792
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+
+      simplerelation 129176
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128408 "modifier le produit"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128664
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128536 "cr�er un bac"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128920
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128664 "Selectionner des bacs a remplir ou depanner"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 129304
+	-_->
 	  on usecase_ref 128002 // Planifier une intervention
       end
     end
@@ -426,6 +613,34 @@ ${inlines}
     sequencediagram 134826 "Visualiser l'état du distributeur"
       sequencediagramsettings end
       overlapping_bars size A0
+    end
+
+    sequencediagram 141080 "visualisation d'une intervention"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    class 142488 "operateur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 134552 ""
+      type class_ref 128002 // Opérateur
+      attributes
+        end
+      relations
+        end
     end
   end
 
