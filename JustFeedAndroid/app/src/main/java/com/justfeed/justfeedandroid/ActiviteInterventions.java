@@ -47,6 +47,7 @@ public class ActiviteInterventions extends AppCompatActivity
      * Attributs
      */
     private Intervention.Etats        etat; //!< Etat qui sert à trier les interventions
+    private static int idOperateur; //!< Identifiant de l'opérateur
     private static List<Intervention> listeInterventions; //!< Liste des interventions à afficher
     private Handler                   handler;            //!< Le handler utilisé par l'activité
     private static BaseDeDonnees      baseDeDonnees;      //!< Identifiants pour la base de données
@@ -68,13 +69,22 @@ public class ActiviteInterventions extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.interventions);
 
-        initialiserHandler();
         this.positionListe = 0;
+        Bundle extras = getIntent().getExtras();
+        if(extras != null)
+        {
+            idOperateur = extras.getInt("idOperateur");
+        }
+        else
+            idOperateur = JustFeed.OPERATEUR_NON_DEFINI;
+        Log.d(TAG, "onCreate() idOperateur = " + idOperateur);
+
+        initialiserHandler();
         VueIntervention.setContext(this);
         etat          = Intervention.Etats.A_FAIRE;
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
         baseDeDonnees.setHandler(handler);
-        baseDeDonnees.recupererInterventions();
+        baseDeDonnees.recupererInterventions(idOperateur);
     }
 
     /**
@@ -183,7 +193,7 @@ public class ActiviteInterventions extends AppCompatActivity
             {
                 Log.d(TAG, "_onRefresh()");
                 rafraichisseur.setRefreshing(false);
-                baseDeDonnees.recupererInterventions();
+                baseDeDonnees.recupererInterventions(idOperateur);
             }
         });
     }
@@ -239,7 +249,7 @@ public class ActiviteInterventions extends AppCompatActivity
         baseDeDonnees.executerRequete(requete);
         intervention.modifierEtatIntervention(nouvelEtat);
         rafraichisseur.setRefreshing(false);
-        baseDeDonnees.recupererInterventions();
+        baseDeDonnees.recupererInterventions(idOperateur);
     }
 
     /**
@@ -250,6 +260,6 @@ public class ActiviteInterventions extends AppCompatActivity
         baseDeDonnees.executerRequete(requete);
         listeInterventions.remove(intervention);
         rafraichisseur.setRefreshing(false);
-        baseDeDonnees.recupererInterventions();
+        baseDeDonnees.recupererInterventions(idOperateur);
     }
 }

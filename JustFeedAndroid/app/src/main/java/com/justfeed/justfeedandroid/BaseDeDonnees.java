@@ -52,6 +52,7 @@ public class BaseDeDonnees
     public final static int     REQUETE_SQL_SELECT = 6;
     public final static int     REQUETE_SQL_SELECT_DISTRIBUTEURS = 7;
     public final static int     REQUETE_SQL_SELECT_INTERVENTIONS = 8;
+    public final static int     REQUETE_SQL_SELECT_OPERATEURS    = 9;
     private static final String NOM_BDD = "justfeed"; //!< Le nom par défaut de la base de données
     private static final String IDENTIFIANT =
       "justfeed"; //!< Le nom de l'utilisateur par défaut de la base de données
@@ -80,9 +81,7 @@ public class BaseDeDonnees
       new ReentrantLock(true);               //!< mutex pour l'exécution concurrente de requêtes
     private static BaseDeDonnees bdd = null; //!< l'instance unique de BaseDeDonnees (Singleton)
     private Handler handler = null; //<! Le handler pour l'échange de messages entre les threads
-    private List<Distributeur> listeDistributeurs = null; //<! La liste des distributeurs
-    private List<Intervention> listeInterventions = null; //<! La liste des interventions
-
+    private List<Distributeur> listeDistributeurs = null; //!< La liste des distributeurs
     /**
      * @fn getInstance
      * @brief Retourne l'instance BaseDeDonnees
@@ -153,12 +152,11 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees()
     {
-        this.nomBDD             = NOM_BDD;
-        this.identifiant        = IDENTIFIANT;
-        this.motDePasse         = MOT_DE_PASSE;
-        this.hostName           = HOSTNAME;
-        this.port               = PORT_DEFAUT;
-        this.listeInterventions = new ArrayList<Intervention>();
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -176,13 +174,12 @@ public class BaseDeDonnees
      */
     private BaseDeDonnees(Handler handler)
     {
-        this.nomBDD             = NOM_BDD;
-        this.identifiant        = IDENTIFIANT;
-        this.motDePasse         = MOT_DE_PASSE;
-        this.hostName           = HOSTNAME;
-        this.port               = PORT_DEFAUT;
-        this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
+        this.nomBDD      = NOM_BDD;
+        this.identifiant = IDENTIFIANT;
+        this.motDePasse  = MOT_DE_PASSE;
+        this.hostName    = HOSTNAME;
+        this.port        = PORT_DEFAUT;
+        this.handler     = handler;
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBDD + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
@@ -215,13 +212,12 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD             = nomBase;
-        this.identifiant        = identifiant;
-        this.motDePasse         = motDePasse;
-        this.hostName           = hostName;
-        this.port               = port;
-        this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -252,13 +248,12 @@ public class BaseDeDonnees
         Log.d(TAG,
               "BaseDeDonnees() nom = " + nomBase + " - identifiant = " + identifiant +
                 " - motDePasse = " + motDePasse + " - hostName = " + hostName);
-        this.nomBDD             = nomBase;
-        this.identifiant        = identifiant;
-        this.motDePasse         = motDePasse;
-        this.hostName           = hostName;
-        this.port               = port;
-        this.handler            = handler;
-        this.listeInterventions = new ArrayList<Intervention>();
+        this.nomBDD      = nomBase;
+        this.identifiant = identifiant;
+        this.motDePasse  = motDePasse;
+        this.hostName    = hostName;
+        this.port        = port;
+        this.handler     = handler;
         // Initialise l'url pour la connexion à la base de données MySQL
         // this.url = "jdbc:mysql://" + this.hostName + "/" + this.nomBDD +
         // "?useUnicode=true&characterEncoding=utf8&useSSL=false";
@@ -610,8 +605,7 @@ public class BaseDeDonnees
     }
 
     /**
-     * @brief Méthode qui retourne une liste de distributeurs de la BDD.
-     * @return listeDistributeurs
+     * @brief Méthode qui récupère une liste de distributeurs de la BDD.
      */
     public void recupererDistributeurs()
     {
@@ -625,9 +619,10 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs = "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
-                                    +
-                                    " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
+                            String requeteSQLDistributeurs =
+                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                              +
+                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -658,7 +653,7 @@ public class BaseDeDonnees
                                   (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
                                 distributeur.depanner(
                                   (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
-                                Log.d(TAG, "Nouveau distributeur : "+distributeur);
+                                Log.d(TAG, "Nouveau distributeur : " + distributeur);
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   distributeur);
@@ -786,11 +781,11 @@ public class BaseDeDonnees
     }
 
     /**
-     * @brief Méthode qui retourne une liste d'interventions de la BDD.
-     * @return listeInterventions
+     * @brief Méthode qui récupère une liste d'interventions de la BDD.
      */
-    public void recupererInterventions()
+    public void recupererInterventions(final int idOperateur)
     {
+        List<Intervention> listeInterventions = new ArrayList<Intervention>();
         if(BaseDeDonnees.active)
         {
             if(estConnecte())
@@ -802,13 +797,15 @@ public class BaseDeDonnees
                         try
                         {
                             String requeteSQL =
-                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur ON Intervention.idDistributeur = Distributeur.idDistributeur";
+                              "SELECT Intervention.* FROM Intervention INNER JOIN Distributeur"
+                              + " ON Intervention.idDistributeur = Distributeur.idDistributeur"
+                              + " WHERE Intervention.idOperateur = " + idOperateur;
                             Log.d(TAG, "Requete : " + requeteSQL);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                                         ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequete = statement.executeQuery(requeteSQL);
-                            listeInterventions        = new ArrayList<Intervention>();
+
                             while(resultatRequete.next())
                             {
                                 for(Distributeur distributeur: listeDistributeurs)
@@ -835,6 +832,7 @@ public class BaseDeDonnees
                                           resultatRequete.getString("dateIntervention"),
                                           distributeur,
                                           etat.valueOf(resultatRequete.getString("etat")),
+                                          resultatRequete.getInt("idOperateur"),
                                           (resultatRequete.getInt("aRemplir") == 1),
                                           (resultatRequete.getInt("aDepanner") == 1)));
                                     }
@@ -876,12 +874,81 @@ public class BaseDeDonnees
             Intervention.Etats etat = Intervention.Etats.A_FAIRE;
             listeInterventions.clear();
             listeInterventions.add(
-              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, true, false));
+              new Intervention("2023-06-01", listeDistributeurs.get(0), etat, 1, true, false));
             Message message = new Message();
             message.what    = REQUETE_SQL_SELECT_INTERVENTIONS;
             message.obj     = listeInterventions;
             if(handler != null)
                 handler.sendMessage(message);
+        }
+    }
+
+    /**
+     * @brief Méthode qui récupère une liste d'opérateur de la BDD.
+     */
+    public void recupererOperateurs()
+    {
+        List<Operateur> listeOperateurs = new ArrayList<Operateur>();
+        if(BaseDeDonnees.active)
+        {
+            if(estConnecte())
+            {
+                Thread requeteBDD = new Thread(new Runnable() {
+                    public void run()
+                    {
+                        mutex.lock();
+                        try
+                        {
+                            String requeteSQL = "SELECT Operateur.* FROM Operateur;";
+                            Log.d(TAG, "Requete : " + requeteSQL);
+                            Statement statement =
+                              connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                        ResultSet.CONCUR_READ_ONLY);
+                            ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+                            while(resultatRequete.next())
+                            {
+                                listeOperateurs.add(
+                                  new Operateur(resultatRequete.getString("nom"),
+                                                resultatRequete.getString("prenom"),
+                                                resultatRequete.getString("identifiant"),
+                                                resultatRequete.getString("email"),
+                                                resultatRequete.getInt("idOperateur")));
+                            }
+                            Message message = new Message();
+                            message.what    = REQUETE_SQL_SELECT_OPERATEURS;
+                            message.obj     = listeOperateurs;
+                            if(handler != null)
+                                handler.sendMessage(message);
+                        }
+                        catch(Exception e)
+                        {
+                            // e.printStackTrace();
+                            Log.e(TAG, "recupererOperateurs() Exception = " + e.toString());
+                        }
+                        finally
+                        {
+                            mutex.unlock();
+                        }
+                    }
+                });
+
+                requeteBDD.start();
+            }
+            else
+            {
+                listeOperateurs.clear();
+                listeOperateurs.add(
+                  new Operateur("FARGIER", "Mayeul", "mfargier", "mfargier@justfeed.fr", 1));
+                listeOperateurs.add(
+                  new Operateur("ROUANET", "Nicolas", "nrouanet", "nrouanet@justfeed.fr", 2));
+                listeOperateurs.add(
+                  new Operateur("SALAUN", "Matthieu", "msalaun", "msalaun@justfeed.fr", 3));
+                Message message = new Message();
+                message.what    = REQUETE_SQL_SELECT_OPERATEURS;
+                message.obj     = listeOperateurs;
+                if(handler != null)
+                    handler.sendMessage(message);
+            }
         }
     }
 }
