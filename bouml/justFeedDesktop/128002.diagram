@@ -6,14 +6,15 @@ classcanvas 128002 class_ref 128002 // Opérateur
 end
 usecasecanvas 128130 usecase_ref 128002 // Planifier une intervention
   color darkgreen
-  xyzwh 235 221 3005 64 32 label_xy 186 262
+  xyzwh 206 271 3005 73 39 label_xy 129 315
 end
 usecasecanvas 128258 usecase_ref 128130 // Lister les distributeurs
   color darkorange
   xyzwh 279 76 3005 64 32 label_xy 243 50
 end
 usecasecanvas 128386 usecase_ref 128258 // Visualiser les statistiques
-  xyzwh 539 135 3005 64 32 label_xy 496 112
+  color yellow
+  xyzwh 677 168 3005 64 32 label_xy 634 145
 end
 usecasecanvas 128514 usecase_ref 128386 // Visualiser l'état du distributeur
   color darkorange
@@ -21,33 +22,94 @@ usecasecanvas 128514 usecase_ref 128386 // Visualiser l'état du distributeur
 end
 usecasecanvas 128642 usecase_ref 128514 // Configurer les distributeurs
   color darkgreen
-  xyzwh 227 366 3005 64 32 label_xy 172 398
+  xyzwh 183 409 3005 64 32 label_xy 130 388
 end
+textcanvas 128664 "<<extend>>"
+  xyzwh 350 166 2000 79 15
 usecasecanvas 128770 usecase_ref 128642 // Imprimer une fiche intervention
   color darkgreen
-  xyzwh 534 314 3005 64 32 label_xy 479 286
+  xyzwh 379 281 3005 64 32 label_xy 326 262
 end
 usecasecanvas 128898 usecase_ref 128770 // Géolocaliser un distributeur
   color darkorange
-  xyzwh 533 224 3005 64 32 label_xy 476 205
+  xyzwh 718 64 3005 64 32 label_xy 648 38
 end
-line 129410 ----
-  from ref 128002 z 2006 to ref 128130
+textcanvas 129304 "<<extend>>"
+  xyzwh 297.5 301.5 2000 79 15
+usecasecanvas 130200 usecase_ref 128152 // selectionner un distributeur qui a une intervention
+  color darkgreen
+  xyzwh 460 219 3011 64 32 label_xy 345 202
+end
+usecasecanvas 130584 usecase_ref 128024 // visualiser une intervention
+  color darkgreen
+  xyzwh 715.5 250.5 3005 64 32 label_xy 662.5 282.5
+end
+usecasecanvas 130840 usecase_ref 128280 // changer le prix
+  color darkgreen
+  xyzwh 292 516 3005 77 37 label_xy 289 550
+end
+usecasecanvas 130968 usecase_ref 128408 // modifier le produit
+  color darkgreen
+  xyzwh 173 522 3005 64 32 label_xy 147 554
+end
+usecasecanvas 131096 usecase_ref 128536 // cr�er un bac
+  color darkgreen
+  xyzwh 356 462 3005 64 32 label_xy 347 494
+end
+textcanvas 131608 "<<extend>>"
+  xyzwh 128.5 506.5 2000 79 15
+textcanvas 131736 "<<extend>>"
+  xyzwh 249.5 476.5 2000 79 15
+textcanvas 131864 "<<extend>>"
+  xyzwh 299.5 434.5 2000 79 15
+textcanvas 132120 "<<extend>>
+"
+  xyzwh 615 70 2000 79 33
+textcanvas 132632 "<<extend>>"
+  xyzwh 553.5 281.5 2000 79 15
+usecasecanvas 132760 usecase_ref 128664 // Selectionner des bacs a remplir ou depanner
+  color darkgreen
+  xyzwh 443 348 3005 64 32 label_xy 329 380
+end
+textcanvas 133016 "<<extend>>"
+  xyzwh 315.5 335.5 2000 79 15
+simplerelationcanvas 129176 simplerelation_ref 128152
+  from ref 128770 z 3006 to ref 128130
+end
 line 129666 ----
   from ref 128002 z 3006 to ref 128642
+line 130072 ----
+  from ref 128130 z 3006 to ref 128002
 simplerelationcanvas 130178 simplerelation_ref 128130
-  from ref 128130 z 3006 stereotype "<<include>>" xyz 246 163 3000 to ref 128258
+  from ref 128130 z 3006 stereotype "<<include>>" xyz 235.5 188 3000 to ref 128258
+end
+simplerelationcanvas 130328 simplerelation_ref 128408
+  from ref 130200 z 3012 to ref 128258
+end
+simplerelationcanvas 130712 simplerelation_ref 128536
+  from ref 130584 z 3012 to ref 130200
 end
 simplerelationcanvas 130946 simplerelation_ref 128386
-  from ref 128386 z 3006 stereotype "<<extend>>" xyz 395 128 3000 to ref 128258
+  from ref 128386 z 3006 stereotype "<<extend>>" xyz 464 144.5 3000 to ref 128258
 end
 simplerelationcanvas 131074 simplerelation_ref 128514
   from ref 128514 z 3006 stereotype "<<extend>>" xyz 427 67 3000 to ref 128258
 end
-simplerelationcanvas 131202 simplerelation_ref 128642
-  from ref 128770 z 3006 stereotype "<<extend>>" xyz 372 294 3000 to ref 128130
+simplerelationcanvas 131224 simplerelation_ref 128664
+  decenter_end 328
+  from ref 130968 z 3006 to ref 128642
 end
-simplerelationcanvas 131330 simplerelation_ref 128770
-  from ref 128898 z 3006 stereotype "<<extend>>" xyz 381 241 3000 to ref 128130
+simplerelationcanvas 131480 simplerelation_ref 128920
+  from ref 131096 z 3006 to ref 128642
+end
+simplerelationcanvas 131992 simplerelation_ref 129048
+  from ref 128898 z 3006 to ref 128514
+end
+simplerelationcanvas 132504 simplerelation_ref 129176
+  from ref 130840 z 3006 to ref 128642
+end
+simplerelationcanvas 132888 simplerelation_ref 129304
+  from ref 132760 z 3006 to point 312 350
+  line 133144 z 3006 to ref 128130
 end
 end

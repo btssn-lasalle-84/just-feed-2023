@@ -1,5 +1,5 @@
 /**
- * @file        Bac.cpp
+ * @file        bac.cpp
  * @brief       Définition de la classe Bac.
  * @details     La classe Bac \c Cette classe permet de définir un bac
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>

@@ -1,5 +1,5 @@
 /**
- * @file        Statistiques.h
+ * @file        statistiques.h
  * @brief       Déclaration de la classe Statistiques.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @version     0.1
@@ -13,14 +13,12 @@ class Statistiques
 {
   private:
     int frequenceIntervetion; //!< frequence d'intervention pour chaque bac
-    int poidsMoyenProduits; //!< poids moyen à prendre pour remplir un bac
-    int moyenneKilometres; //!< kilometres moyen lors d'une intervention
+    int poidsMoyenProduits;   //!< poids moyen à prendre pour remplir un bac
+    int moyenneKilometres;    //!< kilometres moyen lors d'une intervention
 
   public:
     Statistiques();
-    Statistiques(int frequenceIntervetion,
-                 int poidsMoyenProduits,
-                 int moyenneKilometres);
+    Statistiques(int frequenceIntervetion, int poidsMoyenProduits, int moyenneKilometres);
     ~Statistiques();
 
     // Accesseurs

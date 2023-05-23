@@ -175,7 +175,14 @@ void PlanificationIntervention::instancierWidgets()
 void PlanificationIntervention::initialiserWidgets()
 {
     qDebug() << Q_FUNC_INFO;
-    boutonItervention->setText("Créer l'intervention");
+    if(distributeurs.size() > 1)
+    {
+        boutonItervention->setText("Créer les interventions");
+    }
+    else
+    {
+        boutonItervention->setText("Créer l'intervention");
+    }
     boutonItervention->setEnabled(false);
     editionDate->setDisplayFormat("dd/MM/yyyy");
     chargerListeOperateurs();
@@ -351,18 +358,61 @@ void PlanificationIntervention::initialiserEtatDistributeur()
             }
 
             qDebug() << Q_FUNC_INFO << "ADepanner" << distributeurs[i]->getBac(j)->getADepanner();
-            if((distributeurs[i]->getBac(j)->getADepanner()))
+            if(distributeurEstAttribueDepannage(i))
             {
+                qDebug() << Q_FUNC_INFO << "distributeurEstAttribueDepannage"
+                         << distributeurEstAttribueDepannage(i);
                 labelsDesCheckboxDepannage[i][j]->setEnabled(false);
             }
 
             qDebug() << Q_FUNC_INFO << "ARemplir" << distributeurs[i]->getBac(j)->getARemplir();
-            if((distributeurs[i]->getBac(j)->getARemplir()))
+            if(bacEstAttribueRemplissage(i, j))
             {
                 labelsDesCheckboxRemplissage[i][j]->setEnabled(false);
             }
         }
     }
+}
+
+/**
+ * @brief verifie si le bac est attribué
+ * @param idDistributeur
+ * @param idBac
+ */
+bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistributeur, const int idBac)
+{
+    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QVector<QString> listeDeBacPlanifie;
+    baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
+    qDebug() << Q_FUNC_INFO << "idIntervention" << requete;
+
+    for(int i = 0; i < listeDeBacPlanifie.size(); i++)
+    {
+        if(listeDeBacPlanifie[i].toInt() ==
+           distributeurs[idDistributeur]->getBac(idBac)->getIdBac())
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
+ * @brief verifie si le distributeur est deja a depanner
+ * @param idDistributeur
+ */
+bool PlanificationIntervention::distributeurEstAttribueDepannage(const int idDistributeur)
+{
+    QString requete = "SELECT aDepanner FROM Intervention WHERE idDistributeur = " +
+                      QString::number(distributeurs[idDistributeur]->getId()) + ";";
+    QString aDepannerBdd;
+    baseDeDonnees->recuperer(requete, aDepannerBdd);
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    if(aDepannerBdd.toInt() == 1)
+    {
+        return true;
+    }
+    return false;
 }
 
 /**

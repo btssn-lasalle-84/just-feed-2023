@@ -1,0 +1,112 @@
+format 224
+
+classinstancecanvas 128280 classinstance_ref 134936 // 
+  xyz 129 4 2005 life_line_z 2000
+end
+classinstancecanvas 128408 classinstance_ref 135064 // 
+  xyz 459 4 2005 life_line_z 2000
+end
+note 129560 "au clic sur la cellule de la table
+"
+  xyzwh 543 105 2000 139 53
+note 134040 "au clic sur la cellule de la table \"etat d'intervention\"
+
+"
+  xyzwh 266.5 558.5 2000 139 53
+durationcanvas 128536 classinstance_ref 128280 // :Opérateur
+  xyzwh 167 73 2010 11 40
+end
+durationcanvas 128664 classinstance_ref 128408 // :systeme
+  xyzwh 489 73 2010 11 99
+  overlappingdurationcanvas 129304
+    xyzwh 495 84 2020 11 59
+  end
+end
+durationcanvas 130072 classinstance_ref 128280 // :Opérateur
+  xyzwh 167 204 2010 11 40
+end
+durationcanvas 130200 classinstance_ref 128408 // :systeme
+  xyzwh 489 205 2010 11 80
+end
+durationcanvas 131992 classinstance_ref 128280 // :Opérateur
+  xyzwh 167 274 2010 11 164
+end
+durationcanvas 132248 classinstance_ref 128408 // :systeme
+  xyzwh 489 297 2010 11 38
+end
+durationcanvas 132504 classinstance_ref 128408 // :systeme
+  xyzwh 489 355 2010 11 25
+end
+durationcanvas 132760 classinstance_ref 128408 // :systeme
+  xyzwh 489 409 2010 11 25
+end
+durationcanvas 133016 classinstance_ref 128280 // :Opérateur
+  xyzwh 167 470 2010 11 40
+end
+durationcanvas 133144 classinstance_ref 128408 // :systeme
+  xyzwh 489 470 2010 11 25
+end
+durationcanvas 133400 classinstance_ref 128280 // :Opérateur
+  xyzwh 167 535 2010 11 40
+end
+durationcanvas 133528 classinstance_ref 128408 // :systeme
+  xyzwh 489 535 2010 11 45
+end
+msg 128792 asynchronous
+  from durationcanvas_ref 128536
+  to durationcanvas_ref 128664
+  yz 73 2015 explicitmsg "visualiser la liste de distributeur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 188 58
+reflexivemsg 129432 synchronous
+  to durationcanvas_ref 129304
+  yz 84 2025 explicitmsg "afficher le detail d'un distributeur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 538 81
+msg 130328 asynchronous
+  from durationcanvas_ref 130072
+  to durationcanvas_ref 130200
+  yz 205 2015 explicitmsg "selectionner des distributeur � intervenir"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 192 189
+msg 132120 return
+  from durationcanvas_ref 130200
+  to durationcanvas_ref 131992
+  yz 274 2015 explicitmsg "affiche la fenetre d'intervention"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 233 259
+msg 132376 asynchronous
+  from durationcanvas_ref 131992
+  to durationcanvas_ref 132248
+  yz 312 2015 explicitmsg "selectionner les bacs � intervenir"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 225 297
+msg 132632 synchronous
+  from durationcanvas_ref 131992
+  to durationcanvas_ref 132504
+  yz 356 2015 explicitmsg "selectionner l'opperateur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 252 341
+msg 132888 synchronous
+  from durationcanvas_ref 131992
+  to durationcanvas_ref 132760
+  yz 409 2015 explicitmsg "selectionner l'heure d'intervention"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 224 394
+msg 133272 synchronous
+  from durationcanvas_ref 133016
+  to durationcanvas_ref 133144
+  yz 470 2015 explicitmsg "configurer un distributeur"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 251 455
+msg 133656 synchronous
+  from durationcanvas_ref 133400
+  to durationcanvas_ref 133528
+  yz 535 2015 explicitmsg "visualiser les interventions"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 247 520
+line 129688 -_-_
+  from ref 129560 z 2026 to ref 129432
+line 134552 -_-_
+  from ref 133656 z 2016 to ref 134040
+end

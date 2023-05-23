@@ -1,147 +1,147 @@
 format 224
 
 classinstance 128042 class_ref 128536 // IHMJustFeed
-  name ""   xyz 402 4 2000 life_line_z 2000
-classinstance 128170 class_ref 128002 // Opérateur
-  name ""   xyz 12 4 2000 life_line_z 2000
+  name ""   xyz 402.4 4.6 2000 life_line_z 2000
+classinstance 128170 class_ref 128002 // OpÃ©rateur
+  name ""   xyz 23.2 8.2 2000 life_line_z 2000
 classinstance 129834 class_ref 148138 // PlanificationIntervention
-  name ""   xyz 817 4 2000 life_line_z 2000
+  name ""   xyz 816.6 4.6 2000 life_line_z 2000
 fragment 131754 "loop"
-  xyzwh 32 87 1995 982 261
+  xyzwh 31.6 87.6 1995 982 261
 end
-note 131882 "clic sur la case � cocher d'un distributeur"
-  xyzwh 101 233 2000 367 87
-textcanvas 132266 "[chaque bac � remplir ou � d�panner]"
+note 131882 "clic sur la case à cocher d'un distributeur"
+  xyzwh 101.2 233.8 2000 367 87
+textcanvas 132266 "[chaque bac à remplir ou à dépanner]"
   xyzwh 123 1083 2000 500 41
 note 132394 "clic sur le bouton \"Planifier\""
-  xyzwh 105 484 2000 279 91
+  xyzwh 105.2 484.2 2000 279 91
 fragment 132650 "alt"
-  xyzwh 13 594 1980 1731 1960
+  xyzwh 13.4 594.4 1980 1731 1960
 end
 textcanvas 132778 "[nbDistributeursAIntervenir > 0]"
-  xyzwh 84 607 2000 405 30
+  xyzwh 84 607.5 2000 405 30
 fragment 133546 "loop"
   xyzwh 22 1075.5 1975 1298 261
 end
-textcanvas 133674 "[chaque distributeur � intervenir]"
-  xyzwh 137 93 2000 438 33
-note 135082 "clic sur une case � cocher associ�e � l'op�ration sur un bac"
-  xyzwh 104 1203 2000 331 115
-note 135466 "clic sur le nom d'un op�rateur dans la liste d�roulante"
-  xyzwh 105 1514 2000 407 87
-note 135722 "clic sur le bouton \"Cr�er\""
-  xyzwh 114 1835 2000 343 55
+textcanvas 133674 "[chaque distributeur à intervenir]"
+  xyzwh 137.5 93.5 2000 438 33
+note 135082 "clic sur une case à cocher associée à l'opération sur un bac"
+  xyzwh 104.2 1203 2000 331 115
+note 135466 "clic sur le nom d'un opérateur dans la liste déroulante"
+  xyzwh 105.4 1514.6 2000 407 87
+note 135722 "clic sur le bouton \"Créer\""
+  xyzwh 114 1835.6 2000 343 55
 classinstance 136106 class_ref 128792 // Intervention
-  name ""   xyz 1509 4 2000 life_line_z 2000
+  name ""   xyz 1509 4.6 2000 life_line_z 2000
 fragment 136746 "alt"
-  xyzwh 856 1901 1995 854 626
+  xyzwh 855.6 1901.4 1995 854 626
 end
 textcanvas 136874 "[effectuable]"
-  xyzwh 938 1913 2025 160 30
+  xyzwh 937 1912 2025 160 30
 fragment 138026 "ref"
-  refer sequencediagram_ref 134698 // Cr�er une intervention
-  xyzwh 1128 2322 2000 323 105
+  refer sequencediagram_ref 134698 // Créer une intervention
+  xyzwh 1128.2 2322.2 2000 323 105
 end
-durationcanvas 128298 classinstance_ref 128170 // :Opérateur
-  xyzwh 91 165 2010 11 40
+durationcanvas 128298 classinstance_ref 128170 // :OpÃ©rateur
+  xyzwh 61 163.5 2010 11 40
 end
 durationcanvas 128426 classinstance_ref 128042 // :IHMJustFeed
-  xyzwh 493 148 2010 11 174
+  xyzwh 448 147.5 2010 11 174
   overlappingdurationcanvas 128682
-    xyzwh 499 196 2020 11 120
+    xyzwh 454 195 2020 11 120
   end
 end
-durationcanvas 128938 classinstance_ref 128170 // :Opérateur
-  xyzwh 91 430 2010 11 40
+durationcanvas 128938 classinstance_ref 128170 // :OpÃ©rateur
+  xyzwh 61 428.5 2010 11 40
 end
 durationcanvas 129066 classinstance_ref 128042 // :IHMJustFeed
-  xyzwh 493 431 2010 11 315
+  xyzwh 448 428.5 2010 11 319
   overlappingdurationcanvas 129322
-    xyzwh 499 451 2020 11 278
+    xyzwh 454 448.5 2020 11 278
     overlappingdurationcanvas 129578
-      xyzwh 505 527 2030 11 25
+      xyzwh 460 527.5 2030 11 25
     end
   end
 end
 durationcanvas 129962 classinstance_ref 129834 // :PlanificationIntervention
-  xyzwh 976 698 2010 11 356
+  xyzwh 897 696 2010 11 359
   overlappingdurationcanvas 130218
-    xyzwh 982 742 2020 11 306
+    xyzwh 903 741.5 2020 11 306
     overlappingdurationcanvas 130474
-      xyzwh 988 786 2030 11 25
+      xyzwh 909 787 2030 11 25
     end
     overlappingdurationcanvas 130730
-      xyzwh 988 844 2030 11 25
+      xyzwh 909 844 2030 11 25
     end
     overlappingdurationcanvas 130986
-      xyzwh 988 901 2030 11 25
+      xyzwh 909 901.5 2030 11 25
     end
     overlappingdurationcanvas 131242
-      xyzwh 988 958 2030 11 26
+      xyzwh 909 958 2030 11 26
     end
     overlappingdurationcanvas 131498
-      xyzwh 988 1017 2030 11 25
+      xyzwh 909 1017.5 2030 11 25
     end
   end
 end
-durationcanvas 132906 classinstance_ref 128170 // :Opérateur
-  xyzwh 91 1150 2010 11 40
+durationcanvas 132906 classinstance_ref 128170 // :OpÃ©rateur
+  xyzwh 62 1148.5 2010 11 40
 end
 durationcanvas 133034 classinstance_ref 129834 // :PlanificationIntervention
-  xyzwh 976 1151 2010 11 62
+  xyzwh 897 1149 2010 11 64
   overlappingdurationcanvas 133290
-    xyzwh 982 1172 2020 11 25
+    xyzwh 903 1172 2020 11 25
   end
 end
-durationcanvas 133802 classinstance_ref 128170 // :Opérateur
-  xyzwh 91 1455 2010 11 40
+durationcanvas 133802 classinstance_ref 128170 // :OpÃ©rateur
+  xyzwh 61 1453.5 2010 11 41
 end
 durationcanvas 133930 classinstance_ref 129834 // :PlanificationIntervention
-  xyzwh 976 1455 2010 11 39
+  xyzwh 897 1453.5 2010 11 41
   overlappingdurationcanvas 134186
-    xyzwh 982 1463 2020 11 25
+    xyzwh 903 1463.5 2020 11 25
   end
 end
-durationcanvas 134442 classinstance_ref 128170 // :Opérateur
-  xyzwh 91 1781 2010 11 40
+durationcanvas 134442 classinstance_ref 128170 // :OpÃ©rateur
+  xyzwh 62 1778.5 2010 11 43
 end
 durationcanvas 134570 classinstance_ref 129834 // :PlanificationIntervention
-  xyzwh 976 1781 2010 11 725
+  xyzwh 897 1779.5 2010 11 730
   overlappingdurationcanvas 134826
-    xyzwh 982 1792 2020 11 709
+    xyzwh 903 1793 2020 11 709
     overlappingdurationcanvas 136234
-      xyzwh 988 1852 2030 11 31
+      xyzwh 909 1852.5 2030 11 31
     end
     overlappingdurationcanvas 137258
-      xyzwh 988 2136 2030 11 25
+      xyzwh 909 2136 2030 11 25
     end
     overlappingdurationcanvas 138154
-      xyzwh 988 2468 2030 11 25
+      xyzwh 909 2468 2030 11 25
     end
   end
 end
 durationcanvas 136490 classinstance_ref 136106 // :Intervention
-  xyzwh 1590 1960 2010 11 33
+  xyzwh 1551 1961 2010 11 33
 end
 durationcanvas 137002 classinstance_ref 136106 // :Intervention
-  xyzwh 1590 2070 2010 11 25
+  xyzwh 1551 2070 2010 11 25
 end
 durationcanvas 137514 classinstance_ref 136106 // :Intervention
-  xyzwh 1590 2211 2010 11 25
+  xyzwh 1551 2210.5 2010 11 27
 end
 durationcanvas 137770 classinstance_ref 136106 // :Intervention
-  xyzwh 1590 2290 2010 11 25
+  xyzwh 1551 2288.5 2010 11 27
 end
 msg 128554 asynchronous
   from durationcanvas_ref 128298
   to durationcanvas_ref 128426
   yz 166 2015 explicitmsg "itemClicked()"
-  stereotype "<<signal>>" xyz 226 184 3000
+  stereotype "<<signal>>" xyz 235 184 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 214 136
+  label_xy 224 136
 reflexivemsg 128810 synchronous
   to durationcanvas_ref 128682
-  yz 196 2025 msg operation_ref 177066 // "selectionnerDistributeurAIntervenir(inout item : QTableWidgetItem) : void"
+  yz 195 2025 msg operation_ref 177066 // "selectionnerDistributeurAIntervenir(inout item : QTableWidgetItem) : void"
   stereotype "<<slot>>" xyz 543 196 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 512 165
@@ -149,12 +149,12 @@ msg 129194 asynchronous
   from durationcanvas_ref 128938
   to durationcanvas_ref 129066
   yz 431 2015 explicitmsg "clicked()"
-  stereotype "<<signal>>" xyz 225 445 3000
+  stereotype "<<signal>>" xyz 235 444 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 244 401
+  label_xy 254 402
 reflexivemsg 129450 synchronous
   to durationcanvas_ref 129322
-  yz 451 2025 msg operation_ref 176682 // "planifierIntervention() : void"
+  yz 448 2025 msg operation_ref 176682 // "planifierIntervention() : void"
   stereotype "<<slot>>" xyz 539 451 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 511 422
@@ -172,7 +172,7 @@ msg 130090 synchronous
   label_xy 573 668
 reflexivemsg 130346 synchronous
   to durationcanvas_ref 130218
-  yz 742 2025 msg operation_ref 180138 // "initialiserBoiteDeDialogue() : void"
+  yz 741 2025 msg operation_ref 180138 // "initialiserBoiteDeDialogue() : void"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 992 714
 reflexivemsg 130602 synchronous
@@ -204,9 +204,9 @@ msg 133162 asynchronous
   from durationcanvas_ref 132906
   to durationcanvas_ref 133034
   yz 1151 2015 explicitmsg "clicked()"
-  stereotype "<<signal>>" xyz 466 1165 3000
+  stereotype "<<signal>>" xyz 475 1164 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 485 1121
+  label_xy 494 1122
 reflexivemsg 133418 synchronous
   to durationcanvas_ref 133290
   yz 1172 2025 msg operation_ref 181674 // "selectionnerBac() : void"
@@ -217,9 +217,9 @@ msg 134058 asynchronous
   from durationcanvas_ref 133802
   to durationcanvas_ref 133930
   yz 1455 2015 explicitmsg "currentIndexChanged()"
-  stereotype "<<signal>>" xyz 466 1471 3000
+  stereotype "<<signal>>" xyz 475 1472 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 389 1425
+  label_xy 399 1424
 reflexivemsg 134314 synchronous
   to durationcanvas_ref 134186
   yz 1463 2025 msg operation_ref 181802 // "selectionnerOperateur() : void"
@@ -230,9 +230,9 @@ msg 134698 asynchronous
   from durationcanvas_ref 134442
   to durationcanvas_ref 134570
   yz 1781 2015 explicitmsg "clicked()"
-  stereotype "<<signal>>" xyz 466 1797 3000
+  stereotype "<<signal>>" xyz 475 1797 3000
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 485 1751
+  label_xy 494 1752
 reflexivemsg 134954 synchronous
   to durationcanvas_ref 134826
   yz 1792 2025 msg operation_ref 181930 // "creerUneIntervention() : void"

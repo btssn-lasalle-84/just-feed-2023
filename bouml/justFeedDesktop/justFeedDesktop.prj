@@ -1,7 +1,7 @@
 format 224
 "justFeedDesktop"
-  revision 14
-  modified_by 42 "tv"
+  revision 16
+  modified_by 24 "btssn2"
   cpp_root_dir "../../"
 
 
@@ -71,7 +71,7 @@ format 224
       size A0
     end
 
-    class 128002 "Opérateur"
+    class 128002 "OpÃ©rateur"
       visibility package stereotype "actor"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -175,7 +175,7 @@ ${inlines}
       end
     end
 
-    usecase 128386 "Visualiser l'état du distributeur"
+    usecase 128386 "Visualiser l'Ã©tat du distributeur"
       
       usecasediagramsettings end
       
@@ -252,9 +252,14 @@ ${inlines}
 	  stereotype "extend"
 	  on usecase_ref 128002 // Planifier une intervention
       end
+
+      simplerelation 128152
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
     end
 
-    usecase 128770 "Géolocaliser un distributeur"
+    usecase 128770 "GÃ©olocaliser un distributeur"
       
       usecasediagramsettings end
       
@@ -280,10 +285,193 @@ ${inlines}
 	  stereotype "extend"
 	  on usecase_ref 128002 // Planifier une intervention
       end
+
+      simplerelation 129048
+	-_->
+	  on usecase_ref 128386 // Visualiser l'Ã©tat du distributeur
+      end
     end
+
+    usecase 128024 "visualiser une intervention"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128024
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+
+      simplerelation 128536
+	-_->
+	  on usecase_ref 128152 // selectionner un distributeur qui a une intervention
+      end
+    end
+
+    usecase 128152 "selectionner un distributeur qui a une intervention"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128280
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+
+      simplerelation 128408
+	-_->
+	  on usecase_ref 128130 // Lister les distributeurs
+      end
+    end
+
+    usecase 128280 "changer le prix"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128792
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+
+      simplerelation 129176
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128408 "modifier le produit"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128664
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128536 "créer un bac"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 128920
+	-_->
+	  on usecase_ref 128514 // Configurer les distributeurs
+      end
+    end
+
+    usecase 128664 "Selectionner des bacs a remplir ou depanner"
+      
+      usecasediagramsettings end
+      
+      sequencediagramsettings end
+      
+      collaborationdiagramsettings end
+      
+      classdiagramsettings member_max_width 0 end
+      
+      classcompositediagramsettings end
+      
+      objectdiagramsettings end
+      
+      objectcompositediagramsettings end
+      
+      statediagramsettings
+       end
+      
+      activitydiagramsettings
+       end
+      simplerelation 129304
+	-_->
+	  on usecase_ref 128002 // Planifier une intervention
+      end
+    end
+
   end
 
-  usecaseview 134530 "Diagramme de séquence"
+  usecaseview 134530 "Diagramme de sÃ©quence"
     
     usecasediagramsettings end
     
@@ -304,13 +492,13 @@ ${inlines}
     
     activitydiagramsettings
      end
-    sequencediagram 141314 "Diagramme de séquence"
+    sequencediagram 141314 "Diagramme de sÃ©quence"
       sequencediagramsettings end
       overlapping_bars size A0
     end
 
     classinstance 128258 ""
-      type class_ref 128002 // Opérateur
+      type class_ref 128002 // OpÃ©rateur
       attributes
         end
       relations
@@ -340,7 +528,7 @@ ${inlines}
         end
     end
 
-    class 129176 "système"
+    class 129176 "systÃ¨me"
       visibility package 
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
@@ -356,7 +544,7 @@ ${inlines}
     end
 
     classinstance 128024 ""
-      type class_ref 129176 // système
+      type class_ref 129176 // systÃ¨me
       attributes
         end
       relations
@@ -418,14 +606,172 @@ ${inlines}
       overlapping_bars size A0
     end
 
-    sequencediagram 134698 "Cr�er une intervention"
+    sequencediagram 134698 "Créer une intervention"
       sequencediagramsettings end
       overlapping_bars size A0
     end
 
-    sequencediagram 134826 "Visualiser l'état du distributeur"
+    sequencediagram 134826 "Visualiser l'Ã©tat du distributeur"
       sequencediagramsettings end
       overlapping_bars size A0
+    end
+
+    sequencediagram 141080 "visualisation d'une intervention"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    class 142488 "operateur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 134552 ""
+      type class_ref 128002 // OpÃ©rateur
+      attributes
+        end
+      relations
+        end
+    end
+  end
+
+  usecaseview 128024 "configuration distributeurs"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    sequencediagram 134552 "configurer un distributeur"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    class 135832 "configurationdistributeur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 135960 "distributeur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+  end
+
+  usecaseview 134552 "diagramme sequence operateur"
+    
+    usecasediagramsettings end
+    
+    sequencediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    activitydiagramsettings
+     end
+    sequencediagram 147736 "diagramme systeme"
+      sequencediagramsettings end
+      overlapping_bars size A0
+    end
+
+    class 142616 "Operateur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 134936 ""
+      type class_ref 128002 // OpÃ©rateur
+      attributes
+        end
+      relations
+        end
+    end
+
+    class 142744 "systeme"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    classinstance 135064 ""
+      type class_ref 142744 // systeme
+      attributes
+        end
+      relations
+        end
     end
   end
 end
