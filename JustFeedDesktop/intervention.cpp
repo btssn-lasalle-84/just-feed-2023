@@ -39,7 +39,8 @@ Intervention::Intervention(int     idIntervention,
     idOperateur(idOperateur), idDistributeur(idDistributeur), dateIntervention(dateIntervention),
     aRemplir(aRemplir), aDepanner(aDepanner), etat(etat)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "idIntervention " << idIntervention << " idOperateur " << idOperateur
+             << " dateIntervention " << dateIntervention;
 }
 
 /**
@@ -331,6 +332,7 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
                       QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
+            //!< @todo update l'operateur si il a changé
         }
 
         if(this->getARemplir())
@@ -339,6 +341,7 @@ int Intervention::ajouterIntervention(const int indexDistributeur)
                       QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
+            //!< @todo update l'operateur si il a changé
         }
     }
 

@@ -609,7 +609,8 @@ void IHMJustFeed::initialiserIntervention()
         {
             aDepanner = true;
         }
-
+        qDebug() << Q_FUNC_INFO
+                 << interventionsBdd[i][Intervention::TableIntervention::DATE_INTERVENTION];
         interventions.push_back(new Intervention(
           interventionsBdd[i][Intervention::TableIntervention::ID].toInt(),
           interventionsBdd[i][Intervention::TableIntervention::ID_OPERATEUR].toInt(),
@@ -894,7 +895,7 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
 void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 {
     qDebug() << Q_FUNC_INFO << distributeur->getIdDistributeur();
-
+    int interventionId;
     interventionIdOperateur->setAlignment(Qt::AlignCenter);
     interventionIdDistributeur->setAlignment(Qt::AlignCenter);
     dateIntervention->setAlignment(Qt::AlignCenter);
@@ -910,6 +911,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     {
         if(interventions[i]->getIdDistributeur() == distributeur->getIdDistributeur())
         {
+            interventionId = interventions[i]->getIdIntervention();
             for(int j = 0; j < operateurs.size(); j++)
             {
                 if(operateurs[j]->getId() == interventions[i]->getIdOperateur())
@@ -946,6 +948,29 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             etatIntervention->setText("etat : " + interventions[i]->getEtat());
         }
     }
+
+    QString requete =
+      "SELECT * FROM Approvisionnement WHERE idIntervention = " + QString::number(interventionId) +
+      ";";
+    baseDeDonnees->recuperer(requete, listeApprovisionnement);
+    QLabel* idBac;
+    QLabel* poidsAPrevoir;
+    qDebug() << Q_FUNC_INFO << "listeApprovisionnement" << listeApprovisionnement.size();
+
+    for(int i = 0; i < listeApprovisionnement.size(); i++)
+    {
+        layoutApprovisionnement.push_back(new QHBoxLayout);
+        idBac         = new QLabel(this);
+        poidsAPrevoir = new QLabel(this);
+        idBac->setText("approvisionnement sur le bac : " +
+                       listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC]);
+        poidsAPrevoir->setText(
+          "poids à prevoir pour le remplir : " +
+          listeApprovisionnement[i][Intervention::TableApprovisionnement::POIDS_A_PREVOIR] + " g");
+        layoutApprovisionnement[i]->addWidget(idBac);
+        layoutApprovisionnement[i]->addWidget(poidsAPrevoir);
+    }
+
     // positionnement
     layoutIntervention->addWidget(interventionIdDistributeur);
     layoutIntervention->addWidget(interventionIdOperateur);
@@ -954,6 +979,10 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     layoutIntervention->addWidget(aDepannerIntervention);
     layoutIntervention->addWidget(etatIntervention);
     layoutInformationsIntervention->addLayout(layoutIntervention);
+    for(int i = 0; i < listeApprovisionnement.size(); i++)
+    {
+        layoutInformationsIntervention->addLayout(layoutApprovisionnement[i]);
+    }
     layoutInformationsIntervention->addLayout(layoutBoutonsDistributeur);
     fenetreIntervention->setLayout(layoutInformationsIntervention);
 }
@@ -1004,8 +1033,8 @@ void IHMJustFeed::effacerEtatDistributeur()
         }
         delete item;
     }
+    //!<@todo effacer layoutApprovisionnement
 }
-
 /**
  * @brief charge la carte de localisation d'un distributeur
  * @param distributeur

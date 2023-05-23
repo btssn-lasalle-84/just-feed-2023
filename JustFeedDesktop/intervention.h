@@ -29,13 +29,22 @@ class Intervention
      */
     enum TableIntervention
     {
-        ID                = 0,
-        ID_OPERATEUR      = 1,
-        ID_DISTRIBUTEUR   = 2,
-        DATE_INTERVENTION = 3,
-        A_REMPLIR         = 4,
-        A_DEPANNER        = 5,
-        ETAT              = 6
+        ID,
+        ID_OPERATEUR,
+        ID_DISTRIBUTEUR,
+        DATE_INTERVENTION,
+        A_REMPLIR,
+        A_DEPANNER,
+        ETAT
+    };
+
+    enum TableApprovisionnement
+    {
+        ID_APPROVISIONNEMENT,
+        ID_INTERVENTION,
+        ID_BAC,
+        POIDS_A_PREVOIR,
+        HEURE_APPROVISIONNEMENT
     };
 
   private:

@@ -107,32 +107,34 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *itemIntervention,
       *itemDetailIntervention; //!< les éléments de la table
-    QPushButton*  boutonPlanifier;
-    QPushButton*  boutonConfigurer;
-    QPushButton*  boutonValider;
-    QPushButton*  boutonAfficherCarte;
-    QComboBox*    listeDistributeurs; //!< liste de distributeurs
-    QVBoxLayout*  layoutFenetreDistributeur;
-    QProgressBar* volumeRestant;
-    QLabel*       nomDistributeur;
-    QLabel*       adresseDistributeur;
-    QLabel*       codePostalDistributeur;
-    QLabel*       villeDistributeur;
-    QLabel*       descriptionDistributeur;
-    QLabel*       miseEnServiceDistributeur;
-    QLabel*       positionDistributeur;
-    QHBoxLayout*  layoutIntervention;
-    QHBoxLayout*  layoutBoutonsDistributeur;
-    QVBoxLayout*  layoutInformationsIntervention;
-    QLabel*       interventionIdOperateur;
-    QLabel*       interventionIdDistributeur;
-    QLabel*       dateIntervention;
-    QLabel*       aRemplirIntervention;
-    QLabel*       aDepannerIntervention;
-    QLabel*       etatIntervention;
-    QComboBox*    listeOperateurs;
-    QWebView*     vueCarte;
-    int           identifiantIntervention;
+    QPushButton*          boutonPlanifier;
+    QPushButton*          boutonConfigurer;
+    QPushButton*          boutonValider;
+    QPushButton*          boutonAfficherCarte;
+    QComboBox*            listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*          layoutFenetreDistributeur;
+    QProgressBar*         volumeRestant;
+    QLabel*               nomDistributeur;
+    QLabel*               adresseDistributeur;
+    QLabel*               codePostalDistributeur;
+    QLabel*               villeDistributeur;
+    QLabel*               descriptionDistributeur;
+    QLabel*               miseEnServiceDistributeur;
+    QLabel*               positionDistributeur;
+    QHBoxLayout*          layoutIntervention;
+    QHBoxLayout*          layoutBoutonsDistributeur;
+    QVBoxLayout*          layoutInformationsIntervention;
+    QVector<QStringList>  listeApprovisionnement;
+    QVector<QHBoxLayout*> layoutApprovisionnement;
+    QLabel*               interventionIdOperateur;
+    QLabel*               interventionIdDistributeur;
+    QLabel*               dateIntervention;
+    QLabel*               aRemplirIntervention;
+    QLabel*               aDepannerIntervention;
+    QLabel*               etatIntervention;
+    QComboBox*            listeOperateurs;
+    QWebView*             vueCarte;
+    int                   identifiantIntervention;
 
     void initialiserGUI();
     void instancierWidgets();
