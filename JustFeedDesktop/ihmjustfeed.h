@@ -109,7 +109,8 @@ class IHMJustFeed : public QWidget
       *itemDetailIntervention; //!< les éléments de la table
     QPushButton*          boutonPlanifier;
     QPushButton*          boutonConfigurer;
-    QPushButton*          boutonValider;
+    QPushButton*          boutonValiderDistributeur;
+    QPushButton*          boutonValiderIntervention;
     QPushButton*          boutonAfficherCarte;
     QComboBox*            listeDistributeurs; //!< liste de distributeurs
     QVBoxLayout*          layoutFenetreDistributeur;
@@ -122,12 +123,12 @@ class IHMJustFeed : public QWidget
     QLabel*               miseEnServiceDistributeur;
     QLabel*               positionDistributeur;
     QHBoxLayout*          layoutIntervention;
-    QHBoxLayout*          layoutBoutonsDistributeur;
+    QHBoxLayout*          layoutBoutonsInterventions;
     QVBoxLayout*          layoutInformationsIntervention;
     QVector<QStringList>  listeApprovisionnement;
-    QVector<QHBoxLayout*> layoutApprovisionnement;
+    QVector<QHBoxLayout*> layoutsApprovisionnement;
     QLabel*               interventionIdOperateur;
-    QLabel*               interventionIdDistributeur;
+    QLabel*               interventionNomDistributeur;
     QLabel*               dateIntervention;
     QLabel*               aRemplirIntervention;
     QLabel*               aDepannerIntervention;
@@ -155,7 +156,7 @@ class IHMJustFeed : public QWidget
     void effacerDistributeursAIntervenir();
     void creerEtatDistributeur(Distributeur* distributeur);
     void creerEtatIntervention(Distributeur* distributeur);
-    void effacerEtatDistributeur();
+    void effacerEtatsFenetre();
     void chargerCarte(Distributeur* distributeur);
     void chargerListeOperateurs();
 
