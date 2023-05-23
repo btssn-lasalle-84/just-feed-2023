@@ -26,6 +26,23 @@ Intervention::Intervention(QVector<Distributeur*> listeDistributeursAIntervenir)
 }
 
 /**
+ * @brief Constructeur de la classe Intervention
+ */
+Intervention::Intervention(int     idIntervention,
+                           int     idOperateur,
+                           int     idDistributeur,
+                           QDate   dateIntervention,
+                           bool    aRemplir,
+                           bool    aDepanner,
+                           QString etat) :
+    idIntervention(idIntervention),
+    idOperateur(idOperateur), idDistributeur(idDistributeur), dateIntervention(dateIntervention),
+    aRemplir(aRemplir), aDepanner(aDepanner), etat(etat)
+{
+    qDebug() << Q_FUNC_INFO;
+}
+
+/**
  * @brief Destructeur de la classe Intervention
  */
 Intervention::~Intervention()
@@ -116,6 +133,24 @@ int Intervention::getIdOperateur() const
 }
 
 /**
+ * @brief Accesseur de l'attribut idOperateur
+ * @return int
+ */
+int Intervention::getIdDistributeur() const
+{
+    return this->idDistributeur;
+}
+
+/**
+ * @brief Accesseur de l'attribut etat
+ * @return QString
+ */
+QString Intervention::getEtat() const
+{
+    return this->etat;
+}
+
+/**
  * @brief Mutateur de l'attribut aRemplir
  * @param aRemplir
  */
@@ -146,9 +181,27 @@ void Intervention::setIdOperateur(const int& idOperateur)
  * @brief Mutateur de l'attribut numeroIntervention
  * @param numeroIntervention
  */
-void Intervention::setIdIntervention(const int numeroIntervention)
+void Intervention::setIdIntervention(const int& numeroIntervention)
 {
     this->idIntervention = numeroIntervention;
+}
+
+/**
+ * @brief Mutateur de l'attribut numeroIntervention
+ * @param numeroDistributeur
+ */
+void Intervention::setIdDistributeur(const int& numeroDistributeur)
+{
+    this->idDistributeur = numeroDistributeur;
+}
+
+/**
+ * @brief Mutateur de l'attribut etat
+ * @param etat
+ */
+void Intervention::setEtat(const QString& etat)
+{
+    this->etat = etat;
 }
 
 /**

@@ -175,7 +175,14 @@ void PlanificationIntervention::instancierWidgets()
 void PlanificationIntervention::initialiserWidgets()
 {
     qDebug() << Q_FUNC_INFO;
-    boutonItervention->setText("Créer intervention/s");
+    if(distributeurs.size() > 1)
+    {
+        boutonItervention->setText("Créer les interventions");
+    }
+    else
+    {
+        boutonItervention->setText("Créer l'intervention");
+    }
     boutonItervention->setEnabled(false);
     editionDate->setDisplayFormat("dd/MM/yyyy");
     chargerListeOperateurs();

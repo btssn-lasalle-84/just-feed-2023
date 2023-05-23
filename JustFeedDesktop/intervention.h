@@ -48,9 +48,18 @@ class Intervention
     bool                   aDepanner;      //!< si on doit dépanner au moins un distributeur
     int                    idIntervention; //!< id de l'intervention
     int                    idOperateur;    //!< id de l'opérateur
+    int                    idDistributeur; //!< id du distributeur au quel l'intervention appartient
+    QString                etat;           //!< etat de l'intervention
 
   public:
     explicit Intervention(QVector<Distributeur*> listeDistributeursAIntervenir);
+    Intervention(int     idIntervention,
+                 int     idOperateur,
+                 int     idDistributeur,
+                 QDate   dateIntervention,
+                 bool    aRemplir,
+                 bool    aDepanner,
+                 QString etat);
     ~Intervention();
 
     QDate                  getDateIntervention() const;
@@ -59,13 +68,17 @@ class Intervention
     bool                   getADepanner() const;
     int                    getIdIntervention() const;
     int                    getIdOperateur() const;
+    int                    getIdDistributeur() const;
+    QString                getEtat() const;
     bool                   estEffectuee() const;
     bool                   estAIntervenir() const;
     void                   setDateIntervention(const QDate& dateIntervention);
     void                   setARemplir(const bool& aRemplir);
     void                   setADepanner(const bool& aDepanner);
     void                   setIdOperateur(const int& idOperateur);
-    void                   setIdIntervention(const int numeroIntervention);
+    void                   setIdIntervention(const int& numeroIntervention);
+    void                   setIdDistributeur(const int& numeroDistributeur);
+    void                   setEtat(const QString& numeroDistributeur);
     void                   ajouterDistributeur(Distributeur* distributeur);
     void                   effectuer(bool effectuee);
     void                   intervenir(bool aIntervenir);

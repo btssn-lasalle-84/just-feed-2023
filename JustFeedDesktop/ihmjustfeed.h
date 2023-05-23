@@ -23,6 +23,7 @@ class Produit;
 class PlanificationIntervention;
 class BaseDeDonnees;
 class Operateur;
+class Intervention;
 
 /**
  * @def TITRE_APPLICATION
@@ -80,11 +81,6 @@ class IHMJustFeed : public QWidget
      * @brief Définit les colonnes de la table approvisionnement
      *
      */
-    enum TableApprovisionnement
-    {
-        ID_BAC,
-        POIDS_A_PREVOIR
-    };
 
     Q_OBJECT
   private:
@@ -98,6 +94,7 @@ class IHMJustFeed : public QWidget
     QVector<Operateur*>    operateurs;                //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
+    QVector<Intervention*> interventions;                 //!< les interventions
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     QStringList            nomColonnes;                   //!< la liste des noms de colonne
     int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
@@ -110,22 +107,32 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *itemIntervention,
       *itemDetailIntervention; //!< les éléments de la table
-    QPushButton*         boutonPlanifier;
-    QPushButton*         boutonConfigurer;
-    QPushButton*         boutonValider;
-    QPushButton*         boutonAfficherCarte;
-    QComboBox*           listeDistributeurs; //!< liste de distributeurs
-    QVBoxLayout*         layoutFenetreDistributeur;
-    QProgressBar*        volumeRestant;
-    QLabel*              nomDistributeur;
-    QLabel*              adresseDistributeur;
-    QLabel*              codePostalDistributeur;
-    QLabel*              villeDistributeur;
-    QLabel*              descriptionDistributeur;
-    QLabel*              miseEnServiceDistributeur;
-    QLabel*              positionDistributeur;
-    QWebView*            vueCarte;
-    QVector<QStringList> interventionsBdd;
+    QPushButton*  boutonPlanifier;
+    QPushButton*  boutonConfigurer;
+    QPushButton*  boutonValider;
+    QPushButton*  boutonAfficherCarte;
+    QComboBox*    listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*  layoutFenetreDistributeur;
+    QProgressBar* volumeRestant;
+    QLabel*       nomDistributeur;
+    QLabel*       adresseDistributeur;
+    QLabel*       codePostalDistributeur;
+    QLabel*       villeDistributeur;
+    QLabel*       descriptionDistributeur;
+    QLabel*       miseEnServiceDistributeur;
+    QLabel*       positionDistributeur;
+    QHBoxLayout*  layoutIntervention;
+    QHBoxLayout*  layoutBoutonsDistributeur;
+    QVBoxLayout*  layoutInformationsIntervention;
+    QLabel*       interventionIdOperateur;
+    QLabel*       interventionIdDistributeur;
+    QLabel*       dateIntervention;
+    QLabel*       aRemplirIntervention;
+    QLabel*       aDepannerIntervention;
+    QLabel*       etatIntervention;
+    QComboBox*    listeOperateurs;
+    QWebView*     vueCarte;
+    int           identifiantIntervention;
 
     void initialiserGUI();
     void instancierWidgets();
@@ -136,6 +143,7 @@ class IHMJustFeed : public QWidget
     void initialiserDistributeurs();
     void initialiserProduits();
     void initialiserOperateurs();
+    void initialiserIntervention();
     void chargerDistributeurs();
     void afficherDistributeurTable(const Distributeur& distributeur);
     void afficherDistributeur(Distributeur* distributeur);
@@ -148,6 +156,7 @@ class IHMJustFeed : public QWidget
     void creerEtatIntervention(Distributeur* distributeur);
     void effacerEtatDistributeur();
     void chargerCarte(Distributeur* distributeur);
+    void chargerListeOperateurs();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
