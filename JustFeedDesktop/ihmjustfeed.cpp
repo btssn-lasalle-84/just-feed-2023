@@ -743,7 +743,7 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
     QString infoIntervention;
     for(int i = 0; i < interventions.size(); i++)
     {
-        if(distributeur.getIdDistributeur() == interventions[i]->getIdDistributeur())
+        if(distributeur.getId() == interventions[i]->getIdDistributeur())
         {
             infoIntervention = interventions[i]->getEtatFormate();
         }
@@ -981,7 +981,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QString nomOperateur;
     for(int i = 0; i < interventions.size(); i++)
     {
-        if(interventions[i]->getIdDistributeur() == distributeur->getIdDistributeur())
+        if(interventions[i]->getIdDistributeur() == distributeur->getId())
         {
             idIntervention = interventions[i]->getIdIntervention();
             for(int j = 0; j < operateurs.size(); j++)

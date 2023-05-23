@@ -13,6 +13,10 @@
 #include <QString>
 #include <QTime>
 
+/**
+ * @def ID_INTERVENTION_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
 #define ID_INTERVENTION_NON_DEFINI -1
 
 class Distributeur;

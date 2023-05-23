@@ -404,7 +404,7 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
 bool PlanificationIntervention::distributeurEstAttribueDepannage(const int idDistributeur)
 {
     QString requete = "SELECT aDepanner FROM Intervention WHERE idDistributeur = " +
-                      QString::number(distributeurs[idDistributeur]->getIdDistributeur()) + ";";
+                      QString::number(distributeurs[idDistributeur]->getId()) + ";";
     QString aDepannerBdd;
     baseDeDonnees->recuperer(requete, aDepannerBdd);
     qDebug() << Q_FUNC_INFO << "requete" << requete;

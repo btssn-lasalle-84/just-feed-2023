@@ -386,7 +386,7 @@ void Intervention::ajouterApprovisionnement(int indexDistributeur)
            !estBacAttribue(indexDistributeur, j))
         {
             qDebug() << Q_FUNC_INFO << "bacEstAttribue" << estBacAttribue(indexDistributeur, j);
-            if(estPlanifiee(distributeurs[indexDistributeur]->getIdDistributeur()))
+            if(estPlanifiee(distributeurs[indexDistributeur]->getId()))
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
                           "poidsAPrevoir, heureApprovisionnement) VALUES (" +

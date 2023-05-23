@@ -13,6 +13,10 @@
 #include <QString>
 #include <QStringList>
 
+/**
+ * @def ID_OPERATEUR_NON_DEFINI
+ * @brief Définit la valeur d'un id non défini
+ */
 #define ID_OPERATEUR_NON_DEFINI -1
 
 class Operateur

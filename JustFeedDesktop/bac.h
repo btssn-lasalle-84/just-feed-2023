@@ -2,7 +2,7 @@
  * @file        bac.h
  * @brief       Déclaration de la classe Bac.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     0.2
  * @date        2023
  */
 
