@@ -46,8 +46,8 @@ public class ActiviteInterventions extends AppCompatActivity
     /**
      * Attributs
      */
-    private Intervention.Etats        etat; //!< Etat qui sert à trier les interventions
-    private static int idOperateur; //!< Identifiant de l'opérateur
+    private Intervention.Etats        etat;        //!< Etat qui sert à trier les interventions
+    private static int                idOperateur; //!< Identifiant de l'opérateur
     private static List<Intervention> listeInterventions; //!< Liste des interventions à afficher
     private Handler                   handler;            //!< Le handler utilisé par l'activité
     private static BaseDeDonnees      baseDeDonnees;      //!< Identifiants pour la base de données
@@ -70,7 +70,7 @@ public class ActiviteInterventions extends AppCompatActivity
         setContentView(R.layout.interventions);
 
         this.positionListe = 0;
-        Bundle extras = getIntent().getExtras();
+        Bundle extras      = getIntent().getExtras();
         if(extras != null)
         {
             idOperateur = extras.getInt("idOperateur");
@@ -247,11 +247,14 @@ public class ActiviteInterventions extends AppCompatActivity
                                                 Intervention.Etats nouvelEtat)
     {
         baseDeDonnees.executerRequete(requete);
-        baseDeDonnees.executerRequete("UPDATE Approvisionnement SET heureApprovisionnement = CURRENT_TIME()\n"
-                +
-                "WHERE Approvisionnement.idIntervention IN\n"
-                +
-                "(SELECT Intervention.idIntervention FROM Intervention WHERE Approvisionnement.idIntervention = 28); ");
+        /**
+         * @todo C'est quoi cette requête ??? idIntervention = 28 ???
+         */
+        baseDeDonnees.executerRequete(
+          "UPDATE Approvisionnement SET heureApprovisionnement = CURRENT_TIME()\n"
+          + "WHERE Approvisionnement.idIntervention IN\n"
+          +
+          "(SELECT Intervention.idIntervention FROM Intervention WHERE Approvisionnement.idIntervention = 28); ");
         intervention.modifierEtatIntervention(nouvelEtat);
         rafraichisseur.setRefreshing(false);
         baseDeDonnees.recupererInterventions(idOperateur);

@@ -59,11 +59,11 @@ public class Intervention
      */
     private String       dateIntervention = "";   //!< Date de l'intervention.
     private Distributeur distributeur     = null; //!< Distributeur où intervenir.
-    private Etats        etat;                    //!< Les états d'une intervention.
+    private Etats        etat;                    //!< L'état d'une intervention.
     private int          idOperateur =
       JustFeed
         .OPERATEUR_NON_DEFINI; //!< L'identifiant de l'opérateur qui s'occupe de l'intervention
-    private int idIntervention; //!< Identifiant de l'intervention
+    private int     idIntervention;    //!< Identifiant de l'intervention
     private boolean aRemplir  = false; //!< Si l'intervention consiste à remplir.
     private boolean aDepanner = false; //!< Si l'intervention consiste à dépanner.
 
@@ -89,13 +89,13 @@ public class Intervention
               "Intervention() dateIntervention = " + dateIntervention +
                 " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
                 " - aRemplir = " + aRemplir + " - aDepanner = " + aDepanner);
-        this.dateIntervention  = dateIntervention;
-        this.distributeur      = distributeur;
-        this.etat              = etat;
-        this.idOperateur       = idOperateur;
-        this.idIntervention    = idIntervention;
-        this.aRemplir          = aRemplir;
-        this.aDepanner         = aDepanner;
+        this.dateIntervention = dateIntervention;
+        this.distributeur     = distributeur;
+        this.etat             = etat;
+        this.idOperateur      = idOperateur;
+        this.idIntervention   = idIntervention;
+        this.aRemplir         = aRemplir;
+        this.aDepanner        = aDepanner;
     }
 
     // Accesseurs
@@ -131,7 +131,10 @@ public class Intervention
      * @brief Méthode d'accès à l'identifiant de l'intervention
      * @return l'identifiant de l'intervention
      */
-    public int getIdIntervention() { return this.idIntervention; }
+    public int getIdIntervention()
+    {
+        return this.idIntervention;
+    }
 
     /**
      * @brief Méthode d'accés au nom du distributeur.

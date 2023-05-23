@@ -55,7 +55,7 @@ public class ListeDeroulanteGestionnaire
                 case TERMINER:
                     Log.d(TAG, "Terminer");
                     ActiviteInterventions.modifierEtatIntervention(
-                      "UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = " +
+                      "UPDATE `Intervention` SET `etat` = 'VALIDEE' WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
                       Intervention.Etats.VALIDEES);
