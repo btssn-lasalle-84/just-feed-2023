@@ -112,6 +112,7 @@ CREATE TABLE `Bac` (
   `poidsActuel` double,
   `poidsTotal`  double NOT NULL,
   `hygrometrie` int DEFAULT '0',
+  `remplissage` double DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Bac`
@@ -135,7 +136,7 @@ CREATE TABLE `Intervention` (
   `dateIntervention` date NOT NULL,
   `aRemplir` int DEFAULT '0',
   `aDepanner` int DEFAULT '0',
-  `etat` enum('EN_COURS','VALIDEES','A_FAIRE') NOT NULL DEFAULT 'A_FAIRE'
+  `etat` enum('EN_COURS','VALIDEE','A_FAIRE') NOT NULL DEFAULT 'A_FAIRE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
@@ -159,7 +160,8 @@ CREATE TABLE `Approvisionnement` (
   `idIntervention` int NOT NULL,
   `idBac` int NOT NULL,
   `poidsAPrevoir` float NOT NULL,
-  `heureApprovisionnement` time NOT NULL
+  `heureApprovisionnement` time NOT NULL,
+  `effectue` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Approvisionnement`
