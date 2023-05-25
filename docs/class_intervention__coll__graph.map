@@ -1,3 +1,4 @@
 <map id="Intervention" name="Intervention">
-<area shape="rect" id="node1" title=" " alt="" coords="5,5,176,185"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,307,225,692"/>
+<area shape="rect" id="node2" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="36,5,195,244"/>
 </map>

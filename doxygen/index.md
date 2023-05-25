@@ -4,7 +4,7 @@
 \author Nicolas Rouanet <<rouanet.nicolas.pro@gmail.com>>
 \author Mayeul Fargier <mayeulfargier.pro@gmail.com>>
 \date 2023
-\version 0.1
+\version 0.2
 \see https://github.com/btssn-lasalle-84/just-feed-2023
 
 

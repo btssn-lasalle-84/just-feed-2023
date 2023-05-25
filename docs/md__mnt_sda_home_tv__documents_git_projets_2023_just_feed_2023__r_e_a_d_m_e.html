@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -88,8 +88,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="title">README </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&amp;logo=java&amp;logoColor=white&amp;style=plastic" alt="Java Badge" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
-<p><a href="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" alt="pages-build-deployment" style="pointer-events: none;" class="inline"/></a></p>
+<div class="textblock"><p><img src="https://img.shields.io/badge/C%2B%2B-00599C?logo=cplusplus&amp;logoColor=fff&amp;style=plastic" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/Android-3DDC84?logo=android&amp;logoColor=fff&amp;style=plastic" alt="Android Badge" class="inline"/></p>
+<p><img src="https://badgen.net/badge/Qt/5.12.8/green" alt="" class="inline"/> <a href="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/make-qt.yml"><img src="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/make-qt.yml/badge.svg" alt="qt-build" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/android-build.yml"><img src="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/android-build.yml/badge.svg" alt="android-build" style="pointer-events: none;" class="inline"/></a> <a href="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment"><img src="https://github.com/btssn-lasalle-84/just-feed-2023/actions/workflows/pages/pages-build-deployment/badge.svg?branch=develop" alt="pages-build-deployment" style="pointer-events: none;" class="inline"/></a></p>
 <h1>Le projet just-feed 2023</h1>
 <ul>
 <li><a href="#le-projet-just-feed-2023">Le projet just-feed 2023</a><ul>
@@ -148,7 +148,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <h2>Base de données</h2>
 <p>Base de données MySQL 8.0 <code>justfeed</code> hébergée sur www.db4free.net (pour les tests) :</p>
 <p><img src="sql/justfeed-v0.1.png" alt="" class="inline"/></p>
-<div class="fragment"><div class="line"><span class="comment">--- LDD (langage de définition de données)</span></div>
+<div class="fragment"><div class="line"><span class="comment">-- LDD (langage de définition de données)</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">DROP</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> `justfeed`;</div>
 <div class="line"> </div>
@@ -162,13 +162,11 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"> </div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Approvisionnement;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Intervention;</div>
-<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> StockDistributeur;</div>
+<div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Bac;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Produit;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Distributeur;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Operateur;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> ServeurTTN;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `ServeurTTN`</span></div>
@@ -184,8 +182,6 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  `estActif` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
-<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Operateur`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -198,8 +194,6 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  `email` <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
-<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Distributeur`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -207,7 +201,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Distributeur` (</div>
 <div class="line">  `idDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
 <div class="line">  `idServeurTTN` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `nom` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `nomDistributeur` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `description` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `adresse` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `ville` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
@@ -216,7 +210,6 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  `longitude` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `latitude` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `deviceID` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `hygrometrie` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
 <div class="line">  `nbBacs` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;2&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
@@ -228,18 +221,16 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Distributeur`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Distributeur_fk_1` <span class="keyword">FOREIGN</span> KEY (`idServeurTTN`) <span class="keyword">REFERENCES</span> `ServeurTTN` (`idServeurTTN`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
-<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Produit`</span></div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Produit` (</div>
 <div class="line">  `idProduit` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
-<div class="line">  `nom` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `nomProduit` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `marque` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `description` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `codeEAN` <span class="keywordtype">varchar</span>(<span class="stringliteral">12</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `codeEAN` <span class="keywordtype">varchar</span>(<span class="stringliteral">13</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `prix` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `poidsUnitaire` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `volumeUnitaire` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span></div>
@@ -248,27 +239,27 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Produit`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `codeEAN` (`codeEAN`);</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
-<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
-<div class="line"><span class="comment">-- Structure de la table `StockDistributeur`</span></div>
+<div class="line"><span class="comment">-- Structure de la table `Bac`</span></div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `StockDistributeur` (</div>
-<div class="line">  `idStockDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
+<div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Bac` (</div>
+<div class="line">  `idBac` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
 <div class="line">  `idDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `idProduit` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `remplissage` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">  `poidsActuel` <span class="keywordtype">double</span>,</div>
+<div class="line">  `poidsTotal`  <span class="keywordtype">double</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `hygrometrie` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">  `remplissage` <span class="keywordtype">double</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `StockDistributeur`</div>
-<div class="line">  <span class="keyword">ADD</span> KEY `Stock_fk_2` (`idProduit`);</div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Bac`</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Bac_fk_1` (`idDistributeur`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Bac_fk_2` (`idProduit`);</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `StockDistributeur`</div>
-<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Stock_fk_1` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
-<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Stock_fk_2` <span class="keyword">FOREIGN</span> KEY (`idProduit`) <span class="keyword">REFERENCES</span> `Produit` (`idProduit`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Bac`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Bac_fk_1` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Bac_fk_2` <span class="keyword">FOREIGN</span> KEY (`idProduit`) <span class="keyword">REFERENCES</span> `Produit` (`idProduit`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Intervention`</span></div>
@@ -277,17 +268,22 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Intervention` (</div>
 <div class="line">  `idIntervention` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
 <div class="line">  `idOperateur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `idDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `dateIntervention` <span class="keywordtype">date</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `effectuee` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
+<div class="line">  `aRemplir` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">  `aDepanner` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span>,</div>
+<div class="line">  `etat` enum(<span class="stringliteral">&#39;EN_COURS&#39;</span>,<span class="stringliteral">&#39;VALIDEE&#39;</span>,<span class="stringliteral">&#39;A_FAIRE&#39;</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;A_FAIRE&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
-<div class="line">  <span class="keyword">ADD</span> KEY `Intervention_fk_1` (`idOperateur`);</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Intervention_fk_1` (`idOperateur`),</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Intervention_fk_2` (`idDistributeur`);</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Intervention_fk_1` <span class="keyword">FOREIGN</span> KEY (`idOperateur`) <span class="keyword">REFERENCES</span> `Operateur` (`idOperateur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Intervention_fk_2` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Approvisionnement`</span></div>
@@ -296,20 +292,19 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> `Approvisionnement` (</div>
 <div class="line">  `idApprovisionnement` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</div>
 <div class="line">  `idIntervention` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `idStockDistributeur` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
-<div class="line">  `dateApprovisionnement` <span class="keywordtype">date</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `idBac` <span class="keywordtype">int</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `poidsAPrevoir` <span class="keywordtype">float</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
+<div class="line">  `heureApprovisionnement` <span class="keywordtype">time</span> <span class="keyword">NOT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `effectue` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Approvisionnement`</div>
 <div class="line">  <span class="keyword">ADD</span> KEY `Approvisionnement_fk_1` (`idIntervention`),</div>
-<div class="line">  <span class="keyword">ADD</span> KEY `Approvisionnement_fk_2` (`idStockDistributeur`);</div>
+<div class="line">  <span class="keyword">ADD</span> KEY `Approvisionnement_fk_2` (`idBac`);</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Approvisionnement`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_1` <span class="keyword">FOREIGN</span> KEY (`idIntervention`) <span class="keyword">REFERENCES</span> `Intervention` (`idIntervention`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
-<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_2` <span class="keyword">FOREIGN</span> KEY (`idStockDistributeur`) <span class="keyword">REFERENCES</span> `StockDistributeur` (`idStockDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_2` <span class="keyword">FOREIGN</span> KEY (`idBac`) <span class="keyword">REFERENCES</span> `Bac` (`idBac`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 </div><!-- fragment --><h2>MQTT</h2>
 <p>Voir aussi : modules-lora/README.md</p>
 <h3>Qt MQTT</h3>
@@ -408,7 +403,23 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"> </div>
 <div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
 </div><!-- fragment --><h2>Versions</h2>
+<p><img src="livraisons.png" alt="" class="inline"/></p>
+<h3>0.2</h3>
+<p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-justfeed-android-distributeur-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-v0.2.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-justfeed-qt-distributeurs-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-distributeur-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-interventions-v0.2.png" alt="" class="inline"/></p>
 <h3>0.1</h3>
+<p><img src="jira-tickets-v0.1.png" alt="" class="inline"/></p>
 <ul>
 <li>Android :</li>
 </ul>
@@ -435,7 +446,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

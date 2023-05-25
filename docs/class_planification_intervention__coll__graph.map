@@ -1,0 +1,11 @@
+<map id="PlanificationIntervention" name="PlanificationIntervention">
+<area shape="rect" id="node1" title="permet de planifier une intervention" alt="" coords="86,755,349,1213"/>
+<area shape="rect" id="node5" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="303,1276,545,1925"/>
+<area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="5,461,80,538"/>
+<area shape="rect" id="node7" href="$class_configuration_distributeur.html" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="299,1988,525,2432"/>
+<area shape="rect" id="node3" href="$class_intervention.html" title=" " alt="" coords="105,307,325,692"/>
+<area shape="rect" id="node4" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="294,5,453,244"/>
+<area shape="rect" id="node6" href="$class_q_widget.html" title=" " alt="" coords="565,945,643,1023"/>
+<area shape="rect" id="node8" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="604,1415,783,1786"/>
+<area shape="rect" id="node9" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="667,931,767,1037"/>
+</map>

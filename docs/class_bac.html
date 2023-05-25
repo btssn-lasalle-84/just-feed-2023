@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -85,6 +85,7 @@ $(document).ready(function(){initNavTree('class_bac.html',''); initResizable(); 
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Types publics</a> &#124;
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
 <a href="#pri-attribs">Attributs privés</a>  </div>
   <div class="headertitle">
@@ -98,11 +99,27 @@ Graphe de collaboration de Bac:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_bac__coll__graph.png" border="0" usemap="#a_bac_coll__map" alt="Collaboration graph"/></div>
 <map name="a_bac_coll__map" id="a_bac_coll__map">
-<area shape="rect" title=" " alt="" coords="5,380,201,633"/>
-<area shape="rect" href="class_produit.html" title=" " alt="" coords="30,5,177,317"/>
+<area shape="rect" title=" " alt="" coords="5,365,201,692"/>
+<area shape="rect" href="class_produit.html" title=" " alt="" coords="30,5,177,303"/>
 </map>
 </div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Types publics</h2></td></tr>
+<tr class="memitem:a6ff1b5f6476e6f358779d578171bfcff"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcff">TableBac</a> { <br />
+&#160;&#160;<a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffad78d706f299c3fca26db5ac00bfb2df4">ID_BAC</a> = 0
+, <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffafd59df97ae86a57cca74c5b955c6fbca">ID_DISTRIBUTEUR</a> = 1
+, <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa1f5ddf64649f8c548a323929311f17ad">ID_PRODUIT</a> = 2
+, <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa07028f5aba1306fe3941d2a1b39ee17f">POIDS_ACTUEL</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffaa074495ef885cd29a9a2316748f01085">POID_TOTAL</a> = 4
+, <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847">HYGROMETRIE</a> = 5
+, <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa60bf89156c896a8c1a37f0f2b736acdd">REMPLISSAGE</a> = 6
+<br />
+ }</td></tr>
+<tr class="memdesc:a6ff1b5f6476e6f358779d578171bfcff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit les champs de la table <a class="el" href="class_bac.html">Bac</a>.  <a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcff">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6ff1b5f6476e6f358779d578171bfcff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:a5ca0aa3fc0beb247f994723c588b648e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac</a> ()</td></tr>
@@ -111,27 +128,75 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="memitem:a298aa0b20f70712b7ced3eba300b81a3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a298aa0b20f70712b7ced3eba300b81a3">Bac</a> (const <a class="el" href="class_bac.html">Bac</a> &amp;bac)</td></tr>
 <tr class="memdesc:a298aa0b20f70712b7ced3eba300b81a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de copie.  <a href="class_bac.html#a298aa0b20f70712b7ced3eba300b81a3">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a298aa0b20f70712b7ced3eba300b81a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a174a3fbb8830e840c154a4fcc5177505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a174a3fbb8830e840c154a4fcc5177505">Bac</a> (<a class="el" href="class_produit.html">Produit</a> *<a class="el" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>, unsigned int <a class="el" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>, double <a class="el" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>=100.)</td></tr>
-<tr class="memdesc:a174a3fbb8830e840c154a4fcc5177505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur d'initialisation du bac.  <a href="class_bac.html#a174a3fbb8830e840c154a4fcc5177505">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a174a3fbb8830e840c154a4fcc5177505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae0014d0de9cb71a3b5ac4b62a7166bd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aae0014d0de9cb71a3b5ac4b62a7166bd">Bac</a> (const QStringList &amp;bac, <a class="el" href="class_produit.html">Produit</a> *<a class="el" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>)</td></tr>
+<tr class="memdesc:aae0014d0de9cb71a3b5ac4b62a7166bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur d'initialisation du bac.  <a href="class_bac.html#aae0014d0de9cb71a3b5ac4b62a7166bd">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aae0014d0de9cb71a3b5ac4b62a7166bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a496b2221eb0c078caf1af275cf1f2580"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a496b2221eb0c078caf1af275cf1f2580">Bac</a> (int <a class="el" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>, <a class="el" href="class_produit.html">Produit</a> *<a class="el" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>, double <a class="el" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>, double <a class="el" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>, int <a class="el" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>)</td></tr>
+<tr class="memdesc:a496b2221eb0c078caf1af275cf1f2580"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur d'initialisation du bac.  <a href="class_bac.html#a496b2221eb0c078caf1af275cf1f2580">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a496b2221eb0c078caf1af275cf1f2580"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5af206eb0afb326e4b518eefa80bada1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a5af206eb0afb326e4b518eefa80bada1">Bac</a> (int <a class="el" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>, <a class="el" href="class_produit.html">Produit</a> *<a class="el" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>, double <a class="el" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>)</td></tr>
+<tr class="memdesc:a5af206eb0afb326e4b518eefa80bada1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur d'initialisation du bac.  <a href="class_bac.html#a5af206eb0afb326e4b518eefa80bada1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5af206eb0afb326e4b518eefa80bada1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac198ffe716b2b6758598e43dd1aa5724"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#ac198ffe716b2b6758598e43dd1aa5724">getADepanner</a> () const</td></tr>
+<tr class="memdesc:ac198ffe716b2b6758598e43dd1aa5724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aDepanner.  <a href="class_bac.html#ac198ffe716b2b6758598e43dd1aa5724">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac198ffe716b2b6758598e43dd1aa5724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfde41e941dc8aefc5fba05e48ad05a7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#adfde41e941dc8aefc5fba05e48ad05a7">getAIntervenir</a> () const</td></tr>
+<tr class="memdesc:adfde41e941dc8aefc5fba05e48ad05a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aIntervenir.  <a href="class_bac.html#adfde41e941dc8aefc5fba05e48ad05a7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:adfde41e941dc8aefc5fba05e48ad05a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81c15529af37c32e20562f491d2c13e1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a81c15529af37c32e20562f491d2c13e1">getARemplir</a> () const</td></tr>
+<tr class="memdesc:a81c15529af37c32e20562f491d2c13e1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aRemplir.  <a href="class_bac.html#a81c15529af37c32e20562f491d2c13e1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a81c15529af37c32e20562f491d2c13e1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a152733972201822b36e22d6fb9e5c304"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a152733972201822b36e22d6fb9e5c304">getHygrometrie</a> () const</td></tr>
+<tr class="memdesc:a152733972201822b36e22d6fb9e5c304"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut hygrometrie.  <a href="class_bac.html#a152733972201822b36e22d6fb9e5c304">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a152733972201822b36e22d6fb9e5c304"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adda8a61b24e4ce794e225f042028fc9a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#adda8a61b24e4ce794e225f042028fc9a">getIdBac</a> () const</td></tr>
+<tr class="memdesc:adda8a61b24e4ce794e225f042028fc9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aDepanner.  <a href="class_bac.html#adda8a61b24e4ce794e225f042028fc9a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:adda8a61b24e4ce794e225f042028fc9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a72f2f6a8cc73727e2c3a1de14806ee2c"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a72f2f6a8cc73727e2c3a1de14806ee2c">getNomProduit</a> () const</td></tr>
 <tr class="memdesc:a72f2f6a8cc73727e2c3a1de14806ee2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le nom du produit.  <a href="class_bac.html#a72f2f6a8cc73727e2c3a1de14806ee2c">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a72f2f6a8cc73727e2c3a1de14806ee2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2ccd525468a70e9630ac90317826eca"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#af2ccd525468a70e9630ac90317826eca">getPoidsActuel</a> () const</td></tr>
-<tr class="memdesc:af2ccd525468a70e9630ac90317826eca"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut poidsActuel.  <a href="class_bac.html#af2ccd525468a70e9630ac90317826eca">Plus de détails...</a><br /></td></tr>
-<tr class="separator:af2ccd525468a70e9630ac90317826eca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c989d787cf53a77bdd4f2b2bed12e6b"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a3c989d787cf53a77bdd4f2b2bed12e6b">getPoidsActuel</a> () const</td></tr>
+<tr class="memdesc:a3c989d787cf53a77bdd4f2b2bed12e6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut poidsActuel.  <a href="class_bac.html#a3c989d787cf53a77bdd4f2b2bed12e6b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3c989d787cf53a77bdd4f2b2bed12e6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c93ab521e6f2b6f19e2acb20d95e201"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a9c93ab521e6f2b6f19e2acb20d95e201">getPoidsTotal</a> () const</td></tr>
+<tr class="memdesc:a9c93ab521e6f2b6f19e2acb20d95e201"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut poidsTotal.  <a href="class_bac.html#a9c93ab521e6f2b6f19e2acb20d95e201">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9c93ab521e6f2b6f19e2acb20d95e201"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef2d2169e6e81c1d1ecf2ea32f7560d7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aef2d2169e6e81c1d1ecf2ea32f7560d7">getPourcentageRemplissage</a> () const</td></tr>
+<tr class="memdesc:aef2d2169e6e81c1d1ecf2ea32f7560d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut pourcentageRemplissage.  <a href="class_bac.html#aef2d2169e6e81c1d1ecf2ea32f7560d7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aef2d2169e6e81c1d1ecf2ea32f7560d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0873da4f610e46901cfd8208ade527ab"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a0873da4f610e46901cfd8208ade527ab">getPrixProduit</a> () const</td></tr>
 <tr class="memdesc:a0873da4f610e46901cfd8208ade527ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne le prix du produit.  <a href="class_bac.html#a0873da4f610e46901cfd8208ade527ab">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a0873da4f610e46901cfd8208ade527ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8eead2a15e95452633962ad2b7d7ad7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_produit.html">Produit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#af8eead2a15e95452633962ad2b7d7ad7">getProduit</a> () const</td></tr>
 <tr class="memdesc:af8eead2a15e95452633962ad2b7d7ad7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut produit.  <a href="class_bac.html#af8eead2a15e95452633962ad2b7d7ad7">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af8eead2a15e95452633962ad2b7d7ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d1924af19677b3ed2f2db51046cf085"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a3d1924af19677b3ed2f2db51046cf085">getQuantiteARemplir</a> () const</td></tr>
+<tr class="memdesc:a3d1924af19677b3ed2f2db51046cf085"><td class="mdescLeft">&#160;</td><td class="mdescRight">Méthode qui détermine la quantité à remplir.  <a href="class_bac.html#a3d1924af19677b3ed2f2db51046cf085">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3d1924af19677b3ed2f2db51046cf085"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2bea62a4f059353585381480845e204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aa2bea62a4f059353585381480845e204">setADepanner</a> (bool <a class="el" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>)</td></tr>
+<tr class="memdesc:aa2bea62a4f059353585381480845e204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut aDepanner.  <a href="class_bac.html#aa2bea62a4f059353585381480845e204">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aa2bea62a4f059353585381480845e204"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f07912a15c73d0b647e7e418197f154"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a9f07912a15c73d0b647e7e418197f154">setAIntervenir</a> (bool attribue)</td></tr>
+<tr class="memdesc:a9f07912a15c73d0b647e7e418197f154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut aIntervenir.  <a href="class_bac.html#a9f07912a15c73d0b647e7e418197f154">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9f07912a15c73d0b647e7e418197f154"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab248645117b210ebfe2bf633d6e851a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#ab248645117b210ebfe2bf633d6e851a2">setARemplir</a> (bool <a class="el" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>)</td></tr>
+<tr class="memdesc:ab248645117b210ebfe2bf633d6e851a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut aRemplir.  <a href="class_bac.html#ab248645117b210ebfe2bf633d6e851a2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab248645117b210ebfe2bf633d6e851a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab0cc6dcc878087baf952b9b89d7fb6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aab0cc6dcc878087baf952b9b89d7fb6a">setHygrometrie</a> (int hydrometrie)</td></tr>
+<tr class="memdesc:aab0cc6dcc878087baf952b9b89d7fb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut hygrometrie.  <a href="class_bac.html#aab0cc6dcc878087baf952b9b89d7fb6a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aab0cc6dcc878087baf952b9b89d7fb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad522c7898f9f7f269606e02f796babdc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#ad522c7898f9f7f269606e02f796babdc">setNomProduit</a> (const QString &amp;nomProduit)</td></tr>
 <tr class="memdesc:ad522c7898f9f7f269606e02f796babdc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie le nom du produit.  <a href="class_bac.html#ad522c7898f9f7f269606e02f796babdc">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ad522c7898f9f7f269606e02f796babdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb49b48c04720e6a5a0310f88bc26dbc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#adb49b48c04720e6a5a0310f88bc26dbc">setPoidsActuel</a> (int <a class="el" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>)</td></tr>
-<tr class="memdesc:adb49b48c04720e6a5a0310f88bc26dbc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut poidsActuel.  <a href="class_bac.html#adb49b48c04720e6a5a0310f88bc26dbc">Plus de détails...</a><br /></td></tr>
-<tr class="separator:adb49b48c04720e6a5a0310f88bc26dbc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a653e0ca3588aa25faa1cb1632cbd983a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a653e0ca3588aa25faa1cb1632cbd983a">setPoidsActuel</a> (const double &amp;<a class="el" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>)</td></tr>
+<tr class="memdesc:a653e0ca3588aa25faa1cb1632cbd983a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut poidsActuel.  <a href="class_bac.html#a653e0ca3588aa25faa1cb1632cbd983a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a653e0ca3588aa25faa1cb1632cbd983a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac7ee471c31cec8e12647676e5a52809"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aac7ee471c31cec8e12647676e5a52809">setPoidsTotal</a> (const double &amp;<a class="el" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>)</td></tr>
+<tr class="memdesc:aac7ee471c31cec8e12647676e5a52809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut poidsTotal.  <a href="class_bac.html#aac7ee471c31cec8e12647676e5a52809">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aac7ee471c31cec8e12647676e5a52809"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec3ae976b63101465f6642a93bd40644"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#aec3ae976b63101465f6642a93bd40644">setPourcentageRemplissage</a> (const double &amp;<a class="el" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>)</td></tr>
+<tr class="memdesc:aec3ae976b63101465f6642a93bd40644"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut pourcentageRemplissage.  <a href="class_bac.html#aec3ae976b63101465f6642a93bd40644">Plus de détails...</a><br /></td></tr>
+<tr class="separator:aec3ae976b63101465f6642a93bd40644"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a125597de50a111fdea7a55dcea6fdfb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a125597de50a111fdea7a55dcea6fdfb5">setPrixProduit</a> (const double &amp;prixProduit)</td></tr>
 <tr class="memdesc:a125597de50a111fdea7a55dcea6fdfb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie le prix du produit.  <a href="class_bac.html#a125597de50a111fdea7a55dcea6fdfb5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a125597de50a111fdea7a55dcea6fdfb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -144,11 +209,28 @@ Fonctions membres publiques</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Attributs privés</h2></td></tr>
-<tr class="memitem:afd38fde916c18beb8efcb37c0984d170"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a></td></tr>
-<tr class="memdesc:afd38fde916c18beb8efcb37c0984d170"><td class="mdescLeft">&#160;</td><td class="mdescRight">à définir.  <a href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">Plus de détails...</a><br /></td></tr>
-<tr class="separator:afd38fde916c18beb8efcb37c0984d170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab1902fa81c8cfb313df3583efe38e0ed"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a></td></tr>
+<tr class="separator:ab1902fa81c8cfb313df3583efe38e0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71c309f00f49864b8f4277a83973e6e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a></td></tr>
+<tr class="memdesc:a71c309f00f49864b8f4277a83973e6e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">bac attribué à une intervention  <a href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a71c309f00f49864b8f4277a83973e6e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af401682202cf15552959ea61b12cd47f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a></td></tr>
+<tr class="memdesc:af401682202cf15552959ea61b12cd47f"><td class="mdescLeft">&#160;</td><td class="mdescRight">permet de savoir s'il faut remplir ce distributeur  <a href="class_bac.html#af401682202cf15552959ea61b12cd47f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af401682202cf15552959ea61b12cd47f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49dc9d91fc65fba2742128f006e2dff7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a></td></tr>
+<tr class="memdesc:a49dc9d91fc65fba2742128f006e2dff7"><td class="mdescLeft">&#160;</td><td class="mdescRight">hygrometrie de l'interieur du distributeur  <a href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a49dc9d91fc65fba2742128f006e2dff7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e178e9c40ebd4365e4392f04f5576ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a></td></tr>
+<tr class="memdesc:a1e178e9c40ebd4365e4392f04f5576ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifiant du bac  <a href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1e178e9c40ebd4365e4392f04f5576ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9054e8e3c91ee0cee74c226b52d0fad"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a></td></tr>
+<tr class="memdesc:ab9054e8e3c91ee0cee74c226b52d0fad"><td class="mdescLeft">&#160;</td><td class="mdescRight">à définir.  <a href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ab9054e8e3c91ee0cee74c226b52d0fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48e2c46768c0bd0c74aab3133b56fe3f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a></td></tr>
+<tr class="memdesc:a48e2c46768c0bd0c74aab3133b56fe3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">à définir.  <a href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a48e2c46768c0bd0c74aab3133b56fe3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1937e0247af342c198c4e122271219f1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a></td></tr>
-<tr class="memdesc:a1937e0247af342c198c4e122271219f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">pourcentage de remplissage du bu bac  <a href="class_bac.html#a1937e0247af342c198c4e122271219f1">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a1937e0247af342c198c4e122271219f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">pourcentage de remplissage du bac  <a href="class_bac.html#a1937e0247af342c198c4e122271219f1">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a1937e0247af342c198c4e122271219f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1c456bcc09ab661103d1422915231910"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_produit.html">Produit</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a></td></tr>
 <tr class="memdesc:a1c456bcc09ab661103d1422915231910"><td class="mdescLeft">&#160;</td><td class="mdescRight">produit que contient le bac  <a href="class_bac.html#a1c456bcc09ab661103d1422915231910">Plus de détails...</a><br /></td></tr>
@@ -156,10 +238,54 @@ Attributs privés</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock">
-<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00016">16</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
-</div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00022">22</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+</div><h2 class="groupheader">Documentation des énumérations membres</h2>
+<a id="a6ff1b5f6476e6f358779d578171bfcff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6ff1b5f6476e6f358779d578171bfcff">&#9670;&nbsp;</a></span>TableBac</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcff">Bac::TableBac</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Définit les champs de la table <a class="el" href="class_bac.html">Bac</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffad78d706f299c3fca26db5ac00bfb2df4"></a>ID_BAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffafd59df97ae86a57cca74c5b955c6fbca"></a>ID_DISTRIBUTEUR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffa1f5ddf64649f8c548a323929311f17ad"></a>ID_PRODUIT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffa07028f5aba1306fe3941d2a1b39ee17f"></a>POIDS_ACTUEL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffaa074495ef885cd29a9a2316748f01085"></a>POID_TOTAL&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847"></a>HYGROMETRIE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a6ff1b5f6476e6f358779d578171bfcffa60bf89156c896a8c1a37f0f2b736acdd"></a>REMPLISSAGE&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00030">30</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffad78d706f299c3fca26db5ac00bfb2df4">ID_BAC</a>          = 0,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffafd59df97ae86a57cca74c5b955c6fbca">ID_DISTRIBUTEUR</a> = 1,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa1f5ddf64649f8c548a323929311f17ad">ID_PRODUIT</a>      = 2,</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa07028f5aba1306fe3941d2a1b39ee17f">POIDS_ACTUEL</a>    = 3,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffaa074495ef885cd29a9a2316748f01085">POID_TOTAL</a>      = 4,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847">HYGROMETRIE</a>     = 5,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa60bf89156c896a8c1a37f0f2b736acdd">REMPLISSAGE</a>     = 6,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    };</div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffa07028f5aba1306fe3941d2a1b39ee17f"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa07028f5aba1306fe3941d2a1b39ee17f">Bac::POIDS_ACTUEL</a></div><div class="ttdeci">@ POIDS_ACTUEL</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00035">bac.h:35</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffa1f5ddf64649f8c548a323929311f17ad"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa1f5ddf64649f8c548a323929311f17ad">Bac::ID_PRODUIT</a></div><div class="ttdeci">@ ID_PRODUIT</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00034">bac.h:34</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847">Bac::HYGROMETRIE</a></div><div class="ttdeci">@ HYGROMETRIE</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00037">bac.h:37</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffa60bf89156c896a8c1a37f0f2b736acdd"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa60bf89156c896a8c1a37f0f2b736acdd">Bac::REMPLISSAGE</a></div><div class="ttdeci">@ REMPLISSAGE</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00038">bac.h:38</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffaa074495ef885cd29a9a2316748f01085"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffaa074495ef885cd29a9a2316748f01085">Bac::POID_TOTAL</a></div><div class="ttdeci">@ POID_TOTAL</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00036">bac.h:36</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffad78d706f299c3fca26db5ac00bfb2df4"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffad78d706f299c3fca26db5ac00bfb2df4">Bac::ID_BAC</a></div><div class="ttdeci">@ ID_BAC</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00032">bac.h:32</a></div></div>
+<div class="ttc" id="aclass_bac_html_a6ff1b5f6476e6f358779d578171bfcffafd59df97ae86a57cca74c5b955c6fbca"><div class="ttname"><a href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffafd59df97ae86a57cca74c5b955c6fbca">Bac::ID_DISTRIBUTEUR</a></div><div class="ttdeci">@ ID_DISTRIBUTEUR</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00033">bac.h:33</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
 <a id="a5ca0aa3fc0beb247f994723c588b648e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ca0aa3fc0beb247f994723c588b648e">&#9670;&nbsp;</a></span>Bac() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ca0aa3fc0beb247f994723c588b648e">&#9670;&nbsp;</a></span>Bac() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -176,18 +302,28 @@ Attributs privés</h2></td></tr>
 <p>Constructeur par défaut de la classe <a class="el" href="class_bac.html">Bac</a>. </p>
 
 <p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00016">16</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;         : <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<span class="keyword">nullptr</span>), <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>(0), <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(0.)</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="ttc" id="aclass_bac_html_a1937e0247af342c198c4e122271219f1"><div class="ttname"><a href="class_bac.html#a1937e0247af342c198c4e122271219f1">Bac::pourcentageRemplissage</a></div><div class="ttdeci">double pourcentageRemplissage</div><div class="ttdoc">pourcentage de remplissage du bu bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00021">bac.h:21</a></div></div>
-<div class="ttc" id="aclass_bac_html_a1c456bcc09ab661103d1422915231910"><div class="ttname"><a href="class_bac.html#a1c456bcc09ab661103d1422915231910">Bac::produit</a></div><div class="ttdeci">Produit * produit</div><div class="ttdoc">produit que contient le bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00019">bac.h:19</a></div></div>
-<div class="ttc" id="aclass_bac_html_afd38fde916c18beb8efcb37c0984d170"><div class="ttname"><a href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">Bac::poidsActuel</a></div><div class="ttdeci">unsigned int poidsActuel</div><div class="ttdoc">à définir.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00020">bac.h:20</a></div></div>
+<div class="fragment"><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;         :</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>(<a class="code" href="bac_8h.html#ab900a70db7f454a44af8803307a086ad">ID_BAC_NON_DEFINI</a>), <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<span class="keyword">nullptr</span>), <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>(0.), <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>(0.),</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(0.), <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>(0),</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>(<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;{</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;}</div>
+<div class="ttc" id="abac_8h_html_ab900a70db7f454a44af8803307a086ad"><div class="ttname"><a href="bac_8h.html#ab900a70db7f454a44af8803307a086ad">ID_BAC_NON_DEFINI</a></div><div class="ttdeci">#define ID_BAC_NON_DEFINI</div><div class="ttdoc">Définit la valeur d'un id non défini.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00016">bac.h:16</a></div></div>
+<div class="ttc" id="aclass_bac_html_a1937e0247af342c198c4e122271219f1"><div class="ttname"><a href="class_bac.html#a1937e0247af342c198c4e122271219f1">Bac::pourcentageRemplissage</a></div><div class="ttdeci">double pourcentageRemplissage</div><div class="ttdoc">pourcentage de remplissage du bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00046">bac.h:46</a></div></div>
+<div class="ttc" id="aclass_bac_html_a1c456bcc09ab661103d1422915231910"><div class="ttname"><a href="class_bac.html#a1c456bcc09ab661103d1422915231910">Bac::produit</a></div><div class="ttdeci">Produit * produit</div><div class="ttdoc">produit que contient le bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00043">bac.h:43</a></div></div>
+<div class="ttc" id="aclass_bac_html_a1e178e9c40ebd4365e4392f04f5576ff"><div class="ttname"><a href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">Bac::idBac</a></div><div class="ttdeci">int idBac</div><div class="ttdoc">identifiant du bac</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00042">bac.h:42</a></div></div>
+<div class="ttc" id="aclass_bac_html_a48e2c46768c0bd0c74aab3133b56fe3f"><div class="ttname"><a href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">Bac::poidsTotal</a></div><div class="ttdeci">double poidsTotal</div><div class="ttdoc">à définir.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00045">bac.h:45</a></div></div>
+<div class="ttc" id="aclass_bac_html_a49dc9d91fc65fba2742128f006e2dff7"><div class="ttname"><a href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">Bac::hygrometrie</a></div><div class="ttdeci">int hygrometrie</div><div class="ttdoc">hygrometrie de l'interieur du distributeur</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00050">bac.h:50</a></div></div>
+<div class="ttc" id="aclass_bac_html_a71c309f00f49864b8f4277a83973e6e6"><div class="ttname"><a href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">Bac::aIntervenir</a></div><div class="ttdeci">bool aIntervenir</div><div class="ttdoc">bac attribué à une intervention</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00051">bac.h:51</a></div></div>
+<div class="ttc" id="aclass_bac_html_ab1902fa81c8cfb313df3583efe38e0ed"><div class="ttname"><a href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">Bac::aDepanner</a></div><div class="ttdeci">bool aDepanner</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00048">bac.h:48</a></div></div>
+<div class="ttc" id="aclass_bac_html_ab9054e8e3c91ee0cee74c226b52d0fad"><div class="ttname"><a href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">Bac::poidsActuel</a></div><div class="ttdeci">double poidsActuel</div><div class="ttdoc">à définir.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00044">bac.h:44</a></div></div>
+<div class="ttc" id="aclass_bac_html_af401682202cf15552959ea61b12cd47f"><div class="ttname"><a href="class_bac.html#af401682202cf15552959ea61b12cd47f">Bac::aRemplir</a></div><div class="ttdeci">bool aRemplir</div><div class="ttdoc">permet de savoir s'il faut remplir ce distributeur</div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00047">bac.h:47</a></div></div>
 </div><!-- fragment -->
 </div>
 </div>
-<a id="a174a3fbb8830e840c154a4fcc5177505"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a174a3fbb8830e840c154a4fcc5177505">&#9670;&nbsp;</a></span>Bac() <span class="overload">[2/3]</span></h2>
+<a id="a496b2221eb0c078caf1af275cf1f2580"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a496b2221eb0c078caf1af275cf1f2580">&#9670;&nbsp;</a></span>Bac() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -195,20 +331,32 @@ Attributs privés</h2></td></tr>
         <tr>
           <td class="memname">Bac::Bac </td>
           <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idBac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype"><a class="el" href="class_produit.html">Produit</a> *&#160;</td>
           <td class="paramname"><em>produit</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramtype">double&#160;</td>
           <td class="paramname"><em>poidsActuel</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>pourcentageRemplissage</em> = <code>100.</code>&#160;</td>
+          <td class="paramname"><em>poidsTotal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hygrometrie</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -220,27 +368,135 @@ Attributs privés</h2></td></tr>
 
 <p>Constructeur d'initialisation du bac. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00024">24</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;                                                                                  :</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>), <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>(<a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>), <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;{</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>() &lt;&lt; <span class="stringliteral">&quot;marque&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">getMarque</a>()</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">getDescription</a>() &lt;&lt; <span class="stringliteral">&quot;codeProduit&quot;</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">getCodeProduit</a>() &lt;&lt; <span class="stringliteral">&quot;prix&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>() &lt;&lt; <span class="stringliteral">&quot;poidsActuel&quot;</span></div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a> &lt;&lt; <span class="stringliteral">&quot;pourcentageRemplissage&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;}</div>
-<div class="ttc" id="aclass_produit_html_a1526859e8e13b8567b61d91e2ebba24c"><div class="ttname"><a href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">Produit::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Accesseur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00041">produit.cpp:41</a></div></div>
-<div class="ttc" id="aclass_produit_html_a375669a36dcf37f61009eac4032e330e"><div class="ttname"><a href="class_produit.html#a375669a36dcf37f61009eac4032e330e">Produit::getPrix</a></div><div class="ttdeci">double getPrix() const</div><div class="ttdoc">Accesseur de l'attribut prix.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00077">produit.cpp:77</a></div></div>
-<div class="ttc" id="aclass_produit_html_a4ed3a66dc1e9656b60594237cb4cf2e3"><div class="ttname"><a href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">Produit::getDescription</a></div><div class="ttdeci">QString getDescription() const</div><div class="ttdoc">Accesseur de l'attribut descriptio,.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00059">produit.cpp:59</a></div></div>
-<div class="ttc" id="aclass_produit_html_a844335fa780235c0cc492f84fe8c955d"><div class="ttname"><a href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">Produit::getCodeProduit</a></div><div class="ttdeci">QString getCodeProduit() const</div><div class="ttdoc">Accesseur de l'attribut codeProduit.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00068">produit.cpp:68</a></div></div>
-<div class="ttc" id="aclass_produit_html_a9833baf91255c5afa13dd2cd57f9de9c"><div class="ttname"><a href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">Produit::getMarque</a></div><div class="ttdeci">QString getMarque() const</div><div class="ttdoc">Accesseur de l'attribut marque.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00050">produit.cpp:50</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00027">27</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                                                                                            :</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>(<a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>), <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>), <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>(<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>), <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>(<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>),</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>((<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> * 100.) / <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>), <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>(<span class="keyword">false</span>),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>(<a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>), <a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>(<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;{</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;idBac&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a> &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>() &lt;&lt; <span class="stringliteral">&quot;marque&quot;</span></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">getMarque</a>() &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">getDescription</a>() &lt;&lt; <span class="stringliteral">&quot;codeProduit&quot;</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">getCodeProduit</a>() &lt;&lt; <span class="stringliteral">&quot;prix&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>() &lt;&lt; <span class="stringliteral">&quot;poidsActuel&quot;</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> &lt;&lt; <span class="stringliteral">&quot;poidsTotal&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> &lt;&lt; <span class="stringliteral">&quot;pourcentageRemplissage&quot;</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> &lt;&lt; <span class="stringliteral">&quot;hygrometrie&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="ttc" id="aclass_produit_html_a1526859e8e13b8567b61d91e2ebba24c"><div class="ttname"><a href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">Produit::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Accesseur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00074">produit.cpp:74</a></div></div>
+<div class="ttc" id="aclass_produit_html_a375669a36dcf37f61009eac4032e330e"><div class="ttname"><a href="class_produit.html#a375669a36dcf37f61009eac4032e330e">Produit::getPrix</a></div><div class="ttdeci">double getPrix() const</div><div class="ttdoc">Accesseur de l'attribut prix.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00110">produit.cpp:110</a></div></div>
+<div class="ttc" id="aclass_produit_html_a4ed3a66dc1e9656b60594237cb4cf2e3"><div class="ttname"><a href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">Produit::getDescription</a></div><div class="ttdeci">QString getDescription() const</div><div class="ttdoc">Accesseur de l'attribut descriptio,.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00092">produit.cpp:92</a></div></div>
+<div class="ttc" id="aclass_produit_html_a844335fa780235c0cc492f84fe8c955d"><div class="ttname"><a href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">Produit::getCodeProduit</a></div><div class="ttdeci">QString getCodeProduit() const</div><div class="ttdoc">Accesseur de l'attribut codeProduit.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00101">produit.cpp:101</a></div></div>
+<div class="ttc" id="aclass_produit_html_a9833baf91255c5afa13dd2cd57f9de9c"><div class="ttname"><a href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">Produit::getMarque</a></div><div class="ttdeci">QString getMarque() const</div><div class="ttdoc">Accesseur de l'attribut marque.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00083">produit.cpp:83</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00068">Produit::getCodeProduit()</a>, <a class="el" href="produit_8cpp_source.html#l00059">Produit::getDescription()</a>, <a class="el" href="produit_8cpp_source.html#l00050">Produit::getMarque()</a>, <a class="el" href="produit_8cpp_source.html#l00041">Produit::getNom()</a>, <a class="el" href="produit_8cpp_source.html#l00077">Produit::getPrix()</a>, <a class="el" href="bac_8h_source.html#l00020">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00021">pourcentageRemplissage</a>, et <a class="el" href="bac_8h_source.html#l00019">produit</a>.</p>
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00101">Produit::getCodeProduit()</a>, <a class="el" href="produit_8cpp_source.html#l00092">Produit::getDescription()</a>, <a class="el" href="produit_8cpp_source.html#l00083">Produit::getMarque()</a>, <a class="el" href="produit_8cpp_source.html#l00074">Produit::getNom()</a>, <a class="el" href="produit_8cpp_source.html#l00110">Produit::getPrix()</a>, <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>, <a class="el" href="bac_8h_source.html#l00042">idBac</a>, <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
+</div>
+</div>
+<a id="a5af206eb0afb326e4b518eefa80bada1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5af206eb0afb326e4b518eefa80bada1">&#9670;&nbsp;</a></span>Bac() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bac::Bac </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idBac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_produit.html">Produit</a> *&#160;</td>
+          <td class="paramname"><em>produit</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>poidsTotal</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructeur d'initialisation du bac. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00042">42</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;                                                       :</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>(<a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>), <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>), <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>(<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>), <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>(<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>),</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(100.), <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>(0),</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>(<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;{</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;idBac&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a> &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>() &lt;&lt; <span class="stringliteral">&quot;marque&quot;</span></div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">getMarque</a>() &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">getDescription</a>() &lt;&lt; <span class="stringliteral">&quot;codeProduit&quot;</span></div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">getCodeProduit</a>() &lt;&lt; <span class="stringliteral">&quot;prix&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>() &lt;&lt; <span class="stringliteral">&quot;poidsActuel&quot;</span></div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> &lt;&lt; <span class="stringliteral">&quot;poidsTotal&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> &lt;&lt; <span class="stringliteral">&quot;pourcentageRemplissage&quot;</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> &lt;&lt; <span class="stringliteral">&quot;hygrometrie&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00101">Produit::getCodeProduit()</a>, <a class="el" href="produit_8cpp_source.html#l00092">Produit::getDescription()</a>, <a class="el" href="produit_8cpp_source.html#l00083">Produit::getMarque()</a>, <a class="el" href="produit_8cpp_source.html#l00074">Produit::getNom()</a>, <a class="el" href="produit_8cpp_source.html#l00110">Produit::getPrix()</a>, <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>, <a class="el" href="bac_8h_source.html#l00042">idBac</a>, <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
+</div>
+</div>
+<a id="aae0014d0de9cb71a3b5ac4b62a7166bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae0014d0de9cb71a3b5ac4b62a7166bd">&#9670;&nbsp;</a></span>Bac() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bac::Bac </td>
+          <td>(</td>
+          <td class="paramtype">const QStringList &amp;&#160;</td>
+          <td class="paramname"><em>bac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_produit.html">Produit</a> *&#160;</td>
+          <td class="paramname"><em>produit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructeur d'initialisation du bac. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bac</td><td>un bac sous forme de QStringList issu de la table <a class="el" href="class_bac.html">Bac</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00058">58</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                                                 :</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>(bac.at(TableBac::ID_BAC).toInt()), <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>),</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>(bac.at(TableBac::POIDS_ACTUEL).toDouble()),</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>(bac.at(TableBac::POID_TOTAL).toDouble()),</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(bac.at(TableBac::REMPLISSAGE).toDouble()), <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>(<span class="keyword">false</span>),</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>(<span class="keyword">false</span>), <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>(bac.at(TableBac::HYGROMETRIE).toInt()), <a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>(<span class="keyword">false</span>)</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;{</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;idBac&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a> &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>() &lt;&lt; <span class="stringliteral">&quot;marque&quot;</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">getMarque</a>() &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">getDescription</a>() &lt;&lt; <span class="stringliteral">&quot;codeProduit&quot;</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">getCodeProduit</a>() &lt;&lt; <span class="stringliteral">&quot;prix&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>() &lt;&lt; <span class="stringliteral">&quot;poidsActuel&quot;</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> &lt;&lt; <span class="stringliteral">&quot;poidsTotal&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> &lt;&lt; <span class="stringliteral">&quot;pourcentageRemplissage&quot;</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> &lt;&lt; <span class="stringliteral">&quot;hygrometrie&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00101">Produit::getCodeProduit()</a>, <a class="el" href="produit_8cpp_source.html#l00092">Produit::getDescription()</a>, <a class="el" href="produit_8cpp_source.html#l00083">Produit::getMarque()</a>, <a class="el" href="produit_8cpp_source.html#l00074">Produit::getNom()</a>, <a class="el" href="produit_8cpp_source.html#l00110">Produit::getPrix()</a>, <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>, <a class="el" href="bac_8h_source.html#l00042">idBac</a>, <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
 
 </div>
 </div>
 <a id="a298aa0b20f70712b7ced3eba300b81a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a298aa0b20f70712b7ced3eba300b81a3">&#9670;&nbsp;</a></span>Bac() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a298aa0b20f70712b7ced3eba300b81a3">&#9670;&nbsp;</a></span>Bac() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -257,14 +513,22 @@ Attributs privés</h2></td></tr>
 
 <p>Constructeur de copie. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00036">36</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                       :</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(bac.<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>), <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>(bac.<a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>),</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(bac.<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;{</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00076">76</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                       :</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>(bac.<a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>), <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>(bac.<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>), <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>(bac.<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>),</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>(bac.<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>), <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>(bac.<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>),</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>(bac.<a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>), <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>(bac.<a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>), <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>(bac.<a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>),</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>(bac.<a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>)</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;{</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;idBac&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a> &lt;&lt; <span class="stringliteral">&quot;nom&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>() &lt;&lt; <span class="stringliteral">&quot;marque&quot;</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a9833baf91255c5afa13dd2cd57f9de9c">getMarque</a>() &lt;&lt; <span class="stringliteral">&quot;description&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a4ed3a66dc1e9656b60594237cb4cf2e3">getDescription</a>() &lt;&lt; <span class="stringliteral">&quot;codeProduit&quot;</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a844335fa780235c0cc492f84fe8c955d">getCodeProduit</a>() &lt;&lt; <span class="stringliteral">&quot;prix&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>() &lt;&lt; <span class="stringliteral">&quot;poidsActuel&quot;</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> &lt;&lt; <span class="stringliteral">&quot;poidsTotal&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> &lt;&lt; <span class="stringliteral">&quot;pourcentageRemplissage&quot;</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;             &lt;&lt; <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> &lt;&lt; <span class="stringliteral">&quot;hygrometrie&quot;</span> &lt;&lt; <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
 </div><!-- fragment -->
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00101">Produit::getCodeProduit()</a>, <a class="el" href="produit_8cpp_source.html#l00092">Produit::getDescription()</a>, <a class="el" href="produit_8cpp_source.html#l00083">Produit::getMarque()</a>, <a class="el" href="produit_8cpp_source.html#l00074">Produit::getNom()</a>, <a class="el" href="produit_8cpp_source.html#l00110">Produit::getPrix()</a>, <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>, <a class="el" href="bac_8h_source.html#l00042">idBac</a>, <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
 </div>
 </div>
 <a id="a5d03e01610a9fcf02c54c1741721176e"></a>
@@ -284,14 +548,151 @@ Attributs privés</h2></td></tr>
 
 <p>Destructeur de la classe <a class="el" href="class_bac.html">Bac</a>. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00046">46</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00092">92</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;{</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="ac198ffe716b2b6758598e43dd1aa5724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac198ffe716b2b6758598e43dd1aa5724">&#9670;&nbsp;</a></span>getADepanner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bac::getADepanner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aDepanner. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>un bool qui permet de savoir s'il faut dépanner le distributeur </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00160">160</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;{</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>;</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00048">aDepanner</a>.</p>
+
+</div>
+</div>
+<a id="adfde41e941dc8aefc5fba05e48ad05a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfde41e941dc8aefc5fba05e48ad05a7">&#9670;&nbsp;</a></span>getAIntervenir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bac::getAIntervenir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aIntervenir. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>bool </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00205">205</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;{</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a>;</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00051">aIntervenir</a>.</p>
+
+</div>
+</div>
+<a id="a81c15529af37c32e20562f491d2c13e1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81c15529af37c32e20562f491d2c13e1">&#9670;&nbsp;</a></span>getARemplir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bac::getARemplir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aRemplir. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>un bool qui permet de savoir s'il faut remplir le distributeur </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00151">151</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;{</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>;</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00047">aRemplir</a>.</p>
+
+</div>
+</div>
+<a id="a152733972201822b36e22d6fb9e5c304"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152733972201822b36e22d6fb9e5c304">&#9670;&nbsp;</a></span>getHygrometrie()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bac::getHygrometrie </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut hygrometrie. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00196">196</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;{</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ihmjustfeed_8cpp_source.html#l00870">IHMJustFeed::creerEtatDistributeur()</a>.</p>
+
+</div>
+</div>
+<a id="adda8a61b24e4ce794e225f042028fc9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adda8a61b24e4ce794e225f042028fc9a">&#9670;&nbsp;</a></span>getIdBac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bac::getIdBac </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aDepanner. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>un bool qui permet de savoir s'il faut dépanner le distributeur </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00101">101</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;{</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#a1e178e9c40ebd4365e4392f04f5576ff">idBac</a>;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00042">idBac</a>.</p>
+
+</div>
+</div>
 <a id="a72f2f6a8cc73727e2c3a1de14806ee2c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a72f2f6a8cc73727e2c3a1de14806ee2c">&#9670;&nbsp;</a></span>getNomProduit()</h2>
 
@@ -310,25 +711,27 @@ Attributs privés</h2></td></tr>
 <p>Retourne le nom du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>le nom du <a class="el" href="class_produit.html">Produit</a> que contient le bac </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00065">65</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordflow">return</span> QString();</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00120">120</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;{</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a1526859e8e13b8567b61d91e2ebba24c">getNom</a>();</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;    <span class="keywordflow">return</span> QString();</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00041">Produit::getNom()</a>, et <a class="el" href="bac_8h_source.html#l00019">produit</a>.</p>
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00074">Produit::getNom()</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ihmjustfeed_8cpp_source.html#l00870">IHMJustFeed::creerEtatDistributeur()</a>, <a class="el" href="configurationdistributeur_8cpp_source.html#l00256">ConfigurationDistributeur::initialiserNouveauBac()</a>, et <a class="el" href="configurationdistributeur_8cpp_source.html#l00141">ConfigurationDistributeur::initialiserWidgets()</a>.</p>
 
 </div>
 </div>
-<a id="af2ccd525468a70e9630ac90317826eca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af2ccd525468a70e9630ac90317826eca">&#9670;&nbsp;</a></span>getPoidsActuel()</h2>
+<a id="a3c989d787cf53a77bdd4f2b2bed12e6b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c989d787cf53a77bdd4f2b2bed12e6b">&#9670;&nbsp;</a></span>getPoidsActuel()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int Bac::getPoidsActuel </td>
+          <td class="memname">double Bac::getPoidsActuel </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -339,12 +742,70 @@ Attributs privés</h2></td></tr>
 <p>Accesseur de l'attribut poidsActuel. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>un entier qui represente le poids actuel dans le bac </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00087">87</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;{</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>;</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00142">142</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;{</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>;</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00020">poidsActuel</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>.</p>
+
+</div>
+</div>
+<a id="a9c93ab521e6f2b6f19e2acb20d95e201"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c93ab521e6f2b6f19e2acb20d95e201">&#9670;&nbsp;</a></span>getPoidsTotal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bac::getPoidsTotal </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut poidsTotal. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>double </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00187">187</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;{</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>;</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00169">getQuantiteARemplir()</a>.</p>
+
+</div>
+</div>
+<a id="aef2d2169e6e81c1d1ecf2ea32f7560d7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef2d2169e6e81c1d1ecf2ea32f7560d7">&#9670;&nbsp;</a></span>getPourcentageRemplissage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bac::getPourcentageRemplissage </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut pourcentageRemplissage. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>un double qui represente le pourcentage de remplissage dans le bac </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00178">178</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;{</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>;</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="ihmjustfeed_8cpp_source.html#l00870">IHMJustFeed::creerEtatDistributeur()</a>, et <a class="el" href="bac_8cpp_source.html#l00169">getQuantiteARemplir()</a>.</p>
 
 </div>
 </div>
@@ -366,14 +827,16 @@ Attributs privés</h2></td></tr>
 <p>Retourne le prix du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>le prix du produit que contient le bac </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00076">76</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;{</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">return</span> 0.;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00131">131</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;{</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a375669a36dcf37f61009eac4032e330e">getPrix</a>();</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">return</span> 0.;</div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00077">Produit::getPrix()</a>, et <a class="el" href="bac_8h_source.html#l00019">produit</a>.</p>
+<p class="reference">Références <a class="el" href="produit_8cpp_source.html#l00110">Produit::getPrix()</a>, et <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="configurationdistributeur_8cpp_source.html#l00256">ConfigurationDistributeur::initialiserNouveauBac()</a>, et <a class="el" href="configurationdistributeur_8cpp_source.html#l00141">ConfigurationDistributeur::initialiserWidgets()</a>.</p>
 
 </div>
 </div>
@@ -395,12 +858,173 @@ Attributs privés</h2></td></tr>
 <p>Accesseur de l'attribut produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>un Produits qui represente le produit que contient le bac </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00056">56</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;{</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00111">111</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;{</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00019">produit</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
+
+</div>
+</div>
+<a id="a3d1924af19677b3ed2f2db51046cf085"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d1924af19677b3ed2f2db51046cf085">&#9670;&nbsp;</a></span>getQuantiteARemplir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bac::getQuantiteARemplir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Méthode qui détermine la quantité à remplir. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>double la quantité à remplir </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00169">169</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;{</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    <span class="keywordflow">return</span> (<a class="code" href="class_bac.html#a9c93ab521e6f2b6f19e2acb20d95e201">getPoidsTotal</a>() * (100. - <a class="code" href="class_bac.html#aef2d2169e6e81c1d1ecf2ea32f7560d7">getPourcentageRemplissage</a>()) / 100.);</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;}</div>
+<div class="ttc" id="aclass_bac_html_a9c93ab521e6f2b6f19e2acb20d95e201"><div class="ttname"><a href="class_bac.html#a9c93ab521e6f2b6f19e2acb20d95e201">Bac::getPoidsTotal</a></div><div class="ttdeci">double getPoidsTotal() const</div><div class="ttdoc">Accesseur de l'attribut poidsTotal.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00187">bac.cpp:187</a></div></div>
+<div class="ttc" id="aclass_bac_html_aef2d2169e6e81c1d1ecf2ea32f7560d7"><div class="ttname"><a href="class_bac.html#aef2d2169e6e81c1d1ecf2ea32f7560d7">Bac::getPourcentageRemplissage</a></div><div class="ttdeci">double getPourcentageRemplissage() const</div><div class="ttdoc">Accesseur de l'attribut pourcentageRemplissage.</div><div class="ttdef"><b>Definition:</b> <a href="bac_8cpp_source.html#l00178">bac.cpp:178</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8cpp_source.html#l00187">getPoidsTotal()</a>, et <a class="el" href="bac_8cpp_source.html#l00178">getPourcentageRemplissage()</a>.</p>
+
+</div>
+</div>
+<a id="aa2bea62a4f059353585381480845e204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2bea62a4f059353585381480845e204">&#9670;&nbsp;</a></span>setADepanner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setADepanner </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aDepanner</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut aDepanner. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aDepanner</td><td>un booleen qui détermine l'état du bac </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00301">301</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;{</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;    this-&gt;<a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a> = <a class="code" href="class_bac.html#ab1902fa81c8cfb313df3583efe38e0ed">aDepanner</a>;</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00048">aDepanner</a>.</p>
+
+</div>
+</div>
+<a id="a9f07912a15c73d0b647e7e418197f154"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f07912a15c73d0b647e7e418197f154">&#9670;&nbsp;</a></span>setAIntervenir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setAIntervenir </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>attribue</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut aIntervenir. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">attribue</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00310">310</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;{</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;    this-&gt;<a class="code" href="class_bac.html#a71c309f00f49864b8f4277a83973e6e6">aIntervenir</a> = attribue;</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00051">aIntervenir</a>.</p>
+
+</div>
+</div>
+<a id="ab248645117b210ebfe2bf633d6e851a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab248645117b210ebfe2bf633d6e851a2">&#9670;&nbsp;</a></span>setARemplir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setARemplir </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aRemplir</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut aRemplir. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aRemplir</td><td>un booleen qui détermine l'état du bac </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00292">292</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;{</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;    this-&gt;<a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a> = <a class="code" href="class_bac.html#af401682202cf15552959ea61b12cd47f">aRemplir</a>;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00047">aRemplir</a>.</p>
+
+</div>
+</div>
+<a id="aab0cc6dcc878087baf952b9b89d7fb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab0cc6dcc878087baf952b9b89d7fb6a">&#9670;&nbsp;</a></span>setHygrometrie()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setHygrometrie </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>hygrometrie</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut hygrometrie. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">hygrometrie</td><td>l'hygrometrie, mesure de la quantité de vapeur d'eau contenue de l'air du distributeur </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00283">283</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;{</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    this-&gt;<a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a> = <a class="code" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">hygrometrie</a>;</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00050">hygrometrie</a>.</p>
 
 </div>
 </div>
@@ -428,19 +1052,19 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00105">105</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a34c2e92b00f56ccb26f57f9e45942a68">setNom</a>(nomProduit);</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;}</div>
-<div class="ttc" id="aclass_produit_html_a34c2e92b00f56ccb26f57f9e45942a68"><div class="ttname"><a href="class_produit.html#a34c2e92b00f56ccb26f57f9e45942a68">Produit::setNom</a></div><div class="ttdeci">void setNom(const QString &amp;nom)</div><div class="ttdoc">Mutateur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00087">produit.cpp:87</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00223">223</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;{</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a34c2e92b00f56ccb26f57f9e45942a68">setNom</a>(nomProduit);</div>
+<div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;}</div>
+<div class="ttc" id="aclass_produit_html_a34c2e92b00f56ccb26f57f9e45942a68"><div class="ttname"><a href="class_produit.html#a34c2e92b00f56ccb26f57f9e45942a68">Produit::setNom</a></div><div class="ttdeci">void setNom(const QString &amp;nom)</div><div class="ttdoc">Mutateur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00129">produit.cpp:129</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00019">produit</a>, et <a class="el" href="produit_8cpp_source.html#l00087">Produit::setNom()</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00043">produit</a>, et <a class="el" href="produit_8cpp_source.html#l00129">Produit::setNom()</a>.</p>
 
 </div>
 </div>
-<a id="adb49b48c04720e6a5a0310f88bc26dbc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb49b48c04720e6a5a0310f88bc26dbc">&#9670;&nbsp;</a></span>setPoidsActuel()</h2>
+<a id="a653e0ca3588aa25faa1cb1632cbd983a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a653e0ca3588aa25faa1cb1632cbd983a">&#9670;&nbsp;</a></span>setPoidsActuel()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -448,7 +1072,7 @@ Attributs privés</h2></td></tr>
         <tr>
           <td class="memname">void Bac::setPoidsActuel </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
+          <td class="paramtype">const double &amp;&#160;</td>
           <td class="paramname"><em>poidsActuel</em></td><td>)</td>
           <td></td>
         </tr>
@@ -463,12 +1087,90 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00125">125</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;{</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    this-&gt;<a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a> = <a class="code" href="class_bac.html#afd38fde916c18beb8efcb37c0984d170">poidsActuel</a>;</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00243">243</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;{</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> != <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>)</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    {</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;        this-&gt;<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>            = <a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>;</div>
+<div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> = (<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> * 100.) / <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>;</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    }</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00020">poidsActuel</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, et <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>.</p>
+
+</div>
+</div>
+<a id="aac7ee471c31cec8e12647676e5a52809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac7ee471c31cec8e12647676e5a52809">&#9670;&nbsp;</a></span>setPoidsTotal()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setPoidsTotal </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>poidsTotal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut poidsTotal. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">poidsActuel</td><td>le poids max du bac </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00256">256</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;    <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> != <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>)</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    {</div>
+<div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>             = <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>;</div>
+<div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> = (<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a> * 100.) / <a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a>;</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    }</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, et <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>.</p>
+
+</div>
+</div>
+<a id="aec3ae976b63101465f6642a93bd40644"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec3ae976b63101465f6642a93bd40644">&#9670;&nbsp;</a></span>setPourcentageRemplissage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Bac::setPourcentageRemplissage </td>
+          <td>(</td>
+          <td class="paramtype">const double &amp;&#160;</td>
+          <td class="paramname"><em>pourcentageRemplissage</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut pourcentageRemplissage. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pourcentageRemplissage</td><td>le % de remplissage du bac </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00269">269</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;{</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;    <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> != <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>)</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;    {</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a> = <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>;</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;        this-&gt;<a class="code" href="class_bac.html#ab9054e8e3c91ee0cee74c226b52d0fad">poidsActuel</a>            = (<a class="code" href="class_bac.html#a48e2c46768c0bd0c74aab3133b56fe3f">poidsTotal</a> * <a class="code" href="class_bac.html#a1937e0247af342c198c4e122271219f1">pourcentageRemplissage</a>) / 100.;</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;    }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00044">poidsActuel</a>, <a class="el" href="bac_8h_source.html#l00045">poidsTotal</a>, et <a class="el" href="bac_8h_source.html#l00046">pourcentageRemplissage</a>.</p>
 
 </div>
 </div>
@@ -496,14 +1198,14 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00115">115</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;{</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a8a0bd89a92821ce0e849f224f09696ee">setPrix</a>(prixProduit);</div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;}</div>
-<div class="ttc" id="aclass_produit_html_a8a0bd89a92821ce0e849f224f09696ee"><div class="ttname"><a href="class_produit.html#a8a0bd89a92821ce0e849f224f09696ee">Produit::setPrix</a></div><div class="ttdeci">void setPrix(const double prix)</div><div class="ttdoc">Mutateur de l'attribut prix.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00126">produit.cpp:126</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00233">233</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;{</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a> != <span class="keyword">nullptr</span>)</div>
+<div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;        this-&gt;<a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>-&gt;<a class="code" href="class_produit.html#a8a0bd89a92821ce0e849f224f09696ee">setPrix</a>(prixProduit);</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;}</div>
+<div class="ttc" id="aclass_produit_html_a8a0bd89a92821ce0e849f224f09696ee"><div class="ttname"><a href="class_produit.html#a8a0bd89a92821ce0e849f224f09696ee">Produit::setPrix</a></div><div class="ttdeci">void setPrix(const double prix)</div><div class="ttdoc">Mutateur de l'attribut prix.</div><div class="ttdef"><b>Definition:</b> <a href="produit_8cpp_source.html#l00168">produit.cpp:168</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00019">produit</a>, et <a class="el" href="produit_8cpp_source.html#l00126">Produit::setPrix()</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00043">produit</a>, et <a class="el" href="produit_8cpp_source.html#l00168">Produit::setPrix()</a>.</p>
 
 </div>
 </div>
@@ -531,20 +1233,20 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00096">96</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;{</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    this-&gt;produit = <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>;</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8cpp_source.html#l00214">214</a> du fichier <a class="el" href="bac_8cpp_source.html">bac.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;{</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    this-&gt;produit = <a class="code" href="class_bac.html#a1c456bcc09ab661103d1422915231910">produit</a>;</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="bac_8h_source.html#l00019">produit</a>.</p>
+<p class="reference">Références <a class="el" href="bac_8h_source.html#l00043">produit</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="configurationdistributeur_8cpp_source.html#l00073">ConfigurationDistributeur::changerLeProduit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="configurationdistributeur_8cpp_source.html#l00072">ConfigurationDistributeur::changerLeProduit()</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Documentation des champs</h2>
-<a id="afd38fde916c18beb8efcb37c0984d170"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd38fde916c18beb8efcb37c0984d170">&#9670;&nbsp;</a></span>poidsActuel</h2>
+<a id="ab1902fa81c8cfb313df3583efe38e0ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1902fa81c8cfb313df3583efe38e0ed">&#9670;&nbsp;</a></span>aDepanner</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -553,7 +1255,146 @@ Attributs privés</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int Bac::poidsActuel</td>
+          <td class="memname">bool Bac::aDepanner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>permet de savoir s'il faut intervenir sur le distributeur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00048">48</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00160">getADepanner()</a>, et <a class="el" href="bac_8cpp_source.html#l00301">setADepanner()</a>.</p>
+
+</div>
+</div>
+<a id="a71c309f00f49864b8f4277a83973e6e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71c309f00f49864b8f4277a83973e6e6">&#9670;&nbsp;</a></span>aIntervenir</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bac::aIntervenir</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>bac attribué à une intervention </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00051">51</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00205">getAIntervenir()</a>, et <a class="el" href="bac_8cpp_source.html#l00310">setAIntervenir()</a>.</p>
+
+</div>
+</div>
+<a id="af401682202cf15552959ea61b12cd47f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af401682202cf15552959ea61b12cd47f">&#9670;&nbsp;</a></span>aRemplir</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Bac::aRemplir</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>permet de savoir s'il faut remplir ce distributeur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00047">47</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00151">getARemplir()</a>, et <a class="el" href="bac_8cpp_source.html#l00292">setARemplir()</a>.</p>
+
+</div>
+</div>
+<a id="a49dc9d91fc65fba2742128f006e2dff7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49dc9d91fc65fba2742128f006e2dff7">&#9670;&nbsp;</a></span>hygrometrie</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bac::hygrometrie</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>hygrometrie de l'interieur du distributeur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00050">50</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00196">getHygrometrie()</a>, et <a class="el" href="bac_8cpp_source.html#l00283">setHygrometrie()</a>.</p>
+
+</div>
+</div>
+<a id="a1e178e9c40ebd4365e4392f04f5576ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e178e9c40ebd4365e4392f04f5576ff">&#9670;&nbsp;</a></span>idBac</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Bac::idBac</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>identifiant du bac </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00042">42</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, et <a class="el" href="bac_8cpp_source.html#l00101">getIdBac()</a>.</p>
+
+</div>
+</div>
+<a id="ab9054e8e3c91ee0cee74c226b52d0fad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab9054e8e3c91ee0cee74c226b52d0fad">&#9670;&nbsp;</a></span>poidsActuel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bac::poidsActuel</td>
         </tr>
       </table>
   </td>
@@ -565,9 +1406,37 @@ Attributs privés</h2></td></tr>
 
 <p>à définir. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00020">20</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00044">44</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00024">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00087">getPoidsActuel()</a>, et <a class="el" href="bac_8cpp_source.html#l00125">setPoidsActuel()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00142">getPoidsActuel()</a>, <a class="el" href="bac_8cpp_source.html#l00243">setPoidsActuel()</a>, <a class="el" href="bac_8cpp_source.html#l00256">setPoidsTotal()</a>, et <a class="el" href="bac_8cpp_source.html#l00269">setPourcentageRemplissage()</a>.</p>
+
+</div>
+</div>
+<a id="a48e2c46768c0bd0c74aab3133b56fe3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48e2c46768c0bd0c74aab3133b56fe3f">&#9670;&nbsp;</a></span>poidsTotal</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Bac::poidsTotal</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>à définir. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00045">45</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00187">getPoidsTotal()</a>, <a class="el" href="bac_8cpp_source.html#l00243">setPoidsActuel()</a>, <a class="el" href="bac_8cpp_source.html#l00256">setPoidsTotal()</a>, et <a class="el" href="bac_8cpp_source.html#l00269">setPourcentageRemplissage()</a>.</p>
 
 </div>
 </div>
@@ -591,11 +1460,11 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>pourcentage de remplissage du bu bac </p>
+<p>pourcentage de remplissage du bac </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00021">21</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00046">46</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00024">Bac()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00178">getPourcentageRemplissage()</a>, <a class="el" href="bac_8cpp_source.html#l00243">setPoidsActuel()</a>, <a class="el" href="bac_8cpp_source.html#l00256">setPoidsTotal()</a>, et <a class="el" href="bac_8cpp_source.html#l00269">setPourcentageRemplissage()</a>.</p>
 
 </div>
 </div>
@@ -621,9 +1490,9 @@ Attributs privés</h2></td></tr>
 
 <p>produit que contient le bac </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00019">19</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="bac_8h_source.html#l00043">43</a> du fichier <a class="el" href="bac_8h_source.html">bac.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00024">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00065">getNomProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00076">getPrixProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00056">getProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00105">setNomProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00115">setPrixProduit()</a>, et <a class="el" href="bac_8cpp_source.html#l00096">setProduit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="bac_8cpp_source.html#l00027">Bac()</a>, <a class="el" href="bac_8cpp_source.html#l00120">getNomProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00131">getPrixProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00111">getProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00223">setNomProduit()</a>, <a class="el" href="bac_8cpp_source.html#l00233">setPrixProduit()</a>, et <a class="el" href="bac_8cpp_source.html#l00214">setProduit()</a>.</p>
 
 </div>
 </div>
@@ -638,7 +1507,7 @@ Attributs privés</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_bac.html">Bac</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

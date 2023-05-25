@@ -1,8 +1,11 @@
 <map id="IHMJustFeed" name="IHMJustFeed">
-<area shape="rect" id="node1" title="Déclaration de la classe IHMJustFeed." alt="" coords="313,175,535,765"/>
-<area shape="rect" id="node3" href="$class_configuration_distributeur.html" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="135,828,361,1272"/>
-<area shape="rect" id="node2" href="$class_q_widget.html" title=" " alt="" coords="385,20,463,97"/>
-<area shape="rect" id="node4" href="$class_q_dialog.html" title=" " alt="" coords="5,431,80,509"/>
-<area shape="rect" id="node5" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="104,292,283,648"/>
-<area shape="rect" id="node6" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="143,5,243,112"/>
+<area shape="rect" id="node1" title="Déclaration de la classe IHMJustFeed." alt="" coords="491,307,733,956"/>
+<area shape="rect" id="node3" href="$class_planification_intervention.html" title="permet de planifier une intervention" alt="" coords="681,1019,943,1477"/>
+<area shape="rect" id="node7" href="$class_configuration_distributeur.html" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="138,1026,363,1470"/>
+<area shape="rect" id="node2" href="$class_q_widget.html" title=" " alt="" coords="573,86,651,163"/>
+<area shape="rect" id="node4" href="$class_q_dialog.html" title=" " alt="" coords="208,593,283,670"/>
+<area shape="rect" id="node5" href="$class_intervention.html" title=" " alt="" coords="773,439,993,824"/>
+<area shape="rect" id="node6" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="803,5,962,244"/>
+<area shape="rect" id="node8" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="5,446,184,817"/>
+<area shape="rect" id="node9" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="45,71,145,178"/>
 </map>

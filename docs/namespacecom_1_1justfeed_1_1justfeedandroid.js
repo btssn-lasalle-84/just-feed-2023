@@ -11,6 +11,8 @@ var namespacecom_1_1justfeed_1_1justfeedandroid =
     [ "ExampleUnitTest", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_unit_test.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_unit_test" ],
     [ "Intervention", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention" ],
     [ "JustFeed", "classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed" ],
+    [ "ListeDeroulanteGestionnaire", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire" ],
+    [ "Operateur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur" ],
     [ "Produit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit" ],
     [ "VueBac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_bac.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_bac" ],
     [ "VueDistributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur" ],

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -85,7 +85,9 @@ $(document).ready(function(){initNavTree('class_intervention.html',''); initResi
 
 <div class="header">
   <div class="summary">
+<a href="#pub-types">Types publics</a> &#124;
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
+<a href="#pub-static-methods">Fonctions membres publiques statiques</a> &#124;
 <a href="#pri-attribs">Attributs privés</a>  </div>
   <div class="headertitle">
 <div class="title">Référence de la classe Intervention</div>  </div>
@@ -98,48 +100,362 @@ Graphe de collaboration de Intervention:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_intervention__coll__graph.png" border="0" usemap="#a_intervention_coll__map" alt="Collaboration graph"/></div>
 <map name="a_intervention_coll__map" id="a_intervention_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,176,185"/>
+<area shape="rect" title=" " alt="" coords="5,307,225,692"/>
+<area shape="rect" href="class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="36,5,195,244"/>
 </map>
 </div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Types publics</h2></td></tr>
+<tr class="memitem:ad3f1b9a96dd3999ef850beef7ece3429"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a> { <br />
+&#160;&#160;<a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4">INCONNU</a> = -1
+, <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a>
+, <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f">VALIDEE</a>
+, <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a2ab2dd1fbebf226c4c24a99702656f8c">EN_COURS</a>
+, <br />
+&#160;&#160;<a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">NB_ETATS</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:ad3f1b9a96dd3999ef850beef7ece3429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Les différents états d'une intervention.  <a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad3f1b9a96dd3999ef850beef7ece3429"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8ebdb8ad941db81dba4fe672a4e3995"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995">TableApprovisionnement</a> { <br />
+&#160;&#160;<a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0e9dfdc70ee342eb099a99452e7e6294">ID_APPROVISIONNEMENT</a>
+, <a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a13d3bd00af70596e02c1560c09d4682e">ID_INTERVENTION</a>
+, <a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a46cfb2eaa63db270426e028ec9d64fdc">ID_BAC</a>
+, <a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a195e7a4f53c091d16ace3c48dc7e0e2e">POIDS_A_PREVOIR</a>
+, <br />
+&#160;&#160;<a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0ec104b33c9d66219e46cfd5634b55b4">HEURE_APPROVISIONNEMENT</a>
+<br />
+ }</td></tr>
+<tr class="separator:aa8ebdb8ad941db81dba4fe672a4e3995"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4eca900b721b50b3a566698c44fa2b73"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73">TableIntervention</a> { <br />
+&#160;&#160;<a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a41edb8e30602d801042aef8569546524">ID</a>
+, <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a1d0a8caba92d6835a31b566d5b08fbf8">ID_OPERATEUR</a>
+, <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73ad4133413745989849115b70b6bb036aa">ID_DISTRIBUTEUR</a>
+, <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a444ae59c5f581d1c8124f742291c32fc">DATE_INTERVENTION</a>
+, <br />
+&#160;&#160;<a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a7a6fafb34085eccefe23d315f5859c1f">A_REMPLIR</a>
+, <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73aa0eee31355ca00ed15aebcf8d1c5d570">A_DEPANNER</a>
+, <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a2d478cf6d4992a26a8635738f42ec63f">ETAT</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a4eca900b721b50b3a566698c44fa2b73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Les colonnes de la table <a class="el" href="class_intervention.html">Intervention</a>.  <a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4eca900b721b50b3a566698c44fa2b73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
+<tr class="memitem:a6efa646ae8d2d0b18bf10bd8832b4950"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a6efa646ae8d2d0b18bf10bd8832b4950">affecterEtatIntervention</a> (int indexDistributeur)</td></tr>
+<tr class="memdesc:a6efa646ae8d2d0b18bf10bd8832b4950"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'état de l'intervention si elle est à remplir, à depanner ou les deux.  <a href="class_intervention.html#a6efa646ae8d2d0b18bf10bd8832b4950">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6efa646ae8d2d0b18bf10bd8832b4950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a12fe3505422555563c9d698044c51e13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a12fe3505422555563c9d698044c51e13">ajouterApprovisionnement</a> (int indexDistributeur)</td></tr>
+<tr class="memdesc:a12fe3505422555563c9d698044c51e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute les approvisionnements nécessaires des bacs dans la bdd.  <a href="class_intervention.html#a12fe3505422555563c9d698044c51e13">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a12fe3505422555563c9d698044c51e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3062835adbb592516dba3a570e6b0394"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a3062835adbb592516dba3a570e6b0394">ajouterDistributeur</a> (<a class="el" href="class_distributeur.html">Distributeur</a> *distributeur)</td></tr>
-<tr class="memdesc:a3062835adbb592516dba3a570e6b0394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut distributeurAIntervenir.  <a href="class_intervention.html#a3062835adbb592516dba3a570e6b0394">Plus de détails...</a><br /></td></tr>
+<tr class="memdesc:a3062835adbb592516dba3a570e6b0394"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un distributeur sur lequel il faut intervenir.  <a href="class_intervention.html#a3062835adbb592516dba3a570e6b0394">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a3062835adbb592516dba3a570e6b0394"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968bbb40be5ecabfe94ad43fb4014667"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a968bbb40be5ecabfe94ad43fb4014667">ajouterIntervention</a> (int indexDistributeur)</td></tr>
+<tr class="memdesc:a968bbb40be5ecabfe94ad43fb4014667"><td class="mdescLeft">&#160;</td><td class="mdescRight">Insére une nouvelle intervention dans la bdd.  <a href="class_intervention.html#a968bbb40be5ecabfe94ad43fb4014667">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a968bbb40be5ecabfe94ad43fb4014667"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9569c1744c19a426136da20b53ee12b1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a9569c1744c19a426136da20b53ee12b1">creer</a> ()</td></tr>
+<tr class="memdesc:a9569c1744c19a426136da20b53ee12b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Crée une nouvelle intervention.  <a href="class_intervention.html#a9569c1744c19a426136da20b53ee12b1">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9569c1744c19a426136da20b53ee12b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc255490bb845520cc11148e4173cb6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#acc255490bb845520cc11148e4173cb6a">effectuer</a> (bool effectuee)</td></tr>
+<tr class="memdesc:acc255490bb845520cc11148e4173cb6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'état de l'intervention.  <a href="class_intervention.html#acc255490bb845520cc11148e4173cb6a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acc255490bb845520cc11148e4173cb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32f52be46931c9c8785aa0e90d79fe5a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a32f52be46931c9c8785aa0e90d79fe5a">estAIntervenir</a> () const</td></tr>
+<tr class="memdesc:a32f52be46931c9c8785aa0e90d79fe5a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne un booléen s'il faut intervenir.  <a href="class_intervention.html#a32f52be46931c9c8785aa0e90d79fe5a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a32f52be46931c9c8785aa0e90d79fe5a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a93e9539a06df306a58be0396aee64fdb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a93e9539a06df306a58be0396aee64fdb">estBacAttribue</a> (int <a class="el" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>, int idBac)</td></tr>
+<tr class="memdesc:a93e9539a06df306a58be0396aee64fdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le bac est deja attribué  <a href="class_intervention.html#a93e9539a06df306a58be0396aee64fdb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a93e9539a06df306a58be0396aee64fdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a795b65358763698af291462a3d5f5448"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a795b65358763698af291462a3d5f5448">estEffectuee</a> () const</td></tr>
+<tr class="memdesc:a795b65358763698af291462a3d5f5448"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne l'état effectuee de l'intervention.  <a href="class_intervention.html#a795b65358763698af291462a3d5f5448">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a795b65358763698af291462a3d5f5448"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bc58449f7fa465f579de5f3384ee1c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a33bc58449f7fa465f579de5f3384ee1c">estPlanifiee</a> (int <a class="el" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>)</td></tr>
+<tr class="memdesc:a33bc58449f7fa465f579de5f3384ee1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Vérifie si le distributeur a déja une intervention à faire ou en cours.  <a href="class_intervention.html#a33bc58449f7fa465f579de5f3384ee1c">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a33bc58449f7fa465f579de5f3384ee1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91de9339441da2ef9020504f10058b62"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a> () const</td></tr>
+<tr class="memdesc:a91de9339441da2ef9020504f10058b62"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aDepanner.  <a href="class_intervention.html#a91de9339441da2ef9020504f10058b62">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a91de9339441da2ef9020504f10058b62"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0684a8292a480acb7e82da9f1eced5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a> () const</td></tr>
+<tr class="memdesc:a5f0684a8292a480acb7e82da9f1eced5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut aRemplir.  <a href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5f0684a8292a480acb7e82da9f1eced5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acddf1047ac581ec1b412e34380a60cc5"><td class="memItemLeft" align="right" valign="top">QDate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#acddf1047ac581ec1b412e34380a60cc5">getDateIntervention</a> () const</td></tr>
+<tr class="memdesc:acddf1047ac581ec1b412e34380a60cc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut dateIntervention.  <a href="class_intervention.html#acddf1047ac581ec1b412e34380a60cc5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acddf1047ac581ec1b412e34380a60cc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa199631a0242a656466513571f8bba6"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_distributeur.html">Distributeur</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#afa199631a0242a656466513571f8bba6">getDistributeurs</a> () const</td></tr>
 <tr class="memdesc:afa199631a0242a656466513571f8bba6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut distributeurAIntervenir.  <a href="class_intervention.html#afa199631a0242a656466513571f8bba6">Plus de détails...</a><br /></td></tr>
 <tr class="separator:afa199631a0242a656466513571f8bba6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6765abb6c7ca7e9e0a99050d519649f7"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a6765abb6c7ca7e9e0a99050d519649f7">getHorodatage</a> () const</td></tr>
-<tr class="memdesc:a6765abb6c7ca7e9e0a99050d519649f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut horodatage.  <a href="class_intervention.html#a6765abb6c7ca7e9e0a99050d519649f7">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a6765abb6c7ca7e9e0a99050d519649f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41e2417994d8589a56c7b7b2e02bd8bc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a41e2417994d8589a56c7b7b2e02bd8bc">Intervention</a> ()</td></tr>
-<tr class="memdesc:a41e2417994d8589a56c7b7b2e02bd8bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur par défaut de la classe <a class="el" href="class_intervention.html">Intervention</a>.  <a href="class_intervention.html#a41e2417994d8589a56c7b7b2e02bd8bc">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a41e2417994d8589a56c7b7b2e02bd8bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac40e8e34d650e3709d51f686e81bb2f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ac40e8e34d650e3709d51f686e81bb2f6">setHorodatage</a> (const QDateTime &amp;<a class="el" href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">horodatage</a>)</td></tr>
-<tr class="separator:ac40e8e34d650e3709d51f686e81bb2f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69446b9647627e6771d7634b766ba619"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a69446b9647627e6771d7634b766ba619">getEtat</a> () const</td></tr>
+<tr class="memdesc:a69446b9647627e6771d7634b766ba619"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut etat.  <a href="class_intervention.html#a69446b9647627e6771d7634b766ba619">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a69446b9647627e6771d7634b766ba619"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a06bba7c0c975e9a94f063d90c076cc7b"><td class="memItemLeft" align="right" valign="top">QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a06bba7c0c975e9a94f063d90c076cc7b">getEtatFormate</a> () const</td></tr>
+<tr class="memdesc:a06bba7c0c975e9a94f063d90c076cc7b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut etat.  <a href="class_intervention.html#a06bba7c0c975e9a94f063d90c076cc7b">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a06bba7c0c975e9a94f063d90c076cc7b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5d5619a2b928f16de0331fb96a412c5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#af5d5619a2b928f16de0331fb96a412c5">getIdDistributeur</a> () const</td></tr>
+<tr class="memdesc:af5d5619a2b928f16de0331fb96a412c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut idDistributeur.  <a href="class_intervention.html#af5d5619a2b928f16de0331fb96a412c5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:af5d5619a2b928f16de0331fb96a412c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c6222b913ef9c0f7761cd0dc8431cec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a9c6222b913ef9c0f7761cd0dc8431cec">getIdIntervention</a> () const</td></tr>
+<tr class="memdesc:a9c6222b913ef9c0f7761cd0dc8431cec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut idIntervention.  <a href="class_intervention.html#a9c6222b913ef9c0f7761cd0dc8431cec">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9c6222b913ef9c0f7761cd0dc8431cec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf4618eb2680ac43188983d6a1f0e28a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#acf4618eb2680ac43188983d6a1f0e28a">getIdOperateur</a> () const</td></tr>
+<tr class="memdesc:acf4618eb2680ac43188983d6a1f0e28a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Accesseur de l'attribut idOperateur.  <a href="class_intervention.html#acf4618eb2680ac43188983d6a1f0e28a">Plus de détails...</a><br /></td></tr>
+<tr class="separator:acf4618eb2680ac43188983d6a1f0e28a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2237dae435a7bd80a0fe43db2f87846"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ad2237dae435a7bd80a0fe43db2f87846">intervenir</a> (bool aIntervenir)</td></tr>
+<tr class="memdesc:ad2237dae435a7bd80a0fe43db2f87846"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie l'état de l'intervention.  <a href="class_intervention.html#ad2237dae435a7bd80a0fe43db2f87846">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad2237dae435a7bd80a0fe43db2f87846"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e53073ed8942ff8addc8ef90ab59dd8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a5e53073ed8942ff8addc8ef90ab59dd8">Intervention</a> (int <a class="el" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>, int <a class="el" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>, int <a class="el" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>, QDate <a class="el" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>, bool <a class="el" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>, bool <a class="el" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>, QString <a class="el" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>)</td></tr>
+<tr class="memdesc:a5e53073ed8942ff8addc8ef90ab59dd8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>.  <a href="class_intervention.html#a5e53073ed8942ff8addc8ef90ab59dd8">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a5e53073ed8942ff8addc8ef90ab59dd8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada0a0d8e3c6da0933b7222bdc0889505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ada0a0d8e3c6da0933b7222bdc0889505">Intervention</a> (QVector&lt; <a class="el" href="class_distributeur.html">Distributeur</a> * &gt; listeDistributeursAIntervenir)</td></tr>
+<tr class="memdesc:ada0a0d8e3c6da0933b7222bdc0889505"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>.  <a href="class_intervention.html#ada0a0d8e3c6da0933b7222bdc0889505">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ada0a0d8e3c6da0933b7222bdc0889505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c5cf3ada5abcea5a74c607441f441d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">setADepanner</a> (const bool &amp;<a class="el" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>)</td></tr>
+<tr class="memdesc:a72c5cf3ada5abcea5a74c607441f441d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut aDepanner.  <a href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a72c5cf3ada5abcea5a74c607441f441d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a337777a04b2ebf2e3b9aa281b7d6f2d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">setARemplir</a> (const bool &amp;<a class="el" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>)</td></tr>
+<tr class="memdesc:a337777a04b2ebf2e3b9aa281b7d6f2d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut aRemplir.  <a href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a337777a04b2ebf2e3b9aa281b7d6f2d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a897bdb63d49b0326ab6314ebb1ebf220"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a897bdb63d49b0326ab6314ebb1ebf220">setDateIntervention</a> (const QDate &amp;<a class="el" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>)</td></tr>
+<tr class="memdesc:a897bdb63d49b0326ab6314ebb1ebf220"><td class="mdescLeft">&#160;</td><td class="mdescRight">Modifie la dateIntervention.  <a href="class_intervention.html#a897bdb63d49b0326ab6314ebb1ebf220">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a897bdb63d49b0326ab6314ebb1ebf220"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a576c03c958e4c2073be941b985e90ecf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a576c03c958e4c2073be941b985e90ecf">setEtat</a> (const QString &amp;numeroDistributeur)</td></tr>
+<tr class="memdesc:a576c03c958e4c2073be941b985e90ecf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut etat.  <a href="class_intervention.html#a576c03c958e4c2073be941b985e90ecf">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a576c03c958e4c2073be941b985e90ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3e4e97e43a59c6ff2e1aaeb330393294"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a3e4e97e43a59c6ff2e1aaeb330393294">setIdDistributeur</a> (const int &amp;numeroDistributeur)</td></tr>
+<tr class="memdesc:a3e4e97e43a59c6ff2e1aaeb330393294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut idDistributeur.  <a href="class_intervention.html#a3e4e97e43a59c6ff2e1aaeb330393294">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3e4e97e43a59c6ff2e1aaeb330393294"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a791496add0bd549ba070f275d4c3136e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a791496add0bd549ba070f275d4c3136e">setIdIntervention</a> (const int &amp;numeroIntervention)</td></tr>
+<tr class="memdesc:a791496add0bd549ba070f275d4c3136e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut idIntervention.  <a href="class_intervention.html#a791496add0bd549ba070f275d4c3136e">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a791496add0bd549ba070f275d4c3136e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe5b8575e6379efb4b31fbbd47ddba42"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#afe5b8575e6379efb4b31fbbd47ddba42">setIdOperateur</a> (const int &amp;<a class="el" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>)</td></tr>
+<tr class="memdesc:afe5b8575e6379efb4b31fbbd47ddba42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Mutateur de l'attribut idOperateur.  <a href="class_intervention.html#afe5b8575e6379efb4b31fbbd47ddba42">Plus de détails...</a><br /></td></tr>
+<tr class="separator:afe5b8575e6379efb4b31fbbd47ddba42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1236b661cb09811ee79657b89488758"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#af1236b661cb09811ee79657b89488758">~Intervention</a> ()</td></tr>
 <tr class="memdesc:af1236b661cb09811ee79657b89488758"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>.  <a href="class_intervention.html#af1236b661cb09811ee79657b89488758">Plus de détails...</a><br /></td></tr>
 <tr class="separator:af1236b661cb09811ee79657b89488758"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Fonctions membres publiques statiques</h2></td></tr>
+<tr class="memitem:a9290d8b4cdb4a23e2897fd3145922a45"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a9290d8b4cdb4a23e2897fd3145922a45">getEtat</a> (const QString &amp;<a class="el" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>)</td></tr>
+<tr class="memdesc:a9290d8b4cdb4a23e2897fd3145922a45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne l'état sous forme de EtatIntervention.  <a href="class_intervention.html#a9290d8b4cdb4a23e2897fd3145922a45">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a9290d8b4cdb4a23e2897fd3145922a45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8b26e2b914653dbbb5b1b7546e53ced"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ad8b26e2b914653dbbb5b1b7546e53ced">getEtat</a> (<a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a> <a class="el" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>)</td></tr>
+<tr class="memdesc:ad8b26e2b914653dbbb5b1b7546e53ced"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne l'état sous forme de QString.  <a href="class_intervention.html#ad8b26e2b914653dbbb5b1b7546e53ced">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ad8b26e2b914653dbbb5b1b7546e53ced"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4104a2be6a555f1f034bfd56e7208a70"><td class="memItemLeft" align="right" valign="top">static QString&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a4104a2be6a555f1f034bfd56e7208a70">getEtatFormate</a> (<a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a> <a class="el" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>)</td></tr>
+<tr class="memdesc:a4104a2be6a555f1f034bfd56e7208a70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne l'état sous forme de QString.  <a href="class_intervention.html#a4104a2be6a555f1f034bfd56e7208a70">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a4104a2be6a555f1f034bfd56e7208a70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Attributs privés</h2></td></tr>
+<tr class="memitem:a309c55a568505cafaed9f51f871df164"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a></td></tr>
+<tr class="memdesc:a309c55a568505cafaed9f51f871df164"><td class="mdescLeft">&#160;</td><td class="mdescRight">si on doit dépanner au moins un distributeur  <a href="class_intervention.html#a309c55a568505cafaed9f51f871df164">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a309c55a568505cafaed9f51f871df164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f1971b2083a1916700902a65422cde9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a></td></tr>
+<tr class="memdesc:a3f1971b2083a1916700902a65422cde9"><td class="mdescLeft">&#160;</td><td class="mdescRight">si on doit remplir au moins un distributeur  <a href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a3f1971b2083a1916700902a65422cde9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a96010b7951d2a1a3d75d77d5bca4dc16"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a></td></tr>
+<tr class="memdesc:a96010b7951d2a1a3d75d77d5bca4dc16"><td class="mdescLeft">&#160;</td><td class="mdescRight">association avec la base de données  <a href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a96010b7951d2a1a3d75d77d5bca4dc16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a968f1e7fcf7de3e5b9514797ad0c9c78"><td class="memItemLeft" align="right" valign="top">QDate&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a></td></tr>
+<tr class="memdesc:a968f1e7fcf7de3e5b9514797ad0c9c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">la date de l'intervention  <a href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a968f1e7fcf7de3e5b9514797ad0c9c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab1f94e5390e6270ddd81adfd5c88b787"><td class="memItemLeft" align="right" valign="top">QVector&lt; <a class="el" href="class_distributeur.html">Distributeur</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a></td></tr>
 <tr class="memdesc:ab1f94e5390e6270ddd81adfd5c88b787"><td class="mdescLeft">&#160;</td><td class="mdescRight">les distributeurs sur lesquels il faut intervenir  <a href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">Plus de détails...</a><br /></td></tr>
 <tr class="separator:ab1f94e5390e6270ddd81adfd5c88b787"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad689d4bc565f10f10b4368a04c401a14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ad689d4bc565f10f10b4368a04c401a14">effectuee</a></td></tr>
-<tr class="memdesc:ad689d4bc565f10f10b4368a04c401a14"><td class="mdescLeft">&#160;</td><td class="mdescRight">si l'intervention a été effectuée  <a href="class_intervention.html#ad689d4bc565f10f10b4368a04c401a14">Plus de détails...</a><br /></td></tr>
-<tr class="separator:ad689d4bc565f10f10b4368a04c401a14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a85d67fc42f13e0f7bd6a85d2ed0cb9df"><td class="memItemLeft" align="right" valign="top">QDateTime&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">horodatage</a></td></tr>
-<tr class="memdesc:a85d67fc42f13e0f7bd6a85d2ed0cb9df"><td class="mdescLeft">&#160;</td><td class="mdescRight">date et heure de l'intervention  <a href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">Plus de détails...</a><br /></td></tr>
-<tr class="separator:a85d67fc42f13e0f7bd6a85d2ed0cb9df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcba4becba42946aac4c5801918fc8a2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a></td></tr>
+<tr class="memdesc:abcba4becba42946aac4c5801918fc8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">etat de l'intervention  <a href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">Plus de détails...</a><br /></td></tr>
+<tr class="separator:abcba4becba42946aac4c5801918fc8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a612a7bea852fb68126387c84fd67bcd7"><td class="memItemLeft" align="right" valign="top">QVector&lt; QTime &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a612a7bea852fb68126387c84fd67bcd7">heuresIntervention</a></td></tr>
+<tr class="memdesc:a612a7bea852fb68126387c84fd67bcd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">l'heure de l'intervention  <a href="class_intervention.html#a612a7bea852fb68126387c84fd67bcd7">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a612a7bea852fb68126387c84fd67bcd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac7f5d74dd97c61a9eaad111116d2b2dc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a></td></tr>
+<tr class="memdesc:ac7f5d74dd97c61a9eaad111116d2b2dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">id du distributeur au quel l'intervention appartient  <a href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ac7f5d74dd97c61a9eaad111116d2b2dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f19266f2a0d168a1cb7b782dbd59eb"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a></td></tr>
+<tr class="memdesc:ae4f19266f2a0d168a1cb7b782dbd59eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">id de l'intervention  <a href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae4f19266f2a0d168a1cb7b782dbd59eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e03e2b9d4803f390c582a65efc434d5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a></td></tr>
+<tr class="memdesc:a6e03e2b9d4803f390c582a65efc434d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">id de l'opérateur  <a href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a6e03e2b9d4803f390c582a65efc434d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock">
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00018">18</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
-</div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
-<a id="a41e2417994d8589a56c7b7b2e02bd8bc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a41e2417994d8589a56c7b7b2e02bd8bc">&#9670;&nbsp;</a></span>Intervention()</h2>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00026">26</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+</div><h2 class="groupheader">Documentation des énumérations membres</h2>
+<a id="ad3f1b9a96dd3999ef850beef7ece3429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3f1b9a96dd3999ef850beef7ece3429">&#9670;&nbsp;</a></span>EtatIntervention</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">Intervention::EtatIntervention</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Les différents états d'une intervention. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4"></a>INCONNU&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47"></a>A_FAIRE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f"></a>VALIDEE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad3f1b9a96dd3999ef850beef7ece3429a2ab2dd1fbebf226c4c24a99702656f8c"></a>EN_COURS&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77"></a>NB_ETATS&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00056">56</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4">INCONNU</a> = -1,</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f">VALIDEE</a>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a2ab2dd1fbebf226c4c24a99702656f8c">EN_COURS</a>,</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">NB_ETATS</a></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    };</div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f">Intervention::VALIDEE</a></div><div class="ttdeci">@ VALIDEE</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00060">intervention.h:60</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429a2ab2dd1fbebf226c4c24a99702656f8c"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a2ab2dd1fbebf226c4c24a99702656f8c">Intervention::EN_COURS</a></div><div class="ttdeci">@ EN_COURS</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00061">intervention.h:61</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">Intervention::A_FAIRE</a></div><div class="ttdeci">@ A_FAIRE</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00059">intervention.h:59</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4">Intervention::INCONNU</a></div><div class="ttdeci">@ INCONNU</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00058">intervention.h:58</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">Intervention::NB_ETATS</a></div><div class="ttdeci">@ NB_ETATS</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00063">intervention.h:62</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aa8ebdb8ad941db81dba4fe672a4e3995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8ebdb8ad941db81dba4fe672a4e3995">&#9670;&nbsp;</a></span>TableApprovisionnement</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995">Intervention::TableApprovisionnement</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="aa8ebdb8ad941db81dba4fe672a4e3995a0e9dfdc70ee342eb099a99452e7e6294"></a>ID_APPROVISIONNEMENT&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa8ebdb8ad941db81dba4fe672a4e3995a13d3bd00af70596e02c1560c09d4682e"></a>ID_INTERVENTION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa8ebdb8ad941db81dba4fe672a4e3995a46cfb2eaa63db270426e028ec9d64fdc"></a>ID_BAC&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa8ebdb8ad941db81dba4fe672a4e3995a195e7a4f53c091d16ace3c48dc7e0e2e"></a>POIDS_A_PREVOIR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa8ebdb8ad941db81dba4fe672a4e3995a0ec104b33c9d66219e46cfd5634b55b4"></a>HEURE_APPROVISIONNEMENT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00044">44</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    {</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <a class="code" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0e9dfdc70ee342eb099a99452e7e6294">ID_APPROVISIONNEMENT</a>,</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <a class="code" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a13d3bd00af70596e02c1560c09d4682e">ID_INTERVENTION</a>,</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <a class="code" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a46cfb2eaa63db270426e028ec9d64fdc">ID_BAC</a>,</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        <a class="code" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a195e7a4f53c091d16ace3c48dc7e0e2e">POIDS_A_PREVOIR</a>,</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <a class="code" href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0ec104b33c9d66219e46cfd5634b55b4">HEURE_APPROVISIONNEMENT</a></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    };</div>
+<div class="ttc" id="aclass_intervention_html_aa8ebdb8ad941db81dba4fe672a4e3995a0e9dfdc70ee342eb099a99452e7e6294"><div class="ttname"><a href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0e9dfdc70ee342eb099a99452e7e6294">Intervention::ID_APPROVISIONNEMENT</a></div><div class="ttdeci">@ ID_APPROVISIONNEMENT</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00046">intervention.h:46</a></div></div>
+<div class="ttc" id="aclass_intervention_html_aa8ebdb8ad941db81dba4fe672a4e3995a0ec104b33c9d66219e46cfd5634b55b4"><div class="ttname"><a href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a0ec104b33c9d66219e46cfd5634b55b4">Intervention::HEURE_APPROVISIONNEMENT</a></div><div class="ttdeci">@ HEURE_APPROVISIONNEMENT</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00051">intervention.h:50</a></div></div>
+<div class="ttc" id="aclass_intervention_html_aa8ebdb8ad941db81dba4fe672a4e3995a13d3bd00af70596e02c1560c09d4682e"><div class="ttname"><a href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a13d3bd00af70596e02c1560c09d4682e">Intervention::ID_INTERVENTION</a></div><div class="ttdeci">@ ID_INTERVENTION</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00047">intervention.h:47</a></div></div>
+<div class="ttc" id="aclass_intervention_html_aa8ebdb8ad941db81dba4fe672a4e3995a195e7a4f53c091d16ace3c48dc7e0e2e"><div class="ttname"><a href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a195e7a4f53c091d16ace3c48dc7e0e2e">Intervention::POIDS_A_PREVOIR</a></div><div class="ttdeci">@ POIDS_A_PREVOIR</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00049">intervention.h:49</a></div></div>
+<div class="ttc" id="aclass_intervention_html_aa8ebdb8ad941db81dba4fe672a4e3995a46cfb2eaa63db270426e028ec9d64fdc"><div class="ttname"><a href="class_intervention.html#aa8ebdb8ad941db81dba4fe672a4e3995a46cfb2eaa63db270426e028ec9d64fdc">Intervention::ID_BAC</a></div><div class="ttdeci">@ ID_BAC</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00048">intervention.h:48</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a4eca900b721b50b3a566698c44fa2b73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4eca900b721b50b3a566698c44fa2b73">&#9670;&nbsp;</a></span>TableIntervention</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73">Intervention::TableIntervention</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Les colonnes de la table <a class="el" href="class_intervention.html">Intervention</a>. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Valeurs énumérées</th></tr><tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73a41edb8e30602d801042aef8569546524"></a>ID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73a1d0a8caba92d6835a31b566d5b08fbf8"></a>ID_OPERATEUR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73ad4133413745989849115b70b6bb036aa"></a>ID_DISTRIBUTEUR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73a444ae59c5f581d1c8124f742291c32fc"></a>DATE_INTERVENTION&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73a7a6fafb34085eccefe23d315f5859c1f"></a>A_REMPLIR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73aa0eee31355ca00ed15aebcf8d1c5d570"></a>A_DEPANNER&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a4eca900b721b50b3a566698c44fa2b73a2d478cf6d4992a26a8635738f42ec63f"></a>ETAT&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00033">33</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<div class="fragment"><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a41edb8e30602d801042aef8569546524">ID</a>,</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a1d0a8caba92d6835a31b566d5b08fbf8">ID_OPERATEUR</a>,</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73ad4133413745989849115b70b6bb036aa">ID_DISTRIBUTEUR</a>,</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a444ae59c5f581d1c8124f742291c32fc">DATE_INTERVENTION</a>,</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a7a6fafb34085eccefe23d315f5859c1f">A_REMPLIR</a>,</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73aa0eee31355ca00ed15aebcf8d1c5d570">A_DEPANNER</a>,</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a2d478cf6d4992a26a8635738f42ec63f">ETAT</a></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    };</div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73a1d0a8caba92d6835a31b566d5b08fbf8"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a1d0a8caba92d6835a31b566d5b08fbf8">Intervention::ID_OPERATEUR</a></div><div class="ttdeci">@ ID_OPERATEUR</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00036">intervention.h:36</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73a2d478cf6d4992a26a8635738f42ec63f"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a2d478cf6d4992a26a8635738f42ec63f">Intervention::ETAT</a></div><div class="ttdeci">@ ETAT</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00042">intervention.h:41</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73a41edb8e30602d801042aef8569546524"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a41edb8e30602d801042aef8569546524">Intervention::ID</a></div><div class="ttdeci">@ ID</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00035">intervention.h:35</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73a444ae59c5f581d1c8124f742291c32fc"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a444ae59c5f581d1c8124f742291c32fc">Intervention::DATE_INTERVENTION</a></div><div class="ttdeci">@ DATE_INTERVENTION</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00038">intervention.h:38</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73a7a6fafb34085eccefe23d315f5859c1f"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73a7a6fafb34085eccefe23d315f5859c1f">Intervention::A_REMPLIR</a></div><div class="ttdeci">@ A_REMPLIR</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00039">intervention.h:39</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73aa0eee31355ca00ed15aebcf8d1c5d570"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73aa0eee31355ca00ed15aebcf8d1c5d570">Intervention::A_DEPANNER</a></div><div class="ttdeci">@ A_DEPANNER</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00040">intervention.h:40</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a4eca900b721b50b3a566698c44fa2b73ad4133413745989849115b70b6bb036aa"><div class="ttname"><a href="class_intervention.html#a4eca900b721b50b3a566698c44fa2b73ad4133413745989849115b70b6bb036aa">Intervention::ID_DISTRIBUTEUR</a></div><div class="ttdeci">@ ID_DISTRIBUTEUR</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00037">intervention.h:37</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
+<a id="ada0a0d8e3c6da0933b7222bdc0889505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada0a0d8e3c6da0933b7222bdc0889505">&#9670;&nbsp;</a></span>Intervention() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Intervention::Intervention </td>
+          <td>(</td>
+          <td class="paramtype">QVector&lt; <a class="el" href="class_distributeur.html">Distributeur</a> * &gt;&#160;</td>
+          <td class="paramname"><em>listeDistributeursAIntervenir</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00020">20</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;                                                                               :</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>(<a class="code" href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees::getInstance</a>()), <a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>(QDate::currentDate()),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>(listeDistributeursAIntervenir), <a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>(<span class="keyword">false</span>), <a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>(<span class="keyword">false</span>),</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>(<a class="code" href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a>), <a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>(<a class="code" href="operateur_8h.html#a0647592e814f6386f9760622af415417">ID_OPERATEUR_NON_DEFINI</a>),</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>(<a class="code" href="distributeur_8h.html#aac107aa8e0cfed1e09608868dad262cc">ID_DISTRIBUTEUR_NON_DEFINI</a>), <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>(<a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4">INCONNU</a>)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;dateIntervention&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a> &lt;&lt; <span class="stringliteral">&quot;nb distributeurs&quot;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;             &lt;&lt; listeDistributeursAIntervenir.size();</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;}</div>
+<div class="ttc" id="aclass_base_de_donnees_html_a1cea5a739386ba076c7f265205e82608"><div class="ttname"><a href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees::getInstance</a></div><div class="ttdeci">static BaseDeDonnees * getInstance()</div><div class="ttdoc">Définition méthode getInstance()</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00047">basededonnees.cpp:47</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a309c55a568505cafaed9f51f871df164"><div class="ttname"><a href="class_intervention.html#a309c55a568505cafaed9f51f871df164">Intervention::aDepanner</a></div><div class="ttdeci">bool aDepanner</div><div class="ttdoc">si on doit dépanner au moins un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00071">intervention.h:71</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a3f1971b2083a1916700902a65422cde9"><div class="ttname"><a href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">Intervention::aRemplir</a></div><div class="ttdeci">bool aRemplir</div><div class="ttdoc">si on doit remplir au moins un distributeur</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00070">intervention.h:70</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a6e03e2b9d4803f390c582a65efc434d5"><div class="ttname"><a href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">Intervention::idOperateur</a></div><div class="ttdeci">int idOperateur</div><div class="ttdoc">id de l'opérateur</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00073">intervention.h:73</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a96010b7951d2a1a3d75d77d5bca4dc16"><div class="ttname"><a href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">Intervention::baseDeDonnees</a></div><div class="ttdeci">BaseDeDonnees * baseDeDonnees</div><div class="ttdoc">association avec la base de données</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00066">intervention.h:66</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a968f1e7fcf7de3e5b9514797ad0c9c78"><div class="ttname"><a href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">Intervention::dateIntervention</a></div><div class="ttdeci">QDate dateIntervention</div><div class="ttdoc">la date de l'intervention</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00067">intervention.h:67</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ab1f94e5390e6270ddd81adfd5c88b787"><div class="ttname"><a href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">Intervention::distributeurs</a></div><div class="ttdeci">QVector&lt; Distributeur * &gt; distributeurs</div><div class="ttdoc">les distributeurs sur lesquels il faut intervenir</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00069">intervention.h:69</a></div></div>
+<div class="ttc" id="aclass_intervention_html_abcba4becba42946aac4c5801918fc8a2"><div class="ttname"><a href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">Intervention::etat</a></div><div class="ttdeci">EtatIntervention etat</div><div class="ttdoc">etat de l'intervention</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00075">intervention.h:75</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ac7f5d74dd97c61a9eaad111116d2b2dc"><div class="ttname"><a href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">Intervention::idDistributeur</a></div><div class="ttdeci">int idDistributeur</div><div class="ttdoc">id du distributeur au quel l'intervention appartient</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00074">intervention.h:74</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ae4f19266f2a0d168a1cb7b782dbd59eb"><div class="ttname"><a href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">Intervention::idIntervention</a></div><div class="ttdeci">int idIntervention</div><div class="ttdoc">id de l'intervention</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00072">intervention.h:72</a></div></div>
+<div class="ttc" id="adistributeur_8h_html_aac107aa8e0cfed1e09608868dad262cc"><div class="ttname"><a href="distributeur_8h.html#aac107aa8e0cfed1e09608868dad262cc">ID_DISTRIBUTEUR_NON_DEFINI</a></div><div class="ttdeci">#define ID_DISTRIBUTEUR_NON_DEFINI</div><div class="ttdoc">Définit la valeur d'un id non défini.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8h_source.html#l00020">distributeur.h:20</a></div></div>
+<div class="ttc" id="aintervention_8h_html_afeb84f757b59f0b14d278e164d1f94ac"><div class="ttname"><a href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a></div><div class="ttdeci">#define ID_INTERVENTION_NON_DEFINI</div><div class="ttdoc">Définit la valeur d'un id non défini.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00020">intervention.h:20</a></div></div>
+<div class="ttc" id="aoperateur_8h_html_a0647592e814f6386f9760622af415417"><div class="ttname"><a href="operateur_8h.html#a0647592e814f6386f9760622af415417">ID_OPERATEUR_NON_DEFINI</a></div><div class="ttdeci">#define ID_OPERATEUR_NON_DEFINI</div><div class="ttdoc">Définit la valeur d'un id non défini.</div><div class="ttdef"><b>Definition:</b> <a href="operateur_8h_source.html#l00020">operateur.h:20</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00067">dateIntervention</a>.</p>
+
+</div>
+</div>
+<a id="a5e53073ed8942ff8addc8ef90ab59dd8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e53073ed8942ff8addc8ef90ab59dd8">&#9670;&nbsp;</a></span>Intervention() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,21 +463,70 @@ Attributs privés</h2></td></tr>
         <tr>
           <td class="memname">Intervention::Intervention </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idIntervention</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idOperateur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idDistributeur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDate&#160;</td>
+          <td class="paramname"><em>dateIntervention</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aRemplir</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aDepanner</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>etat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructeur par défaut de la classe <a class="el" href="class_intervention.html">Intervention</a>. </p>
+<p>Constructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00017">17</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;                           : <a class="code" href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">horodatage</a>(), <a class="code" href="class_intervention.html#ad689d4bc565f10f10b4368a04c401a14">effectuee</a>(<span class="keyword">false</span>)</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;{</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;}</div>
-<div class="ttc" id="aclass_intervention_html_a85d67fc42f13e0f7bd6a85d2ed0cb9df"><div class="ttname"><a href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">Intervention::horodatage</a></div><div class="ttdeci">QDateTime horodatage</div><div class="ttdoc">date et heure de l'intervention</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00021">intervention.h:21</a></div></div>
-<div class="ttc" id="aclass_intervention_html_ad689d4bc565f10f10b4368a04c401a14"><div class="ttname"><a href="class_intervention.html#ad689d4bc565f10f10b4368a04c401a14">Intervention::effectuee</a></div><div class="ttdeci">bool effectuee</div><div class="ttdoc">si l'intervention a été effectuée</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00023">intervention.h:23</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00033">33</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                                         :</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>(<a class="code" href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees::getInstance</a>()),</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>(<a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>), <a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>(<a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>), <a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>(<a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>),</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>(<a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>), <a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>(<a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>), <a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>(<a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>),</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>(<a class="code" href="class_intervention.html#a69446b9647627e6771d7634b766ba619">Intervention::getEtat</a>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>))</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;{</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;dateIntervention&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a> &lt;&lt; <span class="stringliteral">&quot;idIntervention&quot;</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;             &lt;&lt; <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a> &lt;&lt; <span class="stringliteral">&quot;idOperateur&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a> &lt;&lt; <span class="stringliteral">&quot;idDistributeur&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;             &lt;&lt; <span class="stringliteral">&quot;aRemplir&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a> &lt;&lt; <span class="stringliteral">&quot;aDepanner&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a> &lt;&lt; <span class="stringliteral">&quot;etat&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_a69446b9647627e6771d7634b766ba619"><div class="ttname"><a href="class_intervention.html#a69446b9647627e6771d7634b766ba619">Intervention::getEtat</a></div><div class="ttdeci">QString getEtat() const</div><div class="ttdoc">Accesseur de l'attribut etat.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00159">intervention.cpp:159</a></div></div>
 </div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00071">aDepanner</a>, <a class="el" href="intervention_8h_source.html#l00070">aRemplir</a>, <a class="el" href="intervention_8h_source.html#l00067">dateIntervention</a>, <a class="el" href="intervention_8h_source.html#l00075">etat</a>, <a class="el" href="intervention_8h_source.html#l00074">idDistributeur</a>, <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>, et <a class="el" href="intervention_8h_source.html#l00073">idOperateur</a>.</p>
+
 </div>
 </div>
 <a id="af1236b661cb09811ee79657b89488758"></a>
@@ -181,13 +546,144 @@ Attributs privés</h2></td></tr>
 
 <p>Destructeur de la classe <a class="el" href="class_intervention.html">Intervention</a>. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00024">24</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00053">53</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;{</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;}</div>
 </div><!-- fragment -->
 </div>
 </div>
 <h2 class="groupheader">Documentation des fonctions membres</h2>
+<a id="a6efa646ae8d2d0b18bf10bd8832b4950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6efa646ae8d2d0b18bf10bd8832b4950">&#9670;&nbsp;</a></span>affecterEtatIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::affecterEtatIntervention </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>indexDistributeur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modifie l'état de l'intervention si elle est à remplir, à depanner ou les deux. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indexDistributeur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00283">283</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;{</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">setARemplir</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">setADepanner</a>(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getNbBacs(); j++)</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;    {</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;distributeur&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getNom()</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot;bac&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getNomProduit()</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot;aRemplir&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getARemplir()</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;                 &lt;&lt; <span class="stringliteral">&quot;aDepanner&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getADepanner();</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>() &amp;&amp;</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;           <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>() &amp;&amp;</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;           !<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getAIntervenir())</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;        {</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;            this-&gt;<a class="code" href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">setARemplir</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;            this-&gt;<a class="code" href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">setADepanner</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;        }</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>((<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>()) &amp;&amp;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                !<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getAIntervenir())</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;        {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;            this-&gt;<a class="code" href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">setARemplir</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;        }</div>
+<div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>() &amp;&amp;</div>
+<div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;                !<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getAIntervenir())</div>
+<div class="line"><a name="l00309"></a><span class="lineno">  309</span>&#160;        {</div>
+<div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;            this-&gt;<a class="code" href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">setADepanner</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160;        }</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;    }</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_a337777a04b2ebf2e3b9aa281b7d6f2d0"><div class="ttname"><a href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">Intervention::setARemplir</a></div><div class="ttdeci">void setARemplir(const bool &amp;aRemplir)</div><div class="ttdoc">Mutateur de l'attribut aRemplir.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00177">intervention.cpp:177</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a5f0684a8292a480acb7e82da9f1eced5"><div class="ttname"><a href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">Intervention::getARemplir</a></div><div class="ttdeci">bool getARemplir() const</div><div class="ttdoc">Accesseur de l'attribut aRemplir.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00114">intervention.cpp:114</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a72c5cf3ada5abcea5a74c607441f441d"><div class="ttname"><a href="class_intervention.html#a72c5cf3ada5abcea5a74c607441f441d">Intervention::setADepanner</a></div><div class="ttdeci">void setADepanner(const bool &amp;aDepanner)</div><div class="ttdoc">Mutateur de l'attribut aDepanner.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00186">intervention.cpp:186</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a91de9339441da2ef9020504f10058b62"><div class="ttname"><a href="class_intervention.html#a91de9339441da2ef9020504f10058b62">Intervention::getADepanner</a></div><div class="ttdeci">bool getADepanner() const</div><div class="ttdoc">Accesseur de l'attribut aDepanner.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00123">intervention.cpp:123</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>, <a class="el" href="intervention_8cpp_source.html#l00123">getADepanner()</a>, <a class="el" href="intervention_8cpp_source.html#l00114">getARemplir()</a>, <a class="el" href="intervention_8cpp_source.html#l00186">setADepanner()</a>, et <a class="el" href="intervention_8cpp_source.html#l00177">setARemplir()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
+<a id="a12fe3505422555563c9d698044c51e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12fe3505422555563c9d698044c51e13">&#9670;&nbsp;</a></span>ajouterApprovisionnement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::ajouterApprovisionnement </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>indexDistributeur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Ajoute les approvisionnements nécessaires des bacs dans la bdd. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indexDistributeur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00377">377</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160;{</div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    QString          requete = <span class="stringliteral">&quot;SELECT idBac FROM Approvisionnement&quot;</span>;</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    QVector&lt;QString&gt; listeDeBacPlanifie;</div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(requete, listeDeBacPlanifie);</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> j = 0; j &lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getNbBacs(); j++)</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;    {</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>() &amp;&amp;</div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;           !<a class="code" href="class_intervention.html#a93e9539a06df306a58be0396aee64fdb">estBacAttribue</a>(indexDistributeur, j))</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        {</div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;bacEstAttribue&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#a93e9539a06df306a58be0396aee64fdb">estBacAttribue</a>(indexDistributeur, j);</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160;            <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#a33bc58449f7fa465f579de5f3384ee1c">estPlanifiee</a>(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getId()))</div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;            {</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;                requete = <span class="stringliteral">&quot;INSERT INTO Approvisionnement (idIntervention, idBac, &quot;</span></div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;                          <span class="stringliteral">&quot;poidsAPrevoir, heureApprovisionnement) VALUES (&quot;</span> +</div>
+<div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;                          QString::number(<a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>) + <span class="stringliteral">&quot;, &quot;</span> +</div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;                          QString::number(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getIdBac()) +</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;                          <span class="stringliteral">&quot;, &quot;</span> +</div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;                          QString::number(</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;                            <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getBac(j)-&gt;getQuantiteARemplir()) +</div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;                          <span class="stringliteral">&quot;, &quot;</span> + <span class="stringliteral">&quot;&#39;&#39;);&quot;</span>;</div>
+<div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;                qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;                <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">executer</a>(requete);</div>
+<div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;            }</div>
+<div class="line"><a name="l00402"></a><span class="lineno">  402</span>&#160;        }</div>
+<div class="line"><a name="l00403"></a><span class="lineno">  403</span>&#160;    }</div>
+<div class="line"><a name="l00404"></a><span class="lineno">  404</span>&#160;}</div>
+<div class="ttc" id="aclass_base_de_donnees_html_a77539baad389f5acf754cd2cd452403e"><div class="ttname"><a href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">BaseDeDonnees::recuperer</a></div><div class="ttdeci">bool recuperer(QString requete, QString &amp;donnees)</div><div class="ttdoc">Exécute une requête SQL de type SELECT et récupère un champ d'un seul enregistrement.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00195">basededonnees.cpp:195</a></div></div>
+<div class="ttc" id="aclass_base_de_donnees_html_aa8de5f8f8bb17edc43f5c0ee33712081"><div class="ttname"><a href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">BaseDeDonnees::executer</a></div><div class="ttdeci">bool executer(QString requete)</div><div class="ttdoc">Exécute une requête SQL de type UPDATE, INSERT et DELETE.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00147">basededonnees.cpp:147</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a33bc58449f7fa465f579de5f3384ee1c"><div class="ttname"><a href="class_intervention.html#a33bc58449f7fa465f579de5f3384ee1c">Intervention::estPlanifiee</a></div><div class="ttdeci">int estPlanifiee(int idDistributeur)</div><div class="ttdoc">Vérifie si le distributeur a déja une intervention à faire ou en cours.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00437">intervention.cpp:437</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a93e9539a06df306a58be0396aee64fdb"><div class="ttname"><a href="class_intervention.html#a93e9539a06df306a58be0396aee64fdb">Intervention::estBacAttribue</a></div><div class="ttdeci">bool estBacAttribue(int idDistributeur, int idBac)</div><div class="ttdoc">Vérifie si le bac est deja attribué</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00412">intervention.cpp:412</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00066">baseDeDonnees</a>, <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>, <a class="el" href="intervention_8cpp_source.html#l00412">estBacAttribue()</a>, <a class="el" href="intervention_8cpp_source.html#l00437">estPlanifiee()</a>, <a class="el" href="basededonnees_8cpp_source.html#l00147">BaseDeDonnees::executer()</a>, <a class="el" href="intervention_8cpp_source.html#l00114">getARemplir()</a>, <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00195">BaseDeDonnees::recuperer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
 <a id="a3062835adbb592516dba3a570e6b0394"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3062835adbb592516dba3a570e6b0394">&#9670;&nbsp;</a></span>ajouterDistributeur()</h2>
 
@@ -204,7 +700,7 @@ Attributs privés</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Mutateur de l'attribut distributeurAIntervenir. </p>
+<p>Ajoute un distributeur sur lequel il faut intervenir. </p>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">distributeur</td><td>distributeur sur lequel il faut intervenir </td></tr>
@@ -212,13 +708,433 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00050">50</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;{</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>.push_back(distributeur);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;}</div>
-<div class="ttc" id="aclass_intervention_html_ab1f94e5390e6270ddd81adfd5c88b787"><div class="ttname"><a href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">Intervention::distributeurs</a></div><div class="ttdeci">QVector&lt; Distributeur * &gt; distributeurs</div><div class="ttdoc">les distributeurs sur lesquels il faut intervenir</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00022">intervention.h:22</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00231">231</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;{</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>.push_back(distributeur);</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00022">distributeurs</a>.</p>
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>.</p>
+
+</div>
+</div>
+<a id="a968bbb40be5ecabfe94ad43fb4014667"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968bbb40be5ecabfe94ad43fb4014667">&#9670;&nbsp;</a></span>ajouterIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::ajouterIntervention </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>indexDistributeur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Insére une nouvelle intervention dans la bdd. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">indexDistributeur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>int le numéro d'intervention ou -1 en cas d'échec </dd></dl>
+<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000002">A faire:</a></b></dt><dd>update l'operateur si il a changé </dd></dl>
+<p>&lt; </p><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">A faire:</a></b></dt><dd>update l'operateur si il a changé </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00321">321</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160;{</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    <span class="keywordtype">int</span>     numeroIntervention = <a class="code" href="class_intervention.html#a33bc58449f7fa465f579de5f3384ee1c">estPlanifiee</a>(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getId());</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160;    QString requete;</div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>() || this-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>())</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160;    {</div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;        <span class="keywordflow">if</span>(numeroIntervention == <a class="code" href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a>)</div>
+<div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160;        {</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;            requete = <span class="stringliteral">&quot;INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, &quot;</span></div>
+<div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;                      <span class="stringliteral">&quot;etat, aRemplir, aDepanner) VALUES (&quot;</span> +</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;                      QString::number(<a class="code" href="class_intervention.html#acf4618eb2680ac43188983d6a1f0e28a">getIdOperateur</a>()) + <span class="stringliteral">&quot;, &quot;</span> +</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;                      QString::number(<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[indexDistributeur]-&gt;getId()) + <span class="stringliteral">&quot;, &quot;</span> + <span class="stringliteral">&quot;&#39;&quot;</span> +</div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;                      this-&gt;<a class="code" href="class_intervention.html#acddf1047ac581ec1b412e34380a60cc5">getDateIntervention</a>().toString(<span class="stringliteral">&quot;yyyy-MM-dd&quot;</span>) + <span class="stringliteral">&quot;&#39;&quot;</span> + <span class="stringliteral">&quot;, &#39;A_FAIRE&#39;, &quot;</span> +</div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;                      QString::number(this-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>()) + <span class="stringliteral">&quot;, &quot;</span> +</div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;                      QString::number(this-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>()) + <span class="stringliteral">&quot;);&quot;</span>;</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;            <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">executer</a>(requete);</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;            requete = <span class="stringliteral">&quot;SELECT MAX(idIntervention) FROM Intervention;&quot;</span>;</div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160;            QString <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>;</div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;            <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(requete, <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>);</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;idIntervention&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>;</div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;            <span class="keywordtype">bool</span> conversion;</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160;            numeroIntervention = <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>.toInt(&amp;conversion);</div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;            <span class="keywordflow">if</span>(conversion)</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160;                <span class="keywordflow">return</span> numeroIntervention;</div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;            <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a>;</div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;        }</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160; </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;        <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>())</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160;        {</div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;            requete = <span class="stringliteral">&quot;UPDATE Intervention SET aDepanner = 1 WHERE idIntervention = &quot;</span> +</div>
+<div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160;                      QString::number(numeroIntervention) + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160;            <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">executer</a>(requete);</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160;        }</div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160; </div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160;        <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>())</div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;        {</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;            requete = <span class="stringliteral">&quot;UPDATE Intervention SET aRemplir = 1 WHERE idIntervention = &quot;</span> +</div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;                      QString::number(numeroIntervention) + <span class="stringliteral">&quot;;&quot;</span>;</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160;            qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;            <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#aa8de5f8f8bb17edc43f5c0ee33712081">executer</a>(requete);</div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;        }</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160;    }</div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160; </div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;    <span class="keywordflow">return</span> numeroIntervention;</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_acddf1047ac581ec1b412e34380a60cc5"><div class="ttname"><a href="class_intervention.html#acddf1047ac581ec1b412e34380a60cc5">Intervention::getDateIntervention</a></div><div class="ttdeci">QDate getDateIntervention() const</div><div class="ttdoc">Accesseur de l'attribut dateIntervention.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00062">intervention.cpp:62</a></div></div>
+<div class="ttc" id="aclass_intervention_html_acf4618eb2680ac43188983d6a1f0e28a"><div class="ttname"><a href="class_intervention.html#acf4618eb2680ac43188983d6a1f0e28a">Intervention::getIdOperateur</a></div><div class="ttdeci">int getIdOperateur() const</div><div class="ttdoc">Accesseur de l'attribut idOperateur.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00141">intervention.cpp:141</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00066">baseDeDonnees</a>, <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>, <a class="el" href="intervention_8cpp_source.html#l00437">estPlanifiee()</a>, <a class="el" href="basededonnees_8cpp_source.html#l00147">BaseDeDonnees::executer()</a>, <a class="el" href="intervention_8cpp_source.html#l00123">getADepanner()</a>, <a class="el" href="intervention_8cpp_source.html#l00114">getARemplir()</a>, <a class="el" href="intervention_8cpp_source.html#l00062">getDateIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00141">getIdOperateur()</a>, <a class="el" href="intervention_8h_source.html#l00020">ID_INTERVENTION_NON_DEFINI</a>, <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00195">BaseDeDonnees::recuperer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
+<a id="a9569c1744c19a426136da20b53ee12b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9569c1744c19a426136da20b53ee12b1">&#9670;&nbsp;</a></span>creer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::creer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Crée une nouvelle intervention. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00260">260</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;{</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>.size(); i++)</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;    {</div>
+<div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;        <a class="code" href="class_intervention.html#a6efa646ae8d2d0b18bf10bd8832b4950">affecterEtatIntervention</a>(i);</div>
+<div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;        qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;distributeur&quot;</span> &lt;&lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[i]-&gt;getNom() &lt;&lt; <span class="stringliteral">&quot;aRemplir&quot;</span></div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                 &lt;&lt; this-&gt;<a class="code" href="class_intervention.html#a5f0684a8292a480acb7e82da9f1eced5">getARemplir</a>() &lt;&lt; <span class="stringliteral">&quot;aDepanner&quot;</span> &lt;&lt; this-&gt;<a class="code" href="class_intervention.html#a91de9339441da2ef9020504f10058b62">getADepanner</a>();</div>
+<div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;        this-&gt;<a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a> = <a class="code" href="class_intervention.html#a968bbb40be5ecabfe94ad43fb4014667">ajouterIntervention</a>(i);</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    }</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    <span class="keywordflow">if</span>(this-&gt;<a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a> != <a class="code" href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a>)</div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <a class="code" href="class_intervention.html#ad2237dae435a7bd80a0fe43db2f87846">intervenir</a>(<span class="keyword">true</span>);</div>
+<div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>.size(); ++i)</div>
+<div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;        {</div>
+<div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;            <a class="code" href="class_intervention.html#a12fe3505422555563c9d698044c51e13">ajouterApprovisionnement</a>(i);</div>
+<div class="line"><a name="l00275"></a><span class="lineno">  275</span>&#160;        }</div>
+<div class="line"><a name="l00276"></a><span class="lineno">  276</span>&#160;    }</div>
+<div class="line"><a name="l00277"></a><span class="lineno">  277</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_a12fe3505422555563c9d698044c51e13"><div class="ttname"><a href="class_intervention.html#a12fe3505422555563c9d698044c51e13">Intervention::ajouterApprovisionnement</a></div><div class="ttdeci">void ajouterApprovisionnement(int indexDistributeur)</div><div class="ttdoc">Ajoute les approvisionnements nécessaires des bacs dans la bdd.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00377">intervention.cpp:377</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a6efa646ae8d2d0b18bf10bd8832b4950"><div class="ttname"><a href="class_intervention.html#a6efa646ae8d2d0b18bf10bd8832b4950">Intervention::affecterEtatIntervention</a></div><div class="ttdeci">void affecterEtatIntervention(int indexDistributeur)</div><div class="ttdoc">Modifie l'état de l'intervention si elle est à remplir, à depanner ou les deux.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00283">intervention.cpp:283</a></div></div>
+<div class="ttc" id="aclass_intervention_html_a968bbb40be5ecabfe94ad43fb4014667"><div class="ttname"><a href="class_intervention.html#a968bbb40be5ecabfe94ad43fb4014667">Intervention::ajouterIntervention</a></div><div class="ttdeci">int ajouterIntervention(int indexDistributeur)</div><div class="ttdoc">Insére une nouvelle intervention dans la bdd.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00321">intervention.cpp:321</a></div></div>
+<div class="ttc" id="aclass_intervention_html_ad2237dae435a7bd80a0fe43db2f87846"><div class="ttname"><a href="class_intervention.html#ad2237dae435a7bd80a0fe43db2f87846">Intervention::intervenir</a></div><div class="ttdeci">void intervenir(bool aIntervenir)</div><div class="ttdoc">Modifie l'état de l'intervention.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00252">intervention.cpp:252</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>, <a class="el" href="intervention_8cpp_source.html#l00123">getADepanner()</a>, <a class="el" href="intervention_8cpp_source.html#l00114">getARemplir()</a>, <a class="el" href="intervention_8h_source.html#l00020">ID_INTERVENTION_NON_DEFINI</a>, <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>, et <a class="el" href="intervention_8cpp_source.html#l00252">intervenir()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="planificationintervention_8cpp_source.html#l00101">PlanificationIntervention::creerUneIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="acc255490bb845520cc11148e4173cb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc255490bb845520cc11148e4173cb6a">&#9670;&nbsp;</a></span>effectuer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::effectuer </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>effectuee</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modifie l'état de l'intervention. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">effectuee</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00240">240</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;{</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    <span class="keywordflow">if</span>(effectuee)</div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;        this-&gt;<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> = <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f">VALIDEE</a>;</div>
+<div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;        this-&gt;<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> = <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a>;</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00059">A_FAIRE</a>, <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8h_source.html#l00060">VALIDEE</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00252">intervenir()</a>.</p>
+
+</div>
+</div>
+<a id="a32f52be46931c9c8785aa0e90d79fe5a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32f52be46931c9c8785aa0e90d79fe5a">&#9670;&nbsp;</a></span>estAIntervenir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::estAIntervenir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retourne un booléen s'il faut intervenir. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>bool </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00093">93</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;{</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> == <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a>)</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00059">A_FAIRE</a>, et <a class="el" href="intervention_8h_source.html#l00075">etat</a>.</p>
+
+</div>
+</div>
+<a id="a93e9539a06df306a58be0396aee64fdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a93e9539a06df306a58be0396aee64fdb">&#9670;&nbsp;</a></span>estBacAttribue()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::estBacAttribue </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idDistributeur</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idBac</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si le bac est deja attribué </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idDistributeur</td><td></td></tr>
+    <tr><td class="paramname">idBac</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>bool </dd></dl>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000004">A faire:</a></b></dt><dd>Cette requête me semble insuffisante </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00412">412</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00413"></a><span class="lineno">  413</span>&#160;{</div>
+<div class="line"><a name="l00417"></a><span class="lineno">  417</span>&#160;    QString          requete = <span class="stringliteral">&quot;SELECT idBac FROM Approvisionnement&quot;</span>;</div>
+<div class="line"><a name="l00418"></a><span class="lineno">  418</span>&#160;    QVector&lt;QString&gt; listeDeBacPlanifie;</div>
+<div class="line"><a name="l00419"></a><span class="lineno">  419</span>&#160;    <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(requete, listeDeBacPlanifie);</div>
+<div class="line"><a name="l00420"></a><span class="lineno">  420</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00421"></a><span class="lineno">  421</span>&#160; </div>
+<div class="line"><a name="l00422"></a><span class="lineno">  422</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; listeDeBacPlanifie.size(); i++)</div>
+<div class="line"><a name="l00423"></a><span class="lineno">  423</span>&#160;    {</div>
+<div class="line"><a name="l00424"></a><span class="lineno">  424</span>&#160;        <span class="keywordflow">if</span>(listeDeBacPlanifie[i].toInt() ==</div>
+<div class="line"><a name="l00425"></a><span class="lineno">  425</span>&#160;           <a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>[<a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>]-&gt;getBac(idBac)-&gt;getIdBac())</div>
+<div class="line"><a name="l00426"></a><span class="lineno">  426</span>&#160;        {</div>
+<div class="line"><a name="l00427"></a><span class="lineno">  427</span>&#160;            <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00428"></a><span class="lineno">  428</span>&#160;        }</div>
+<div class="line"><a name="l00429"></a><span class="lineno">  429</span>&#160;    }</div>
+<div class="line"><a name="l00430"></a><span class="lineno">  430</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00431"></a><span class="lineno">  431</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00066">baseDeDonnees</a>, <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>, <a class="el" href="intervention_8h_source.html#l00074">idDistributeur</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00195">BaseDeDonnees::recuperer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>.</p>
+
+</div>
+</div>
+<a id="a795b65358763698af291462a3d5f5448"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a795b65358763698af291462a3d5f5448">&#9670;&nbsp;</a></span>estEffectuee()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::estEffectuee </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Retourne l'état effectuee de l'intervention. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>bool </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00081">81</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;{</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> == <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a104a72b5f249ad8dcc919fb774f1157f">VALIDEE</a>)</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8h_source.html#l00060">VALIDEE</a>.</p>
+
+</div>
+</div>
+<a id="a33bc58449f7fa465f579de5f3384ee1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33bc58449f7fa465f579de5f3384ee1c">&#9670;&nbsp;</a></span>estPlanifiee()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::estPlanifiee </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idDistributeur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Vérifie si le distributeur a déja une intervention à faire ou en cours. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>bool l'idIntervention ou -1 sinon </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00437">437</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00438"></a><span class="lineno">  438</span>&#160;{</div>
+<div class="line"><a name="l00439"></a><span class="lineno">  439</span>&#160;    QString requete;</div>
+<div class="line"><a name="l00440"></a><span class="lineno">  440</span>&#160;    requete = <span class="stringliteral">&quot;SELECT idIntervention,idDistributeur FROM Intervention WHERE idDistributeur = &quot;</span> +</div>
+<div class="line"><a name="l00441"></a><span class="lineno">  441</span>&#160;              QString::number(<a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>) + <span class="stringliteral">&quot; AND (etat = &#39;A_FAIRE&#39; OR etat = &#39;EN_COURS&#39;);&quot;</span>;</div>
+<div class="line"><a name="l00442"></a><span class="lineno">  442</span>&#160;    qDebug() &lt;&lt; Q_FUNC_INFO &lt;&lt; <span class="stringliteral">&quot;requete&quot;</span> &lt;&lt; requete;</div>
+<div class="line"><a name="l00443"></a><span class="lineno">  443</span>&#160;    QVector&lt;QStringList&gt; idInterventionsBdd;</div>
+<div class="line"><a name="l00444"></a><span class="lineno">  444</span>&#160;    <a class="code" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">baseDeDonnees</a>-&gt;<a class="code" href="class_base_de_donnees.html#a77539baad389f5acf754cd2cd452403e">recuperer</a>(requete, idInterventionsBdd);</div>
+<div class="line"><a name="l00445"></a><span class="lineno">  445</span>&#160; </div>
+<div class="line"><a name="l00446"></a><span class="lineno">  446</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; idInterventionsBdd.size(); i++)</div>
+<div class="line"><a name="l00447"></a><span class="lineno">  447</span>&#160;    {</div>
+<div class="line"><a name="l00448"></a><span class="lineno">  448</span>&#160;        <span class="keywordflow">if</span>(idInterventionsBdd[i].at(1).toInt() == <a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>)</div>
+<div class="line"><a name="l00449"></a><span class="lineno">  449</span>&#160;        {</div>
+<div class="line"><a name="l00450"></a><span class="lineno">  450</span>&#160;            <span class="keywordflow">return</span> idInterventionsBdd[i].at(0).toInt();</div>
+<div class="line"><a name="l00451"></a><span class="lineno">  451</span>&#160;        }</div>
+<div class="line"><a name="l00452"></a><span class="lineno">  452</span>&#160;    }</div>
+<div class="line"><a name="l00453"></a><span class="lineno">  453</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="intervention_8h.html#afeb84f757b59f0b14d278e164d1f94ac">ID_INTERVENTION_NON_DEFINI</a>;</div>
+<div class="line"><a name="l00454"></a><span class="lineno">  454</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00066">baseDeDonnees</a>, <a class="el" href="intervention_8h_source.html#l00020">ID_INTERVENTION_NON_DEFINI</a>, <a class="el" href="intervention_8h_source.html#l00074">idDistributeur</a>, et <a class="el" href="basededonnees_8cpp_source.html#l00195">BaseDeDonnees::recuperer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, et <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="a91de9339441da2ef9020504f10058b62"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91de9339441da2ef9020504f10058b62">&#9670;&nbsp;</a></span>getADepanner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::getADepanner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aDepanner. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>bool </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00123">123</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;{</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>;</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00071">aDepanner</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
+<a id="a5f0684a8292a480acb7e82da9f1eced5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f0684a8292a480acb7e82da9f1eced5">&#9670;&nbsp;</a></span>getARemplir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::getARemplir </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut aRemplir. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>un bool </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00114">114</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;{</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>;</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00070">aRemplir</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
+<a id="acddf1047ac581ec1b412e34380a60cc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acddf1047ac581ec1b412e34380a60cc5">&#9670;&nbsp;</a></span>getDateIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">QDate Intervention::getDateIntervention </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut dateIntervention. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>QDate représente la date de l'intervention au format </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00062">62</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;{</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00067">dateIntervention</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>.</p>
 
 </div>
 </div>
@@ -238,25 +1154,25 @@ Attributs privés</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Accesseur de l'attribut distributeurAIntervenir. </p>
-<dl class="section return"><dt>Renvoie</dt><dd>QVector&lt;Distributeur*&gt; represente les distributeurs surlequels il faut intervenir </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>QVector&lt;Distributeur*&gt; represente les distributeurs sur lesquels il faut intervenir </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00041">41</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;{</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00072">72</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;{</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#ab1f94e5390e6270ddd81adfd5c88b787">distributeurs</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00022">distributeurs</a>.</p>
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00069">distributeurs</a>.</p>
 
 </div>
 </div>
-<a id="a6765abb6c7ca7e9e0a99050d519649f7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6765abb6c7ca7e9e0a99050d519649f7">&#9670;&nbsp;</a></span>getHorodatage()</h2>
+<a id="a69446b9647627e6771d7634b766ba619"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69446b9647627e6771d7634b766ba619">&#9670;&nbsp;</a></span>getEtat() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">QDateTime Intervention::getHorodatage </td>
+          <td class="memname">QString Intervention::getEtat </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
@@ -264,37 +1180,662 @@ Attributs privés</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Accesseur de l'attribut horodatage. </p>
-<dl class="section return"><dt>Renvoie</dt><dd>QDateTime représente la date et l'heure de l'intervention sur le distributeur </dd></dl>
+<p>Accesseur de l'attribut etat. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>QString formaté pour la base de données </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00032">32</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
-<div class="fragment"><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;{</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#a85d67fc42f13e0f7bd6a85d2ed0cb9df">horodatage</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;}</div>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00159">159</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;{</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_intervention.html#a69446b9647627e6771d7634b766ba619">Intervention::getEtat</a>(this-&gt;<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>);</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;}</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00021">horodatage</a>.</p>
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00075">etat</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00222">setEtat()</a>.</p>
 
 </div>
 </div>
-<a id="ac40e8e34d650e3709d51f686e81bb2f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac40e8e34d650e3709d51f686e81bb2f6">&#9670;&nbsp;</a></span>setHorodatage()</h2>
+<a id="a9290d8b4cdb4a23e2897fd3145922a45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9290d8b4cdb4a23e2897fd3145922a45">&#9670;&nbsp;</a></span>getEtat() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">Intervention::EtatIntervention</a> Intervention::getEtat </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>etat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne l'état sous forme de EtatIntervention. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">etat</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>EtatIntervention </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00476">476</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00477"></a><span class="lineno">  477</span>&#160;{</div>
+<div class="line"><a name="l00478"></a><span class="lineno">  478</span>&#160;    QVector&lt;QString&gt; etats = { <span class="stringliteral">&quot;A_FAIRE&quot;</span>, <span class="stringliteral">&quot;VALIDEE&quot;</span>, <span class="stringliteral">&quot;EN_COURS&quot;</span> };</div>
+<div class="line"><a name="l00479"></a><span class="lineno">  479</span>&#160;    <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; etats.size(); ++i)</div>
+<div class="line"><a name="l00480"></a><span class="lineno">  480</span>&#160;    {</div>
+<div class="line"><a name="l00481"></a><span class="lineno">  481</span>&#160;        <span class="keywordflow">if</span>(etats[i] == <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>)</div>
+<div class="line"><a name="l00482"></a><span class="lineno">  482</span>&#160;            <span class="keywordflow">return</span> <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a>(i);</div>
+<div class="line"><a name="l00483"></a><span class="lineno">  483</span>&#160;    }</div>
+<div class="line"><a name="l00484"></a><span class="lineno">  484</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a42d6244b464ae1ecacbbeadff9699bc4">INCONNU</a>;</div>
+<div class="line"><a name="l00485"></a><span class="lineno">  485</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_ad3f1b9a96dd3999ef850beef7ece3429"><div class="ttname"><a href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">Intervention::EtatIntervention</a></div><div class="ttdeci">EtatIntervention</div><div class="ttdoc">Les différents états d'une intervention.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8h_source.html#l00056">intervention.h:57</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8h_source.html#l00058">INCONNU</a>.</p>
+
+</div>
+</div>
+<a id="ad8b26e2b914653dbbb5b1b7546e53ced"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8b26e2b914653dbbb5b1b7546e53ced">&#9670;&nbsp;</a></span>getEtat() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString Intervention::getEtat </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a>&#160;</td>
+          <td class="paramname"><em>etat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne l'état sous forme de QString. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">etat</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>QString </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00461">461</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00462"></a><span class="lineno">  462</span>&#160;{</div>
+<div class="line"><a name="l00463"></a><span class="lineno">  463</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> &gt;= <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a> &amp;&amp; <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> &lt; <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">NB_ETATS</a>)</div>
+<div class="line"><a name="l00464"></a><span class="lineno">  464</span>&#160;    {</div>
+<div class="line"><a name="l00465"></a><span class="lineno">  465</span>&#160;        QVector&lt;QString&gt; etats = { <span class="stringliteral">&quot;A_FAIRE&quot;</span>, <span class="stringliteral">&quot;VALIDEE&quot;</span>, <span class="stringliteral">&quot;EN_COURS&quot;</span> };</div>
+<div class="line"><a name="l00466"></a><span class="lineno">  466</span>&#160;        <span class="keywordflow">return</span> etats[<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>];</div>
+<div class="line"><a name="l00467"></a><span class="lineno">  467</span>&#160;    }</div>
+<div class="line"><a name="l00468"></a><span class="lineno">  468</span>&#160;    <span class="keywordflow">return</span> QString();</div>
+<div class="line"><a name="l00469"></a><span class="lineno">  469</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00059">A_FAIRE</a>, <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8h_source.html#l00062">NB_ETATS</a>.</p>
+
+</div>
+</div>
+<a id="a06bba7c0c975e9a94f063d90c076cc7b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06bba7c0c975e9a94f063d90c076cc7b">&#9670;&nbsp;</a></span>getEtatFormate() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Intervention::setHorodatage </td>
+          <td class="memname">QString Intervention::getEtatFormate </td>
           <td>(</td>
-          <td class="paramtype">const QDateTime &amp;&#160;</td>
-          <td class="paramname"><em>horodatage</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut etat. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>QString formatée pour un affichage </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00168">168</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;{</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_intervention.html#a06bba7c0c975e9a94f063d90c076cc7b">Intervention::getEtatFormate</a>(this-&gt;<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>);</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_a06bba7c0c975e9a94f063d90c076cc7b"><div class="ttname"><a href="class_intervention.html#a06bba7c0c975e9a94f063d90c076cc7b">Intervention::getEtatFormate</a></div><div class="ttdeci">QString getEtatFormate() const</div><div class="ttdoc">Accesseur de l'attribut etat.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00168">intervention.cpp:168</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00075">etat</a>.</p>
+
+</div>
+</div>
+<a id="a4104a2be6a555f1f034bfd56e7208a70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4104a2be6a555f1f034bfd56e7208a70">&#9670;&nbsp;</a></span>getEtatFormate() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QString Intervention::getEtatFormate </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a>&#160;</td>
+          <td class="paramname"><em>etat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne l'état sous forme de QString. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">etat</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>QString </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00492">492</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00493"></a><span class="lineno">  493</span>&#160;{</div>
+<div class="line"><a name="l00494"></a><span class="lineno">  494</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> &gt;= <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429a34848ec075a8dc3c96fa241431ce0b47">A_FAIRE</a> &amp;&amp; <a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> &lt; <a class="code" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">NB_ETATS</a>)</div>
+<div class="line"><a name="l00495"></a><span class="lineno">  495</span>&#160;    {</div>
+<div class="line"><a name="l00496"></a><span class="lineno">  496</span>&#160;        QVector&lt;QString&gt; etats = { <span class="stringliteral">&quot;À FAIRE&quot;</span>, <span class="stringliteral">&quot;VALIDÉE&quot;</span>, <span class="stringliteral">&quot;EN COURS&quot;</span> };</div>
+<div class="line"><a name="l00497"></a><span class="lineno">  497</span>&#160;        <span class="keywordflow">return</span> etats[<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>];</div>
+<div class="line"><a name="l00498"></a><span class="lineno">  498</span>&#160;    }</div>
+<div class="line"><a name="l00499"></a><span class="lineno">  499</span>&#160;    <span class="keywordflow">return</span> QString();</div>
+<div class="line"><a name="l00500"></a><span class="lineno">  500</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00059">A_FAIRE</a>, <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8h_source.html#l00062">NB_ETATS</a>.</p>
+
+</div>
+</div>
+<a id="af5d5619a2b928f16de0331fb96a412c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5d5619a2b928f16de0331fb96a412c5">&#9670;&nbsp;</a></span>getIdDistributeur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::getIdDistributeur </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut idDistributeur. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00150">150</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;{</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a>;</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00074">idDistributeur</a>.</p>
+
+</div>
+</div>
+<a id="a9c6222b913ef9c0f7761cd0dc8431cec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c6222b913ef9c0f7761cd0dc8431cec">&#9670;&nbsp;</a></span>getIdIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::getIdIntervention </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut idIntervention. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00132">132</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;{</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a>;</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>.</p>
+
+</div>
+</div>
+<a id="acf4618eb2680ac43188983d6a1f0e28a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf4618eb2680ac43188983d6a1f0e28a">&#9670;&nbsp;</a></span>getIdOperateur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::getIdOperateur </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Accesseur de l'attribut idOperateur. </p>
+<dl class="section return"><dt>Renvoie</dt><dd>int </dd></dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00141">141</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;{</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    <span class="keywordflow">return</span> this-&gt;<a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>;</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00073">idOperateur</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="ad2237dae435a7bd80a0fe43db2f87846"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2237dae435a7bd80a0fe43db2f87846">&#9670;&nbsp;</a></span>intervenir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::intervenir </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aIntervenir</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
+<p>Modifie l'état de l'intervention. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aIntervenir</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00252">252</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;{</div>
+<div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;    <a class="code" href="class_intervention.html#acc255490bb845520cc11148e4173cb6a">effectuer</a>(!aIntervenir);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;}</div>
+<div class="ttc" id="aclass_intervention_html_acc255490bb845520cc11148e4173cb6a"><div class="ttname"><a href="class_intervention.html#acc255490bb845520cc11148e4173cb6a">Intervention::effectuer</a></div><div class="ttdeci">void effectuer(bool effectuee)</div><div class="ttdoc">Modifie l'état de l'intervention.</div><div class="ttdef"><b>Definition:</b> <a href="intervention_8cpp_source.html#l00240">intervention.cpp:240</a></div></div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8cpp_source.html#l00240">effectuer()</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>.</p>
+
+</div>
+</div>
+<a id="a72c5cf3ada5abcea5a74c607441f441d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72c5cf3ada5abcea5a74c607441f441d">&#9670;&nbsp;</a></span>setADepanner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setADepanner </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>aDepanner</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut aDepanner. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aDepanner</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00186">186</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;{</div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a> = <a class="code" href="class_intervention.html#a309c55a568505cafaed9f51f871df164">aDepanner</a>;</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00071">aDepanner</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="a337777a04b2ebf2e3b9aa281b7d6f2d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a337777a04b2ebf2e3b9aa281b7d6f2d0">&#9670;&nbsp;</a></span>setARemplir()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setARemplir </td>
+          <td>(</td>
+          <td class="paramtype">const bool &amp;&#160;</td>
+          <td class="paramname"><em>aRemplir</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut aRemplir. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">aRemplir</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00177">177</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;{</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a> = <a class="code" href="class_intervention.html#a3f1971b2083a1916700902a65422cde9">aRemplir</a>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00070">aRemplir</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="a897bdb63d49b0326ab6314ebb1ebf220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a897bdb63d49b0326ab6314ebb1ebf220">&#9670;&nbsp;</a></span>setDateIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setDateIntervention </td>
+          <td>(</td>
+          <td class="paramtype">const QDate &amp;&#160;</td>
+          <td class="paramname"><em>dateIntervention</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Modifie la dateIntervention. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dateIntervention</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00105">105</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;{</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a> = <a class="code" href="class_intervention.html#a968f1e7fcf7de3e5b9514797ad0c9c78">dateIntervention</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00067">dateIntervention</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="planificationintervention_8cpp_source.html#l00101">PlanificationIntervention::creerUneIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="a576c03c958e4c2073be941b985e90ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a576c03c958e4c2073be941b985e90ecf">&#9670;&nbsp;</a></span>setEtat()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setEtat </td>
+          <td>(</td>
+          <td class="paramtype">const QString &amp;&#160;</td>
+          <td class="paramname"><em>etat</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut etat. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">etat</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00222">222</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;{</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a> = <a class="code" href="class_intervention.html#a69446b9647627e6771d7634b766ba619">Intervention::getEtat</a>(<a class="code" href="class_intervention.html#abcba4becba42946aac4c5801918fc8a2">etat</a>);</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00075">etat</a>, et <a class="el" href="intervention_8cpp_source.html#l00159">getEtat()</a>.</p>
+
+</div>
+</div>
+<a id="a3e4e97e43a59c6ff2e1aaeb330393294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3e4e97e43a59c6ff2e1aaeb330393294">&#9670;&nbsp;</a></span>setIdDistributeur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setIdDistributeur </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numeroDistributeur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut idDistributeur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numeroDistributeur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00213">213</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;{</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#ac7f5d74dd97c61a9eaad111116d2b2dc">idDistributeur</a> = numeroDistributeur;</div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00074">idDistributeur</a>.</p>
+
+</div>
+</div>
+<a id="a791496add0bd549ba070f275d4c3136e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a791496add0bd549ba070f275d4c3136e">&#9670;&nbsp;</a></span>setIdIntervention()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setIdIntervention </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>numeroIntervention</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut idIntervention. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">numeroIntervention</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00204">204</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;{</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#ae4f19266f2a0d168a1cb7b782dbd59eb">idIntervention</a> = numeroIntervention;</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00072">idIntervention</a>.</p>
+
+</div>
+</div>
+<a id="afe5b8575e6379efb4b31fbbd47ddba42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5b8575e6379efb4b31fbbd47ddba42">&#9670;&nbsp;</a></span>setIdOperateur()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Intervention::setIdOperateur </td>
+          <td>(</td>
+          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramname"><em>idOperateur</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Mutateur de l'attribut idOperateur. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">idOperateur</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8cpp_source.html#l00195">195</a> du fichier <a class="el" href="intervention_8cpp_source.html">intervention.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;{</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    this-&gt;<a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a> = <a class="code" href="class_intervention.html#a6e03e2b9d4803f390c582a65efc434d5">idOperateur</a>;</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;}</div>
+</div><!-- fragment -->
+<p class="reference">Références <a class="el" href="intervention_8h_source.html#l00073">idOperateur</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="planificationintervention_8cpp_source.html#l00101">PlanificationIntervention::creerUneIntervention()</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Documentation des champs</h2>
+<a id="a309c55a568505cafaed9f51f871df164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a309c55a568505cafaed9f51f871df164">&#9670;&nbsp;</a></span>aDepanner</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::aDepanner</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>si on doit dépanner au moins un distributeur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00071">71</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00123">getADepanner()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00186">setADepanner()</a>.</p>
+
+</div>
+</div>
+<a id="a3f1971b2083a1916700902a65422cde9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f1971b2083a1916700902a65422cde9">&#9670;&nbsp;</a></span>aRemplir</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Intervention::aRemplir</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>si on doit remplir au moins un distributeur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00070">70</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00114">getARemplir()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00177">setARemplir()</a>.</p>
+
+</div>
+</div>
+<a id="a96010b7951d2a1a3d75d77d5bca4dc16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a96010b7951d2a1a3d75d77d5bca4dc16">&#9670;&nbsp;</a></span>baseDeDonnees</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_base_de_donnees.html">BaseDeDonnees</a>* Intervention::baseDeDonnees</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>association avec la base de données </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00066">66</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00412">estBacAttribue()</a>, et <a class="el" href="intervention_8cpp_source.html#l00437">estPlanifiee()</a>.</p>
+
+</div>
+</div>
+<a id="a968f1e7fcf7de3e5b9514797ad0c9c78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a968f1e7fcf7de3e5b9514797ad0c9c78">&#9670;&nbsp;</a></span>dateIntervention</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">QDate Intervention::dateIntervention</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>la date de l'intervention </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00067">67</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00062">getDateIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00020">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00105">setDateIntervention()</a>.</p>
+
+</div>
+</div>
 <a id="ab1f94e5390e6270ddd81adfd5c88b787"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab1f94e5390e6270ddd81adfd5c88b787">&#9670;&nbsp;</a></span>distributeurs</h2>
 
@@ -317,14 +1858,14 @@ Attributs privés</h2></td></tr>
 
 <p>les distributeurs sur lesquels il faut intervenir </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00022">22</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00069">69</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00050">ajouterDistributeur()</a>, et <a class="el" href="intervention_8cpp_source.html#l00041">getDistributeurs()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00283">affecterEtatIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, <a class="el" href="intervention_8cpp_source.html#l00231">ajouterDistributeur()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>, <a class="el" href="intervention_8cpp_source.html#l00412">estBacAttribue()</a>, et <a class="el" href="intervention_8cpp_source.html#l00072">getDistributeurs()</a>.</p>
 
 </div>
 </div>
-<a id="ad689d4bc565f10f10b4368a04c401a14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad689d4bc565f10f10b4368a04c401a14">&#9670;&nbsp;</a></span>effectuee</h2>
+<a id="abcba4becba42946aac4c5801918fc8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcba4becba42946aac4c5801918fc8a2">&#9670;&nbsp;</a></span>etat</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -333,7 +1874,7 @@ Attributs privés</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Intervention::effectuee</td>
+          <td class="memname"><a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429">EtatIntervention</a> Intervention::etat</td>
         </tr>
       </table>
   </td>
@@ -343,14 +1884,16 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>si l'intervention a été effectuée </p>
+<p>etat de l'intervention </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00023">23</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00075">75</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00240">effectuer()</a>, <a class="el" href="intervention_8cpp_source.html#l00093">estAIntervenir()</a>, <a class="el" href="intervention_8cpp_source.html#l00081">estEffectuee()</a>, <a class="el" href="intervention_8cpp_source.html#l00159">getEtat()</a>, <a class="el" href="intervention_8cpp_source.html#l00168">getEtatFormate()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00222">setEtat()</a>.</p>
 
 </div>
 </div>
-<a id="a85d67fc42f13e0f7bd6a85d2ed0cb9df"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85d67fc42f13e0f7bd6a85d2ed0cb9df">&#9670;&nbsp;</a></span>horodatage</h2>
+<a id="a612a7bea852fb68126387c84fd67bcd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612a7bea852fb68126387c84fd67bcd7">&#9670;&nbsp;</a></span>heuresIntervention</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -359,7 +1902,7 @@ Attributs privés</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">QDateTime Intervention::horodatage</td>
+          <td class="memname">QVector&lt;QTime&gt; Intervention::heuresIntervention</td>
         </tr>
       </table>
   </td>
@@ -369,11 +1912,93 @@ Attributs privés</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>date et heure de l'intervention </p>
+<p>l'heure de l'intervention </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00021">21</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00068">68</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00032">getHorodatage()</a>.</p>
+</div>
+</div>
+<a id="ac7f5d74dd97c61a9eaad111116d2b2dc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac7f5d74dd97c61a9eaad111116d2b2dc">&#9670;&nbsp;</a></span>idDistributeur</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::idDistributeur</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>id du distributeur au quel l'intervention appartient </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00074">74</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00412">estBacAttribue()</a>, <a class="el" href="intervention_8cpp_source.html#l00437">estPlanifiee()</a>, <a class="el" href="intervention_8cpp_source.html#l00150">getIdDistributeur()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00213">setIdDistributeur()</a>.</p>
+
+</div>
+</div>
+<a id="ae4f19266f2a0d168a1cb7b782dbd59eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f19266f2a0d168a1cb7b782dbd59eb">&#9670;&nbsp;</a></span>idIntervention</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::idIntervention</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>id de l'intervention </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00072">72</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00377">ajouterApprovisionnement()</a>, <a class="el" href="intervention_8cpp_source.html#l00321">ajouterIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00260">creer()</a>, <a class="el" href="intervention_8cpp_source.html#l00132">getIdIntervention()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00204">setIdIntervention()</a>.</p>
+
+</div>
+</div>
+<a id="a6e03e2b9d4803f390c582a65efc434d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e03e2b9d4803f390c582a65efc434d5">&#9670;&nbsp;</a></span>idOperateur</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Intervention::idOperateur</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>id de l'opérateur </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="intervention_8h_source.html#l00073">73</a> du fichier <a class="el" href="intervention_8h_source.html">intervention.h</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="intervention_8cpp_source.html#l00141">getIdOperateur()</a>, <a class="el" href="intervention_8cpp_source.html#l00033">Intervention()</a>, et <a class="el" href="intervention_8cpp_source.html#l00195">setIdOperateur()</a>.</p>
 
 </div>
 </div>
@@ -388,7 +2013,7 @@ Attributs privés</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="class_intervention.html">Intervention</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:24 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['serveur_385',['Serveur',['../class_serveur.html',1,'']]],
-  ['statistiques_386',['Statistiques',['../class_statistiques.html',1,'']]]
+  ['qdialog_646',['QDialog',['../class_q_dialog.html',1,'']]],
+  ['qwidget_647',['QWidget',['../class_q_widget.html',1,'']]]
 ];
