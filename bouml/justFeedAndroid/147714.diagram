@@ -4,42 +4,54 @@ classinstancecanvas 128002 classinstance_ref 128002 //
   xyz 100 4 2005 life_line_z 2000
 end
 classinstancecanvas 128386 classinstance_ref 128130 // 
-  xyz 422 4 2005 life_line_z 2000
+  xyz 426 4 2005 life_line_z 2000
 end
 durationcanvas 128898 classinstance_ref 128002 // :operateur
-  xyzwh 130 168 2010 11 58
+  xyzwh 130 216 2010 11 63
 end
 durationcanvas 129026 classinstance_ref 128386 // :JustFeedAndroid
-  xyzwh 480 168 2010 11 54
+  xyzwh 484 211 2010 11 84
 end
 durationcanvas 129282 classinstance_ref 128002 // :operateur
-  xyzwh 130 278 2010 11 46
+  xyzwh 130 329 2010 11 78
 end
 durationcanvas 129410 classinstance_ref 128386 // :JustFeedAndroid
-  xyzwh 480 280 2010 11 56
+  xyzwh 484 322 2010 11 83
 end
 durationcanvas 130434 classinstance_ref 128002 // :operateur
   xyzwh 130 69 2010 11 41
 end
 durationcanvas 130562 classinstance_ref 128386 // :JustFeedAndroid
-  xyzwh 480 69 2010 11 47
+  xyzwh 484 69 2010 11 47
+end
+durationcanvas 130818 classinstance_ref 128002 // :operateur
+  xyzwh 130 153 2010 11 40
+end
+durationcanvas 130946 classinstance_ref 128386 // :JustFeedAndroid
+  xyzwh 484 155 2010 11 40
 end
 msg 129154 synchronous
   from durationcanvas_ref 128898
   to durationcanvas_ref 129026
-  yz 168 2015 explicitmsg "afficherInterventions()"
+  yz 247 2015 explicitmsg "afficherInterventions()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 236 153
+  label_xy 236 232
 msg 129538 synchronous
   from durationcanvas_ref 129282
   to durationcanvas_ref 129410
-  yz 280 2015 explicitmsg "modifierEtatIntervention()"
+  yz 361 2015 explicitmsg "modifierEtatIntervention()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 245 265
+  label_xy 245 346
 msg 130690 synchronous
   from durationcanvas_ref 130434
   to durationcanvas_ref 130562
   yz 69 2015 explicitmsg "afficherDistributeurs()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
   label_xy 231 59
+msg 131074 synchronous
+  from durationcanvas_ref 130818
+  to durationcanvas_ref 130946
+  yz 155 2015 explicitmsg "choisirOperateur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 253 140
 end

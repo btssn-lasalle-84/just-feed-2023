@@ -1,0 +1,73 @@
+format 224
+
+classinstancecanvas 128258 classinstance_ref 134786 // 
+  xyz 72 4 2005 life_line_z 2000
+end
+classinstancecanvas 128514 classinstance_ref 134914 // 
+  xyz 368 4 2005 life_line_z 2000
+end
+note 129026 "L'opérateur lance l'application"
+  xyzwh 132 93 2015 209 49
+note 129794 "L'opérateur selectionne son identifiant"
+  xyzwh 127 244 2015 227 61
+classinstancecanvas 130050 classinstance_ref 135170 // 
+  xyz 777 4 2005 life_line_z 2000
+end
+note 130434 "L'application sauvegarde l'identifiant dans un fichier XML "
+  xyzwh 473 319 2000 249 51
+fragment 131330 "alt"
+  form "DEFAULT" xyzwh 410 220 2025 397 278
+end
+textcanvas 131458 "[DEFAULT]"
+  xyzwh 443 237 3005 72 15
+durationcanvas 128642 classinstance_ref 128258 // :operateur
+  xyzwh 102 80 2010 11 47
+end
+durationcanvas 128770 classinstance_ref 128514 // :JustFeed
+  xyzwh 400 81 2010 11 98
+  overlappingdurationcanvas 130818
+    xyzwh 406 98 2020 11 75
+  end
+end
+durationcanvas 129410 classinstance_ref 128258 // :operateur
+  xyzwh 102 224 2010 11 40
+end
+durationcanvas 129538 classinstance_ref 128514 // :JustFeed
+  xyzwh 400 225 2010 11 213
+end
+durationcanvas 130178 classinstance_ref 130050 // :Tablette
+  xyzwh 805 270 2010 11 57
+end
+durationcanvas 131074 classinstance_ref 130050 // :Tablette
+  xyzwh 805 135 2010 11 25
+end
+msg 128898 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 128770
+  yz 82 2015 explicitmsg "lancementApplication"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 187 67
+msg 129666 synchronous
+  from durationcanvas_ref 129410
+  to durationcanvas_ref 129538
+  yz 225 2015 explicitmsg "onOptionsItemSelected(inout item : MenuItem)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 114 198
+msg 130306 synchronous
+  from durationcanvas_ref 129538
+  to durationcanvas_ref 130178
+  yz 292 2020 explicitmsg "sauvegarderPreferences()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 508 263
+reflexivemsg 130946 synchronous
+  to durationcanvas_ref 130818
+  yz 98 2025 explicitmsg "chargerPreferences()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 419 81
+msg 131202 synchronous
+  from durationcanvas_ref 130818
+  to durationcanvas_ref 131074
+  yz 135 2025 explicitmsg "recupererIdOperateur()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 536 120
+end

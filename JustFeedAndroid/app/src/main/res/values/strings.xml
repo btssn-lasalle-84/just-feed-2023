@@ -9,11 +9,9 @@
     <string-array name="listeEtatsEnCours">
         <item>En cours</item>
         <item>Terminer</item>
-        <item>Supprimer</item>
     </string-array>
     <string-array name="listeEtatsValider">
         <item>Validée</item>
         <item>Recommencer</item>
-        <item>Supprimer</item>
     </string-array>
 </resources>

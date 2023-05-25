@@ -17,8 +17,6 @@ public class ListeDeroulanteGestionnaire
     private final static String AFAIRE   = "A faire";  //!< L'intervention est à faire
     private final static String RECOMMENCER =
       "Recommencer"; //!< L'opérateur recommence l'intervention
-    private final static String SUPPRIMER =
-      "Supprimer"; //!< L'opérateur supprime de la liste l'intervention
 
     /**
      * Attribut
@@ -57,10 +55,10 @@ public class ListeDeroulanteGestionnaire
                 case TERMINER:
                     Log.d(TAG, "Terminer");
                     ActiviteInterventions.modifierEtatIntervention(
-                      "UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = " +
+                      "UPDATE `Intervention` SET `etat` = 'VALIDEE' WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
-                      Intervention.Etats.VALIDEES);
+                      Intervention.Etats.VALIDEE);
                     break;
                 case DEMARRER:
                     Log.d(TAG, "Démarrer");
@@ -85,13 +83,6 @@ public class ListeDeroulanteGestionnaire
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
                       Intervention.Etats.A_FAIRE);
-                    break;
-                case SUPPRIMER:
-                    Log.d(TAG, "Supprimer");
-                    ActiviteInterventions.supprimerIntervention(
-                      "DELETE FROM `Intervention` WHERE `Intervention`.`idDistributeur` = " +
-                        intervention.getIdentifiantDistribteur() + ";",
-                      intervention);
                     break;
             }
         }
