@@ -32,7 +32,7 @@ public class Intervention
         TOUTES("Toutes"),
         A_FAIRE("A faire"),
         EN_COURS("En cours"),
-        VALIDEES("Validées");
+        VALIDEE("Validée");
 
         private String nomMenu;
 

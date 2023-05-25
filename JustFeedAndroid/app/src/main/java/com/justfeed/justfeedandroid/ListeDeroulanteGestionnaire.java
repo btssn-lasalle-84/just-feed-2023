@@ -58,7 +58,7 @@ public class ListeDeroulanteGestionnaire
                       "UPDATE `Intervention` SET `etat` = 'VALIDEE' WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
-                      Intervention.Etats.VALIDEES);
+                      Intervention.Etats.VALIDEE);
                     break;
                 case DEMARRER:
                     Log.d(TAG, "Démarrer");

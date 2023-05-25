@@ -78,7 +78,7 @@ public class VueIntervention extends ViewHolder {
         if (etatAfiltrer == intervention.getEtat() && etatAfiltrer != Intervention.Etats.TOUTES) {
             carteIntervention.setVisibility(View.VISIBLE);
             switch (intervention.getEtat()) {
-                case VALIDEES:
+                case VALIDEE:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
                     break;
                 case A_FAIRE:
@@ -102,7 +102,7 @@ public class VueIntervention extends ViewHolder {
             Log.d(TAG, "TOUTES");
             carteIntervention.setVisibility(View.VISIBLE);
             switch (intervention.getEtat()) {
-                case VALIDEES:
+                case VALIDEE:
                     carteIntervention.setCardBackgroundColor(Color.parseColor(VERT));
                     break;
                 case A_FAIRE:
@@ -144,7 +144,7 @@ public class VueIntervention extends ViewHolder {
             listeAdapteur.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             this.listeEtats.setAdapter(listeAdapteur);
         }
-        else if(intervention.getEtat() == Intervention.Etats.VALIDEES)
+        else if(intervention.getEtat() == Intervention.Etats.VALIDEE)
         {
             ArrayAdapter<CharSequence> listeAdapteur = ArrayAdapter.createFromResource(contexte,
                     R.array.listeEtatsValider, android.R.layout.simple_spinner_item);

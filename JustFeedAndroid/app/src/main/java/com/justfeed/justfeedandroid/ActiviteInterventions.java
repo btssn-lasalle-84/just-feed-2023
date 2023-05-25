@@ -170,7 +170,7 @@ public class ActiviteInterventions extends AppCompatActivity
                         etat = Intervention.Etats.EN_COURS;
                         break;
                     case VALIDEES:
-                        etat = Intervention.Etats.VALIDEES;
+                        etat = Intervention.Etats.VALIDEE;
                         break;
                     case TOUTES:
                         etat = Intervention.Etats.TOUTES;
@@ -247,14 +247,11 @@ public class ActiviteInterventions extends AppCompatActivity
                                                 Intervention.Etats nouvelEtat)
     {
         baseDeDonnees.executerRequete(requete);
-        /**
-         * @todo C'est quoi cette requête ??? idIntervention = 28 ???
-         */
         baseDeDonnees.executerRequete(
           "UPDATE Approvisionnement SET heureApprovisionnement = CURRENT_TIME()\n"
           + "WHERE Approvisionnement.idIntervention IN\n"
           +
-          "(SELECT Intervention.idIntervention FROM Intervention WHERE Approvisionnement.idIntervention = 28); ");
+          "(SELECT Intervention.idIntervention FROM Intervention WHERE Approvisionnement.idIntervention = "+intervention.getIdIntervention()+"); ");
         intervention.modifierEtatIntervention(nouvelEtat);
         rafraichisseur.setRefreshing(false);
         baseDeDonnees.recupererInterventions(idOperateur);
