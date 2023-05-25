@@ -14,9 +14,7 @@ var files_dup =
     ] ],
     [ "AndroidManifest.xml", "_android_manifest_8xml.html", null ],
     [ "bac.cpp", "bac_8cpp.html", null ],
-    [ "bac.h", "bac_8h.html", [
-      [ "Bac", "class_bac.html", "class_bac" ]
-    ] ],
+    [ "bac.h", "bac_8h.html", "bac_8h" ],
     [ "Bac.java", "_bac_8java.html", [
       [ "Bac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_bac" ]
     ] ],
@@ -37,10 +35,7 @@ var files_dup =
     [ "configurationdistributeur.h", "configurationdistributeur_8h.html", "configurationdistributeur_8h" ],
     [ "data_extraction_rules.xml", "data__extraction__rules_8xml.html", null ],
     [ "distributeur.cpp", "distributeur_8cpp.html", null ],
-    [ "distributeur.h", "distributeur_8h.html", [
-      [ "Distributeur", "class_distributeur.html", "class_distributeur" ],
-      [ "Localisation", "struct_localisation.html", "struct_localisation" ]
-    ] ],
+    [ "distributeur.h", "distributeur_8h.html", "distributeur_8h" ],
     [ "Distributeur.java", "_distributeur_8java.html", [
       [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur" ]
     ] ],
@@ -58,10 +53,9 @@ var files_dup =
     [ "ihmjustfeed.cpp", "ihmjustfeed_8cpp.html", null ],
     [ "ihmjustfeed.h", "ihmjustfeed_8h.html", "ihmjustfeed_8h" ],
     [ "intervention.cpp", "intervention_8cpp.html", null ],
-    [ "intervention.h", "intervention_8h.html", [
-      [ "Intervention", "class_intervention.html", "class_intervention" ]
-    ] ],
+    [ "intervention.h", "intervention_8h.html", "intervention_8h" ],
     [ "Intervention.java", "_intervention_8java.html", [
+      [ "Etats", "enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html", "enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats" ],
       [ "Intervention", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention" ]
     ] ],
     [ "intervention.xml", "intervention_8xml.html", null ],
@@ -70,7 +64,18 @@ var files_dup =
       [ "JustFeed", "classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed" ]
     ] ],
     [ "justfeed.xml", "justfeed_8xml.html", null ],
+    [ "ListeDeroulanteGestionnaire.java", "_liste_deroulante_gestionnaire_8java.html", [
+      [ "ListeDeroulanteGestionnaire", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire" ]
+    ] ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
+    [ "menu.xml", "menu_8xml.html", null ],
+    [ "operateur.cpp", "operateur_8cpp.html", null ],
+    [ "operateur.h", "operateur_8h.html", "operateur_8h" ],
+    [ "Operateur.java", "_operateur_8java.html", [
+      [ "Operateur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur" ]
+    ] ],
+    [ "planificationintervention.cpp", "planificationintervention_8cpp.html", null ],
+    [ "planificationintervention.h", "planificationintervention_8h.html", "planificationintervention_8h" ],
     [ "produit.cpp", "produit_8cpp.html", null ],
     [ "produit.h", "produit_8h.html", [
       [ "Produit", "class_produit.html", "class_produit" ]

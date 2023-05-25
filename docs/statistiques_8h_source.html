@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -96,28 +96,26 @@ $(document).ready(function(){initNavTree('statistiques_8h_source.html',''); init
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <span class="keyword">private</span>:</div>
 <div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">   15</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">frequenceIntervetion</a>; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">   16</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">   16</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>;   </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">   17</a></span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>;    </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160; </div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <a class="code" href="class_statistiques.html#a4ecd522328776fb86ba21d6a3dfe8d70">Statistiques</a>();</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_statistiques.html#a4ecd522328776fb86ba21d6a3dfe8d70">Statistiques</a>(<span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">frequenceIntervetion</a>,</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                 <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>,</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                 <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_statistiques.html#a0b3904d9f448c4eb3c88074932c25051">~Statistiques</a>();</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="comment">// Accesseurs</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a77ccf7a78002a499157446b348869e92">getFrequenceIntervetion</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a09a97e84b71f870f363e7f5c9e1338d4">getPoidsMoyenProduits</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a7255812c874ccd0032d8bdaebb2a1fb3">getMoyenneKilometres</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="comment">// Mutateurs</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#ad6564d10e99bc69c526c034786a9bb67">setFrequenceIntervetion</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">frequenceIntervetion</a>);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#a5bb1f1f76cd6f543a6ebc1359ab4938f">setPoidsMoyenProduits</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#a932be7ff0efe8bcb8a50c17ec199cb8e">setMoyenneKilometres</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// STATISTIQUES_H</span></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <a class="code" href="class_statistiques.html#a4ecd522328776fb86ba21d6a3dfe8d70">Statistiques</a>(<span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">frequenceIntervetion</a>, <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>, <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>);</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <a class="code" href="class_statistiques.html#a0b3904d9f448c4eb3c88074932c25051">~Statistiques</a>();</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="comment">// Accesseurs</span></div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a77ccf7a78002a499157446b348869e92">getFrequenceIntervetion</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a09a97e84b71f870f363e7f5c9e1338d4">getPoidsMoyenProduits</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#a7255812c874ccd0032d8bdaebb2a1fb3">getMoyenneKilometres</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="comment">// Mutateurs</span></div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#ad6564d10e99bc69c526c034786a9bb67">setFrequenceIntervetion</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#ab5249f7b63426fd5fc29a513cc99c1d3">frequenceIntervetion</a>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#a5bb1f1f76cd6f543a6ebc1359ab4938f">setPoidsMoyenProduits</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#afa1212e3b632e6d34154dd42fb184c13">poidsMoyenProduits</a>);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_statistiques.html#a932be7ff0efe8bcb8a50c17ec199cb8e">setMoyenneKilometres</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_statistiques.html#abb9860c90c4d1ddfaf7d0b4239913795">moyenneKilometres</a>);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;};</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// STATISTIQUES_H</span></div>
 <div class="ttc" id="aclass_statistiques_html"><div class="ttname"><a href="class_statistiques.html">Statistiques</a></div><div class="ttdef"><b>Definition:</b> <a href="statistiques_8h_source.html#l00012">statistiques.h:13</a></div></div>
 <div class="ttc" id="aclass_statistiques_html_a09a97e84b71f870f363e7f5c9e1338d4"><div class="ttname"><a href="class_statistiques.html#a09a97e84b71f870f363e7f5c9e1338d4">Statistiques::getPoidsMoyenProduits</a></div><div class="ttdeci">int getPoidsMoyenProduits() const</div><div class="ttdoc">Accesseur de l'attribut poidsMoyenProduits.</div><div class="ttdef"><b>Definition:</b> <a href="statistiques_8cpp_source.html#l00051">statistiques.cpp:51</a></div></div>
 <div class="ttc" id="aclass_statistiques_html_a0b3904d9f448c4eb3c88074932c25051"><div class="ttname"><a href="class_statistiques.html#a0b3904d9f448c4eb3c88074932c25051">Statistiques::~Statistiques</a></div><div class="ttdeci">~Statistiques()</div><div class="ttdoc">Destructeur de la classe Serveur.</div><div class="ttdef"><b>Definition:</b> <a href="statistiques_8cpp_source.html#l00034">statistiques.cpp:34</a></div></div>
@@ -137,7 +135,7 @@ $(document).ready(function(){initNavTree('statistiques_8h_source.html',''); init
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="statistiques_8h.html">statistiques.h</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

@@ -7,13 +7,15 @@
 - [Le projet just-feed 2023](#le-projet-just-feed-2023)
   - [Documentation du code](#documentation-du-code)
   - [Resources logicielles](#resources-logicielles)
-  - [Base de données](#base-de-données)
+  - [Base de données](#base-de-donn%C3%A9es)
   - [MQTT](#mqtt)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
   - [Versions](#versions)
+    - [0.2](#02)
     - [0.1](#01)
   - [Auteurs](#auteurs)
+
 
 ---
 
@@ -53,7 +55,7 @@ Base de données MySQL 8.0 `justfeed` hébergée sur www.db4free.net (pour les t
 ![](sql/justfeed-v0.1.png)
 
 ```sql
---- LDD (langage de définition de données)
+-- LDD (langage de définition de données)
 
 DROP DATABASE IF EXISTS `justfeed`;
 
@@ -67,13 +69,11 @@ USE justfeed;
 
 DROP TABLE IF EXISTS Approvisionnement;
 DROP TABLE IF EXISTS Intervention;
-DROP TABLE IF EXISTS StockDistributeur;
+DROP TABLE IF EXISTS Bac;
 DROP TABLE IF EXISTS Produit;
 DROP TABLE IF EXISTS Distributeur;
 DROP TABLE IF EXISTS Operateur;
 DROP TABLE IF EXISTS ServeurTTN;
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `ServeurTTN`
@@ -89,8 +89,6 @@ CREATE TABLE `ServeurTTN` (
   `estActif` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
 -- Structure de la table `Operateur`
 --
@@ -103,8 +101,6 @@ CREATE TABLE `Operateur` (
   `email` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
 -- Structure de la table `Distributeur`
 --
@@ -112,7 +108,7 @@ CREATE TABLE `Operateur` (
 CREATE TABLE `Distributeur` (
   `idDistributeur` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idServeurTTN` int NOT NULL,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomDistributeur` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `adresse` varchar(255) DEFAULT NULL,
   `ville` varchar(255) DEFAULT NULL,
@@ -121,7 +117,6 @@ CREATE TABLE `Distributeur` (
   `longitude` varchar(255) DEFAULT NULL,
   `latitude` varchar(255) DEFAULT NULL,
   `deviceID` varchar(255) NOT NULL,
-  `hygrometrie` int DEFAULT '0',
   `nbBacs` int NOT NULL DEFAULT '2'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -133,18 +128,16 @@ ALTER TABLE `Distributeur`
 ALTER TABLE `Distributeur`
   ADD CONSTRAINT `Distributeur_fk_1` FOREIGN KEY (`idServeurTTN`) REFERENCES `ServeurTTN` (`idServeurTTN`) ON DELETE CASCADE;
 
--- --------------------------------------------------------
-
 --
 -- Structure de la table `Produit`
 --
 
 CREATE TABLE `Produit` (
   `idProduit` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `nom` varchar(255) DEFAULT NULL,
+  `nomProduit` varchar(255) DEFAULT NULL,
   `marque` varchar(255) NOT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `codeEAN` varchar(12) DEFAULT NULL,
+  `codeEAN` varchar(13) DEFAULT NULL,
   `prix` double DEFAULT NULL,
   `poidsUnitaire` double DEFAULT NULL,
   `volumeUnitaire` double DEFAULT NULL
@@ -153,27 +146,27 @@ CREATE TABLE `Produit` (
 ALTER TABLE `Produit`
   ADD UNIQUE KEY `codeEAN` (`codeEAN`);
 
--- --------------------------------------------------------
-
 --
--- Structure de la table `StockDistributeur`
+-- Structure de la table `Bac`
 --
 
-CREATE TABLE `StockDistributeur` (
-  `idStockDistributeur` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE `Bac` (
+  `idBac` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idDistributeur` int NOT NULL,
   `idProduit` int NOT NULL,
-  `remplissage` int DEFAULT '0'
+  `poidsActuel` double,
+  `poidsTotal`  double NOT NULL,
+  `hygrometrie` int DEFAULT '0',
+  `remplissage` double DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-ALTER TABLE `StockDistributeur`
-  ADD KEY `Stock_fk_2` (`idProduit`);
+ALTER TABLE `Bac`
+  ADD KEY `Bac_fk_1` (`idDistributeur`),
+  ADD KEY `Bac_fk_2` (`idProduit`);
 
-ALTER TABLE `StockDistributeur`
-  ADD CONSTRAINT `Stock_fk_1` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Stock_fk_2` FOREIGN KEY (`idProduit`) REFERENCES `Produit` (`idProduit`) ON DELETE CASCADE;
-
--- --------------------------------------------------------
+ALTER TABLE `Bac`
+  ADD CONSTRAINT `Bac_fk_1` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`) ON DELETE CASCADE,
+  ADD CONSTRAINT `Bac_fk_2` FOREIGN KEY (`idProduit`) REFERENCES `Produit` (`idProduit`) ON DELETE CASCADE;
 
 --
 -- Structure de la table `Intervention`
@@ -182,17 +175,22 @@ ALTER TABLE `StockDistributeur`
 CREATE TABLE `Intervention` (
   `idIntervention` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idOperateur` int NOT NULL,
+  `idDistributeur` int NOT NULL,
   `dateIntervention` date NOT NULL,
-  `effectuee` int DEFAULT '0'
+  `aRemplir` int DEFAULT '0',
+  `aDepanner` int DEFAULT '0',
+  `etat` enum('EN_COURS','VALIDEE','A_FAIRE') NOT NULL DEFAULT 'A_FAIRE'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Intervention`
-  ADD KEY `Intervention_fk_1` (`idOperateur`);
+  ADD KEY `Intervention_fk_1` (`idOperateur`),
+  ADD KEY `Intervention_fk_2` (`idDistributeur`);
 
 ALTER TABLE `Intervention`
   ADD CONSTRAINT `Intervention_fk_1` FOREIGN KEY (`idOperateur`) REFERENCES `Operateur` (`idOperateur`) ON DELETE CASCADE;
 
--- --------------------------------------------------------
+ALTER TABLE `Intervention`
+  ADD CONSTRAINT `Intervention_fk_2` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
 
 --
 -- Structure de la table `Approvisionnement`
@@ -201,20 +199,19 @@ ALTER TABLE `Intervention`
 CREATE TABLE `Approvisionnement` (
   `idApprovisionnement` int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `idIntervention` int NOT NULL,
-  `idStockDistributeur` int NOT NULL,
-  `dateApprovisionnement` date NOT NULL,
+  `idBac` int NOT NULL,
+  `poidsAPrevoir` float NOT NULL,
+  `heureApprovisionnement` time NOT NULL,
   `effectue` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Approvisionnement`
   ADD KEY `Approvisionnement_fk_1` (`idIntervention`),
-  ADD KEY `Approvisionnement_fk_2` (`idStockDistributeur`);
+  ADD KEY `Approvisionnement_fk_2` (`idBac`);
 
 ALTER TABLE `Approvisionnement`
   ADD CONSTRAINT `Approvisionnement_fk_1` FOREIGN KEY (`idIntervention`) REFERENCES `Intervention` (`idIntervention`) ON DELETE CASCADE,
-  ADD CONSTRAINT `Approvisionnement_fk_2` FOREIGN KEY (`idStockDistributeur`) REFERENCES `StockDistributeur` (`idStockDistributeur`) ON DELETE CASCADE;
-
--- --------------------------------------------------------
+  ADD CONSTRAINT `Approvisionnement_fk_2` FOREIGN KEY (`idBac`) REFERENCES `Bac` (`idBac`) ON DELETE CASCADE;
 ```
 
 ## MQTT
@@ -345,6 +342,28 @@ dependencies {
 ```
 
 ## Versions
+
+![](images/livraisons.png)
+
+### 0.2
+
+![](images/jira-tickets-v0.2.png)
+
+- Android :
+
+![](images/screenshot-justfeed-android-distributeur-v0.2.png)
+
+![](images/screenshot-justfeed-android-interventions-v0.2.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-justfeed-qt-distributeurs-v0.2.png)
+
+![](images/screenshot-justfeed-qt-distributeur-v0.2.png)
+
+![](images/screenshot-justfeed-qt-configuration-v0.1.png)
+
+![](images/screenshot-justfeed-qt-interventions-v0.2.png)
 
 ### 0.1
 

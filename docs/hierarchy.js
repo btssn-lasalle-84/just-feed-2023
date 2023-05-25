@@ -12,15 +12,25 @@ var hierarchy =
     [ "Communication", "class_communication.html", null ],
     [ "com.justfeed.justfeedandroid.Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html", null ],
     [ "Distributeur", "class_distributeur.html", null ],
+    [ "com.justfeed.justfeedandroid.Intervention.Etats", "enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html", null ],
     [ "com.justfeed.justfeedandroid.ExampleInstrumentedTest", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_instrumented_test.html", null ],
     [ "com.justfeed.justfeedandroid.ExampleUnitTest", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_unit_test.html", null ],
     [ "com.justfeed.justfeedandroid.Intervention", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html", null ],
     [ "Intervention", "class_intervention.html", null ],
     [ "Localisation", "struct_localisation.html", null ],
+    [ "AdapterView.OnItemSelectedListener", null, [
+      [ "com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html", null ]
+    ] ],
+    [ "View.OnTouchListener", null, [
+      [ "com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html", null ]
+    ] ],
+    [ "com.justfeed.justfeedandroid.Operateur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html", null ],
+    [ "Operateur", "class_operateur.html", null ],
     [ "com.justfeed.justfeedandroid.Produit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html", null ],
     [ "Produit", "class_produit.html", null ],
     [ "QDialog", "class_q_dialog.html", [
-      [ "ConfigurationDistributeur", "class_configuration_distributeur.html", null ]
+      [ "ConfigurationDistributeur", "class_configuration_distributeur.html", null ],
+      [ "PlanificationIntervention", "class_planification_intervention.html", null ]
     ] ],
     [ "QWidget", "class_q_widget.html", [
       [ "IHMJustFeed", "class_i_h_m_just_feed.html", null ]

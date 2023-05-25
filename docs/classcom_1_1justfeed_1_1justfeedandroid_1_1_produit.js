@@ -9,5 +9,6 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_produit =
     [ "nom", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d", null ],
     [ "poidsDuProduit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242", null ],
     [ "prix", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde", null ],
+    [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ae78cec72b906ed28be5ad69460d309c5", null ],
     [ "volumeProduit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025", null ]
 ];

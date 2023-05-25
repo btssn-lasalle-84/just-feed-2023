@@ -38,7 +38,7 @@ var NAVTREE =
       [ "Champs de donnée", "functions.html", [
         [ "Tout", "functions.html", "functions_dup" ],
         [ "Fonctions", "functions_func.html", "functions_func" ],
-        [ "Variables", "functions_vars.html", null ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Énumérations", "functions_enum.html", null ],
         [ "Valeurs énumérées", "functions_eval.html", null ]
       ] ]
@@ -56,9 +56,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"",
-"class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3",
-"functions_i.html"
+"_activite_interventions_8java.html",
+"class_i_h_m_just_feed.html#a5ce68323cc76a0b1ae5ffa93b4d90bdf",
+"class_statistiques.html",
+"classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025"
 ];
 
 var SYNCONMSG = 'cliquez pour désactiver la synchronisation du panel';

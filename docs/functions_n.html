@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -87,8 +87,17 @@ $(document).ready(function(){initNavTree('functions_n.html',''); initResizable()
 <div class="textblock">Liste de tous les champs de structure et d'union avec des liens vers les structures/unions auxquelles ils appartiennent :</div>
 
 <h3><a id="index_n"></a>- n -</h3><ul>
+<li>NB_BACS
+: <a class="el" href="class_distributeur.html#aff81225d18b21d2333e35734f511622aa6df041849f8a3a61ad2c04842940d90d">Distributeur</a>
+</li>
+<li>NB_ETATS
+: <a class="el" href="class_intervention.html#ad3f1b9a96dd3999ef850beef7ece3429af55169f75c48d39bfa76cdfaf31d5a77">Intervention</a>
+</li>
 <li>nbAcces
 : <a class="el" href="class_base_de_donnees.html#a5099ecb2922bb31d84cd5d4505298a29">BaseDeDonnees</a>
+</li>
+<li>NbChamps
+: <a class="el" href="class_produit.html#aff02b206c4b068866e1de3ef1c62905da3312cf15b20ba53fdf680307e6858426">Produit</a>
 </li>
 <li>NbColonnesDistributeur
 : <a class="el" href="class_i_h_m_just_feed.html#a4ba1c55ca75b1a03e7d3f47e2b56c49da3db597941388c353cb9f28fad9dfe481">IHMJustFeed</a>
@@ -100,8 +109,16 @@ $(document).ready(function(){initNavTree('functions_n.html',''); initResizable()
 : <a class="el" href="class_i_h_m_just_feed.html#a1d5783f025b58d5d7343989a308bf86a">IHMJustFeed</a>
 </li>
 <li>nom
-: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">com.justfeed.justfeedandroid.Produit</a>
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#a5a1787e17d23197f3ee4e2d9dffd4e36">com.justfeed.justfeedandroid.Operateur</a>
+, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">com.justfeed.justfeedandroid.Produit</a>
 , <a class="el" href="class_distributeur.html#a4b8a7806587e1499002d58ee6cfa4543">Distributeur</a>
+</li>
+<li>NOM
+: <a class="el" href="class_distributeur.html#aff81225d18b21d2333e35734f511622aa3ef816d471c39e09a7c21940cb610054">Distributeur</a>
+, <a class="el" href="class_operateur.html#a2f896535893bbafc79e5461160a87504a6a18b19c7bba449b210cf4947f78f463">Operateur</a>
+</li>
+<li>nom
+: <a class="el" href="class_operateur.html#a9ed24b06cedc9aba0654b1befa9fc628">Operateur</a>
 , <a class="el" href="class_produit.html#a582becfbc8aef72c99f83a37642cf7a5">Produit</a>
 </li>
 <li>NOM_BDD
@@ -114,8 +131,15 @@ $(document).ready(function(){initNavTree('functions_n.html',''); initResizable()
 : <a class="el" href="class_i_h_m_just_feed.html#a7d974a0601aba56f051fdf07bd1bb466">IHMJustFeed</a>
 </li>
 <li>nomDistributeur
-: <a class="el" href="class_configuration_distributeur.html#a02162208764c6300b30be37ef0b5007a">ConfigurationDistributeur</a>
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ad5bf76a607761e3c14eae1698e8e0fb5">com.justfeed.justfeedandroid.Distributeur</a>
+, <a class="el" href="class_configuration_distributeur.html#a02162208764c6300b30be37ef0b5007a">ConfigurationDistributeur</a>
 , <a class="el" href="class_i_h_m_just_feed.html#a94a60c012ec082a17a3a16401b94d9c7">IHMJustFeed</a>
+</li>
+<li>nomDistributeurs
+: <a class="el" href="class_planification_intervention.html#ae832e4107c43badfea3ed9a38aa37f86">PlanificationIntervention</a>
+</li>
+<li>nomMenu
+: <a class="el" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#a7f4c00be484512bd72ce50d8d69fc8c8">com.justfeed.justfeedandroid.Intervention.Etats</a>
 </li>
 <li>numeroDistributeurSelectionne
 : <a class="el" href="class_i_h_m_just_feed.html#ac8e34b82db99152afba5122954edd139">IHMJustFeed</a>
@@ -127,7 +151,7 @@ $(document).ready(function(){initNavTree('functions_n.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:24 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

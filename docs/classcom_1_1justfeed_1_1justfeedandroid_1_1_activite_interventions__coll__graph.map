@@ -1,4 +1,7 @@
 <map id="com.justfeed.justfeedandroid.ActiviteInterventions" name="com.justfeed.justfeedandroid.ActiviteInterventions">
-<area shape="rect" id="node1" title="Définition de la classe ActiviteInterventions." alt="" coords="5,747,223,985"/>
-<area shape="rect" id="node2" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="5,5,223,684"/>
+<area shape="rect" id="node1" title="Définition de la classe ActiviteInterventions." alt="" coords="153,1327,371,1741"/>
+<area shape="rect" id="node2" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="5,483,223,1264"/>
+<area shape="rect" id="node3" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html" title="Définition de la classe Intervention." alt="" coords="304,688,521,1059"/>
+<area shape="rect" id="node4" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html" title="Définition de la classe Distributeur." alt="" coords="183,5,400,420"/>
+<area shape="rect" id="node5" href="$enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html" title=" " alt="" coords="424,130,641,295"/>
 </map>

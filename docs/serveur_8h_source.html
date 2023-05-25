@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -104,26 +104,23 @@ $(document).ready(function(){initNavTree('serveur_8h_source.html',''); initResiz
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;  <span class="keyword">public</span>:</div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur</a>();</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur</a>(<span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            QString <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>,</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;            QString <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>,</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;            QString <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <a class="code" href="class_serveur.html#a722aefd65c9efab0b3e0646bf3440ea1">~Serveur</a>();</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="comment">// Accesseurs</span></div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#aafd6e938f7e14ef3a4ed70c3cd2d3d79">getPort</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    QString <a class="code" href="class_serveur.html#a35208f48d86589d96b2ac1967774f0cb">getHostName</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    QString <a class="code" href="class_serveur.html#a66f97003fe0556c38d32d552e70dbf36">getUtilisateur</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    QString <a class="code" href="class_serveur.html#ad462addaa056be83fce1d41a472e3bca">getMotDePasse</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="comment">// Mutateurs</span></div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a4344a091913db5b8021571b36f528eb7">setPort</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>);</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a3675dddca182cb7f120723344e82da79">setHostName</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#af192097ea811e7919efffc174948250c">setUtilisateur</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3">setMotDePasse</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;};</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SERVEUR_H</span></div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <a class="code" href="class_serveur.html#a8a7a1df15a07e095436dedd0d40a0196">Serveur</a>(<span class="keywordtype">int</span> <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>, QString <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>, QString <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>, QString <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="class_serveur.html#a722aefd65c9efab0b3e0646bf3440ea1">~Serveur</a>();</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="comment">// Accesseurs</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">int</span>     <a class="code" href="class_serveur.html#aafd6e938f7e14ef3a4ed70c3cd2d3d79">getPort</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    QString <a class="code" href="class_serveur.html#a35208f48d86589d96b2ac1967774f0cb">getHostName</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    QString <a class="code" href="class_serveur.html#a66f97003fe0556c38d32d552e70dbf36">getUtilisateur</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    QString <a class="code" href="class_serveur.html#ad462addaa056be83fce1d41a472e3bca">getMotDePasse</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="comment">// Mutateurs</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a4344a091913db5b8021571b36f528eb7">setPort</a>(<span class="keyword">const</span> <span class="keywordtype">int</span> <a class="code" href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">port</a>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a3675dddca182cb7f120723344e82da79">setHostName</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">hostName</a>);</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#af192097ea811e7919efffc174948250c">setUtilisateur</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a5940ad18d6f69c068a0ebc1ccfd4116f">utilisateur</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3">setMotDePasse</a>(<span class="keyword">const</span> QString&amp; <a class="code" href="class_serveur.html#a488a91ae1c69d7769afd9278a4ed4fc6">motDePasse</a>);</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;};</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// SERVEUR_H</span></div>
 <div class="ttc" id="aclass_serveur_html"><div class="ttname"><a href="class_serveur.html">Serveur</a></div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00014">serveur.h:15</a></div></div>
 <div class="ttc" id="aclass_serveur_html_a1b9e9d83f8a1c7c08c11efb0e74eb9f3"><div class="ttname"><a href="class_serveur.html#a1b9e9d83f8a1c7c08c11efb0e74eb9f3">Serveur::setMotDePasse</a></div><div class="ttdeci">void setMotDePasse(const QString &amp;motDePasse)</div><div class="ttdoc">Mutateur de l'attribut motDePasse.</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8cpp_source.html#l00104">serveur.cpp:104</a></div></div>
 <div class="ttc" id="aclass_serveur_html_a1d877917435962e9602ac93d2d59dc0d"><div class="ttname"><a href="class_serveur.html#a1d877917435962e9602ac93d2d59dc0d">Serveur::port</a></div><div class="ttdeci">int port</div><div class="ttdoc">port du serveur</div><div class="ttdef"><b>Definition:</b> <a href="serveur_8h_source.html#l00017">serveur.h:17</a></div></div>
@@ -146,7 +143,7 @@ $(document).ready(function(){initNavTree('serveur_8h_source.html',''); initResiz
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="serveur_8h.html">serveur.h</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:23 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>
