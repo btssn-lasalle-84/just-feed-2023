@@ -1,0 +1,4875 @@
+format 224
+"justfeedandroid" // justfeedandroid
+  revision 7
+  modified_by 42 "tv"
+  // class settings
+  
+  classdiagramsettings member_max_width 0 end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  java_dir "JustFeedAndroid/app/src/main/java/com/justfeed/justfeedandroid/"
+  java_package "com.justfeed.justfeedandroid"
+  classview 134570 "justfeedandroid"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    class 134570 "ActiviteInterventions"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe ActiviteInterventions.
+@details La classe ActiviteIntervention \\c ActiviteIntervention permet de lancer une seconde
+activité pour l'application Android.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 134570 // <generalisation>
+	relation 134570 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134570 // <generalisation>
+	  b parent class_ref 134698 // AppCompatActivity
+      end
+
+      attribute 134570 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_ActiviteInterventions\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 143618 "TOUTES"
+	const_attribute private explicit_type "String"
+	init_value " \"Toutes\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 143746 "A_FAIRE"
+	const_attribute private explicit_type "String"
+	init_value " \"A faire\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 151466 "EN_COURS"
+	const_attribute private explicit_type "String"
+	init_value " \"En cours\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      attribute 143874 "VALIDEES"
+	const_attribute private explicit_type "String"
+	init_value " \"Validées\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Constante utilisée pour configurer le filtre."
+      end
+
+      classrelation 144042 // etat (<unidirectional association>)
+	relation 144042 --->
+	  a role_name "etat" private
+	    comment "
+Attributs
+
+!< Etat qui sert à trier les interventions"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144042 // etat (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
+      end
+
+      classrelation 134698 // listeInterventions (<unidirectional association>)
+	relation 134698 --->
+	  stereotype "List"
+	  a role_name "listeInterventions" class_relation private
+	    comment "!< Liste des interventions à afficher"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 134698 // listeInterventions (<unidirectional association>)
+	  b parent class_ref 134826 // Intervention
+      end
+
+      attribute 134698 "handler"
+	private explicit_type "Handler"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le handler utilisé par l'activité"
+      end
+
+      classrelation 134826 // baseDeDonnees (<unidirectional association>)
+	relation 134826 --->
+	  a role_name "baseDeDonnees" class_relation private
+	    comment "!< Identifiants pour la base de données"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134826 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 134954 // BaseDeDonnees
+      end
+
+      attribute 134826 "vueListeInterventions"
+	private explicit_type "RecyclerView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Affichage des Interventions"
+      end
+
+      classrelation 137386 // adapteurIntervention (<unidirectional association>)
+	relation 137386 --->
+	  a role_name "adapteurIntervention" init_value " null" private
+	    comment "!< Pour remplir les vues des Interventions"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137386 // adapteurIntervention (<unidirectional association>)
+	  b parent class_ref 135338 // Adapter
+      end
+
+      attribute 135082 "layoutVueListeInterventions"
+	private explicit_type "RecyclerView.LayoutManager"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Positionnement des vues"
+      end
+
+      attribute 151722 "menuEtats"
+	private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Menu pour trier les interventions"
+      end
+
+      attribute 144002 "rafraichisseur"
+	class_attribute private explicit_type "SwipeRefreshLayout"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Pull-to-refresh"
+      end
+
+      attribute 144130 "positionListe"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< La position actuelle de la liste déroulante"
+      end
+
+      operation 134570 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelé à la création d'une seconde activité
+@param savedInstanceState
+"
+      end
+
+      operation 134698 "onStart"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée au démarrage après le onCreate() ou un restart
+après un onStop()
+"
+      end
+
+      operation 134826 "onResume"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée après onStart() ou après onPause()
+"
+      end
+
+      operation 134954 "onPause"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on
+reprend sur un onResume()) ou avant onStop() (activité plus visible)
+"
+      end
+
+      operation 135082 "onStop"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée lorsque l'activité n'est plus visible
+"
+      end
+
+      operation 135210 "onDestroy"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée à la destruction de l'application (après onStop()
+et détruite par le système Android)
+"
+      end
+
+      operation 135338 "initialiserVueInterventions"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "interventions" explicit_type "List<Intervention>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui initialise la vue des Interventions
+@details initialiserVueInterventions() initialise les attributs chargés
+d'afficher les interventions, de placer les interventions et de remplir les vues
+des interventions
+"
+      end
+
+      operation 135466 "afficherInterventions"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "interventions" explicit_type "List<Intervention>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Affiche les interventions
+"
+      end
+
+      operation 135594 "initialiserHandler"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise la gestion des messages en provenance des threads
+"
+      end
+
+      operation 134786 "modifierEtatIntervention"
+	class_operation public explicit_return_type "void"
+	nparams 3
+	  param in name "requete" explicit_type "String"
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Execute une requête UPDATE, INSERT, DELETE
+"
+      end
+
+      operation 134914 "supprimerIntervention"
+	class_operation public explicit_return_type "void"
+	nparams 2
+	  param in name "requete" explicit_type "String"
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Supprimer une intervention
+"
+      end
+    end
+
+    class 134826 "Intervention"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe Intervention.
+@details La classe Intervention \\c Intervention permet de décrire une Intervention pour
+l'opérateur. elle contient toutes les informations liées à une intervention : heure, trajet, type
+d'intervention, poids à remplir...
+@author Fargier Mayeul
+@version 0.1
+"
+      class 148354 "Etats"
+	visibility public stereotype "enum"
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 144258 "TOUTES"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"Toutes\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 137090 "A_FAIRE"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"A faire\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 136834 "EN_COURS"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"En cours\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 144386 "VALIDEES"
+	  public type class_ref 148354 // Etats
+	  cpp_decl ""
+	  java_decl "  ${@}${name}(\"Validées\"),${comment}"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 151850 "nomMenu"
+	  private explicit_type "String"
+	  stereotype "attribute"
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 128130 "Etats"
+	  private explicit_return_type ""
+	  nparams 1
+	    param in name "nomMenu" explicit_type "String"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  
+	  
+	  
+	end
+
+	operation 128258 "toString"
+	  public explicit_return_type "String"
+	  nparams 0
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	end
+      end
+
+      attribute 140714 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Intervention\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 140842 "SEUIL_HUMIDITE"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 12"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Seuil du taux d'humidité d'un distributeur."
+      end
+
+      attribute 140970 "dateIntervention"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< Date de l'intervention."
+      end
+
+      classrelation 136490 // distributeur (<unidirectional association>)
+	relation 136490 --->
+	  a role_name "distributeur" private
+	    comment "!< Distributeur où intervenir."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136490 // distributeur (<unidirectional association>)
+	  b parent class_ref 135850 // Distributeur
+      end
+
+      classrelation 144170 // etat (<unidirectional association>)
+	relation 144170 --->
+	  a role_name "etat" private
+	    comment "!< Les états d'une intervention."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144170 // etat (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
+      end
+
+      attribute 141226 "aRemplir"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Si l'intervention consiste à remplir."
+      end
+
+      attribute 141354 "aDepanner"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Si l'intervention consiste à dépanner."
+      end
+
+      operation 142890 "Intervention"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de classe Intervention.
+"
+      end
+
+      operation 143018 "Intervention"
+	public explicit_return_type ""
+	nparams 5
+	  param in name "dateIntervention" explicit_type "String"
+	  param inout name "distributeur" type class_ref 135850 // Distributeur
+	  param inout name "etat" type class_ref 148354 // Etats
+	  param inout name "aRemplir" explicit_type "boolean"
+	  param inout name "aDepanner" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Intervention.
+@param dateIntervention
+@param distributeur
+@param etat
+@param aRemplir
+@param aDepanner
+"
+      end
+
+      operation 143146 "getDateIntervention"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Accesseurs
+
+@brief Méthode d'accés à l'heure d'intervention.
+@return l'heure de l'intervention.
+"
+      end
+
+      operation 143274 "getIdentifiantDistribteur"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés à l'identifiant du distributeur.
+@return l'identifiant du distributeur.
+"
+      end
+
+      operation 143402 "getNomDistribteur"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés au nom du distributeur.
+@return le nom du distributeur.
+"
+      end
+
+      operation 154154 "getEtat"
+	public return_type class_ref 148354 // Etats
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés à l'état de l'intervention.
+@return etat.
+"
+      end
+
+      operation 143658 "estARemplir"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés à aRemplir.
+@return aRemplir
+"
+      end
+
+      operation 143786 "estADepanner"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés à aDepanner.
+@return aDepanner
+"
+      end
+
+      operation 144042 "recupererBacsARemplir"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Services
+
+
+@brief Méthode qui renvoie la liste des bacs à remplir.
+@return la liste des bacs à remplir.
+"
+      end
+
+      operation 144170 "recupererBacsADepanner"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui renvoie la liste des bacs à dépanner.
+@return la liste des bacs à dépanner.
+"
+      end
+
+      operation 144298 "modifierDateIntervention"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "nouvelleDateIntervention" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Mutateurs
+
+@brief Méthode pour modifier la date d'intervention.
+@param nouvelleDateIntervention
+"
+      end
+
+      operation 144426 "modifierEtatIntervention"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode pour modifier l'état de l'intervention.
+@param nouvelEtat
+"
+      end
+
+      operation 144554 "formaterDate"
+	class_operation public explicit_return_type "String"
+	nparams 1
+	  param in name "date" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode statique qui convertit le format d'une date de \"yyyy-MM-dd\" en \"dd/MM/yyyy\"
+@param date au format \"yyyy-MM-dd\"
+@return String date au format \"dd/MM/yyyy\"
+"
+      end
+    end
+
+    class 134954 "BaseDeDonnees"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Classe BaseDeDonnees.
+@details La classe BaseDeDonnees permet de créer une interface entre
+l'application Android et une bose de données distante.
+@author Fargier Mayeul
+@author Thierry VAIRA
+@version 0.1
+@see https://www.tutorialspoint.com/java_mysql/
+"
+      attribute 136106 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_BaseDeDonnees\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs"
+      end
+
+      attribute 136234 "CONNEXION_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136362 "CONNEXION_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136490 "DECONNEXION_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136618 "DECONNEXION_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136746 "REQUETE_SQL_OK"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 4"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136874 "REQUETE_SQL_ERREUR"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 5"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137002 "REQUETE_SQL_SELECT"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 6"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137130 "REQUETE_SQL_SELECT_DISTRIBUTEURS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 7"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137258 "REQUETE_SQL_SELECT_INTERVENTIONS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 8"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 159018 "REQUETE_SQL_SELECT_OPERATEURS"
+	class_attribute const_attribute public explicit_type "int"
+	init_value " 9"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 137386 "NOM_BDD"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"justfeed\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le nom par défaut de la base de données"
+      end
+
+      attribute 137514 "IDENTIFIANT"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"justfeed\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le nom de l'utilisateur par défaut de la base de données"
+      end
+
+      attribute 137642 "MOT_DE_PASSE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"justfeed\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le mot de passe par défaut de la base de données"
+      end
+
+      attribute 137770 "HOSTNAME"
+	class_attribute const_attribute private explicit_type "String"
+	init_value "
+      \"www.db4free.net\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'adresse du serveur de base de données par défaut"
+      end
+
+      attribute 137898 "PORT_DEFAUT"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 3306"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment " private static final String HOSTNAME = \"127.0.0.1\"; //!< L'adresse du serveur de base de
+ données par défaut
+!< Le numéro de port par défaut pour MySQL"
+      end
+
+      attribute 138026 "TRUE"
+	const_attribute private explicit_type "int"
+	init_value " 1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Vérifie si l'intervention a été executée."
+      end
+
+      attribute 138154 "active"
+	class_attribute const_attribute public explicit_type "boolean"
+	init_value "
+      true"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< si vrai l'application peut utiliser la base de données MySQL (utile en debug)"
+      end
+
+      attribute 138282 "nomBDD"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< Nom de la base de données"
+      end
+
+      attribute 138410 "identifiant"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Identifiant de l'utilisateur de la base de données"
+      end
+
+      attribute 138538 "motDePasse"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Mot de passe de l'identifiant"
+      end
+
+      attribute 138666 "hostName"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Nom de la machine distante"
+      end
+
+      attribute 138794 "url"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'URL de connexion à la base de données"
+      end
+
+      attribute 138922 "port"
+	const_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Port sur lequel le processus de la base de données écoute"
+      end
+
+      attribute 139050 "connexion"
+	class_attribute public explicit_type "Connection"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< objet de connexion à MySQL (null par défaut)"
+      end
+
+      attribute 139178 "mutex"
+	class_attribute const_attribute public explicit_type "Lock"
+	init_value "
+      new ReentrantLock(true)"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< mutex pour l'exécution concurrente de requêtes"
+      end
+
+      classrelation 135850 // bdd (<unidirectional association>)
+	relation 135850 --->
+	  a role_name "bdd" init_value " null" class_relation private
+	    comment "!< l'instance unique de BaseDeDonnees (Singleton)"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135850 // bdd (<unidirectional association>)
+	  b parent class_ref 134954 // BaseDeDonnees
+      end
+
+      attribute 139306 "handler"
+	private explicit_type "Handler"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! Le handler pour l'échange de messages entre les threads"
+      end
+
+      classrelation 135978 // listeDistributeurs (<unidirectional association>)
+	relation 135978 --->
+	  stereotype "List"
+	  a role_name "listeDistributeurs" init_value " null" private
+	    comment "<! La liste des distributeurs"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135978 // listeDistributeurs (<unidirectional association>)
+	  b parent class_ref 135850 // Distributeur
+      end
+
+      classrelation 136106 // listeInterventions (<unidirectional association>)
+	relation 136106 --->
+	  stereotype "List"
+	  a role_name "listeInterventions" init_value " null" private
+	    comment "<! La liste des interventions"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 136106 // listeInterventions (<unidirectional association>)
+	  b parent class_ref 134826 // Intervention
+      end
+
+      operation 138538 "getInstance"
+	class_operation public return_type class_ref 134954 // BaseDeDonnees
+	nparams 0
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+"
+      end
+
+      operation 138666 "getInstance"
+	class_operation public return_type class_ref 134954 // BaseDeDonnees
+	nparams 4
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+"
+      end
+
+      operation 138794 "getInstance"
+	class_operation public return_type class_ref 134954 // BaseDeDonnees
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 138922 "getInstance"
+	class_operation public return_type class_ref 134954 // BaseDeDonnees
+	nparams 5
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent synchronized java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn getInstance
+@brief Retourne l'instance BaseDeDonnees
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 139050 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe BaseDeDonnees.
+@see BaseDeDonnees()
+"
+      end
+
+      operation 139178 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe BaseDeDonnees.
+@see BaseDeDonnees()
+"
+      end
+
+      operation 139306 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 5
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param in name "port" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe BaseDeDonnees.
+@see BaseDeDonnees(String nomBase, String identifiant, String motDePasse, String
+    hostName, int port)
+@param nomBase le nom de la base de données MySQL
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param port le numéro de port sur lequel le processus de la base de
+  données écoute.
+"
+      end
+
+      operation 139434 "BaseDeDonnees"
+	private explicit_return_type ""
+	nparams 6
+	  param in name "nomBase" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "motDePasse" explicit_type "String"
+	  param in name "hostName" explicit_type "String"
+	  param in name "port" explicit_type "int"
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe BaseDeDonnees.
+@see BaseDeDonnees(String nomBase, String identifiant, String motDePasse, String
+  hostName, int port)
+@param nomBase le nom de la base de données
+@param identifiant le nom d'un utilisateur autorisé sur la base de
+  données.
+@param motDePasse le mot de passe de l'utilisateur.
+@param hostName le nom de la machine distante.
+@param port le numéro de port sur lequel le processus de la base de
+  données écoute.
+@param handler Le handler pour l'échange de messages entre les threads.
+"
+      end
+
+      operation 139562 "setHandler"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "handler" explicit_type "Handler"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn setHandler
+@brief Fixe le gestionnaire de messages du thread UI
+@param handler Handler le gestionnaire de messages du thread UI
+"
+      end
+
+      operation 139690 "connecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn connecter
+@brief Connexion à la base de données MySQL si pas déjà connecté
+@return boolean vrai si la connexion a réussi sinon faux
+"
+      end
+
+      operation 139818 "reconnecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn reconnecter
+@brief Reconnexion à la base de données MySQL
+@return boolean vrai si la connexion a réussi sinon faux
+"
+      end
+
+      operation 139946 "deconnecter"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn deconnecter
+@brief Déconnexion de la base de données MySQL
+@return boolean vrai si la déconnexion a réussi sinon faux
+"
+      end
+
+      operation 140074 "estConnecte"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn estConnecte
+@brief Retourne vrai si on est connecté à la base de données MySQL
+@return boolean vrai si on est connecté à la base de données MySQL sinon faux
+"
+      end
+
+      class 136362 "ConnexionMySql"
+	visibility private 
+	cpp_decl ""
+	java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	classrelation 136234 // <realization>
+	  relation 136234 -_-|>
+	    stereotype "bind"
+	    a public
+	      java "${type}<Void, Integer, Boolean>"
+	      classrelation_ref 136234 // <realization>
+	    b parent class_ref 136490 // AsyncTask
+	end
+
+	attribute 139434 "messageConnexion"
+	  private explicit_type "String"
+	  init_value " \"\""
+	  cpp_decl ""
+	  java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	operation 140202 "doInBackground"
+	  protected explicit_return_type "Boolean"
+	  nparams 1
+	    param inout name "" explicit_type "Void...unused"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn doInBackground
+@brief Méthode de connexion qui s’exécute dans un autre thread
+"
+	end
+
+	operation 140330 "onProgressUpdate"
+	  protected explicit_return_type "void"
+	  nparams 1
+	    param inout name "" explicit_type "Integer...progress"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn onProgressUpdate
+@brief Méthode permettant d'indiquer la progression de la tâche d'arrière plan (s’exécute
+dans le thread UI)
+@details doInBackground peut appeler publishProgress() pour indiquer l'avancement du
+traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
+"
+	end
+
+	operation 140458 "onPostExecute"
+	  protected explicit_return_type "void"
+	  nparams 1
+	    param inout name "result" explicit_type "Boolean"
+	  
+	  preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	  java_annotation "@Override
+"
+	  
+	  
+	  
+	  comment "@fn onPostExecute
+@brief Méthode appelée lorsque doInBackground a terminé (s’exécute dans le thread UI)
+"
+	end
+      end
+
+      operation 140586 "executerRequete"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "requete" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@fn executerRequete
+@brief Méthode qui exécute une requête UPDATE, INSERT ou DELETE en arrière-plan
+"
+      end
+
+      operation 140714 "selectionner"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "requeteSELECT" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Sélectionne des enregistrements dans la base de données en arrière-plan
+@param requeteSELECT String la requête SQL
+"
+      end
+
+      operation 140842 "recupererDistributeurs"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui récupère une liste de distributeurs de la BDD.
+"
+      end
+
+      operation 140970 "recupererInterventions"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui récupère une liste d'interventions de la BDD.
+"
+      end
+
+      operation 160938 "recupererOperateurs"
+	public explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui récupère une liste d'opérateur de la BDD.
+"
+      end
+    end
+
+    class 135082 "AdaptateurBac"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe AdaptateurBac.
+@details La classe AdaptateurBac \\c AdaptateurBac permet de créer une instance de la classe
+BacViewHolder (cf. BacViewHolder) et elle remplit les vues de la classe VueBac.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 134954 // <realization>
+	relation 134954 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}<VueBac>"
+	    classrelation_ref 134954 // <realization>
+	  b parent class_ref 135338 // Adapter
+      end
+
+      classrelation 135082 // listeBacs (<unidirectional association>)
+	relation 135082 --->
+	  stereotype "List"
+	  a role_name "listeBacs" init_value " null" private
+	    comment "!< Liste des bacs à afficher"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135082 // listeBacs (<unidirectional association>)
+	  b parent class_ref 135466 // Bac
+      end
+
+      operation 135722 "AdaptateurBac"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "listeBacs" explicit_type "List<Bac>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe BacAdapter.
+@param listeBacs
+"
+      end
+
+      operation 135850 "onCreateViewHolder"
+	public return_type class_ref 135210 // VueBac
+	nparams 2
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param in name "viewType" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+@Override
+"
+	
+	
+	
+	comment "@brief Méthode chargé de créer une instance de la classe BacViewHolder.
+@details onCreateViewHolder() créer une instance de la classe BacViewHolder
+et lui passe en paramètre le contexte de l'activité actuelle (UID).
+@param parent   The ViewGroup into which the new View will be added after it is bound to
+                an adapter position.
+@param viewType The view type of the new View.
+@return BacViewHolder , une instance de la classe BacViewHolder.
+"
+      end
+
+      operation 135978 "onBindViewHolder"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "holder" type class_ref 135210 // VueBac
+	  param in name "position" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui remplie les vues de la classe BacViewHolder.
+@param holder   The ViewHolder which should be updated to represent the contents of the
+                item at the given position in the data set.
+@param position The position of the item within the adapter's data set.
+"
+      end
+
+      operation 136106 "getItemCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui compte le nombre d'items dans la liste listeBacs.
+@return la taille de la liste de bacs.
+"
+      end
+    end
+
+    class 135210 "VueBac"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe VueBac.
+@details La classe VueBac \\c VueBac permet de gérer les vues des bacs.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 137002 // <generalisation>
+	relation 137002 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137002 // <generalisation>
+	  b parent class_ref 136746 // ViewHolder
+      end
+
+      attribute 142890 "MOITIE"
+	const_attribute private explicit_type "int"
+	init_value " 2"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< constante utilisée pour calculer la moitié d'un bac."
+      end
+
+      attribute 143018 "CRITIQUE"
+	const_attribute private explicit_type "int"
+	init_value " 3"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< constante utilisée pour calculer l'état critique d'un bac"
+      end
+
+      attribute 143146 "remplissageBac"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< (si celui-ci est vide au 3/4).
+
+@brief Attributs GUI
+@details Attributs qui s'occupent de l'affichage des paramètres d'un bac.
+
+!< attribut GUI qui affiche une barre de remplissage du bac."
+      end
+
+      attribute 143274 "produit"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche un texte qui contient le nom du produit."
+      end
+
+      attribute 143402 "hydrometrie"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche l'hygrométrie du bac."
+      end
+
+      attribute 143530 "prix"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche le prix du produit."
+      end
+
+      operation 146858 "VueBac"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "itemView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe BacViewHolder.
+@details Le constructeur BacViewHolder() initialise les attributs qui seront chargés
+d'afficher les vues décritent dans le layout bac.xml.
+@param itemView
+"
+      end
+
+      operation 146986 "afficherBac"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "bac" type class_ref 135466 // Bac
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui affiche les bacs.
+@details afficherBac(), affiche le bac qui lui est passé en paramètre.
+@param bac
+"
+      end
+    end
+
+    class 135466 "Bac"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe Bac
+@details La classe Bac \\c Bac permet de décrire un
+bac, qui est une partie d'un distributeur qui contient un produit. Un Bac à un type de Produit et
+un poids actuel.
+@author Fargier Mayeul
+@version 0.1
+"
+      attribute 135466 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Bac\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      classrelation 135722 // typeProduit (<unidirectional association>)
+	relation 135722 --->
+	  a role_name "typeProduit" private
+	    comment "
+Attributs
+
+!< Type de produit dans le bac"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135722 // typeProduit (<unidirectional association>)
+	  b parent class_ref 136234 // Produit
+      end
+
+      attribute 135594 "poidsActuel"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Poids actuel du bac en Kg"
+      end
+
+      attribute 135722 "poidsTotal"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Poids total du bac en kg"
+      end
+
+      attribute 135850 "hygrometrie"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Taux d'humidité dans un bac"
+      end
+
+      attribute 135978 "quantiteARemplir"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Quantité à remplir en kg"
+      end
+
+      operation 137258 "Bac"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe Bac
+@see Bac()
+"
+      end
+
+      operation 137386 "Bac"
+	public explicit_return_type ""
+	nparams 5
+	  param inout name "typeProduit" type class_ref 136234 // Produit
+	  param in name "poidsActuel" explicit_type "double"
+	  param in name "poidsTotal" explicit_type "double"
+	  param in name "hygrometrie" explicit_type "int"
+	  param in name "quantiteARemplir" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Bac
+@param typeProduit type de produit dans le bac
+@param poidsActuel poids actuel d'un bac
+@param poidsTotal  poids total d'un bac
+@param hygrometrie
+@param quantiteARemplir
+"
+      end
+
+      operation 137514 "getTypeProduit"
+	public return_type class_ref 136234 // Produit
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseurs
+
+
+@brief Accesseur du produit contenu dans le bac.
+@return Produit , produit contenu dans le bac.
+"
+      end
+
+      operation 137642 "getPoidsActuel"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du poids actuel du bac.
+@return poidsActuel , poids actuel en kg du bac.
+"
+      end
+
+      operation 137770 "getPoidsTotalBac"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du poids total d'un bac du distributeur en kg.
+@return Le poids total d'un bac du distributeur quant-il est plein.
+"
+      end
+
+      operation 137898 "getHygrometrie"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'hydrométrie d'un bac.
+@return hydrometrie le taux d'humidité d'un bac.
+"
+      end
+
+      operation 138026 "getQuantiteARemplir"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de la quantité à remplir.
+@return quantiteARemplir , la quantité en kg à remplir
+"
+      end
+
+      operation 138154 "changerTypeProduit"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouveauProduit" type class_ref 136234 // Produit
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Services
+
+
+@brief Change de produit.
+@param nouveauProduit le nouveau produit.
+"
+      end
+
+      operation 138282 "changerPoidsActuel"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "nouveauPoids" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Change le poids actuel.
+@param nouveauPoids le nouveau poids.
+"
+      end
+
+      operation 138410 "changerQuantiteARemplir"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "nouvelleQuantite" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Change la quantité à remplir.
+@param nouvelleQuantite la nouvelle quantité.
+"
+      end
+
+    end
+
+    class 135594 "AdaptateurDistributeur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe AdaptateurDistributeur.
+@details La classe AdaptateurDistributeur \\c AdaptateurDistributeur permet de remplir les vues
+définies par la classe VueDistributeur.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 135210 // <realization>
+	relation 135210 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}<VueDistributeur>"
+	    classrelation_ref 135210 // <realization>
+	  b parent class_ref 135338 // Adapter
+      end
+
+      attribute 135210 "TAG"
+	const_attribute private explicit_type "String"
+	init_value " \"_AdapteurDistributeur\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+"
+      end
+
+      classrelation 135338 // distributeurs (<unidirectional association>)
+	relation 135338 --->
+	  stereotype "List"
+	  a role_name "distributeurs" init_value " null" private
+	    comment "!< Liste des distributeurs à afficher."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135338 // distributeurs (<unidirectional association>)
+	  b parent class_ref 135850 // Distributeur
+      end
+
+      attribute 135338 "partageVue"
+	private explicit_type "RecyclerView.RecycledViewPool"
+	init_value "
+      new RecyclerView.RecycledViewPool()"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Partage des vues entre plusieurs recyclerview."
+      end
+
+      operation 136234 "AdaptateurDistributeur"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "distributeurs" explicit_type "List<Distributeur>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe DistributeurAdapter.
+@param distributeurs
+"
+      end
+
+      operation 136362 "onCreateViewHolder"
+	public return_type class_ref 135722 // VueDistributeur
+	nparams 2
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param in name "viewType" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+@Override
+"
+	
+	
+	
+	comment "@brief Méthode onCreateViewHolder.
+@details onCreateViewHolder() instancie un nouvel objet de classe DistributeurViewHolder.
+@param parent   The ViewGroup into which the new View will be added after it is bound to
+                an adapter position.
+@param viewType The view type of the new View.
+@return une instance de la classe DistributeurViewHolder.
+"
+      end
+
+      operation 136490 "onBindViewHolder"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "holder" type class_ref 135722 // VueDistributeur
+	  param in name "position" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui remplie la vues de l'instance de la classe DistributeurViewHolder.
+@param holder   The ViewHolder which should be updated to represent the contents of the
+                item at the given position in the data set.
+@param position The position of the item within the adapter's data set.
+"
+      end
+
+      operation 136618 "getItemCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui compte le nombre d'items de la liste distributeurs.
+@return la taille de la liste distributeurs.
+"
+      end
+    end
+
+    class 135722 "VueDistributeur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe VueDistributeur.
+@details La classe VueDistributeur \\c VueDistributeur permet de gérer les vues
+pour afficher des distributeurs.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 137130 // <generalisation>
+	relation 137130 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137130 // <generalisation>
+	  b parent class_ref 136746 // ViewHolder
+      end
+
+      attribute 143658 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_VueDistributeur\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs"
+      end
+
+      attribute 143786 "identifiant"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Ressources GUI
+
+!< attribut GUI qui affiche l'identifiant du distributeur."
+      end
+
+      attribute 143914 "localisation"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche la localisation du distributeur."
+      end
+
+      attribute 144042 "coordGeographiques"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche les coordonnées géographiques du distributeur."
+      end
+
+      attribute 144170 "intervention"
+	private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche l'état du distributeur."
+      end
+
+      attribute 144298 "vueListeBacs"
+	private explicit_type "RecyclerView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui afficher la liste des bacs du distributeur."
+      end
+
+      operation 147114 "VueDistributeur"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "itemView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe DistributeurViewHolder.
+@details initialise les attributs GUI.
+@param itemView
+"
+      end
+
+      operation 147242 "afficherDistributeur"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeur" type class_ref 135850 // Distributeur
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode qui affiche les distributeurs.
+@param distributeur
+"
+      end
+
+      operation 147370 "modifierVueListeBacs"
+	public explicit_return_type "RecyclerView"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135850 "Distributeur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe Distributeur
+@details La classe distributeur \\c Distributeur permet de décrire un
+distributeur pour l'opérateur. , un distributeur à un identifiant, contient
+le prix du produit qu'il distribue, des indications sur son poids ainsi que
+l'hydrométrie.
+@author Fargier Mayeul
+@version 0.2
+"
+      attribute 139562 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Distributeur\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 139690 "id"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< l'identifiant d'un ditributeur."
+      end
+
+      attribute 139818 "codePostal"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Code postal de la ville où se trouve le distributeur."
+      end
+
+      attribute 139946 "adresse"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Adresse du distributeur."
+      end
+
+      attribute 140074 "ville"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Ville où se situe le distributeur."
+      end
+
+      attribute 140202 "nomDistributeur"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Lieu où se trouve le distributeur."
+      end
+
+      attribute 140330 "coordGeographiques"
+	private explicit_type "Location"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Coordonnées Géographiques des distributeurs."
+      end
+
+      classrelation 136362 // listeBacs (<unidirectional association>)
+	relation 136362 --->
+	  stereotype "List"
+	  a role_name "listeBacs" private
+	    comment "!< les bacs du distributeur avec leurs produits et leurs poids actuel."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 136362 // listeBacs (<unidirectional association>)
+	  b parent class_ref 135466 // Bac
+      end
+
+      attribute 140458 "aRemplir"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le distributeur est à remplir."
+      end
+
+      attribute 140586 "aDepanner"
+	private explicit_type "boolean"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Le Distributeur est à dépanner."
+      end
+
+      operation 141098 "Distributeur"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur par défaut de la classe Distributeur.
+@see Distributeur()
+"
+      end
+
+      operation 141226 "Distributeur"
+	public explicit_return_type ""
+	nparams 7
+	  param in name "id" explicit_type "int"
+	  param in name "codePostal" explicit_type "String"
+	  param in name "adresse" explicit_type "String"
+	  param in name "ville" explicit_type "String"
+	  param in name "nomDistributeur" explicit_type "String"
+	  param inout name "coordGeographiques" explicit_type "Location"
+	  param inout name "listeBacs" explicit_type "List<Bac>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Distributeur.
+@see Distributeur(int id, String codePostal, String adresse, String Ville, String
+  nomDistributeur, Location coordGeographiques,List<Bac> listeBacs)
+@param id L'identifiant du distributeur.
+@param codePostal Code postal de la ville.
+@param adresse Adresse du distributeur.
+@param ville Ville du distributeur.
+@param nomDistributeur Nom du distributeur.
+@param coordGeographiques Géo-localisation du distributeur.
+@param listeBacs Les bacs du distributeur.
+"
+      end
+
+      operation 141354 "getNom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Accesseurs
+
+@brief Accesseur de la localisation du nomDistributeur.
+@return String le nom du distributeur
+"
+      end
+
+      operation 141482 "getLocalisation"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de la localisation du distributeur.
+@return String la localisation du distributeur.
+"
+      end
+
+      operation 141610 "getCoordGeographiques"
+	public explicit_return_type "Location"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur des coordonnées géographiques d'un distributeur.
+@return Location un objet qui représente la localisation en latitude et longitude.
+"
+      end
+
+      operation 141738 "getIdentifiant"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'identifiant du distributeur.
+@return id du distributeur.
+"
+      end
+
+      operation 141866 "getListeBacs"
+	public return_type class_ref 135466 // Bac
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}List<${type}> ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur des bacs du distributeur
+@return listeBacs , la liste des bacs du distributeur
+"
+      end
+
+      operation 141994 "getNbBacs"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du nombre de bacs du distributeur
+@return int le nombre de bacs
+"
+      end
+
+      operation 142122 "estARemplir"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'intervention à remplir.
+@return boolean , true si le distributeur est à remplir sinon false.
+"
+      end
+
+      operation 142250 "estADepanner"
+	public explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'intervention à dépanner.
+@return boolean , true si le distributeur est à dépanner sinon false.
+"
+      end
+
+      operation 142378 "changerProduit"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "numeroBac" explicit_type "int"
+	  param inout name "nouveauProduit" type class_ref 136234 // Produit
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur du type de produit contenu dans un bac.
+@param numeroBac le numéro du bac à changer.
+@param nouveauProduit le nouveau produit.
+"
+      end
+
+      operation 142506 "ajouterBac"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouveauBac" type class_ref 135466 // Bac
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Mutateur de la liste des bacs.
+@param nouveauBac le bac à ajouter.
+"
+      end
+
+      operation 142634 "remplir"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "aRemplir" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Change l'état à remplir.
+@param aRemplir true si le bac est à remplir sinon false.
+"
+      end
+
+      operation 142762 "depanner"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "aDepanner" explicit_type "boolean"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Change l'état à dépanner.
+@param aDepanner true si le bac a un taux d'humidité élevé sinon false.
+"
+      end
+
+    end
+
+    class 135978 "AdaptateurIntervention"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe AdaptateurIntervention.
+@details La classe AdaptateurIntervention \\c InterventionAdapter permet de remplir les vues gérer
+par la classe VueIntervention.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 135466 // <realization>
+	relation 135466 -_-|>
+	  stereotype "bind"
+	  a public
+	    java "${type}<VueIntervention>"
+	    classrelation_ref 135466 // <realization>
+	  b parent class_ref 135338 // Adapter
+      end
+
+      classrelation 135594 // interventions (<unidirectional association>)
+	relation 135594 --->
+	  stereotype "List"
+	  a role_name "interventions" init_value " null" private
+	    comment "!< Liste des interventions à afficher."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 135594 // interventions (<unidirectional association>)
+	  b parent class_ref 134826 // Intervention
+      end
+
+      operation 136746 "AdaptateurIntervention"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "interventions" explicit_type "List<Intervention>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe InterventionAdapter
+@param interventions
+"
+      end
+
+      operation 136874 "onCreateViewHolder"
+	public return_type class_ref 136106 // VueIntervention
+	nparams 2
+	  param inout name "parent" explicit_type "ViewGroup"
+	  param in name "viewType" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@NonNull
+@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui créer une nouvelle instance de la classe InterventionViewHolder.
+@param parent   The ViewGroup into which the new View will be added after it is bound to
+                an adapter position.
+@param viewType The view type of the new View.
+@return l'instance d'une classe InterventionViewHolder.
+"
+      end
+
+      operation 137002 "onBindViewHolder"
+	public explicit_return_type "void"
+	nparams 2
+	  param inout name "holder" type class_ref 136106 // VueIntervention
+	  param in name "position" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}@NonNull ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui remplie les vues de l'instance de la classe InterventionViewHolder.
+@param holder   The ViewHolder which should be updated to represent the contents of the
+                item at the given position in the data set.
+@param position The position of the item within the adapter's data set.
+"
+      end
+
+      operation 137130 "getItemCount"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode qui compte le nombre d'items de la liste d'interventions.
+@return la taille de la liste des interventions.
+"
+      end
+    end
+
+    class 136106 "VueIntervention"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe VueIntervention.
+@details La classe VueIntervention \\c VueIntervention permet de gérer les vues
+pour afficher des interventions.
+@author Fargier Mayeul
+@version 0.1
+"
+      classrelation 137258 // <generalisation>
+	relation 137258 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137258 // <generalisation>
+	  b parent class_ref 136874 // ViewHolder
+      end
+
+      attribute 151978 "ROUGE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#ed3734\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< L'intervention n'a pas été effectuée"
+      end
+
+      attribute 152106 "VERT"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#4eea48\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention a été effectuée"
+      end
+
+      attribute 152234 "BLEU"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"#039dfc\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est en cours"
+      end
+
+      attribute 145410 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_VueIntervention\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< TAG pour le débug"
+      end
+
+      classrelation 144298 // etatAfiltrer (<unidirectional association>)
+	relation 144298 --->
+	  a role_name "etatAfiltrer" init_value " A_FAIRE" class_relation private
+	    comment "Membres statiques
+
+!< pour trier les interventions."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144298 // etatAfiltrer (<unidirectional association>)
+	  b parent class_ref 148354 // Etats
+      end
+
+      attribute 145538 "contexte"
+	class_attribute private explicit_type "Context"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut qui contient le contexte de l'application."
+      end
+
+      attribute 145666 "interactionDetectee"
+	class_attribute private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut utilisé pour détecter évènement."
+      end
+
+      attribute 144426 "identifiantDistributeur"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Ressources GUI
+
+!< attribut GUI qui affiche l'identifiant du"
+      end
+
+      attribute 144554 "dateIntervention"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< distributeur où intervenir.
+!< attribut GUI qui affiche l'heure de l'intervention."
+      end
+
+      attribute 144682 "aRemplir"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche si le distributeur doit être rempli."
+      end
+
+      attribute 144810 "aDepanner"
+	const_attribute private explicit_type "TextView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui affiche si le distributeur doit être dépanné."
+      end
+
+      attribute 152362 "carteIntervention"
+	const_attribute private explicit_type "CardView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI qui contient les informations sur une intervention."
+      end
+
+      attribute 152490 "menuEtats"
+	const_attribute private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI d'une liste déroulante pour trier les interventions."
+      end
+
+      attribute 145794 "listeEtats"
+	const_attribute private explicit_type "Spinner"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< attribut GUI d'une liste déroulante pour changer l'état d'une intervention."
+      end
+
+      operation 147498 "VueIntervention"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "itemView" explicit_type "View"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 147626 "afficherInterventions"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135554 "afficherListeDeroulante"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 154282 "getEtatAFiltrer"
+	class_operation public return_type class_ref 148354 // Etats
+	nparams 1
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode pour récuérer l'état qui permet de trier les interventions.
+"
+      end
+
+      operation 154410 "changerEtatAFiltrer"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouvelEtat" type class_ref 148354 // Etats
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Mutateurs
+
+@brief Méthode pour modifier l'état qui permet de trier les interventions.
+"
+      end
+
+      operation 135682 "setContext"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param inout name "nouveauContexte" explicit_type "Context"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode pour modifier le contexte.
+"
+      end
+    end
+
+    class 136234 "Produit"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la Classe Produit.
+@details La classe Produit décrit un type de produit, avec ses propriétés : nom, poids, prix.
+@author Fargier Mayeul
+@version 0.1
+"
+      attribute 142250 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Produit\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 142378 "nom"
+	const_attribute private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< nom du produit"
+      end
+
+      attribute 142506 "prix"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< prix du produit pour 100g"
+      end
+
+      attribute 142634 "poidsDuProduit"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< poids en kg à l'unité du produit"
+      end
+
+      attribute 142762 "volumeProduit"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Volume du produit en dm3"
+      end
+
+      operation 146090 "Produit"
+	public explicit_return_type ""
+	nparams 4
+	  param in name "nom" explicit_type "String"
+	  param in name "prix" explicit_type "double"
+	  param in name "poidsDuProduit" explicit_type "double"
+	  param in name "volumeProduit" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Produit.
+@see Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)
+@param prix le prix du produit.
+@param poidsDuProduit le poid du produit à l'unité.
+@param volumeProduit le volume du produit.
+@param nom le nom du produit.
+"
+      end
+
+      operation 146218 "getPrix"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Accesseurs
+
+@brief Accesseur du prix du produit.
+@return prix le prix du produit
+"
+      end
+
+      operation 146346 "getPoidsDuProduit"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du poids du produit.
+@return poidsDuProduit le poids du produit à l'unité
+"
+      end
+
+      operation 146474 "getVolume"
+	public explicit_return_type "double"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du volume du produit.
+@return volumeProduit le volume du produit à l'unité
+"
+      end
+
+      operation 146602 "getNom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du nom du produit.
+@return nom le nom du produit
+"
+      end
+
+      operation 146730 "modifierPrix"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "nouveauPrix" explicit_type "double"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment " Mutateur
+
+@brief Mutateur du prix du produit.
+@param nouveauPrix le nouveau prix du produit
+"
+      end
+    end
+
+    class 136618 "JustFeed"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@class JustFeed
+@brief L'activité principale
+"
+      classrelation 136618 // <generalisation>
+	relation 136618 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136618 // <generalisation>
+	  b parent class_ref 134698 // AppCompatActivity
+      end
+
+      attribute 141482 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_JustFeed\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 159146 "PREFERENCES"
+	class_attribute const_attribute public explicit_type "String"
+	init_value " \"justfeed\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Clé pour le titre du stockage"
+      end
+
+      attribute 159274 "PREFERENCES_ID_OPERATEUR"
+	class_attribute const_attribute public explicit_type "String"
+	init_value "
+      \"idOperateur\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Clé pour l'id de l'opérateur"
+      end
+
+      attribute 159402 "OPERATEUR_NON_DEFINI"
+	class_attribute const_attribute public explicit_type "int"
+	init_value "
+      -1"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'id de l'opérateur actif n'est pas défini"
+      end
+
+      classrelation 136746 // listeDistributeurs (<unidirectional association>)
+	relation 136746 --->
+	  stereotype "List"
+	  a role_name "listeDistributeurs" private
+	    comment "Attributs
+
+!< Liste des distributeurs"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 136746 // listeDistributeurs (<unidirectional association>)
+	  b parent class_ref 135850 // Distributeur
+      end
+
+      classrelation 136874 // baseDeDonnees (<unidirectional association>)
+	relation 136874 --->
+	  a role_name "baseDeDonnees" private
+	    comment "!< L'accès à la base de données"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136874 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 134954 // BaseDeDonnees
+      end
+
+      classrelation 150826 // listeOperateurs (<unidirectional association>)
+	relation 150826 --->
+	  stereotype "List"
+	  a role_name "listeOperateurs" init_value " null" private
+	    comment "!< Liste des opérateurs"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 150826 // listeOperateurs (<unidirectional association>)
+	  b parent class_ref 143402 // Operateur
+      end
+
+      attribute 159530 "nomsOperateurs"
+	private explicit_type "String"
+	multiplicity "[]"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Les noms d'opérateurs"
+      end
+
+      attribute 159658 "operateurSelectionne"
+	private explicit_type "int"
+	init_value " OPERATEUR_NON_DEFINI"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'opérateur sélectionné"
+      end
+
+      attribute 141610 "handler"
+	private explicit_type "Handler"
+	init_value " null"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "<! Le handler utilisé par l'activité"
+      end
+
+      attribute 141738 "vueListeDistributeurs"
+	private explicit_type "RecyclerView"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Affichage de la liste des distributeurs"
+      end
+
+      classrelation 137514 // adapteurDistributeur (<unidirectional association>)
+	relation 137514 --->
+	  a role_name "adapteurDistributeur" private
+	    comment "!< Remplit les vues des distributeurs"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137514 // adapteurDistributeur (<unidirectional association>)
+	  b parent class_ref 135338 // Adapter
+      end
+
+      attribute 141994 "layoutVueListeDistributeurs"
+	private explicit_type "RecyclerView.LayoutManager"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Positionne les vues"
+      end
+
+      attribute 159786 "preferences"
+	private explicit_type "SharedPreferences"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< système de persistance des données pour l'application"
+      end
+
+      operation 144682 "onCreate"
+	protected explicit_return_type "void"
+	nparams 1
+	  param inout name "savedInstanceState" explicit_type "Bundle"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "Ressources GUI
+
+
+@brief Méthode appelée à la création de l'activité
+"
+      end
+
+      operation 144810 "onStart"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée au démarrage après le onCreate() ou un restart
+après un onStop()
+"
+      end
+
+      operation 144938 "onResume"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée après onStart() ou après onPause()
+"
+      end
+
+      operation 145066 "onPause"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée après qu'une boîte de dialogue s'est affichée (on
+reprend sur un onResume()) ou avant onStop() (activité plus visible)
+"
+      end
+
+      operation 145194 "onStop"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée lorsque l'activité n'est plus visible
+"
+      end
+
+      operation 145322 "onDestroy"
+	protected explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée à la destruction de l'application (après onStop()
+et détruite par le système Android)
+"
+      end
+
+      operation 145450 "initialiserGUI"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise la vue de l'activité
+"
+      end
+
+      operation 145578 "initialiserBaseDeDonnees"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise laccès à la base de données MySQL
+"
+      end
+
+      operation 145706 "initialiserVueListeDistributeurs"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise la vue pour afficher la liste des distributeurs
+"
+      end
+
+      operation 145834 "afficherDistributeurs"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeurs" explicit_type "List<Distributeur>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Met à jour l'affichage de la liste des distributeurs
+"
+      end
+
+      operation 145962 "initialiserHandler"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Initialise la gestion des messages en provenance des threads
+"
+      end
+
+      operation 161066 "chargerPreferences"
+	private explicit_return_type "boolean"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Charge les préfèrences de l'application
+"
+      end
+
+      operation 161194 "enregistrerPreferences"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Enregistre les préfèrences de l'application
+"
+      end
+
+      operation 161322 "onCreateOptionsMenu"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "menu" explicit_type "Menu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée au démarrage de l'activité principale
+@return void
+"
+      end
+
+      operation 161450 "onOptionsItemSelected"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "item" explicit_type "MenuItem"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Méthode appelée quand on sélectionne une entrée du menu
+@return boolean
+"
+      end
+
+      operation 161578 "demarrerActiviteInterventions"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Démarre l'activité ActiviteInterventions
+"
+      end
+
+      operation 161706 "creerListeOperateurs"
+	private explicit_return_type "void"
+	nparams 1
+	  param inout name "listeOperateurs" explicit_type "List<Operateur>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Crée une liste d'opérateurs
+"
+      end
+
+      operation 161834 "selectionnerOperateur"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Sélectionne l'opérateur
+"
+      end
+
+      operation 161962 "afficherAPropos"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Affiche la fenêtre A propos
+"
+      end
+
+    end
+
+    classdiagram 134570 "diagramme de classes 0.2"
+      classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 show_relation_visibility yes end
+      size A0
+    end
+
+    class 154882 "ListeDeroulanteGestionnaire"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128002 // <realization>
+	relation 128002 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128002 // <realization>
+	  b parent class_ref 155010 // OnItemSelectedListener
+      end
+
+      classrelation 128130 // <realization>
+	relation 128130 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128130 // <realization>
+	  b parent class_ref 155138 // OnTouchListener
+      end
+
+      attribute 144514 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_ListeDeroulante\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+"
+      end
+
+      attribute 144642 "TERMINER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Terminer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est validée"
+      end
+
+      attribute 144770 "DEMARRER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Démarrer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est en cours"
+      end
+
+      attribute 144898 "AFAIRE"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"A faire\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'intervention est à faire"
+      end
+
+      attribute 145026 "RECOMMENCER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Recommencer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'opérateur recommence l'intervention"
+      end
+
+      attribute 145154 "SUPPRIMER"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"Supprimer\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'opérateur supprime de la liste l'intervention"
+      end
+
+      attribute 145282 "interactionDetectee"
+	private explicit_type "boolean"
+	init_value " false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attribut
+
+!< Attribut utilisé pour détecter l'interaction d'un utilisateur."
+      end
+
+      classrelation 128258 // intervention (<unidirectional association>)
+	relation 128258 --->
+	  a role_name "intervention" private
+	    comment "!< Intervention où gérer l'évènement."
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128258 // intervention (<unidirectional association>)
+	  b parent class_ref 134826 // Intervention
+      end
+
+      operation 135042 "ListeDeroulanteGestionnaire"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "intervention" type class_ref 134826 // Intervention
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la Classe ListeDeroulanteGestionnaire
+@param intervention, l'intervention affichée
+"
+      end
+
+      operation 135170 "onTouch"
+	public explicit_return_type "boolean"
+	nparams 2
+	  param inout name "vue" explicit_type "View"
+	  param inout name "event" explicit_type "MotionEvent"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 135298 "onItemSelected"
+	public explicit_return_type "void"
+	nparams 4
+	  param inout name "parent" explicit_type "AdapterView<?>"
+	  param inout name "vue" explicit_type "View"
+	  param in name "position" explicit_type "int"
+	  param in name "id" explicit_type "long"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 135426 "onNothingSelected"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "adapterView" explicit_type "AdapterView<?>"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 143402 "Operateur"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "@brief Définition de la classe Operateur.
+@details La classe Operateur \\c Operateur permet choisir l'opérateur
+qui effectuera l'intervention.
+@author Fargier Mayeul
+@version 0.2
+"
+      attribute 159914 "TAG"
+	class_attribute const_attribute private explicit_type "String"
+	init_value " \"_Operateur\""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Constantes
+
+!< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 160042 "idOperateur"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Attributs
+
+!< Identifiant de l'opérateur dans la table Operateur"
+      end
+
+      attribute 160170 "nom"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Nom de l'opérateur"
+      end
+
+      attribute 160298 "prenom"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Prénom de l'opérateur"
+      end
+
+      attribute 160426 "identifiant"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Identifiant de l'opérateur"
+      end
+
+      attribute 160554 "email"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Email de l'opérateur"
+      end
+
+      operation 162090 "Operateur"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "nom" explicit_type "String"
+	  param in name "prenom" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Operateur
+@param nom nom de l'opérateur
+@param prenom prenom de l'opérateur
+"
+      end
+
+      operation 162218 "Operateur"
+	public explicit_return_type ""
+	nparams 3
+	  param in name "nom" explicit_type "String"
+	  param in name "prenom" explicit_type "String"
+	  param in name "idOperateur" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Operateur
+@param nom nom de l'opérateur
+@param prenom prenom de l'opérateur
+@param idOperateur identifiant de l'opérateur
+"
+      end
+
+      operation 162346 "Operateur"
+	public explicit_return_type ""
+	nparams 5
+	  param in name "nom" explicit_type "String"
+	  param in name "prenom" explicit_type "String"
+	  param in name "identifiant" explicit_type "String"
+	  param in name "email" explicit_type "String"
+	  param in name "idOperateur" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Constructeur d'initialisation de la classe Operateur
+@param nom , nom de l'opérateur
+@param prenom , prenom de l'opérateur
+@param idOperateur , identifiant de l'opérateur
+"
+      end
+
+      operation 162474 "getIdOperateur"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Accesseurs
+
+
+@brief Accesseur de l'identifiant numérique de l'opérateur
+@return idOperateur
+"
+      end
+
+      operation 162602 "getNom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du nom de l'opérateur
+@return nom
+"
+      end
+
+      operation 162730 "getPrenom"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur du prénom de l'opérateur
+@return prenom
+"
+      end
+
+      operation 162858 "getIdentifiant"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'identifiant de l'opérateur
+@return identifiant
+"
+      end
+
+      operation 162986 "getEmail"
+	public explicit_return_type "String"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Accesseur de l'email de l'opérateur
+@return prenom
+"
+      end
+
+      operation 163114 "setIdOperateur"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "idOperateur" explicit_type "int"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "Mutateurs
+
+
+@brief Mutateur de l'identifiant numérique de l'opérateur
+@param idOperateur
+"
+      end
+    end
+  end
+
+  deploymentview 134570 "justfeedandroid"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 134570 "ActiviteInterventions"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import android.content.Context;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import java.util.ArrayList;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 134570 // ActiviteInterventions
+      end
+      comment "@file ActiviteInterventions.java
+@brief Déclaration de l'activité ActiviteInterventions
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 134698 "AdaptateurBac"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 135082 // AdaptateurBac
+      end
+      comment "@file AdaptateurBac.java
+@brief Déclaration de la classe AdaptateurBac
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 134826 "AdaptateurDistributeur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+${definition}"
+      associated_elems
+	class_ref 135594 // AdaptateurDistributeur
+      end
+      comment "@file AdaptateurDistributeur.java
+@brief Déclaration de la classe AdaptateurDistributeur
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 134954 "AdaptateurIntervention"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 135978 // AdaptateurIntervention
+      end
+      comment "@file AdaptateurIntervention.java
+@brief Déclaration de la classe AdaptateurIntervention
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135082 "Bac"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+${definition}"
+      associated_elems
+	class_ref 135466 // Bac
+      end
+      comment "@file Bac.java
+@brief Déclaration de la classe Bac qui permet de décrire un bac d'un distributeur
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135210 "BaseDeDonnees"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.location.Location;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+${definition}"
+      associated_elems
+	class_ref 134954 // BaseDeDonnees
+      end
+      comment "@file BaseDeDonnees.java
+@brief Déclaration de la classe BaseDeDonnees
+@author FARGIER Mayeul
+@author Thierry VAIRA
+"
+    end
+
+    artifact 135338 "Distributeur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.location.Location;
+import android.util.Log;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 135850 // Distributeur
+      end
+      comment "@file Distributeur.java
+@brief Déclaration de la classe Distributeur
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135466 "Intervention"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+${definition}"
+      associated_elems
+	class_ref 134826 // Intervention
+      end
+      comment "@file Intervention.java
+@brief Déclaration de la classe Intervention
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135594 "JustFeed"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import java.util.ArrayList;
+import java.util.List;
+${definition}"
+      associated_elems
+	class_ref 136618 // JustFeed
+      end
+      comment "@file JustFeed.java
+@brief Déclaration de l'activité principale JustFeed
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135722 "Produit"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+${definition}"
+      associated_elems
+	class_ref 136234 // Produit
+      end
+      comment "@file Produit.java
+@brief Déclaration de la classe Produit
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135850 "VueBac"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.graphics.Color;
+import android.view.View;
+import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
+${definition}"
+      associated_elems
+	class_ref 135210 // VueBac
+      end
+      comment "@file VueBac.java
+@brief Déclaration de la classe VueBac
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 135978 "VueDistributeur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.location.Location;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import androidx.recyclerview.widget.RecyclerView;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.List;
+import java.util.Locale;
+${definition}"
+      associated_elems
+	class_ref 135722 // VueDistributeur
+      end
+      comment "@file VueDistributeur.java
+@brief Déclaration de la classe VueDistributeur
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 136106 "VueIntervention"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.content.Context;
+import android.graphics.Color;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TextView;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import static com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE;
+${definition}"
+      associated_elems
+	class_ref 136106 // VueIntervention
+      end
+      comment "@file VueIntervention.java
+@brief Déclaration de la classe VueIntervention
+@author FARGIER Mayeul
+"
+    end
+
+    artifact 128002 "ListeDeroulanteGestionnaire"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.AdapterView;
+${definition}"
+      associated_elems
+	class_ref 154882 // ListeDeroulanteGestionnaire
+      end
+    end
+
+    artifact 142634 "Operateur"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import android.util.Log;
+${definition}"
+      associated_elems
+	class_ref 143402 // Operateur
+      end
+    end
+  end
+end

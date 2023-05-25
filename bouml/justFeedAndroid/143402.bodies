@@ -1,0 +1,36 @@
+class Operateur
+!!!162090.java!!!	Operateur(in nom : String, in prenom : String)
+        Log.d(TAG, "Operateur(" + nom + ", " + prenom + ")");
+        this.idOperateur = -1;
+        this.nom         = nom;
+        this.prenom      = prenom;
+        this.identifiant = prenom.substring(0, 1).toLowerCase() + this.nom.toLowerCase();
+        this.email       = "";
+!!!162218.java!!!	Operateur(in nom : String, in prenom : String, in idOperateur : int)
+        Log.d(TAG, "Operateur(" + nom + ", " + prenom + " ," + idOperateur + ")");
+        this.idOperateur = idOperateur;
+        this.nom         = nom;
+        this.prenom      = prenom;
+        this.identifiant = prenom.substring(0, 1).toLowerCase() + this.nom.toLowerCase();
+        this.email       = "";
+!!!162346.java!!!	Operateur(in nom : String, in prenom : String, in identifiant : String, in email : String, in idOperateur : int)
+        Log.d(TAG,
+              "Operateur(" + nom + ", " + prenom + " ," + identifiant + " ," + email + " ," +
+                idOperateur + ")");
+        this.idOperateur = idOperateur;
+        this.nom         = nom;
+        this.prenom      = prenom;
+        this.identifiant = identifiant;
+        this.email       = email;
+!!!162474.java!!!	getIdOperateur() : int
+        return this.idOperateur;
+!!!162602.java!!!	getNom() : String
+        return this.nom;
+!!!162730.java!!!	getPrenom() : String
+        return this.prenom;
+!!!162858.java!!!	getIdentifiant() : String
+        return this.identifiant;
+!!!162986.java!!!	getEmail() : String
+        return this.email;
+!!!163114.java!!!	setIdOperateur(in idOperateur : int) : void
+        this.idOperateur = idOperateur;

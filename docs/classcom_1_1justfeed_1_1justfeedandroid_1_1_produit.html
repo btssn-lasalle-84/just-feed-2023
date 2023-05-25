@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.1</span>
+   &#160;<span id="projectnumber">0.2</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -86,7 +86,8 @@ $(document).ready(function(){initNavTree('classcom_1_1justfeed_1_1justfeedandroi
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
-<a href="#pri-attribs">Attributs privés</a>  </div>
+<a href="#pri-attribs">Attributs privés</a> &#124;
+<a href="#pri-static-attribs">Attributs privés statiques</a>  </div>
   <div class="headertitle">
 <div class="title">Référence de la classe com.justfeed.justfeedandroid.Produit</div>  </div>
 </div><!--header-->
@@ -99,7 +100,7 @@ Graphe de collaboration de com.justfeed.justfeedandroid.Produit:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit__coll__graph.png" border="0" usemap="#acom_8justfeed_8justfeedandroid_8_produit_coll__map" alt="Collaboration graph"/></div>
 <map name="acom_8justfeed_8justfeedandroid_8_produit_coll__map" id="acom_8justfeed_8justfeedandroid_8_produit_coll__map">
-<area shape="rect" title="Définition de la Classe Produit." alt="" coords="5,5,223,215"/>
+<area shape="rect" title="Définition de la Classe Produit." alt="" coords="5,5,223,229"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -138,13 +139,19 @@ Attributs privés</h2></td></tr>
 <tr class="memitem:a39d14dde4419869b3c6bbbab67e54025"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a></td></tr>
 <tr class="memdesc:a39d14dde4419869b3c6bbbab67e54025"><td class="mdescLeft">&#160;</td><td class="mdescRight">Volume du produit en dm3.  <a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a39d14dde4419869b3c6bbbab67e54025"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Attributs privés statiques</h2></td></tr>
+<tr class="memitem:ae78cec72b906ed28be5ad69460d309c5"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ae78cec72b906ed28be5ad69460d309c5">TAG</a> = &quot;_Produit&quot;</td></tr>
+<tr class="memdesc:ae78cec72b906ed28be5ad69460d309c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">TAG pour les logs (cf. Logcat)  <a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ae78cec72b906ed28be5ad69460d309c5">Plus de détails...</a><br /></td></tr>
+<tr class="separator:ae78cec72b906ed28be5ad69460d309c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Description détaillée</h2>
 <div class="textblock"><p>Définition de la Classe <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html" title="Définition de la Classe Produit.">Produit</a>. </p>
 <p>La classe <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html" title="Définition de la Classe Produit.">Produit</a> décrit un type de produit, avec ses propriétés : nom, poids, prix. </p><dl class="section author"><dt>Auteur</dt><dd>Fargier Mayeul </dd></dl>
 <dl class="section version"><dt>Version</dt><dd>0.1 </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00015">15</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00017">17</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 </div><h2 class="groupheader">Documentation des constructeurs et destructeur</h2>
 <a id="a644ab1aaea1681eb3fc104205f51194e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a644ab1aaea1681eb3fc104205f51194e">&#9670;&nbsp;</a></span>Produit()</h2>
@@ -185,7 +192,7 @@ Attributs privés</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Constructeur d'initialisation de la classe <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html" title="Définition de la Classe Produit.">Produit</a>. </p>
-<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="class_produit.html">Produit(double prix, double poidsDuProduit, double volumeProduit, String nom)</a> </dd></dl>
+<dl class="section see"><dt>Voir également</dt><dd><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a644ab1aaea1681eb3fc104205f51194e" title="Constructeur d&#39;initialisation de la classe Produit.">Produit(String nom, double prix, double poidsDuProduit, double volumeProduit)</a> </dd></dl>
 <dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
     <tr><td class="paramname">prix</td><td>le prix du produit. </td></tr>
@@ -196,19 +203,21 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00030">30</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    {</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>            = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>           = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a> = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a>;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>  = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_a39d14dde4419869b3c6bbbab67e54025"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">com.justfeed.justfeedandroid.Produit.volumeProduit</a></div><div class="ttdeci">double volumeProduit</div><div class="ttdoc">Volume du produit en dm3.</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00020">Produit.java:20</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_a512f0f3b349aed4b7c063ffdf5e4ac0d"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">com.justfeed.justfeedandroid.Produit.nom</a></div><div class="ttdeci">final String nom</div><div class="ttdoc">nom du produit</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00017">Produit.java:17</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_aa3e2ec466c8cd2d715d346b7ef2d4bde"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">com.justfeed.justfeedandroid.Produit.prix</a></div><div class="ttdeci">double prix</div><div class="ttdoc">prix du produit pour 100g</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00018">Produit.java:18</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_ac355bc09b10e950ab853186bf46c6242"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a></div><div class="ttdeci">double poidsDuProduit</div><div class="ttdoc">poids en kg à l'unité du produit</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00019">Produit.java:19</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00040">40</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ae78cec72b906ed28be5ad69460d309c5">TAG</a>, <span class="stringliteral">&quot;Produit() nom = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a> + <span class="stringliteral">&quot; - prix = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a> + <span class="stringliteral">&quot; - poidsDuProduit = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a> + <span class="stringliteral">&quot; - volumeProduit = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>            = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>           = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a> = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a>;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>  = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    }</div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_a39d14dde4419869b3c6bbbab67e54025"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">com.justfeed.justfeedandroid.Produit.volumeProduit</a></div><div class="ttdeci">double volumeProduit</div><div class="ttdoc">Volume du produit en dm3.</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00030">Produit.java:30</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_a512f0f3b349aed4b7c063ffdf5e4ac0d"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">com.justfeed.justfeedandroid.Produit.nom</a></div><div class="ttdeci">final String nom</div><div class="ttdoc">nom du produit</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00027">Produit.java:27</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_aa3e2ec466c8cd2d715d346b7ef2d4bde"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">com.justfeed.justfeedandroid.Produit.prix</a></div><div class="ttdeci">double prix</div><div class="ttdoc">prix du produit pour 100g</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00028">Produit.java:28</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_ac355bc09b10e950ab853186bf46c6242"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a></div><div class="ttdeci">double poidsDuProduit</div><div class="ttdoc">poids en kg à l'unité du produit</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00029">Produit.java:29</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_produit_html_ae78cec72b906ed28be5ad69460d309c5"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ae78cec72b906ed28be5ad69460d309c5">com.justfeed.justfeedandroid.Produit.TAG</a></div><div class="ttdeci">static final String TAG</div><div class="ttdoc">TAG pour les logs (cf. Logcat)</div><div class="ttdef"><b>Definition:</b> <a href="_produit_8java_source.html#l00022">Produit.java:22</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00017">com.justfeed.justfeedandroid.Produit.nom</a>, <a class="el" href="_produit_8java_source.html#l00019">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a>, <a class="el" href="_produit_8java_source.html#l00018">com.justfeed.justfeedandroid.Produit.prix</a>, et <a class="el" href="_produit_8java_source.html#l00020">com.justfeed.justfeedandroid.Produit.volumeProduit</a>.</p>
+<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00027">com.justfeed.justfeedandroid.Produit.nom</a>, <a class="el" href="_produit_8java_source.html#l00029">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a>, <a class="el" href="_produit_8java_source.html#l00028">com.justfeed.justfeedandroid.Produit.prix</a>, <a class="el" href="_produit_8java_source.html#l00022">com.justfeed.justfeedandroid.Produit.TAG</a>, et <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.volumeProduit</a>.</p>
 
 </div>
 </div>
@@ -231,14 +240,14 @@ Attributs privés</h2></td></tr>
 <p>Accesseur du nom du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>nom le nom du produit </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00070">70</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>;</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00081">81</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>;</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00017">com.justfeed.justfeedandroid.Produit.nom</a>.</p>
+<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00027">com.justfeed.justfeedandroid.Produit.nom</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00062">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00062">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>, et <a class="el" href="_bac_8java_source.html#l00056">com.justfeed.justfeedandroid.Bac.Bac()</a>.</p>
 
 </div>
 </div>
@@ -260,12 +269,12 @@ Attributs privés</h2></td></tr>
 <p>Accesseur du poids du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>poidsDuProduit le poids du produit à l'unité </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00052">52</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00063">63</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#ac355bc09b10e950ab853186bf46c6242">poidsDuProduit</a>;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00019">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a>.</p>
+<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00029">com.justfeed.justfeedandroid.Produit.poidsDuProduit</a>.</p>
 
 </div>
 </div>
@@ -287,12 +296,12 @@ Attributs privés</h2></td></tr>
 <p>Accesseur du prix du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>prix le prix du produit </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00043">43</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00054">54</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00018">com.justfeed.justfeedandroid.Produit.prix</a>.</p>
+<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00028">com.justfeed.justfeedandroid.Produit.prix</a>.</p>
 
 <p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00062">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>.</p>
 
@@ -316,12 +325,12 @@ Attributs privés</h2></td></tr>
 <p>Accesseur du volume du produit. </p>
 <dl class="section return"><dt>Renvoie</dt><dd>volumeProduit le volume du produit à l'unité </dd></dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00061">61</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00072">72</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a39d14dde4419869b3c6bbbab67e54025">volumeProduit</a>;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00020">com.justfeed.justfeedandroid.Produit.volumeProduit</a>.</p>
+<p class="reference">Références <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.volumeProduit</a>.</p>
 
 </div>
 </div>
@@ -349,10 +358,10 @@ Attributs privés</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00081">81</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    {</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a> = nouveauPrix;</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00092">92</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a> = nouveauPrix;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
 </div><!-- fragment -->
 </div>
 </div>
@@ -378,10 +387,11 @@ Attributs privés</h2></td></tr>
 </div><div class="memdoc">
 
 <p>nom du produit </p>
+<p>Attributs </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00017">17</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00027">27</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00070">com.justfeed.justfeedandroid.Produit.getNom()</a>, et <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00081">com.justfeed.justfeedandroid.Produit.getNom()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
 
 </div>
 </div>
@@ -407,9 +417,9 @@ Attributs privés</h2></td></tr>
 
 <p>poids en kg à l'unité du produit </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00019">19</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00029">29</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00052">com.justfeed.justfeedandroid.Produit.getPoidsDuProduit()</a>, et <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00063">com.justfeed.justfeedandroid.Produit.getPoidsDuProduit()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
 
 </div>
 </div>
@@ -435,9 +445,38 @@ Attributs privés</h2></td></tr>
 
 <p>prix du produit pour 100g </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00018">18</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00028">28</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00043">com.justfeed.justfeedandroid.Produit.getPrix()</a>, et <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00054">com.justfeed.justfeedandroid.Produit.getPrix()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+
+</div>
+</div>
+<a id="ae78cec72b906ed28be5ad69460d309c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae78cec72b906ed28be5ad69460d309c5">&#9670;&nbsp;</a></span>TAG</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final String com.justfeed.justfeedandroid.Produit.TAG = &quot;_Produit&quot;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>TAG pour les logs (cf. Logcat) </p>
+<p>Constantes </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00022">22</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
 
 </div>
 </div>
@@ -463,9 +502,9 @@ Attributs privés</h2></td></tr>
 
 <p>Volume du produit en dm3. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00020">20</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00030">30</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00061">com.justfeed.justfeedandroid.Produit.getVolume()</a>, et <a class="el" href="_produit_8java_source.html#l00030">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00072">com.justfeed.justfeedandroid.Produit.getVolume()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
 
 </div>
 </div>
@@ -479,7 +518,7 @@ Attributs privés</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>com</b></li><li class="navelem"><b>justfeed</b></li><li class="navelem"><a class="el" href="namespacecom_1_1justfeed_1_1justfeedandroid.html">justfeedandroid</a></li><li class="navelem"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html">Produit</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 9 Avril 2023 20:41:24 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

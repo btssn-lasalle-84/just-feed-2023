@@ -1,15 +1,34 @@
 class Bac
 !!!134570.cpp!!!	Bac()
     qDebug() << Q_FUNC_INFO;
-!!!134698.cpp!!!	Bac(inout produit : Produit, in poidsActuel : uint, in pourcentageRemplissage : double = 100.)
-    qDebug() << Q_FUNC_INFO << "nom" << produit->getNom() << "marque" << produit->getMarque()
-             << "description" << produit->getDescription() << "codeProduit"
+!!!170794.cpp!!!	Bac(in idBac : int, inout produit : Produit, in poidsActuel : double, in poidsTotal : double, in hygrometrie : int)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
              << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
-             << poidsActuel << "pourcentageRemplissage" << pourcentageRemplissage;
-!!!134826.cpp!!!	Bac(in bac : Bac)
-    qDebug() << Q_FUNC_INFO;
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+!!!170922.cpp!!!	Bac(in idBac : int, inout produit : Produit, in poidsTotal : double)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+!!!134826.cpp!!!	Bac(in bac : QStringList, inout produit : Produit)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+!!!195114.cpp!!!	Bac(in bac : Bac)
+    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
+             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
+             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
+             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
 !!!134954.cpp!!!	~Bac()
     qDebug() << Q_FUNC_INFO;
+!!!171050.cpp!!!	getIdBac() : int
+    return this->idBac;
 !!!135082.cpp!!!	getProduit() : Produit
     return produit;
 !!!135210.cpp!!!	getNomProduit() : QString
@@ -20,15 +39,53 @@ class Bac
     if(produit != nullptr)
         return produit->getPrix();
     return 0.;
-!!!135466.cpp!!!	getPoidsActuel() : uint
+!!!135466.cpp!!!	getPoidsActuel() : double
     return this->poidsActuel;
+!!!171178.cpp!!!	getPoidsTotal() : double
+    return this->poidsTotal;
+!!!171306.cpp!!!	getPourcentageRemplissage() : double
+    return this->pourcentageRemplissage;
+!!!171434.cpp!!!	getQuantiteARemplir() : double
+    return (getPoidsTotal() * (100. - getPourcentageRemplissage()) / 100.);
+!!!171562.cpp!!!	getHygrometrie() : int
+    return this->hygrometrie;
+!!!171690.cpp!!!	getARemplir() : bool
+    return this->aRemplir;
+!!!171818.cpp!!!	getADepanner() : bool
+    return this->aDepanner;
+!!!171946.cpp!!!	getAIntervenir() : bool
+    return this->aIntervenir;
 !!!135594.cpp!!!	setProduit(inout produit : Produit) : void
     this->produit = produit;
 !!!135722.cpp!!!	setNomProduit(in nomProduit : QString) : void
     if(produit != nullptr)
         this->produit->setNom(nomProduit);
-!!!135850.cpp!!!	setPrixProduit(in prixProduit : int) : void
+!!!135850.cpp!!!	setPrixProduit(in prixProduit : double) : void
     if(produit != nullptr)
         this->produit->setPrix(prixProduit);
-!!!135978.cpp!!!	setPoidsActuel(in poidsActuel : int) : void
-    this->poidsActuel = poidsActuel;
+!!!135978.cpp!!!	setPoidsActuel(in poidsActuel : double) : void
+    if(this->poidsActuel != poidsActuel)
+    {
+        this->poidsActuel            = poidsActuel;
+        this->pourcentageRemplissage = (poidsActuel * 100.) / poidsTotal;
+    }
+!!!172074.cpp!!!	setPoidsTotal(in poidsTotal : double) : void
+    if(this->poidsTotal != poidsTotal)
+    {
+        this->poidsTotal             = poidsTotal;
+        this->pourcentageRemplissage = (poidsActuel * 100.) / poidsTotal;
+    }
+!!!172202.cpp!!!	setPourcentageRemplissage(in pourcentageRemplissage : double) : void
+    if(this->pourcentageRemplissage != pourcentageRemplissage)
+    {
+        this->pourcentageRemplissage = pourcentageRemplissage;
+        this->poidsActuel            = (poidsTotal * pourcentageRemplissage) / 100.;
+    }
+!!!172330.cpp!!!	setHygrometrie(in hygrometrie : int) : void
+    this->hygrometrie = hygrometrie;
+!!!172458.cpp!!!	setARemplir(in aRemplir : bool) : void
+    this->aRemplir = aRemplir;
+!!!172586.cpp!!!	setADepanner(in aDepanner : bool) : void
+    this->aDepanner = aDepanner;
+!!!172714.cpp!!!	setAIntervenir(in attribue : bool) : void
+    this->aIntervenir = attribue;

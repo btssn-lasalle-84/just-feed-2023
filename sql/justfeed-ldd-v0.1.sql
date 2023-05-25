@@ -1,6 +1,4 @@
--- LDD (langage de définition de données)
-
--- Voir aussi : https://www.db4free.net/phpMyAdmin/
+--- LDD (langage de définition de données)
 
 DROP DATABASE IF EXISTS `justfeed`;
 

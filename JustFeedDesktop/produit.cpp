@@ -14,24 +14,57 @@
 /**
  * @brief Constructeur par défaut de la classe produit
  */
-Produit::Produit() : nom(""), marque(""), description(""), codeProduit(""), prix(0.)
+Produit::Produit() : id(0), nom(""), marque(""), description(""), codeProduit(""), prix(0.)
 {
     qDebug() << Q_FUNC_INFO;
 }
 
 /**
- * @brief destructeur par défaut de la classe produit
+ * @brief Constructeur d'initialisation de la classe Produit
  */
-Produit::Produit(QString nom,
+Produit::Produit(int     id,
+                 QString nom,
                  QString marque,
                  QString description,
                  QString codeProduit,
                  double  prix) :
-    nom(nom),
-    marque(marque), description(description), codeProduit(codeProduit), prix(prix)
+    id(id),
+    nom(nom), marque(marque), description(description), codeProduit(codeProduit), prix(prix)
 {
     qDebug() << Q_FUNC_INFO << "nom" << nom << "marque" << marque << "description" << description
              << "codeProduit" << codeProduit << "prix" << prix;
+}
+
+/**
+ * @brief Constructeur d'initialisation de la classe Produit
+ */
+Produit::Produit(QStringList produit) :
+    id(produit.at(TableProduit::CHAMP_ID_PRODUIT).toInt()),
+    nom(produit.at(TableProduit::CHAMP_NOM_PRODUIT)),
+    marque(produit.at(TableProduit::CHAMP_MARQUE)),
+    description(produit.at(TableProduit::CHAMP_DESCRITION)),
+    codeProduit(produit.at(TableProduit::CHAMP_CODE_EAN)),
+    prix(produit.at(TableProduit::CHAMP_PRIX).toDouble())
+{
+    qDebug() << Q_FUNC_INFO << "id" << id << "nom" << nom << "marque" << marque << "description"
+             << description << "codeProduit" << codeProduit << "prix" << prix;
+}
+
+/**
+ * @brief Destructeur de la classe Produit
+ */
+Produit::~Produit()
+{
+    qDebug() << Q_FUNC_INFO;
+}
+
+/**
+ * @brief Accesseur de l'attribut id
+ * @return un int qui permet de connaitre l'id du produit dans la base de données
+ */
+int Produit::getId() const
+{
+    return this->id;
 }
 
 /**
@@ -77,6 +110,15 @@ QString Produit::getCodeProduit() const
 double Produit::getPrix() const
 {
     return this->prix;
+}
+
+/**
+ * @brief Mutateur de l'attribut id
+ * @param id un int qui affecte l'id du produit
+ */
+void Produit::setId(int id)
+{
+    this->id = id;
 }
 
 /**

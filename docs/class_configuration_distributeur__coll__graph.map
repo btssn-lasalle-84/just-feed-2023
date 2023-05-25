@@ -1,8 +1,11 @@
 <map id="ConfigurationDistributeur" name="ConfigurationDistributeur">
-<area shape="rect" id="node1" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="171,593,396,1037"/>
-<area shape="rect" id="node3" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="5,1100,228,1691"/>
-<area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="197,314,271,391"/>
-<area shape="rect" id="node4" href="$class_q_widget.html" title=" " alt="" coords="33,777,112,854"/>
-<area shape="rect" id="node5" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="295,175,474,531"/>
-<area shape="rect" id="node6" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="335,5,435,112"/>
+<area shape="rect" id="node1" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="181,608,406,1052"/>
+<area shape="rect" id="node3" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="166,1115,408,1764"/>
+<area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="55,321,130,399"/>
+<area shape="rect" id="node5" href="$class_planification_intervention.html" title="permet de planifier une intervention" alt="" coords="356,1827,618,2285"/>
+<area shape="rect" id="node4" href="$class_q_widget.html" title=" " alt="" coords="78,791,157,869"/>
+<area shape="rect" id="node6" href="$class_intervention.html" title=" " alt="" coords="766,1247,986,1632"/>
+<area shape="rect" id="node7" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="546,711,705,949"/>
+<area shape="rect" id="node8" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="204,175,383,545"/>
+<area shape="rect" id="node9" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="244,5,344,112"/>
 </map>

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.9.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Projet just-feed:  Fichier source de ListeDeroulanteGestionnaire.java</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="customdoxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Projet just-feed
+   &#160;<span id="projectnumber">0.2</span>
+   </div>
+   <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.9.1 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche','.html');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('_liste_deroulante_gestionnaire_8java_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">ListeDeroulanteGestionnaire.java</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_liste_deroulante_gestionnaire_8java.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="keyword">package </span>com.justfeed.justfeedandroid;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">import</span> android.util.Log;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">import</span> android.view.MotionEvent;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="keyword">import</span> android.view.View;</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">import</span> android.widget.AdapterView;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html">    8</a></span>&#160;<span class="keyword">public</span> <span class="keyword">class </span><a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html">ListeDeroulanteGestionnaire</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;  <span class="keyword">implements</span> AdapterView.OnItemSelectedListener, View.OnTouchListener</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">   14</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>      = <span class="stringliteral">&quot;_ListeDeroulante&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ac3ccfd38db574d4dd84a91d5696a4dc5">   15</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ac3ccfd38db574d4dd84a91d5696a4dc5">TERMINER</a> = <span class="stringliteral">&quot;Terminer&quot;</span>; </div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#aeecaba44457c955473697020cae0830f">   16</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#aeecaba44457c955473697020cae0830f">DEMARRER</a> = <span class="stringliteral">&quot;Démarrer&quot;</span>; </div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#adf2e6238843ad656183fb4778192c7ac">   17</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#adf2e6238843ad656183fb4778192c7ac">AFAIRE</a>   = <span class="stringliteral">&quot;A faire&quot;</span>;  </div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a4c316e910d8227e59ac5ff5a2a5b59ea">   18</a></span>&#160;    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a4c316e910d8227e59ac5ff5a2a5b59ea">RECOMMENCER</a> =</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="stringliteral">&quot;Recommencer&quot;</span>; </div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a34866ae89f8513e21c83a0a7b851983b">   24</a></span>&#160;    <span class="keyword">private</span> <span class="keywordtype">boolean</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a34866ae89f8513e21c83a0a7b851983b">interactionDetectee</a> =</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keyword">false</span>; </div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">   26</a></span>&#160;    <span class="keyword">private</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>; </div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a14eed97e57fab9f657308fda8abbd093">   32</a></span>&#160;    <span class="keyword">public</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a14eed97e57fab9f657308fda8abbd093">ListeDeroulanteGestionnaire</a>(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    {</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        super();</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        this.intervention = <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    }</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    @Override</div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#af9ea3f0c8e0b70c701c57f33ffdca8b1">   39</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">boolean</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#af9ea3f0c8e0b70c701c57f33ffdca8b1">onTouch</a>(View vue, MotionEvent event)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    {</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a34866ae89f8513e21c83a0a7b851983b">interactionDetectee</a> = <span class="keyword">true</span>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    }</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    @Override</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a48b1111ac182999be9ee06d1201798d5">   46</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a48b1111ac182999be9ee06d1201798d5">onItemSelected</a>(AdapterView&lt;?&gt; parent, View vue, <span class="keywordtype">int</span> position, <span class="keywordtype">long</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    {</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>, <span class="stringliteral">&quot;onItemSelected()&quot;</span>);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        String nouvelleAction = parent.getItemAtPosition(position).toString();</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <span class="keywordflow">if</span>(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a34866ae89f8513e21c83a0a7b851983b">interactionDetectee</a>)</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            <span class="keywordflow">switch</span>(nouvelleAction)</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ac3ccfd38db574d4dd84a91d5696a4dc5">TERMINER</a>:</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>, <span class="stringliteral">&quot;Terminer&quot;</span>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                    <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">ActiviteInterventions</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a12dd6e935b0bfeef532a49af68010825">modifierEtatIntervention</a>(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                      <span class="stringliteral">&quot;UPDATE `Intervention` SET `etat` = &#39;VALIDEE&#39; WHERE `Intervention`.`idDistributeur` = &quot;</span> +</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html#a756e07af8c99d09cf5123bb8209b96f3">getIdentifiantDistribteur</a>() + <span class="stringliteral">&quot;;&quot;</span>,</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>,</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html">Etats</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#af8df348b8ddeadd911163c6f9cee4e29">VALIDEE</a>);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#aeecaba44457c955473697020cae0830f">DEMARRER</a>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                    Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>, <span class="stringliteral">&quot;Démarrer&quot;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                    <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">ActiviteInterventions</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a12dd6e935b0bfeef532a49af68010825">modifierEtatIntervention</a>(</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                      <span class="stringliteral">&quot;UPDATE `Intervention` SET `etat` = &#39;EN_COURS&#39; WHERE `Intervention`.`idDistributeur` = &quot;</span> +</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html#a756e07af8c99d09cf5123bb8209b96f3">getIdentifiantDistribteur</a>() + <span class="stringliteral">&quot;;&quot;</span>,</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>,</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html">Etats</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#a35b74c0213a71cb76d6cf40648e99b75">EN_COURS</a>);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#adf2e6238843ad656183fb4778192c7ac">AFAIRE</a>:</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;                    Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>, <span class="stringliteral">&quot;A faire&quot;</span>);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                    <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">ActiviteInterventions</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a12dd6e935b0bfeef532a49af68010825">modifierEtatIntervention</a>(</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                      <span class="stringliteral">&quot;UPDATE `Intervention` SET `etat` = &#39;A_FAIRE&#39; WHERE `Intervention`.`idDistributeur` = &quot;</span> +</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html#a756e07af8c99d09cf5123bb8209b96f3">getIdentifiantDistribteur</a>() + <span class="stringliteral">&quot;;&quot;</span>,</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>,</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html">Etats</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#aecc48d2903e7536fe7a33b78b7e46d51">A_FAIRE</a>);</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">case</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a4c316e910d8227e59ac5ff5a2a5b59ea">RECOMMENCER</a>:</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">TAG</a>, <span class="stringliteral">&quot;Recommencer&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                    <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">ActiviteInterventions</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a12dd6e935b0bfeef532a49af68010825">modifierEtatIntervention</a>(</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                      <span class="stringliteral">&quot;UPDATE `Intervention` SET `etat` = &#39;A_FAIRE&#39; WHERE `Intervention`.`idDistributeur` = &quot;</span> +</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html#a756e07af8c99d09cf5123bb8209b96f3">getIdentifiantDistribteur</a>() + <span class="stringliteral">&quot;;&quot;</span>,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">intervention</a>,</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                      <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">Intervention</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html">Etats</a>.<a class="code" href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#aecc48d2903e7536fe7a33b78b7e46d51">A_FAIRE</a>);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                    <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            }</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        }</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    }</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    @Override</div>
+<div class="line"><a name="l00092"></a><span class="lineno"><a class="line" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ab435d0e0636076332b39ee9db913b16e">   92</a></span>&#160;    <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ab435d0e0636076332b39ee9db913b16e">onNothingSelected</a>(AdapterView&lt;?&gt; adapterView)</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html">com.justfeed.justfeedandroid.ActiviteInterventions</a></div><div class="ttdoc">Définition de la classe ActiviteInterventions.</div><div class="ttdef"><b>Definition:</b> <a href="_activite_interventions_8java_source.html#l00035">ActiviteInterventions.java:36</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions_html_a12dd6e935b0bfeef532a49af68010825"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a12dd6e935b0bfeef532a49af68010825">com.justfeed.justfeedandroid.ActiviteInterventions.modifierEtatIntervention</a></div><div class="ttdeci">static void modifierEtatIntervention(final String requete, Intervention intervention, Intervention.Etats nouvelEtat)</div><div class="ttdoc">Execute une requête UPDATE, INSERT, DELETE.</div><div class="ttdef"><b>Definition:</b> <a href="_activite_interventions_8java_source.html#l00245">ActiviteInterventions.java:245</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_intervention_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html">com.justfeed.justfeedandroid.Intervention</a></div><div class="ttdoc">Définition de la classe Intervention.</div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00024">Intervention.java:25</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_intervention_html_a756e07af8c99d09cf5123bb8209b96f3"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html#a756e07af8c99d09cf5123bb8209b96f3">com.justfeed.justfeedandroid.Intervention.getIdentifiantDistribteur</a></div><div class="ttdeci">int getIdentifiantDistribteur()</div><div class="ttdoc">Méthode d'accés à l'identifiant du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00116">Intervention.java:116</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire</a></div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00008">ListeDeroulanteGestionnaire.java:10</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a14eed97e57fab9f657308fda8abbd093"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a14eed97e57fab9f657308fda8abbd093">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.ListeDeroulanteGestionnaire</a></div><div class="ttdeci">ListeDeroulanteGestionnaire(Intervention intervention)</div><div class="ttdoc">Constructeur d'initialisation de la Classe ListeDeroulanteGestionnaire.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00032">ListeDeroulanteGestionnaire.java:32</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a34866ae89f8513e21c83a0a7b851983b"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a34866ae89f8513e21c83a0a7b851983b">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.interactionDetectee</a></div><div class="ttdeci">boolean interactionDetectee</div><div class="ttdoc">Attribut utilisé pour détecter l'interaction d'un utilisateur.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00024">ListeDeroulanteGestionnaire.java:24</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a3e77c94d62b493a123f91cf3dc95762f"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a3e77c94d62b493a123f91cf3dc95762f">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.TAG</a></div><div class="ttdeci">static final String TAG</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00014">ListeDeroulanteGestionnaire.java:14</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a48b1111ac182999be9ee06d1201798d5"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a48b1111ac182999be9ee06d1201798d5">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.onItemSelected</a></div><div class="ttdeci">void onItemSelected(AdapterView&lt;?&gt; parent, View vue, int position, long id)</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00046">ListeDeroulanteGestionnaire.java:46</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a4c316e910d8227e59ac5ff5a2a5b59ea"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a4c316e910d8227e59ac5ff5a2a5b59ea">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.RECOMMENCER</a></div><div class="ttdeci">static final String RECOMMENCER</div><div class="ttdoc">L'opérateur recommence l'intervention.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00018">ListeDeroulanteGestionnaire.java:18</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_a856b85e108a7bbdac4e95ec78a0bcb2c"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#a856b85e108a7bbdac4e95ec78a0bcb2c">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.intervention</a></div><div class="ttdeci">Intervention intervention</div><div class="ttdoc">Intervention où gérer l'évènement.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00026">ListeDeroulanteGestionnaire.java:26</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_ab435d0e0636076332b39ee9db913b16e"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ab435d0e0636076332b39ee9db913b16e">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.onNothingSelected</a></div><div class="ttdeci">void onNothingSelected(AdapterView&lt;?&gt; adapterView)</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00092">ListeDeroulanteGestionnaire.java:92</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_ac3ccfd38db574d4dd84a91d5696a4dc5"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#ac3ccfd38db574d4dd84a91d5696a4dc5">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.TERMINER</a></div><div class="ttdeci">static final String TERMINER</div><div class="ttdoc">L'intervention est validée.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00015">ListeDeroulanteGestionnaire.java:15</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_adf2e6238843ad656183fb4778192c7ac"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#adf2e6238843ad656183fb4778192c7ac">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.AFAIRE</a></div><div class="ttdeci">static final String AFAIRE</div><div class="ttdoc">L'intervention est à faire.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00017">ListeDeroulanteGestionnaire.java:17</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_aeecaba44457c955473697020cae0830f"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#aeecaba44457c955473697020cae0830f">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.DEMARRER</a></div><div class="ttdeci">static final String DEMARRER</div><div class="ttdoc">L'intervention est en cours.</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00016">ListeDeroulanteGestionnaire.java:16</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire_html_af9ea3f0c8e0b70c701c57f33ffdca8b1"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#af9ea3f0c8e0b70c701c57f33ffdca8b1">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire.onTouch</a></div><div class="ttdeci">boolean onTouch(View vue, MotionEvent event)</div><div class="ttdef"><b>Definition:</b> <a href="_liste_deroulante_gestionnaire_8java_source.html#l00039">ListeDeroulanteGestionnaire.java:39</a></div></div>
+<div class="ttc" id="aenumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats_html"><div class="ttname"><a href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html">com.justfeed.justfeedandroid.Intervention.Etats</a></div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00030">Intervention.java:31</a></div></div>
+<div class="ttc" id="aenumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats_html_a35b74c0213a71cb76d6cf40648e99b75"><div class="ttname"><a href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#a35b74c0213a71cb76d6cf40648e99b75">com.justfeed.justfeedandroid.Intervention.Etats.EN_COURS</a></div><div class="ttdeci">EN_COURS</div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00034">Intervention.java:34</a></div></div>
+<div class="ttc" id="aenumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats_html_aecc48d2903e7536fe7a33b78b7e46d51"><div class="ttname"><a href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#aecc48d2903e7536fe7a33b78b7e46d51">com.justfeed.justfeedandroid.Intervention.Etats.A_FAIRE</a></div><div class="ttdeci">A_FAIRE</div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00033">Intervention.java:33</a></div></div>
+<div class="ttc" id="aenumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats_html_af8df348b8ddeadd911163c6f9cee4e29"><div class="ttname"><a href="enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html#af8df348b8ddeadd911163c6f9cee4e29">com.justfeed.justfeedandroid.Intervention.Etats.VALIDEE</a></div><div class="ttdeci">VALIDEE</div><div class="ttdef"><b>Definition:</b> <a href="_intervention_8java_source.html#l00035">Intervention.java:35</a></div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- HTML footer for doxygen 1.9.1-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_53e37af7aaa85a476f947ba6b1d4ed39.html">JustFeedAndroid</a></li><li class="navelem"><a class="el" href="dir_18ef3db294d4e2a55ab01151c45c661c.html">app</a></li><li class="navelem"><a class="el" href="dir_303284309fdf16b00fe51bee7897a6be.html">src</a></li><li class="navelem"><a class="el" href="dir_0bf19ce2fae7c1cc57049142be97a5f6.html">main</a></li><li class="navelem"><a class="el" href="dir_8a04882a4d4689a16125712ca756204c.html">java</a></li><li class="navelem"><a class="el" href="dir_44c0d615e41bb1786dbbaec414491258.html">com</a></li><li class="navelem"><a class="el" href="dir_53b9cc8f93aa8158345b128217724142.html">justfeed</a></li><li class="navelem"><a class="el" href="dir_8a82e326b33e34f42747822abc087719.html">justfeedandroid</a></li><li class="navelem"><a class="el" href="_liste_deroulante_gestionnaire_8java.html">ListeDeroulanteGestionnaire.java</a></li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+  </ul>
+</div>
+</body>
+</html>

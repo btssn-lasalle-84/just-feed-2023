@@ -1,9 +1,16 @@
 class Produit
 !!!136362.cpp!!!	Produit()
     qDebug() << Q_FUNC_INFO;
-!!!136490.cpp!!!	Produit(in nom : QString, in marque : QString, in description : QString, in codeProduit : QString, in prix : double)
+!!!136490.cpp!!!	Produit(in id : int, in nom : QString, in marque : QString, in description : QString, in codeProduit : QString, in prix : double)
     qDebug() << Q_FUNC_INFO << "nom" << nom << "marque" << marque << "description" << description
              << "codeProduit" << codeProduit << "prix" << prix;
+!!!196138.cpp!!!	Produit(in produit : QStringList)
+    qDebug() << Q_FUNC_INFO << "id" << id << "nom" << nom << "marque" << marque << "description"
+             << description << "codeProduit" << codeProduit << "prix" << prix;
+!!!136618.cpp!!!	~Produit()
+    qDebug() << Q_FUNC_INFO;
+!!!196266.cpp!!!	getId() : int
+    return this->id;
 !!!136874.cpp!!!	getNom() : QString
     return this->nom;
 !!!145706.cpp!!!	getMarque() : QString
@@ -14,6 +21,8 @@ class Produit
     return this->codeProduit;
 !!!136746.cpp!!!	getPrix() : double
     return this->prix;
+!!!196394.cpp!!!	setId(in id : int) : void
+    this->id = id;
 !!!137130.cpp!!!	setNom(in nom : QString) : void
     this->nom = nom;
 !!!146090.cpp!!!	setMarque(in marque : QString) : void

@@ -1,0 +1,216 @@
+class JustFeed
+!!!144682.java!!!	onCreate(inout savedInstanceState : Bundle) : void
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.justfeed);
+        Log.d(TAG, "onCreate()");
+
+        initialiserGUI();
+        initialiserHandler();
+        initialiserBaseDeDonnees();
+        chargerPreferences();
+
+        baseDeDonnees.recupererOperateurs();
+        baseDeDonnees.recupererDistributeurs();
+!!!144810.java!!!	onStart() : void
+        super.onStart();
+        Log.d(TAG, "onStart()");
+!!!144938.java!!!	onResume() : void
+        super.onResume();
+        Log.d(TAG, "onResume()");
+        baseDeDonnees.setHandler(handler);
+        baseDeDonnees.recupererDistributeurs();
+!!!145066.java!!!	onPause() : void
+        super.onPause();
+        Log.d(TAG, "onPause()");
+!!!145194.java!!!	onStop() : void
+        super.onStop();
+        Log.d(TAG, "onStop()");
+!!!145322.java!!!	onDestroy() : void
+        super.onDestroy();
+        Log.d(TAG, "onDestroy()");
+
+        enregistrerPreferences();
+!!!145450.java!!!	initialiserGUI() : void
+        initialiserVueListeDistributeurs();
+!!!145578.java!!!	initialiserBaseDeDonnees() : void
+        // Récupère l'instance de BaseDeDonnees
+        baseDeDonnees = BaseDeDonnees.getInstance(handler);
+!!!145706.java!!!	initialiserVueListeDistributeurs() : void
+        this.vueListeDistributeurs = (RecyclerView)findViewById(R.id.listeDistributeurs);
+        this.vueListeDistributeurs.setHasFixedSize(true);
+        this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
+        this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
+!!!145834.java!!!	afficherDistributeurs(inout distributeurs : List<Distributeur>) : void
+        Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
+        this.listeDistributeurs = distributeurs;
+        if(this.adapteurDistributeur == null)
+        {
+            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+        }
+        adapteurDistributeur.notifyDataSetChanged();
+!!!145962.java!!!	initialiserHandler() : void
+        this.handler = new Handler(this.getMainLooper()) {
+            @Override
+            public void handleMessage(@NonNull Message message)
+            {
+                // Log.d(TAG, "[Handler] id message = " + message.what);
+                // Log.d(TAG, "[Handler] message = " + message.obj.toString());
+
+                switch(message.what)
+                {
+                    case BaseDeDonnees.CONNEXION_OK:
+                        Log.d(TAG, "[Handler] CONNEXION_OK");
+                        /**
+                         * Exemples de requêtes
+                         *
+                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
+                         * WHERE Distributeur.idDistributeur = '1'");
+                         * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
+                         */
+                        break;
+                    case BaseDeDonnees.CONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] CONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_OK:
+                        Log.d(TAG, "[Handler] DECONNEXION_OK");
+                        break;
+                    case BaseDeDonnees.DECONNEXION_ERREUR:
+                        Log.d(TAG, "[Handler] DECONNEXION_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_OK:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_OK");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_ERREUR:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_ERREUR");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT");
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
+                        afficherDistributeurs((ArrayList)message.obj);
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_OPERATEURS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
+                        creerListeOperateurs((ArrayList)message.obj);
+                        break;
+                }
+            }
+        };
+!!!161066.java!!!	chargerPreferences() : boolean
+        int idOperateur = OPERATEUR_NON_DEFINI;
+
+        preferences = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        if(preferences.contains(PREFERENCES_ID_OPERATEUR))
+        {
+            idOperateur = preferences.getInt(PREFERENCES_ID_OPERATEUR, OPERATEUR_NON_DEFINI);
+        }
+        Log.d(TAG, "chargerPreferences() idOperateur = " + idOperateur);
+        if(idOperateur != OPERATEUR_NON_DEFINI)
+        {
+            if(listeOperateurs != null)
+            {
+                operateurSelectionne = OPERATEUR_NON_DEFINI;
+                for(int i = 0; i < listeOperateurs.size(); ++i)
+                {
+                    if(idOperateur == listeOperateurs.get(i).getIdOperateur())
+                    {
+                        operateurSelectionne = i;
+                        Log.d(TAG,
+                              "chargerPreferences() operateurSelectionne = " +
+                                operateurSelectionne);
+                        break;
+                    }
+                }
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+!!!161194.java!!!	enregistrerPreferences() : void
+        if(operateurSelectionne != OPERATEUR_NON_DEFINI)
+        {
+            Log.d(TAG,
+                  "enregistrerPreferences() idOperateur = " +
+                    listeOperateurs.get(operateurSelectionne).getIdOperateur());
+            preferences.edit()
+              .putInt(PREFERENCES_ID_OPERATEUR,
+                      listeOperateurs.get(operateurSelectionne).getIdOperateur())
+              .apply();
+        }
+!!!161322.java!!!	onCreateOptionsMenu(inout menu : Menu) : boolean
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+!!!161450.java!!!	onOptionsItemSelected(inout item : MenuItem) : boolean
+        switch(item.getItemId())
+        {
+            case R.id.operateurs:
+                selectionnerOperateur();
+                return true;
+            case R.id.interventions:
+                demarrerActiviteInterventions();
+                return true;
+            case R.id.aPropos:
+                afficherAPropos();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+!!!161578.java!!!	demarrerActiviteInterventions() : void
+        Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+        startActivity(activiteIntervention);
+!!!161706.java!!!	creerListeOperateurs(inout listeOperateurs : List<Operateur>) : void
+        this.listeOperateurs = listeOperateurs;
+        nomsOperateurs       = new String[listeOperateurs.size()];
+        for(int i = 0; i < listeOperateurs.size(); ++i)
+        {
+            nomsOperateurs[i] =
+              listeOperateurs.get(i).getNom() + " " + listeOperateurs.get(i).getPrenom();
+        }
+!!!161834.java!!!	selectionnerOperateur() : void
+        chargerPreferences();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
+        alertDialog.setTitle("Sélectionner l'opérateur :");
+        final int[] checkedItem = { operateurSelectionne };
+        alertDialog.setSingleChoiceItems(nomsOperateurs,
+                                         operateurSelectionne,
+                                         new DialogInterface.OnClickListener() {
+                                             @Override
+                                             public void onClick(DialogInterface dialog, int which)
+                                             {
+                                                 checkedItem[0] = which;
+                                             }
+                                         });
+        alertDialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                operateurSelectionne = checkedItem[0];
+                Log.d(TAG,
+                      "selectionnerOperateur() " + operateurSelectionne + " -> " +
+                        nomsOperateurs[operateurSelectionne]);
+                enregistrerPreferences();
+            }
+        });
+        alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)
+            {
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+!!!161962.java!!!	afficherAPropos() : void
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
+        alertDialog.setTitle("JustFeed 2023");
+        alertDialog.setMessage("BTS SN LaSalle Avignon\nFARGIER Mayeul");
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which)
+            {
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.show();

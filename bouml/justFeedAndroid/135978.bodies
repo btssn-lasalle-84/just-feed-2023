@@ -1,0 +1,20 @@
+class AdaptateurIntervention
+!!!136746.java!!!	AdaptateurIntervention(inout interventions : List<Intervention>)
+        if(interventions != null)
+        {
+            this.interventions = interventions;
+        }
+!!!136874.java!!!	onCreateViewHolder(inout parent : ViewGroup, in viewType : int) : VueIntervention
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View           view     = inflater.inflate(R.layout.intervention, parent, false);
+
+        return new VueIntervention(view);
+!!!137002.java!!!	onBindViewHolder(inout holder : VueIntervention, in position : int) : void
+        Intervention intervention = interventions.get(position);
+        holder.afficherInterventions(intervention);
+!!!137130.java!!!	getItemCount() : int
+        if(interventions != null)
+        {
+            return interventions.size();
+        }
+        return 0;

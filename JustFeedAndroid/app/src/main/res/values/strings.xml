@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">JustFeedAndroid</string>
     <string name="interventions">interventions</string>
+    <string-array name="listeEtatsAFaire">
+        <item>A faire</item>
+        <item>Démarrer</item>
+        <item>Terminer</item>
+    </string-array>
+    <string-array name="listeEtatsEnCours">
+        <item>En cours</item>
+        <item>Terminer</item>
+    </string-array>
+    <string-array name="listeEtatsValider">
+        <item>Validée</item>
+        <item>Recommencer</item>
+    </string-array>
 </resources>

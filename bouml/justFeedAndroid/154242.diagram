@@ -1,58 +1,116 @@
 format 224
 
-classinstancecanvas 128002 classinstance_ref 134658 // 
-  xyz 65 4 2005 life_line_z 2000
+classinstance 129922 class_ref 128002 // operateur
+  name ""   xyz 100.893 4.22625 2005 life_line_z 2000
+classinstance 130050 class_ref 136618 // JustFeed
+  name ""   xyz 318.275 4.29766 2005 life_line_z 2000
+classinstance 130818 class_ref 134954 // BaseDeDonnees
+  name ""   xyz 813.574 4.29766 2005 life_line_z 2000
+classinstance 131842 class_ref 134570 // ActiviteInterventions
+  name ""   xyz 518.326 4 2010 life_line_z 2000
+fragment 132994 "loop"
+  xyzwh 207.8 163.36 2005 297 117
 end
-classinstancecanvas 128130 classinstance_ref 134786 // 
-  xyz 310 4 2005 life_line_z 2000
+fragment 134146 "loop"
+  xyzwh 504.12 431.44 2000 257 107
 end
-classinstancecanvas 128258 classinstance_ref 134914 // 
-  xyz 545 4 2005 life_line_z 2000
+durationcanvas 130178 classinstance_ref 129922 // :operateur
+  xyzwh 163 66 2010 11 40
 end
-fragment 129666 "loop"
-  xyzwh 83 98 3005 303 96
-end
-fragment 129794 "loop"
-  xyzwh 91 335 2020 523 119
-end
-durationcanvas 128386 classinstance_ref 128002 // :IHMJustFeed
-  xyzwh 111 51 2010 11 133
-  overlappingdurationcanvas 128770
-    xyzwh 117 70 2020 11 25
+durationcanvas 130306 classinstance_ref 130050 // :JustFeed
+  xyzwh 382 67 2010 11 158
+  overlappingdurationcanvas 130562
+    xyzwh 388 67 2020 11 89
+    overlappingdurationcanvas 132738
+      xyzwh 394 92 2030 11 25
+    end
+  end
+  overlappingdurationcanvas 133122
+    xyzwh 388 190 2020 11 25
   end
 end
-durationcanvas 128514 classinstance_ref 128130 // :Distributeur
-  xyzwh 350 115 2010 11 45
+durationcanvas 130946 classinstance_ref 130818 // :BaseDeDonnees
+  xyzwh 928 92 2010 11 63
 end
-durationcanvas 129026 classinstance_ref 128002 // :IHMJustFeed
-  xyzwh 111 283 2010 11 127
-  overlappingdurationcanvas 129410
-    xyzwh 117 302 2020 11 25
+durationcanvas 131458 classinstance_ref 129922 // :operateur
+  xyzwh 163 316 2010 11 97
+end
+durationcanvas 131586 classinstance_ref 130050 // :JustFeed
+  xyzwh 382 327 2010 11 98
+end
+durationcanvas 132226 classinstance_ref 131842 // :ActiviteInterventions
+  xyzwh 653 327 2010 11 235
+  overlappingdurationcanvas 132482
+    xyzwh 659 327 2020 11 64
+  end
+  overlappingdurationcanvas 133634
+    xyzwh 659 407 2020 11 107
+    overlappingdurationcanvas 133890
+      xyzwh 665 469 2030 11 32
+    end
   end
 end
-durationcanvas 129154 classinstance_ref 128258 // :Intervention
-  xyzwh 586 348 2010 11 51
+durationcanvas 133378 classinstance_ref 130818 // :BaseDeDonnees
+  xyzwh 928 356 2010 11 25
 end
-msg 128642 synchronous
-  from durationcanvas_ref 128386
-  to durationcanvas_ref 128514
-  yz 149 2015 explicitmsg "informationsDistributeur()"
+msg 130434 synchronous
+  from durationcanvas_ref 130178
+  to durationcanvas_ref 130306
+  yz 68 2015 explicitmsg "lancementApplication"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 154 134
-reflexivemsg 128898 synchronous
-  to durationcanvas_ref 128770
-  yz 70 2025 explicitmsg "listerDistributeurs()"
+  label_xy 175 52
+reflexivemsg 130690 synchronous
+  to durationcanvas_ref 130562
+  yz 67 2025 explicitmsg "onCreate()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 130 56
-msg 129282 synchronous
-  from durationcanvas_ref 129026
-  to durationcanvas_ref 129154
-  yz 370 2015 explicitmsg "informationIntervention()"
+  label_xy 363 54
+msg 131074 asynchronous
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 130946
+  yz 142 2030 explicitmsg "recupererDistributeurs()"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 183 355
-reflexivemsg 129538 synchronous
-  to durationcanvas_ref 129410
-  yz 302 2025 explicitmsg "visualiserInterventions()"
+  label_xy 394 126
+msg 131714 synchronous
+  from durationcanvas_ref 131458
+  to durationcanvas_ref 131586
+  yz 342 2015 explicitmsg "lancementActiviteIntervention"
   show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
-  label_xy 129 287
+  label_xy 149 327
+msg 132354 synchronous
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 132226
+  yz 350 2015 explicitmsg "startActivity(activiteIntervention)"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 369 335
+reflexivemsg 132610 synchronous
+  to durationcanvas_ref 132482
+  yz 327 2025 explicitmsg "onCreate()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 602 311
+reflexivemsg 132866 synchronous
+  to durationcanvas_ref 132738
+  yz 92 2035 explicitmsg "initialiserVueListeDistributeurs()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 369 78
+reflexivemsg 133250 synchronous
+  to durationcanvas_ref 133122
+  yz 190 2025 explicitmsg "afficherDistributeurs()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 363 170
+msg 133506 asynchronous
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 133378
+  yz 355 2025 explicitmsg "recupererInterventions()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 657 340
+reflexivemsg 133762 synchronous
+  to durationcanvas_ref 133634
+  yz 407 2025 explicitmsg "initialiserVueInterventions()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 608 389
+reflexivemsg 134018 synchronous
+  to durationcanvas_ref 133890
+  yz 469 2035 explicitmsg "afficherInterventions()"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 615 451
 end

@@ -1,0 +1,155 @@
+format 224
+
+classinstance 128042 class_ref 128792 // Intervention
+  name ""   xyz 204 5 2000 life_line_z 2000
+textcanvas 129194 "[à remplir ou à dépanner]"
+  xyzwh 149 279 3005 328 30
+fragment 129322 "alt"
+  xyzwh 54 269 1970 1025 1022
+end
+classinstance 129450 class_ref 147754 // BaseDeDonnees
+  name ""   xyz 924 4 2000 life_line_z 2000
+note 129834 "requête SELECT sur la table Intervention"
+  xyzwh 487 521 2000 365 95
+fragment 130858 "loop"
+  xyzwh 39 121 1965 1056 1179
+end
+textcanvas 130986 "[pour chaque distributeur  à intervenir]"
+  xyzwh 147 135 2015 495 30
+note 132394 "requête INSERT dans la table Intervention"
+  xyzwh 484 700 2000 371 91
+fragment 132778 "alt"
+  xyzwh 71 433 1985 995 427
+end
+textcanvas 132906 "[pas encore planifiée]"
+  xyzwh 151 444 2000 280 30
+fragment 133290 "alt"
+  xyzwh 71 870 1985 993 223
+end
+fragment 133418 "alt"
+  xyzwh 71 1103 1980 991 178
+end
+textcanvas 133546 "[à remplir]"
+  xyzwh 158 881 2030 328 30
+textcanvas 133674 "[à dépanner]"
+  xyzwh 158 1113 2000 328 30
+note 134058 "requête UPDATE sur la table Intervention"
+  xyzwh 487.5 940.5 2000 365 95
+note 134186 "requête UPDATE sur la table Intervention"
+  xyzwh 487.5 1177.5 2000 365 95
+fragment 134826 "alt"
+  xyzwh 40 1320 1985 1056 390
+end
+textcanvas 134954 "[intervention]"
+  xyzwh 150 1330 3005 280 30
+textcanvas 135594 "[pour chaque distributeur  à intervenir]"
+  xyzwh 153 1474 3005 495 30
+fragment 135722 "loop"
+  xyzwh 55.5 1466.5 1980 1026 228
+end
+note 136106 "requête INSERT dans la table Approvisionnement"
+  xyzwh 491.5 1596.5 2000 371 91
+durationcanvas 130090 classinstance_ref 128042 // :Intervention
+  xyzwh 285 101 2010 11 1534
+  overlappingdurationcanvas 130346
+    xyzwh 291 215 2020 11 25
+  end
+  overlappingdurationcanvas 130602
+    xyzwh 291 346 2020 11 842
+    overlappingdurationcanvas 131114
+      xyzwh 297 411 2030 11 121
+    end
+  end
+  overlappingdurationcanvas 135082
+    xyzwh 291 1401 2020 11 32
+  end
+  overlappingdurationcanvas 135338
+    xyzwh 291 1550 2020 11 79
+  end
+end
+durationcanvas 131626 classinstance_ref 129450 // :BaseDeDonnees
+  xyzwh 1039 677 2010 11 127
+end
+durationcanvas 131882 classinstance_ref 129450 // :BaseDeDonnees
+  xyzwh 1039 491 2010 11 133
+end
+durationcanvas 133034 classinstance_ref 129450 // :BaseDeDonnees
+  xyzwh 1039 917 2010 11 25
+end
+durationcanvas 133802 classinstance_ref 129450 // :BaseDeDonnees
+  xyzwh 1039 1160 2010 11 25
+end
+durationcanvas 135850 classinstance_ref 129450 // :BaseDeDonnees
+  xyzwh 1039 1579 2010 11 25
+end
+reflexivemsg 130218 synchronous
+  to durationcanvas_ref 130090
+  yz 101 2015 msg operation_ref 179498 // "creer() : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 297 74
+reflexivemsg 130474 synchronous
+  to durationcanvas_ref 130346
+  yz 215 2025 msg operation_ref 179626 // "affecterEtatIntervention(in indexDistributeur : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 302 185
+reflexivemsg 130730 synchronous
+  to durationcanvas_ref 130602
+  yz 346 2025 msg operation_ref 179754 // "ajouterIntervention(in indexDistributeur : int) : int"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 301 314
+reflexivemsg 131242 synchronous
+  to durationcanvas_ref 131114
+  yz 411 2035 msg operation_ref 180010 // "estPlanifiee(in idDistributeur : int) : int"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 308 383
+msg 131754 synchronous
+  from durationcanvas_ref 130602
+  to durationcanvas_ref 131626
+  yz 682 2025 msg operation_ref 173354 // "executer(in requete : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 603 652
+msg 132010 synchronous
+  from durationcanvas_ref 131114
+  to durationcanvas_ref 131882
+  yz 498 2035 msg operation_ref 173354 // "executer(in requete : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 606 468
+msg 133162 synchronous
+  from durationcanvas_ref 130602
+  to durationcanvas_ref 133034
+  yz 917 2025 msg operation_ref 173354 // "executer(in requete : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 605 887
+msg 133930 synchronous
+  from durationcanvas_ref 130602
+  to durationcanvas_ref 133802
+  yz 1160 2025 msg operation_ref 173354 // "executer(in requete : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 605 1130
+reflexivemsg 135210 synchronous
+  to durationcanvas_ref 135082
+  yz 1401 2025 msg operation_ref 179370 // "intervenir(in aIntervenir : bool) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 302 1373
+reflexivemsg 135466 synchronous
+  to durationcanvas_ref 135338
+  yz 1550 2025 msg operation_ref 179882 // "ajouterApprovisionnement(in indexDistributeur : int) : void"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 302 1517
+msg 135978 synchronous
+  from durationcanvas_ref 135338
+  to durationcanvas_ref 135850
+  yz 1579 2025 msg operation_ref 173354 // "executer(in requete : QString) : bool"
+  show_full_operations_definition default show_class_of_operation default drawing_language default show_context_mode default
+  label_xy 605 1549
+line 132266 -_-_
+  from ref 129834 z 2036 to ref 132010
+line 132650 -_-_
+  from ref 132394 z 2026 to ref 131754
+line 134314 -_-_
+  from ref 134058 z 2026 to ref 133162
+line 134698 -_-_
+  from ref 134186 z 2026 to ref 133930
+line 136362 -_-_
+  from ref 136106 z 2026 to ref 135978
+end

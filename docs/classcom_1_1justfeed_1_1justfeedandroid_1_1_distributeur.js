@@ -1,10 +1,27 @@
 var classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur =
 [
     [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a176e72799f9e8fe8ace258ed76e8edca", null ],
-    [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a8e16a1a7d24fb352134972ddb9cd72a8", null ],
+    [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac265cd4ebbc7f9be249206a51ad2dd81", null ],
+    [ "ajouterBac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a9986d57718a6b7dba55173c3733c784a", null ],
     [ "changerProduit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a2e06aaa9ac937ad3b994331a8eac45eb", null ],
+    [ "depanner", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a2d72c088701e15d4ef901691df8f036c", null ],
+    [ "estADepanner", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a336078d1177cdd60ebfb3d65b016cc58", null ],
+    [ "estARemplir", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a71edac94bf5fff1e3c2bf560f9f821f8", null ],
+    [ "getCoordGeographiques", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ae30458bceb0c1931e7bf2078d6ca4cff", null ],
     [ "getIdentifiant", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a121b54f9e8ab19fb97a0eea4bde52901", null ],
     [ "getListeBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a876116a676dc662da5cab979a9698ca6", null ],
+    [ "getLocalisation", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#abd2edcca15b15af5993402ad6014b0c4", null ],
+    [ "getNbBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#af9129f1b6975e64b57d461c051576a88", null ],
+    [ "getNom", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a08bcdd9a698e2c57c25e7172dab8c03f", null ],
+    [ "remplir", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a45496e32e6e67d7de65ba6245f7e8c93", null ],
+    [ "aDepanner", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a59406e36eeb0b445609335df82a0f7e6", null ],
+    [ "adresse", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a7344916135760fe74bee06f35ff2ba4a", null ],
+    [ "aRemplir", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#aabb97d1142d736b44c39e2428ca840ff", null ],
+    [ "codePostal", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac9f72c4e0c7bb7dd9bdc938c1b99cdf4", null ],
+    [ "coordGeographiques", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac781f5cb6f28549fad53ee6b62e5b66a", null ],
     [ "id", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a46c32c9b3f634e8ab709bc5ec0f04048", null ],
-    [ "listeBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a08f0562b0f372f070d10cf05336f5254", null ]
+    [ "listeBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a08f0562b0f372f070d10cf05336f5254", null ],
+    [ "nomDistributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ad5bf76a607761e3c14eae1698e8e0fb5", null ],
+    [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a3b3e2afeb2dab4af0ed19cf07e91a990", null ],
+    [ "ville", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a6db218189aa1c30bf957b70144dda5b6", null ]
 ];
