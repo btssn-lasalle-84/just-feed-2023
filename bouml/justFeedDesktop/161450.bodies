@@ -1,0 +1,27 @@
+class Operateur
+!!!204970.cpp!!!	Operateur(in idOperateur : int, in nom : QString, in prenom : QString, in identifiant : QString, in email : QString)
+    qDebug() << Q_FUNC_INFO << "id" << id << "nom" << nom << "prenom" << prenom << "identifiant"
+             << identifiant << "email" << email;
+!!!205098.cpp!!!	Operateur(in operateur : QStringList)
+    qDebug() << Q_FUNC_INFO << "id" << id << "nom" << nom << "prenom" << prenom << "identifiant"
+             << identifiant << "email" << email;
+!!!205226.cpp!!!	getId() : int
+    return this->id;
+!!!205354.cpp!!!	getNom() : QString
+    return this->nom;
+!!!205482.cpp!!!	getPrenom() : QString
+    return this->prenom;
+!!!205610.cpp!!!	getIdentifiant() : QString
+    return this->identifiant;
+!!!205738.cpp!!!	getEmail() : QString
+    return this->email;
+!!!205866.cpp!!!	setId(in idOperateur : int) : void
+    this->id = idOperateur;
+!!!205994.cpp!!!	setNom(in nom : QString) : void
+    this->nom = nom;
+!!!206122.cpp!!!	setPrenom(in prenom : QString) : void
+    this->prenom = prenom;
+!!!206250.cpp!!!	setIdentifiant(in identifiant : QString) : void
+    this->identifiant = identifiant;
+!!!206378.cpp!!!	setEmail(in email : QString) : void
+    this->email = email;

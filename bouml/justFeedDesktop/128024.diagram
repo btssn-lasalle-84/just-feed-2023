@@ -1,77 +1,110 @@
 format 224
 
-classcanvas 128024 class_ref 128792 // Intervention
-  classdiagramsettings member_max_width 0 end
-  xyzwh 713 275.1 2006 510 817
-end
 classcanvas 128042 class_ref 128536 // IHMJustFeed
-  classdiagramsettings member_max_width 0 end
-  xyz 2621.9 313.2 2000
+  classdiagramsettings hide_attributes yes member_max_width 0 end
+  color mediumgreen
+  xyz 93 100 2000
 end
 classcanvas 128170 class_ref 128408 // Distributeur
-  classdiagramsettings member_max_width 0 end
-  xyz 15 1648.9 2000
+  classdiagramsettings hide_operations yes member_max_width 0 end
+  xyz 1960 1481.2 2000
 end
 classcanvas 128280 class_ref 148138 // PlanificationIntervention
-  classdiagramsettings member_max_width 0 end
-  xyz 1587.1 239 3005
+  classdiagramsettings hide_attributes yes member_max_width 0 end
+  color mediumgreen
+  xyz 2864 390 3005
 end
 classcanvas 128298 class_ref 128152 // Produit
-  classdiagramsettings member_max_width 0 end
-  xyz 2529.7 1981.9 2000
+  classdiagramsettings hide_operations yes member_max_width 0 end
+  xyz 423.4 2365.5 2000
 end
 classcanvas 128426 class_ref 134570 // Bac
-  classdiagramsettings member_max_width 0 end
-  xyz 1620.4 1736.7 2005
+  classdiagramsettings hide_operations yes member_max_width 0 end
+  xyz 1208.3 2333.6 2005
 end
-relationcanvas 128152 relation_ref 155434 // <unidirectional association>
-  from ref 128024 z 2007 stereotype "<<QVector>>" xyz 790 1296.5 2007 to ref 128170
-  role_a_pos 821 1483 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
+classcanvas 129322 class_ref 128792 // Intervention
+  classdiagramsettings hide_operations yes member_max_width 0 end
+  xyz 3135 1457.2 3011
+end
+classcanvas 129834 class_ref 141098 // ConfigurationDistributeur
+  classdiagramsettings hide_attributes yes member_max_width 0 end
+  color mediumgreen
+  xyz 1565 55 2006
 end
 relationcanvas 128408 relation_ref 155690 // <unidirectional association>
   from ref 128280 z 3006 to ref 128042
-  role_a_pos 2493 763 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 128536 relation_ref 155946 // <unidirectional association>
-  from ref 128280 z 3006 to ref 128024
-  role_a_pos 1253 616 3000 no_role_b
+  role_a_pos 1102 751 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128554 relation_ref 134698 // <directional composition>
-  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 1907 2340.5 3000 to ref 128426
-  role_a_pos 1542 2006 3000 no_role_b
+  from ref 128170 z 2006 stereotype "<<QVector>>" xyz 1701 2091 3000 to ref 128426
+  role_a_pos 1630 2276 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128664 relation_ref 156074 // <unidirectional association>
-  from ref 128280 z 3006 stereotype "<<QVector>>" xyz 1310 1253.5 3006 to ref 128170
-  role_a_pos 1161 1483 3000 no_role_b
+  decenter_begin 715
+  decenter_end 888
+  from ref 128280 z 3006 to point 3873 1833
+  line 130474 z 3006 stereotype "<<QVector>>" xyz 3031.5 1826.5 3006 to ref 128170
+  role_a_pos 2394 1779 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128682 relation_ref 134570 // <unidirectional association>
   from ref 128426 z 2006 to ref 128298
-  role_a_pos 2438 2073 3000 no_role_b
+  role_a_pos 773 2444 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128792 relation_ref 155050 // <unidirectional association>
   from ref 128042 z 3006 to ref 128280
-  role_a_pos 2381 673 3000 no_role_b
+  role_a_pos 2517 684 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128810 relation_ref 141226 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 1714.5 1263.5 3000 to ref 128170
-  role_a_pos 1405 1600 3000 no_role_b
+  from ref 128042 z 2001 to point 1390 1605
+  line 130986 z 2001 stereotype "<<QVector>>" xyz 1586 1626.5 3000 to ref 128170
+  role_a_pos 1761 1606 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128938 relation_ref 148138 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2697.5 2100.5 3000 to ref 128298
-  role_a_pos 2928 1890 3000 no_role_b
+  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 536 2121.5 3000 to ref 128298
+  role_a_pos 611 2311 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129066 relation_ref 155178 // <unidirectional association>
-  from ref 128042 z 2001 stereotype "<<QVector>>" xyz 2464.5 1820.5 3000 to ref 128170
-  role_a_pos 1405 1600 3000 no_role_b
+  from ref 128042 z 2001 to point 1470 1230
+  line 130858 z 2001 stereotype "<<QVector>>" xyz 1626 1381.5 3000 to ref 128170
+  role_a_pos 1564 1506 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129450 relation_ref 155434 // <unidirectional association>
+  from ref 129322 z 3012 stereotype "<<QVector>>" xyz 2661.5 1629 3012 to ref 128170
+  role_a_pos 2394 1609 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129578 relation_ref 162730 // <unidirectional association>
+  from ref 128042 z 3012 to point 1830 985
+  line 131114 z 3012 stereotype "<<QVector>>" xyz 2393 1231.5 3012 to ref 129322
+  role_a_pos 2933 1444 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129706 relation_ref 155946 // <unidirectional association>
+  from ref 128280 z 3012 to ref 129322
+  role_a_pos 3485 1401 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129962 relation_ref 147882 // <unidirectional association>
+  from ref 129834 z 2007 to ref 128170
+  role_a_pos 2188 1421 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130090 relation_ref 148010 // <unidirectional association>
+  from ref 129834 z 2007 to ref 128042
+  role_a_pos 1102 611 3000 no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 130218 relation_ref 148266 // <unidirectional association>
+  from ref 128042 z 2007 to ref 129834
+  role_a_pos 1209 464 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 end

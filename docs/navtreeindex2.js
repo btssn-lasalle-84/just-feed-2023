@@ -1,5 +1,7 @@
 var NAVTREEINDEX2 =
 {
+"class_serveur.html#ad462addaa056be83fce1d41a472e3bca":[4,0,14,4],
+"class_serveur.html#af192097ea811e7919efffc174948250c":[4,0,14,10],
 "class_statistiques.html":[4,0,15],
 "class_statistiques.html#a09a97e84b71f870f363e7f5c9e1338d4":[4,0,15,5],
 "class_statistiques.html#a0b3904d9f448c4eb3c88074932c25051":[4,0,15,2],
@@ -247,7 +249,5 @@ var NAVTREEINDEX2 =
 "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#a8570ced401618155c0cc1e56dc228e52":[4,0,0,0,0,12,14],
 "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#abd67a90d81362e7e46c5b56d1402430e":[4,0,0,0,0,12,2],
 "classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#aef007a74102d0d7e0bab55d469fa4e85":[4,0,0,0,0,12,9],
-"classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#afb8c30829e48a99fe7900b4bc8d27401":[4,0,0,0,0,12,10],
-"classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html":[4,0,0,0,0,13],
-"classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a26658db0198787163ff8e0e7500ed486":[4,0,0,0,0,13,2]
+"classcom_1_1justfeed_1_1justfeedandroid_1_1_operateur.html#afb8c30829e48a99fe7900b4bc8d27401":[4,0,0,0,0,12,10]
 };

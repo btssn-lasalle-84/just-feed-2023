@@ -13,18 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Install Qt
-        uses: jurplel/install-qt-action@v2
-        with:
-          version: "5.12.8"
-          host: "linux"
-          target: "desktop"
-          modules: "qtwebkit"
+#      - name: Install Qt
+#        uses: jurplel/install-qt-action@v2
+#        with:
+#          version: "5.12.8"
+#          host: "linux"
+#          target: "desktop"
+#          modules: "qtwebkit"
+#
+#      - name: Install webkit
+#        run: sudo apt-get install -y libqt5webkit5-dev
 
-      - name: Run qmake
-        run: |
-          cd JustFeedDesktop && qmake
+#      - name: Run qmake
+#        run: |
+#          cd JustFeedDesktop && qmake
 
-      - name: Run make
-        run: |
-          cd JustFeedDesktop && make
+#      - name: Run make
+#        run: |
+#          cd JustFeedDesktop && make

@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">0.2</span>
+   &#160;<span id="projectnumber">1.0</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -95,27 +95,80 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <li><a href="#le-projet-just-feed-2023">Le projet just-feed 2023</a><ul>
 <li><a href="#documentation-du-code">Documentation du code</a></li>
 <li><a href="#resources-logicielles">Resources logicielles</a></li>
-<li><a href="#base-de-données">Base de données</a></li>
+<li><a href="#base-de-donn%C3%A9es">Base de données</a></li>
 <li><a href="#mqtt">MQTT</a><ul>
+<li><a href="#donn%C3%A9es">Données</a></li>
 <li><a href="#qt-mqtt">Qt MQTT</a></li>
 <li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
 </ul>
 </li>
 <li><a href="#versions">Versions</a><ul>
+<li><a href="#10">1.0</a></li>
+<li><a href="#02">0.2</a></li>
 <li><a href="#01">0.1</a></li>
 </ul>
 </li>
+<li><a href="#diagramme-de-classes">Diagramme de classes</a></li>
+<li><a href="#planification">Planification</a></li>
 <li><a href="#auteurs">Auteurs</a></li>
 </ul>
 </li>
 </ul>
+<p><img src="logo.png" alt="" class="inline"/></p>
 <hr  />
 <p>Le système doit permettre de surveiller à distance des distributeurs automatiques (café, fruits secs, céréales, …) afin d’optimiser le processus de réapprovisionnement.</p>
+<p><img src="operateur.png" alt="" class="inline"/></p>
 <ul>
 <li>Chaque distributeur automatique est équipé de capteurs et d’une carte embarquée (The Things Uno ou modèle équivalent) communiquant via LoRaWan avec un serveur The Things Network. [Étudiants EC]</li>
+</ul>
+<p><img src="modules.png" alt="" class="inline"/></p>
+<ul>
 <li>Une application <b>PC Desktop</b> supervise l’ensemble des distributeurs afin de déterminer leur état d’approvisionnement. Les données sont reçues au format JSON par le protocole MQTT via le réseau <em>The Things Network</em>. [Étudiants IR]</li>
 <li>Une application mobile pour <b>Android</b> permettra aux opérateurs d’assurer leur intervention (géolocalisation, parcours, type de produits à réapprovisionner, validation de l’intervention, ...). [Étudiant IR]</li>
 </ul>
+<p><img src="synoptique.png" alt="" class="inline"/></p>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="uc-android.png" alt="" class="inline"/></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Fonctionnalité (Android)   </th><th class="markdownTableHeadCenter">Oui   </th><th class="markdownTableHeadCenter">Non    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Lister les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Réaliser une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Visualiser une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Valider une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+</table>
+<ul>
+<li>Desktop Qt :</li>
+</ul>
+<p><img src="uc-desktop.png" alt="" class="inline"/></p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Fonctionnalité (Android)   </th><th class="markdownTableHeadCenter">Oui   </th><th class="markdownTableHeadCenter">Non    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Lister les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Planifier une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Visualiser une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Configurer les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Visualiser les statistiques   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+</table>
 <h2>Documentation du code</h2>
 <p><a href="https://btssn-lasalle-84.github.io/just-feed-2023/">https://btssn-lasalle-84.github.io/just-feed-2023/</a></p>
 <h2>Resources logicielles</h2>
@@ -147,8 +200,10 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 </table>
 <h2>Base de données</h2>
 <p>Base de données MySQL 8.0 <code>justfeed</code> hébergée sur www.db4free.net (pour les tests) :</p>
-<p><img src="sql/justfeed-v0.1.png" alt="" class="inline"/></p>
+<p><img src="sql/justfeed-v0.2.png" alt="" class="inline"/></p>
 <div class="fragment"><div class="line"><span class="comment">-- LDD (langage de définition de données)</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- Voir aussi : https://www.db4free.net/phpMyAdmin/</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">DROP</span> DATABASE <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> `justfeed`;</div>
 <div class="line"> </div>
@@ -168,6 +223,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> Operateur;</div>
 <div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> <span class="keywordflow">IF</span> <span class="keyword">EXISTS</span> ServeurTTN;</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `ServeurTTN`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -182,6 +239,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  `estActif` <span class="keywordtype">int</span> <span class="keyword">DEFAULT</span> <span class="stringliteral">&#39;0&#39;</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Operateur`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -193,6 +252,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  `identifiant` <span class="keywordtype">varchar</span>(<span class="stringliteral">255</span>) <span class="keyword">DEFAULT</span> <span class="stringliteral">NULL</span>,</div>
 <div class="line">  `email` <span class="keywordtype">varchar</span>(<span class="stringliteral">64</span>) <span class="keyword">NOT</span> <span class="stringliteral">NULL</span></div>
 <div class="line">) ENGINE=InnoDB <span class="keyword">DEFAULT</span> CHARSET=utf8;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Distributeur`</span></div>
@@ -221,6 +282,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Distributeur`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Distributeur_fk_1` <span class="keyword">FOREIGN</span> KEY (`idServeurTTN`) <span class="keyword">REFERENCES</span> `ServeurTTN` (`idServeurTTN`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Produit`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -238,6 +301,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"> </div>
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Produit`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">UNIQUE</span> KEY `codeEAN` (`codeEAN`);</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Bac`</span></div>
@@ -260,6 +325,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Bac`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Bac_fk_1` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE,</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Bac_fk_2` <span class="keyword">FOREIGN</span> KEY (`idProduit`) <span class="keyword">REFERENCES</span> `Produit` (`idProduit`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
 <div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Intervention`</span></div>
@@ -285,6 +352,8 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> `Intervention`</div>
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Intervention_fk_2` <span class="keyword">FOREIGN</span> KEY (`idDistributeur`) <span class="keyword">REFERENCES</span> `Distributeur` (`idDistributeur`);</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">-- --------------------------------------------------------</span></div>
+<div class="line"> </div>
 <div class="line"><span class="comment">--</span></div>
 <div class="line"><span class="comment">-- Structure de la table `Approvisionnement`</span></div>
 <div class="line"><span class="comment">--</span></div>
@@ -307,6 +376,10 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">  <span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> `Approvisionnement_fk_2` <span class="keyword">FOREIGN</span> KEY (`idBac`) <span class="keyword">REFERENCES</span> `Bac` (`idBac`) <span class="keyword">ON</span> <span class="keyword">DELETE</span> CASCADE;</div>
 </div><!-- fragment --><h2>MQTT</h2>
 <p>Voir aussi : modules-lora/README.md</p>
+<p><img src="app-ttn.png" alt="" class="inline"/></p>
+<p><img src="livedata-ttn.png" alt="" class="inline"/></p>
+<h3>Données</h3>
+<p><img src="donnees-ttn.png" alt="" class="inline"/></p>
 <h3>Qt MQTT</h3>
 <p><a href="https://doc.qt.io/QtMQTT/index.html">Qt MQTT</a> fournit une implémentation conforme à la norme MQTT.</p>
 <p>Qt MQTT fait parti de <a href="http://doc.qt.io/QtForAutomation/qtautomation-overview.html">Qt For Automation</a> et pas directement de Qt. Il faut donc l'installer.</p>
@@ -404,6 +477,23 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
 </div><!-- fragment --><h2>Versions</h2>
 <p><img src="livraisons.png" alt="" class="inline"/></p>
+<h3>1.0</h3>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="screenshot-justfeed-android-distributeur-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-validees-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-afaire-v1.0.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-android-interventions-encours-v1.0.png" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="screenshot-justfeed-qt-distributeurs-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-distributeur-v0.2.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
+<p><img src="screenshot-justfeed-qt-interventions-v0.2.png" alt="" class="inline"/></p>
 <h3>0.2</h3>
 <p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
 <ul>
@@ -430,12 +520,25 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 </ul>
 <p><img src="screenshot-justfeed-qt-distributeurs-v0.1.png" alt="" class="inline"/></p>
 <p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
+<h2>Diagramme de classes</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="dc-justfeed-android.png" alt="" class="inline"/></p>
+<ul>
+<li>Qt Desktop :</li>
+</ul>
+<p><img src="dc-justfeed-qt.png" alt="" class="inline"/></p>
+<h2>Planification</h2>
+<p><img src="gantt-1.png" alt="" class="inline"/></p>
+<p><img src="gantt-2.png" alt="" class="inline"/></p>
+<p><img src="gantt-3.png" alt="" class="inline"/></p>
 <h2>Auteurs</h2>
 <p>Étudiants IR :</p>
 <ul>
 <li>Matthieu SALAUN <a href="#" onclick="location.href='mai'+'lto:'+'mat'+'th'+'ieu'+'sa'+'lau'+'n3'+'0@g'+'ma'+'il.'+'co'+'m'; return false;">matth<span style="display: none;">.nosp@m.</span>ieus<span style="display: none;">.nosp@m.</span>alaun<span style="display: none;">.nosp@m.</span>30@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a></li>
-<li>Nicolas ROUANET</li>
-<li>Mayeul FARGIER</li>
+<li>Nicolas ROUANET <a href="#" onclick="location.href='mai'+'lto:'+'rou'+'an'+'et.'+'ni'+'col'+'as'+'.pr'+'o@'+'gma'+'il'+'.co'+'m'; return false;">rouan<span style="display: none;">.nosp@m.</span>et.n<span style="display: none;">.nosp@m.</span>icola<span style="display: none;">.nosp@m.</span>s.pr<span style="display: none;">.nosp@m.</span>o@gma<span style="display: none;">.nosp@m.</span>il.c<span style="display: none;">.nosp@m.</span>om</a></li>
+<li>Mayeul FARGIER <a href="#" onclick="location.href='mai'+'lto:'+'may'+'eu'+'lfa'+'rg'+'ier'+'.p'+'ro@'+'gm'+'ail'+'.c'+'om'; return false;">mayeu<span style="display: none;">.nosp@m.</span>lfar<span style="display: none;">.nosp@m.</span>gier.<span style="display: none;">.nosp@m.</span>pro@<span style="display: none;">.nosp@m.</span>gmail<span style="display: none;">.nosp@m.</span>.com</a></li>
 </ul>
 <hr  />
 <p> ©️ LaSalle Avignon 2023 </p>
@@ -446,7 +549,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Jeudi 25 Mai 2023 22:54:41 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

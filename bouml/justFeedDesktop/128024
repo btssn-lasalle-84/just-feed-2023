@@ -1,6 +1,6 @@
 format 224
 "JustFeedDesktop" // JustFeedDesktop
-  revision 9
+  revision 10
   modified_by 42 "tv"
   // class settings
   
@@ -1691,11 +1691,10 @@ ${body}}
 	
 	
       end
-
     end
 
     class 128536 "IHMJustFeed"
-      visibility package 
+      visibility package stereotype "QMainWindow"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
@@ -1833,6 +1832,17 @@ ${items}};
 	  MysqlColumn
 	end
 
+	attribute 183850 "COLONNE_DISTRIBUTEUR_INTERVENTION_DETAIL"
+	  public type class_ref 148010 // ColonneDistributeur
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
 	attribute 160042 "COLONNE_DISTRIBUTEUR_INTERVENTION"
 	  public type class_ref 148010 // ColonneDistributeur
 	  cpp_decl "  ${name}${value},${comment}"
@@ -1869,7 +1879,11 @@ ${items}};
       classrelation 154922 // baseDeDonnees (<unidirectional association>)
 	relation 154922 --->
 	  a role_name "baseDeDonnees" private
-	    comment " Attributs
+	    comment "@enum TableApprovisionnement
+@brief Définit les colonnes de la table approvisionnement
+
+
+ Attributs
 !< association vers la classe BaseDeDonnees"
 	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -1909,6 +1923,17 @@ ${items}};
 	  b parent class_ref 128408 // Distributeur
       end
 
+      classrelation 162602 // operateurs (<unidirectional association>)
+	relation 162602 --->
+	  stereotype "QVector"
+	  a role_name "operateurs" private
+	    comment "!< les operateurs"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 162602 // operateurs (<unidirectional association>)
+	  b parent class_ref 161450 // Operateur
+      end
+
       classrelation 155178 // listeDistributeursAIntervenir (<unidirectional association>)
 	relation 155178 --->
 	  stereotype "QVector"
@@ -1929,6 +1954,17 @@ ${items}};
 "
 	    classrelation_ref 148138 // produits (<unidirectional association>)
 	  b parent class_ref 128152 // Produit
+      end
+
+      classrelation 162730 // interventions (<unidirectional association>)
+	relation 162730 --->
+	  stereotype "QVector"
+	  a role_name "interventions" private
+	    comment "!< les interventions"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}*> ${name}${value};
+"
+	    classrelation_ref 162730 // interventions (<unidirectional association>)
+	  b parent class_ref 128792 // Intervention
       end
 
       attribute 150954 "numeroDistributeurSelectionne"
@@ -2023,6 +2059,19 @@ ${items}};
 	comment "!< la fenêtre d'un distributeur"
       end
 
+      attribute 183978 "fenetreIntervention"
+	private explicit_type "QWidget"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< la fenêtre d'une intervention"
+      end
+
       attribute 161066 "tableWidgetDistributeurs"
 	private explicit_type "QTableWidget"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
@@ -2094,6 +2143,18 @@ ${items}};
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
+      end
+
+      attribute 184106 "itemDetailIntervention"
+	private explicit_type "QTableWidgetItem"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
 	comment "!< les éléments de la table"
       end
 
@@ -2121,7 +2182,19 @@ ${items}};
 	MysqlColumn
       end
 
-      attribute 162090 "boutonValider"
+      attribute 184234 "boutonValiderDistributeur"
+	private explicit_type "QPushButton"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 184362 "boutonValiderIntervention"
 	private explicit_type "QPushButton"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
@@ -2256,6 +2329,152 @@ ${items}};
 
       attribute 163370 "positionDistributeur"
 	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 184490 "layoutIntervention"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 184618 "layoutBoutonsInterventions"
+	private explicit_type "QHBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 184746 "layoutInformationsIntervention"
+	private explicit_type "QVBoxLayout"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 184874 "listeApprovisionnement"
+	private explicit_type "QStringList"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185002 "layoutsApprovisionnement"
+	private explicit_type "QHBoxLayout*"
+	stereotype "QVector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185130 "interventionIdOperateur"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185258 "interventionNomDistributeur"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185386 "dateIntervention"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185514 "aRemplirIntervention"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185642 "aDepannerIntervention"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185770 "etatIntervention"
+	private explicit_type "QLabel"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 185898 "listeOperateurs"
+	private explicit_type "QComboBox"
 	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} * ${name}${value};
 "
 	java_decl ""
@@ -2416,6 +2635,40 @@ ${body}}
 	
       end
 
+      operation 202922 "initialiserOperateurs"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode initialise les différents operateur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203050 "initialiserInterventions"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief méthode initialise les différentes interventions
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 174890 "chargerDistributeurs"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
@@ -2458,6 +2711,26 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief affiche les détails d'un distributeur
+//@param distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203178 "afficherIntervention"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief affiche les détails d'une intervention pour ce distributeur
+//@param distributeur
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
@@ -2560,13 +2833,68 @@ ${body}}
 	
       end
 
-      operation 175914 "effacerEtatDistributeur"
+      operation 203306 "creerEtatIntervention"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief crée les widgets de la fenêtre d 'affichage d'une intervention
+//@param distributeur, le distributeur lié à l'intervention
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203434 "effacerEtatsFenetre"
 	preserve_cpp_body_indent private explicit_return_type "void"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief méthode qui efface les widgets de la fenêtre d'affichage d'un distributeur
-//@fn IHMJustFeed::effacerEtatDistributeur
+	cpp_def "//@brief méthode qui efface les widgets des fenêtres d'affichage
+//@fn IHMJustFeed::effacerEtatsFenetre
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 188586 "chargerCarte"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 1
+	  param inout name "distributeur" type class_ref 128408 // Distributeur
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief charge la carte de localisation d'un distributeur
+//@param distributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203562 "chargerListeOperateurs"
+	preserve_cpp_body_indent private explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Charge la liste des opérateurs connus
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -2598,25 +2926,6 @@ ${body}}
 	
       end
 
-      operation 188586 "chargerCarte"
-	preserve_cpp_body_indent private explicit_return_type "void"
-	nparams 1
-	  param inout name "distributeur" type class_ref 128408 // Distributeur
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} * ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
-"
-	cpp_def "//@brief charge la carte de localisation d'un distributeur
-//@param distributeur
-//
-
-${inline}${typeprefix}${type} ${class}::${name}${(}${t0} * ${p0}${)}${const}${volatile}${throw}${staticnl}{
-${body}}
-"
-	
-	
-	
-	
-      end
-
       operation 130328 "IHMJustFeed"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -2627,7 +2936,7 @@ ${body}}
 	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} * ${p0}${)} :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
     configurationDistributeur(nullptr), planificationIntervention(nullptr),
-    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0), listeOperateurs(nullptr)
 ${throw}{
 ${body}}
 "
@@ -2950,6 +3259,7 @@ ${body}}
 	
 	
       end
+
     end
 
     class 128664 "typedef1"
@@ -2978,6 +3288,233 @@ ${inlines}
       explicit_switch_type ""
       mysql_decl ""
       
+      class 161578 "TableIntervention"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 186026 "ID"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186154 "ID_OPERATEUR"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186282 "ID_DISTRIBUTEUR"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186410 "DATE_INTERVENTION"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186538 "A_REMPLIR"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186666 "A_DEPANNER"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 186794 "ETAT"
+	  public type class_ref 161578 // TableIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 161706 "TableApprovisionnement"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 186922 "ID_APPROVISIONNEMENT"
+	  public type class_ref 161706 // TableApprovisionnement
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187050 "ID_INTERVENTION"
+	  public type class_ref 161706 // TableApprovisionnement
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187178 "ID_BAC"
+	  public type class_ref 161706 // TableApprovisionnement
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187306 "POIDS_A_PREVOIR"
+	  public type class_ref 161706 // TableApprovisionnement
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187434 "HEURE_APPROVISIONNEMENT"
+	  public type class_ref 161706 // TableApprovisionnement
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      class 161834 "EtatIntervention"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 187562 "INCONNU"
+	  public type class_ref 161834 // EtatIntervention
+	  init_value " -1"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187690 "A_FAIRE"
+	  public type class_ref 161834 // EtatIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187818 "VALIDEE"
+	  public type class_ref 161834 // EtatIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 187946 "EN_COURS"
+	  public type class_ref 161834 // EtatIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 188074 "NB_ETATS"
+	  public type class_ref 161834 // EtatIntervention
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
       classrelation 155306 // baseDeDonnees (<unidirectional association>)
 	relation 155306 --->
 	  a role_name "baseDeDonnees" private
@@ -3024,19 +3561,6 @@ ${inlines}
 "
 	    classrelation_ref 155434 // distributeurs (<unidirectional association>)
 	  b parent class_ref 128408 // Distributeur
-      end
-
-      attribute 163882 "effectuee"
-	private explicit_type "bool"
-	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
-"
-	java_decl ""
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< si l'intervention a été effectuée"
       end
 
       attribute 164010 "aRemplir"
@@ -3091,6 +3615,29 @@ ${inlines}
 	comment "!< id de l'opérateur"
       end
 
+      attribute 188202 "idDistributeur"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< id du distributeur au quel l'intervention appartient"
+      end
+
+      classrelation 162858 // etat (<directional composition>)
+	relation 162858 *-->
+	  a role_name "etat" private
+	    comment "!< etat de l'intervention"
+	    cpp default "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 162858 // etat (<directional composition>)
+	  b parent class_ref 161834 // EtatIntervention
+      end
+
       operation 177322 "Intervention"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 1
@@ -3102,8 +3649,38 @@ ${inlines}
 
 ${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}${)} :
     baseDeDonnees(BaseDeDonnees::getInstance()), dateIntervention(QDate::currentDate()),
-    distributeurs(listeDistributeursAIntervenir), effectuee(false), aRemplir(false),
-    aDepanner(false), idIntervention(INTERVENTION_PAS_DEFINIE), idOperateur()
+    distributeurs(listeDistributeursAIntervenir), aRemplir(false), aDepanner(false),
+    idIntervention(ID_INTERVENTION_NON_DEFINI), idOperateur(ID_OPERATEUR_NON_DEFINI),
+    idDistributeur(ID_DISTRIBUTEUR_NON_DEFINI), etat(INCONNU)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203690 "Intervention"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 7
+	  param in name "idIntervention" explicit_type "int"
+	  param in name "idOperateur" explicit_type "int"
+	  param in name "idDistributeur" explicit_type "int"
+	  param in name "dateIntervention" explicit_type "QDate"
+	  param in name "aRemplir" explicit_type "bool"
+	  param in name "aDepanner" explicit_type "bool"
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}, ${t5} ${p5}${v5}, ${t6} ${p6}${v6}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Constructeur de la classe Intervention
+//
+
+${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}${)} :
+    baseDeDonnees(BaseDeDonnees::getInstance()),
+    dateIntervention(dateIntervention), aRemplir(aRemplir), aDepanner(aDepanner),
+    idIntervention(idIntervention), idOperateur(idOperateur), idDistributeur(idDistributeur),
+    etat(Intervention::getEtat(etat))
 ${throw}{
 ${body}}
 "
@@ -3208,7 +3785,7 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Accesseur de l'attribut numeroIntervention
+	cpp_def "//@brief Accesseur de l'attribut idIntervention
 //@return int
 //
 
@@ -3239,13 +3816,67 @@ ${body}}
 	
       end
 
+      operation 203818 "getIdDistributeur"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut idDistributeur
+//@return int
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 203946 "getEtat"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut etat
+//@return QString formaté pour la base de données
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204074 "getEtatFormate"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Accesseur de l'attribut etat
+//@return QString formatée pour un affichage
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 178218 "estEffectuee"
 	preserve_cpp_body_indent const public explicit_return_type "bool"
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Accesseur de l'attribut effectuee
-//@return effectuee
+	cpp_def "//@brief Retourne l'état effectuee de l'intervention
+//@return bool
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -3262,8 +3893,8 @@ ${body}}
 	nparams 0
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Retourne un booléen si il faut intervenir sur au moins un distributeur
-//@return !effectuee
+	cpp_def "//@brief Retourne un booléen s'il faut intervenir
+//@return bool
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -3355,13 +3986,51 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "numeroIntervention" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Mutateur de l'attribut numeroIntervention
+	cpp_def "//@brief Mutateur de l'attribut idIntervention
 //@param numeroIntervention
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204202 "setIdDistributeur"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "numeroDistributeur" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut idDistributeur
+//@param numeroDistributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204330 "setEtat"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Mutateur de l'attribut etat
+//@param etat
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3390,10 +4059,17 @@ ${body}}
       end
 
       operation 179242 "effectuer"
-	public explicit_return_type "void"
+	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "effectuee" explicit_type "bool"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Modifie l'état de l'intervention
+//@param effectuee
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
 "
 	
 	
@@ -3407,8 +4083,8 @@ ${body}}
 	  param in name "aIntervenir" explicit_type "bool"
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Modifie l'état effectue de l'intervention
-//@param effectuee
+	cpp_def "//@brief Modifie l'état de l'intervention
+//@param aIntervenir
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
@@ -3426,7 +4102,6 @@ ${body}}
 	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Crée une nouvelle intervention
-//@return void
 //
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
@@ -3442,13 +4117,13 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "indexDistributeur" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
-	cpp_def "//@brief Modifie l'état de l'intervention si elle est à remplir, depanner ou les deux
-//@return void
+	cpp_def "//@brief Modifie l'état de l'intervention si elle est à remplir, à depanner ou les deux
+//@param indexDistributeur
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3461,13 +4136,14 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "int"
 	nparams 1
 	  param in name "indexDistributeur" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Insére une nouvelle intervention dans la bdd
+//@param indexDistributeur
 //@return int le numéro d'intervention ou -1 en cas d'échec
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3480,13 +4156,13 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "void"
 	nparams 1
 	  param in name "indexDistributeur" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Ajoute les approvisionnements nécessaires des bacs dans la bdd
-//@return void
+//@param indexDistributeur
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3499,13 +4175,13 @@ ${body}}
 	preserve_cpp_body_indent public explicit_return_type "int"
 	nparams 1
 	  param in name "idDistributeur" explicit_type "int"
-	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
 "
 	cpp_def "//@brief Vérifie si le distributeur a déja une intervention à faire ou en cours
 //@return bool l'idIntervention ou -1 sinon
 //
 
-${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
 "
 	
@@ -3513,6 +4189,89 @@ ${body}}
 	
 	
       end
+
+      operation 204458 "estBacAttribue"
+	preserve_cpp_body_indent public explicit_return_type "bool"
+	nparams 2
+	  param in name "idDistributeur" explicit_type "int"
+	  param in name "idBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Vérifie si le bac est deja attribué
+//@param idDistributeur
+//@param idBac
+//@return bool
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204586 "getEtat"
+	class_operation preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "etat" type class_ref 161834 // EtatIntervention
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne l'état sous forme de QString
+//@param etat
+//@return QString
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204714 "getEtat"
+	class_operation preserve_cpp_body_indent public return_type class_ref 161834 // EtatIntervention
+	nparams 1
+	  param in name "etat" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne l'état sous forme de EtatIntervention
+//@param etat
+//@return EtatIntervention
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 204842 "getEtatFormate"
+	class_operation preserve_cpp_body_indent public explicit_return_type "QString"
+	nparams 1
+	  param in name "etat" type class_ref 161834 // EtatIntervention
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief Retourne l'état sous forme de QString
+//@param etat
+//@return QString
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
     end
 
     class 128920 "Serveur"
@@ -5616,7 +6375,7 @@ ${body}}
     end
 
     class 148138 "PlanificationIntervention"
-      visibility package 
+      visibility package stereotype "QDialog"
       cpp_decl "${comment}${template}class ${name}${inherit} {
 ${members}};
 ${inlines}
@@ -6164,6 +6923,46 @@ ${body}}
 	
       end
 
+      operation 206506 "bacEstAttribueRemplissage"
+	preserve_cpp_body_indent private explicit_return_type "bool"
+	nparams 2
+	  param in name "idDistributeur" explicit_type "int"
+	  param in name "idBac" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}, const ${t1} ${p1}${v1}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief verifie si le bac est attribué
+//@param idDistributeur
+//@param idBac
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}, const ${t1} ${p1}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 206634 "distributeurEstAttribueDepannage"
+	preserve_cpp_body_indent private explicit_return_type "bool"
+	nparams 1
+	  param in name "idDistributeur" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "//@brief verifie si le distributeur est deja a depanner
+//@param idDistributeur
+//
+
+${inline}${typeprefix}${type} ${class}::${name}${(}const ${t0} ${p0}${)}${const}${volatile}${throw}${staticnl}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
       operation 181418 "PlanificationIntervention"
 	preserve_cpp_body_indent public explicit_return_type ""
 	nparams 2
@@ -6266,6 +7065,346 @@ ${body}}
 
 ${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
 ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 161450 "Operateur"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      class 161962 "TableOperateur"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}};
+"
+	java_decl ""
+	php_decl ""
+	python_2_2 python_decl ""
+	idl_decl ""
+	explicit_switch_type ""
+	mysql_decl ""
+	
+	attribute 188330 "ID"
+	  public type class_ref 161962 // TableOperateur
+	  init_value " 0"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 188458 "NOM"
+	  public type class_ref 161962 // TableOperateur
+	  init_value " 1"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 188586 "PRENOM"
+	  public type class_ref 161962 // TableOperateur
+	  init_value " 2"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 188714 "IDENTIFIANT"
+	  public type class_ref 161962 // TableOperateur
+	  init_value " 3"
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+
+	attribute 188842 "EMAIL"
+	  public type class_ref 161962 // TableOperateur
+	  init_value " 4
+    "
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	  mysql_decl ""
+	  MysqlColumn
+	end
+      end
+
+      attribute 188970 "id"
+	private explicit_type "int"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< id de l'operateur"
+      end
+
+      attribute 189098 "nom"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< nom de l'operateur"
+      end
+
+      attribute 189226 "prenom"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< prenom de l'operateur"
+      end
+
+      attribute 189354 "identifiant"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< identifiant de l'operateur"
+      end
+
+      attribute 189482 "email"
+	private explicit_type "QString"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< email de l'operateur"
+      end
+
+      operation 204970 "Operateur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 5
+	  param in name "idOperateur" explicit_type "int"
+	  param in name "nom" explicit_type "QString"
+	  param in name "prenom" explicit_type "QString"
+	  param in name "identifiant" explicit_type "QString"
+	  param in name "email" explicit_type "QString"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}, ${t1} ${p1}${v1}, ${t2} ${p2}${v2}, ${t3} ${p3}${v3}, ${t4} ${p4}${v4}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)} :
+    id(idOperateur),
+    nom(nom), prenom(prenom), identifiant(identifiant), email(email)
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205098 "Operateur"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "operateur" explicit_type "QStringList"
+	cpp_decl "    ${comment}${inline}${name}${(}const ${t0} ${p0}${v0}${)}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${class}::${name}${(}const ${t0} ${p0}${)} :
+    id(operateur.at(TableOperateur::ID).toInt()), nom(operateur.at(TableOperateur::NOM)),
+    prenom(operateur.at(TableOperateur::PRENOM)),
+    identifiant(operateur.at(TableOperateur::IDENTIFIANT)),
+    email(operateur.at(TableOperateur::EMAIL))
+${throw}{
+${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205226 "getId"
+	preserve_cpp_body_indent const public explicit_return_type "int"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205354 "getNom"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205482 "getPrenom"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205610 "getIdentifiant"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205738 "getEmail"
+	preserve_cpp_body_indent const public explicit_return_type "QString"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205866 "setId"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "idOperateur" explicit_type "int"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 205994 "setNom"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "nom" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 206122 "setPrenom"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "prenom" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 206250 "setIdentifiant"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "identifiant" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 206378 "setEmail"
+	preserve_cpp_body_indent public explicit_return_type "void"
+	nparams 1
+	  param in name "email" explicit_type "QString"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${typeprefix}${type} ${name}${(}const ${t0} ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${typeprefix}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
 "
 	
 	
@@ -6558,6 +7697,29 @@ ${members}
 ${namespace_end}"
       associated_elems
 	class_ref 148138 // PlanificationIntervention
+      end
+    end
+
+    artifact 154410 "operateur"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 161450 // Operateur
       end
     end
   end
