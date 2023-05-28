@@ -1,7 +1,5 @@
 class Intervention
-!!!142890.java!!!	Intervention()
-        this.distributeur = null;
-!!!143018.java!!!	Intervention(in dateIntervention : String, inout distributeur : Distributeur, inout etat : Intervention::Etats, inout aRemplir : boolean, inout aDepanner : boolean)
+!!!169642.java!!!	Intervention(in dateIntervention : String, inout distributeur : Distributeur, inout etat : Intervention::Etats, in idOperateur : int, in idIntervention : int, inout aRemplir : boolean, inout aDepanner : boolean)
         Log.d(TAG,
               "Intervention() dateIntervention = " + dateIntervention +
                 " - nomdistributeur = " + distributeur.getNom() + " - état = " + etat +
@@ -9,12 +7,18 @@ class Intervention
         this.dateIntervention = dateIntervention;
         this.distributeur     = distributeur;
         this.etat             = etat;
+        this.idOperateur      = idOperateur;
+        this.idIntervention   = idIntervention;
         this.aRemplir         = aRemplir;
         this.aDepanner        = aDepanner;
 !!!143146.java!!!	getDateIntervention() : String
         return this.dateIntervention;
 !!!143274.java!!!	getIdentifiantDistribteur() : int
         return this.distributeur.getIdentifiant();
+!!!169770.java!!!	getIdOperateur() : int
+        return this.idOperateur;
+!!!169898.java!!!	getIdIntervention() : int
+        return this.idIntervention;
 !!!143402.java!!!	getNomDistribteur() : String
         return this.distributeur.getNom();
 !!!154154.java!!!	getEtat() : Intervention::Etats

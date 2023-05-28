@@ -9,21 +9,63 @@
   - [Resources logicielles](#resources-logicielles)
   - [Base de données](#base-de-donn%C3%A9es)
   - [MQTT](#mqtt)
+    - [Données](#donn%C3%A9es)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
   - [Versions](#versions)
+    - [1.0](#10)
     - [0.2](#02)
     - [0.1](#01)
+  - [Diagramme de classes](#diagramme-de-classes)
+  - [Planification](#planification)
   - [Auteurs](#auteurs)
 
+![](images/logo.png)
 
 ---
 
 Le système doit permettre de surveiller à distance des distributeurs automatiques (café, fruits secs, céréales, …) afin d’optimiser le processus de réapprovisionnement.
 
+![](images/operateur.png)
+
 - Chaque distributeur automatique est équipé de capteurs et d’une carte embarquée (The Things Uno ou modèle équivalent) communiquant via LoRaWan avec un serveur The Things Network. [Étudiants EC]
+
+![](images/modules.png)
+
 - Une application **PC Desktop** supervise l’ensemble des distributeurs afin de déterminer leur état d’approvisionnement. Les données sont reçues au format JSON par le protocole MQTT via le réseau _The Things Network_. [Étudiants IR]
 - Une application mobile pour **Android** permettra aux opérateurs d’assurer leur intervention (géolocalisation, parcours, type de produits à réapprovisionner, validation de l’intervention, ...). [Étudiant IR]
+
+![](images/synoptique.png)
+
+- Android :
+
+![](images/uc-android.png)
+
+
+| Fonctionnalité (Android)                         | Oui | Non |
+| ------------------------------------------------ |:---:|:---:|
+| Lister les distributeurs                                |  X  |     |
+| Visualiser l'état d'un distributeur                             |  /  |     |
+| Réaliser une intervention                                 |  X  |     |
+| Visualiser une intervention               |  X  |     |
+| Valider une intervention                            |  X  |     |
+| Dialoguer avec les distributeurs                       |  /  |     |
+
+
+- Desktop Qt :
+
+![](images/uc-desktop.png)
+
+
+| Fonctionnalité (Android)                         | Oui | Non |
+| ------------------------------------------------ |:---:|:---:|
+| Lister les distributeurs                                |  X  |     |
+| Visualiser l'état d'un distributeur                             |  /  |     |
+| Planifier une intervention                                 |  X  |     |
+| Visualiser une intervention               |  X  |     |
+| Configurer les distributeurs                            |  /  |     |
+| Dialoguer avec les distributeurs                       |  /  |     |
+| Visualiser les statistiques                       |    |     |
 
 ## Documentation du code
 
@@ -52,10 +94,12 @@ https://btssn-lasalle-84.github.io/just-feed-2023/
 
 Base de données MySQL 8.0 `justfeed` hébergée sur www.db4free.net (pour les tests) :
 
-![](sql/justfeed-v0.1.png)
+![](sql/justfeed-v0.2.png)
 
 ```sql
 -- LDD (langage de définition de données)
+
+-- Voir aussi : https://www.db4free.net/phpMyAdmin/
 
 DROP DATABASE IF EXISTS `justfeed`;
 
@@ -75,6 +119,8 @@ DROP TABLE IF EXISTS Distributeur;
 DROP TABLE IF EXISTS Operateur;
 DROP TABLE IF EXISTS ServeurTTN;
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `ServeurTTN`
 --
@@ -89,6 +135,8 @@ CREATE TABLE `ServeurTTN` (
   `estActif` int DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `Operateur`
 --
@@ -100,6 +148,8 @@ CREATE TABLE `Operateur` (
   `identifiant` varchar(255) DEFAULT NULL,
   `email` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `Distributeur`
@@ -128,6 +178,8 @@ ALTER TABLE `Distributeur`
 ALTER TABLE `Distributeur`
   ADD CONSTRAINT `Distributeur_fk_1` FOREIGN KEY (`idServeurTTN`) REFERENCES `ServeurTTN` (`idServeurTTN`) ON DELETE CASCADE;
 
+-- --------------------------------------------------------
+
 --
 -- Structure de la table `Produit`
 --
@@ -145,6 +197,8 @@ CREATE TABLE `Produit` (
 
 ALTER TABLE `Produit`
   ADD UNIQUE KEY `codeEAN` (`codeEAN`);
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `Bac`
@@ -167,6 +221,8 @@ ALTER TABLE `Bac`
 ALTER TABLE `Bac`
   ADD CONSTRAINT `Bac_fk_1` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`) ON DELETE CASCADE,
   ADD CONSTRAINT `Bac_fk_2` FOREIGN KEY (`idProduit`) REFERENCES `Produit` (`idProduit`) ON DELETE CASCADE;
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `Intervention`
@@ -191,6 +247,8 @@ ALTER TABLE `Intervention`
 
 ALTER TABLE `Intervention`
   ADD CONSTRAINT `Intervention_fk_2` FOREIGN KEY (`idDistributeur`) REFERENCES `Distributeur` (`idDistributeur`);
+
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `Approvisionnement`
@@ -218,6 +276,13 @@ ALTER TABLE `Approvisionnement`
 
 Voir aussi : [modules-lora/README.md](modules-lora/README.md)
 
+![](images/app-ttn.png)
+
+![](images/livedata-ttn.png)
+
+### Données
+
+![](images/donnees-ttn.png)
 ### Qt MQTT
 
 [Qt MQTT](https://doc.qt.io/QtMQTT/index.html) fournit une implémentation conforme à la norme MQTT.
@@ -345,6 +410,32 @@ dependencies {
 
 ![](images/livraisons.png)
 
+### 1.0
+
+- Android :
+
+![](images/screenshot-justfeed-android-distributeur-v0.2.png)
+
+![](images/screenshot-justfeed-android-interventions-v1.0.png)
+
+![](images/screenshot-justfeed-android-interventions-v0.2.png)
+
+![](images/screenshot-justfeed-android-interventions-validees-v1.0.png)
+
+![](images/screenshot-justfeed-android-interventions-afaire-v1.0.png)
+
+![](images/screenshot-justfeed-android-interventions-encours-v1.0.png)
+
+- PC Desktop Qt :
+
+![](images/screenshot-justfeed-qt-distributeurs-v0.2.png)
+
+![](images/screenshot-justfeed-qt-distributeur-v0.2.png)
+
+![](images/screenshot-justfeed-qt-configuration-v0.1.png)
+
+![](images/screenshot-justfeed-qt-interventions-v0.2.png)
+
 ### 0.2
 
 ![](images/jira-tickets-v0.2.png)
@@ -381,13 +472,31 @@ dependencies {
 
 ![](images/screenshot-justfeed-qt-configuration-v0.1.png)
 
+## Diagramme de classes
+
+- Android :
+
+![](images/dc-justfeed-android.png)
+
+- Qt Desktop :
+
+![](images/dc-justfeed-qt.png)
+
+## Planification
+
+![](images/gantt-1.png)
+
+![](images/gantt-2.png)
+
+![](images/gantt-3.png)
+
 ## Auteurs
 
 Étudiants IR :
 
 - Matthieu SALAUN <matthieusalaun30@gmail.com>
-- Nicolas ROUANET
-- Mayeul FARGIER
+- Nicolas ROUANET <rouanet.nicolas.pro@gmail.com>
+- Mayeul FARGIER <mayeulfargier.pro@gmail.com>
 
 ---
 ©️ LaSalle Avignon 2023

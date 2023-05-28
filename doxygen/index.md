@@ -1,10 +1,10 @@
 \mainpage A propos
 
-\author Matthieu Salaun <matthieu.salaun30@gmail.com>>
-\author Nicolas Rouanet <<rouanet.nicolas.pro@gmail.com>>
-\author Mayeul Fargier <mayeulfargier.pro@gmail.com>>
+\author Matthieu Salaun <matthieu.salaun30@gmail.com>
+\author Nicolas Rouanet <rouanet.nicolas.pro@gmail.com>
+\author Mayeul Fargier <mayeulfargier.pro@gmail.com>
 \date 2023
-\version 0.2
+\version 1.0
 \see https://github.com/btssn-lasalle-84/just-feed-2023
 
 
