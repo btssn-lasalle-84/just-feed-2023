@@ -16,10 +16,10 @@ class ListeDeroulanteGestionnaire
                 case TERMINER:
                     Log.d(TAG, "Terminer");
                     ActiviteInterventions.modifierEtatIntervention(
-                      "UPDATE `Intervention` SET `etat` = 'VALIDEES' WHERE `Intervention`.`idDistributeur` = " +
+                      "UPDATE `Intervention` SET `etat` = 'VALIDEE' WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
-                      Intervention.Etats.VALIDEES);
+                      Intervention.Etats.VALIDEE);
                     break;
                 case DEMARRER:
                     Log.d(TAG, "Démarrer");
@@ -44,13 +44,6 @@ class ListeDeroulanteGestionnaire
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
                       Intervention.Etats.A_FAIRE);
-                    break;
-                case SUPPRIMER:
-                    Log.d(TAG, "Supprimer");
-                    ActiviteInterventions.supprimerIntervention(
-                      "DELETE FROM `Intervention` WHERE `Intervention`.`idDistributeur` = " +
-                        intervention.getIdentifiantDistribteur() + ";",
-                      intervention);
                     break;
             }
         }

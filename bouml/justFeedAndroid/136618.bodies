@@ -4,13 +4,57 @@ class JustFeed
         setContentView(R.layout.justfeed);
         Log.d(TAG, "onCreate()");
 
-        initialiserGUI();
+        chargerPreferences();
+
+        initialiserVueListeDistributeurs();
         initialiserHandler();
         initialiserBaseDeDonnees();
-        chargerPreferences();
 
         baseDeDonnees.recupererOperateurs();
         baseDeDonnees.recupererDistributeurs();
+!!!161322.java!!!	onCreateOptionsMenu(inout menu : Menu) : boolean
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+
+        return true;
+!!!170026.java!!!	onPrepareOptionsMenu(inout menu : Menu) : boolean
+        SubMenu sousMenu = menu.getItem(INDEX_MENU_OPERATEURS).getSubMenu();
+        sousMenu.clear();
+
+        if(listeOperateurs != null)
+        {
+            int index = 0;
+            for(Operateur operateur: listeOperateurs)
+            {
+                sousMenu.add(NONE, operateur.getIdOperateur(), NONE, operateur.getIdentifiant());
+                if(operateur.getIdOperateur() == idOperateur)
+                {
+                    sousMenu.getItem(index).setChecked(true);
+                    SpannableString s =
+                      new SpannableString(sousMenu.getItem(index).getTitle().toString());
+                    s.setSpan(new ForegroundColorSpan(Color.RED), 0, s.length(), 0);
+                    sousMenu.getItem(index).setTitle(s);
+                }
+                ++index;
+            }
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+!!!161450.java!!!	onOptionsItemSelected(inout item : MenuItem) : boolean
+        switch(item.getItemId())
+        {
+            case R.id.interventions:
+                lancerActiviteIntervention();
+                return true;
+            case R.id.aPropos:
+                afficherAPropos();
+                return true;
+            default:
+                idOperateur = item.getItemId();
+                sauvegarderIdOperateur();
+        }
+
+        return super.onOptionsItemSelected(item);
 !!!144810.java!!!	onStart() : void
         super.onStart();
         Log.d(TAG, "onStart()");
@@ -26,12 +70,9 @@ class JustFeed
         super.onStop();
         Log.d(TAG, "onStop()");
 !!!145322.java!!!	onDestroy() : void
-        super.onDestroy();
         Log.d(TAG, "onDestroy()");
-
         enregistrerPreferences();
-!!!145450.java!!!	initialiserGUI() : void
-        initialiserVueListeDistributeurs();
+        super.onDestroy();
 !!!145578.java!!!	initialiserBaseDeDonnees() : void
         // Récupère l'instance de BaseDeDonnees
         baseDeDonnees = BaseDeDonnees.getInstance(handler);
@@ -61,13 +102,6 @@ class JustFeed
                 {
                     case BaseDeDonnees.CONNEXION_OK:
                         Log.d(TAG, "[Handler] CONNEXION_OK");
-                        /**
-                         * Exemples de requêtes
-                         *
-                         * baseDeDonnees.executerRequete("UPDATE Distributeur SET hygrometrie = '18'
-                         * WHERE Distributeur.idDistributeur = '1'");
-                         * baseDeDonnees.selectionner("SELECT * FROM Distributeur");
-                         */
                         break;
                     case BaseDeDonnees.CONNEXION_ERREUR:
                         Log.d(TAG, "[Handler] CONNEXION_ERREUR");
@@ -93,119 +127,46 @@ class JustFeed
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_OPERATEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
-                        creerListeOperateurs((ArrayList)message.obj);
-                        break;
+                        listeOperateurs = (ArrayList)message.obj;
+                        invalidateOptionsMenu();
                 }
             }
         };
-!!!161066.java!!!	chargerPreferences() : boolean
-        int idOperateur = OPERATEUR_NON_DEFINI;
-
-        preferences = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
-        if(preferences.contains(PREFERENCES_ID_OPERATEUR))
-        {
-            idOperateur = preferences.getInt(PREFERENCES_ID_OPERATEUR, OPERATEUR_NON_DEFINI);
-        }
-        Log.d(TAG, "chargerPreferences() idOperateur = " + idOperateur);
+!!!170154.java!!!	lancerActiviteIntervention() : void
         if(idOperateur != OPERATEUR_NON_DEFINI)
         {
-            if(listeOperateurs != null)
-            {
-                operateurSelectionne = OPERATEUR_NON_DEFINI;
-                for(int i = 0; i < listeOperateurs.size(); ++i)
-                {
-                    if(idOperateur == listeOperateurs.get(i).getIdOperateur())
-                    {
-                        operateurSelectionne = i;
-                        Log.d(TAG,
-                              "chargerPreferences() operateurSelectionne = " +
-                                operateurSelectionne);
-                        break;
-                    }
-                }
-            }
-            return true;
+            Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+            activiteIntervention.putExtra("idOperateur", idOperateur);
+            startActivity(activiteIntervention);
         }
         else
         {
-            return false;
+            afficherMessage("JustFeed", "Il faut sélectionner un opérateur dans le menu !");
         }
+!!!170282.java!!!	recupererIdOperateur() : void
+        if(preferencesPartagees.contains(PREFERENCES_ID_OPERATEUR))
+        {
+            idOperateur =
+              preferencesPartagees.getInt(PREFERENCES_ID_OPERATEUR, OPERATEUR_NON_DEFINI);
+            Log.d(TAG, "recupererIdOperateur() idOperateur = " + idOperateur);
+        }
+!!!170410.java!!!	sauvegarderIdOperateur() : void
+        Log.d(TAG, "sauvegarderIdOperateur() idOperateur = " + idOperateur);
+        preferencesPartagees.edit().putInt(PREFERENCES_ID_OPERATEUR, idOperateur).apply();
+!!!161066.java!!!	chargerPreferences() : void
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        recupererIdOperateur();
 !!!161194.java!!!	enregistrerPreferences() : void
-        if(operateurSelectionne != OPERATEUR_NON_DEFINI)
-        {
-            Log.d(TAG,
-                  "enregistrerPreferences() idOperateur = " +
-                    listeOperateurs.get(operateurSelectionne).getIdOperateur());
-            preferences.edit()
-              .putInt(PREFERENCES_ID_OPERATEUR,
-                      listeOperateurs.get(operateurSelectionne).getIdOperateur())
-              .apply();
-        }
-!!!161322.java!!!	onCreateOptionsMenu(inout menu : Menu) : boolean
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-!!!161450.java!!!	onOptionsItemSelected(inout item : MenuItem) : boolean
-        switch(item.getItemId())
-        {
-            case R.id.operateurs:
-                selectionnerOperateur();
-                return true;
-            case R.id.interventions:
-                demarrerActiviteInterventions();
-                return true;
-            case R.id.aPropos:
-                afficherAPropos();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-!!!161578.java!!!	demarrerActiviteInterventions() : void
-        Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
-        startActivity(activiteIntervention);
-!!!161706.java!!!	creerListeOperateurs(inout listeOperateurs : List<Operateur>) : void
-        this.listeOperateurs = listeOperateurs;
-        nomsOperateurs       = new String[listeOperateurs.size()];
-        for(int i = 0; i < listeOperateurs.size(); ++i)
-        {
-            nomsOperateurs[i] =
-              listeOperateurs.get(i).getNom() + " " + listeOperateurs.get(i).getPrenom();
-        }
-!!!161834.java!!!	selectionnerOperateur() : void
-        chargerPreferences();
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
-        alertDialog.setTitle("Sélectionner l'opérateur :");
-        final int[] checkedItem = { operateurSelectionne };
-        alertDialog.setSingleChoiceItems(nomsOperateurs,
-                                         operateurSelectionne,
-                                         new DialogInterface.OnClickListener() {
-                                             @Override
-                                             public void onClick(DialogInterface dialog, int which)
-                                             {
-                                                 checkedItem[0] = which;
-                                             }
-                                         });
-        alertDialog.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which)
-            {
-                operateurSelectionne = checkedItem[0];
-                Log.d(TAG,
-                      "selectionnerOperateur() " + operateurSelectionne + " -> " +
-                        nomsOperateurs[operateurSelectionne]);
-                enregistrerPreferences();
-            }
-        });
-        alertDialog.setNegativeButton("Annuler", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which)
-            {
-            }
-        });
-        AlertDialog alert = alertDialog.create();
-        alert.setCanceledOnTouchOutside(false);
-        alert.show();
+        if(preferencesPartagees == null)
+            preferencesPartagees = getBaseContext().getSharedPreferences(PREFERENCES, MODE_PRIVATE);
+        sauvegarderIdOperateur();
 !!!161962.java!!!	afficherAPropos() : void
+        afficherMessage("JustFeed 2023", "BTS SN LaSalle Avignon\nFARGIER Mayeul");
+!!!170538.java!!!	afficherMessage(in titre : String, in message : String) : void
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(JustFeed.this);
-        alertDialog.setTitle("JustFeed 2023");
-        alertDialog.setMessage("BTS SN LaSalle Avignon\nFARGIER Mayeul");
+        alertDialog.setTitle(titre);
+        alertDialog.setMessage(message);
         alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which)
             {

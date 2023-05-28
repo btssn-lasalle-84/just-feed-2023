@@ -2,6 +2,10 @@ class Intervention
 !!!177322.cpp!!!	Intervention(in listeDistributeursAIntervenir : QVector<Distributeur*>)
     qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention << "nb distributeurs"
              << listeDistributeursAIntervenir.size();
+!!!203690.cpp!!!	Intervention(in idIntervention : int, in idOperateur : int, in idDistributeur : int, in dateIntervention : QDate, in aRemplir : bool, in aDepanner : bool, in etat : QString)
+    qDebug() << Q_FUNC_INFO << "dateIntervention" << dateIntervention << "idIntervention"
+             << idIntervention << "idOperateur" << idOperateur << "idDistributeur" << idDistributeur
+             << "aRemplir" << aRemplir << "aDepanner" << aDepanner << "etat" << etat;
 !!!130840.cpp!!!	~Intervention()
     qDebug() << Q_FUNC_INFO;
 !!!177450.cpp!!!	getDateIntervention() : QDate
@@ -16,10 +20,22 @@ class Intervention
     return idIntervention;
 !!!178090.cpp!!!	getIdOperateur() : int
     return this->idOperateur;
+!!!203818.cpp!!!	getIdDistributeur() : int
+    return this->idDistributeur;
+!!!203946.cpp!!!	getEtat() : QString
+    return Intervention::getEtat(this->etat);
+!!!204074.cpp!!!	getEtatFormate() : QString
+    return Intervention::getEtatFormate(this->etat);
 !!!178218.cpp!!!	estEffectuee() : bool
-    return this->effectuee;
+    if(etat == VALIDEE)
+        return true;
+    else
+        return false;
 !!!178346.cpp!!!	estAIntervenir() : bool
-    return !this->effectuee;
+    if(etat == A_FAIRE)
+        return true;
+    else
+        return false;
 !!!178474.cpp!!!	setDateIntervention(in dateIntervention : QDate) : void
     this->dateIntervention = dateIntervention;
 !!!178602.cpp!!!	setARemplir(in aRemplir : bool) : void
@@ -30,10 +46,19 @@ class Intervention
     this->idOperateur = idOperateur;
 !!!178986.cpp!!!	setIdIntervention(in numeroIntervention : int) : void
     this->idIntervention = numeroIntervention;
+!!!204202.cpp!!!	setIdDistributeur(in numeroDistributeur : int) : void
+    this->idDistributeur = numeroDistributeur;
+!!!204330.cpp!!!	setEtat(in etat : QString) : void
+    this->etat = Intervention::getEtat(etat);
 !!!179114.cpp!!!	ajouterDistributeur(inout distributeur : Distributeur) : void
     this->distributeurs.push_back(distributeur);
+!!!179242.cpp!!!	effectuer(in effectuee : bool) : void
+    if(effectuee)
+        this->etat = VALIDEE;
+    else
+        this->etat = A_FAIRE;
 !!!179370.cpp!!!	intervenir(in aIntervenir : bool) : void
-    this->effectuee = !aIntervenir;
+    effectuer(!aIntervenir);
 !!!179498.cpp!!!	creer() : void
     for(int i = 0; i < distributeurs.size(); i++)
     {
@@ -42,7 +67,7 @@ class Intervention
                  << this->getARemplir() << "aDepanner" << this->getADepanner();
         this->idIntervention = ajouterIntervention(i);
     }
-    if(this->idIntervention != INTERVENTION_PAS_DEFINIE)
+    if(this->idIntervention != ID_INTERVENTION_NON_DEFINI)
     {
         intervenir(true);
         for(int i = 0; i < distributeurs.size(); ++i)
@@ -85,7 +110,7 @@ class Intervention
     QString requete;
     if(this->getARemplir() || this->getADepanner())
     {
-        if(numeroIntervention == INTERVENTION_PAS_DEFINIE)
+        if(numeroIntervention == ID_INTERVENTION_NON_DEFINI)
         {
             requete = "INSERT INTO Intervention (idOperateur, idDistributeur, dateIntervention, "
                       "etat, aRemplir, aDepanner) VALUES (" +
@@ -106,7 +131,7 @@ class Intervention
             if(conversion)
                 return numeroIntervention;
             else
-                return INTERVENTION_PAS_DEFINIE;
+                return ID_INTERVENTION_NON_DEFINI;
         }
 
         if(this->getADepanner())
@@ -115,6 +140,7 @@ class Intervention
                       QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
+            //!< @todo update l'operateur si il a changé
         }
 
         if(this->getARemplir())
@@ -123,21 +149,22 @@ class Intervention
                       QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
+            //!< @todo update l'operateur si il a changé
         }
     }
 
     return numeroIntervention;
 !!!179882.cpp!!!	ajouterApprovisionnement(in indexDistributeur : int) : void
-    /**
-     * @todo Améliorer la gestion des approvisionnements pour des interventions (à faire et en
-     * cours) déjà plainifiées
-     */
-    QString requete;
+    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QVector<QString> listeDeBacPlanifie;
+    baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
+
     for(int j = 0; j < distributeurs[indexDistributeur]->getNbBacs(); j++)
     {
         if(distributeurs[indexDistributeur]->getBac(j)->getARemplir() &&
-           !distributeurs[indexDistributeur]->getBac(j)->getAIntervenir())
+           !estBacAttribue(indexDistributeur, j))
         {
+            qDebug() << Q_FUNC_INFO << "bacEstAttribue" << estBacAttribue(indexDistributeur, j);
             if(estPlanifiee(distributeurs[indexDistributeur]->getId()))
             {
                 requete = "INSERT INTO Approvisionnement (idIntervention, idBac, "
@@ -150,7 +177,6 @@ class Intervention
                           ", " + "'');";
                 qDebug() << Q_FUNC_INFO << "requete" << requete;
                 baseDeDonnees->executer(requete);
-                distributeurs[indexDistributeur]->getBac(j)->setAIntervenir(true);
             }
         }
     }
@@ -169,4 +195,44 @@ class Intervention
             return idInterventionsBdd[i].at(0).toInt();
         }
     }
-    return INTERVENTION_PAS_DEFINIE;
+    return ID_INTERVENTION_NON_DEFINI;
+!!!204458.cpp!!!	estBacAttribue(in idDistributeur : int, in idBac : int) : bool
+    /**
+     * @todo Cette requête me semble insuffisante
+     */
+    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QVector<QString> listeDeBacPlanifie;
+    baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+
+    for(int i = 0; i < listeDeBacPlanifie.size(); i++)
+    {
+        if(listeDeBacPlanifie[i].toInt() ==
+           distributeurs[idDistributeur]->getBac(idBac)->getIdBac())
+        {
+            return true;
+        }
+    }
+    return false;
+!!!204586.cpp!!!	getEtat(in etat : Intervention::EtatIntervention) : QString
+    if(etat >= A_FAIRE && etat < NB_ETATS)
+    {
+        QVector<QString> etats = { "A_FAIRE", "VALIDEE", "EN_COURS" };
+        return etats[etat];
+    }
+    return QString();
+!!!204714.cpp!!!	getEtat(in etat : QString) : Intervention::EtatIntervention
+    QVector<QString> etats = { "A_FAIRE", "VALIDEE", "EN_COURS" };
+    for(int i = 0; i < etats.size(); ++i)
+    {
+        if(etats[i] == etat)
+            return EtatIntervention(i);
+    }
+    return INCONNU;
+!!!204842.cpp!!!	getEtatFormate(in etat : Intervention::EtatIntervention) : QString
+    if(etat >= A_FAIRE && etat < NB_ETATS)
+    {
+        QVector<QString> etats = { "À FAIRE", "VALIDÉE", "EN COURS" };
+        return etats[etat];
+    }
+    return QString();

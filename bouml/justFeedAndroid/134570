@@ -1,6 +1,6 @@
 format 224
 "justfeedandroid" // justfeedandroid
-  revision 7
+  revision 8
   modified_by 42 "tv"
   // class settings
   
@@ -53,14 +53,23 @@ format 224
     activitydiagramsettings
      end
     class 134570 "ActiviteInterventions"
-      visibility public 
-      cpp_decl ""
+      visibility public stereotype "activity"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
 "
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       mysql_decl ""
       
@@ -161,6 +170,19 @@ Attributs
 "
 	    classrelation_ref 144042 // etat (<unidirectional association>)
 	  b parent class_ref 148354 // Etats
+      end
+
+      attribute 167082 "idOperateur"
+	class_attribute private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Identifiant de l'opérateur"
       end
 
       classrelation 134698 // listeInterventions (<unidirectional association>)
@@ -437,21 +459,6 @@ des interventions
 "
       end
 
-      operation 134914 "supprimerIntervention"
-	class_operation public explicit_return_type "void"
-	nparams 2
-	  param in name "requete" explicit_type "String"
-	  param inout name "intervention" type class_ref 134826 // Intervention
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Supprimer une intervention
-"
-      end
     end
 
     class 134826 "Intervention"
@@ -519,10 +526,10 @@ ${members}}
 	  MysqlColumn
 	end
 
-	attribute 144386 "VALIDEES"
+	attribute 167210 "VALIDEE"
 	  public type class_ref 148354 // Etats
 	  cpp_decl ""
-	  java_decl "  ${@}${name}(\"Validées\"),${comment}"
+	  java_decl "  ${@}${name}(\"Validée\"),${comment}"
 	  php_decl ""
 	  python_decl ""
 	  idl_decl ""
@@ -603,6 +610,7 @@ ${members}}
 
       attribute 140970 "dateIntervention"
 	private explicit_type "String"
+	init_value " \"\""
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -618,7 +626,7 @@ ${members}}
 
       classrelation 136490 // distributeur (<unidirectional association>)
 	relation 136490 --->
-	  a role_name "distributeur" private
+	  a role_name "distributeur" init_value " null" private
 	    comment "!< Distributeur où intervenir."
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -629,15 +637,45 @@ ${members}}
       classrelation 144170 // etat (<unidirectional association>)
 	relation 144170 --->
 	  a role_name "etat" private
-	    comment "!< Les états d'une intervention."
+	    comment "!< L'état d'une intervention."
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 144170 // etat (<unidirectional association>)
 	  b parent class_ref 148354 // Etats
       end
 
+      attribute 167338 "idOperateur"
+	private explicit_type "int"
+	init_value "
+      JustFeed
+        .OPERATEUR_NON_DEFINI"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< L'identifiant de l'opérateur qui s'occupe de l'intervention"
+      end
+
+      attribute 167466 "idIntervention"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Identifiant de l'intervention"
+      end
+
       attribute 141226 "aRemplir"
 	private explicit_type "boolean"
+	init_value " false"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -651,6 +689,7 @@ ${members}}
 
       attribute 141354 "aDepanner"
 	private explicit_type "boolean"
+	init_value " false"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -662,30 +701,18 @@ ${members}}
 	comment "!< Si l'intervention consiste à dépanner."
       end
 
-      operation 142890 "Intervention"
+      operation 169642 "Intervention"
 	public explicit_return_type ""
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Constructeur par défaut de classe Intervention.
-"
-      end
-
-      operation 143018 "Intervention"
-	public explicit_return_type ""
-	nparams 5
+	nparams 7
 	  param in name "dateIntervention" explicit_type "String"
 	  param inout name "distributeur" type class_ref 135850 // Distributeur
 	  param inout name "etat" type class_ref 148354 // Etats
+	  param in name "idOperateur" explicit_type "int"
+	  param in name "idIntervention" explicit_type "int"
 	  param inout name "aRemplir" explicit_type "boolean"
 	  param inout name "aDepanner" explicit_type "boolean"
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} ${p5}, ${t6} ${p6}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -695,6 +722,8 @@ ${members}}
 @param dateIntervention
 @param distributeur
 @param etat
+@param idOperateur
+@param idIntervention
 @param aRemplir
 @param aDepanner
 "
@@ -712,8 +741,8 @@ ${members}}
 	
 	comment " Accesseurs
 
-@brief Méthode d'accés à l'heure d'intervention.
-@return l'heure de l'intervention.
+@brief Méthode d'accés à la date d'intervention.
+@return la date de l'intervention.
 "
       end
 
@@ -729,6 +758,36 @@ ${members}}
 	
 	comment "@brief Méthode d'accés à l'identifiant du distributeur.
 @return l'identifiant du distributeur.
+"
+      end
+
+      operation 169770 "getIdOperateur"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accés à l'identifiant de l'opérateur
+@return l'identifiant de l'opérateur
+"
+      end
+
+      operation 169898 "getIdIntervention"
+	public explicit_return_type "int"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode d'accès à l'identifiant de l'intervention
+@return l'identifiant de l'intervention
 "
       end
 
@@ -875,6 +934,7 @@ ${members}}
 @return String date au format \"dd/MM/yyyy\"
 "
       end
+
     end
 
     class 134954 "BaseDeDonnees"
@@ -1284,22 +1344,11 @@ l'application Android et une bose de données distante.
 	relation 135978 --->
 	  stereotype "List"
 	  a role_name "listeDistributeurs" init_value " null" private
-	    comment "<! La liste des distributeurs"
+	    comment "!< La liste des distributeurs"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 135978 // listeDistributeurs (<unidirectional association>)
 	  b parent class_ref 135850 // Distributeur
-      end
-
-      classrelation 136106 // listeInterventions (<unidirectional association>)
-	relation 136106 --->
-	  stereotype "List"
-	  a role_name "listeInterventions" init_value " null" private
-	    comment "<! La liste des interventions"
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
-"
-	    classrelation_ref 136106 // listeInterventions (<unidirectional association>)
-	  b parent class_ref 134826 // Intervention
       end
 
       operation 138538 "getInstance"
@@ -1694,9 +1743,10 @@ traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
 
       operation 140970 "recupererInterventions"
 	public explicit_return_type "void"
-	nparams 0
+	nparams 1
+	  param in name "idOperateur" explicit_type "int"
 	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}final ${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -1719,6 +1769,7 @@ traitement ce qui aura pour effet d'appeler automatiquement onProgressUpdate()
 	comment "@brief Méthode qui récupère une liste d'opérateur de la BDD.
 "
       end
+
     end
 
     class 135082 "AdaptateurBac"
@@ -2254,7 +2305,6 @@ Attributs
 @param nouvelleQuantite la nouvelle quantité.
 "
       end
-
     end
 
     class 135594 "AdaptateurDistributeur"
@@ -2945,7 +2995,6 @@ l'hydrométrie.
 @param aDepanner true si le bac a un taux d'humidité élevé sinon false.
 "
       end
-
     end
 
     class 135978 "AdaptateurIntervention"
@@ -3560,14 +3609,23 @@ ${members}}
     end
 
     class 136618 "JustFeed"
-      visibility public 
-      cpp_decl ""
+      visibility public stereotype "activity"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
       java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
 "
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       mysql_decl ""
       
@@ -3596,6 +3654,20 @@ ${members}}
 	comment "Constantes
 
 !< TAG pour les logs (cf. Logcat)"
+      end
+
+      attribute 167594 "INDEX_MENU_OPERATEURS"
+	class_attribute const_attribute private explicit_type "int"
+	init_value " 0"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< Index de l'item Opérateurs dans le menu"
       end
 
       attribute 159146 "PREFERENCES"
@@ -3655,20 +3727,10 @@ ${members}}
 	  b parent class_ref 135850 // Distributeur
       end
 
-      classrelation 136874 // baseDeDonnees (<unidirectional association>)
-	relation 136874 --->
-	  a role_name "baseDeDonnees" private
-	    comment "!< L'accès à la base de données"
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136874 // baseDeDonnees (<unidirectional association>)
-	  b parent class_ref 134954 // BaseDeDonnees
-      end
-
       classrelation 150826 // listeOperateurs (<unidirectional association>)
 	relation 150826 --->
 	  stereotype "List"
-	  a role_name "listeOperateurs" init_value " null" private
+	  a role_name "listeOperateurs" private
 	    comment "!< Liste des opérateurs"
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
@@ -3676,21 +3738,7 @@ ${members}}
 	  b parent class_ref 143402 // Operateur
       end
 
-      attribute 159530 "nomsOperateurs"
-	private explicit_type "String"
-	multiplicity "[]"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< Les noms d'opérateurs"
-      end
-
-      attribute 159658 "operateurSelectionne"
+      attribute 167722 "idOperateur"
 	private explicit_type "int"
 	init_value " OPERATEUR_NON_DEFINI"
 	cpp_decl ""
@@ -3701,7 +3749,17 @@ ${members}}
 	idl_decl ""
 	mysql_decl ""
 	MysqlColumn
-	comment "!< L'opérateur sélectionné"
+	comment "!< Identifiant de l'opérateur"
+      end
+
+      classrelation 136874 // baseDeDonnees (<unidirectional association>)
+	relation 136874 --->
+	  a role_name "baseDeDonnees" private
+	    comment "!< Identifiants pour la base de données"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136874 // baseDeDonnees (<unidirectional association>)
+	  b parent class_ref 134954 // BaseDeDonnees
       end
 
       attribute 141610 "handler"
@@ -3754,8 +3812,10 @@ ${members}}
 	comment "!< Positionne les vues"
       end
 
-      attribute 159786 "preferences"
+      attribute 167850 "preferencesPartagees"
 	private explicit_type "SharedPreferences"
+	init_value "
+      null"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -3765,6 +3825,35 @@ ${members}}
 	mysql_decl ""
 	MysqlColumn
 	comment "!< système de persistance des données pour l'application"
+      end
+
+      attribute 167978 "boutonInterventions"
+	private explicit_type "Button"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Ressources GUI
+
+!< Bouton pour démarrer une nouvelle activity qui liste"
+      end
+
+      attribute 168106 "menu"
+	private explicit_type "Menu"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "!< les interventions
+!< Menu de l'application"
       end
 
       operation 144682 "onCreate"
@@ -3780,10 +3869,55 @@ ${members}}
 	
 	
 	
-	comment "Ressources GUI
+	comment "@brief Méthode appelée à la création de l'activité
+"
+      end
 
+      operation 161322 "onCreateOptionsMenu"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "menu" explicit_type "Menu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode appelée pour initialiser le menu
+"
+      end
 
-@brief Méthode appelée à la création de l'activité
+      operation 170026 "onPrepareOptionsMenu"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "menu" explicit_type "Menu"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "@brief Initialise le sous menu
+"
+      end
+
+      operation 161450 "onOptionsItemSelected"
+	public explicit_return_type "boolean"
+	nparams 1
+	  param inout name "item" explicit_type "MenuItem"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode appelée quand on sélectionne une entrée du menu
+@return boolean
 "
       end
 
@@ -3870,20 +4004,6 @@ et détruite par le système Android)
 "
       end
 
-      operation 145450 "initialiserGUI"
-	private explicit_return_type "void"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Initialise la vue de l'activité
-"
-      end
-
       operation 145578 "initialiserBaseDeDonnees"
 	private explicit_return_type "void"
 	nparams 0
@@ -3894,7 +4014,7 @@ et détruite par le système Android)
 	
 	
 	
-	comment "@brief Initialise laccès à la base de données MySQL
+	comment "@brief Initialise l'accès à la base de données MySQL
 "
       end
 
@@ -3941,8 +4061,50 @@ et détruite par le système Android)
 "
       end
 
+      operation 170154 "lancerActiviteIntervention"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Méthode utilisée pour lancer l'activité ActiviteInterventions
+"
+      end
+
+      operation 170282 "recupererIdOperateur"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Récupère l'id de l'opérateur qui utilise l'application
+"
+      end
+
+      operation 170410 "sauvegarderIdOperateur"
+	private explicit_return_type "void"
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Sauvegarde l'id de l'opérateur qui utilise l'application
+"
+      end
+
       operation 161066 "chargerPreferences"
-	private explicit_return_type "boolean"
+	private explicit_return_type "void"
 	nparams 0
 	
 	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -3969,85 +4131,6 @@ et détruite par le système Android)
 "
       end
 
-      operation 161322 "onCreateOptionsMenu"
-	public explicit_return_type "boolean"
-	nparams 1
-	  param inout name "menu" explicit_type "Menu"
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	java_annotation "@Override
-"
-	
-	
-	
-	comment "@brief Méthode appelée au démarrage de l'activité principale
-@return void
-"
-      end
-
-      operation 161450 "onOptionsItemSelected"
-	public explicit_return_type "boolean"
-	nparams 1
-	  param inout name "item" explicit_type "MenuItem"
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	java_annotation "@Override
-"
-	
-	
-	
-	comment "@brief Méthode appelée quand on sélectionne une entrée du menu
-@return boolean
-"
-      end
-
-      operation 161578 "demarrerActiviteInterventions"
-	private explicit_return_type "void"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Démarre l'activité ActiviteInterventions
-"
-      end
-
-      operation 161706 "creerListeOperateurs"
-	private explicit_return_type "void"
-	nparams 1
-	  param inout name "listeOperateurs" explicit_type "List<Operateur>"
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Crée une liste d'opérateurs
-"
-      end
-
-      operation 161834 "selectionnerOperateur"
-	private explicit_return_type "void"
-	nparams 0
-	
-	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	comment "@brief Sélectionne l'opérateur
-"
-      end
-
       operation 161962 "afficherAPropos"
 	private explicit_return_type "void"
 	nparams 0
@@ -4062,11 +4145,27 @@ et détruite par le système Android)
 "
       end
 
+      operation 170538 "afficherMessage"
+	private explicit_return_type "void"
+	nparams 2
+	  param in name "titre" explicit_type "String"
+	  param in name "message" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@brief Affiche un message dans une boîte de dialogue
+"
+      end
+
     end
 
     classdiagram 134570 "diagramme de classes 0.2"
       classdiagramsettings show_members_full_definition yes show_members_visibility yes member_max_width 0 show_relation_visibility yes end
-      size A0
+      size A0-Landscape
     end
 
     class 154882 "ListeDeroulanteGestionnaire"
@@ -4169,20 +4268,6 @@ ${members}}
 	comment "!< L'opérateur recommence l'intervention"
       end
 
-      attribute 145154 "SUPPRIMER"
-	class_attribute const_attribute private explicit_type "String"
-	init_value " \"Supprimer\""
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-	mysql_decl ""
-	MysqlColumn
-	comment "!< L'opérateur supprime de la liste l'intervention"
-      end
-
       attribute 145282 "interactionDetectee"
 	private explicit_type "boolean"
 	init_value " false"
@@ -4273,6 +4358,7 @@ ${members}}
 	
 	
       end
+
     end
 
     class 143402 "Operateur"
@@ -4738,17 +4824,22 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
+import android.view.SubMenu;
 import android.widget.Button;
+import android.widget.PopupMenu;
 import java.util.ArrayList;
 import java.util.List;
+import static android.app.usage.UsageEvents.Event.NONE;
 ${definition}"
       associated_elems
 	class_ref 136618 // JustFeed

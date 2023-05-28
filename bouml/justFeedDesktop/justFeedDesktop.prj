@@ -1,7 +1,7 @@
 format 224
 "justFeedDesktop"
-  revision 16
-  modified_by 24 "btssn2"
+  revision 17
+  modified_by 42 "tv"
   cpp_root_dir "../../"
 
 
@@ -468,7 +468,6 @@ ${inlines}
 	  on usecase_ref 128002 // Planifier une intervention
       end
     end
-
   end
 
   usecaseview 134530 "Diagramme de sÃ©quence"
@@ -576,7 +575,7 @@ ${inlines}
      end
     classdiagram 128024 "Diagramme de classe"
       classdiagramsettings draw_all_relations yes show_members_full_definition yes show_members_visibility yes show_members_stereotype yes member_max_width 0 show_relation_visibility yes end
-      size A0
+      size A0-Landscape
     end
   end
 

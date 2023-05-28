@@ -1,13 +1,13 @@
 format 224
 
-classinstance 128042 class_ref 128002 // Opérateur
+classinstance 128042 class_ref 128002 // OpÃ©rateur
   name ""   xyz 71 4 2000 life_line_z 2000
 classinstance 128170 class_ref 128536 // IHMJustFeed
   name ""   xyz 633 6 2000 life_line_z 2000
 note 128938 "clic sur une ligne de la table des distributeurs"
   xyzwh 213 181 2000 425 81
-durationcanvas 128298 classinstance_ref 128042 // :Opérateur
-  xyzwh 150 102 2010 11 40
+durationcanvas 128298 classinstance_ref 128042 // :OpÃ©rateur
+  xyzwh 160 102 2010 11 40
 end
 durationcanvas 128426 classinstance_ref 128170 // :IHMJustFeed
   xyzwh 724 102 2010 11 489
