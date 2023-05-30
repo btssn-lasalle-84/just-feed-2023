@@ -23,6 +23,7 @@
 class Distributeur;
 class IHMJustFeed;
 class Produit;
+class BaseDeDonnees;
 
 /**
  * @class       ConfigurationDistributeur
@@ -34,8 +35,9 @@ class ConfigurationDistributeur : public QDialog
 {
     Q_OBJECT
   private:
-    Distributeur* distributeur; //!< le distributeur à configurer
-    IHMJustFeed*  ihmJustFeed;  //!< l'ihm principale
+    Distributeur*  distributeur;  //!< le distributeur à configurer
+    IHMJustFeed*   ihmJustFeed;   //!< l'ihm principale
+    BaseDeDonnees* baseDeDonnees; //!< association vers la base de données
     // Widgets
     QLabel*                  nomDistributeur;      //!< nom du distributeur et son numero
     QVector<QLabel*>         labelsBac;            //!< conteneur de QLabel de bac
@@ -43,9 +45,10 @@ class ConfigurationDistributeur : public QDialog
     QVector<QLabel*>         labelsPrix;           //!< conteneur de QLabel de prix
     QPushButton*             boutonAjoutBac;       //!< bouton pour ajouter un bac
     QVector<QPushButton*>    boutonSuppressionBac; //!< bouton supprimer pour chaque bac
+    QPushButton*             boutonValide;         //!< bouton valider
     QVector<QDoubleSpinBox*> editionsNouveauPrix;  //!< conteneur de QLineEdit de etidion prix
     QVector<QComboBox*>
-      choixNouveauProduit; //!< conteneur de listes déroulantes pour choisir un produit du bac
+                          choixNouveauProduit; //!< conteneur de listes déroulantes pour choisir un produit du bac
     QVector<QPushButton*> boutonsChangerPrix;    //!< conteneur de boutons pour changer le prix
     QVector<QPushButton*> boutonsChangerProduit; //!< conteneur de boutons changer le produit
     QVBoxLayout*          layoutBacs; //!< positionnement des bacs dans la boîte de dialogue
@@ -70,6 +73,7 @@ class ConfigurationDistributeur : public QDialog
     void changerLeProduit(int numeroBac);
     void ajouterBac();
     void supprimerBac(const int numeroBac);
+    void valider();
 };
 
 #endif // CONFIGURATIONDISTRIBUTEUR_H
