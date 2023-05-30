@@ -458,8 +458,7 @@ void IHMJustFeed::initialiserEvenements()
  */
 void IHMJustFeed::initialiserDistributeurs()
 {
-#ifdef SANS_BDD
-    qDebug() << Q_FUNC_INFO << "SANS BDD";
+    /*qDebug() << Q_FUNC_INFO << "SANS BDD";
     distributeurs.push_back(new Distributeur(1,
                                              "distributeur-1-sim",
                                              "Grand Frais",
@@ -488,9 +487,9 @@ void IHMJustFeed::initialiserDistributeurs()
                                              QDate::fromString("2022-01-10", "yyyy-MM-dd"),
                                              { "43.90252", "4.75280", "0" }));
 
-    distributeurs[0]->ajouterBac(Bac(1, produits[0], 50, 50, 25));
-    distributeurs[0]->ajouterBac(Bac(2, produits[1], 0, 100, 25));
-    distributeurs[0]->ajouterBac(Bac(3, produits[2], 15, 30, 25));
+    distributeurs[0]->ajouterBac(Bac(1, produits[0], 50, 50, 10));
+    distributeurs[0]->ajouterBac(Bac(2, produits[1], 30, 100, 8));
+    distributeurs[0]->ajouterBac(Bac(3, produits[2], 2, 30, 9));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[0]->getNom() << "NbBacs"
              << distributeurs[0]->getNbBacs();
     distributeurs[1]->ajouterBac(Bac(4, produits[3], 0, 12, 18));
@@ -503,7 +502,7 @@ void IHMJustFeed::initialiserDistributeurs()
     distributeurs[2]->ajouterBac(Bac(9, produits[8], 10.8, 12, 21));
     qDebug() << Q_FUNC_INFO << "Distributeur" << distributeurs[2]->getNom() << "NbBacs"
              << distributeurs[2]->getNbBacs();
-#else
+    */
     qDebug() << Q_FUNC_INFO << "BDD";
     QString requete = "SELECT * FROM Distributeur";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
@@ -522,7 +521,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -548,7 +547,7 @@ void IHMJustFeed::initialiserDistributeurs()
     {
         qDebug() << Q_FUNC_INFO << "retour" << retour;
     }
-#endif
+
     if(distributeurs.size() > 0)
         numeroDistributeurSelectionne = 0;
     qDebug() << Q_FUNC_INFO << "nbDistributeurs" << distributeurs.size();
@@ -559,13 +558,12 @@ void IHMJustFeed::initialiserDistributeurs()
  */
 void IHMJustFeed::initialiserProduits()
 {
-#ifdef SANS_BDD
-    qDebug() << Q_FUNC_INFO << "SANS BDD";
+    /*qDebug() << Q_FUNC_INFO << "SANS BDD";
     Produit* pruneaux    = new Produit(1,
                                     "Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit(2,
@@ -619,8 +617,8 @@ void IHMJustFeed::initialiserProduits()
     produits.push_back(cacahuete);
     produits.push_back(soja);
     produits.push_back(basilic);
-#else
-    qDebug() << Q_FUNC_INFO << "BDD";
+
+    */ qDebug() << Q_FUNC_INFO << "BDD";
     QString requete = "SELECT * FROM Produit";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     bool                 retour;
@@ -634,7 +632,7 @@ void IHMJustFeed::initialiserProduits()
             produits.push_back(nouveauProduit);
         }
     }
-#endif
+
     qDebug() << Q_FUNC_INFO << "nbProduits" << produits.size();
 }
 
@@ -943,9 +941,24 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
 
         layoutBacs->addWidget(volumeRestant, 2, i, Qt::AlignCenter);
 
-        QLabel* hygrometrie = new QLabel(this);
+        QLabel* hygrometrie       = new QLabel(this);
+        int     valeurHygrometrie = distributeur->getBac(i)->getHygrometrie();
         hygrometrie->setText(
           QString("Hygrométrie : %1 %").arg(distributeur->getBac(i)->getHygrometrie()));
+
+        if(valeurHygrometrie >= 10 && valeurHygrometrie <= 15)
+        {
+            hygrometrie->setStyleSheet("color: green;");
+        }
+        else if((valeurHygrometrie >= 8 && valeurHygrometrie < 10) ||
+                (valeurHygrometrie > 15 && valeurHygrometrie <= 18))
+        {
+            hygrometrie->setStyleSheet("color: orange;");
+        }
+        else
+        {
+            hygrometrie->setStyleSheet("color: red;");
+        }
         layoutBacs->addWidget(hygrometrie, 3, i, Qt::AlignCenter);
     }
 
