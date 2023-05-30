@@ -47,6 +47,10 @@ class Intervention;
 #define BAC_VIDE      30
 #define BAC_MOITIE    50
 
+#define HYGROMETRIE_MIN_VALIDE     10
+#define HYGROMETRIE_MAX_VALIDE     15
+#define HYGROMETRIE_MIN_NON_VALIDE 8
+#define HYGROMETRIE_MAX_NON_VALIDE 18
 /**
  * @class       IHMJustFeed
  * @brief       Déclaration de la classe IHMJustFeed.
@@ -95,9 +99,9 @@ class IHMJustFeed : public QWidget
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
-      planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
-    QVector<Distributeur*> distributeurs; //!< les distributeurs
-    QVector<Operateur*>    operateurs;    //!< les operateurs
+                           planificationIntervention; //!< la boîte de dialogue pour créer une intervention
+    QVector<Distributeur*> distributeurs;             //!< les distributeurs
+    QVector<Operateur*>    operateurs;                //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
@@ -143,29 +147,29 @@ class IHMJustFeed : public QWidget
     QComboBox*            listeOperateurs;
     QWebView*             vueCarte;
 
-    void initialiserGUI();
-    void instancierWidgets();
-    void initialiserWidgets();
-    void initialiserTable();
-    void positionnerWidgets();
-    void initialiserEvenements();
-    void initialiserDistributeurs();
-    void initialiserProduits();
-    void initialiserOperateurs();
-    void initialiserInterventions();
-    void chargerDistributeurs();
-    void afficherDistributeurTable(const Distributeur& distributeur);
-    void afficherDistributeur(Distributeur* distributeur);
-    void afficherIntervention(Distributeur* distributeur);
-    void effacerTableau(int ligne, int colonne);
-    void effacerTableDistributeurs();
-    int  recupererDistributeursAIntervenir();
-    void effacerDistributeursAIntervenir();
-    void creerEtatDistributeur(Distributeur* distributeur);
-    void creerEtatIntervention(Distributeur* distributeur);
-    void effacerEtatsFenetre();
-    void chargerCarte(Distributeur* distributeur);
-    void chargerListeOperateurs();
+    void     initialiserGUI();
+    void     instancierWidgets();
+    void     initialiserWidgets();
+    void     initialiserTable();
+    void     positionnerWidgets();
+    void     initialiserEvenements();
+    void     initialiserDistributeurs();
+    void     initialiserProduits();
+    void     initialiserOperateurs();
+    void     initialiserInterventions();
+    void     chargerDistributeurs();
+    void     afficherDistributeurTable(const Distributeur& distributeur);
+    void     afficherDistributeur(Distributeur* distributeur);
+    void     afficherIntervention(Distributeur* distributeur);
+    void     effacerTableau(int ligne, int colonne);
+    void     effacerTableDistributeurs();
+    int      recupererDistributeursAIntervenir();
+    void     effacerDistributeursAIntervenir();
+    void     creerEtatDistributeur(Distributeur* distributeur);
+    void     creerEtatIntervention(Distributeur* distributeur);
+    void     effacerEtatsFenetre();
+    void     chargerCarte(Distributeur* distributeur);
+    void     chargerListeOperateurs();
     Produit* recupererProduit(int idProduit);
 
   public:

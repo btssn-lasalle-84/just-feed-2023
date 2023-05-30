@@ -946,12 +946,15 @@ void IHMJustFeed::creerEtatDistributeur(Distributeur* distributeur)
         hygrometrie->setText(
           QString("Hygrométrie : %1 %").arg(distributeur->getBac(i)->getHygrometrie()));
 
-        if(valeurHygrometrie >= 10 && valeurHygrometrie <= 15)
+        if(valeurHygrometrie >= HYGROMETRIE_MIN_VALIDE &&
+           valeurHygrometrie <= HYGROMETRIE_MAX_VALIDE)
         {
             hygrometrie->setStyleSheet("color: green;");
         }
-        else if((valeurHygrometrie >= 8 && valeurHygrometrie < 10) ||
-                (valeurHygrometrie > 15 && valeurHygrometrie <= 18))
+        else if((valeurHygrometrie >= HYGROMETRIE_MIN_NON_VALIDE &&
+                 valeurHygrometrie < HYGROMETRIE_MIN_VALIDE) ||
+                (valeurHygrometrie > HYGROMETRIE_MAX_VALIDE &&
+                 valeurHygrometrie <= HYGROMETRIE_MAX_NON_VALIDE))
         {
             hygrometrie->setStyleSheet("color: orange;");
         }
