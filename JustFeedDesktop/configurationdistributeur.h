@@ -59,20 +59,21 @@ class ConfigurationDistributeur : public QDialog
     void positionnerWidgets();
     void initialiserEvenements();
     int  instancierNouveauBac();
-    void initialiserNouveauBac(int numeroBac);
-    void positionnerNouveauBac(int numeroBac);
-    void connecterNouveauBac(int numeroBac);
+    void initialiserNouveauBac(int indiceBac);
+    void positionnerNouveauBac(int indiceBac);
+    void connecterNouveauBac(int indiceBac);
 
   public:
     explicit ConfigurationDistributeur(Distributeur* distributeur, IHMJustFeed* parent = 0);
     ~ConfigurationDistributeur();
 
   private slots:
-    void selectionnerNouveauProduit(int numeroBac);
-    void changerLePrix(int numeroBac);
-    void changerLeProduit(int numeroBac);
+    void selectionnerNouveauProduit(int indiceBac);
+    void changerLePrix(int indiceBac);
+    void changerLeProduit(int indiceBac);
     void ajouterBac();
-    void supprimerBac(const int numeroBac);
+    void supprimerBac(const int indiceBac);
+    void supprimerBaseDeDonnees(const int indiceBac);
     void valider();
 };
 

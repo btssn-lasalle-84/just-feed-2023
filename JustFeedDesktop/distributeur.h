@@ -124,7 +124,7 @@ class Distributeur
     void setAIntervenir(bool aIntervenir);
     void setPrixProduit(const int& numeroBac, const double& prix);
     void ajouterBac(const Bac& bac);
-    void supprimerBac(const int numeroBacASupprimer);
+    void supprimerBac(const int indiceBacASupprimer);
 };
 
 #endif // DISTRIBUTEUR_H

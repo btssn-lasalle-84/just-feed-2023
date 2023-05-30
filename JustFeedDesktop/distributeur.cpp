@@ -371,6 +371,7 @@ void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
  */
 void Distributeur::ajouterBac(const Bac& bac)
 {
+    qDebug() << Q_FUNC_INFO;
     bacs.push_back(new Bac(bac));
 }
 
@@ -378,13 +379,13 @@ void Distributeur::ajouterBac(const Bac& bac)
  * @brief Supprime un bac dans le distributeur
  * @param numeroBacASupprimer
  */
-void Distributeur::supprimerBac(const int numeroBacASupprimer)
+void Distributeur::supprimerBac(const int indiceBacASupprimer)
 {
-    if(numeroBacASupprimer >= 0 && numeroBacASupprimer < bacs.size())
+    if(indiceBacASupprimer >= 0 && indiceBacASupprimer < bacs.size())
     {
-        qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
-        delete bacs[numeroBacASupprimer];
-        bacs.remove(numeroBacASupprimer);
+        qDebug() << Q_FUNC_INFO << "indiceBacASupprimer" << indiceBacASupprimer;
+        delete bacs[indiceBacASupprimer];
+        bacs.remove(indiceBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
 }

@@ -47,39 +47,39 @@ ConfigurationDistributeur::~ConfigurationDistributeur()
 /**
  * @brief méthode qui sélectionne un produit dans la liste
  */
-void ConfigurationDistributeur::selectionnerNouveauProduit(int numeroBac)
+void ConfigurationDistributeur::selectionnerNouveauProduit(int indiceBac)
 {
-    labelsPrix[numeroBac]->setText(
-      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[numeroBac]->currentIndex())) +
+    labelsPrix[indiceBac]->setText(
+      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[indiceBac]->currentIndex())) +
       " €");
 }
 
 /**
  * @brief méthode qui change le prix d'un produit
  */
-void ConfigurationDistributeur::changerLePrix(const int numeroBac)
+void ConfigurationDistributeur::changerLePrix(const int indiceBac)
 {
-    QString nouveauPrix = QString::number(editionsNouveauPrix[numeroBac]->value());
-    labelsPrix[numeroBac]->setText(nouveauPrix);
-    distributeur->setPrixProduit(numeroBac, editionsNouveauPrix[numeroBac]->value());
+    QString nouveauPrix = QString::number(editionsNouveauPrix[indiceBac]->value());
+    labelsPrix[indiceBac]->setText(nouveauPrix);
+    distributeur->setPrixProduit(indiceBac, editionsNouveauPrix[indiceBac]->value());
     // editionsNouveauPrix[numeroBac]->setValue(0.);
 }
 
 /**
  * @brief méthode qui change le produit d'un bac
  */
-void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
+void ConfigurationDistributeur::changerLeProduit(const int indiceBac)
 {
-    QString nouveauProduit = choixNouveauProduit[numeroBac]->currentText();
-    labelsProduit[numeroBac]->setText(nouveauProduit);
-    distributeur->getBac(numeroBac)->setProduit(
-      ihmJustFeed->getProduit(choixNouveauProduit[numeroBac]->currentIndex()));
+    QString nouveauProduit = choixNouveauProduit[indiceBac]->currentText();
+    labelsProduit[indiceBac]->setText(nouveauProduit);
+    distributeur->getBac(indiceBac)->setProduit(
+      ihmJustFeed->getProduit(choixNouveauProduit[indiceBac]->currentIndex()));
 
     QString nouveauPrix =
-      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[numeroBac]->currentIndex()));
-    labelsPrix[numeroBac]->setText(nouveauPrix);
+      QString::number(ihmJustFeed->getPrixProduit(choixNouveauProduit[indiceBac]->currentIndex()));
+    labelsPrix[indiceBac]->setText(nouveauPrix);
 
-    selectionnerNouveauProduit(numeroBac);
+    selectionnerNouveauProduit(indiceBac);
 }
 
 /**
@@ -87,16 +87,16 @@ void ConfigurationDistributeur::changerLeProduit(const int numeroBac)
  */
 void ConfigurationDistributeur::ajouterBac()
 {
-    int numeroBac = instancierNouveauBac();
+    int indiceBac = instancierNouveauBac();
     qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNom() << "NbBacs"
              << distributeur->getNbBacs();
-    initialiserNouveauBac(numeroBac);
-    positionnerNouveauBac(numeroBac);
+    initialiserNouveauBac(indiceBac);
+    positionnerNouveauBac(indiceBac);
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
         labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
     }
-    connecterNouveauBac(numeroBac);
+    connecterNouveauBac(indiceBac);
 }
 
 // Méthodes privées
@@ -227,7 +227,9 @@ void ConfigurationDistributeur::initialiserEvenements()
 int ConfigurationDistributeur::instancierNouveauBac()
 {
     Bac bac;
+    qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNbBacs();
     distributeur->ajouterBac(bac);
+    qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNbBacs();
     labelsBac.push_back(new QLabel(this));
     labelsProduit.push_back(new QLabel(this));
     labelsPrix.push_back(new QLabel(this));
@@ -242,48 +244,48 @@ int ConfigurationDistributeur::instancierNouveauBac()
 /**
  * @brief méthode qui initialise le nouveau bac
  */
-void ConfigurationDistributeur::initialiserNouveauBac(int numeroBac)
+void ConfigurationDistributeur::initialiserNouveauBac(int indiceBac)
 {
-    labelsBac[numeroBac]->setText("Bac numero : " + QString::number(numeroBac) + " : ");
-    labelsBac[numeroBac]->setAlignment(Qt::AlignCenter);
-    labelsProduit[numeroBac]->setText(distributeur->getBac(numeroBac)->getNomProduit());
-    labelsProduit[numeroBac]->setAlignment(Qt::AlignCenter);
-    labelsPrix[numeroBac]->setText(
-      "Prix : " + QString::number(distributeur->getBac(numeroBac)->getPrixProduit()) + " €");
-    labelsPrix[numeroBac]->setAlignment(Qt::AlignCenter);
-    editionsNouveauPrix[numeroBac]->setAlignment(Qt::AlignCenter);
-    boutonsChangerPrix[numeroBac]->setText("Changer prix");
-    boutonsChangerProduit[numeroBac]->setText("Changer produit");
-    boutonSuppressionBac[numeroBac]->setText("Supprimer");
+    labelsBac[indiceBac]->setText("Bac numero : " + QString::number(indiceBac) + " : ");
+    labelsBac[indiceBac]->setAlignment(Qt::AlignCenter);
+    labelsProduit[indiceBac]->setText(distributeur->getBac(indiceBac)->getNomProduit());
+    labelsProduit[indiceBac]->setAlignment(Qt::AlignCenter);
+    labelsPrix[indiceBac]->setText(
+      "Prix : " + QString::number(distributeur->getBac(indiceBac)->getPrixProduit()) + " €");
+    labelsPrix[indiceBac]->setAlignment(Qt::AlignCenter);
+    editionsNouveauPrix[indiceBac]->setAlignment(Qt::AlignCenter);
+    boutonsChangerPrix[indiceBac]->setText("Changer prix");
+    boutonsChangerProduit[indiceBac]->setText("Changer produit");
+    boutonSuppressionBac[indiceBac]->setText("Supprimer");
     for(int j = 0; j < ihmJustFeed->getNbProduits(); j++)
     {
-        choixNouveauProduit[numeroBac]->addItem(ihmJustFeed->getNomProduit(j));
+        choixNouveauProduit[indiceBac]->addItem(ihmJustFeed->getNomProduit(j));
     }
 }
 
 /**
  * @brief méthode qui positionne le nouveau bac
  */
-void ConfigurationDistributeur::positionnerNouveauBac(int numeroBac)
+void ConfigurationDistributeur::positionnerNouveauBac(int indiceBac)
 {
     QHBoxLayout* layoutBac = new QHBoxLayout();
-    layoutBac->addWidget(labelsBac[numeroBac]);
-    layoutBac->addWidget(labelsProduit[numeroBac]);
-    layoutBac->addWidget(choixNouveauProduit[numeroBac]);
-    layoutBac->addWidget(boutonsChangerProduit[numeroBac]);
-    layoutBac->addWidget(labelsPrix[numeroBac]);
-    layoutBac->addWidget(editionsNouveauPrix[numeroBac]);
-    layoutBac->addWidget(boutonsChangerPrix[numeroBac]);
-    layoutBac->addWidget(boutonSuppressionBac[numeroBac]);
+    layoutBac->addWidget(labelsBac[indiceBac]);
+    layoutBac->addWidget(labelsProduit[indiceBac]);
+    layoutBac->addWidget(choixNouveauProduit[indiceBac]);
+    layoutBac->addWidget(boutonsChangerProduit[indiceBac]);
+    layoutBac->addWidget(labelsPrix[indiceBac]);
+    layoutBac->addWidget(editionsNouveauPrix[indiceBac]);
+    layoutBac->addWidget(boutonsChangerPrix[indiceBac]);
+    layoutBac->addWidget(boutonSuppressionBac[indiceBac]);
     layoutBacs->addLayout(layoutBac);
 }
 
 /**
  * @brief méthode qui connecte le nouveau bac
  */
-void ConfigurationDistributeur::connecterNouveauBac(int numeroBac)
+void ConfigurationDistributeur::connecterNouveauBac(int indiceBac)
 {
-    for(int i = numeroBac; i < distributeur->getNbBacs(); i++)
+    for(int i = indiceBac; i < distributeur->getNbBacs(); i++)
     {
         connect(boutonsChangerPrix[i], &QPushButton::clicked, this, [this, i]() {
             changerLePrix(i);
@@ -301,29 +303,32 @@ void ConfigurationDistributeur::connecterNouveauBac(int numeroBac)
  * @brief méthode qui supprime un bac
  * @param numeroBac
  */
-void ConfigurationDistributeur::supprimerBac(const int numeroBac)
+void ConfigurationDistributeur::supprimerBac(const int indiceBac)
 {
-    distributeur->supprimerBac(numeroBac);
-    delete labelsBac[numeroBac];
-    delete labelsProduit[numeroBac];
-    delete labelsPrix[numeroBac];
-    delete editionsNouveauPrix[numeroBac];
-    delete choixNouveauProduit[numeroBac];
-    delete boutonsChangerPrix[numeroBac];
-    delete boutonsChangerProduit[numeroBac];
-    delete boutonSuppressionBac[numeroBac];
-    labelsBac.removeAt(numeroBac);
-    labelsProduit.removeAt(numeroBac);
-    labelsPrix.removeAt(numeroBac);
-    editionsNouveauPrix.removeAt(numeroBac);
-    choixNouveauProduit.removeAt(numeroBac);
-    boutonsChangerPrix.removeAt(numeroBac);
-    boutonsChangerProduit.removeAt(numeroBac);
-    boutonSuppressionBac.removeAt(numeroBac);
-
-    for(int i = 0; i < distributeur->getNbBacs(); i++)
+    if(distributeur->getNbBacs() != 1)
     {
-        labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
+        supprimerBaseDeDonnees(indiceBac);
+        distributeur->supprimerBac(indiceBac);
+        delete labelsBac[indiceBac];
+        delete labelsProduit[indiceBac];
+        delete labelsPrix[indiceBac];
+        delete editionsNouveauPrix[indiceBac];
+        delete choixNouveauProduit[indiceBac];
+        delete boutonsChangerPrix[indiceBac];
+        delete boutonsChangerProduit[indiceBac];
+        delete boutonSuppressionBac[indiceBac];
+        labelsBac.removeAt(indiceBac);
+        labelsProduit.removeAt(indiceBac);
+        labelsPrix.removeAt(indiceBac);
+        editionsNouveauPrix.removeAt(indiceBac);
+        choixNouveauProduit.removeAt(indiceBac);
+        boutonsChangerPrix.removeAt(indiceBac);
+        boutonsChangerProduit.removeAt(indiceBac);
+        boutonSuppressionBac.removeAt(indiceBac);
+        for(int i = 0; i < distributeur->getNbBacs(); i++)
+        {
+            labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
+        }
     }
 }
 
@@ -350,4 +355,17 @@ void ConfigurationDistributeur::valider()
         }
     }
     this->close();
+}
+
+void ConfigurationDistributeur::supprimerBaseDeDonnees(const int indiceBac)
+{
+    qDebug() << Q_FUNC_INFO;
+    QString requete = "DELETE FROM Bac WHERE idBac = '" +
+                      QString::number(distributeur->getBac(indiceBac)->getIdBac()) + "';";
+    // baseDeDonnees->executer(requete);
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    requete = "UPDATE Distributeur SET nbBacs = '" + QString::number(distributeur->getNbBacs()) +
+              "' WHERE idDistributeur = " + QString::number(distributeur->getId()) + ";";
+    // baseDeDonnees->executer(requete);
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
 }
