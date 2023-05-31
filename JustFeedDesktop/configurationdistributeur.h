@@ -72,6 +72,7 @@ class ConfigurationDistributeur : public QDialog
     void changerLePrix(int indiceBac);
     void changerLeProduit(int indiceBac);
     void ajouterBac();
+    void ajouterBacBdd();
     void supprimerBac(const int indiceBac);
     void supprimerBacBaseDeDonnees(const int indiceBac);
     void valider();

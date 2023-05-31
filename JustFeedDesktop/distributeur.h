@@ -123,6 +123,7 @@ class Distributeur
     void setHygrometrie(int hygrometrie);
     void setAIntervenir(bool aIntervenir);
     void setPrixProduit(const int& numeroBac, const double& prix);
+    void ajouterBac();
     void ajouterBac(const Bac& bac);
     void supprimerBac(const int indiceBacASupprimer);
 };

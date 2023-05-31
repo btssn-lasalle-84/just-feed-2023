@@ -366,13 +366,23 @@ void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 }
 
 /**
- * @brief Ajoute un bac dans le distributeur
+ * @brief Ajoute un nouveau bac dans le distributeur
+ * @param bac
+ */
+void Distributeur::ajouterBac()
+{
+    bacs.push_back(new Bac());
+}
+
+/**
+ * @brief Ajoute un bac existant dans le distributeur
  * @param bac
  */
 void Distributeur::ajouterBac(const Bac& bac)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "nbBacs" << bacs.size();
     bacs.push_back(new Bac(bac));
+    qDebug() << Q_FUNC_INFO << "nbBacs" << bacs.size();
 }
 
 /**

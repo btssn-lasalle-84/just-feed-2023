@@ -170,10 +170,9 @@ void ConfigurationDistributeur::initialiserEvenements()
  */
 int ConfigurationDistributeur::instancierNouveauBac()
 {
-    Bac bac;
-    qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNbBacs();
-    distributeur->ajouterBac(bac);
-    qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNbBacs();
+    qDebug() << Q_FUNC_INFO << "nbBacs" << distributeur->getNbBacs();
+    distributeur->ajouterBac();
+    qDebug() << Q_FUNC_INFO << "nbBacs" << distributeur->getNbBacs();
     labelsBac.push_back(new QLabel(this));
     labelsProduit.push_back(new QLabel(this));
     labelsPrix.push_back(new QLabel(this));
@@ -301,7 +300,34 @@ void ConfigurationDistributeur::ajouterBac()
         labelsBac[i]->setText("Bac n°" + QString::number(i + 1));
     }
     connecterNouveauBac(indiceBac);
+    ajouterBacBdd();
 }
+
+/**
+ * @brief méthode qui ajoute un bac dans la bdd
+ */
+void ConfigurationDistributeur::ajouterBacBdd()
+{
+    QString requete = "SELECT MAX(idBac) FROM Bac;";
+    QString idMaxBac;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->recuperer(requete, idMaxBac);
+    bool conversion;
+    int  idMaxBacInt = idMaxBac.toInt(&conversion);
+    qDebug() << Q_FUNC_INFO << "idMaxBacInt" << idMaxBacInt;
+    requete = "INSERT INTO Bac (idBac, idDistributeur, idProduit, poidsActuel, poidsTotal, "
+              "hygrometrie, remplissage) VALUES (" +
+              QString::number(idMaxBacInt + 1) + "," + QString::number(distributeur->getId()) +
+              "," + "1, 0 , 0, 0, 0);";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+
+    requete = "UPDATE Distributeur SET nbBacs = '" + QString::number(distributeur->getNbBacs()) +
+              "' WHERE idDistributeur = " + QString::number(distributeur->getId()) + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+}
+
 /**
  * @brief méthode qui supprime un bac
  * @param indiceBac
