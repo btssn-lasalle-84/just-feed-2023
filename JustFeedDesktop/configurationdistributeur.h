@@ -19,7 +19,7 @@
  * @brief Définit le titre de la boîte de dialogue
  */
 #define TITRE_CONFIGURATION_DISTRIBUTEUR QString("Configuration")
-
+#define NB_BAC_MAX                       6
 class Distributeur;
 class IHMJustFeed;
 class Produit;
