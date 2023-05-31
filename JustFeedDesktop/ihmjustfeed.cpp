@@ -522,7 +522,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -565,7 +565,7 @@ void IHMJustFeed::initialiserProduits()
                                     "Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit(2,
@@ -766,6 +766,31 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
                                       itemDetailIntervention);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_INTERVENTION, itemIntervention);
 
+    int nbBacs         = distributeur.getNbBacs();
+    int maxRemplissage = MAX_REMPLISSAGE;
+
+    for(int i = 0; i < nbBacs; i++)
+    {
+        int pourcentageRemplissage = distributeur.getBac(i)->getPourcentageRemplissage();
+
+        if(pourcentageRemplissage < maxRemplissage)
+        {
+            maxRemplissage = pourcentageRemplissage;
+        }
+    }
+
+    if(maxRemplissage < BAC_VIDE)
+    {
+        itemEnseigne->setBackgroundColor(Qt::red);
+    }
+    else if(maxRemplissage < BAC_MOITIE)
+    {
+        itemEnseigne->setBackgroundColor(Qt::yellow);
+    }
+    else
+    {
+        itemEnseigne->setBackgroundColor(Qt::green);
+    }
     // Se replace au début de la table
     tableWidgetDistributeurs->scrollToItem(tableWidgetDistributeurs->item(0, 1));
     tableWidgetDistributeurs->setCurrentCell(0, 1);
