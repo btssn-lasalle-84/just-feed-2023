@@ -32,7 +32,9 @@ import android.widget.Button;
 import android.widget.PopupMenu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @class JustFeed
@@ -44,7 +46,10 @@ public class JustFeed extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_JustFeed";      //!< TAG pour les logs (cf. Logcat)
+    private static final int INDEX_CLIENT_ID = 0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
+    private static final int INDEX_MDP = 1; //!< Index du mot de passe dans la liste des identifiants pour MQTT
+    private static final int INDEX_HOSTNAME = 2; //!< Index du hostname dans la liste des identifiants pour MQTT
     public static final String PREFERENCES         = "justfeed"; //!< Clé pour le titre du stockage
     public static final String PREFERENCES_ID_OPERATEUR =
       "idOperateur"; //!< Clé pour l'id de l'opérateur
@@ -57,6 +62,7 @@ public class JustFeed extends AppCompatActivity
     private List<Distributeur> listeDistributeurs;                 //!< Liste des distributeurs
     private List<Operateur>    listeOperateurs;                    //!< Liste des opérateurs
     private int                idOperateur = OPERATEUR_NON_DEFINI; //!< Identifiant de l'opérateur
+    private ClientMQTT         clientMQTT; //!< Client MQTT pour communiquer avec le broker MQTT
     private BaseDeDonnees      baseDeDonnees;         //!< Identifiants pour la base de données
     private Handler            handler = null;        //<! Le handler utilisé par l'activité
     private RecyclerView       vueListeDistributeurs; //!< Affichage de la liste des distributeurs
@@ -90,6 +96,7 @@ public class JustFeed extends AppCompatActivity
 
         baseDeDonnees.recupererOperateurs();
         baseDeDonnees.recupererDistributeurs();
+        baseDeDonnees.recupererIdentifiantsTTS();
     }
 
     /**
@@ -246,6 +253,24 @@ public class JustFeed extends AppCompatActivity
     }
 
     /**
+     * @brief Méthode utilisée pour initier la communication avec le broker MQTT
+     */
+    private void initialiserCommunicationMQTT(ArrayList<String> identifiants)
+    {
+        String clientId   = identifiants.get(INDEX_CLIENT_ID);
+        String motDePasse = identifiants.get(INDEX_MDP);
+        String hostname   = identifiants.get(INDEX_HOSTNAME);
+        Log.d(TAG, "Mot de passe : "+motDePasse+" clientId : "+clientId);
+
+        this.clientMQTT = new ClientMQTT(getApplicationContext(), handler);
+        clientMQTT.changerClientId(clientId);
+        clientMQTT.changerMotDePasse(motDePasse);
+        clientMQTT.changerHostname(hostname);
+        clientMQTT.creerClientMQTTT();
+        clientMQTT.connecter();
+    }
+
+    /**
      * @brief Initialise la gestion des messages en provenance des threads
      */
     private void initialiserHandler()
@@ -288,6 +313,20 @@ public class JustFeed extends AppCompatActivity
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
                         listeOperateurs = (ArrayList)message.obj;
                         invalidateOptionsMenu();
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_TTS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_TTS");
+                        initialiserCommunicationMQTT((ArrayList<String>) message.obj);
+                        break;
+                    case ClientMQTT.TTN_CONNECTE:
+                        Log.d(TAG, "[Handler] TTS connecté");
+                        break;
+                    case ClientMQTT.TTN_DECONNECTE:
+                        Log.d(TAG, "[Handler] TTS déconnecté");
+                        break;
+                    case ClientMQTT.TTN_MESSAGE:
+                        Log.d(TAG, "[Handler] TTS message");
+                        break;
                 }
             }
         };

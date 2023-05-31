@@ -32,9 +32,9 @@ public class ClientMQTT {
     /**
      * Constantes pour le Handler
      */
-    public static final int TTN_CONNECTE = 1;
-    public static final int TTN_DECONNECTE = 2;
-    public static final int TTN_MESSAGE = 3;
+    public static final int TTN_CONNECTE = 11;
+    public static final int TTN_DECONNECTE = 12;
+    public static final int TTN_MESSAGE = 13;
 
     /**
      * Constantes QoS
@@ -47,7 +47,8 @@ public class ClientMQTT {
      * Attributs
      */
     private MqttAndroidClient mqttAndroidClient;
-    private Handler handler = null; // pour la communication entre classes
+    private Handler handler = null; //!< pour la communication entre classes
+    private Context context = null; //!< Context de l'application
 
     private String uriServeur; //!<  lien vers TTS
     private String clientId; //!< Application ID
@@ -64,18 +65,16 @@ public class ClientMQTT {
     {
         Log.v(TAG, "[ClientMQTT()] clientId = " + clientId);
         this.handler = handler;
+        this.context = context;
 
-        creerClientMQTTT(context, handler);
-
-        connecter();
+        //creerClientMQTTT(context, handler);
+        //connecter();
     }
 
     /**
      * @brief Méthode pour créer le client MQTT
-     * @param context
-     * @param handler
      */
-    private void creerClientMQTTT(Context context, Handler handler)
+    public void creerClientMQTTT()
     {
         mqttAndroidClient = new MqttAndroidClient(context, uriServeur, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended()
@@ -122,6 +121,30 @@ public class ClientMQTT {
             }
         });
     }
+
+    /**
+     * @brief Méthode pour modifier le nom d'utilisateur
+     * @param nomUtilisateur
+     */
+    public void changerNomUtilisateur(String nomUtilisateur){ this.nomUtilisateur = nomUtilisateur; }
+
+    /**
+     * @brief Méthode pour modifier le hostname
+     * @param hostname
+     */
+    public void changerHostname(String hostname){ this.uriServeur = hostname; }
+
+    /**
+     * @brief Méthode pour modifier l'identifiant du client
+     * @param clientId
+     */
+    public void changerClientId(String clientId){ this.clientId = clientId; }
+
+    /**
+     * @brief Méthode pour modifier le mot de passe de l'application
+     * @param motDePasse
+     */
+    public void changerMotDePasse(String motDePasse){ this.motDePasse = motDePasse; }
 
     /**
      * @brief Méthode pour mettre en place les callbacks
