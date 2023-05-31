@@ -9,6 +9,9 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
+#include <QString>
+#include <QtMqtt/QMqttClient>
+#include <QtMqtt/QMqttSubscription>
 /**
  * @class       Communication
  * @brief       Définition de la classe Communication.
@@ -16,17 +19,36 @@
  */
 class Communication
 {
+  private:
+    int     idServeurTTN;
+    QString hostname;
+    int     port;
+    QString username;
+    QString password;
+    QString applicationID;
+    bool    estActif;
+
   public:
-    /**
-     * @brief Constructeur par défault de la classe Communication
-     * @see Distributeur
-     */
-    Communication();
-    /**
-     * @brief Destructeur par défault de la classe Communication
-     * @see Distributeur
-     */
+    enum TableCommunication
+    {
+        ID_SERVEUR_TTN,
+        HOSTNAME_COMMUNICATION,
+        PORT,
+        USERANME,
+        PASSWORD_COMMUNICATION,
+        APPLICATION_ID,
+        EST_ACTIF
+    };
+
+    Communication(int     idServeurTTN,
+                  QString hostname,
+                  int     port,
+                  QString username,
+                  QString password,
+                  QString applicationID,
+                  bool    estActif);
     ~Communication();
+    void connecter();
 };
 
 #endif // COMMUNICATION_H

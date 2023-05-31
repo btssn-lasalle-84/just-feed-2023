@@ -24,6 +24,7 @@ class PlanificationIntervention;
 class BaseDeDonnees;
 class Operateur;
 class Intervention;
+class Communication;
 
 /**
  * @def TITRE_APPLICATION
@@ -105,6 +106,7 @@ class IHMJustFeed : public QWidget
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
+    Communication*         communication;                 //!< la communication
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     QStringList            nomColonnes;                   //!< la liste des noms de colonne
     int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
@@ -153,6 +155,7 @@ class IHMJustFeed : public QWidget
     void     initialiserTable();
     void     positionnerWidgets();
     void     initialiserEvenements();
+    void     initialiserCommunication();
     void     initialiserDistributeurs();
     void     initialiserProduits();
     void     initialiserOperateurs();

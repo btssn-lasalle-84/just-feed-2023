@@ -11,8 +11,20 @@
 /**
  * @brief Constructeur par défaut de la classe bac
  */
-Communication::Communication()
+Communication::Communication(int     idServeurTTN,
+                             QString hostname,
+                             int     port,
+                             QString username,
+                             QString password,
+                             QString applicationID,
+                             bool    estActif) :
+    idServeurTTN(idServeurTTN),
+    hostname(hostname), port(port), username(username), password(password),
+    applicationID(applicationID), estActif(estActif)
 {
+    qDebug() << Q_FUNC_INFO << "idServeurTTN" << this->idServeurTTN << "hostname" << this->hostname
+             << "port" << this->port << "username" << this->username << "password" << this->password
+             << "applicationID" << this->applicationID << "estActif" << this->estActif;
 }
 
 /**
@@ -20,4 +32,11 @@ Communication::Communication()
  */
 Communication::~Communication()
 {
+}
+
+void Communication::connecter()
+{
+    QMqttClient client;
+    client.setHostname(this->hostname);
+    client.setPort(this->port);
 }

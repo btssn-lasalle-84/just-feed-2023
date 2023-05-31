@@ -18,6 +18,7 @@
 #include "bac.h"
 #include "produit.h"
 #include "operateur.h"
+#include "communication.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -29,6 +30,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
+    initialiserCommunication();
     initialiserProduits();
     initialiserDistributeurs();
     initialiserOperateurs();
@@ -451,6 +453,32 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonValiderDistributeur, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonValiderIntervention, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
+}
+
+/**
+ * @brief initialise les distributeurs avec les bacs et les produits
+ */
+void IHMJustFeed::initialiserCommunication()
+{
+    QString     requete = "SELECT * FROM ServeurTTN;";
+    QStringList infoCommunication;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->recuperer(requete, infoCommunication);
+    bool estActif;
+    if(infoCommunication[Communication::TableCommunication::EST_ACTIF] == "1")
+    {
+        estActif = true;
+    }
+    else
+        estActif = false;
+    communication = new Communication(
+      infoCommunication[Communication::TableCommunication::ID_SERVEUR_TTN].toInt(),
+      infoCommunication[Communication::TableCommunication::HOSTNAME_COMMUNICATION],
+      infoCommunication[Communication::TableCommunication::PORT].toInt(),
+      infoCommunication[Communication::TableCommunication::USERANME],
+      infoCommunication[Communication::TableCommunication::PASSWORD_COMMUNICATION],
+      infoCommunication[Communication::TableCommunication::APPLICATION_ID],
+      estActif);
 }
 
 /**
