@@ -43,9 +43,10 @@ class Intervention;
  */
 //#define SANS_BDD
 
-#define TAILLE_POLICE 14
-#define BAC_VIDE      30
-#define BAC_MOITIE    50
+#define TAILLE_POLICE   14
+#define BAC_VIDE        30
+#define BAC_MOITIE      50
+#define MAX_REMPLISSAGE 100
 
 #define HYGROMETRIE_MIN_VALIDE     10
 #define HYGROMETRIE_MAX_VALIDE     15

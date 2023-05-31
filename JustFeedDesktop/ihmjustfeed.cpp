@@ -764,6 +764,31 @@ void IHMJustFeed::afficherDistributeurTable(const Distributeur& distributeur)
                                       itemDetailIntervention);
     tableWidgetDistributeurs->setItem(nb - 1, COLONNE_DISTRIBUTEUR_INTERVENTION, itemIntervention);
 
+    int nbBacs         = distributeur.getNbBacs();
+    int maxRemplissage = MAX_REMPLISSAGE;
+
+    for(int i = 0; i < nbBacs; i++)
+    {
+        int pourcentageRemplissage = distributeur.getBac(i)->getPourcentageRemplissage();
+
+        if(pourcentageRemplissage < maxRemplissage)
+        {
+            maxRemplissage = pourcentageRemplissage;
+        }
+    }
+
+    if(maxRemplissage < BAC_VIDE)
+    {
+        itemEnseigne->setBackgroundColor(Qt::red);
+    }
+    else if(maxRemplissage < BAC_MOITIE)
+    {
+        itemEnseigne->setBackgroundColor(Qt::yellow);
+    }
+    else
+    {
+        itemEnseigne->setBackgroundColor(Qt::green);
+    }
     // Se replace au début de la table
     tableWidgetDistributeurs->scrollToItem(tableWidgetDistributeurs->item(0, 1));
     tableWidgetDistributeurs->setCurrentCell(0, 1);
