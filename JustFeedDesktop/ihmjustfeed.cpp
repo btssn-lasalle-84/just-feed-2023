@@ -522,7 +522,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -565,7 +565,7 @@ void IHMJustFeed::initialiserProduits()
                                     "Pruneaux",
                                     "Maître Prunille",
                                     "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                       "délicieuse friandise à déguster à tout moment de la journée.",
+                                    "délicieuse friandise à déguster à tout moment de la journée.",
                                     "761234567890",
                                     1.15);
     Produit* abricot     = new Produit(2,

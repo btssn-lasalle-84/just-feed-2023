@@ -40,6 +40,7 @@ ConfigurationDistributeur::ConfigurationDistributeur(Distributeur* distributeur,
 ConfigurationDistributeur::~ConfigurationDistributeur()
 {
     qDebug() << Q_FUNC_INFO;
+    baseDeDonnees->detruireInstance();
 }
 
 // Slots
@@ -60,7 +61,7 @@ void ConfigurationDistributeur::selectionnerNouveauProduit(int indiceBac)
 void ConfigurationDistributeur::changerLePrix(const int indiceBac)
 {
     QString nouveauPrix = QString::number(editionsNouveauPrix[indiceBac]->value());
-    labelsPrix[indiceBac]->setText(nouveauPrix);
+    labelsPrix[indiceBac]->setText("Prix : " + nouveauPrix + " €");
     distributeur->setPrixProduit(indiceBac, editionsNouveauPrix[indiceBac]->value());
     // editionsNouveauPrix[numeroBac]->setValue(0.);
 }
@@ -71,7 +72,7 @@ void ConfigurationDistributeur::changerLePrix(const int indiceBac)
 void ConfigurationDistributeur::changerLeProduit(const int indiceBac)
 {
     QString nouveauProduit = choixNouveauProduit[indiceBac]->currentText();
-    labelsProduit[indiceBac]->setText(nouveauProduit);
+    labelsProduit[indiceBac]->setText(" : " + nouveauProduit);
     distributeur->getBac(indiceBac)->setProduit(
       ihmJustFeed->getProduit(choixNouveauProduit[indiceBac]->currentIndex()));
 
@@ -147,7 +148,7 @@ void ConfigurationDistributeur::initialiserWidgets()
     {
         labelsBac[i]->setText("Bac n°" + QString::number(i + 1) + " : ");
         labelsBac[i]->setAlignment(Qt::AlignCenter);
-        labelsProduit[i]->setText(distributeur->getBac(i)->getNomProduit());
+        labelsProduit[i]->setText(" : " + distributeur->getBac(i)->getNomProduit());
         labelsProduit[i]->setAlignment(Qt::AlignCenter);
         labelsPrix[i]->setText(
           "Prix : " + QString::number(distributeur->getBac(i)->getPrixProduit()) + " €");
@@ -248,7 +249,7 @@ void ConfigurationDistributeur::initialiserNouveauBac(int indiceBac)
 {
     labelsBac[indiceBac]->setText("Bac numero : " + QString::number(indiceBac) + " : ");
     labelsBac[indiceBac]->setAlignment(Qt::AlignCenter);
-    labelsProduit[indiceBac]->setText(distributeur->getBac(indiceBac)->getNomProduit());
+    labelsProduit[indiceBac]->setText(" : " + distributeur->getBac(indiceBac)->getNomProduit());
     labelsProduit[indiceBac]->setAlignment(Qt::AlignCenter);
     labelsPrix[indiceBac]->setText(
       "Prix : " + QString::number(distributeur->getBac(indiceBac)->getPrixProduit()) + " €");
@@ -336,8 +337,8 @@ void ConfigurationDistributeur::valider()
 {
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        QString requete =
-          "SELECT idProduit FROM Produit WHERE nomProduit = '" + labelsProduit[i]->text() + "';";
+        QString produit = labelsProduit[i]->text().section(':', 1).trimmed();
+        QString requete = "SELECT idProduit FROM Produit WHERE nomProduit = '" + produit + "';";
         QString idProduit;
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         baseDeDonnees->recuperer(requete, idProduit);
@@ -346,10 +347,13 @@ void ConfigurationDistributeur::valider()
                   " WHERE idBac =" + QString::number(distributeur->getBac(i)->getIdBac()) + ";";
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         baseDeDonnees->executer(requete);
+
+        int     startIndex = labelsPrix[i]->text().indexOf(QRegExp("\\d"));
+        int     endIndex   = labelsPrix[i]->text().lastIndexOf(QRegExp("\\d"));
+        QString prix       = labelsPrix[i]->text().mid(startIndex, endIndex - startIndex + 1);
         if(editionsNouveauPrix[i]->value() != 0.)
         {
-            requete = "UPDATE Produit SET prix =" + labelsPrix[i]->text() +
-                      " WHERE idProduit =" + idProduit + ";";
+            requete = "UPDATE Produit SET prix =" + prix + " WHERE idProduit = " + idProduit + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
         }
