@@ -23,7 +23,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
  * @author Fargier Mayeul
  * @version 1.1
  */
-public class ClientMQTT {
+public class ClientMQTT
+{
     /**
      * Constantes
      */
@@ -32,9 +33,9 @@ public class ClientMQTT {
     /**
      * Constantes pour le Handler
      */
-    public static final int TTN_CONNECTE = 11;
+    public static final int TTN_CONNECTE   = 11;
     public static final int TTN_DECONNECTE = 12;
-    public static final int TTN_MESSAGE = 13;
+    public static final int TTN_MESSAGE    = 13;
 
     /**
      * Constantes QoS
@@ -47,14 +48,14 @@ public class ClientMQTT {
      * Attributs
      */
     private MqttAndroidClient mqttAndroidClient;
-    private Handler handler = null; //!< pour la communication entre classes
-    private Context context = null; //!< Context de l'application
+    private Handler           handler = null; //!< pour la communication entre classes
+    private Context           context = null; //!< Context de l'application
 
     private String uriServeur; //!<  lien vers TTS
-    private String clientId; //!< Application ID
+    private String clientId;   //!< Application ID
 
     private String nomUtilisateur; //!<  nom d'utilisateur
-    private String motDePasse; //!<  mot de passe TTS
+    private String motDePasse;     //!<  mot de passe TTS
 
     /**
      * @brief Constructeur de la classe ClientMQTT
@@ -67,8 +68,8 @@ public class ClientMQTT {
         this.handler = handler;
         this.context = context;
 
-        //creerClientMQTTT(context, handler);
-        //connecter();
+        // creerClientMQTTT(context, handler);
+        // connecter();
     }
 
     /**
@@ -76,15 +77,17 @@ public class ClientMQTT {
      */
     public void creerClientMQTTT()
     {
+        Log.w(TAG, "creerClientMQTTT() uriServeur = " + uriServeur + " clientId = " + clientId);
         mqttAndroidClient = new MqttAndroidClient(context, uriServeur, clientId);
-        mqttAndroidClient.setCallback(new MqttCallbackExtended()
-        {
+        mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s)
             {
-                Log.w(TAG, "[ClientMQTT()] uriServeur = " + s + " connecte = " + mqttAndroidClient.isConnected());
-                Message msg = Message.obtain();
-                Bundle bundle = new Bundle();
+                Log.w(TAG,
+                      "[ClientMQTT()] uriServeur = " + s +
+                        " connecte = " + mqttAndroidClient.isConnected());
+                Message msg    = Message.obtain();
+                Bundle  bundle = new Bundle();
                 bundle.putInt("etat", TTN_CONNECTE);
                 msg.setData(bundle);
                 handler.sendMessage(msg);
@@ -95,7 +98,7 @@ public class ClientMQTT {
             {
                 Log.w(TAG, "[connectionLost()]");
                 Message msg = Message.obtain();
-                Bundle b = new Bundle();
+                Bundle  b   = new Bundle();
                 b.putInt("etat", TTN_DECONNECTE);
                 msg.setData(b);
                 handler.sendMessage(msg);
@@ -104,9 +107,11 @@ public class ClientMQTT {
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception
             {
-                Log.w(TAG, "[messageArrived()] topic = " + topic + " message = " + mqttMessage.toString());
+                Log.w(TAG,
+                      "[messageArrived()] topic = " + topic +
+                        " message = " + mqttMessage.toString());
                 Message msg = Message.obtain();
-                Bundle b = new Bundle();
+                Bundle  b   = new Bundle();
                 b.putInt("etat", TTN_MESSAGE);
                 b.putString("topic", topic);
                 b.putString("message", mqttMessage.toString());
@@ -126,25 +131,37 @@ public class ClientMQTT {
      * @brief Méthode pour modifier le nom d'utilisateur
      * @param nomUtilisateur
      */
-    public void changerNomUtilisateur(String nomUtilisateur){ this.nomUtilisateur = nomUtilisateur; }
+    public void changerNomUtilisateur(String nomUtilisateur)
+    {
+        this.nomUtilisateur = nomUtilisateur;
+    }
 
     /**
      * @brief Méthode pour modifier le hostname
      * @param hostname
      */
-    public void changerHostname(String hostname){ this.uriServeur = hostname; }
+    public void changerHostname(String hostname)
+    {
+        this.uriServeur = "tcp://" + hostname + ":1883";
+    }
 
     /**
      * @brief Méthode pour modifier l'identifiant du client
      * @param clientId
      */
-    public void changerClientId(String clientId){ this.clientId = clientId; }
+    public void changerClientId(String clientId)
+    {
+        this.clientId = clientId;
+    }
 
     /**
      * @brief Méthode pour modifier le mot de passe de l'application
      * @param motDePasse
      */
-    public void changerMotDePasse(String motDePasse){ this.motDePasse = motDePasse; }
+    public void changerMotDePasse(String motDePasse)
+    {
+        this.motDePasse = motDePasse;
+    }
 
     /**
      * @brief Méthode pour mettre en place les callbacks
@@ -168,29 +185,34 @@ public class ClientMQTT {
 
         try
         {
-            Log.d(TAG, "[ClientMQTT()] uriServeur = " + uriServeur + " clientId = " + clientId);
-            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener()
-            {
+            Log.d(TAG,
+                  "[ClientMQTT()] uriServeur = " + uriServeur + " clientId = " + clientId +
+                    " motdepasse = " + motDePasse);
+            mqttAndroidClient.connect(mqttConnectOptions, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
-                    DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
+                    DisconnectedBufferOptions disconnectedBufferOptions =
+                      new DisconnectedBufferOptions();
                     disconnectedBufferOptions.setBufferEnabled(true);
                     disconnectedBufferOptions.setBufferSize(100);
                     disconnectedBufferOptions.setPersistBuffer(false);
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
-                    Log.d(TAG, "[onSuccess()] uriServeur = " + uriServeur + " clientId = " + clientId);
+                    Log.d(TAG,
+                          "[onSuccess()] uriServeur = " + uriServeur + " clientId = " + clientId);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception)
                 {
-                    Log.d(TAG, "[onFailure()] uriServeur = " + uriServeur + " clientId = " + clientId + " exception = " + exception.toString());
+                    Log.d(TAG,
+                          "[onFailure()] uriServeur = " + uriServeur + " clientId = " + clientId +
+                            " exception = " + exception.toString());
                 }
             });
         }
-        catch (MqttException e)
+        catch(MqttException e)
         {
             e.printStackTrace();
         }
@@ -207,22 +229,24 @@ public class ClientMQTT {
         try
         {
             IMqttToken disconToken = mqttAndroidClient.disconnect();
-            disconToken.setActionCallback(new IMqttActionListener()
-            {
+            disconToken.setActionCallback(new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
-                    Log.d(TAG, "[onSuccess()] uriServeur = " + uriServeur + " clientId = " + clientId);
+                    Log.d(TAG,
+                          "[onSuccess()] uriServeur = " + uriServeur + " clientId = " + clientId);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception)
                 {
-                    Log.d(TAG, "[onFailure()] uriServeur = " + uriServeur + " clientId = " + clientId + " exception = " + exception.toString());
+                    Log.d(TAG,
+                          "[onFailure()] uriServeur = " + uriServeur + " clientId = " + clientId +
+                            " exception = " + exception.toString());
                 }
             });
         }
-        catch (MqttException e)
+        catch(MqttException e)
         {
             e.printStackTrace();
         }
@@ -255,9 +279,8 @@ public class ClientMQTT {
         Log.w(TAG, "[souscrireTopic()] topic = " + topicTTN);
         try
         {
-            final boolean[] retour = {false};
-            mqttAndroidClient.subscribe(topicTTN, 0, null, new IMqttActionListener()
-            {
+            final boolean[] retour = { false };
+            mqttAndroidClient.subscribe(topicTTN, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
@@ -274,7 +297,7 @@ public class ClientMQTT {
             });
             return retour[0];
         }
-        catch (MqttException e)
+        catch(MqttException e)
         {
             Log.w(TAG, "Erreur topic = " + topicTTN);
             e.printStackTrace();
@@ -296,12 +319,12 @@ public class ClientMQTT {
         Log.w(TAG, "[unsouscrireTopic()] topic = " + topicTTN);
         try
         {
-            final boolean[] retour = {false};
+            final boolean[] retour = { false };
             mqttAndroidClient.unsubscribe(topicTTN, null, null);
 
             return retour[0];
         }
-        catch (MqttException e)
+        catch(MqttException e)
         {
             Log.w(TAG, "Erreur topic = " + topicTTN);
             e.printStackTrace();
