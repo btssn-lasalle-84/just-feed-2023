@@ -41,7 +41,7 @@ class Communication : public QObject
     QString            applicationID; //!< applicationID
     bool               estActif;      //!< estActif
     QMqttClient*       client;        //!< client
-    QMqttSubscription* subscription;  //!< Subscription
+    QMqttSubscription* abonnement;    //!< abonnement
 
   public:
     Communication(int      idServeurTTN,

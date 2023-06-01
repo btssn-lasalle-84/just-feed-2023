@@ -23,7 +23,7 @@ Communication::Communication(int      idServeurTTN,
     QObject(parent),
     idServeurTTN(idServeurTTN), hostname(hostname), port(port), username(username),
     password(password), applicationID(applicationID), estActif(estActif), client(nullptr),
-    subscription(nullptr)
+    abonnement(nullptr)
 
 {
     qDebug() << Q_FUNC_INFO << "idServeurTTN" << this->idServeurTTN << "hostname" << this->hostname
@@ -60,11 +60,11 @@ Communication::~Communication()
 void Communication::sAbonner(QString topic)
 {
     qDebug() << Q_FUNC_INFO << "topic" << topic;
-    QMqttSubscription* subscription;
-    subscription = client->subscribe(topic);
-    if(!subscription)
+    QMqttSubscription* abonnement;
+    abonnement = client->subscribe(topic);
+    if(!abonnement)
     {
-        qDebug() << Q_FUNC_INFO << "erreur subscription";
+        qDebug() << Q_FUNC_INFO << "erreur abonnement";
         return;
     }
 }
