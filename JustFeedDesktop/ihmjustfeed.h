@@ -52,6 +52,7 @@ class Communication;
 #define HYGROMETRIE_MAX_VALIDE     15
 #define HYGROMETRIE_MIN_NON_VALIDE 8
 #define HYGROMETRIE_MAX_NON_VALIDE 18
+
 /**
  * @class       IHMJustFeed
  * @brief       Déclaration de la classe IHMJustFeed.

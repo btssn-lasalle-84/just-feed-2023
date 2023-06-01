@@ -1,8 +1,9 @@
 QT       += core gui widgets sql
 QT       += webkitwidgets
+QT += mqtt
 
 CONFIG += c++11
-
+LIBS += -lQt5Mqtt
 DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
