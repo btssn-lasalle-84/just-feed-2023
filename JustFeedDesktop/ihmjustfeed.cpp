@@ -30,7 +30,6 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
-    initialiserCommunication();
     initialiserProduits();
     initialiserDistributeurs();
     initialiserOperateurs();
@@ -38,6 +37,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
     initialiserGUI();
     chargerListeOperateurs();
     chargerDistributeurs();
+    initialiserCommunication();
 }
 
 /**
@@ -478,7 +478,8 @@ void IHMJustFeed::initialiserCommunication()
       infoCommunication[Communication::TableCommunication::USERANME],
       infoCommunication[Communication::TableCommunication::PASSWORD_COMMUNICATION],
       infoCommunication[Communication::TableCommunication::APPLICATION_ID],
-      estActif);
+      estActif,
+      this);
 }
 
 /**
@@ -549,7 +550,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                      "WHERE Bac.idDistributeur='" +
+                                     "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
