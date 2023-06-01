@@ -21,6 +21,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -30,6 +31,10 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.widget.Button;
 import android.widget.PopupMenu;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,6 +51,7 @@ public class JustFeed extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TOPIC_SIM1 = "distributeur-1-sim"; //!< Topic MQTT du simulateur 1
     private static final int    INDEX_CLIENT_ID =
       0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
@@ -324,12 +330,13 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case ClientMQTT.TTN_CONNECTE:
                         Log.d(TAG, "[Handler] TTS connecté");
+                        clientMQTT.souscrireTopic(TOPIC_SIM1);
                         break;
                     case ClientMQTT.TTN_DECONNECTE:
                         Log.d(TAG, "[Handler] TTS déconnecté");
                         break;
                     case ClientMQTT.TTN_MESSAGE:
-                        Log.d(TAG, "[Handler] TTS message");
+                        Log.d(TAG, "[Handler] TTS message device");
                         break;
                 }
             }

@@ -15,6 +15,7 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 
 /**
  * @brief Définition de la classe ClientMQTT.
@@ -56,6 +57,7 @@ public class ClientMQTT
 
     private String nomUtilisateur; //!<  nom d'utilisateur
     private String motDePasse;     //!<  mot de passe TTS
+    private String topicTTN;     //!<  mot de passe TTS
 
     /**
      * @brief Constructeur de la classe ClientMQTT
@@ -64,10 +66,9 @@ public class ClientMQTT
      */
     public ClientMQTT(Context context, final Handler handler)
     {
-        Log.v(TAG, "[ClientMQTT()] clientId = " + clientId);
         this.handler = handler;
         this.context = context;
-
+        Log.v(TAG, "[ClientMQTT()] clientId = " + clientId+ " [Handler] = "+ handler);
         // creerClientMQTTT(context, handler);
         // connecter();
     }
@@ -86,22 +87,18 @@ public class ClientMQTT
                 Log.w(TAG,
                       "[ClientMQTT()] uriServeur = " + s +
                         " connecte = " + mqttAndroidClient.isConnected());
-                Message msg    = Message.obtain();
-                Bundle  bundle = new Bundle();
-                bundle.putInt("etat", TTN_CONNECTE);
-                msg.setData(bundle);
-                handler.sendMessage(msg);
+                Message message = new Message();
+                message.what = TTN_CONNECTE;
+                handler.sendMessage(message);
             }
 
             @Override
             public void connectionLost(Throwable throwable)
             {
                 Log.w(TAG, "[connectionLost()]");
-                Message msg = Message.obtain();
-                Bundle  b   = new Bundle();
-                b.putInt("etat", TTN_DECONNECTE);
-                msg.setData(b);
-                handler.sendMessage(msg);
+                Message message = new Message();
+                message.what = TTN_DECONNECTE;
+                handler.sendMessage(message);
             }
 
             @Override
@@ -110,13 +107,10 @@ public class ClientMQTT
                 Log.w(TAG,
                       "[messageArrived()] topic = " + topic +
                         " message = " + mqttMessage.toString());
-                Message msg = Message.obtain();
-                Bundle  b   = new Bundle();
-                b.putInt("etat", TTN_MESSAGE);
-                b.putString("topic", topic);
-                b.putString("message", mqttMessage.toString());
-                msg.setData(b);
-                handler.sendMessage(msg);
+                Message message = new Message();
+                message.what = TTN_MESSAGE;
+                message.obj = new JSONObject(mqttMessage.toString());
+                handler.sendMessage(message);
             }
 
             @Override
@@ -275,12 +269,16 @@ public class ClientMQTT
             return false;
         }
 
-        final String topicTTN = clientId + "/devices/" + deviceID + "/up";
+
+        if(deviceID.isEmpty())
+            topicTTN = "v3/" + clientId + "/devices/#";
+        else
+            topicTTN = "v3/" + clientId + "/devices/" + deviceID + "/up";
         Log.w(TAG, "[souscrireTopic()] topic = " + topicTTN);
         try
         {
             final boolean[] retour = { false };
-            mqttAndroidClient.subscribe(topicTTN, 0, null, new IMqttActionListener() {
+            mqttAndroidClient.subscribe(topicTTN, QOS_2, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken)
                 {
