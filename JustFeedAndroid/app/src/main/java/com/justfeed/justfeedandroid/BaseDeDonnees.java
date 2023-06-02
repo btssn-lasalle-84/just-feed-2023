@@ -53,6 +53,8 @@ public class BaseDeDonnees
     public final static int     REQUETE_SQL_SELECT_DISTRIBUTEURS = 7;
     public final static int     REQUETE_SQL_SELECT_INTERVENTIONS = 8;
     public final static int     REQUETE_SQL_SELECT_OPERATEURS    = 9;
+    public final static int     REQUETE_SQL_SELECT_TTS = 10;
+
     private static final String NOM_BDD = "justfeed"; //!< Le nom par défaut de la base de données
     private static final String IDENTIFIANT =
       "justfeed"; //!< Le nom de l'utilisateur par défaut de la base de données
@@ -955,5 +957,56 @@ public class BaseDeDonnees
                     handler.sendMessage(message);
             }
         }
+    }
+
+    public void recupererIdentifiantsTTS()
+    {
+        ArrayList<String> identifiants = new ArrayList<String>();
+           if(BaseDeDonnees.active)
+           {
+               if(estConnecte())
+               {
+                   Thread requeteBDD = new Thread(new Runnable() {
+                       public void run()
+                       {
+                            mutex.lock();
+                            try
+                            {
+                                String requeteSQL = "SELECT * FROM ServeurTTN;";
+                                Log.d(TAG, "Requete : "+requeteSQL);
+                                Statement statement =
+                                        connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
+                                                                  ResultSet.CONCUR_READ_ONLY);
+                                ResultSet resultatRequete = statement.executeQuery(requeteSQL);
+
+                                while(resultatRequete.next())
+                                {
+                                    identifiants.add(resultatRequete.getString("username"));
+                                    identifiants.add(resultatRequete.getString("password"));
+                                    identifiants.add(resultatRequete.getString("hostname"));
+                                }
+                                Message message = new Message();
+                                message.what = REQUETE_SQL_SELECT_TTS;
+                                message.obj = identifiants;
+                                if(handler != null)
+                                {
+                                    handler.sendMessage(message);
+                                }
+                            }
+                            catch(Exception e)
+                            {
+                                // e.printStackTrace();
+                                Log.e(TAG, "recupererIdentifiantsTTS() Exception = " + e.toString());
+                            }
+                            finally
+                            {
+                                mutex.unlock();
+                            }
+                       }
+                   });
+
+                   requeteBDD.start();
+               }
+           }
     }
 }
