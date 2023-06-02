@@ -40,6 +40,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @class JustFeed
@@ -52,6 +54,9 @@ public class JustFeed extends AppCompatActivity
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
     private static final String TOPIC_SIM1 = "distributeur-1-sim"; //!< Topic MQTT du simulateur 1
+    private static final String PATTERN_ID_DISTRIBUTEUR = "\"device_id\"\\s*:\\s*\"([^\"]+)\""; //!< Expression régulière pour trouver l'id du distributeur dans le JSON
+    private static final String PATTERN_HEURE = "\"received_at\":\"(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z)\""; //!< Expression régulière pour extraire l'horodatage
+    private static final String PATTERN_REMPLISSAGES = "\"nbBacs\":\\d+(?:,\"remplissage\\d+\":\\d+)+"; //!< Expression régulière pour extraire le remplissages des bacs
     private static final int    INDEX_CLIENT_ID =
       0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
@@ -336,7 +341,8 @@ public class JustFeed extends AppCompatActivity
                         Log.d(TAG, "[Handler] TTS déconnecté");
                         break;
                     case ClientMQTT.TTN_MESSAGE:
-                        Log.d(TAG, "[Handler] TTS message device");
+                        Log.d(TAG, "[Handler] TTS message device "+message.obj);
+                        extraireInfoDistributeur(message);
                         break;
                 }
             }
@@ -357,6 +363,24 @@ public class JustFeed extends AppCompatActivity
         else
         {
             afficherMessage("JustFeed", "Il faut sélectionner un opérateur dans le menu !");
+        }
+    }
+
+    /**
+     * @brief Méthode utilisée pour extraire les informations sur le distributeur dans le JSON
+     * @param message
+     */
+    private void extraireInfoDistributeur(@NonNull Message message) {
+        Pattern regexIdDistributeur = Pattern.compile(PATTERN_ID_DISTRIBUTEUR);
+        Pattern regexHeure = Pattern.compile(PATTERN_HEURE);
+        Pattern regexRemplissages = Pattern.compile(PATTERN_REMPLISSAGES);
+        Matcher distributeur = regexIdDistributeur.matcher(message.obj.toString());
+        Matcher heure = regexHeure.matcher(message.obj.toString());
+        Matcher remplissages = regexRemplissages.matcher(message.obj.toString());
+        if(distributeur.find() && heure.find() && remplissages.find())
+        {
+            Log.d(TAG, "[Handler] TTS Info distributeur : "+distributeur.group(1)
+                    + " Heure : "+heure.group(1)+" Remplissages : "+remplissages.group(0));
         }
     }
 
