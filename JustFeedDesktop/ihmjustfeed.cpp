@@ -1099,6 +1099,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         QLabel* idBac;
         QLabel* poidsAPrevoir;
+        QLabel* produitAPrevoir;
         qDebug() << Q_FUNC_INFO << "listeApprovisionnement" << listeApprovisionnement;
 
         for(int i = 0; i < listeApprovisionnement.size(); i++)
@@ -1106,6 +1107,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             layoutsApprovisionnement.push_back(new QHBoxLayout);
             idBac         = new QLabel(this);
             poidsAPrevoir = new QLabel(this);
+            produitAPrevoir = new QLabel(this);
             idBac->setText("Approvisionnement bac n°" +
                            listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC]);
             /**
@@ -1115,8 +1117,10 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
               "Poids à prevoir : " +
               listeApprovisionnement[i][Intervention::TableApprovisionnement::POIDS_A_PREVOIR] +
               " g");
+            produitAPrevoir->setText("Produit à prevoir : " + distributeur->getBacId(listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())->getNomProduit());
             layoutsApprovisionnement[i]->addWidget(idBac);
             layoutsApprovisionnement[i]->addWidget(poidsAPrevoir);
+            layoutsApprovisionnement[i]->addWidget(produitAPrevoir);
         }
     }
 

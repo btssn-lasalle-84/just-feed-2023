@@ -200,6 +200,22 @@ Bac* Distributeur::getBac(int numeroBac) const
 }
 
 /**
+ * @brief Accesseur pour récupérer un bac grâce à son id
+ * @return Bac
+ */
+Bac* Distributeur::getBacId(int idBac) const
+{
+    for(int i = 0; i < bacs.size(); i++)
+    {
+        if(bacs[i]->getIdBac() == idBac)
+        {
+            return bacs[i];
+        }
+    }
+    return nullptr;
+}
+
+/**
  * @brief Accesseur pour récupérer le produit dans le bac voulu
  * @return Produit qui permet de connaitre le produit
  */
