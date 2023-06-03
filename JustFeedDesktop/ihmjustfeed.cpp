@@ -18,6 +18,7 @@
 #include "bac.h"
 #include "produit.h"
 #include "operateur.h"
+#include "communication.h"
 
 /**
  * @brief constructeur par défaut de la classe IHMJustFeed
@@ -36,6 +37,7 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
     initialiserGUI();
     chargerListeOperateurs();
     chargerDistributeurs();
+    initialiserCommunication();
 }
 
 /**
@@ -456,6 +458,33 @@ void IHMJustFeed::initialiserEvenements()
 /**
  * @brief initialise les distributeurs avec les bacs et les produits
  */
+void IHMJustFeed::initialiserCommunication()
+{
+    QString     requete = "SELECT * FROM ServeurTTN;";
+    QStringList infoCommunication;
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->recuperer(requete, infoCommunication);
+    bool estActif;
+    if(infoCommunication[Communication::TableCommunication::EST_ACTIF] == "1")
+    {
+        estActif = true;
+    }
+    else
+        estActif = false;
+    communication = new Communication(
+      infoCommunication[Communication::TableCommunication::ID_SERVEUR_TTN].toInt(),
+      infoCommunication[Communication::TableCommunication::HOSTNAME_COMMUNICATION],
+      infoCommunication[Communication::TableCommunication::PORT].toInt(),
+      infoCommunication[Communication::TableCommunication::USERANME],
+      infoCommunication[Communication::TableCommunication::PASSWORD_COMMUNICATION],
+      infoCommunication[Communication::TableCommunication::APPLICATION_ID],
+      estActif,
+      this);
+}
+
+/**
+ * @brief initialise les distributeurs avec les bacs et les produits
+ */
 void IHMJustFeed::initialiserDistributeurs()
 {
     /*qDebug() << Q_FUNC_INFO << "SANS BDD";
@@ -521,7 +550,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                      "WHERE Bac.idDistributeur='" +
+                                     "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;

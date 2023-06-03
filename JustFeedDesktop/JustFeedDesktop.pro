@@ -1,5 +1,6 @@
 QT       += core gui widgets sql
 QT       += webkitwidgets
+QT += mqtt
 
 CONFIG += c++11
 

@@ -24,6 +24,7 @@ class PlanificationIntervention;
 class BaseDeDonnees;
 class Operateur;
 class Intervention;
+class Communication;
 
 /**
  * @def TITRE_APPLICATION
@@ -52,6 +53,7 @@ class Intervention;
 #define HYGROMETRIE_MAX_VALIDE     15
 #define HYGROMETRIE_MIN_NON_VALIDE 8
 #define HYGROMETRIE_MAX_NON_VALIDE 18
+
 /**
  * @class       IHMJustFeed
  * @brief       Déclaration de la classe IHMJustFeed.
@@ -106,6 +108,7 @@ class IHMJustFeed : public QWidget
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
+    Communication*         communication;                 //!< la communication
     int                    numeroDistributeurSelectionne; //!< le distributeur sélectionné
     QStringList            nomColonnes;                   //!< la liste des noms de colonne
     int                    nbLignesDistributeurs;         //!< le nombre de lignes dans la table
@@ -154,6 +157,7 @@ class IHMJustFeed : public QWidget
     void     initialiserTable();
     void     positionnerWidgets();
     void     initialiserEvenements();
+    void     initialiserCommunication();
     void     initialiserDistributeurs();
     void     initialiserProduits();
     void     initialiserOperateurs();
