@@ -1075,11 +1075,11 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             }
             else
             {
-                aRemplirIntervention->setText("À depanner : Non");
+                aRemplirIntervention->setText("À remplir : Non");
             }
             if(interventions[i]->getADepanner())
             {
-                aDepannerIntervention->setText("À remplir  : Oui");
+                aDepannerIntervention->setText("À depanner  : Oui");
             }
             else
             {
