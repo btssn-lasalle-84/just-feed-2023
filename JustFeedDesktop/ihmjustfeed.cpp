@@ -26,7 +26,7 @@
 IHMJustFeed::IHMJustFeed(QWidget* parent) :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
     configurationDistributeur(nullptr), planificationIntervention(nullptr),
-    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0), listeOperateurs(nullptr)
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
@@ -116,6 +116,7 @@ void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
  */
 void IHMJustFeed::afficherFenetreAccueil()
 {
+    metAJourLesInformationsIntervention();
     afficherFenetre(IHMJustFeed::Fenetre::FAccueil);
 }
 
@@ -299,12 +300,14 @@ void IHMJustFeed::instancierWidgets()
     descriptionDistributeur     = new QLabel(this);
     miseEnServiceDistributeur   = new QLabel(this);
     positionDistributeur        = new QLabel(this);
-    interventionIdOperateur     = new QLabel(this);
+    interventionNomOperateur     = new QLabel(this);
     interventionNomDistributeur = new QLabel(this);
     dateIntervention            = new QLabel(this);
     aRemplirIntervention        = new QLabel(this);
     aDepannerIntervention       = new QLabel(this);
     etatIntervention            = new QLabel(this);
+    nouveauOperateur            = new QComboBox(this);
+    nouvelleDateIntervention    = new QDateEdit(this);
 
     // Les layouts
     layoutIntervention             = new QHBoxLayout();
@@ -1037,23 +1040,27 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNom();
 
     // la fenêtre intervention
-
-    interventionIdOperateur->setAlignment(Qt::AlignCenter);
+    interventionNomOperateur->setAlignment(Qt::AlignCenter);
     interventionNomDistributeur->setAlignment(Qt::AlignCenter);
     dateIntervention->setAlignment(Qt::AlignCenter);
     aRemplirIntervention->setAlignment(Qt::AlignCenter);
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
+    nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
     layoutBoutonsInterventions->addStretch();
+    layoutBoutonsInterventions->addWidget(nouveauOperateur);
+    layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);
     layoutBoutonsInterventions->addWidget(boutonValiderIntervention);
 
-    int     idIntervention = ID_INTERVENTION_NON_DEFINI;
+    idIntervention = ID_INTERVENTION_NON_DEFINI;
     QString nomOperateur;
     for(int i = 0; i < interventions.size(); i++)
     {
         if(interventions[i]->getIdDistributeur() == distributeur->getId())
         {
+            nouvelleDateIntervention->setDate(interventions[i]->getDateIntervention());
             idIntervention = interventions[i]->getIdIntervention();
+            qDebug() << Q_FUNC_INFO << "idIntervention" << idIntervention;
             for(int j = 0; j < operateurs.size(); j++)
             {
                 if(operateurs[j]->getId() == interventions[i]->getIdOperateur())
@@ -1063,7 +1070,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
                 }
             }
 
-            interventionIdOperateur->setText("Opérateur : " + nomOperateur);
+            interventionNomOperateur->setText("Opérateur : " + nomOperateur);
             interventionNomDistributeur->setText("Distributeur : " + distributeur->getNom());
             dateIntervention->setText(
               "Date : " + interventions[i]->getDateIntervention().toString("dd/MM/yyyy"));
@@ -1126,7 +1133,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 
     // positionnement
     layoutIntervention->addWidget(interventionNomDistributeur);
-    layoutIntervention->addWidget(interventionIdOperateur);
+    layoutIntervention->addWidget(interventionNomOperateur);
     layoutIntervention->addWidget(dateIntervention);
     layoutIntervention->addWidget(aRemplirIntervention);
     layoutIntervention->addWidget(aDepannerIntervention);
@@ -1202,6 +1209,43 @@ Produit* IHMJustFeed::recupererProduit(int idProduit)
 }
 
 /**
+ * @brief change les information d'une intervention, l'operateur ainsi que la date d'intervention
+ */
+void IHMJustFeed::metAJourLesInformationsIntervention()
+{
+    QString requete = "UPDATE Intervention SET dateIntervention = '"+
+            nouvelleDateIntervention->date().toString("yyyy-MM-dd")+"' "
+            "WHERE idIntervention = "+QString::number(idIntervention)+";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+    int idNouveauOperateur;
+
+    if(nouveauOperateur->currentText() != "Opérateur")
+    {
+        for(int i = 0; i < operateurs.size(); i++)
+        {
+            if(operateurs[i]->getNom() == nouveauOperateur->currentText())
+            {
+                idNouveauOperateur = operateurs[i]->getId();
+            }
+        }
+        requete = "UPDATE Intervention SET idOperateur = '"+ QString::number(idNouveauOperateur)
+                +"' WHERE idIntervention = "+QString::number(idIntervention)+";";
+        qDebug() << Q_FUNC_INFO << "requete" << requete;
+        baseDeDonnees->executer(requete);
+    }
+
+    for(int i = 0; i < interventions.size(); i++)
+    {
+        if(interventions[i]->getIdIntervention() == idIntervention)
+        {
+            interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
+            interventions[i]->setIdOperateur(idNouveauOperateur);
+        }
+    }
+}
+
+/**
  * @brief charge la carte de localisation d'un distributeur
  * @param distributeur
  */
@@ -1236,12 +1280,12 @@ void IHMJustFeed::chargerCarte(Distributeur* distributeur)
  */
 void IHMJustFeed::chargerListeOperateurs()
 {
-    if(listeOperateurs != nullptr)
+    qDebug() << Q_FUNC_INFO;
+    nouveauOperateur->clear();
+    nouveauOperateur->addItem("Opérateur");
+    for(int i = 0; i < operateurs.size(); i++)
     {
-        listeOperateurs->addItem("Opérateur");
-        for(int i = 0; i < operateurs.size(); i++)
-        {
-            listeOperateurs->addItem(operateurs[i]->getNom() + " " + operateurs[i]->getPrenom());
-        }
+        qDebug() << Q_FUNC_INFO;
+        nouveauOperateur->addItem(operateurs[i]->getNom());
     }
 }

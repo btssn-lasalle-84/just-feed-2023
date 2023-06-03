@@ -137,18 +137,20 @@ class IHMJustFeed : public QWidget
     QLabel*               descriptionDistributeur;
     QLabel*               miseEnServiceDistributeur;
     QLabel*               positionDistributeur;
-    QHBoxLayout*          layoutIntervention;
-    QHBoxLayout*          layoutBoutonsInterventions;
-    QVBoxLayout*          layoutInformationsIntervention;
-    QVector<QStringList>  listeApprovisionnement;
-    QVector<QHBoxLayout*> layoutsApprovisionnement;
-    QLabel*               interventionIdOperateur;
-    QLabel*               interventionNomDistributeur;
-    QLabel*               dateIntervention;
-    QLabel*               aRemplirIntervention;
-    QLabel*               aDepannerIntervention;
-    QLabel*               etatIntervention;
-    QComboBox*            listeOperateurs;
+    QHBoxLayout*          layoutIntervention; //!< layout intervention
+    QHBoxLayout*          layoutBoutonsInterventions; //!< layout des boutons de l'intervention
+    QVBoxLayout*          layoutInformationsIntervention;  //!< layout contenant les informations de l'intervention
+    QVector<QStringList>  listeApprovisionnement; //!< vecteur de liste qui contient les Approvisionnement lié à l'intervention
+    QVector<QHBoxLayout*> layoutsApprovisionnement; //!< layout des approvisionnement
+    QLabel*               interventionNomOperateur;  //!< nom operateur
+    QLabel*               interventionNomDistributeur; //!< nom distributeur
+    QLabel*               dateIntervention;  //!< date planifié pour l'intervention
+    QLabel*               aRemplirIntervention; //!< bool pour savoir si le distributeur est à remplir
+    QLabel*               aDepannerIntervention; //!< bool pour savoir si le distributeur est à depanner
+    QLabel*               etatIntervention; //!< etat de l'intervention
+    QComboBox*            nouveauOperateur; //!< nouveau operateur
+    QDateEdit*            nouvelleDateIntervention; //!< nouvelle date d'intervention
+    int                   idIntervention;
     QWebView*             vueCarte;
 
     void     initialiserGUI();
@@ -176,6 +178,7 @@ class IHMJustFeed : public QWidget
     void     chargerCarte(Distributeur* distributeur);
     void     chargerListeOperateurs();
     Produit* recupererProduit(int idProduit);
+    void     metAJourLesInformationsIntervention();
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
