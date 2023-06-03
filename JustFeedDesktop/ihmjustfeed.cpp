@@ -1233,14 +1233,14 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
                 +"' WHERE idIntervention = "+QString::number(idIntervention)+";";
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         baseDeDonnees->executer(requete);
-    }
 
-    for(int i = 0; i < interventions.size(); i++)
-    {
-        if(interventions[i]->getIdIntervention() == idIntervention)
+        for(int i = 0; i < interventions.size(); i++)
         {
-            interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
-            interventions[i]->setIdOperateur(idNouveauOperateur);
+            if(interventions[i]->getIdIntervention() == idIntervention)
+            {
+                interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
+                interventions[i]->setIdOperateur(idNouveauOperateur);
+            }
         }
     }
 }
