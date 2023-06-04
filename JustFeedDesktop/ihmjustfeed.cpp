@@ -1064,7 +1064,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
     nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
-    boutonImpression->setText("Impression");
+    boutonImpression->setText("Imprimer");
     layoutBoutonsInterventions->addStretch();
     layoutBoutonsInterventions->addWidget(nouveauOperateur);
     layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);
