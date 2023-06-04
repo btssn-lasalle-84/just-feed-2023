@@ -256,6 +256,21 @@ void IHMJustFeed::afficherCarte()
         boutonAfficherCarte->setText("Afficher la carte");
 }
 
+/**
+ * @brief imprime une intervention
+ */
+void IHMJustFeed::imprimerIntervention()
+{
+    qDebug() << Q_FUNC_INFO;
+    QPrinter imprimer;
+       QPrintDialog printDialog(&imprimer);
+       if (printDialog.exec() == QDialog::Accepted) {
+           QPainter peinture(&imprimer);
+           fenetreIntervention->render(&peinture);
+           peinture.end();
+       }
+}
+
 // Méthodes privées
 
 /**
@@ -308,6 +323,7 @@ void IHMJustFeed::instancierWidgets()
     etatIntervention            = new QLabel(this);
     nouveauOperateur            = new QComboBox(this);
     nouvelleDateIntervention    = new QDateEdit(this);
+    boutonImpression            = new QPushButton(this);
 
     // Les layouts
     layoutIntervention             = new QHBoxLayout();
@@ -456,6 +472,7 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonValiderDistributeur, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonValiderIntervention, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
+    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(imprimerIntervention()));
 }
 
 /**
@@ -1047,9 +1064,11 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
     nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
+    boutonImpression->setText("Impression");
     layoutBoutonsInterventions->addStretch();
     layoutBoutonsInterventions->addWidget(nouveauOperateur);
     layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);
+    layoutBoutonsInterventions->addWidget(boutonImpression);
     layoutBoutonsInterventions->addWidget(boutonValiderIntervention);
 
     idIntervention = ID_INTERVENTION_NON_DEFINI;

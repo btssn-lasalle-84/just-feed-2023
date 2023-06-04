@@ -16,6 +16,9 @@
 #include <QVector>
 #include <QtWidgets>
 #include <QWebView>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QPainter>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -150,7 +153,8 @@ class IHMJustFeed : public QWidget
     QLabel*               etatIntervention; //!< etat de l'intervention
     QComboBox*            nouveauOperateur; //!< nouveau operateur
     QDateEdit*            nouvelleDateIntervention; //!< nouvelle date d'intervention
-    int                   idIntervention;
+    QPushButton*          boutonImpression; //!< bouton pour imprimer l'intervention
+    int                   idIntervention; //!< id de l'intervention en cour de visualisation
     QWebView*             vueCarte;
 
     void     initialiserGUI();
@@ -202,6 +206,7 @@ class IHMJustFeed : public QWidget
     void selectionnerDistributeur(QTableWidgetItem* item);
     void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
     void afficherCarte();
+    void imprimerIntervention();
 };
 
 #endif // IHMJUSTFEED_H
