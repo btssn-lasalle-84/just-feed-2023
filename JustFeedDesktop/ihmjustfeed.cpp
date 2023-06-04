@@ -1232,11 +1232,23 @@ Produit* IHMJustFeed::recupererProduit(int idProduit)
  */
 void IHMJustFeed::metAJourLesInformationsIntervention()
 {
-    QString requete = "UPDATE Intervention SET dateIntervention = '"+
-            nouvelleDateIntervention->date().toString("yyyy-MM-dd")+"' "
-            "WHERE idIntervention = "+QString::number(idIntervention)+";";
-    qDebug() << Q_FUNC_INFO << "requete" << requete;
-    baseDeDonnees->executer(requete);
+    QString requete;
+    for(int i = 0; i < interventions.size(); i++)
+    {
+        if(interventions[i]->getIdIntervention() == idIntervention)
+        {
+            if(interventions[i]->getDateIntervention() != nouvelleDateIntervention->date())
+            {
+                 requete = "UPDATE Intervention SET dateIntervention = '"+
+                        nouvelleDateIntervention->date().toString("yyyy-MM-dd")+"' "
+                        "WHERE idIntervention = "+QString::number(idIntervention)+";";
+                qDebug() << Q_FUNC_INFO << "requete" << requete;
+                baseDeDonnees->executer(requete);
+                interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
+            }
+        }
+    }
+
     int idNouveauOperateur;
 
     if(nouveauOperateur->currentText() != "Opérateur")
@@ -1252,12 +1264,10 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
                 +"' WHERE idIntervention = "+QString::number(idIntervention)+";";
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         baseDeDonnees->executer(requete);
-
         for(int i = 0; i < interventions.size(); i++)
         {
             if(interventions[i]->getIdIntervention() == idIntervention)
             {
-                interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
                 interventions[i]->setIdOperateur(idNouveauOperateur);
             }
         }
