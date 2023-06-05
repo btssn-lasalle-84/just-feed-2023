@@ -112,7 +112,8 @@ CREATE TABLE `Bac` (
   `poidsActuel` double,
   `poidsTotal`  double NOT NULL,
   `hygrometrie` int DEFAULT '0',
-  `remplissage` double DEFAULT '0'
+  `remplissage` double DEFAULT '0',
+  `position` int
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `Bac`

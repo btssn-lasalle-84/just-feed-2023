@@ -31,6 +31,7 @@ public class Bac
     private double  poidsTotal;  //!< Poids total du bac en kg
     private int     hygrometrie; //!< Taux d'humidité dans un bac
     private double  quantiteARemplir; //!< Quantité à remplir en kg
+    private double  remplissage; //!< Remplissage d'un bac en pourcentage
 
     /**
      * @brief Constructeur par défaut de la classe Bac
@@ -52,8 +53,9 @@ public class Bac
      * @param poidsTotal  poids total d'un bac
      * @param hygrometrie
      * @param quantiteARemplir
+     * @param remplissage
      */
-    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie, double quantiteARemplir)
+    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie, double quantiteARemplir, double remplissage)
     {
         Log.d(TAG,
               "Bac() nomProduit = " + typeProduit.getNom() + " - poidsActuel = " + poidsActuel +
@@ -63,6 +65,7 @@ public class Bac
         this.poidsTotal       = poidsTotal;
         this.hygrometrie      = hygrometrie;
         this.quantiteARemplir = quantiteARemplir;
+        this.remplissage      = remplissage;
     }
 
     /**
@@ -110,6 +113,12 @@ public class Bac
      * @return quantiteARemplir , la quantité en kg à remplir
      */
     public double getQuantiteARemplir() { return this.quantiteARemplir; }
+
+    /**
+     * @brief Accesseur du taux de remplissage d'un bac
+     * @return remplissage
+     */
+    public double getRemplissage() { return this.remplissage; }
 
     /**
      * Services

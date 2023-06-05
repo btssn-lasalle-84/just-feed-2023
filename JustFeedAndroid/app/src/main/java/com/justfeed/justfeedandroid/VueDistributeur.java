@@ -66,14 +66,10 @@ public class VueDistributeur extends RecyclerView.ViewHolder
     public void afficherDistributeur(Distributeur distributeur)
     {
         Location coordGeographiques = distributeur.getCoordGeographiques();
-        this.identifiant.setText("Identifant : " + Integer.toString(distributeur.getIdentifiant()));
-        if(distributeur.estARemplir())
+        this.identifiant.setText("Identifant : " + distributeur.getNom());
+        if(distributeur.estARemplir() || distributeur.estADepanner())
         {
-            this.intervention.setText("À remplir");
-        }
-        else if(distributeur.estADepanner())
-        {
-            this.intervention.setText("À dépanner");
+            this.intervention.setText("À Intervenir");
         }
         this.localisation.setText("Localisation : \n" + distributeur.getLocalisation() + "\n");
         // En Degrés décimaux (DD) généralement avec quatre décimales

@@ -23,8 +23,9 @@ public class VueBac extends RecyclerView.ViewHolder
     /**
      * Constantes
      */
-    private final int MOITIE   = 2; //!< constante utilisée pour calculer la moitié d'un bac.
-    private final int CRITIQUE = 3; //!< constante utilisée pour calculer l'état critique d'un bac
+    private final Double PLEIN    = 100.0; //!< constante pour vérifier si le bac est plein
+    private final Double MOITIE   = 50.0; //!< constante utilisée pour calculer la moitié d'un bac
+    private final Double CRITIQUE = 25.0; //!< constante utilisée pour calculer l'état critique d'un bac
                                     //!< (si celui-ci est vide au 3/4).
 
     /**
@@ -61,15 +62,20 @@ public class VueBac extends RecyclerView.ViewHolder
      */
     public void afficherBac(Bac bac)
     {
-        if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / MOITIE))
+        if(bac.getRemplissage() < PLEIN && bac.getRemplissage() > MOITIE)
         {
             remplissageBac.setBackgroundColor(Color.parseColor("#FFF200"));
         }
-        if(bac.getPoidsActuel() < (bac.getPoidsTotalBac() / CRITIQUE))
+        if(bac.getRemplissage() <= MOITIE && bac.getRemplissage() > CRITIQUE)
+        {
+            remplissageBac.setBackgroundColor(Color.parseColor("#FF8C00"));
+        }
+        if(bac.getRemplissage() <= CRITIQUE)
         {
             remplissageBac.setBackgroundColor(Color.parseColor("#FF0000"));
         }
 
+        remplissageBac.setText(Double.toString(bac.getRemplissage()) + " %");
         produit.setText(bac.getTypeProduit().getNom());
         hydrometrie.setText(Integer.toString(bac.getHygrometrie()) + " %");
         prix.setText(String.format("%.2f €", bac.getTypeProduit().getPrix()));

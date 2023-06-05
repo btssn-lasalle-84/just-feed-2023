@@ -609,7 +609,7 @@ public class BaseDeDonnees
     /**
      * @brief Méthode qui récupère une liste de distributeurs de la BDD.
      */
-    public void recupererDistributeurs()
+    public void recupererDistributeurs(final String deviceId)
     {
         if(BaseDeDonnees.active)
         {
@@ -624,7 +624,9 @@ public class BaseDeDonnees
                             String requeteSQLDistributeurs =
                               "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
                               +
-                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
+                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n"
+                              +
+                              " WHERE Distributeur.deviceId = "+"\""+deviceId+"\"";
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -648,7 +650,7 @@ public class BaseDeDonnees
                                   resultatRequeteDistributeurs.getString("codepostal"),
                                   resultatRequeteDistributeurs.getString("adresse"),
                                   resultatRequeteDistributeurs.getString("ville"),
-                                  resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                  resultatRequeteDistributeurs.getString("deviceId"),
                                   coordGeographiques,
                                   new ArrayList<Bac>());
                                 distributeur.remplir(
@@ -663,10 +665,13 @@ public class BaseDeDonnees
                             String requeteSQLBacs =
                               "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
                               +
-                              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur\n"
-                              + "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                              "INNER JOIN Distributeur ON Distributeur.deviceId = "+"\""+deviceId+"\""
                               +
-                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                              "AND Distributeur.idDistributeur = Bac.idDistributeur\n"
+                              +
+                              "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                              +
+                              "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
                               +
                               "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             Log.d(TAG, "Requete : " + requeteSQLBacs);
@@ -689,7 +694,8 @@ public class BaseDeDonnees
                                                 resultatRequeteBacs.getDouble("poidsActuel"),
                                                 resultatRequeteBacs.getDouble("poidsTotal"),
                                                 resultatRequeteBacs.getInt("hygrometrie"),
-                                                resultatRequeteBacs.getDouble("poidsAPrevoir")));
+                                                resultatRequeteBacs.getDouble("poidsAPrevoir"),
+                                                resultatRequeteBacs.getDouble("remplissage")));
                                 }
                                 Log.d(
                                   TAG,
@@ -731,19 +737,19 @@ public class BaseDeDonnees
             // Pour les tests
             // simule une base de données
             List<Bac> bacsDistributeur1 = Arrays.asList(
-              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0, 0),
-              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0, 0),
-              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0, 6.5));
+              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0, 0, 75.0),
+              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0, 0, 61.54),
+              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0, 6.5, 19.0));
 
             List<Bac> bacsDistributeur2 = Arrays.asList(
-              new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0),
-              new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0),
-              new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0));
+              new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0, 42.0),
+              new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0, 87.5),
+              new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0, 65.0));
 
             List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0),
-              new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5),
-              new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0));
+              new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0, 100.0),
+              new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5, 46.8),
+              new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0, 88.5));
 
             listeDistributeurs           = new ArrayList<Distributeur>();
             Location coordGeographiques1 = new Location("Non défini");

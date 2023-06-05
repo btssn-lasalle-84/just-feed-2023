@@ -38,6 +38,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -54,9 +55,10 @@ public class JustFeed extends AppCompatActivity
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
     private static final String TOPIC_SIM1 = "distributeur-1-sim"; //!< Topic MQTT du simulateur 1
-    private static final String PATTERN_ID_DISTRIBUTEUR = "\"device_id\"\\s*:\\s*\"([^\"]+)\""; //!< Expression régulière pour trouver l'id du distributeur dans le JSON
-    private static final String PATTERN_HEURE = "\"received_at\":\"(\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z)\""; //!< Expression régulière pour extraire l'horodatage
-    private static final String PATTERN_REMPLISSAGES = "\"nbBacs\":\\d+(?:,\"remplissage\\d+\":\\d+)+"; //!< Expression régulière pour extraire le remplissages des bacs
+    private static final String TOPIC_SIM2 = "distributeur-2-sim"; //!< Topic MQTT du simulateur 2
+    private static final String TOPICS = "#"; //!< S'abonne à tout les topics
+    private static final int PORT_REMPLISSAGE = 1; //!< Port du simulateur qui envoie le remplissage
+    private static final int PORT_HYGROMETRIE = 2; //!< Port du simulateur qui envoie l'hygrométrie
     private static final int    INDEX_CLIENT_ID =
       0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
@@ -109,7 +111,6 @@ public class JustFeed extends AppCompatActivity
         initialiserBaseDeDonnees();
 
         baseDeDonnees.recupererOperateurs();
-        baseDeDonnees.recupererDistributeurs();
         baseDeDonnees.recupererIdentifiantsTTS();
     }
 
@@ -196,7 +197,6 @@ public class JustFeed extends AppCompatActivity
         super.onResume();
         Log.d(TAG, "onResume()");
         baseDeDonnees.setHandler(handler);
-        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -335,14 +335,18 @@ public class JustFeed extends AppCompatActivity
                         break;
                     case ClientMQTT.TTN_CONNECTE:
                         Log.d(TAG, "[Handler] TTS connecté");
-                        clientMQTT.souscrireTopic(TOPIC_SIM1);
+                        clientMQTT.souscrireTopic(TOPICS);
                         break;
                     case ClientMQTT.TTN_DECONNECTE:
                         Log.d(TAG, "[Handler] TTS déconnecté");
                         break;
                     case ClientMQTT.TTN_MESSAGE:
                         Log.d(TAG, "[Handler] TTS message device "+message.obj);
-                        extraireInfoDistributeur(message);
+                        try {
+                            extraireInfoDistributeur(message);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                         break;
                 }
             }
@@ -370,18 +374,97 @@ public class JustFeed extends AppCompatActivity
      * @brief Méthode utilisée pour extraire les informations sur le distributeur dans le JSON
      * @param message
      */
-    private void extraireInfoDistributeur(@NonNull Message message) {
-        Pattern regexIdDistributeur = Pattern.compile(PATTERN_ID_DISTRIBUTEUR);
-        Pattern regexHeure = Pattern.compile(PATTERN_HEURE);
-        Pattern regexRemplissages = Pattern.compile(PATTERN_REMPLISSAGES);
-        Matcher distributeur = regexIdDistributeur.matcher(message.obj.toString());
-        Matcher heure = regexHeure.matcher(message.obj.toString());
-        Matcher remplissages = regexRemplissages.matcher(message.obj.toString());
-        if(distributeur.find() && heure.find() && remplissages.find())
+    private void extraireInfoDistributeur(@NonNull Message message) throws JSONException
+    {
+        JSONObject jsonMessage = new JSONObject(message.obj.toString());
+        int port = jsonMessage.getJSONObject("uplink_message").getInt("f_port");
+        String distributeur = jsonMessage.getJSONObject("end_device_ids").getString("device_id");
+        String heurodatage = jsonMessage.getString("received_at");
+
+        Log.d(TAG, "Distributeur : "+distributeur);
+        if(port == PORT_REMPLISSAGE)
         {
-            Log.d(TAG, "[Handler] TTS Info distributeur : "+distributeur.group(1)
-                    + " Heure : "+heure.group(1)+" Remplissages : "+remplissages.group(0));
+            ArrayList<Double> listeRemplissages = extraireRemplissages(message);
+            for(int i = 0; i < listeRemplissages.size(); i++)
+            {
+                baseDeDonnees.executerRequete("UPDATE Bac SET Bac.remplissage = "+listeRemplissages.get(i)
+                        +
+                        "WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        +
+                        "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
+            }
         }
+        else if (port == PORT_HYGROMETRIE)
+        {
+            ArrayList<Double> listeHygrometries = extraireHygrometrie(message);
+            for(int i = 0; i < listeHygrometries.size(); i++)
+            {
+                baseDeDonnees.executerRequete("UPDATE Bac SET Bac.hygrometrie = "+listeHygrometries.get(i)
+                        +
+                        "WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        +
+                        "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
+            }
+        }
+        baseDeDonnees.recupererDistributeurs(distributeur);
+    }
+
+    /**
+     * @brief Méthode pour extraire les remplissages en pourcentages des bacs
+     * @param message
+     */
+    private ArrayList<Double> extraireRemplissages(@NonNull Message message)
+    {
+        ArrayList<Double> listeRemplissages = new ArrayList<Double>();
+
+        try
+        {
+            JSONObject jsonMessage = new JSONObject(message.obj.toString());
+            JSONObject chargeUtile = jsonMessage.getJSONObject("uplink_message").getJSONObject("decoded_payload");
+            Iterator<?> clefs = chargeUtile.keys();
+            clefs.next();
+            while(clefs.hasNext())
+            {
+                String clef = (String) clefs.next();
+                listeRemplissages.add(chargeUtile.getDouble(clef));
+            }
+            Log.d(TAG, "remplissages : "+listeRemplissages);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "extraireRemplissages() : "+e.toString());
+        }
+
+        return listeRemplissages;
+    }
+
+    /**
+     * @brief Méthode pour extraire l'hygrométrie des bacs
+     * @param message
+     */
+    private ArrayList<Double> extraireHygrometrie(@NonNull Message message)
+    {
+        ArrayList<Double> listeHygrometries = new ArrayList<Double>();
+
+        try
+        {
+            JSONObject jsonMessage = new JSONObject(message.obj.toString());
+            JSONObject chargeUtile = jsonMessage.getJSONObject("uplink_message").getJSONObject("decoded_payload");
+            Iterator<?> clefs = chargeUtile.keys();
+            clefs.next();
+            while(clefs.hasNext())
+            {
+                String clef = (String) clefs.next();
+                listeHygrometries.add(chargeUtile.getDouble(clef));
+            }
+            Log.d(TAG, "Hygrométrie : "+listeHygrometries);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "extraireHygrometrie() : "+e.toString());
+        }
+
+        return listeHygrometries;
     }
 
     /**
