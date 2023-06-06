@@ -257,18 +257,30 @@ void IHMJustFeed::afficherCarte()
 }
 
 /**
- * @brief imprime une intervention
+ * @brief sauvegarder en pdf une intervention
  */
-void IHMJustFeed::imprimerIntervention()
+void IHMJustFeed::pdfIntervention()
 {
     qDebug() << Q_FUNC_INFO;
-    QPrinter imprimante;
-       QPrintDialog boiteDeDialogueImpression(&imprimante);
-       if (boiteDeDialogueImpression.exec() == QDialog::Accepted) {
-           QPainter dessin(&imprimante);
-           fenetreIntervention->render(&dessin);
-           dessin.end();
-       }
+    QString nomFichier = QFileDialog::getSaveFileName(0, QString::fromUtf8("Générer PDF"), QCoreApplication::applicationDirPath(), "*.pdf");
+        if (!nomFichier.isEmpty()) {
+            if (QFileInfo(nomFichier).suffix().isEmpty())
+                nomFichier.append(".pdf");
+            QPrinter imprimante(QPrinter::HighResolution);
+            imprimante.setOutputFormat(QPrinter::PdfFormat);
+            imprimante.setOutputFileName(nomFichier);
+            imprimante.setPageOrientation(QPageLayout::Landscape);
+            imprimante.setPageSize(QPageSize());
+            imprimante.setPageMargins(QMarginsF(), QPageLayout::Unit());
+
+
+            QPainter dessin(&imprimante);
+            double facteurEchelle = 7.0;
+            dessin.scale(facteurEchelle, facteurEchelle);
+            fenetreIntervention->render(&dessin);
+
+            qDebug() << "PDF généré : " << nomFichier << " de l'intervention n° " << idIntervention;
+        }
 }
 
 // Méthodes privées
@@ -472,7 +484,7 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonValiderDistributeur, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonValiderIntervention, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
-    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(imprimerIntervention()));
+    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(pdfIntervention()));
 }
 
 /**
@@ -1064,7 +1076,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
     nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
-    boutonImpression->setText("Imprimer");
+    boutonImpression->setText("Sauvegarder Pdf");
     layoutBoutonsInterventions->addStretch();
     layoutBoutonsInterventions->addWidget(nouveauOperateur);
     layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);

@@ -19,6 +19,7 @@
 #include <QPrinter>
 #include <QPrintDialog>
 #include <QPainter>
+#include <QFont>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -206,7 +207,7 @@ class IHMJustFeed : public QWidget
     void selectionnerDistributeur(QTableWidgetItem* item);
     void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
     void afficherCarte();
-    void imprimerIntervention();
+    void pdfIntervention();
 };
 
 #endif // IHMJUSTFEED_H
