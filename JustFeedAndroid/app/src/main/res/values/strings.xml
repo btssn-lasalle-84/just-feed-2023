@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">JustFeedAndroid</string>
     <string name="interventions">interventions</string>
+    <string name="configuration">Configuration</string>
+    <string name="valider">Valider</string>
+    <string name="annuler">Annuler</string>
     <string-array name="listeEtatsAFaire">
         <item>A faire</item>
         <item>Démarrer</item>

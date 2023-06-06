@@ -54,9 +54,7 @@ public class JustFeed extends AppCompatActivity
      * Constantes
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
-    private static final String TOPIC_SIM1 = "distributeur-1-sim"; //!< Topic MQTT du simulateur 1
-    private static final String TOPIC_SIM2 = "distributeur-2-sim"; //!< Topic MQTT du simulateur 2
-    private static final String TOPICS = "#"; //!< S'abonne à tout les topics
+    private static final String TOPICS = ""; //!< S'abonne à tout les topics
     private static final int PORT_REMPLISSAGE = 1; //!< Port du simulateur qui envoie le remplissage
     private static final int PORT_HYGROMETRIE = 2; //!< Port du simulateur qui envoie l'hygrométrie
     private static final int    INDEX_CLIENT_ID =
