@@ -6,8 +6,12 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +42,7 @@ public class VueBac extends RecyclerView.ViewHolder
       produit; //!< attribut GUI qui affiche un texte qui contient le nom du produit.
     private final TextView hydrometrie; //!< attribut GUI qui affiche l'hygrométrie du bac.
     private final TextView prix;        //!< attribut GUI qui affiche le prix du produit.
+    private final ImageButton boutonConfig; //!< attribut GUI pour configurer un bac.
 
     /**
      * @brief Constructeur d'initialisation de la classe BacViewHolder.
@@ -53,6 +58,7 @@ public class VueBac extends RecyclerView.ViewHolder
         produit        = ((TextView)itemView.findViewById(R.id.produit));
         hydrometrie    = ((TextView)itemView.findViewById(R.id.hydrometrie));
         prix           = ((TextView)itemView.findViewById(R.id.prix));
+        boutonConfig   = ((ImageButton)itemView.findViewById(R.id.boutonConfig));
     }
 
     /**

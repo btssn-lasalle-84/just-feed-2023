@@ -49,7 +49,7 @@ public class DialogueDistributeur extends DialogFragment
                 .setNegativeButton(R.string.annuler, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface interfaceDialogue, int id) {
-                        //TODO
+                        Log.d(TAG, "Annuler");
                     }
                 });
 

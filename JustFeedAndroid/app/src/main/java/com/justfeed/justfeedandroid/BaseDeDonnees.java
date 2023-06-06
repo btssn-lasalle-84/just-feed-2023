@@ -621,12 +621,47 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs =
-                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
-                              +
-                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n"
-                              +
-                              " WHERE Distributeur.deviceId = "+"\""+deviceId+"\"";
+                            String requeteSQLDistributeurs;
+                            String requeteSQLBacs;
+                            if(deviceId.isEmpty())
+                            {
+                                requeteSQLDistributeurs =
+                                        "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                        +
+                                        " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n";
+                                requeteSQLBacs =
+                                        "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
+                                                +
+                                                "INNER JOIN Distributeur ON Distributeur.idDistributeur = Bac.idDistributeur\n"
+                                                +
+                                                "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                                                +
+                                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                                                +
+                                                "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            }
+                            else
+                            {
+                                requeteSQLDistributeurs =
+                                        "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                        +
+                                        " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n"
+                                        +
+                                        " WHERE Distributeur.deviceId = "+"\""+deviceId+"\"";
+                                requeteSQLBacs =
+                                        "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
+                                                +
+                                                "INNER JOIN Distributeur ON Distributeur.deviceId = "+"\""+deviceId+"\""
+                                                +
+                                                "AND Distributeur.idDistributeur = Bac.idDistributeur\n"
+                                                +
+                                                "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                                                +
+                                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                                                +
+                                                "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            }
+
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
@@ -662,18 +697,6 @@ public class BaseDeDonnees
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   distributeur);
                             }
-                            String requeteSQLBacs =
-                              "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
-                              +
-                              "INNER JOIN Distributeur ON Distributeur.deviceId = "+"\""+deviceId+"\""
-                              +
-                              "AND Distributeur.idDistributeur = Bac.idDistributeur\n"
-                              +
-                              "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
-                              +
-                              "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
-                              +
-                              "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             Log.d(TAG, "Requete : " + requeteSQLBacs);
                             ResultSet resultatRequeteBacs = statement.executeQuery(requeteSQLBacs);
                             while(resultatRequeteBacs.next())

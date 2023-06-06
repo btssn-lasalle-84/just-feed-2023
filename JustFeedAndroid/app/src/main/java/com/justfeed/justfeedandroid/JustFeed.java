@@ -29,7 +29,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
 import org.json.JSONArray;
@@ -88,8 +90,6 @@ public class JustFeed extends AppCompatActivity
     /**
      * Ressources GUI
      */
-    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
-                                        //!< les interventions
     private Menu menu;                  //!< Menu de l'application
 
     /**
@@ -108,6 +108,7 @@ public class JustFeed extends AppCompatActivity
         initialiserHandler();
         initialiserBaseDeDonnees();
 
+        baseDeDonnees.recupererDistributeurs(TOPICS);
         baseDeDonnees.recupererOperateurs();
         baseDeDonnees.recupererIdentifiantsTTS();
     }
