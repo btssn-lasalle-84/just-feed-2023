@@ -262,12 +262,12 @@ void IHMJustFeed::afficherCarte()
 void IHMJustFeed::imprimerIntervention()
 {
     qDebug() << Q_FUNC_INFO;
-    QPrinter imprimer;
-       QPrintDialog printDialog(&imprimer);
-       if (printDialog.exec() == QDialog::Accepted) {
-           QPainter peinture(&imprimer);
-           fenetreIntervention->render(&peinture);
-           peinture.end();
+    QPrinter imprimante;
+       QPrintDialog boiteDeDialogueImpression(&imprimante);
+       if (boiteDeDialogueImpression.exec() == QDialog::Accepted) {
+           QPainter dessin(&imprimante);
+           fenetreIntervention->render(&dessin);
+           dessin.end();
        }
 }
 
