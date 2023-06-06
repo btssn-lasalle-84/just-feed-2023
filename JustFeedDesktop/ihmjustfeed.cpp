@@ -1145,8 +1145,14 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             poidsAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
             produitAPrevoir = new QLabel(this);
             produitAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
-            idBac->setText("Approvisionnement bac n°" +
-                           listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC]);
+            for(int j = 0; j < distributeur->getNbBacs(); j++)
+            {
+                if(distributeur->getBac(j)->getIdBac() ==
+                   listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())
+                {
+                    idBac->setText("Approvisionnement bac position n°" + QString::number(j + 1));
+                }
+            }
             /**
              * @todo Gérer l'unité !!!
              */
