@@ -322,7 +322,7 @@ void ConfigurationDistributeur::ajouterBacBdd()
     requete = "INSERT INTO Bac (idBac, idDistributeur, idProduit, poidsActuel, poidsTotal, "
               "hygrometrie, remplissage) VALUES (" +
               QString::number(idMaxBacInt + 1) + "," + QString::number(distributeur->getId()) +
-              "," + "1, 0 , 0, 0, 0);";
+              "," + "1, 0 , 10, 0, 0);";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
 

@@ -262,25 +262,28 @@ void IHMJustFeed::afficherCarte()
 void IHMJustFeed::pdfIntervention()
 {
     qDebug() << Q_FUNC_INFO;
-    QString nomFichier = QFileDialog::getSaveFileName(0, QString::fromUtf8("Générer PDF"), QCoreApplication::applicationDirPath(), "*.pdf");
-        if (!nomFichier.isEmpty()) {
-            if (QFileInfo(nomFichier).suffix().isEmpty())
-                nomFichier.append(".pdf");
-            QPrinter imprimante(QPrinter::HighResolution);
-            imprimante.setOutputFormat(QPrinter::PdfFormat);
-            imprimante.setOutputFileName(nomFichier);
-            imprimante.setPageOrientation(QPageLayout::Landscape);
-            imprimante.setPageSize(QPageSize());
-            imprimante.setPageMargins(QMarginsF(), QPageLayout::Unit());
+    QString nomFichier = QFileDialog::getSaveFileName(0,
+                                                      QString::fromUtf8("Générer PDF"),
+                                                      QCoreApplication::applicationDirPath(),
+                                                      "*.pdf");
+    if(!nomFichier.isEmpty())
+    {
+        if(QFileInfo(nomFichier).suffix().isEmpty())
+            nomFichier.append(".pdf");
+        QPrinter imprimante(QPrinter::HighResolution);
+        imprimante.setOutputFormat(QPrinter::PdfFormat);
+        imprimante.setOutputFileName(nomFichier);
+        imprimante.setPageOrientation(QPageLayout::Landscape);
+        imprimante.setPageSize(QPageSize());
+        imprimante.setPageMargins(QMarginsF(), QPageLayout::Unit());
 
+        QPainter dessin(&imprimante);
+        double   facteurEchelle = 7.0;
+        dessin.scale(facteurEchelle, facteurEchelle);
+        fenetreIntervention->render(&dessin);
 
-            QPainter dessin(&imprimante);
-            double facteurEchelle = 7.0;
-            dessin.scale(facteurEchelle, facteurEchelle);
-            fenetreIntervention->render(&dessin);
-
-            qDebug() << "PDF généré : " << nomFichier << " de l'intervention n° " << idIntervention;
-        }
+        qDebug() << "PDF généré : " << nomFichier << " de l'intervention n° " << idIntervention;
+    }
 }
 
 // Méthodes privées
@@ -327,7 +330,7 @@ void IHMJustFeed::instancierWidgets()
     descriptionDistributeur     = new QLabel(this);
     miseEnServiceDistributeur   = new QLabel(this);
     positionDistributeur        = new QLabel(this);
-    interventionNomOperateur     = new QLabel(this);
+    interventionNomOperateur    = new QLabel(this);
     interventionNomDistributeur = new QLabel(this);
     dateIntervention            = new QLabel(this);
     aRemplirIntervention        = new QLabel(this);
@@ -582,7 +585,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -1070,7 +1073,9 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 
     // la fenêtre intervention
     interventionNomOperateur->setAlignment(Qt::AlignCenter);
+    interventionNomOperateur->setStyleSheet("QLabel { font-weight: bold; }");
     interventionNomDistributeur->setAlignment(Qt::AlignCenter);
+    interventionNomDistributeur->setStyleSheet("QLabel { font-weight: bold; }");
     dateIntervention->setAlignment(Qt::AlignCenter);
     aRemplirIntervention->setAlignment(Qt::AlignCenter);
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
@@ -1107,22 +1112,14 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
               "Date : " + interventions[i]->getDateIntervention().toString("dd/MM/yyyy"));
             qDebug() << Q_FUNC_INFO << "dateIntervention"
                      << interventions[i]->getDateIntervention();
-            if(interventions[i]->getARemplir())
-            {
-                aRemplirIntervention->setText("À remplir  : Oui");
-            }
-            else
-            {
-                aRemplirIntervention->setText("À remplir : Non");
-            }
-            if(interventions[i]->getADepanner())
-            {
-                aDepannerIntervention->setText("À depanner  : Oui");
-            }
-            else
-            {
-                aDepannerIntervention->setText("À depanner : Non");
-            }
+            aRemplirIntervention->setText(QString::fromUtf8("À remplir: ") +
+                                          (interventions[i]->getARemplir()
+                                             ? QString::fromUtf8("Oui")
+                                             : QString::fromUtf8("Non")));
+            aDepannerIntervention->setText(QString::fromUtf8("À dépanner: ") +
+                                           (interventions[i]->getADepanner()
+                                              ? QString::fromUtf8("Oui")
+                                              : QString::fromUtf8("Non")));
 
             etatIntervention->setText(interventions[i]->getEtatFormate());
         }
@@ -1145,7 +1142,9 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             layoutsApprovisionnement.push_back(new QHBoxLayout);
             idBac         = new QLabel(this);
             poidsAPrevoir = new QLabel(this);
+            poidsAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
             produitAPrevoir = new QLabel(this);
+            produitAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
             idBac->setText("Approvisionnement bac n°" +
                            listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC]);
             /**
@@ -1155,7 +1154,12 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
               "Poids à prevoir : " +
               listeApprovisionnement[i][Intervention::TableApprovisionnement::POIDS_A_PREVOIR] +
               " g");
-            produitAPrevoir->setText("Produit à prevoir : " + distributeur->getBacId(listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())->getNomProduit());
+            produitAPrevoir->setText(
+              "Produit à prevoir : " +
+              distributeur
+                ->getBacId(
+                  listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())
+                ->getNomProduit());
             layoutsApprovisionnement[i]->addWidget(idBac);
             layoutsApprovisionnement[i]->addWidget(poidsAPrevoir);
             layoutsApprovisionnement[i]->addWidget(produitAPrevoir);
@@ -1251,9 +1255,11 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
         {
             if(interventions[i]->getDateIntervention() != nouvelleDateIntervention->date())
             {
-                 requete = "UPDATE Intervention SET dateIntervention = '"+
-                        nouvelleDateIntervention->date().toString("yyyy-MM-dd")+"' "
-                        "WHERE idIntervention = "+QString::number(idIntervention)+";";
+                requete = "UPDATE Intervention SET dateIntervention = '" +
+                          nouvelleDateIntervention->date().toString("yyyy-MM-dd") +
+                          "' "
+                          "WHERE idIntervention = " +
+                          QString::number(idIntervention) + ";";
                 qDebug() << Q_FUNC_INFO << "requete" << requete;
                 baseDeDonnees->executer(requete);
                 interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
@@ -1272,8 +1278,8 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
                 idNouveauOperateur = operateurs[i]->getId();
             }
         }
-        requete = "UPDATE Intervention SET idOperateur = '"+ QString::number(idNouveauOperateur)
-                +"' WHERE idIntervention = "+QString::number(idIntervention)+";";
+        requete = "UPDATE Intervention SET idOperateur = '" + QString::number(idNouveauOperateur) +
+                  "' WHERE idIntervention = " + QString::number(idIntervention) + ";";
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         baseDeDonnees->executer(requete);
         for(int i = 0; i < interventions.size(); i++)

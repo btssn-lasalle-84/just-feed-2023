@@ -126,37 +126,39 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *itemIntervention,
       *itemDetailIntervention; //!< les éléments de la table
-    QPushButton*          boutonPlanifier;
-    QPushButton*          boutonConfigurer;
-    QPushButton*          boutonValiderDistributeur;
-    QPushButton*          boutonValiderIntervention;
-    QPushButton*          boutonAfficherCarte;
-    QComboBox*            listeDistributeurs; //!< liste de distributeurs
-    QVBoxLayout*          layoutFenetreDistributeur;
-    QProgressBar*         volumeRestant;
-    QLabel*               nomDistributeur;
-    QLabel*               adresseDistributeur;
-    QLabel*               codePostalDistributeur;
-    QLabel*               villeDistributeur;
-    QLabel*               descriptionDistributeur;
-    QLabel*               miseEnServiceDistributeur;
-    QLabel*               positionDistributeur;
-    QHBoxLayout*          layoutIntervention; //!< layout intervention
-    QHBoxLayout*          layoutBoutonsInterventions; //!< layout des boutons de l'intervention
-    QVBoxLayout*          layoutInformationsIntervention;  //!< layout contenant les informations de l'intervention
-    QVector<QStringList>  listeApprovisionnement; //!< vecteur de liste qui contient les Approvisionnement lié à l'intervention
-    QVector<QHBoxLayout*> layoutsApprovisionnement; //!< layout des approvisionnement
-    QLabel*               interventionNomOperateur;  //!< nom operateur
+    QPushButton*  boutonPlanifier;
+    QPushButton*  boutonConfigurer;
+    QPushButton*  boutonValiderDistributeur;
+    QPushButton*  boutonValiderIntervention;
+    QPushButton*  boutonAfficherCarte;
+    QComboBox*    listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*  layoutFenetreDistributeur;
+    QProgressBar* volumeRestant;
+    QLabel*       nomDistributeur;
+    QLabel*       adresseDistributeur;
+    QLabel*       codePostalDistributeur;
+    QLabel*       villeDistributeur;
+    QLabel*       descriptionDistributeur;
+    QLabel*       miseEnServiceDistributeur;
+    QLabel*       positionDistributeur;
+    QHBoxLayout*  layoutIntervention;         //!< layout intervention
+    QHBoxLayout*  layoutBoutonsInterventions; //!< layout des boutons de l'intervention
+    QVBoxLayout*
+                         layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
+    QVector<QStringList> listeApprovisionnement;       //!< vecteur de liste qui contient les
+                                                       //!< Approvisionnement lié à l'intervention
+    QVector<QHBoxLayout*> layoutsApprovisionnement;    //!< layout des approvisionnement
+    QLabel*               interventionNomOperateur;    //!< nom operateur
     QLabel*               interventionNomDistributeur; //!< nom distributeur
-    QLabel*               dateIntervention;  //!< date planifié pour l'intervention
-    QLabel*               aRemplirIntervention; //!< bool pour savoir si le distributeur est à remplir
-    QLabel*               aDepannerIntervention; //!< bool pour savoir si le distributeur est à depanner
-    QLabel*               etatIntervention; //!< etat de l'intervention
-    QComboBox*            nouveauOperateur; //!< nouveau operateur
-    QDateEdit*            nouvelleDateIntervention; //!< nouvelle date d'intervention
-    QPushButton*          boutonImpression; //!< bouton pour imprimer l'intervention
-    int                   idIntervention; //!< id de l'intervention en cour de visualisation
-    QWebView*             vueCarte;
+    QLabel*               dateIntervention;            //!< date planifié pour l'intervention
+    QLabel*      aRemplirIntervention;     //!< bool pour savoir si le distributeur est à remplir
+    QLabel*      aDepannerIntervention;    //!< bool pour savoir si le distributeur est à depanner
+    QLabel*      etatIntervention;         //!< etat de l'intervention
+    QComboBox*   nouveauOperateur;         //!< nouveau operateur
+    QDateEdit*   nouvelleDateIntervention; //!< nouvelle date d'intervention
+    QPushButton* boutonImpression;         //!< bouton pour imprimer l'intervention
+    int          idIntervention;           //!< id de l'intervention en cour de visualisation
+    QWebView*    vueCarte;
 
     void     initialiserGUI();
     void     instancierWidgets();
