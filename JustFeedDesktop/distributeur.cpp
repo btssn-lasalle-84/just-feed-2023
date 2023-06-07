@@ -5,7 +5,7 @@
  * distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #include "distributeur.h"

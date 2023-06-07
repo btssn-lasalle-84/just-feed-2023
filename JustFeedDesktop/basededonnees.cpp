@@ -6,7 +6,7 @@
  * @file BaseDeDonnees.cpp
  * @brief Définition de la classe BaseDeDonnees
  * @author Thierry VAIRA
- * @version 0.1
+ * @version     1.1
  */
 
 BaseDeDonnees* BaseDeDonnees::bdd     = nullptr;

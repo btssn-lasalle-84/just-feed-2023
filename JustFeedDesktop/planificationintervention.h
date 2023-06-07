@@ -2,7 +2,7 @@
  * @file        planificationintervention.h
  * @brief       Déclaration de la classe PlanificationIntervention.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #ifndef PLANIFICATION_INTERVENTION_H

@@ -4,8 +4,7 @@
  * @details     La classe ConfigurationDistributeur \c Cette classe permet de définir la
  * configuration d'un distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
- * @date        2023
+ * @version     1.1 * @date        2023
  */
 
 #ifndef CONFIGURATIONDISTRIBUTEUR_H
