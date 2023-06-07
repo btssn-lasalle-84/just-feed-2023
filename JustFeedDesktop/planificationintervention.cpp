@@ -341,20 +341,22 @@ void PlanificationIntervention::initialiserEtatDistributeur()
             }
 
             qDebug() << Q_FUNC_INFO << "HygrometrieBac" << distributeurs[i]->getHygrometrieBac(j);
-            if((distributeurs[i]->getHygrometrieBac(j)) >= ZERO &&
+            if((distributeurs[i]->getHygrometrieBac(j) >= DIX) &&
                (distributeurs[i]->getHygrometrieBac(j) <= QUINZE))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_ANORMALE);
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_NORMALE);
             }
-            else if((distributeurs[i]->getHygrometrieBac(j)) > QUINZE &&
-                    (distributeurs[i]->getHygrometrieBac(j) <= CINQUANTE))
+            else if((distributeurs[i]->getHygrometrieBac(j) <= DIX) &&
+                      (distributeurs[i]->getHygrometrieBac(j) >= HUIT) ||
+                    (distributeurs[i]->getHygrometrieBac(j) > QUINZE) &&
+                      (distributeurs[i]->getHygrometrieBac(j) <= DIX_HUIT))
             {
                 labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_A_SURVEILLER);
             }
-            else if((distributeurs[i]->getHygrometrieBac(j)) > CINQUANTE &&
-                    (distributeurs[i]->getHygrometrieBac(j) <= CENT))
+            else if((distributeurs[i]->getHygrometrieBac(j)) < HUIT ||
+                    (distributeurs[i]->getHygrometrieBac(j) > DIX_HUIT))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_NORMALE);
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_ANORMALE);
             }
 
             qDebug() << Q_FUNC_INFO << "ADepanner" << distributeurs[i]->getBac(j)->getADepanner();

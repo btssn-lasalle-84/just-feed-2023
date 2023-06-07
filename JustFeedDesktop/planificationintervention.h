@@ -22,7 +22,10 @@
 
 // Pourcentage de remplissage
 #define ZERO      0
+#define HUIT      8
+#define DIX       10
 #define QUINZE    15
+#define DIX_HUIT  18
 #define TRENTE    30
 #define CINQUANTE 50
 #define SOIXANTE  60
