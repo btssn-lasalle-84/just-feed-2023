@@ -291,15 +291,15 @@ void IHMJustFeed::genererPDFIntervention()
 void IHMJustFeed::imprimerPDFIntervention()
 {
     qDebug() << Q_FUNC_INFO;
-    QString filePath = QFileDialog::getOpenFileName(this,
-                                                    "Sélectionner le fichier PDF à imprimer",
-                                                    "",
-                                                    "Fichiers PDF (*.pdf)");
-    if(!filePath.isEmpty())
+    QString cheminFichier = QFileDialog::getOpenFileName(this,
+                                                         "Sélectionner le fichier PDF à imprimer",
+                                                         "",
+                                                         "Fichiers PDF (*.pdf)");
+    if(!cheminFichier.isEmpty())
     {
         QPrinter imprimer;
         imprimer.setOutputFormat(QPrinter::PdfFormat);
-        imprimer.setOutputFileName(filePath);
+        imprimer.setOutputFileName(cheminFichier);
 
         QPrintDialog boiteDeDialogueImpression(&imprimer, this);
         boiteDeDialogueImpression.setWindowTitle("Imprimer l'intervention");
@@ -308,7 +308,7 @@ void IHMJustFeed::imprimerPDFIntervention()
             QPainter dessin;
             if(dessin.begin(&imprimer))
             {
-                QImage pdfImage(filePath);
+                QImage pdfImage(cheminFichier);
                 dessin.drawImage(QPoint(0, 0), pdfImage);
                 dessin.end();
                 qDebug() << Q_FUNC_INFO << "impression";
