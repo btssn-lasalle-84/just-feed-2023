@@ -14,7 +14,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @brief Définition de la classe AdaptateurBac.
@@ -80,11 +83,21 @@ public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
 
         holder.setOnEditTextChangedListener(new OnEditTextChangedListener() {
             @Override
-            public void onTextChanged(int position, String nouveauPrix) {
-                Double prix = Double.parseDouble(nouveauPrix.toString());
-                Log.d(TAG, "Nouveau prix : "+prix);
-                bac.getTypeProduit().modifierPrix(prix);
-                JustFeed.envoyerMessageMQTT(bac.getIdSimulateur(), bac.getPosition(), prix);
+            public void onTextChanged(int position, String nouveauPrix)
+            {
+                NumberFormat nf   = NumberFormat.getInstance(Locale.FRANCE);
+                double       prix = 0.0;
+                try
+                {
+                    prix = nf.parse(nouveauPrix).doubleValue();
+                    Log.d(TAG, "nouveauPrix = " + nouveauPrix + " -> prix = " + prix);
+                    bac.getTypeProduit().modifierPrix(prix);
+                    JustFeed.envoyerMessageMQTT(bac.getIdSimulateur(), bac.getPosition(), prix);
+                }
+                catch(ParseException e)
+                {
+                    e.printStackTrace();
+                }
             }
         });
     }

@@ -58,8 +58,9 @@ public class JustFeed extends AppCompatActivity
      */
     private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
     private static final String TOPICS = ""; //!< S'abonne à tout les topics
-    private static final int PORT_REMPLISSAGE = 1; //!< Port du simulateur qui envoie le remplissage
-    private static final int PORT_HYGROMETRIE = 2; //!< Port du simulateur qui envoie l'hygrométrie
+    public static final int PORT_REMPLISSAGE = 1; //!< Port du simulateur qui envoie le remplissage
+    public static final int PORT_HYGROMETRIE = 2; //!< Port du simulateur qui envoie l'hygrométrie
+    public static final int PORT_PRIX = 4; //!< Port du simulateur pour envoyer le prix
     private static final int    INDEX_CLIENT_ID =
       0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu

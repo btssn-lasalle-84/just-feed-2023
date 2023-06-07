@@ -104,9 +104,9 @@ public class Distributeur
     public String getLocalisation()
     {
         String localisation = "";
-        localisation        = localisation.concat(this.codePostal + ", ");
+        //localisation        = localisation.concat(this.codePostal + ", ");
         localisation =
-          localisation.concat(this.ville + " " + this.adresse + " " + this.nomDistributeur);
+          localisation.concat(this.nomDistributeur + " " + this.adresse + " " + this.codePostal + " " + this.ville);
 
         return localisation;
     }
