@@ -156,7 +156,8 @@ class IHMJustFeed : public QWidget
     QLabel*      etatIntervention;         //!< etat de l'intervention
     QComboBox*   nouveauOperateur;         //!< nouveau operateur
     QDateEdit*   nouvelleDateIntervention; //!< nouvelle date d'intervention
-    QPushButton* boutonImpression;         //!< bouton pour imprimer l'intervention
+    QPushButton* boutonSauvegarderPDF;     //!< bouton pour sauvegarder en pdf une intervention
+    QPushButton* boutonImpression;         //!< bouton pour imprimer une intervention
     int          idIntervention;           //!< id de l'intervention en cour de visualisation
     QWebView*    vueCarte;
 
@@ -209,7 +210,8 @@ class IHMJustFeed : public QWidget
     void selectionnerDistributeur(QTableWidgetItem* item);
     void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
     void afficherCarte();
-    void pdfIntervention();
+    void genererPDFIntervention();
+    void imprimerPDFIntervention();
 };
 
 #endif // IHMJUSTFEED_H

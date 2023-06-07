@@ -259,7 +259,7 @@ void IHMJustFeed::afficherCarte()
 /**
  * @brief sauvegarder en pdf une intervention
  */
-void IHMJustFeed::pdfIntervention()
+void IHMJustFeed::genererPDFIntervention()
 {
     qDebug() << Q_FUNC_INFO;
     QString nomFichier = QFileDialog::getSaveFileName(0,
@@ -270,19 +270,50 @@ void IHMJustFeed::pdfIntervention()
     {
         if(QFileInfo(nomFichier).suffix().isEmpty())
             nomFichier.append(".pdf");
-        QPrinter imprimante(QPrinter::HighResolution);
-        imprimante.setOutputFormat(QPrinter::PdfFormat);
-        imprimante.setOutputFileName(nomFichier);
-        imprimante.setPageOrientation(QPageLayout::Landscape);
-        imprimante.setPageSize(QPageSize());
-        imprimante.setPageMargins(QMarginsF(), QPageLayout::Unit());
+        QPrinter fichier(QPrinter::HighResolution);
+        fichier.setOutputFormat(QPrinter::PdfFormat);
+        fichier.setOutputFileName(nomFichier);
+        fichier.setPageOrientation(QPageLayout::Landscape);
+        fichier.setPageSize(QPageSize());
+        fichier.setPageMargins(QMarginsF(), QPageLayout::Unit());
 
-        QPainter dessin(&imprimante);
+        QPainter dessin(&fichier);
         double   facteurEchelle = 7.0;
         dessin.scale(facteurEchelle, facteurEchelle);
         fenetreIntervention->render(&dessin);
-
         qDebug() << "PDF généré : " << nomFichier << " de l'intervention n° " << idIntervention;
+    }
+}
+
+/**
+ * @brief imprimer un pdf
+ */
+void IHMJustFeed::imprimerPDFIntervention()
+{
+    qDebug() << Q_FUNC_INFO;
+    QString filePath = QFileDialog::getOpenFileName(this,
+                                                    "Sélectionner le fichier PDF à imprimer",
+                                                    "",
+                                                    "Fichiers PDF (*.pdf)");
+    if(!filePath.isEmpty())
+    {
+        QPrinter imprimer;
+        imprimer.setOutputFormat(QPrinter::PdfFormat);
+        imprimer.setOutputFileName(filePath);
+
+        QPrintDialog boiteDeDialogueImpression(&imprimer, this);
+        boiteDeDialogueImpression.setWindowTitle("Imprimer l'intervention");
+        if(boiteDeDialogueImpression.exec() == QDialog::Accepted)
+        {
+            QPainter dessin;
+            if(dessin.begin(&imprimer))
+            {
+                QImage pdfImage(filePath);
+                dessin.drawImage(QPoint(0, 0), pdfImage);
+                dessin.end();
+                qDebug() << Q_FUNC_INFO << "impression";
+            }
+        }
     }
 }
 
@@ -338,6 +369,7 @@ void IHMJustFeed::instancierWidgets()
     etatIntervention            = new QLabel(this);
     nouveauOperateur            = new QComboBox(this);
     nouvelleDateIntervention    = new QDateEdit(this);
+    boutonSauvegarderPDF        = new QPushButton(this);
     boutonImpression            = new QPushButton(this);
 
     // Les layouts
@@ -487,7 +519,8 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonValiderDistributeur, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonValiderIntervention, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
-    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(pdfIntervention()));
+    connect(boutonSauvegarderPDF, SIGNAL(clicked()), this, SLOT(genererPDFIntervention()));
+    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(imprimerPDFIntervention()));
 }
 
 /**
@@ -626,34 +659,22 @@ void IHMJustFeed::initialiserProduits()
     Produit* pruneaux    = new Produit(1,
                                     "Pruneaux",
                                     "Maître Prunille",
-                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
-                                    "761234567890",
-                                    1.15);
+                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une
+    " "délicieuse friandise à déguster à tout moment de la journée.", "761234567890", 1.15);
     Produit* abricot     = new Produit(2,
                                    "Abricots secs",
                                    "Maître Prunille",
-                                   "L'abricot moelleux, une gourmandise tendre et fruitée !",
-                                   "761234566000",
-                                   1.13);
-    Produit* cranberries = new Produit(3,
-                                       "Cranberries",
+                                   "L'abricot moelleux, une gourmandise tendre et fruitée
+    !", "761234566000", 1.13); Produit* cranberries = new Produit(3, "Cranberries",
                                        "SEEBERGER",
                                        "Cranberries tranchées sucrées séchées",
                                        "761234569000",
                                        2.1);
     Produit* banane =
-      new Produit(4, "Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
-    Produit* raisin    = new Produit(5,
-                                  "Raisin sec",
-                                  "Petit Prix",
-                                  "Raisins secs, huile végétale (graine de coton)",
-                                  "761264569090",
-                                  0.39);
-    Produit* fruitsSec = new Produit(6,
-                                     "fruits sec",
-                                     "FRUIDYLLIC",
-                                     "Peut se manger tel que sans préparation.",
+      new Produit(4, "Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008",
+    0.76); Produit* raisin    = new Produit(5, "Raisin sec", "Petit Prix", "Raisins secs,
+    huile végétale (graine de coton)", "761264569090", 0.39); Produit* fruitsSec = new
+    Produit(6, "fruits sec", "FRUIDYLLIC", "Peut se manger tel que sans préparation.",
                                      "761234960940",
                                      1.06);
     Produit* cacahuete =
@@ -1081,10 +1102,12 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
     nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
-    boutonImpression->setText("Sauvegarder Pdf");
+    boutonSauvegarderPDF->setText("Sauvegarder Pdf");
+    boutonImpression->setText("Imprimer");
     layoutBoutonsInterventions->addStretch();
     layoutBoutonsInterventions->addWidget(nouveauOperateur);
     layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);
+    layoutBoutonsInterventions->addWidget(boutonSauvegarderPDF);
     layoutBoutonsInterventions->addWidget(boutonImpression);
     layoutBoutonsInterventions->addWidget(boutonValiderIntervention);
 
@@ -1250,7 +1273,8 @@ Produit* IHMJustFeed::recupererProduit(int idProduit)
 }
 
 /**
- * @brief change les information d'une intervention, l'operateur ainsi que la date d'intervention
+ * @brief change les information d'une intervention, l'operateur ainsi que la date
+ * d'intervention
  */
 void IHMJustFeed::metAJourLesInformationsIntervention()
 {
