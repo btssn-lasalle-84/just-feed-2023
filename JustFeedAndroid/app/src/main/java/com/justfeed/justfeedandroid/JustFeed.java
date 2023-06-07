@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -78,12 +79,13 @@ public class JustFeed extends AppCompatActivity
     private List<Distributeur> listeDistributeurs;                 //!< Liste des distributeurs
     private List<Operateur>    listeOperateurs;                    //!< Liste des opérateurs
     private int                idOperateur = OPERATEUR_NON_DEFINI; //!< Identifiant de l'opérateur
-    private ClientMQTT         clientMQTT;     //!< Client MQTT pour communiquer avec le broker MQTT
+    private static ClientMQTT         clientMQTT;     //!< Client MQTT pour communiquer avec le broker MQTT
     private BaseDeDonnees      baseDeDonnees;  //!< Identifiants pour la base de données
     private Handler            handler = null; //<! Le handler utilisé par l'activité
     private RecyclerView       vueListeDistributeurs; //!< Affichage de la liste des distributeurs
     private RecyclerView.Adapter       adapteurDistributeur; //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
+    private static SwipeRefreshLayout rafraichisseur; //!< Rafraîchie les vues
     private SharedPreferences          preferencesPartagees =
       null; //!< système de persistance des données pour l'application
 
@@ -248,6 +250,17 @@ public class JustFeed extends AppCompatActivity
         this.vueListeDistributeurs.setHasFixedSize(true);
         this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
         this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
+
+        this.rafraichisseur = (SwipeRefreshLayout) findViewById(R.id.justFeedRafraichisseur);
+
+        rafraichisseur.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "_OnRefresh()");
+                rafraichisseur.setRefreshing(false);
+                baseDeDonnees.recupererDistributeurs(TOPICS);
+            }
+        });
     }
 
     /**
@@ -256,12 +269,11 @@ public class JustFeed extends AppCompatActivity
     private void afficherDistributeurs(List<Distributeur> distributeurs)
     {
         Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
+        vueListeDistributeurs.removeAllViews();
         this.listeDistributeurs = distributeurs;
-        if(this.adapteurDistributeur == null)
-        {
-            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
-            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
-        }
+        this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+        this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+
         adapteurDistributeur.notifyDataSetChanged();
     }
 
@@ -322,6 +334,8 @@ public class JustFeed extends AppCompatActivity
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
                         afficherDistributeurs((ArrayList)message.obj);
+                        findViewById(R.id.listeDistributeurs).invalidate();
+
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_OPERATEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
@@ -360,6 +374,13 @@ public class JustFeed extends AppCompatActivity
         if(idOperateur != OPERATEUR_NON_DEFINI)
         {
             Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+            for(Operateur operateur: listeOperateurs)
+            {
+                if(operateur.getIdOperateur() == idOperateur)
+                {
+                    activiteIntervention.putExtra("nomOperateur", operateur.getNom());
+                }
+            }
             activiteIntervention.putExtra("idOperateur", idOperateur);
             startActivity(activiteIntervention);
         }
@@ -378,7 +399,7 @@ public class JustFeed extends AppCompatActivity
         JSONObject jsonMessage = new JSONObject(message.obj.toString());
         int port = jsonMessage.getJSONObject("uplink_message").getInt("f_port");
         String distributeur = jsonMessage.getJSONObject("end_device_ids").getString("device_id");
-        String heurodatage = jsonMessage.getString("received_at");
+        String horodatage = jsonMessage.getString("received_at");
 
         Log.d(TAG, "Distributeur : "+distributeur);
         if(port == PORT_REMPLISSAGE)
@@ -388,7 +409,7 @@ public class JustFeed extends AppCompatActivity
             {
                 baseDeDonnees.executerRequete("UPDATE Bac SET Bac.remplissage = "+listeRemplissages.get(i)
                         +
-                        "WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        " WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
                         +
                         "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
             }
@@ -400,12 +421,12 @@ public class JustFeed extends AppCompatActivity
             {
                 baseDeDonnees.executerRequete("UPDATE Bac SET Bac.hygrometrie = "+listeHygrometries.get(i)
                         +
-                        "WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        " WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
                         +
                         "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
             }
         }
-        baseDeDonnees.recupererDistributeurs(distributeur);
+        baseDeDonnees.recupererDistributeurs(TOPICS);
     }
 
     /**
@@ -464,6 +485,11 @@ public class JustFeed extends AppCompatActivity
         }
 
         return listeHygrometries;
+    }
+
+    static void envoyerMessageMQTT(String topic, int numeroBac, Double prix)
+    {
+        clientMQTT.envoyerMessageMQTT(topic, numeroBac, prix);
     }
 
     /**

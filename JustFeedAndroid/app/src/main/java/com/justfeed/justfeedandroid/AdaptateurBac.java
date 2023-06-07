@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,14 @@ import java.util.List;
  */
 public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
 {
+    /**
+     * Constantes
+     */
+    private final String TAG = "_AdaptateurBac";
+
+    /**
+     * Attributs
+     */
     private List<Bac> listeBacs = null; //!< Liste des bacs à afficher
 
     /**
@@ -68,6 +77,16 @@ public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
     {
         Bac bac = listeBacs.get(position);
         holder.afficherBac(bac);
+
+        holder.setOnEditTextChangedListener(new OnEditTextChangedListener() {
+            @Override
+            public void onTextChanged(int position, String nouveauPrix) {
+                Double prix = Double.parseDouble(nouveauPrix.toString());
+                Log.d(TAG, "Nouveau prix : "+prix);
+                bac.getTypeProduit().modifierPrix(prix);
+                JustFeed.envoyerMessageMQTT(bac.getIdSimulateur(), bac.getPosition(), prix);
+            }
+        });
     }
 
     /**
@@ -83,5 +102,10 @@ public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
         }
 
         return 0;
+    }
+
+    public interface OnEditTextChangedListener
+    {
+        void onTextChanged(int position, String newText);
     }
 }

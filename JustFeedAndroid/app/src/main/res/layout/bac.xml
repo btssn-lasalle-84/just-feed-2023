@@ -15,25 +15,12 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="98dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteX="1dp">
-
-            <ImageButton
-                android:id="@+id/boutonConfig"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:background="@android:drawable/ic_menu_manage"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.912"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
-                tools:srcCompat="@android:drawable/ic_menu_manage" />
 
             <TextView
                 android:id="@+id/hydrometrie"
@@ -49,7 +36,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.371"
+                app:layout_constraintHorizontal_bias="0.662"
                 app:layout_constraintStart_toStartOf="parent"
                 app:srcCompat="@drawable/water_drop"
                 tools:layout_editor_absoluteY="0dp" />
@@ -70,11 +57,25 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical" />
 
-        <TextView
-            android:id="@+id/prix"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/prix"
+                android:layout_width="53dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:numeric="integer|decimal" />
+
+            <TextView
+                android:id="@+id/euro"
+                android:layout_width="47dp"
+                android:layout_height="32dp"
+                android:text="@string/euro" />
+        </LinearLayout>
 
     </LinearLayout>
 

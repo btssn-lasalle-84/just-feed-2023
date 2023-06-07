@@ -9,8 +9,11 @@ package com.justfeed.justfeedandroid;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -41,8 +44,12 @@ public class VueBac extends RecyclerView.ViewHolder
     private final TextView
       produit; //!< attribut GUI qui affiche un texte qui contient le nom du produit.
     private final TextView hydrometrie; //!< attribut GUI qui affiche l'hygrométrie du bac.
-    private final TextView prix;        //!< attribut GUI qui affiche le prix du produit.
-    private final ImageButton boutonConfig; //!< attribut GUI pour configurer un bac.
+    private final EditText prix;        //!< attribut GUI qui affiche le prix du produit.
+
+    /**
+     * @brief Attribut Gestion des évènements
+     */
+    private AdaptateurBac.OnEditTextChangedListener gestionnaire; //!< Attribut pour gérer le changement de texte.
 
     /**
      * @brief Constructeur d'initialisation de la classe BacViewHolder.
@@ -57,8 +64,29 @@ public class VueBac extends RecyclerView.ViewHolder
         remplissageBac = ((TextView)itemView.findViewById(R.id.remplissageBac));
         produit        = ((TextView)itemView.findViewById(R.id.produit));
         hydrometrie    = ((TextView)itemView.findViewById(R.id.hydrometrie));
-        prix           = ((TextView)itemView.findViewById(R.id.prix));
-        boutonConfig   = ((ImageButton)itemView.findViewById(R.id.boutonConfig));
+        prix           = ((EditText)itemView.findViewById(R.id.prix));
+
+        prix.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                if(gestionnaire != null)
+                {
+                    gestionnaire.onTextChanged(getBindingAdapterPosition(), charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {}
+        });
+    }
+
+    public void setOnEditTextChangedListener(AdaptateurBac.OnEditTextChangedListener gestionnaire)
+    {
+        this.gestionnaire = gestionnaire;
     }
 
     /**
@@ -84,6 +112,6 @@ public class VueBac extends RecyclerView.ViewHolder
         remplissageBac.setText(Double.toString(bac.getRemplissage()) + " %");
         produit.setText(bac.getTypeProduit().getNom());
         hydrometrie.setText(Integer.toString(bac.getHygrometrie()) + " %");
-        prix.setText(String.format("%.2f €", bac.getTypeProduit().getPrix()));
+        prix.setText(String.format("%.2f", bac.getTypeProduit().getPrix()));
     }
 }

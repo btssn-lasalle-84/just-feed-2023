@@ -329,4 +329,32 @@ public class ClientMQTT
             return false;
         }
     }
+
+    /**
+     * @brief Méthode utilisée pour envoyer un message
+     * @param topic
+     * @param numeroBac
+     * @param prix
+     */
+    public void envoyerMessageMQTT(String topic, int numeroBac, Double prix)
+    {
+        try
+        {
+            String chargeUtile = "{\n" +
+                    "    \"f_port\": 4,\n" +
+                    "    \"decoded_payload\": {\n" +
+                    "        \"numeroProduit\": "+numeroBac+",\n" +
+                    "        \"prixProduit\": "+prix+"\n" +
+                    "    },\n" +
+                    "    \"priority\": \"NORMAL\"\n" +
+                    "}";
+            mqttAndroidClient.connect();
+            MqttMessage message = new MqttMessage(chargeUtile.getBytes());
+            mqttAndroidClient.publish(topic, message);
+        }
+        catch (MqttException e)
+        {
+            e.printStackTrace();
+        }
+    }
 }

@@ -66,7 +66,7 @@ public class VueDistributeur extends RecyclerView.ViewHolder
     public void afficherDistributeur(Distributeur distributeur)
     {
         Location coordGeographiques = distributeur.getCoordGeographiques();
-        this.identifiant.setText("Identifant : " + distributeur.getNom());
+        this.identifiant.setText("Identifant : " + distributeur.getNom() + "("+distributeur.getIdMachine()+")");
         if(distributeur.estARemplir() || distributeur.estADepanner())
         {
             this.intervention.setText("À Intervenir");
