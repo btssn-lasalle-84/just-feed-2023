@@ -109,9 +109,9 @@ class IHMJustFeed : public QWidget
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
-                           planificationIntervention; //!< la boîte de dialogue pour créer une intervention
-    QVector<Distributeur*> distributeurs;             //!< les distributeurs
-    QVector<Operateur*>    operateurs;                //!< les operateurs
+      planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
+    QVector<Distributeur*> distributeurs; //!< les distributeurs
+    QVector<Operateur*>    operateurs;    //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
@@ -147,7 +147,7 @@ class IHMJustFeed : public QWidget
     QHBoxLayout*  layoutIntervention;         //!< layout intervention
     QHBoxLayout*  layoutBoutonsInterventions; //!< layout des boutons de l'intervention
     QVBoxLayout*
-                         layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
+      layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
     QVector<QStringList> listeApprovisionnement;       //!< vecteur de liste qui contient les
                                                        //!< Approvisionnement lié à l'intervention
     QVector<QHBoxLayout*> layoutsApprovisionnement;    //!< layout des approvisionnement
@@ -189,15 +189,16 @@ class IHMJustFeed : public QWidget
     void     chargerCarte(Distributeur* distributeur);
     void     chargerListeOperateurs();
     Produit* recupererProduit(int idProduit);
-    void     metAJourLesInformationsIntervention();
-    void     metAJourRemplissage(int idDistributeur, int remplissage, int indiceBac);
-    void     metAJourHumidite(int idDistributeur, int hygrometries, int indiceBac);
+    void     mettreAJourInformationsIntervention();
+    void     mettreAJourRemplissage(int idDistributeur, int remplissage, int indiceBac);
+    void     mettreAJourHumidite(int idDistributeur, int hygrometries, int indiceBac);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
 
     Distributeur* getDistributeur(QString nom) const;
+    int           getIdDistributeur(QString deviceID) const;
     Produit*      getProduit(int index) const;
     QString       getNomProduit(int index) const;
     double        getPrixProduit(int index) const;
@@ -217,7 +218,7 @@ class IHMJustFeed : public QWidget
     void afficherCarte();
     void genererPDFIntervention();
     void imprimerPDFIntervention();
-    void decoderLaTrame(QByteArray message, QMqttTopicName topic);
+    void decoderMessageMQTT(QByteArray message, QMqttTopicName topic);
 };
 
 #endif // IHMJUSTFEED_H

@@ -70,6 +70,20 @@ Distributeur* IHMJustFeed::getDistributeur(QString nom) const
 }
 
 /**
+ * @brief retourne l'idDistributeur dont le deviceID est passé en
+ * paramètre
+ */
+int IHMJustFeed::getIdDistributeur(QString deviceID) const
+{
+    for(int i = 0; i < distributeurs.size(); ++i)
+    {
+        if(distributeurs[i]->getDeviceID() == deviceID)
+            return distributeurs[i]->getId();
+    }
+    return ID_DISTRIBUTEUR_NON_DEFINI;
+}
+
+/**
  * @brief retourne le produit
  */
 Produit* IHMJustFeed::getProduit(int index) const
@@ -116,7 +130,7 @@ void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
  */
 void IHMJustFeed::afficherFenetreAccueil()
 {
-    metAJourLesInformationsIntervention();
+    mettreAJourInformationsIntervention();
     afficherFenetre(IHMJustFeed::Fenetre::FAccueil);
 }
 
@@ -281,7 +295,7 @@ void IHMJustFeed::genererPDFIntervention()
         double   facteurEchelle = 7.0;
         dessin.scale(facteurEchelle, facteurEchelle);
         fenetreIntervention->render(&dessin);
-        qDebug() << "PDF généré : " << nomFichier << " de l'intervention n° " << idIntervention;
+        qDebug() << "nomFichier" << nomFichier << "idIntervention" << idIntervention;
     }
 }
 
@@ -308,10 +322,10 @@ void IHMJustFeed::imprimerPDFIntervention()
             QPainter dessin;
             if(dessin.begin(&imprimante))
             {
+                qDebug() << Q_FUNC_INFO << "cheminFichier" << cheminFichier;
                 QImage pdfImage(cheminFichier);
                 dessin.drawImage(QPoint(0, 0), pdfImage);
                 dessin.end();
-                qDebug() << Q_FUNC_INFO << "impression";
             }
         }
     }
@@ -322,28 +336,27 @@ void IHMJustFeed::imprimerPDFIntervention()
  * @param message
  * @param topic
  */
-void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
+void IHMJustFeed::decoderMessageMQTT(QByteArray message, QMqttTopicName topic)
 {
-    qDebug() << Q_FUNC_INFO;
+    qDebug() << Q_FUNC_INFO << "topic" << topic << "message" << message;
     QJsonDocument jsonDocument = QJsonDocument::fromJson(message);
     QJsonObject   objetJSON    = jsonDocument.object();
     QStringList   listeCles    = objetJSON.keys();
-    qDebug() << listeCles;
+    qDebug() << Q_FUNC_INFO << "listeCles" << listeCles;
 
     QJsonObject endDeviceIDs = objetJSON.value("end_device_ids").toObject();
     QString     deviceID     = endDeviceIDs.value("device_id").toString();
-    QString     charIdDistributeur;
+    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID;
 
-    for(const QChar& caractere: deviceID)
-    {
-        if(caractere.isDigit())
-        {
-            charIdDistributeur = caractere;
-        }
-    }
-    int idDistributeur = charIdDistributeur.toInt();
+    /**
+     * @todo Récupérer l'idDistributeur à partir du deviceID
+     */
 
-    qDebug() << "number:" << idDistributeur;
+    int idDistributeur = getIdDistributeur(deviceID);
+    if(idDistributeur == ID_DISTRIBUTEUR_NON_DEFINI)
+        return;
+
+    qDebug() << Q_FUNC_INFO << "idDistributeur" << idDistributeur;
     if(objetJSON.contains("uplink_message"))
     {
         QJsonObject uplinkMessage = objetJSON["uplink_message"].toObject();
@@ -352,14 +365,14 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
             QJsonObject decodedPayload = uplinkMessage["decoded_payload"].toObject();
             if(decodedPayload.contains("nbBacs"))
             {
-                int          nbBacs = decodedPayload["nbBacs"].toInt();
+                int nbBacs = decodedPayload["nbBacs"].toInt();
+                qDebug() << Q_FUNC_INFO << "nbBacs" << nbBacs;
                 QVector<int> remplissages;
                 remplissages.clear();
                 remplissages.resize(nbBacs);
                 QVector<int> hygrometries;
                 hygrometries.clear();
                 hygrometries.resize(nbBacs);
-                qDebug() << "nbBacs:" << nbBacs;
 
                 for(int i = 0; i < nbBacs; i++)
                 {
@@ -369,8 +382,8 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
                         int valeurRemplissage =
                           decodedPayload["remplissage" + QString::number(i + UN)].toInt();
                         remplissages[i] = valeurRemplissage;
-                        qDebug() << "remplissage" << i << ":" << remplissages[i];
-                        metAJourRemplissage(idDistributeur, remplissages[i], i);
+                        qDebug() << Q_FUNC_INFO << "remplissage" << i << ":" << remplissages[i];
+                        mettreAJourRemplissage(idDistributeur, remplissages[i], i);
                     }
 
                     cle = "humidite" + QString::number(i + UN);
@@ -379,8 +392,8 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
                         int valeurHumidite =
                           decodedPayload["humidite" + QString::number(i + UN)].toInt();
                         hygrometries[i] = valeurHumidite;
-                        qDebug() << "humidite" << i << ":" << hygrometries[i];
-                        metAJourHumidite(idDistributeur, hygrometries[i], i);
+                        qDebug() << Q_FUNC_INFO << "humidite" << i << ":" << hygrometries[i];
+                        mettreAJourHumidite(idDistributeur, hygrometries[i], i);
                     }
                 }
             }
@@ -595,7 +608,7 @@ void IHMJustFeed::initialiserEvenements()
     connect(communication,
             SIGNAL(donneesRecues(QByteArray, QMqttTopicName)),
             this,
-            SLOT(decoderLaTrame(QByteArray, QMqttTopicName)));
+            SLOT(decoderMessageMQTT(QByteArray, QMqttTopicName)));
 }
 
 /**
@@ -693,7 +706,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                      "WHERE Bac.idDistributeur='" +
+                                     "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -1190,7 +1203,8 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QString nomOperateur;
     for(int i = 0; i < interventions.size(); i++)
     {
-        if(interventions[i]->getIdDistributeur() == distributeur->getId() && !interventions[i]->estEffectuee())
+        if(interventions[i]->getIdDistributeur() == distributeur->getId() &&
+           !interventions[i]->estEffectuee())
         {
             nouvelleDateIntervention->setDate(interventions[i]->getDateIntervention());
             idIntervention = interventions[i]->getIdIntervention();
@@ -1351,7 +1365,7 @@ Produit* IHMJustFeed::recupererProduit(int idProduit)
  * @brief change les information d'une intervention, l'operateur ainsi que la date
  * d'intervention
  */
-void IHMJustFeed::metAJourLesInformationsIntervention()
+void IHMJustFeed::mettreAJourInformationsIntervention()
 {
     QString requete;
     for(int i = 0; i < interventions.size(); i++)
@@ -1403,7 +1417,7 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
  * @param hygrometries
  * @param indiceBac
  */
-void IHMJustFeed::metAJourRemplissage(int idDistributeur, int remplissage, int indiceBac)
+void IHMJustFeed::mettreAJourRemplissage(int idDistributeur, int remplissage, int indiceBac)
 {
     distributeurs[idDistributeur - UN]->getBac(indiceBac)->setPourcentageRemplissage(remplissage);
     qDebug() << Q_FUNC_INFO << "pourcentage : "
@@ -1413,6 +1427,9 @@ void IHMJustFeed::metAJourRemplissage(int idDistributeur, int remplissage, int i
       QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
+    /**
+     * @todo Mettre à jour l'affichage
+     */
 }
 
 /**
@@ -1421,7 +1438,7 @@ void IHMJustFeed::metAJourRemplissage(int idDistributeur, int remplissage, int i
  * @param hygrometries
  * @param indiceBac
  */
-void IHMJustFeed::metAJourHumidite(int idDistributeur, int hygrometries, int indiceBac)
+void IHMJustFeed::mettreAJourHumidite(int idDistributeur, int hygrometries, int indiceBac)
 {
     distributeurs[idDistributeur - UN]->getBac(indiceBac)->setHygrometrie(hygrometries);
     qDebug() << Q_FUNC_INFO << "Hygrometrie : "
@@ -1431,6 +1448,9 @@ void IHMJustFeed::metAJourHumidite(int idDistributeur, int hygrometries, int ind
       QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
+    /**
+     * @todo Mettre à jour l'affichage
+     */
 }
 
 /**
