@@ -1190,7 +1190,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     QString nomOperateur;
     for(int i = 0; i < interventions.size(); i++)
     {
-        if(interventions[i]->getIdDistributeur() == distributeur->getId())
+        if(interventions[i]->getIdDistributeur() == distributeur->getId() && !interventions[i]->estEffectuee())
         {
             nouvelleDateIntervention->setDate(interventions[i]->getDateIntervention());
             idIntervention = interventions[i]->getIdIntervention();
