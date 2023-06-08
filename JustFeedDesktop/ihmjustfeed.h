@@ -20,6 +20,7 @@
 #include <QPrintDialog>
 #include <QPainter>
 #include <QFont>
+#include <QtMqtt/QtMqtt>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -212,6 +213,7 @@ class IHMJustFeed : public QWidget
     void afficherCarte();
     void genererPDFIntervention();
     void imprimerPDFIntervention();
+    void decoderLaTrame(QByteArray message, QMqttTopicName topic);
 };
 
 #endif // IHMJUSTFEED_H

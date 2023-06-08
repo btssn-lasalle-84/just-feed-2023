@@ -204,8 +204,7 @@ void PlanificationIntervention::initialiserWidgets()
             labelsDesProduits[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesPourcentage[i][j]->setText(
               "Poids à prévoir : " +
-              QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) +
-              " g ou Kg (à définir)");
+              QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) + " g");
             labelsDesPourcentage[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesCheckboxDepannage[i][j]->setCheckState(Qt::Unchecked);
             labelsDesCheckboxDepannage[i][j]->setText("Dépanner");

@@ -389,7 +389,8 @@ void ConfigurationDistributeur::valider()
 {
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        QString produit = labelsProduit[i]->text().section(':', 1).trimmed();
+        QString produit = labelsProduit[i]->text();
+        qDebug() << Q_FUNC_INFO << "produit" << labelsProduit[i]->text();
         QString requete = "SELECT idProduit FROM Produit WHERE nomProduit = '" + produit + "';";
         QString idProduit;
         qDebug() << Q_FUNC_INFO << "requete" << requete;

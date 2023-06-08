@@ -31,13 +31,13 @@ IHMJustFeed::IHMJustFeed(QWidget* parent) :
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
     initialiserProduits();
+    initialiserCommunication();
     initialiserDistributeurs();
     initialiserOperateurs();
     initialiserInterventions();
     initialiserGUI();
     chargerListeOperateurs();
     chargerDistributeurs();
-    initialiserCommunication();
 }
 
 /**
@@ -317,6 +317,59 @@ void IHMJustFeed::imprimerPDFIntervention()
     }
 }
 
+void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
+{
+    qDebug() << Q_FUNC_INFO;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(message);
+    QJsonObject   objetJSON    = jsonDocument.object();
+    QStringList   listeCles    = objetJSON.keys();
+    qDebug() << listeCles;
+
+    QJsonObject endDeviceIDs = objetJSON.value("end_device_ids").toObject();
+    QString     deviceID     = endDeviceIDs.value("device_id").toString();
+
+    qDebug() << "device_id:" << deviceID;
+    if(objetJSON.contains("uplink_message"))
+    {
+        QJsonObject uplinkMessage = objetJSON["uplink_message"].toObject();
+        if(uplinkMessage.contains("decoded_payload"))
+        {
+            QJsonObject decodedPayload = uplinkMessage["decoded_payload"].toObject();
+            if(decodedPayload.contains("nbBacs"))
+            {
+                int          nbBacs = decodedPayload["nbBacs"].toInt();
+                QVector<int> remplissages;
+                remplissages.clear();
+                remplissages.resize(nbBacs);
+                QVector<int> humidites;
+                humidites.clear();
+                humidites.resize(nbBacs);
+                qDebug() << "nbBacs:" << nbBacs;
+
+                for(int i = 0; i < nbBacs; i++)
+                {
+                    QString key = "remplissage" + QString::number(i + 1);
+                    if(decodedPayload.contains(key))
+                    {
+                        int valeurRemplissage =
+                          decodedPayload["remplissage" + QString::number(i + 1)].toInt();
+                        remplissages[i] = valeurRemplissage;
+                        qDebug() << "remplissage" << i << ":" << remplissages[i];
+                    }
+
+                    key = "humidite" + QString::number(i + 1);
+                    if(decodedPayload.contains(key))
+                    {
+                        int valeurHumidite =
+                          decodedPayload["humidite" + QString::number(i + 1)].toInt();
+                        humidites[i] = valeurHumidite;
+                        qDebug() << "humidite" << i << ":" << humidites[i];
+                    }
+                }
+            }
+        }
+    }
+}
 // Méthodes privées
 
 /**
@@ -521,6 +574,10 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
     connect(boutonSauvegarderPDF, SIGNAL(clicked()), this, SLOT(genererPDFIntervention()));
     connect(boutonImpression, SIGNAL(clicked()), this, SLOT(imprimerPDFIntervention()));
+    connect(communication,
+            SIGNAL(donneesRecues(QByteArray, QMqttTopicName)),
+            this,
+            SLOT(decoderLaTrame(QByteArray, QMqttTopicName)));
 }
 
 /**

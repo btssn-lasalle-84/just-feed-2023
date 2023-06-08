@@ -122,10 +122,19 @@ void Communication::deconnecter()
 }
 
 /**
- * @fn slots pour se déconnecter
+ * @fn slots pour recevoir la trame
  */
 void Communication::recevoirDonnees(QByteArray message, QMqttTopicName topic)
 {
     qDebug() << Q_FUNC_INFO << "topic" << topic.name() << "message" << message;
+    /*QJsonDocument jsonDocument = QJsonDocument::fromJson(message);
+    QJsonObject   objetJSON    = jsonDocument.object();
+    QStringList   listeCles    = objetJSON.keys();
+    qDebug() << listeCles; // une liste de QString
+
+    QJsonObject endDeviceIDs = objetJSON.value("end_device_ids").toObject();
+    QString     deviceID     = endDeviceIDs.value("device_id").toString();
+    qDebug() << "device_id:" << deviceID;*/
+
     emit donneesRecues(message, topic);
 }
