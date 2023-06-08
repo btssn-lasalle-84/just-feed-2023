@@ -384,6 +384,7 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
 {
     QString          requete = "SELECT idBac FROM Approvisionnement";
     QVector<QString> listeDeBacPlanifie;
+    QVector<QString> listeEtatEffectue;
     baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
     qDebug() << Q_FUNC_INFO << "idIntervention" << requete;
 
@@ -392,7 +393,18 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
         if(listeDeBacPlanifie[i].toInt() ==
            distributeurs[idDistributeur]->getBac(idBac)->getIdBac())
         {
-            return true;
+            requete = "SELECT effectue FROM Approvisionnement WHERE idBac =" +
+                      QString::number(distributeurs[idDistributeur]->getBac(idBac)->getIdBac()) +
+                      ";";
+            baseDeDonnees->recuperer(requete, listeEtatEffectue);
+            for(int j = 0; j < listeEtatEffectue.size(); j++)
+            {
+                if(listeEtatEffectue[j].toInt() == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
     return false;

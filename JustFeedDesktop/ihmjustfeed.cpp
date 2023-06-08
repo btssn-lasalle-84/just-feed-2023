@@ -1226,7 +1226,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     if(idIntervention != ID_INTERVENTION_NON_DEFINI)
     {
         QString requete = "SELECT * FROM Approvisionnement WHERE idIntervention = " +
-                          QString::number(idIntervention) + " ORDER BY idBac ASC;";
+                          QString::number(idIntervention) + " AND effectue = 0 ORDER BY idBac ASC;";
         baseDeDonnees->recuperer(requete, listeApprovisionnement);
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         QLabel* idBac;
