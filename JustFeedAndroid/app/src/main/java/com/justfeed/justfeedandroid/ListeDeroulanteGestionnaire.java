@@ -21,6 +21,8 @@ public class ListeDeroulanteGestionnaire
     /**
      * Attribut
      */
+    private static int aRemplir; //!< Ancien état aRemplir de l'intervention
+    private static int aDepanner; //!< Ancien état aDepanner de l'intervention
     private boolean interactionDetectee =
       false; //!< Attribut utilisé pour détecter l'interaction d'un utilisateur.
     private Intervention intervention; //!< Intervention où gérer l'évènement.
@@ -54,6 +56,23 @@ public class ListeDeroulanteGestionnaire
             {
                 case TERMINER:
                     Log.d(TAG, "Terminer");
+                    if(intervention.estARemplir())
+                    {
+                        aRemplir = 1;
+                    }
+                    else
+                    {
+                        aRemplir = 0;
+                    }
+                    if(intervention.estADepanner())
+                    {
+                        aDepanner = 1;
+                    }
+                    else
+                    {
+                        aDepanner = 0;
+                    }
+                    Log.d(TAG, "A depanner :"+aDepanner+" A remplir : "+aRemplir);
                     ActiviteInterventions.modifierEtatIntervention(
                       "UPDATE `Intervention` SET `etat` = 'VALIDEE', `aRemplir` = 0, `aDepanner` = 0 WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
@@ -79,7 +98,9 @@ public class ListeDeroulanteGestionnaire
                 case RECOMMENCER:
                     Log.d(TAG, "Recommencer");
                     ActiviteInterventions.modifierEtatIntervention(
-                      "UPDATE `Intervention` SET `etat` = 'A_FAIRE' WHERE `Intervention`.`idDistributeur` = " +
+                      "UPDATE `Intervention` SET `etat` = 'A_FAIRE', `aRemplir` = "+aRemplir
+                              +
+                              ", `aDepanner` = "+aDepanner+" WHERE `Intervention`.`idDistributeur` = " +
                         intervention.getIdentifiantDistribteur() + ";",
                       intervention,
                       Intervention.Etats.A_FAIRE);
