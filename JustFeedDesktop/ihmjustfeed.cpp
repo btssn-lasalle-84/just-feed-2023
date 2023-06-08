@@ -334,11 +334,11 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
     QString     deviceID     = endDeviceIDs.value("device_id").toString();
     QString     charIdDistributeur;
 
-    for(const QChar& character: deviceID)
+    for(const QChar& caractere: deviceID)
     {
-        if(character.isDigit())
+        if(caractere.isDigit())
         {
-            charIdDistributeur = character;
+            charIdDistributeur = caractere;
         }
     }
     int idDistributeur = charIdDistributeur.toInt();
@@ -363,21 +363,21 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
 
                 for(int i = 0; i < nbBacs; i++)
                 {
-                    QString key = "remplissage" + QString::number(i + 1);
-                    if(decodedPayload.contains(key))
+                    QString cle = "remplissage" + QString::number(i + UN);
+                    if(decodedPayload.contains(cle))
                     {
                         int valeurRemplissage =
-                          decodedPayload["remplissage" + QString::number(i + 1)].toInt();
+                          decodedPayload["remplissage" + QString::number(i + UN)].toInt();
                         remplissages[i] = valeurRemplissage;
                         qDebug() << "remplissage" << i << ":" << remplissages[i];
                         metAJourRemplissage(idDistributeur, remplissages[i], i);
                     }
 
-                    key = "humidite" + QString::number(i + 1);
-                    if(decodedPayload.contains(key))
+                    cle = "humidite" + QString::number(i + UN);
+                    if(decodedPayload.contains(cle))
                     {
                         int valeurHumidite =
-                          decodedPayload["humidite" + QString::number(i + 1)].toInt();
+                          decodedPayload["humidite" + QString::number(i + UN)].toInt();
                         hygrometries[i] = valeurHumidite;
                         qDebug() << "humidite" << i << ":" << hygrometries[i];
                         metAJourHumidite(idDistributeur, hygrometries[i], i);
@@ -387,6 +387,7 @@ void IHMJustFeed::decoderLaTrame(QByteArray message, QMqttTopicName topic)
         }
     }
 }
+
 // Méthodes privées
 
 /**
@@ -1398,32 +1399,36 @@ void IHMJustFeed::metAJourLesInformationsIntervention()
 
 /**
  * @brief met à jour le remplissage
- * @param idDistributeur, remplissage, indiceBac
+ * @param idDistributeur
+ * @param hygrometries
+ * @param indiceBac
  */
 void IHMJustFeed::metAJourRemplissage(int idDistributeur, int remplissage, int indiceBac)
 {
-    distributeurs[idDistributeur - 1]->getBac(indiceBac)->setPourcentageRemplissage(remplissage);
+    distributeurs[idDistributeur - UN]->getBac(indiceBac)->setPourcentageRemplissage(remplissage);
     qDebug() << Q_FUNC_INFO << "pourcentage : "
-             << distributeurs[idDistributeur - 1]->getBac(indiceBac)->getPourcentageRemplissage();
+             << distributeurs[idDistributeur - UN]->getBac(indiceBac)->getPourcentageRemplissage();
     QString requete =
       "UPDATE Bac SET remplissage = '" + QString::number(remplissage) + "' WHERE idBac = " +
-      QString::number(distributeurs[idDistributeur - 1]->getBac(indiceBac)->getIdBac()) + ";";
+      QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
 }
 
 /**
  * @brief met à jour le l'hygrometrie
- * @param idDistributeur, remplissage, indiceBac
+ * @param idDistributeur
+ * @param hygrometries
+ * @param indiceBac
  */
 void IHMJustFeed::metAJourHumidite(int idDistributeur, int hygrometries, int indiceBac)
 {
-    distributeurs[idDistributeur - 1]->getBac(indiceBac)->setHygrometrie(hygrometries);
+    distributeurs[idDistributeur - UN]->getBac(indiceBac)->setHygrometrie(hygrometries);
     qDebug() << Q_FUNC_INFO << "Hygrometrie : "
-             << distributeurs[idDistributeur - 1]->getBac(indiceBac)->getHygrometrie();
+             << distributeurs[idDistributeur - UN]->getBac(indiceBac)->getHygrometrie();
     QString requete =
       "UPDATE Bac SET hygrometrie = '" + QString::number(hygrometries) + "' WHERE idBac = " +
-      QString::number(distributeurs[idDistributeur - 1]->getBac(indiceBac)->getIdBac()) + ";";
+      QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
 }
