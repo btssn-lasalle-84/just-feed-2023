@@ -31,6 +31,7 @@ public class VueDistributeur extends RecyclerView.ViewHolder
      * Constantes
      */
     private static final String TAG = "_VueDistributeur"; //!< TAG pour les logs
+    private static final int HYGROMETRIE_MAX = 12; //!< Hygrométrie maximum d'un bac
 
     /**
      * Ressources GUI
@@ -67,6 +68,13 @@ public class VueDistributeur extends RecyclerView.ViewHolder
     {
         Location coordGeographiques = distributeur.getCoordGeographiques();
         this.identifiant.setText(distributeur.getNom() + " ("+distributeur.getIdMachine()+")");
+        for(Bac bac: distributeur.getListeBacs())
+        {
+            if(bac.getHygrometrie() > HYGROMETRIE_MAX)
+            {
+                this.intervention.setText("À intervenir");
+            }
+        }
         if(distributeur.estARemplir() || distributeur.estADepanner())
         {
             this.intervention.setText("À intervenir");

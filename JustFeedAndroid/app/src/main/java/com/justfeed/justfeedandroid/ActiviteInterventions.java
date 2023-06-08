@@ -42,7 +42,7 @@ public class ActiviteInterventions extends AppCompatActivity
     private final String TOUTES     = "Toutes";  //!< Constante utilisée pour configurer le filtre.
     private final String A_FAIRE    = "A faire"; //!< Constante utilisée pour configurer le filtre.
     private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDEES = "Validées";  //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDEE = "Validée";  //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
@@ -175,7 +175,7 @@ public class ActiviteInterventions extends AppCompatActivity
                     case EN_COURS:
                         etat = Intervention.Etats.EN_COURS;
                         break;
-                    case VALIDEES:
+                    case VALIDEE:
                         etat = Intervention.Etats.VALIDEE;
                         break;
                     case TOUTES:
