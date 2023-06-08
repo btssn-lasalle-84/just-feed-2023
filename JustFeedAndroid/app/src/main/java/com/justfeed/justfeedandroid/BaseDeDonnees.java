@@ -693,9 +693,9 @@ public class BaseDeDonnees
                                   coordGeographiques,
                                   new ArrayList<Bac>());
                                 distributeur.remplir(
-                                  (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
+                                  (resultatRequeteDistributeurs.getInt("aRemplir") == 1));
                                 distributeur.depanner(
-                                  (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
+                                  (resultatRequeteDistributeurs.getInt("aDepanner") == 1));
                                 Log.d(TAG, "Nouveau distributeur : " + distributeur);
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
