@@ -404,7 +404,6 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
                     return true;
                 }
             }
-            return false;
         }
     }
     return false;
