@@ -297,16 +297,16 @@ void IHMJustFeed::imprimerPDFIntervention()
                                                          "Fichiers PDF (*.pdf)");
     if(!cheminFichier.isEmpty())
     {
-        QPrinter imprimer;
-        imprimer.setOutputFormat(QPrinter::PdfFormat);
-        imprimer.setOutputFileName(cheminFichier);
+        QPrinter imprimante;
+        imprimante.setOutputFormat(QPrinter::PdfFormat);
+        imprimante.setOutputFileName(cheminFichier);
 
-        QPrintDialog boiteDeDialogueImpression(&imprimer, this);
+        QPrintDialog boiteDeDialogueImpression(&imprimante, this);
         boiteDeDialogueImpression.setWindowTitle("Imprimer l'intervention");
         if(boiteDeDialogueImpression.exec() == QDialog::Accepted)
         {
             QPainter dessin;
-            if(dessin.begin(&imprimer))
+            if(dessin.begin(&imprimante))
             {
                 QImage pdfImage(cheminFichier);
                 dessin.drawImage(QPoint(0, 0), pdfImage);
@@ -318,7 +318,7 @@ void IHMJustFeed::imprimerPDFIntervention()
 }
 
 /**
- * @brief decode les trames
+ * @brief decoder les trames
  * @param message
  * @param topic
  */
