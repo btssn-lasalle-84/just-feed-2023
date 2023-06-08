@@ -188,6 +188,8 @@ class IHMJustFeed : public QWidget
     void     chargerListeOperateurs();
     Produit* recupererProduit(int idProduit);
     void     metAJourLesInformationsIntervention();
+    void     metAJourRemplissage(int idDistributeur, int remplissage, int indiceBac);
+    void     metAJourHumidite(int idDistributeur, int hygrometries, int indiceBac);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
