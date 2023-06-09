@@ -348,10 +348,6 @@ void IHMJustFeed::decoderMessageMQTT(QByteArray message, QMqttTopicName topic)
     QString     deviceID     = endDeviceIDs.value("device_id").toString();
     qDebug() << Q_FUNC_INFO << "deviceID" << deviceID;
 
-    /**
-     * @todo Récupérer l'idDistributeur à partir du deviceID
-     */
-
     int idDistributeur = getIdDistributeur(deviceID);
     if(idDistributeur == ID_DISTRIBUTEUR_NON_DEFINI)
         return;
@@ -706,7 +702,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;

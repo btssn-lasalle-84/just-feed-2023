@@ -350,8 +350,9 @@ int Intervention::ajouterIntervention(int indexDistributeur)
 
         if(this->getADepanner())
         {
-            requete = "UPDATE Intervention SET aDepanner = 1 WHERE idIntervention = " +
-                      QString::number(numeroIntervention) + ";";
+            requete = "UPDATE Intervention SET aDepanner = 1 AND operateur = " +
+                      QString::number(getIdOperateur()) +
+                      " WHERE idIntervention = " + QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
             //!< @todo update l'operateur si il a changé
@@ -359,10 +360,12 @@ int Intervention::ajouterIntervention(int indexDistributeur)
 
         if(this->getARemplir())
         {
-            requete = "UPDATE Intervention SET aRemplir = 1 WHERE idIntervention = " +
-                      QString::number(numeroIntervention) + ";";
+            requete = "UPDATE Intervention SET aRemplir = 1, idOperateur = " +
+                      QString::number(getIdOperateur()) +
+                      " WHERE idIntervention = " + QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
+
             //!< @todo update l'operateur si il a changé
         }
     }
@@ -411,10 +414,7 @@ void Intervention::ajouterApprovisionnement(int indexDistributeur)
  */
 bool Intervention::estBacAttribue(int idDistributeur, int idBac)
 {
-    /**
-     * @todo Cette requête me semble insuffisante
-     */
-    QString          requete = "SELECT idBac FROM Approvisionnement";
+    QString          requete = "SELECT idBac FROM Approvisionnement WHERE effectue = 0;";
     QVector<QString> listeDeBacPlanifie;
     baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
     qDebug() << Q_FUNC_INFO << "requete" << requete;
