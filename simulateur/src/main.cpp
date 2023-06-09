@@ -92,7 +92,7 @@ const char* appKey = "ED66BC2C532875FFF2174BB11BB20DAC";
  * @def NB_BACS
  * @brief Définit le nombre de bacs du distributeur
  */
-#define NB_BACS 3
+#define NB_BACS 2
 
 #define LEDPIN  4
 #define DHTPIN  7
@@ -110,25 +110,29 @@ const char* appKey = "ED66BC2C532875FFF2174BB11BB20DAC";
 #define PORT_HYGROMETRIE 2
 #define PORT_MAINTENANCE 3
 
+#define NB_BYTE_PORT_MAINTENANCE 4
+
+#define SEUIL_HUMIDITE 15
+
 TheThingsNetwork ttn(loraSerial, debugSerial, freqPlan); //!<
 DHT              dht(DHTPIN, DHTTYPE); //!< le capteur d'humidité
 bool             etatLed = false;      //!< l'état de la led
 uint16_t         humidity;             //!< l'humidité
-uint8_t remplissageBacs[NB_BACS]; //!< le niveau de remplissage en % de chaque
-                                  //!< bac de produit
-uint8_t hygrometrieBacs[NB_BACS]; //!< le niveau d'humidité relative en % de
-                                  //!< chaque bac de produit
-uint8_t demandeMaintenance = 0;   //!< demande de maintrnance si = 1
+uint8_t remplissageBacs[NB_BACS];   //!< le niveau de remplissage en % de chaque
+                                    //!< bac de produit
+uint8_t hygrometrieBacs[NB_BACS];   //!< le niveau d'humidité relative en % de
+                                    //!< chaque bac de produit
+uint8_t demandeMaintenance = 0;     //!< demande de maintrnance si = 1
 
-byte payloadBacs[NB_BACS];        //!< les données de remplissage des bacs
-byte payloadEnvironnement[1]; //!< les données d'environnement (humidité) du
-                              //!< distributeur
-byte payloadMaintenance[5];   //!< les données de maintenance
+byte payloadBacs[NB_BACS];          //!< les données de remplissage des bacs
+byte payloadEnvironnement[NB_BACS]; //!< les données d'environnement (humidité)
+                                    //!< du distributeur
+byte
+  payloadMaintenance[NB_BYTE_PORT_MAINTENANCE]; //!< les données de maintenance
 
-uint32_t compteurErreurs = 0; //!< compteur d'erreurs
-uint32_t totalErreurs    = 0; //!< total des erreurs
-uint32_t totalTrames     = 0; //!< total des trames
-uint32_t tempo           = TEMPO; //!<  cf. duty cycle et airtime calculators
+uint32_t compteurOperations = 0; //!< compteur les opérations de consommation
+uint32_t totalDepassement   = 0; //!< total des dépassement seuil
+uint32_t tempo              = TEMPO; //!<  cf. duty cycle et airtime calculators
 
 void message(const byte* payload, size_t length, port_t port);
 bool controlerReponse(ttn_response_t ttn_response);
@@ -225,16 +229,17 @@ void loop()
         for(int i = 0; i < NB_BACS; ++i)
         {
             // remplir ?
-            if(remplissageBacs[i] == 0)
+            if(remplissageBacs[i] <= 5)
             {
-                consommation = random(0, 5); // une chance sur 5 pour remplir
+                consommation = random(0, 3); // une chance sur 3 pour remplir
                 if(consommation == 1)
-                    remplissageBacs[i] -= 100;
+                    remplissageBacs[i] = 100;
             }
             else                              // consommer ?
             {
                 consommation = random(0, 10); // simule une petite consommation
                 remplissageBacs[i] -= consommation;
+                compteurOperations++;
                 if(remplissageBacs[i] < 0)
                     remplissageBacs[i] = 0;
             }
@@ -247,7 +252,6 @@ void loop()
 
         ttn_response =
           ttn.sendBytes(payloadBacs, sizeof(payloadBacs), PORT_REMPLISSAGE);
-        totalTrames++;
         etat = controlerReponse(ttn_response);
     }
 
@@ -261,58 +265,49 @@ void loop()
 
         for(int i = 0; i < NB_BACS; ++i)
         {
-            humidity           = dht.readHumidity(false);
-            hygrometrieBacs[i] = lowByte(humidity);
-            // payloadEnvironnement[0] = lowByte(humidity);
+            humidity = dht.readHumidity(false);
+            if(uint16_t(humidity / 10.) > SEUIL_HUMIDITE)
+                totalDepassement++;
+            if(i % 2)
+                hygrometrieBacs[i] = lowByte(uint16_t(humidity / 10.) + i);
+            else
+                hygrometrieBacs[i] = lowByte(uint16_t(humidity / 10.) - i);
+            payloadEnvironnement[i] = lowByte(hygrometrieBacs[i]);
             debugSerial.print("   Humidite bac ");
             debugSerial.print(i + 1);
             debugSerial.print(" : ");
             debugSerial.println(hygrometrieBacs[i]);
         }
 
-        ttn_response = ttn.sendBytes(hygrometrieBacs,
-                                     sizeof(hygrometrieBacs),
+        ttn_response = ttn.sendBytes(payloadEnvironnement,
+                                     sizeof(payloadEnvironnement),
                                      PORT_HYGROMETRIE);
-        totalTrames++;
-        etat = controlerReponse(ttn_response);
+        etat         = controlerReponse(ttn_response);
     }
 
     // PORT_MAINTENANCE : maintenance
-    // if(etat)
-    if(0)
+    if(etat)
     {
         delay(tempo);
 
-        uint8_t taus = 0;
-        taus =
-          random(0,
-                 5); // une chance sur 5 pour simuler une demande de maintenance
-        if(taus == 1)
-            demandeMaintenance = 1;
-        else
-            demandeMaintenance = 0;
         debugSerial.print("-> Port : ");
         debugSerial.println(PORT_MAINTENANCE);
 
-        payloadMaintenance[0] = lowByte(demandeMaintenance);
-        payloadMaintenance[1] = highByte(uint16_t(totalErreurs));
-        payloadMaintenance[2] = lowByte(uint16_t(totalErreurs));
-        payloadMaintenance[3] = highByte(uint16_t(totalTrames));
-        payloadMaintenance[4] = lowByte(uint16_t(totalTrames));
+        payloadMaintenance[0] = highByte(uint16_t(compteurOperations));
+        payloadMaintenance[1] = lowByte(uint16_t(compteurOperations));
+        payloadMaintenance[2] = highByte(uint16_t(totalDepassement));
+        payloadMaintenance[3] = lowByte(uint16_t(totalDepassement));
         debugSerial.print("   Maintenance : ");
-        debugSerial.println(demandeMaintenance);
+        debugSerial.print("   compteurOperations ");
+        debugSerial.println(compteurOperations);
+        debugSerial.print("   totalDepassement ");
+        debugSerial.println(totalDepassement);
 
         ttn_response = ttn.sendBytes(payloadMaintenance,
                                      sizeof(payloadMaintenance),
                                      PORT_MAINTENANCE);
-        totalTrames++;
-        etat = controlerReponse(ttn_response);
+        etat         = controlerReponse(ttn_response);
     }
-
-    debugSerial.print("-- STATUS : ");
-    debugSerial.print(totalErreurs);
-    debugSerial.print(" / ");
-    debugSerial.println(totalTrames);
 
 #ifdef DISTRIBUTEUR_1
     digitalWrite(LEDROUGE, LOW);
@@ -362,41 +357,25 @@ bool controlerReponse(ttn_response_t ttn_response)
     {
         case TTN_ERROR_SEND_COMMAND_FAILED:
             debugSerial.println("-- RESPONSE : TTN_ERROR_SEND_COMMAND_FAILED");
-            compteurErreurs++;
-            totalErreurs++;
-            tempo = compteurErreurs * TEMPO;
+            tempo = TEMPO;
             etat  = false;
             break;
         case TTN_ERROR_UNEXPECTED_RESPONSE:
             debugSerial.println("-- RESPONSE : TTN_ERROR_UNEXPECTED_RESPONSE");
-            compteurErreurs++;
-            totalErreurs++;
             etat = false;
             break;
         case TTN_SUCCESSFUL_TRANSMISSION:
-            // reset le compteur d'erreurs
-            compteurErreurs = 0;
-            tempo           = TEMPO;
-            etat            = true;
+            debugSerial.println("-- RESPONSE : TTN_SUCCESSFUL_TRANSMISSION");
+            tempo = TEMPO;
+            etat  = true;
             break;
         case TTN_SUCCESSFUL_RECEIVE:
+            debugSerial.println("-- RESPONSE : TTN_SUCCESSFUL_RECEIVE");
             etat = true;
             break;
         default:
             debugSerial.println("-- RESPONSE : UNKNOWN_ERROR !");
             break;
-    }
-    if(compteurErreurs > NB_ERREURS_MAX)
-    {
-        debugSerial.print("-- NB ERROR : ");
-        debugSerial.println(compteurErreurs);
-        debugSerial.println("-- RESET");
-        ttn.reset();
-        delay(250);
-        debugSerial.println("-- JOIN");
-        etat = ttn.join(appEui, appKey);
-        debugSerial.print("-- JOINED : ");
-        debugSerial.println(etat);
     }
 
     return etat;
