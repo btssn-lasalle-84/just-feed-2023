@@ -423,22 +423,23 @@ void IHMJustFeed::instancierWidgets()
     boutonAfficherCarte       = new QPushButton("Afficher la carte", this);
 
     // Les labels
-    nomDistributeur             = new QLabel(this);
-    adresseDistributeur         = new QLabel(this);
-    villeDistributeur           = new QLabel(this);
-    descriptionDistributeur     = new QLabel(this);
-    miseEnServiceDistributeur   = new QLabel(this);
-    positionDistributeur        = new QLabel(this);
-    interventionNomOperateur    = new QLabel(this);
-    interventionNomDistributeur = new QLabel(this);
-    dateIntervention            = new QLabel(this);
-    aRemplirIntervention        = new QLabel(this);
-    aDepannerIntervention       = new QLabel(this);
-    etatIntervention            = new QLabel(this);
-    nouveauOperateur            = new QComboBox(this);
-    nouvelleDateIntervention    = new QDateEdit(this);
-    boutonSauvegarderPDF        = new QPushButton(this);
-    boutonImpression            = new QPushButton(this);
+    nomDistributeur                 = new QLabel(this);
+    adresseDistributeur             = new QLabel(this);
+    villeDistributeur               = new QLabel(this);
+    descriptionDistributeur         = new QLabel(this);
+    miseEnServiceDistributeur       = new QLabel(this);
+    positionDistributeur            = new QLabel(this);
+    adresseInterventionDistributeur = new QLabel(this);
+    interventionNomOperateur        = new QLabel(this);
+    interventionNomDistributeur     = new QLabel(this);
+    dateIntervention                = new QLabel(this);
+    aRemplirIntervention            = new QLabel(this);
+    aDepannerIntervention           = new QLabel(this);
+    etatIntervention                = new QLabel(this);
+    nouveauOperateur                = new QComboBox(this);
+    nouvelleDateIntervention        = new QDateEdit(this);
+    boutonSauvegarderPDF            = new QPushButton(this);
+    boutonImpression                = new QPushButton(this);
 
     // Les layouts
     layoutIntervention             = new QHBoxLayout();
@@ -1167,6 +1168,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     // la fenêtre intervention
     interventionNomOperateur->setAlignment(Qt::AlignCenter);
     interventionNomOperateur->setStyleSheet("QLabel { font-weight: bold; }");
+    adresseInterventionDistributeur->setAlignment(Qt::AlignCenter);
     interventionNomDistributeur->setAlignment(Qt::AlignCenter);
     interventionNomDistributeur->setStyleSheet("QLabel { font-weight: bold; }");
     dateIntervention->setAlignment(Qt::AlignCenter);
@@ -1204,6 +1206,8 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 
             interventionNomOperateur->setText("Opérateur : " + nomOperateur);
             interventionNomDistributeur->setText("Distributeur : " + distributeur->getNom());
+            adresseInterventionDistributeur->setText("Adresse : " + distributeur->getVille() + " " +
+                                                     distributeur->getAdresse());
             dateIntervention->setText(
               "Date : " + interventions[i]->getDateIntervention().toString("dd/MM/yyyy"));
             qDebug() << Q_FUNC_INFO << "dateIntervention"
@@ -1270,6 +1274,7 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
 
     // positionnement
     layoutIntervention->addWidget(interventionNomDistributeur);
+    layoutIntervention->addWidget(adresseInterventionDistributeur);
     layoutIntervention->addWidget(interventionNomOperateur);
     layoutIntervention->addWidget(dateIntervention);
     layoutIntervention->addWidget(aRemplirIntervention);

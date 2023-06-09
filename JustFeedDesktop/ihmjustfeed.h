@@ -149,12 +149,13 @@ class IHMJustFeed : public QWidget
     QHBoxLayout*  layoutBoutonsInterventions; //!< layout des boutons de l'intervention
     QVBoxLayout*
                          layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
-    QVector<QStringList> listeApprovisionnement;       //!< vecteur de liste qui contient les
-                                                       //!< Approvisionnement lié à l'intervention
-    QVector<QHBoxLayout*> layoutsApprovisionnement;    //!< layout des approvisionnement
-    QLabel*               interventionNomOperateur;    //!< nom operateur
-    QLabel*               interventionNomDistributeur; //!< nom distributeur
-    QLabel*               dateIntervention;            //!< date planifié pour l'intervention
+    QVector<QStringList> listeApprovisionnement;    //!< vecteur de liste qui contient les
+                                                    //!< Approvisionnement lié à l'intervention
+    QVector<QHBoxLayout*> layoutsApprovisionnement; //!< layout des approvisionnement
+    QLabel*               interventionNomOperateur; //!< nom operateur
+    QLabel*      adresseInterventionDistributeur;   //!< adresse du distributeur à intervenir
+    QLabel*      interventionNomDistributeur;       //!< nom distributeur
+    QLabel*      dateIntervention;                  //!< date planifié pour l'intervention
     QLabel*      aRemplirIntervention;     //!< bool pour savoir si le distributeur est à remplir
     QLabel*      aDepannerIntervention;    //!< bool pour savoir si le distributeur est à depanner
     QLabel*      etatIntervention;         //!< etat de l'intervention
