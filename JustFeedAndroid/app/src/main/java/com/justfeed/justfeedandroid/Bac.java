@@ -26,11 +26,14 @@ public class Bac
     /**
      * Attributs
      */
+    private String idSimulateur; //!< Simulateur auquel appartient le bac
     private Produit typeProduit; //!< Type de produit dans le bac
+    private int position; //!< position du bac dans le distributeur
     private double  poidsActuel; //!< Poids actuel du bac en Kg
     private double  poidsTotal;  //!< Poids total du bac en kg
     private int     hygrometrie; //!< Taux d'humidité dans un bac
     private double  quantiteARemplir; //!< Quantité à remplir en kg
+    private double  remplissage; //!< Remplissage d'un bac en pourcentage
 
     /**
      * @brief Constructeur par défaut de la classe Bac
@@ -47,27 +50,40 @@ public class Bac
 
     /**
      * @brief Constructeur d'initialisation de la classe Bac
+     * @paramm distributeur distributeur auquel appartient le bac
+     * @param idSimulateur simulateur du distributeur
      * @param typeProduit type de produit dans le bac
+     * @param position position du bac
      * @param poidsActuel poids actuel d'un bac
      * @param poidsTotal  poids total d'un bac
      * @param hygrometrie
      * @param quantiteARemplir
+     * @param remplissage
      */
-    public Bac(Produit typeProduit, double poidsActuel, double poidsTotal, int hygrometrie, double quantiteARemplir)
+    public Bac(String idSimulateur, Produit typeProduit, int position, double poidsActuel, double poidsTotal, int hygrometrie, double quantiteARemplir, double remplissage)
     {
         Log.d(TAG,
               "Bac() nomProduit = " + typeProduit.getNom() + " - poidsActuel = " + poidsActuel +
                 " - poidsTotal = " + poidsTotal + " - hygrometrie = " + hygrometrie);
+        this.idSimulateur     = idSimulateur;
         this.typeProduit      = typeProduit;
+        this.position         = position;
         this.poidsActuel      = poidsActuel;
         this.poidsTotal       = poidsTotal;
         this.hygrometrie      = hygrometrie;
         this.quantiteARemplir = quantiteARemplir;
+        this.remplissage      = remplissage;
     }
 
     /**
      * Accesseurs
      */
+
+    /**
+     * @brief Accesseur du distributeur du bac
+     * @return identifiant du simulateur du distributeur
+     */
+    public String getIdSimulateur(){ return this.idSimulateur; }
 
     /**
      * @brief Accesseur du produit contenu dans le bac.
@@ -77,6 +93,12 @@ public class Bac
     {
         return this.typeProduit;
     }
+
+    /**
+     * @brief Accesseur de la position du bac
+     * @return position
+     */
+    public int getPosition() { return this.position; }
 
     /**
      * @brief Accesseur du poids actuel du bac.
@@ -110,6 +132,12 @@ public class Bac
      * @return quantiteARemplir , la quantité en kg à remplir
      */
     public double getQuantiteARemplir() { return this.quantiteARemplir; }
+
+    /**
+     * @brief Accesseur du taux de remplissage d'un bac
+     * @return remplissage
+     */
+    public double getRemplissage() { return this.remplissage; }
 
     /**
      * Services

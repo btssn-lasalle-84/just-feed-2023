@@ -35,6 +35,7 @@ public class Distributeur
     private String       adresse;         //!< Adresse du distributeur.
     private String       ville;           //!< Ville où se situe le distributeur.
     private String       nomDistributeur; //!< Lieu où se trouve le distributeur.
+    private String       idMachine; //!< Idenfifiant du simulateur.
     private Location     coordGeographiques; //!< Coordonnées Géographiques des distributeurs.
     private List<Bac>
       listeBacs; //!< les bacs du distributeur avec leurs produits et leurs poids actuel.
@@ -60,6 +61,7 @@ public class Distributeur
      * @param adresse Adresse du distributeur.
      * @param ville Ville du distributeur.
      * @param nomDistributeur Nom du distributeur.
+     * @param idMachine identifiant du simulateur.
      * @param coordGeographiques Géo-localisation du distributeur.
      * @param listeBacs Les bacs du distributeur.
      */
@@ -68,6 +70,7 @@ public class Distributeur
                         String    adresse,
                         String    ville,
                         String    nomDistributeur,
+                        String    idMachine,
                         Location  coordGeographiques,
                         List<Bac> listeBacs)
     {
@@ -77,6 +80,7 @@ public class Distributeur
         this.adresse            = adresse;
         this.ville              = ville;
         this.nomDistributeur    = nomDistributeur;
+        this.idMachine          = idMachine;
         this.coordGeographiques = coordGeographiques;
         this.listeBacs          = listeBacs;
         this.aRemplir           = false;
@@ -100,9 +104,9 @@ public class Distributeur
     public String getLocalisation()
     {
         String localisation = "";
-        localisation        = localisation.concat(this.codePostal + ", ");
+        //localisation        = localisation.concat(this.codePostal + ", ");
         localisation =
-          localisation.concat(this.ville + " " + this.adresse + " " + this.nomDistributeur);
+          localisation.concat(this.nomDistributeur + " " + this.adresse + " " + this.codePostal + " " + this.ville);
 
         return localisation;
     }
@@ -121,6 +125,12 @@ public class Distributeur
     {
         return this.id;
     }
+
+    /**
+     * @brief Accesseur de l'identifiant du simulateur
+     * @return idMachine
+     */
+    public String getIdMachine() { return this.idMachine; }
 
     /**
      * @brief Accesseur des bacs du distributeur

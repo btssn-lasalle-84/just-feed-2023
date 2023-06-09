@@ -24,6 +24,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.util.TreeMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -609,7 +610,7 @@ public class BaseDeDonnees
     /**
      * @brief Méthode qui récupère une liste de distributeurs de la BDD.
      */
-    public void recupererDistributeurs()
+    public void recupererDistributeurs(final String deviceId)
     {
         if(BaseDeDonnees.active)
         {
@@ -621,18 +622,57 @@ public class BaseDeDonnees
                         mutex.lock();
                         try
                         {
-                            String requeteSQLDistributeurs =
-                              "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
-                              +
-                              " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur ";
+                            String requeteSQLDistributeurs;
+                            String requeteSQLBacs;
+                            if(deviceId.isEmpty())
+                            {
+                                requeteSQLDistributeurs =
+                                        "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                        +
+                                        " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n"
+                                        +
+                                        " ORDER BY Distributeur.dateMiseEnService ASC";
+                                requeteSQLBacs =
+                                        "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
+                                                +
+                                                "INNER JOIN Distributeur ON Distributeur.idDistributeur = Bac.idDistributeur\n"
+                                                +
+                                                "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                                                +
+                                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                                                +
+                                                "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            }
+                            else
+                            {
+                                requeteSQLDistributeurs =
+                                        "SELECT Distributeur.*, Intervention.aRemplir, Intervention.aDepanner FROM Distributeur\n"
+                                        +
+                                        " LEFT JOIN Intervention ON Distributeur.idDistributeur = Intervention.idDistributeur\n"
+                                        +
+                                        " WHERE Distributeur.deviceId = "+"\""+deviceId+"\" ORDER BY Distributeur.dateMiseEnService ASC";
+                                requeteSQLBacs =
+                                        "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
+                                                +
+                                                "INNER JOIN Distributeur ON Distributeur.deviceId = "+"\""+deviceId+"\""
+                                                +
+                                                "AND Distributeur.idDistributeur = Bac.idDistributeur\n"
+                                                +
+                                                "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
+                                                +
+                                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                                                +
+                                                "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
+                            }
+
                             Log.d(TAG, "Requete : " + requeteSQLDistributeurs);
                             Statement statement =
                               connexion.createStatement(ResultSet.TYPE_FORWARD_ONLY,
                                                         ResultSet.CONCUR_READ_ONLY);
                             ResultSet resultatRequeteDistributeurs =
                               statement.executeQuery(requeteSQLDistributeurs);
-                            Map<Integer, Distributeur> distributeurs =
-                              new HashMap<Integer, Distributeur>();
+                            TreeMap<Integer, Distributeur> distributeurs =
+                              new TreeMap<Integer, Distributeur>();
                             while(resultatRequeteDistributeurs.next())
                             {
                                 Log.d(TAG,
@@ -649,26 +689,18 @@ public class BaseDeDonnees
                                   resultatRequeteDistributeurs.getString("adresse"),
                                   resultatRequeteDistributeurs.getString("ville"),
                                   resultatRequeteDistributeurs.getString("nomDistributeur"),
+                                  resultatRequeteDistributeurs.getString("deviceID"),
                                   coordGeographiques,
                                   new ArrayList<Bac>());
                                 distributeur.remplir(
-                                  (resultatRequeteDistributeurs.getInt("aRemplir") == 0));
+                                  (resultatRequeteDistributeurs.getInt("aRemplir") == 1));
                                 distributeur.depanner(
-                                  (resultatRequeteDistributeurs.getInt("aDepanner") == 0));
+                                  (resultatRequeteDistributeurs.getInt("aDepanner") == 1));
                                 Log.d(TAG, "Nouveau distributeur : " + distributeur);
                                 distributeurs.put(
                                   resultatRequeteDistributeurs.getInt("idDistributeur"),
                                   distributeur);
                             }
-                            String requeteSQLBacs =
-                              "SELECT Distributeur.*,Produit.*,Bac.*, Approvisionnement.* FROM Bac\n"
-                              +
-                              "INNER JOIN Distributeur ON Distributeur.idDistributeur=Bac.idDistributeur\n"
-                              + "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
-                              +
-                                "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
-                              +
-                              "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             Log.d(TAG, "Requete : " + requeteSQLBacs);
                             ResultSet resultatRequeteBacs = statement.executeQuery(requeteSQLBacs);
                             while(resultatRequeteBacs.next())
@@ -681,15 +713,19 @@ public class BaseDeDonnees
                                 {
                                     distributeurs.get(resultatRequeteBacs.getInt("idDistributeur"))
                                       .ajouterBac(
-                                        new Bac(new Produit(
+                                        new Bac(
+                                                distributeurs.get(resultatRequeteBacs.getInt("idDistributeur")).getIdMachine(),
+                                                new Produit(
                                                   resultatRequeteBacs.getString("nomProduit"),
                                                   resultatRequeteBacs.getDouble("prix"),
                                                   resultatRequeteBacs.getDouble("poidsUnitaire"),
                                                   resultatRequeteBacs.getDouble("volumeUnitaire")),
+                                                resultatRequeteBacs.getInt("position"),
                                                 resultatRequeteBacs.getDouble("poidsActuel"),
                                                 resultatRequeteBacs.getDouble("poidsTotal"),
                                                 resultatRequeteBacs.getInt("hygrometrie"),
-                                                resultatRequeteBacs.getDouble("poidsAPrevoir")));
+                                                resultatRequeteBacs.getDouble("poidsAPrevoir"),
+                                                resultatRequeteBacs.getDouble("remplissage")));
                                 }
                                 Log.d(
                                   TAG,
@@ -731,19 +767,19 @@ public class BaseDeDonnees
             // Pour les tests
             // simule une base de données
             List<Bac> bacsDistributeur1 = Arrays.asList(
-              new Bac(new Produit("Cacahuète", 0.49, 0.001, 0.004), 1.5, 2, 0, 0),
-              new Bac(new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 0.8, 1.3, 0, 0),
-              new Bac(new Produit("Fèves entières", 0.3, 0.002, 0.003), 1.5, 8, 0, 6.5));
+              new Bac("distributeur-1-sim",new Produit("Cacahuète", 0.49, 0.001, 0.004), 1, 1.5, 2, 0, 0, 75.0),
+              new Bac("distributeur-1-sim", new Produit("Riz Basmati Blanc", 0.35, 0.00005, 0.0003), 2, 0.8, 1.3, 0, 0, 61.54),
+              new Bac("distributeur-1-sim", new Produit("Fèves entières", 0.3, 0.002, 0.003), 3, 1.5, 8, 0, 6.5, 19.0));
 
             List<Bac> bacsDistributeur2 = Arrays.asList(
-              new Bac(new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 5.0, 12, 0, 7.0),
-              new Bac(new Produit("Abricots secs", 1.13, 0.008, 0.004), 14.0, 16, 0, 0),
-              new Bac(new Produit("Raisin sec", 0.39, 0.002, 0.001), 10.5, 16, 0, 0));
+              new Bac("distributeur-2-sim", new Produit("Banane CHIPS", 0.76, 0.003, 0.002), 1, 5.0, 12, 0, 7.0, 42.0),
+              new Bac("distributeur-2-sim", new Produit("Abricots secs", 1.13, 0.008, 0.004), 2, 14.0, 16, 0, 0, 87.5),
+              new Bac("distributeur-2-sim", new Produit("Raisin sec", 0.39, 0.002, 0.001), 3, 10.5, 16, 0, 0, 65.0));
 
             List<Bac> bacsDistributeur3 = Arrays.asList(
-              new Bac(new Produit("Cranberries", 2.1, 0.0006, 0.0005), 9.6, 9.6, 1, 0),
-              new Bac(new Produit("Pruneaux", 1.15, 0.008, 0.004), 7.5, 16, 0, 8.5),
-              new Bac(new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 6.2, 7, 0, 0));
+              new Bac("distributeur-3", new Produit("Cranberries", 2.1, 0.0006, 0.0005), 1, 9.6, 9.6, 1, 0, 100.0),
+              new Bac("distributeur-3", new Produit("Pruneaux", 1.15, 0.008, 0.004), 2, 7.5, 16, 0, 8.5, 46.8),
+              new Bac("distributeur-3", new Produit("Fruits sec", 1.06, 0.00035, 0.0004), 3, 6.2, 7, 0, 0, 88.5));
 
             listeDistributeurs           = new ArrayList<Distributeur>();
             Location coordGeographiques1 = new Location("Non défini");
@@ -760,6 +796,7 @@ public class BaseDeDonnees
                                                     "Avenue Frédéric Mistral",
                                                     "Orange",
                                                     "Gare Orange",
+                                                    "distributeur-1-sim",
                                                     coordGeographiques1,
                                                     bacsDistributeur1));
             listeDistributeurs.add(new Distributeur(2,
@@ -767,6 +804,7 @@ public class BaseDeDonnees
                                                     "Boulevard Saint-Roch",
                                                     "Avignon",
                                                     "Gare Avignon Centre",
+                                                    "distributeur-2-sim",
                                                     coordGeographiques2,
                                                     bacsDistributeur2));
             listeDistributeurs.add(new Distributeur(3,
@@ -774,6 +812,7 @@ public class BaseDeDonnees
                                                     "Avenue De La Gare",
                                                     "Carpentras",
                                                     "Gare de Carpentras",
+                                                    "distributeur-3",
                                                     coordGeographiques3,
                                                     bacsDistributeur3));
             Message message = new Message();

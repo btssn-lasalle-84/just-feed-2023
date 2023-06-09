@@ -57,7 +57,7 @@ public class ClientMQTT
 
     private String nomUtilisateur; //!<  nom d'utilisateur
     private String motDePasse;     //!<  mot de passe TTS
-    private String topicTTN;     //!<  mot de passe TTS
+    private String topicTTN;       //!<  mot de passe TTS
 
     /**
      * @brief Constructeur de la classe ClientMQTT
@@ -68,7 +68,7 @@ public class ClientMQTT
     {
         this.handler = handler;
         this.context = context;
-        Log.v(TAG, "[ClientMQTT()] clientId = " + clientId+ " [Handler] = "+ handler);
+        Log.v(TAG, "[ClientMQTT()] clientId = " + clientId + " [Handler] = " + handler);
         // creerClientMQTTT(context, handler);
         // connecter();
     }
@@ -88,7 +88,7 @@ public class ClientMQTT
                       "[ClientMQTT()] uriServeur = " + s +
                         " connecte = " + mqttAndroidClient.isConnected());
                 Message message = new Message();
-                message.what = TTN_CONNECTE;
+                message.what    = TTN_CONNECTE;
                 handler.sendMessage(message);
             }
 
@@ -97,7 +97,7 @@ public class ClientMQTT
             {
                 Log.w(TAG, "[connectionLost()]");
                 Message message = new Message();
-                message.what = TTN_DECONNECTE;
+                message.what    = TTN_DECONNECTE;
                 handler.sendMessage(message);
             }
 
@@ -108,8 +108,8 @@ public class ClientMQTT
                       "[messageArrived()] topic = " + topic +
                         " message = " + mqttMessage.toString());
                 Message message = new Message();
-                message.what = TTN_MESSAGE;
-                message.obj = new JSONObject(mqttMessage.toString());
+                message.what    = TTN_MESSAGE;
+                message.obj     = new JSONObject(mqttMessage.toString());
                 handler.sendMessage(message);
             }
 
@@ -269,9 +269,8 @@ public class ClientMQTT
             return false;
         }
 
-
         if(deviceID.isEmpty())
-            topicTTN = "v3/" + clientId + "/devices/#";
+            topicTTN = "v3/" + clientId + "/devices/+/up";
         else
             topicTTN = "v3/" + clientId + "/devices/" + deviceID + "/up";
         Log.w(TAG, "[souscrireTopic()] topic = " + topicTTN);
@@ -314,7 +313,7 @@ public class ClientMQTT
             return false;
         }
         final String topicTTN = clientId + "/devices/" + deviceID + "/up";
-        Log.w(TAG, "[unsouscrireTopic()] topic = " + topicTTN);
+        Log.w(TAG, "[unsubscribe()] topic = " + topicTTN);
         try
         {
             final boolean[] retour = { false };
@@ -327,6 +326,41 @@ public class ClientMQTT
             Log.w(TAG, "Erreur topic = " + topicTTN);
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * @brief Méthode utilisée pour envoyer un message
+     * @param topic
+     * @param numeroBac
+     * @param prix
+     */
+    public void envoyerMessageMQTT(String topic, int numeroBac, Double prix)
+    {
+        try
+        {
+            Log.w(TAG,
+                  "[envoyerMessageMQTT()] topic = " + topic + " numeroBac = " + numeroBac +
+                    " prix = " + prix);
+            String topicTTN    = "v3/just-feed-2022@ttn/devices/" + topic + "/down/push";
+            String chargeUtile = "{\"downlinks\":[{\n"
+                                 + "    \"f_port\": " + JustFeed.PORT_PRIX + ",\n"
+                                 + "    \"decoded_payload\": {\n"
+                                 + "        \"numeroProduit\": " + numeroBac + ",\n"
+                                 + "        \"prixProduit\": " + prix + "\n"
+                                 + "    },\n"
+                                 + "    \"priority\": \"NORMAL\"\n"
+                                 + "}]}";
+            Log.w(TAG, "[envoyerMessageMQTT()] topicTTN = " + topicTTN);
+            Log.w(TAG, "[envoyerMessageMQTT()] chargeUtile = " + chargeUtile);
+            if(!mqttAndroidClient.isConnected())
+                connecter();
+            MqttMessage message = new MqttMessage(chargeUtile.getBytes());
+            mqttAndroidClient.publish(topicTTN, message);
+        }
+        catch(MqttException e)
+        {
+            e.printStackTrace();
         }
     }
 }
