@@ -12,12 +12,8 @@
 #include "bac.h"
 #include "basededonnees.h"
 #include "intervention.h"
-#include "distributeur.h"
+#include "distributeur.h" +
 #include "ihmjustfeed.h"
-
-/**
- * @todo Améliorer la gestion des interventions (à faire et en cours) déjà planifiées
- */
 
 /**
  * @brief Constructeur de la classe PlanificationIntervention

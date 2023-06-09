@@ -355,7 +355,6 @@ int Intervention::ajouterIntervention(int indexDistributeur)
                       " WHERE idIntervention = " + QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-            //!< @todo update l'operateur si il a changé
         }
 
         if(this->getARemplir())
@@ -365,8 +364,6 @@ int Intervention::ajouterIntervention(int indexDistributeur)
                       " WHERE idIntervention = " + QString::number(numeroIntervention) + ";";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             baseDeDonnees->executer(requete);
-
-            //!< @todo update l'operateur si il a changé
         }
     }
 

@@ -18,6 +18,7 @@
 #include <QWebView>
 #include <QPrinter>
 #include <QPrintDialog>
+#include <QFileDialog>
 #include <QPainter>
 #include <QFont>
 #include <QtMqtt/QtMqtt>
@@ -109,9 +110,9 @@ class IHMJustFeed : public QWidget
     ConfigurationDistributeur* configurationDistributeur; //!< la boîte de dialogue pour configurer
     //!< un distributeur
     PlanificationIntervention*
-      planificationIntervention;          //!< la boîte de dialogue pour créer une intervention
-    QVector<Distributeur*> distributeurs; //!< les distributeurs
-    QVector<Operateur*>    operateurs;    //!< les operateurs
+                           planificationIntervention; //!< la boîte de dialogue pour créer une intervention
+    QVector<Distributeur*> distributeurs;             //!< les distributeurs
+    QVector<Operateur*>    operateurs;                //!< les operateurs
     QVector<Distributeur*> listeDistributeursAIntervenir; //!< les distributeurs à intervenir
     QVector<Produit*>      produits;                      //!< les produits
     QVector<Intervention*> interventions;                 //!< les interventions
@@ -147,7 +148,7 @@ class IHMJustFeed : public QWidget
     QHBoxLayout*  layoutIntervention;         //!< layout intervention
     QHBoxLayout*  layoutBoutonsInterventions; //!< layout des boutons de l'intervention
     QVBoxLayout*
-      layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
+                         layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
     QVector<QStringList> listeApprovisionnement;       //!< vecteur de liste qui contient les
                                                        //!< Approvisionnement lié à l'intervention
     QVector<QHBoxLayout*> layoutsApprovisionnement;    //!< layout des approvisionnement

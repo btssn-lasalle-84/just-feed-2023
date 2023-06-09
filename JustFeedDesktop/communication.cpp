@@ -74,7 +74,7 @@ void Communication::sAbonner(QString topic)
  */
 void Communication::demarrer()
 {
-    QString topic = QString("v3/") + username + QString("/devices/#");
+    QString topic = QString("v3/") + username + QString("/devices/+/up");
     qDebug() << Q_FUNC_INFO << "topic" << topic;
     sAbonner(topic);
 }
