@@ -641,6 +641,8 @@ public class BaseDeDonnees
                                                 +
                                                 "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
                                                 +
+                                                "AND Approvisionnement.effectue = 0\n"
+                                                +
                                                 "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             }
                             else
@@ -661,6 +663,8 @@ public class BaseDeDonnees
                                                 "INNER JOIN Produit ON Produit.idProduit=Bac.idProduit\n"
                                                 +
                                                 "LEFT JOIN Approvisionnement ON Approvisionnement.idBac = Bac.idBac\n"
+                                                +
+                                                "AND Approvisonnement.effectue = 0\n"
                                                 +
                                                 "INNER JOIN ServeurTTN ON ServeurTTN.idServeurTTN=Distributeur.idServeurTTN;";
                             }

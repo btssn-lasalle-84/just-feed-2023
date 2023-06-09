@@ -67,7 +67,7 @@
                 android:layout_width="53dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="numberDecimal" />
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/euro"
