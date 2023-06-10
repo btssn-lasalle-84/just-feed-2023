@@ -3,7 +3,7 @@
  * @brief       Déclaration de la classe Distributeur.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 
@@ -104,6 +104,7 @@ class Distributeur
     int          getHygrometrie() const;
     bool         getAIntervenir() const;
     Bac*         getBac(int numeroBac) const;
+    Bac*         getBacId(int idbac) const;
     int          getNbBacs() const;
     double       getPourcentageBac(int numeroBac) const;
     double       getPoidsBac(int numeroBac) const;

@@ -5,7 +5,7 @@
  * @file basededonnees.h
  * @brief Déclaration de la classe BaseDeDonnees
  * @author Thierry VAIRA
- * @version 0.1
+ * @version     1.1
  */
 
 #include <QtSql/QtSql>

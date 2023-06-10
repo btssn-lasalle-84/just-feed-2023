@@ -4,7 +4,7 @@
  * @details     La classe PlanificationIntervention \c Cette classe permet de planifier une
  * intervention
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 
@@ -12,12 +12,8 @@
 #include "bac.h"
 #include "basededonnees.h"
 #include "intervention.h"
-#include "distributeur.h"
+#include "distributeur.h" +
 #include "ihmjustfeed.h"
-
-/**
- * @todo Améliorer la gestion des interventions (à faire et en cours) déjà planifiées
- */
 
 /**
  * @brief Constructeur de la classe PlanificationIntervention
@@ -204,8 +200,7 @@ void PlanificationIntervention::initialiserWidgets()
             labelsDesProduits[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesPourcentage[i][j]->setText(
               "Poids à prévoir : " +
-              QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) +
-              " g ou Kg (à définir)");
+              QString::number(distributeurs[i]->getBac(j)->getQuantiteARemplir()) + " g");
             labelsDesPourcentage[i][j]->setAlignment(Qt::AlignCenter);
             labelsDesCheckboxDepannage[i][j]->setCheckState(Qt::Unchecked);
             labelsDesCheckboxDepannage[i][j]->setText("Dépanner");
@@ -341,20 +336,22 @@ void PlanificationIntervention::initialiserEtatDistributeur()
             }
 
             qDebug() << Q_FUNC_INFO << "HygrometrieBac" << distributeurs[i]->getHygrometrieBac(j);
-            if((distributeurs[i]->getHygrometrieBac(j)) >= ZERO &&
+            if((distributeurs[i]->getHygrometrieBac(j) >= DIX) &&
                (distributeurs[i]->getHygrometrieBac(j) <= QUINZE))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_ANORMALE);
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_NORMALE);
             }
-            else if((distributeurs[i]->getHygrometrieBac(j)) > QUINZE &&
-                    (distributeurs[i]->getHygrometrieBac(j) <= CINQUANTE))
+            else if((distributeurs[i]->getHygrometrieBac(j) <= DIX) &&
+                      (distributeurs[i]->getHygrometrieBac(j) >= HUIT) ||
+                    (distributeurs[i]->getHygrometrieBac(j) > QUINZE) &&
+                      (distributeurs[i]->getHygrometrieBac(j) <= DIX_HUIT))
             {
                 labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_A_SURVEILLER);
             }
-            else if((distributeurs[i]->getHygrometrieBac(j)) > CINQUANTE &&
-                    (distributeurs[i]->getHygrometrieBac(j) <= CENT))
+            else if((distributeurs[i]->getHygrometrieBac(j)) < HUIT ||
+                    (distributeurs[i]->getHygrometrieBac(j) > DIX_HUIT))
             {
-                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_NORMALE);
+                labelsDesHygrometries[i][j]->setStyleSheet(COULEUR_HYGROMETRIE_ANORMALE);
             }
 
             qDebug() << Q_FUNC_INFO << "ADepanner" << distributeurs[i]->getBac(j)->getADepanner();
@@ -383,6 +380,7 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
 {
     QString          requete = "SELECT idBac FROM Approvisionnement";
     QVector<QString> listeDeBacPlanifie;
+    QVector<QString> listeEtatEffectue;
     baseDeDonnees->recuperer(requete, listeDeBacPlanifie);
     qDebug() << Q_FUNC_INFO << "idIntervention" << requete;
 
@@ -391,7 +389,17 @@ bool PlanificationIntervention::bacEstAttribueRemplissage(const int idDistribute
         if(listeDeBacPlanifie[i].toInt() ==
            distributeurs[idDistributeur]->getBac(idBac)->getIdBac())
         {
-            return true;
+            requete = "SELECT effectue FROM Approvisionnement WHERE idBac =" +
+                      QString::number(distributeurs[idDistributeur]->getBac(idBac)->getIdBac()) +
+                      ";";
+            baseDeDonnees->recuperer(requete, listeEtatEffectue);
+            for(int j = 0; j < listeEtatEffectue.size(); j++)
+            {
+                if(listeEtatEffectue[j].toInt() == 0)
+                {
+                    return true;
+                }
+            }
         }
     }
     return false;

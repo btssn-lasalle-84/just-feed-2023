@@ -5,7 +5,7 @@
  * distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #include "distributeur.h"
@@ -195,6 +195,22 @@ Bac* Distributeur::getBac(int numeroBac) const
     if(numeroBac >= 0 && numeroBac < bacs.size())
     {
         return bacs[numeroBac];
+    }
+    return nullptr;
+}
+
+/**
+ * @brief Accesseur pour récupérer un bac grâce à son id
+ * @return Bac
+ */
+Bac* Distributeur::getBacId(int idBac) const
+{
+    for(int i = 0; i < bacs.size(); i++)
+    {
+        if(bacs[i]->getIdBac() == idBac)
+        {
+            return bacs[i];
+        }
     }
     return nullptr;
 }

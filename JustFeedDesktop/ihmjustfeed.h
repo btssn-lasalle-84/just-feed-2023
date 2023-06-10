@@ -5,7 +5,7 @@
  * de l'application JustFeed (Desktop)
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 
@@ -16,6 +16,12 @@
 #include <QVector>
 #include <QtWidgets>
 #include <QWebView>
+#include <QPrinter>
+#include <QPrintDialog>
+#include <QFileDialog>
+#include <QPainter>
+#include <QFont>
+#include <QtMqtt/QtMqtt>
 
 class Distributeur;
 class ConfigurationDistributeur;
@@ -53,6 +59,8 @@ class Communication;
 #define HYGROMETRIE_MAX_VALIDE     15
 #define HYGROMETRIE_MIN_NON_VALIDE 8
 #define HYGROMETRIE_MAX_NON_VALIDE 18
+
+#define UN 1
 
 /**
  * @class       IHMJustFeed
@@ -122,34 +130,41 @@ class IHMJustFeed : public QWidget
     QTableWidget*     tableWidgetDistributeurs; //!< l'affichage sous forme de table
     QTableWidgetItem *itemEnseigne, *itemAdresse, *itemVille, *itemCodePostal, *itemIntervention,
       *itemDetailIntervention; //!< les éléments de la table
-    QPushButton*          boutonPlanifier;
-    QPushButton*          boutonConfigurer;
-    QPushButton*          boutonValiderDistributeur;
-    QPushButton*          boutonValiderIntervention;
-    QPushButton*          boutonAfficherCarte;
-    QComboBox*            listeDistributeurs; //!< liste de distributeurs
-    QVBoxLayout*          layoutFenetreDistributeur;
-    QProgressBar*         volumeRestant;
-    QLabel*               nomDistributeur;
-    QLabel*               adresseDistributeur;
-    QLabel*               codePostalDistributeur;
-    QLabel*               villeDistributeur;
-    QLabel*               descriptionDistributeur;
-    QLabel*               miseEnServiceDistributeur;
-    QLabel*               positionDistributeur;
-    QHBoxLayout*          layoutIntervention;
-    QHBoxLayout*          layoutBoutonsInterventions;
-    QVBoxLayout*          layoutInformationsIntervention;
-    QVector<QStringList>  listeApprovisionnement;
-    QVector<QHBoxLayout*> layoutsApprovisionnement;
-    QLabel*               interventionIdOperateur;
-    QLabel*               interventionNomDistributeur;
-    QLabel*               dateIntervention;
-    QLabel*               aRemplirIntervention;
-    QLabel*               aDepannerIntervention;
-    QLabel*               etatIntervention;
-    QComboBox*            listeOperateurs;
-    QWebView*             vueCarte;
+    QPushButton*  boutonPlanifier;
+    QPushButton*  boutonConfigurer;
+    QPushButton*  boutonValiderDistributeur;
+    QPushButton*  boutonValiderIntervention;
+    QPushButton*  boutonAfficherCarte;
+    QComboBox*    listeDistributeurs; //!< liste de distributeurs
+    QVBoxLayout*  layoutFenetreDistributeur;
+    QProgressBar* volumeRestant;
+    QLabel*       nomDistributeur;
+    QLabel*       adresseDistributeur;
+    QLabel*       codePostalDistributeur;
+    QLabel*       villeDistributeur;
+    QLabel*       descriptionDistributeur;
+    QLabel*       miseEnServiceDistributeur;
+    QLabel*       positionDistributeur;
+    QHBoxLayout*  layoutIntervention;         //!< layout intervention
+    QHBoxLayout*  layoutBoutonsInterventions; //!< layout des boutons de l'intervention
+    QVBoxLayout*
+                         layoutInformationsIntervention; //!< layout contenant les informations de l'intervention
+    QVector<QStringList> listeApprovisionnement;    //!< vecteur de liste qui contient les
+                                                    //!< Approvisionnement lié à l'intervention
+    QVector<QHBoxLayout*> layoutsApprovisionnement; //!< layout des approvisionnement
+    QLabel*               interventionNomOperateur; //!< nom operateur
+    QLabel*      adresseInterventionDistributeur;   //!< adresse du distributeur à intervenir
+    QLabel*      interventionNomDistributeur;       //!< nom distributeur
+    QLabel*      dateIntervention;                  //!< date planifié pour l'intervention
+    QLabel*      aRemplirIntervention;     //!< bool pour savoir si le distributeur est à remplir
+    QLabel*      aDepannerIntervention;    //!< bool pour savoir si le distributeur est à depanner
+    QLabel*      etatIntervention;         //!< etat de l'intervention
+    QComboBox*   nouveauOperateur;         //!< nouveau operateur
+    QDateEdit*   nouvelleDateIntervention; //!< nouvelle date d'intervention
+    QPushButton* boutonSauvegarderPDF;     //!< bouton pour sauvegarder en pdf une intervention
+    QPushButton* boutonImpression;         //!< bouton pour imprimer une intervention
+    int          idIntervention;           //!< id de l'intervention en cour de visualisation
+    QWebView*    vueCarte;
 
     void     initialiserGUI();
     void     instancierWidgets();
@@ -176,12 +191,16 @@ class IHMJustFeed : public QWidget
     void     chargerCarte(Distributeur* distributeur);
     void     chargerListeOperateurs();
     Produit* recupererProduit(int idProduit);
+    void     mettreAJourInformationsIntervention();
+    void     mettreAJourRemplissage(int idDistributeur, int remplissage, int indiceBac);
+    void     mettreAJourHumidite(int idDistributeur, int hygrometries, int indiceBac);
 
   public:
     IHMJustFeed(QWidget* parent = nullptr);
     ~IHMJustFeed();
 
     Distributeur* getDistributeur(QString nom) const;
+    int           getIdDistributeur(QString deviceID) const;
     Produit*      getProduit(int index) const;
     QString       getNomProduit(int index) const;
     double        getPrixProduit(int index) const;
@@ -199,6 +218,9 @@ class IHMJustFeed : public QWidget
     void selectionnerDistributeur(QTableWidgetItem* item);
     void selectionnerDistributeurAIntervenir(QTableWidgetItem* item);
     void afficherCarte();
+    void genererPDFIntervention();
+    void imprimerPDFIntervention();
+    void decoderMessageMQTT(QByteArray message, QMqttTopicName topic);
 };
 
 #endif // IHMJUSTFEED_H

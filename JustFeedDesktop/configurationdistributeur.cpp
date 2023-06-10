@@ -4,7 +4,7 @@
  * @details     La classe ConfigurationDistributeur \c Cette classe permet de
  * définir la configuration d'un distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     1.1
  * @date        2023
  */
 
@@ -322,7 +322,7 @@ void ConfigurationDistributeur::ajouterBacBdd()
     requete = "INSERT INTO Bac (idBac, idDistributeur, idProduit, poidsActuel, poidsTotal, "
               "hygrometrie, remplissage) VALUES (" +
               QString::number(idMaxBacInt + 1) + "," + QString::number(distributeur->getId()) +
-              "," + "1, 0 , 0, 0, 0);";
+              "," + "1, 0 , 10, 0, 0);";
     qDebug() << Q_FUNC_INFO << "requete" << requete;
     baseDeDonnees->executer(requete);
 
@@ -389,7 +389,8 @@ void ConfigurationDistributeur::valider()
 {
     for(int i = 0; i < distributeur->getNbBacs(); i++)
     {
-        QString produit = labelsProduit[i]->text().section(':', 1).trimmed();
+        QString produit = labelsProduit[i]->text();
+        qDebug() << Q_FUNC_INFO << "produit" << labelsProduit[i]->text();
         QString requete = "SELECT idProduit FROM Produit WHERE nomProduit = '" + produit + "';";
         QString idProduit;
         qDebug() << Q_FUNC_INFO << "requete" << requete;

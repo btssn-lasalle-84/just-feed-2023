@@ -3,7 +3,7 @@
  * @brief       Définition de la classe Operateur.
  * @details     La classe Operateur \c Cette classe permet de définir un opérateur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #include "operateur.h"

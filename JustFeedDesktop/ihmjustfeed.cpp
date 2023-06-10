@@ -5,7 +5,7 @@
  * de l'application JustFeed (Desktop)
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 
@@ -26,18 +26,18 @@
 IHMJustFeed::IHMJustFeed(QWidget* parent) :
     QWidget(parent), baseDeDonnees(BaseDeDonnees::getInstance()),
     configurationDistributeur(nullptr), planificationIntervention(nullptr),
-    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0), listeOperateurs(nullptr)
+    numeroDistributeurSelectionne(-1), nbLignesDistributeurs(0)
 {
     qDebug() << Q_FUNC_INFO;
     baseDeDonnees->connecter();
     initialiserProduits();
+    initialiserCommunication();
     initialiserDistributeurs();
     initialiserOperateurs();
     initialiserInterventions();
     initialiserGUI();
     chargerListeOperateurs();
     chargerDistributeurs();
-    initialiserCommunication();
 }
 
 /**
@@ -67,6 +67,20 @@ Distributeur* IHMJustFeed::getDistributeur(QString nom) const
             return distributeurs[i];
     }
     return nullptr;
+}
+
+/**
+ * @brief retourne l'idDistributeur dont le deviceID est passé en
+ * paramètre
+ */
+int IHMJustFeed::getIdDistributeur(QString deviceID) const
+{
+    for(int i = 0; i < distributeurs.size(); ++i)
+    {
+        if(distributeurs[i]->getDeviceID() == deviceID)
+            return distributeurs[i]->getId();
+    }
+    return ID_DISTRIBUTEUR_NON_DEFINI;
 }
 
 /**
@@ -116,6 +130,7 @@ void IHMJustFeed::afficherFenetre(IHMJustFeed::Fenetre fenetre)
  */
 void IHMJustFeed::afficherFenetreAccueil()
 {
+    mettreAJourInformationsIntervention();
     afficherFenetre(IHMJustFeed::Fenetre::FAccueil);
 }
 
@@ -255,6 +270,121 @@ void IHMJustFeed::afficherCarte()
         boutonAfficherCarte->setText("Afficher la carte");
 }
 
+/**
+ * @brief sauvegarder en pdf une intervention
+ */
+void IHMJustFeed::genererPDFIntervention()
+{
+    qDebug() << Q_FUNC_INFO;
+    QString nomFichier = QFileDialog::getSaveFileName(0,
+                                                      QString::fromUtf8("Générer PDF"),
+                                                      QCoreApplication::applicationDirPath(),
+                                                      "*.pdf");
+    if(!nomFichier.isEmpty())
+    {
+        if(QFileInfo(nomFichier).suffix().isEmpty())
+            nomFichier.append(".pdf");
+        QPrinter fichier(QPrinter::HighResolution);
+        fichier.setOutputFormat(QPrinter::PdfFormat);
+        fichier.setOutputFileName(nomFichier);
+        fichier.setPageOrientation(QPageLayout::Landscape);
+        fichier.setPageSize(QPageSize());
+        fichier.setPageMargins(QMarginsF(), QPageLayout::Unit());
+
+        QPainter dessin(&fichier);
+        double   facteurEchelle = 7.0;
+        dessin.scale(facteurEchelle, facteurEchelle);
+        fenetreIntervention->render(&dessin);
+        qDebug() << "nomFichier" << nomFichier << "idIntervention" << idIntervention;
+    }
+}
+
+/**
+ * @brief imprimer un pdf
+ */
+void IHMJustFeed::imprimerPDFIntervention()
+{
+    qDebug() << Q_FUNC_INFO;
+    QPrinter imprimante;
+    imprimante.setPageOrientation(QPageLayout::Landscape);
+    imprimante.setOutputFormat(QPrinter::PdfFormat);
+    imprimante.setPageSize(QPageSize(QPageSize::A4));
+    fenetreIntervention->setFixedSize(imprimante.pageRect().size());
+    QPrintDialog boiteDeDialogueImpression(&imprimante);
+    if(boiteDeDialogueImpression.exec() == QDialog::Accepted)
+    {
+        QPainter dessin(&imprimante);
+        fenetreIntervention->render(&dessin);
+        dessin.end();
+    }
+}
+
+/**
+ * @brief decoder les trames
+ * @param message
+ * @param topic
+ */
+void IHMJustFeed::decoderMessageMQTT(QByteArray message, QMqttTopicName topic)
+{
+    qDebug() << Q_FUNC_INFO << "topic" << topic << "message" << message;
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(message);
+    QJsonObject   objetJSON    = jsonDocument.object();
+    QStringList   listeCles    = objetJSON.keys();
+    qDebug() << Q_FUNC_INFO << "listeCles" << listeCles;
+
+    QJsonObject endDeviceIDs = objetJSON.value("end_device_ids").toObject();
+    QString     deviceID     = endDeviceIDs.value("device_id").toString();
+    qDebug() << Q_FUNC_INFO << "deviceID" << deviceID;
+
+    int idDistributeur = getIdDistributeur(deviceID);
+    if(idDistributeur == ID_DISTRIBUTEUR_NON_DEFINI)
+        return;
+
+    qDebug() << Q_FUNC_INFO << "idDistributeur" << idDistributeur;
+    if(objetJSON.contains("uplink_message"))
+    {
+        QJsonObject uplinkMessage = objetJSON["uplink_message"].toObject();
+        if(uplinkMessage.contains("decoded_payload"))
+        {
+            QJsonObject decodedPayload = uplinkMessage["decoded_payload"].toObject();
+            if(decodedPayload.contains("nbBacs"))
+            {
+                int nbBacs = decodedPayload["nbBacs"].toInt();
+                qDebug() << Q_FUNC_INFO << "nbBacs" << nbBacs;
+                QVector<int> remplissages;
+                remplissages.clear();
+                remplissages.resize(nbBacs);
+                QVector<int> hygrometries;
+                hygrometries.clear();
+                hygrometries.resize(nbBacs);
+
+                for(int i = 0; i < nbBacs; i++)
+                {
+                    QString cle = "remplissage" + QString::number(i + UN);
+                    if(decodedPayload.contains(cle))
+                    {
+                        int valeurRemplissage =
+                          decodedPayload["remplissage" + QString::number(i + UN)].toInt();
+                        remplissages[i] = valeurRemplissage;
+                        qDebug() << Q_FUNC_INFO << "remplissage" << i << ":" << remplissages[i];
+                        mettreAJourRemplissage(idDistributeur, remplissages[i], i);
+                    }
+
+                    cle = "humidite" + QString::number(i + UN);
+                    if(decodedPayload.contains(cle))
+                    {
+                        int valeurHumidite =
+                          decodedPayload["humidite" + QString::number(i + UN)].toInt();
+                        hygrometries[i] = valeurHumidite;
+                        qDebug() << Q_FUNC_INFO << "humidite" << i << ":" << hygrometries[i];
+                        mettreAJourHumidite(idDistributeur, hygrometries[i], i);
+                    }
+                }
+            }
+        }
+    }
+}
+
 // Méthodes privées
 
 /**
@@ -293,18 +423,23 @@ void IHMJustFeed::instancierWidgets()
     boutonAfficherCarte       = new QPushButton("Afficher la carte", this);
 
     // Les labels
-    nomDistributeur             = new QLabel(this);
-    adresseDistributeur         = new QLabel(this);
-    villeDistributeur           = new QLabel(this);
-    descriptionDistributeur     = new QLabel(this);
-    miseEnServiceDistributeur   = new QLabel(this);
-    positionDistributeur        = new QLabel(this);
-    interventionIdOperateur     = new QLabel(this);
-    interventionNomDistributeur = new QLabel(this);
-    dateIntervention            = new QLabel(this);
-    aRemplirIntervention        = new QLabel(this);
-    aDepannerIntervention       = new QLabel(this);
-    etatIntervention            = new QLabel(this);
+    nomDistributeur                 = new QLabel(this);
+    adresseDistributeur             = new QLabel(this);
+    villeDistributeur               = new QLabel(this);
+    descriptionDistributeur         = new QLabel(this);
+    miseEnServiceDistributeur       = new QLabel(this);
+    positionDistributeur            = new QLabel(this);
+    adresseInterventionDistributeur = new QLabel(this);
+    interventionNomOperateur        = new QLabel(this);
+    interventionNomDistributeur     = new QLabel(this);
+    dateIntervention                = new QLabel(this);
+    aRemplirIntervention            = new QLabel(this);
+    aDepannerIntervention           = new QLabel(this);
+    etatIntervention                = new QLabel(this);
+    nouveauOperateur                = new QComboBox(this);
+    nouvelleDateIntervention        = new QDateEdit(this);
+    boutonSauvegarderPDF            = new QPushButton(this);
+    boutonImpression                = new QPushButton(this);
 
     // Les layouts
     layoutIntervention             = new QHBoxLayout();
@@ -453,6 +588,12 @@ void IHMJustFeed::initialiserEvenements()
     connect(boutonValiderDistributeur, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonValiderIntervention, SIGNAL(clicked()), this, SLOT(afficherFenetreAccueil()));
     connect(boutonAfficherCarte, SIGNAL(clicked()), this, SLOT(afficherCarte()));
+    connect(boutonSauvegarderPDF, SIGNAL(clicked()), this, SLOT(genererPDFIntervention()));
+    connect(boutonImpression, SIGNAL(clicked()), this, SLOT(imprimerPDFIntervention()));
+    connect(communication,
+            SIGNAL(donneesRecues(QByteArray, QMqttTopicName)),
+            this,
+            SLOT(decoderMessageMQTT(QByteArray, QMqttTopicName)));
 }
 
 /**
@@ -550,7 +691,7 @@ void IHMJustFeed::initialiserDistributeurs()
 
             QString idDistributeur = distributeur.at(Distributeur::TableDistributeur::ID);
             requete                = "SELECT Bac.* FROM Bac "
-                                     "WHERE Bac.idDistributeur='" +
+                      "WHERE Bac.idDistributeur='" +
                       idDistributeur + "'";
             qDebug() << Q_FUNC_INFO << "requete" << requete;
             QStringList          bac;
@@ -591,34 +732,22 @@ void IHMJustFeed::initialiserProduits()
     Produit* pruneaux    = new Produit(1,
                                     "Pruneaux",
                                     "Maître Prunille",
-                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une "
-                                    "délicieuse friandise à déguster à tout moment de la journée.",
-                                    "761234567890",
-                                    1.15);
+                                    "Les Pruneaux d'Agen dénoyautés Maître Prunille sont une
+    " "délicieuse friandise à déguster à tout moment de la journée.", "761234567890", 1.15);
     Produit* abricot     = new Produit(2,
                                    "Abricots secs",
                                    "Maître Prunille",
-                                   "L'abricot moelleux, une gourmandise tendre et fruitée !",
-                                   "761234566000",
-                                   1.13);
-    Produit* cranberries = new Produit(3,
-                                       "Cranberries",
+                                   "L'abricot moelleux, une gourmandise tendre et fruitée
+    !", "761234566000", 1.13); Produit* cranberries = new Produit(3, "Cranberries",
                                        "SEEBERGER",
                                        "Cranberries tranchées sucrées séchées",
                                        "761234569000",
                                        2.1);
     Produit* banane =
-      new Produit(4, "Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008", 0.76);
-    Produit* raisin    = new Produit(5,
-                                  "Raisin sec",
-                                  "Petit Prix",
-                                  "Raisins secs, huile végétale (graine de coton)",
-                                  "761264569090",
-                                  0.39);
-    Produit* fruitsSec = new Produit(6,
-                                     "fruits sec",
-                                     "FRUIDYLLIC",
-                                     "Peut se manger tel que sans préparation.",
+      new Produit(4, "Banane CHIPS", " BIO VILLAGE", "Banane CHIPS bio ", "761234560008",
+    0.76); Produit* raisin    = new Produit(5, "Raisin sec", "Petit Prix", "Raisins secs,
+    huile végétale (graine de coton)", "761264569090", 0.39); Produit* fruitsSec = new
+    Produit(6, "fruits sec", "FRUIDYLLIC", "Peut se manger tel que sans préparation.",
                                      "761234960940",
                                      1.06);
     Produit* cacahuete =
@@ -1037,23 +1166,35 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     qDebug() << Q_FUNC_INFO << "distributeur" << distributeur->getNom();
 
     // la fenêtre intervention
-
-    interventionIdOperateur->setAlignment(Qt::AlignCenter);
+    interventionNomOperateur->setAlignment(Qt::AlignCenter);
+    interventionNomOperateur->setStyleSheet("QLabel { font-weight: bold; }");
+    adresseInterventionDistributeur->setAlignment(Qt::AlignCenter);
     interventionNomDistributeur->setAlignment(Qt::AlignCenter);
+    interventionNomDistributeur->setStyleSheet("QLabel { font-weight: bold; }");
     dateIntervention->setAlignment(Qt::AlignCenter);
     aRemplirIntervention->setAlignment(Qt::AlignCenter);
     aDepannerIntervention->setAlignment(Qt::AlignCenter);
     etatIntervention->setAlignment(Qt::AlignCenter);
+    nouvelleDateIntervention->setAlignment(Qt::AlignCenter);
+    boutonSauvegarderPDF->setText("Sauvegarder Pdf");
+    boutonImpression->setText("Imprimer");
     layoutBoutonsInterventions->addStretch();
+    layoutBoutonsInterventions->addWidget(nouveauOperateur);
+    layoutBoutonsInterventions->addWidget(nouvelleDateIntervention);
+    layoutBoutonsInterventions->addWidget(boutonSauvegarderPDF);
+    layoutBoutonsInterventions->addWidget(boutonImpression);
     layoutBoutonsInterventions->addWidget(boutonValiderIntervention);
 
-    int     idIntervention = ID_INTERVENTION_NON_DEFINI;
+    idIntervention = ID_INTERVENTION_NON_DEFINI;
     QString nomOperateur;
     for(int i = 0; i < interventions.size(); i++)
     {
-        if(interventions[i]->getIdDistributeur() == distributeur->getId())
+        if(interventions[i]->getIdDistributeur() == distributeur->getId() &&
+           !interventions[i]->estEffectuee())
         {
+            nouvelleDateIntervention->setDate(interventions[i]->getDateIntervention());
             idIntervention = interventions[i]->getIdIntervention();
+            qDebug() << Q_FUNC_INFO << "idIntervention" << idIntervention;
             for(int j = 0; j < operateurs.size(); j++)
             {
                 if(operateurs[j]->getId() == interventions[i]->getIdOperateur())
@@ -1063,28 +1204,22 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
                 }
             }
 
-            interventionIdOperateur->setText("Opérateur : " + nomOperateur);
+            interventionNomOperateur->setText("Opérateur : " + nomOperateur);
             interventionNomDistributeur->setText("Distributeur : " + distributeur->getNom());
+            adresseInterventionDistributeur->setText("Adresse : " + distributeur->getVille() + " " +
+                                                     distributeur->getAdresse());
             dateIntervention->setText(
               "Date : " + interventions[i]->getDateIntervention().toString("dd/MM/yyyy"));
             qDebug() << Q_FUNC_INFO << "dateIntervention"
                      << interventions[i]->getDateIntervention();
-            if(interventions[i]->getARemplir())
-            {
-                aRemplirIntervention->setText("À remplir  : Oui");
-            }
-            else
-            {
-                aRemplirIntervention->setText("À depanner : Non");
-            }
-            if(interventions[i]->getADepanner())
-            {
-                aDepannerIntervention->setText("À remplir  : Oui");
-            }
-            else
-            {
-                aDepannerIntervention->setText("À depanner : Non");
-            }
+            aRemplirIntervention->setText(QString::fromUtf8("À remplir: ") +
+                                          (interventions[i]->getARemplir()
+                                             ? QString::fromUtf8("Oui")
+                                             : QString::fromUtf8("Non")));
+            aDepannerIntervention->setText(QString::fromUtf8("À dépanner: ") +
+                                           (interventions[i]->getADepanner()
+                                              ? QString::fromUtf8("Oui")
+                                              : QString::fromUtf8("Non")));
 
             etatIntervention->setText(interventions[i]->getEtatFormate());
         }
@@ -1094,11 +1229,12 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
     if(idIntervention != ID_INTERVENTION_NON_DEFINI)
     {
         QString requete = "SELECT * FROM Approvisionnement WHERE idIntervention = " +
-                          QString::number(idIntervention) + " ORDER BY idBac ASC;";
+                          QString::number(idIntervention) + " AND effectue = 0 ORDER BY idBac ASC;";
         baseDeDonnees->recuperer(requete, listeApprovisionnement);
         qDebug() << Q_FUNC_INFO << "requete" << requete;
         QLabel* idBac;
         QLabel* poidsAPrevoir;
+        QLabel* produitAPrevoir;
         qDebug() << Q_FUNC_INFO << "listeApprovisionnement" << listeApprovisionnement;
 
         for(int i = 0; i < listeApprovisionnement.size(); i++)
@@ -1106,8 +1242,17 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
             layoutsApprovisionnement.push_back(new QHBoxLayout);
             idBac         = new QLabel(this);
             poidsAPrevoir = new QLabel(this);
-            idBac->setText("Approvisionnement bac n°" +
-                           listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC]);
+            poidsAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
+            produitAPrevoir = new QLabel(this);
+            produitAPrevoir->setStyleSheet("QLabel { font-weight: bold; }");
+            for(int j = 0; j < distributeur->getNbBacs(); j++)
+            {
+                if(distributeur->getBac(j)->getIdBac() ==
+                   listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())
+                {
+                    idBac->setText("Approvisionnement bac position n°" + QString::number(j + 1));
+                }
+            }
             /**
              * @todo Gérer l'unité !!!
              */
@@ -1115,14 +1260,22 @@ void IHMJustFeed::creerEtatIntervention(Distributeur* distributeur)
               "Poids à prevoir : " +
               listeApprovisionnement[i][Intervention::TableApprovisionnement::POIDS_A_PREVOIR] +
               " g");
+            produitAPrevoir->setText(
+              "Produit à prevoir : " +
+              distributeur
+                ->getBacId(
+                  listeApprovisionnement[i][Intervention::TableApprovisionnement::ID_BAC].toInt())
+                ->getNomProduit());
             layoutsApprovisionnement[i]->addWidget(idBac);
             layoutsApprovisionnement[i]->addWidget(poidsAPrevoir);
+            layoutsApprovisionnement[i]->addWidget(produitAPrevoir);
         }
     }
 
     // positionnement
     layoutIntervention->addWidget(interventionNomDistributeur);
-    layoutIntervention->addWidget(interventionIdOperateur);
+    layoutIntervention->addWidget(adresseInterventionDistributeur);
+    layoutIntervention->addWidget(interventionNomOperateur);
     layoutIntervention->addWidget(dateIntervention);
     layoutIntervention->addWidget(aRemplirIntervention);
     layoutIntervention->addWidget(aDepannerIntervention);
@@ -1198,6 +1351,98 @@ Produit* IHMJustFeed::recupererProduit(int idProduit)
 }
 
 /**
+ * @brief change les information d'une intervention, l'operateur ainsi que la date
+ * d'intervention
+ */
+void IHMJustFeed::mettreAJourInformationsIntervention()
+{
+    QString requete;
+    for(int i = 0; i < interventions.size(); i++)
+    {
+        if(interventions[i]->getIdIntervention() == idIntervention)
+        {
+            if(interventions[i]->getDateIntervention() != nouvelleDateIntervention->date())
+            {
+                requete = "UPDATE Intervention SET dateIntervention = '" +
+                          nouvelleDateIntervention->date().toString("yyyy-MM-dd") +
+                          "' "
+                          "WHERE idIntervention = " +
+                          QString::number(idIntervention) + ";";
+                qDebug() << Q_FUNC_INFO << "requete" << requete;
+                baseDeDonnees->executer(requete);
+                interventions[i]->setDateIntervention(nouvelleDateIntervention->date());
+            }
+        }
+    }
+
+    int idNouveauOperateur;
+
+    if(nouveauOperateur->currentText() != "Opérateur")
+    {
+        for(int i = 0; i < operateurs.size(); i++)
+        {
+            if(operateurs[i]->getNom() == nouveauOperateur->currentText())
+            {
+                idNouveauOperateur = operateurs[i]->getId();
+            }
+        }
+        requete = "UPDATE Intervention SET idOperateur = '" + QString::number(idNouveauOperateur) +
+                  "' WHERE idIntervention = " + QString::number(idIntervention) + ";";
+        qDebug() << Q_FUNC_INFO << "requete" << requete;
+        baseDeDonnees->executer(requete);
+        for(int i = 0; i < interventions.size(); i++)
+        {
+            if(interventions[i]->getIdIntervention() == idIntervention)
+            {
+                interventions[i]->setIdOperateur(idNouveauOperateur);
+            }
+        }
+    }
+}
+
+/**
+ * @brief met à jour le remplissage
+ * @param idDistributeur
+ * @param hygrometries
+ * @param indiceBac
+ */
+void IHMJustFeed::mettreAJourRemplissage(int idDistributeur, int remplissage, int indiceBac)
+{
+    distributeurs[idDistributeur - UN]->getBac(indiceBac)->setPourcentageRemplissage(remplissage);
+    qDebug() << Q_FUNC_INFO << "pourcentage : "
+             << distributeurs[idDistributeur - UN]->getBac(indiceBac)->getPourcentageRemplissage();
+    QString requete =
+      "UPDATE Bac SET remplissage = '" + QString::number(remplissage) + "' WHERE idBac = " +
+      QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+    /**
+     * @todo Mettre à jour l'affichage
+     */
+}
+
+/**
+ * @brief met à jour le l'hygrometrie
+ * @param idDistributeur
+ * @param hygrometries
+ * @param indiceBac
+ */
+void IHMJustFeed::mettreAJourHumidite(int idDistributeur, int hygrometries, int indiceBac)
+{
+    distributeurs[idDistributeur - UN]->getBac(indiceBac)->setHygrometrie(hygrometries);
+    qDebug() << Q_FUNC_INFO << "Hygrometrie : "
+             << distributeurs[idDistributeur - UN]->getBac(indiceBac)->getHygrometrie();
+    QString requete =
+      "UPDATE Bac SET hygrometrie = '" + QString::number(hygrometries) + "' WHERE idBac = " +
+      QString::number(distributeurs[idDistributeur - UN]->getBac(indiceBac)->getIdBac()) + ";";
+    qDebug() << Q_FUNC_INFO << "requete" << requete;
+    baseDeDonnees->executer(requete);
+    /**
+     * @todo Mettre à jour l'affichage
+     */
+}
+
+/**
  * @brief charge la carte de localisation d'un distributeur
  * @param distributeur
  */
@@ -1232,12 +1477,12 @@ void IHMJustFeed::chargerCarte(Distributeur* distributeur)
  */
 void IHMJustFeed::chargerListeOperateurs()
 {
-    if(listeOperateurs != nullptr)
+    qDebug() << Q_FUNC_INFO;
+    nouveauOperateur->clear();
+    nouveauOperateur->addItem("Opérateur");
+    for(int i = 0; i < operateurs.size(); i++)
     {
-        listeOperateurs->addItem("Opérateur");
-        for(int i = 0; i < operateurs.size(); i++)
-        {
-            listeOperateurs->addItem(operateurs[i]->getNom() + " " + operateurs[i]->getPrenom());
-        }
+        qDebug() << Q_FUNC_INFO;
+        nouveauOperateur->addItem(operateurs[i]->getNom());
     }
 }

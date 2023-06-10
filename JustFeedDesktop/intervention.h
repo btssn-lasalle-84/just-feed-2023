@@ -2,7 +2,7 @@
  * @file        intervention.h
  * @brief       Déclaration de la classe Intervention.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #ifndef INTERVENTION_H

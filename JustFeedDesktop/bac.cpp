@@ -3,7 +3,7 @@
  * @brief       Définition de la classe Bac.
  * @details     La classe Bac \c Cette classe permet de définir un bac
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     1.1
  * @date        2023
  */
 #include "bac.h"
