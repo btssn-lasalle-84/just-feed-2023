@@ -5,22 +5,24 @@
 # Le projet just-feed 2023
 
 - [Le projet just-feed 2023](#le-projet-just-feed-2023)
+  - [Fonctionnalités](#fonctionnalit%C3%A9s)
   - [Documentation du code](#documentation-du-code)
   - [Resources logicielles](#resources-logicielles)
+  - [Présentations](#pr%C3%A9sentations)
+  - [Vidéo](#vid%C3%A9o)
+  - [Diagramme de classes](#diagramme-de-classes)
+  - [Screenshots](#screenshots)
   - [Base de données](#base-de-donn%C3%A9es)
   - [MQTT](#mqtt)
     - [Données](#donn%C3%A9es)
     - [Qt MQTT](#qt-mqtt)
     - [Paho MQTT (Android)](#paho-mqtt-android)
-  - [Versions](#versions)
+  - [Historique des versions](#historique-des-versions)
     - [1.0](#10)
     - [0.2](#02)
     - [0.1](#01)
-  - [Diagramme de classes](#diagramme-de-classes)
   - [Planification](#planification)
   - [Auteurs](#auteurs)
-
-![](images/logo.png)
 
 ---
 
@@ -37,6 +39,8 @@ Le système doit permettre de surveiller à distance des distributeurs automatiq
 
 ![](images/synoptique.png)
 
+## Fonctionnalités
+
 - Android :
 
 ![](images/uc-android.png)
@@ -45,11 +49,11 @@ Le système doit permettre de surveiller à distance des distributeurs automatiq
 | Fonctionnalité (Android)                         | Oui | Non |
 | ------------------------------------------------ |:---:|:---:|
 | Lister les distributeurs                                |  X  |     |
-| Visualiser l'état d'un distributeur                             |  /  |     |
+| Visualiser l'état d'un distributeur                             |  X  |     |
 | Réaliser une intervention                                 |  X  |     |
 | Visualiser une intervention               |  X  |     |
 | Valider une intervention                            |  X  |     |
-| Dialoguer avec les distributeurs                       |  /  |     |
+| Dialoguer avec les distributeurs                       |  X  |     |
 
 
 - Desktop Qt :
@@ -60,12 +64,14 @@ Le système doit permettre de surveiller à distance des distributeurs automatiq
 | Fonctionnalité (Android)                         | Oui | Non |
 | ------------------------------------------------ |:---:|:---:|
 | Lister les distributeurs                                |  X  |     |
-| Visualiser l'état d'un distributeur                             |  /  |     |
+| Visualiser l'état d'un distributeur                             |  X  |     |
 | Planifier une intervention                                 |  X  |     |
 | Visualiser une intervention               |  X  |     |
-| Configurer les distributeurs                            |  /  |     |
-| Dialoguer avec les distributeurs                       |  /  |     |
-| Visualiser les statistiques                       |    |     |
+| Configurer les distributeurs                            |  X  |     |
+| Dialoguer avec les distributeurs                       |  X  |     |
+| Sélectionner les bacs pour intervention                       |  X  |     |
+| Imprimer une intervention (et sauvegarder en pdf)                       |  X  |     |
+| Visualiser un distributeur sur une carte                       |  X  |     |
 
 ## Documentation du code
 
@@ -89,6 +95,40 @@ https://btssn-lasalle-84.github.io/just-feed-2023/
 | EDI                       | Android Studio 2021.3 / Gradle 7.3.1 |
 | Développement             | Java (JDK 11.0.13)                   |
 
+## Présentations
+
+Diaporamas étudiants IR :
+
+- Android :
+    - Mayeul FARGIER : [Revue finale - Just Feed - Fargier.pptx](./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Fargier.pptx)
+
+- Qt :
+    - Matthieu SALAUN : [Revue finale - Just Feed - Salaun.pptx](./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Salaun.pptx)
+    - Nicolas ROUANET : [Revue finale - Just Feed - Rouanet.pptx](./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Rouanet.pptx)
+
+## Vidéo
+
+https://www.youtube.com/@projets-btssn-lasalle84
+
+## Diagramme de classes
+
+- Android :
+
+![](images/dc-justfeed-android.png)
+
+- Qt Desktop :
+
+![](images/dc-justfeed-qt.png)
+
+## Screenshots
+
+- Android :
+
+![](images/android.gif)
+
+- PC Desktop Qt :
+
+![](images/desktop.gif)
 
 ## Base de données
 
@@ -283,6 +323,7 @@ Voir aussi : [modules-lora/README.md](modules-lora/README.md)
 ### Données
 
 ![](images/donnees-ttn.png)
+
 ### Qt MQTT
 
 [Qt MQTT](https://doc.qt.io/QtMQTT/index.html) fournit une implémentation conforme à la norme MQTT.
@@ -406,81 +447,21 @@ dependencies {
 </manifest>
 ```
 
-## Versions
+## Historique des versions
 
 ![](images/livraisons.png)
 
 ### 1.0
 
-- Android :
-
-![](images/screenshot-justfeed-android-distributeur-v0.2.png)
-
-![](images/screenshot-justfeed-android-interventions-v1.0.png)
-
-![](images/screenshot-justfeed-android-interventions-v0.2.png)
-
-![](images/screenshot-justfeed-android-interventions-validees-v1.0.png)
-
-![](images/screenshot-justfeed-android-interventions-afaire-v1.0.png)
-
-![](images/screenshot-justfeed-android-interventions-encours-v1.0.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-justfeed-qt-distributeurs-v0.2.png)
-
-![](images/screenshot-justfeed-qt-distributeur-v0.2.png)
-
-![](images/screenshot-justfeed-qt-configuration-v0.1.png)
-
-![](images/screenshot-justfeed-qt-interventions-v0.2.png)
 
 ### 0.2
 
 ![](images/jira-tickets-v0.2.png)
 
-- Android :
-
-![](images/screenshot-justfeed-android-distributeur-v0.2.png)
-
-![](images/screenshot-justfeed-android-interventions-v0.2.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-justfeed-qt-distributeurs-v0.2.png)
-
-![](images/screenshot-justfeed-qt-distributeur-v0.2.png)
-
-![](images/screenshot-justfeed-qt-configuration-v0.1.png)
-
-![](images/screenshot-justfeed-qt-interventions-v0.2.png)
 
 ### 0.1
 
 ![](images/jira-tickets-v0.1.png)
-
-- Android :
-
-![](images/screenshot-justfeed-android-distributeur-v0.1.png)
-
-![](images/screenshot-justfeed-android-interventions-v0.1.png)
-
-- PC Desktop Qt :
-
-![](images/screenshot-justfeed-qt-distributeurs-v0.1.png)
-
-![](images/screenshot-justfeed-qt-configuration-v0.1.png)
-
-## Diagramme de classes
-
-- Android :
-
-![](images/dc-justfeed-android.png)
-
-- Qt Desktop :
-
-![](images/dc-justfeed-qt.png)
 
 ## Planification
 
