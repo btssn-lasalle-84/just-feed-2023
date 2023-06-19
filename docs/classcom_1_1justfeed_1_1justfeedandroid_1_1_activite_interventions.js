@@ -20,10 +20,12 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions =
     [ "layoutVueListeInterventions", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a0889fd16b05d5fb124d87afe5ae95483", null ],
     [ "listeInterventions", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#ac91091c3a90040ffc8518ce44b1222ac", null ],
     [ "menuEtats", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#af1ad40d0e0908478a71ff1664675f297", null ],
+    [ "nomOperateur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#ada04f0fb9c1cb29d94623d669b96ad86", null ],
+    [ "operateur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a7f154a8bc01a43c3aaeca1576ece4d7f", null ],
     [ "positionListe", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#ac807515f8beaef9acf52830714ca412b", null ],
     [ "rafraichisseur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a8749290f68ea4b0247d7435d6df765c7", null ],
     [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a6c136e21b4d25ea928164eb3c0dec7dc", null ],
     [ "TOUTES", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a1a54ae12eaf323e84da3e7d0f1b25440", null ],
-    [ "VALIDEES", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#aa307b9ae6c5449ecb9ba360f6734e194", null ],
+    [ "VALIDEE", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#ae9bf31482c4d8ee68a440e295518dd7f", null ],
     [ "vueListeInterventions", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a63ae75e4e77af538e8c28c4678ed6d7d", null ]
 ];

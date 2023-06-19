@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -89,7 +89,7 @@ $(document).ready(function(){initNavTree('functions_b.html',''); initResizable()
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>Bac()
 : <a class="el" href="class_bac.html#a5ca0aa3fc0beb247f994723c588b648e">Bac</a>
-, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html#adc4df0c26a9e3da6c4d127a2491c6c3e">com.justfeed.justfeedandroid.Bac</a>
+, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html#af39f690ae5a414e1840bc6b625e5d094">com.justfeed.justfeedandroid.Bac</a>
 </li>
 <li>bacEstAttribueRemplissage()
 : <a class="el" href="class_planification_intervention.html#ad87d4d14068411d85b78baafb5c883ae">PlanificationIntervention</a>
@@ -104,10 +104,11 @@ $(document).ready(function(){initNavTree('functions_b.html',''); initResizable()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a4c654ae3725c243e388607526079a273">com.justfeed.justfeedandroid.ActiviteInterventions</a>
 </li>
 <li>BaseDeDonnees()
-: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a295919d60717f1819f246498f67ffe17">com.justfeed.justfeedandroid.BaseDeDonnees</a>
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a21cdda6e479ee4c6f23b1131f0ddb9e2">com.justfeed.justfeedandroid.BaseDeDonnees</a>
 </li>
 <li>baseDeDonnees
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a4148ed4ea1cd78fa584cb31e52dfc474">com.justfeed.justfeedandroid.JustFeed</a>
+, <a class="el" href="class_configuration_distributeur.html#a1309b26af8ba3d9fbdcd480bd005e85b">ConfigurationDistributeur</a>
 , <a class="el" href="class_i_h_m_just_feed.html#a673c0efe11a5b294ccf1f55c5d3f334e">IHMJustFeed</a>
 , <a class="el" href="class_intervention.html#a96010b7951d2a1a3d75d77d5bca4dc16">Intervention</a>
 , <a class="el" href="class_planification_intervention.html#afdda8aedcd0a309ef76a272ec87f61ac">PlanificationIntervention</a>
@@ -128,14 +129,17 @@ $(document).ready(function(){initNavTree('functions_b.html',''); initResizable()
 <li>boutonConfigurer
 : <a class="el" href="class_i_h_m_just_feed.html#a03582cc1b35d36151d7cbd104de7f0a5">IHMJustFeed</a>
 </li>
-<li>boutonInterventions
-: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a2c72763515fb5411687d7ad5a30c29c4">com.justfeed.justfeedandroid.JustFeed</a>
+<li>boutonImpression
+: <a class="el" href="class_i_h_m_just_feed.html#a45b07bb062ea5e99edc820f9fbfba86b">IHMJustFeed</a>
 </li>
 <li>boutonItervention
 : <a class="el" href="class_planification_intervention.html#a0fcfce3548c346774e39134fe129560e">PlanificationIntervention</a>
 </li>
 <li>boutonPlanifier
 : <a class="el" href="class_i_h_m_just_feed.html#afe5ffd590d23d284d5bb9021f0952191">IHMJustFeed</a>
+</li>
+<li>boutonSauvegarderPDF
+: <a class="el" href="class_i_h_m_just_feed.html#a0c2af1db885097d91e839748f8adcecb">IHMJustFeed</a>
 </li>
 <li>boutonsChangerPrix
 : <a class="el" href="class_configuration_distributeur.html#a480a544cba93e9bbd52430df26bfa3e4">ConfigurationDistributeur</a>
@@ -145,6 +149,9 @@ $(document).ready(function(){initNavTree('functions_b.html',''); initResizable()
 </li>
 <li>boutonSuppressionBac
 : <a class="el" href="class_configuration_distributeur.html#a115dd32ab4c355f0720692f09b79cdac">ConfigurationDistributeur</a>
+</li>
+<li>boutonValide
+: <a class="el" href="class_configuration_distributeur.html#a7ce6b280ed927c06a804475b2e0ff3ef">ConfigurationDistributeur</a>
 </li>
 <li>boutonValiderDistributeur
 : <a class="el" href="class_i_h_m_just_feed.html#ad762c416b5a9e6f9fc1fd8e2a304978a">IHMJustFeed</a>
@@ -159,7 +166,7 @@ $(document).ready(function(){initNavTree('functions_b.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

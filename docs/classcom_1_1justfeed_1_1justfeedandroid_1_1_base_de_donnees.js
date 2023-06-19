@@ -14,7 +14,8 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees =
     [ "getInstance", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a41803d9b1729590aa8a46e0d30d451f0", null ],
     [ "getInstance", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a2908e079e2f4422dac56566bc3ada4fc", null ],
     [ "reconnecter", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a89357a1cc8a3648400df37a8bfe95958", null ],
-    [ "recupererDistributeurs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a76f32b4d9cf67a5324e46bb81aec5b71", null ],
+    [ "recupererDistributeurs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#acfd7040c7f607ec5882a2ec690a57e75", null ],
+    [ "recupererIdentifiantsTTS", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#afa080e32bfeaadd59ffcd8d2317c6624", null ],
     [ "recupererInterventions", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a773a5e49fce9e6c812923da37bfbaa52", null ],
     [ "recupererOperateurs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#acef7fc192591eaf6b04ffcdbc7133aff", null ],
     [ "selectionner", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a9790124726081313c8658861cd8dbdd2", null ],
@@ -45,6 +46,7 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees =
     [ "REQUETE_SQL_SELECT_DISTRIBUTEURS", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a53f1874647d25935bd7593d404bf7214", null ],
     [ "REQUETE_SQL_SELECT_INTERVENTIONS", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a5a53d4ec325471c1e3b72c4a3871128c", null ],
     [ "REQUETE_SQL_SELECT_OPERATEURS", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a36a4723ae2f85e2002d85966e1fd4f8f", null ],
+    [ "REQUETE_SQL_SELECT_TTS", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a31f1c8d05a05a8af19fa58a7addc8182", null ],
     [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#aded1148ece26a55a56e051bb812a98a9", null ],
     [ "TRUE", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a3fdadcd5232d578379d091715fa22235", null ],
     [ "url", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#ae105b104ae58b7bd5ddc170ea26d7c1e", null ]

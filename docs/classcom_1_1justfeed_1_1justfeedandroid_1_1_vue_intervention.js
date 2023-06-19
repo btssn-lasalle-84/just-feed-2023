@@ -17,6 +17,7 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention =
     [ "interactionDetectee", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#aa9bf0e01ca9cfd7aa06c35841e8daccf", null ],
     [ "listeEtats", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#ab7a6d07f38bb1921e3f5ff22f65b56f9", null ],
     [ "menuEtats", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#a7eeee66def7f3f4d8e4574cf5b8599a8", null ],
+    [ "NOIR", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#ad1be0c19aa25f34a84b38969399f829d", null ],
     [ "ROUGE", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#a7c9941f39157cd47f23bcbbfcc774fdf", null ],
     [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#ace6b8683f055c803e33fafaf0b0268e8", null ],
     [ "VERT", "classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_intervention.html#a314ae98cc8e106187a92e41e3ea6cc40", null ]
