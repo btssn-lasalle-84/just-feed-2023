@@ -9,7 +9,7 @@ var hierarchy =
     [ "com.justfeed.justfeedandroid.Bac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html", null ],
     [ "BaseDeDonnees", "class_base_de_donnees.html", null ],
     [ "com.justfeed.justfeedandroid.BaseDeDonnees", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html", null ],
-    [ "Communication", "class_communication.html", null ],
+    [ "com.justfeed.justfeedandroid.ClientMQTT", "classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html", null ],
     [ "com.justfeed.justfeedandroid.Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html", null ],
     [ "Distributeur", "class_distributeur.html", null ],
     [ "com.justfeed.justfeedandroid.Intervention.Etats", "enumcom_1_1justfeed_1_1justfeedandroid_1_1_intervention_1_1_etats.html", null ],
@@ -18,6 +18,7 @@ var hierarchy =
     [ "com.justfeed.justfeedandroid.Intervention", "classcom_1_1justfeed_1_1justfeedandroid_1_1_intervention.html", null ],
     [ "Intervention", "class_intervention.html", null ],
     [ "Localisation", "struct_localisation.html", null ],
+    [ "com.justfeed.justfeedandroid.AdaptateurBac.OnEditTextChangedListener", "interfacecom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac_1_1_on_edit_text_changed_listener.html", null ],
     [ "AdapterView.OnItemSelectedListener", null, [
       [ "com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire", "classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html", null ]
     ] ],
@@ -31,6 +32,9 @@ var hierarchy =
     [ "QDialog", "class_q_dialog.html", [
       [ "ConfigurationDistributeur", "class_configuration_distributeur.html", null ],
       [ "PlanificationIntervention", "class_planification_intervention.html", null ]
+    ] ],
+    [ "QObject", "class_q_object.html", [
+      [ "Communication", "class_communication.html", null ]
     ] ],
     [ "QWidget", "class_q_widget.html", [
       [ "IHMJustFeed", "class_i_h_m_just_feed.html", null ]

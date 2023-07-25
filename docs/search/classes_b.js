@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['serveur_648',['Serveur',['../class_serveur.html',1,'']]],
-  ['statistiques_649',['Statistiques',['../class_statistiques.html',1,'']]]
+  ['serveur_764',['Serveur',['../class_serveur.html',1,'']]],
+  ['statistiques_765',['Statistiques',['../class_statistiques.html',1,'']]]
 ];

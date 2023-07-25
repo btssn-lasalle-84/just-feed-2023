@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -90,6 +90,7 @@ $(document).ready(function(){initNavTree('functions_h.html',''); initResizable()
 <li>handler
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html#a7ca2f9bc87ba0b35fff3cc410491b1e0">com.justfeed.justfeedandroid.ActiviteInterventions</a>
 , <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#aa774a05895e08d2131a3f477120f316f">com.justfeed.justfeedandroid.BaseDeDonnees</a>
+, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html#afc4dbb59d0cc12987d49109c84d79d3f">com.justfeed.justfeedandroid.ClientMQTT</a>
 , <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#ae2f251d90f31fa209fdb79c19ed466c9">com.justfeed.justfeedandroid.JustFeed</a>
 </li>
 <li>HEURE_APPROVISIONNEMENT
@@ -98,23 +99,36 @@ $(document).ready(function(){initNavTree('functions_h.html',''); initResizable()
 <li>heuresIntervention
 : <a class="el" href="class_intervention.html#a612a7bea852fb68126387c84fd67bcd7">Intervention</a>
 </li>
+<li>hostName
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a17fc81f28587876f52053d55bcbbaa85">com.justfeed.justfeedandroid.BaseDeDonnees</a>
+</li>
 <li>HOSTNAME
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a1aa133c0d2231b158a04eb0abfe3b319">com.justfeed.justfeedandroid.BaseDeDonnees</a>
 </li>
+<li>hostname
+: <a class="el" href="class_communication.html#a92c0bd6351cbf2bc7d728dad7515f83e">Communication</a>
+</li>
 <li>hostName
-: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a17fc81f28587876f52053d55bcbbaa85">com.justfeed.justfeedandroid.BaseDeDonnees</a>
-, <a class="el" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">Serveur</a>
+: <a class="el" href="class_serveur.html#a9b75bb349949ffb77bef7ac5bfb80a53">Serveur</a>
+</li>
+<li>HOSTNAME_COMMUNICATION
+: <a class="el" href="class_communication.html#a381ec2ffce9bfa83c334b79b65efae59a634b42568168ecda95892cc4e1826e6a">Communication</a>
 </li>
 <li>hydrometrie
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_bac.html#a1dea6ad87565874ae3ca516456d09351">com.justfeed.justfeedandroid.VueBac</a>
+</li>
+<li>hygrometrie
+: <a class="el" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">Bac</a>
 </li>
 <li>HYGROMETRIE
 : <a class="el" href="class_bac.html#a6ff1b5f6476e6f358779d578171bfcffa262f33a4dcbbec113dec8ec6d53e8847">Bac</a>
 </li>
 <li>hygrometrie
-: <a class="el" href="class_bac.html#a49dc9d91fc65fba2742128f006e2dff7">Bac</a>
-, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html#a2a0af72f819783d892f8949923a96c3e">com.justfeed.justfeedandroid.Bac</a>
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html#a2a0af72f819783d892f8949923a96c3e">com.justfeed.justfeedandroid.Bac</a>
 , <a class="el" href="class_distributeur.html#a91742c20a63adaf99c3b70b454cd6ce4">Distributeur</a>
+</li>
+<li>HYGROMETRIE_MAX
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a1080e26833f778d7bed61d89269eb058">com.justfeed.justfeedandroid.VueDistributeur</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -123,7 +137,7 @@ $(document).ready(function(){initNavTree('functions_h.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

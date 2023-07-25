@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -247,7 +247,7 @@ Attributs privés statiques</h2></td></tr>
 </div><!-- fragment -->
 <p class="reference">Références <a class="el" href="_produit_8java_source.html#l00027">com.justfeed.justfeedandroid.Produit.nom</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00062">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>, et <a class="el" href="_bac_8java_source.html#l00056">com.justfeed.justfeedandroid.Bac.Bac()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00097">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>, et <a class="el" href="_bac_8java_source.html#l00063">com.justfeed.justfeedandroid.Bac.Bac()</a>.</p>
 
 </div>
 </div>
@@ -303,7 +303,7 @@ Attributs privés statiques</h2></td></tr>
 </div><!-- fragment -->
 <p class="reference">Références <a class="el" href="_produit_8java_source.html#l00028">com.justfeed.justfeedandroid.Produit.prix</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00062">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_bac_8java_source.html#l00097">com.justfeed.justfeedandroid.VueBac.afficherBac()</a>.</p>
 
 </div>
 </div>
@@ -360,9 +360,20 @@ Attributs privés statiques</h2></td></tr>
 
 <p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00092">92</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 <div class="fragment"><div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    {</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a> = nouveauPrix;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    }</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;        <a class="code" href="class_base_de_donnees.html">BaseDeDonnees</a> baseDeDonnees = <a class="code" href="class_base_de_donnees.html">BaseDeDonnees</a>.<a class="code" href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">getInstance</a>();</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a> = nouveauPrix;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        baseDeDonnees.executerRequete(</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                <span class="stringliteral">&quot;UPDATE `Produit` SET `prix` = &quot;</span>+<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#aa3e2ec466c8cd2d715d346b7ef2d4bde">prix</a>+<span class="stringliteral">&quot; WHERE nomProduit = &quot;</span>+<span class="stringliteral">&quot;\&quot;&quot;</span>+this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html#a512f0f3b349aed4b7c063ffdf5e4ac0d">nom</a>+<span class="stringliteral">&quot;\&quot;&quot;</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;        );</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="ttc" id="aclass_base_de_donnees_html"><div class="ttname"><a href="class_base_de_donnees.html">BaseDeDonnees</a></div><div class="ttdoc">Déclaration de la classe permettant l'accès à la base de données MySQL.</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8h_source.html#l00054">basededonnees.h:55</a></div></div>
+<div class="ttc" id="aclass_base_de_donnees_html_a1cea5a739386ba076c7f265205e82608"><div class="ttname"><a href="class_base_de_donnees.html#a1cea5a739386ba076c7f265205e82608">BaseDeDonnees::getInstance</a></div><div class="ttdeci">static BaseDeDonnees * getInstance()</div><div class="ttdoc">Définition méthode getInstance()</div><div class="ttdef"><b>Definition:</b> <a href="basededonnees_8cpp_source.html#l00047">basededonnees.cpp:47</a></div></div>
 </div><!-- fragment -->
+<p class="reference">Références <a class="el" href="_base_de_donnees_8java_source.html#l00498">com.justfeed.justfeedandroid.BaseDeDonnees.executerRequete()</a>, <a class="el" href="_base_de_donnees_8java_source.html#l00092">com.justfeed.justfeedandroid.BaseDeDonnees.getInstance()</a>, et <a class="el" href="_produit_8java_source.html#l00028">com.justfeed.justfeedandroid.Produit.prix</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="_adaptateur_bac_8java_source.html#l00079">com.justfeed.justfeedandroid.AdaptateurBac.onBindViewHolder()</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Documentation des champs</h2>
@@ -447,7 +458,7 @@ Attributs privés statiques</h2></td></tr>
 
 <p class="definition">Définition à la ligne <a class="el" href="_produit_8java_source.html#l00028">28</a> du fichier <a class="el" href="_produit_8java_source.html">Produit.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00054">com.justfeed.justfeedandroid.Produit.getPrix()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_produit_8java_source.html#l00054">com.justfeed.justfeedandroid.Produit.getPrix()</a>, <a class="el" href="_produit_8java_source.html#l00092">com.justfeed.justfeedandroid.Produit.modifierPrix()</a>, et <a class="el" href="_produit_8java_source.html#l00040">com.justfeed.justfeedandroid.Produit.Produit()</a>.</p>
 
 </div>
 </div>
@@ -518,7 +529,7 @@ Attributs privés statiques</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>com</b></li><li class="navelem"><b>justfeed</b></li><li class="navelem"><a class="el" href="namespacecom_1_1justfeed_1_1justfeedandroid.html">justfeedandroid</a></li><li class="navelem"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_produit.html">Produit</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

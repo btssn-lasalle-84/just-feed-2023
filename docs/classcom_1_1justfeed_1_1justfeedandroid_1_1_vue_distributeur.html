@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -100,7 +100,7 @@ Graphe de collaboration de com.justfeed.justfeedandroid.VueDistributeur:</div>
 <div class="dyncontent">
 <div class="center"><img src="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur__coll__graph.png" border="0" usemap="#acom_8justfeed_8justfeedandroid_8_vue_distributeur_coll__map" alt="Collaboration graph"/></div>
 <map name="acom_8justfeed_8justfeedandroid_8_vue_distributeur_coll__map" id="acom_8justfeed_8justfeedandroid_8_vue_distributeur_coll__map">
-<area shape="rect" title="Définition de la classe VueDistributeur." alt="" coords="5,5,223,200"/>
+<area shape="rect" title="Définition de la classe VueDistributeur." alt="" coords="5,5,223,215"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -135,6 +135,9 @@ Attributs privés</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
 Attributs privés statiques</h2></td></tr>
+<tr class="memitem:a1080e26833f778d7bed61d89269eb058"><td class="memItemLeft" align="right" valign="top">static final int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a1080e26833f778d7bed61d89269eb058">HYGROMETRIE_MAX</a> = 12</td></tr>
+<tr class="memdesc:a1080e26833f778d7bed61d89269eb058"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hygrométrie maximum d'un bac.  <a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a1080e26833f778d7bed61d89269eb058">Plus de détails...</a><br /></td></tr>
+<tr class="separator:a1080e26833f778d7bed61d89269eb058"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d5643b349828ed1bad5894b12827443"><td class="memItemLeft" align="right" valign="top">static final String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a5d5643b349828ed1bad5894b12827443">TAG</a> = &quot;_VueDistributeur&quot;</td></tr>
 <tr class="memdesc:a5d5643b349828ed1bad5894b12827443"><td class="mdescLeft">&#160;</td><td class="mdescRight">TAG pour les logs.  <a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a5d5643b349828ed1bad5894b12827443">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a5d5643b349828ed1bad5894b12827443"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -170,23 +173,23 @@ Attributs privés statiques</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00051">51</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        super(itemView);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">identifiant</a>         = ((TextView)itemView.findViewById(R.id.identifiant));</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">localisation</a>        = ((TextView)itemView.findViewById(R.id.localisation));</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>  = ((TextView)itemView.findViewById(R.id.coordGeographiques));</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>        = ((TextView)itemView.findViewById(R.id.intervention));</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">vueListeBacs</a>        = itemView.findViewById(R.id.listeBacs);</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a05768dfc427cf0c0e4d604893aed2f9a"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a></div><div class="ttdeci">TextView coordGeographiques</div><div class="ttdoc">attribut GUI qui affiche les coordonnées géographiques du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00041">VueDistributeur.java:41</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a09665ab59e987ce13bbb874c464a0ea8"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">com.justfeed.justfeedandroid.VueDistributeur.localisation</a></div><div class="ttdeci">TextView localisation</div><div class="ttdoc">attribut GUI qui affiche la localisation du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00039">VueDistributeur.java:39</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a47e7ca8b88f4bb0a098e0222d5e7266b"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">com.justfeed.justfeedandroid.VueDistributeur.intervention</a></div><div class="ttdeci">TextView intervention</div><div class="ttdoc">attribut GUI qui affiche l'état du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00042">VueDistributeur.java:42</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a72994f726ffca214c8b0d389e04558e4"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a></div><div class="ttdeci">RecyclerView vueListeBacs</div><div class="ttdoc">attribut GUI qui afficher la liste des bacs du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00044">VueDistributeur.java:44</a></div></div>
-<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_af00980b0fc27904498aa3934f735acc2"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">com.justfeed.justfeedandroid.VueDistributeur.identifiant</a></div><div class="ttdeci">TextView identifiant</div><div class="ttdoc">attribut GUI qui affiche l'identifiant du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00038">VueDistributeur.java:38</a></div></div>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00052">52</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        super(itemView);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">identifiant</a>         = ((TextView)itemView.findViewById(R.id.identifiant));</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">localisation</a>        = ((TextView)itemView.findViewById(R.id.localisation));</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>  = ((TextView)itemView.findViewById(R.id.coordGeographiques));</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>        = ((TextView)itemView.findViewById(R.id.intervention));</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;        <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">vueListeBacs</a>        = itemView.findViewById(R.id.listeBacs);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;    }</div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a05768dfc427cf0c0e4d604893aed2f9a"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a></div><div class="ttdeci">TextView coordGeographiques</div><div class="ttdoc">attribut GUI qui affiche les coordonnées géographiques du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00042">VueDistributeur.java:42</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a09665ab59e987ce13bbb874c464a0ea8"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">com.justfeed.justfeedandroid.VueDistributeur.localisation</a></div><div class="ttdeci">TextView localisation</div><div class="ttdoc">attribut GUI qui affiche la localisation du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00040">VueDistributeur.java:40</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a47e7ca8b88f4bb0a098e0222d5e7266b"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">com.justfeed.justfeedandroid.VueDistributeur.intervention</a></div><div class="ttdeci">TextView intervention</div><div class="ttdoc">attribut GUI qui affiche l'état du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00043">VueDistributeur.java:43</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a72994f726ffca214c8b0d389e04558e4"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a></div><div class="ttdeci">RecyclerView vueListeBacs</div><div class="ttdoc">attribut GUI qui afficher la liste des bacs du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00045">VueDistributeur.java:45</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_af00980b0fc27904498aa3934f735acc2"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">com.justfeed.justfeedandroid.VueDistributeur.identifiant</a></div><div class="ttdeci">TextView identifiant</div><div class="ttdoc">attribut GUI qui affiche l'identifiant du distributeur.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00039">VueDistributeur.java:39</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00041">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00038">com.justfeed.justfeedandroid.VueDistributeur.identifiant</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00042">com.justfeed.justfeedandroid.VueDistributeur.intervention</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00039">com.justfeed.justfeedandroid.VueDistributeur.localisation</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00044">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a>.</p>
+<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00042">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00039">com.justfeed.justfeedandroid.VueDistributeur.identifiant</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00043">com.justfeed.justfeedandroid.VueDistributeur.intervention</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00040">com.justfeed.justfeedandroid.VueDistributeur.localisation</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00045">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a>.</p>
 
 </div>
 </div>
@@ -215,32 +218,38 @@ Attributs privés statiques</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00066">66</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    {</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        Location <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a> = distributeur.getCoordGeographiques();</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">identifiant</a>.setText(<span class="stringliteral">&quot;Identifant : &quot;</span> + Integer.toString(distributeur.getIdentifiant()));</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        <span class="keywordflow">if</span>(distributeur.estARemplir())</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        {</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>.setText(<span class="stringliteral">&quot;À remplir&quot;</span>);</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">else</span> <span class="keywordflow">if</span>(distributeur.estADepanner())</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        {</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>.setText(<span class="stringliteral">&quot;À dépanner&quot;</span>);</div>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00067">67</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;        Location <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a> = distributeur.getCoordGeographiques();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#af00980b0fc27904498aa3934f735acc2">identifiant</a>.setText(distributeur.<a class="code" href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">getNom</a>() + <span class="stringliteral">&quot; (&quot;</span>+distributeur.getIdMachine()+<span class="stringliteral">&quot;)&quot;</span>);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        <span class="keywordflow">for</span>(<a class="code" href="class_bac.html">Bac</a> bac: distributeur.getListeBacs())</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;        {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;            <span class="keywordflow">if</span>(bac.getHygrometrie() &gt; <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a1080e26833f778d7bed61d89269eb058">HYGROMETRIE_MAX</a>)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;            {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;                this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>.setText(<span class="stringliteral">&quot;À intervenir&quot;</span>);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;            }</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        }</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">localisation</a>.setText(<span class="stringliteral">&quot;Localisation : \n&quot;</span> + distributeur.getLocalisation() + <span class="stringliteral">&quot;\n&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        <span class="comment">// En Degrés décimaux (DD) généralement avec quatre décimales</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;        <span class="comment">// avec un point &#39;.&#39; pour la partie décimale</span></div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        <span class="comment">// et la virgule &#39;,&#39; pour séparer les deux valeurs</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        <span class="comment">// La latitude doit être indiquée avant la longitude</span></div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        DecimalFormatSymbols symbolesUS  = DecimalFormatSymbols.getInstance(Locale.US);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        DecimalFormat        formateurUS = <span class="keyword">new</span> DecimalFormat(<span class="stringliteral">&quot;###.#####&quot;</span>, symbolesUS);</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        this.coordGeographiques.setText(formateurUS.format(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.getLatitude()) + <span class="stringliteral">&quot;, &quot;</span> +</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;                                     formateurUS.format(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.getLongitude()));</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a5d5643b349828ed1bad5894b12827443">TAG</a>, <span class="stringliteral">&quot;afficherDistributeur() coordGeographiques = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.toString());</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;        <span class="keywordflow">if</span>(distributeur.estARemplir() || distributeur.estADepanner())</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;        {</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;            this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a47e7ca8b88f4bb0a098e0222d5e7266b">intervention</a>.setText(<span class="stringliteral">&quot;À intervenir&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;        this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a09665ab59e987ce13bbb874c464a0ea8">localisation</a>.setText(distributeur.getLocalisation() + <span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        <span class="comment">// En Degrés décimaux (DD) généralement avec quatre décimales</span></div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;        <span class="comment">// avec un point &#39;.&#39; pour la partie décimale</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="comment">// et la virgule &#39;,&#39; pour séparer les deux valeurs</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;        <span class="comment">// La latitude doit être indiquée avant la longitude</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        DecimalFormatSymbols symbolesUS  = DecimalFormatSymbols.getInstance(Locale.US);</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;        DecimalFormat        formateurUS = <span class="keyword">new</span> DecimalFormat(<span class="stringliteral">&quot;###.#####&quot;</span>, symbolesUS);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        this.coordGeographiques.setText(formateurUS.format(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.getLatitude()) + <span class="stringliteral">&quot;, &quot;</span> +</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;                                     formateurUS.format(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.getLongitude()));</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;        Log.d(<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a5d5643b349828ed1bad5894b12827443">TAG</a>, <span class="stringliteral">&quot;afficherDistributeur() coordGeographiques = &quot;</span> + <a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a05768dfc427cf0c0e4d604893aed2f9a">coordGeographiques</a>.toString());</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    }</div>
+<div class="ttc" id="aclass_bac_html"><div class="ttname"><a href="class_bac.html">Bac</a></div><div class="ttdef"><b>Definition:</b> <a href="bac_8h_source.html#l00022">bac.h:23</a></div></div>
+<div class="ttc" id="aclass_distributeur_html_ae3b4b61b2443f6918eb036a8c8f0c30a"><div class="ttname"><a href="class_distributeur.html#ae3b4b61b2443f6918eb036a8c8f0c30a">Distributeur::getNom</a></div><div class="ttdeci">QString getNom() const</div><div class="ttdoc">Accesseur de l'attribut nom.</div><div class="ttdef"><b>Definition:</b> <a href="distributeur_8cpp_source.html#l00111">distributeur.cpp:111</a></div></div>
+<div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a1080e26833f778d7bed61d89269eb058"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a1080e26833f778d7bed61d89269eb058">com.justfeed.justfeedandroid.VueDistributeur.HYGROMETRIE_MAX</a></div><div class="ttdeci">static final int HYGROMETRIE_MAX</div><div class="ttdoc">Hygrométrie maximum d'un bac.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00034">VueDistributeur.java:34</a></div></div>
 <div class="ttc" id="aclasscom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur_html_a5d5643b349828ed1bad5894b12827443"><div class="ttname"><a href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a5d5643b349828ed1bad5894b12827443">com.justfeed.justfeedandroid.VueDistributeur.TAG</a></div><div class="ttdeci">static final String TAG</div><div class="ttdoc">TAG pour les logs.</div><div class="ttdef"><b>Definition:</b> <a href="_vue_distributeur_8java_source.html#l00033">VueDistributeur.java:33</a></div></div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00041">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a>, <a class="el" href="_distributeur_8java_source.html#l00153">com.justfeed.justfeedandroid.Distributeur.estADepanner()</a>, <a class="el" href="_distributeur_8java_source.html#l00147">com.justfeed.justfeedandroid.Distributeur.estARemplir()</a>, <a class="el" href="_distributeur_8java_source.html#l00114">com.justfeed.justfeedandroid.Distributeur.getCoordGeographiques()</a>, <a class="el" href="_distributeur_8java_source.html#l00120">com.justfeed.justfeedandroid.Distributeur.getIdentifiant()</a>, <a class="el" href="_distributeur_8java_source.html#l00100">com.justfeed.justfeedandroid.Distributeur.getLocalisation()</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00033">com.justfeed.justfeedandroid.VueDistributeur.TAG</a>.</p>
+<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00042">com.justfeed.justfeedandroid.VueDistributeur.coordGeographiques</a>, <a class="el" href="_distributeur_8java_source.html#l00163">com.justfeed.justfeedandroid.Distributeur.estADepanner()</a>, <a class="el" href="_distributeur_8java_source.html#l00157">com.justfeed.justfeedandroid.Distributeur.estARemplir()</a>, <a class="el" href="_distributeur_8java_source.html#l00118">com.justfeed.justfeedandroid.Distributeur.getCoordGeographiques()</a>, <a class="el" href="_distributeur_8java_source.html#l00133">com.justfeed.justfeedandroid.Distributeur.getIdMachine()</a>, <a class="el" href="_distributeur_8java_source.html#l00139">com.justfeed.justfeedandroid.Distributeur.getListeBacs()</a>, <a class="el" href="_distributeur_8java_source.html#l00104">com.justfeed.justfeedandroid.Distributeur.getLocalisation()</a>, <a class="el" href="_distributeur_8java_source.html#l00095">com.justfeed.justfeedandroid.Distributeur.getNom()</a>, <a class="el" href="_vue_distributeur_8java_source.html#l00034">com.justfeed.justfeedandroid.VueDistributeur.HYGROMETRIE_MAX</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00033">com.justfeed.justfeedandroid.VueDistributeur.TAG</a>.</p>
 
 </div>
 </div>
@@ -259,12 +268,12 @@ Attributs privés statiques</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00090">90</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
-<div class="fragment"><div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    {</div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">vueListeBacs</a>;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    }</div>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00094">94</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<div class="fragment"><div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    {</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;        <span class="keywordflow">return</span> this.<a class="code" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html#a72994f726ffca214c8b0d389e04558e4">vueListeBacs</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    }</div>
 </div><!-- fragment -->
-<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00044">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a>.</p>
+<p class="reference">Références <a class="el" href="_vue_distributeur_8java_source.html#l00045">com.justfeed.justfeedandroid.VueDistributeur.vueListeBacs</a>.</p>
 
 </div>
 </div>
@@ -291,9 +300,37 @@ Attributs privés statiques</h2></td></tr>
 
 <p>attribut GUI qui affiche les coordonnées géographiques du distributeur. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00041">41</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00042">42</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00066">com.justfeed.justfeedandroid.VueDistributeur.afficherDistributeur()</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00051">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00067">com.justfeed.justfeedandroid.VueDistributeur.afficherDistributeur()</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00052">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+
+</div>
+</div>
+<a id="a1080e26833f778d7bed61d89269eb058"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1080e26833f778d7bed61d89269eb058">&#9670;&nbsp;</a></span>HYGROMETRIE_MAX</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">final int com.justfeed.justfeedandroid.VueDistributeur.HYGROMETRIE_MAX = 12</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hygrométrie maximum d'un bac. </p>
+
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00034">34</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00067">com.justfeed.justfeedandroid.VueDistributeur.afficherDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -320,9 +357,9 @@ Attributs privés statiques</h2></td></tr>
 <p>attribut GUI qui affiche l'identifiant du distributeur. </p>
 <p>Ressources GUI </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00038">38</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00039">39</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00051">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00052">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -348,9 +385,9 @@ Attributs privés statiques</h2></td></tr>
 
 <p>attribut GUI qui affiche l'état du distributeur. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00042">42</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00043">43</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00051">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00052">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -376,9 +413,9 @@ Attributs privés statiques</h2></td></tr>
 
 <p>attribut GUI qui affiche la localisation du distributeur. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00039">39</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00040">40</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00051">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00052">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -407,7 +444,7 @@ Attributs privés statiques</h2></td></tr>
 
 <p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00033">33</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00066">com.justfeed.justfeedandroid.VueDistributeur.afficherDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00067">com.justfeed.justfeedandroid.VueDistributeur.afficherDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -433,9 +470,9 @@ Attributs privés statiques</h2></td></tr>
 
 <p>attribut GUI qui afficher la liste des bacs du distributeur. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00044">44</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="_vue_distributeur_8java_source.html#l00045">45</a> du fichier <a class="el" href="_vue_distributeur_8java_source.html">VueDistributeur.java</a>.</p>
 
-<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00090">com.justfeed.justfeedandroid.VueDistributeur.modifierVueListeBacs()</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00051">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
+<p class="reference">Référencé par <a class="el" href="_vue_distributeur_8java_source.html#l00094">com.justfeed.justfeedandroid.VueDistributeur.modifierVueListeBacs()</a>, et <a class="el" href="_vue_distributeur_8java_source.html#l00052">com.justfeed.justfeedandroid.VueDistributeur.VueDistributeur()</a>.</p>
 
 </div>
 </div>
@@ -449,7 +486,7 @@ Attributs privés statiques</h2></td></tr>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><b>com</b></li><li class="navelem"><b>justfeed</b></li><li class="navelem"><a class="el" href="namespacecom_1_1justfeed_1_1justfeedandroid.html">justfeedandroid</a></li><li class="navelem"><a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_distributeur.html">VueDistributeur</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

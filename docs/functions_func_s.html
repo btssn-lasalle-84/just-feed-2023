@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -87,8 +87,17 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 &#160;
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>sAbonner()
+: <a class="el" href="class_communication.html#a7be06937e10a7c9a1264a7c0030202e2">Communication</a>
+</li>
 <li>sauvegarderIdOperateur()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_just_feed.html#a9487efe81dc406aeecda80a436b7ede9">com.justfeed.justfeedandroid.JustFeed</a>
+</li>
+<li>seConnecter()
+: <a class="el" href="class_communication.html#a83fb272a00a5d95c1a8fc339da2bb78d">Communication</a>
+</li>
+<li>seDeconnecter()
+: <a class="el" href="class_communication.html#a7ab2e547c79c7a5f394ecf15b46a1501">Communication</a>
 </li>
 <li>selectionner()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a9790124726081313c8658861cd8dbdd2">com.justfeed.justfeedandroid.BaseDeDonnees</a>
@@ -103,7 +112,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 : <a class="el" href="class_i_h_m_just_feed.html#a4dfe83d252ba83f75c8534504a166652">IHMJustFeed</a>
 </li>
 <li>selectionnerNouveauProduit()
-: <a class="el" href="class_configuration_distributeur.html#a91c43bf572a746014a50a3d6e6f082c0">ConfigurationDistributeur</a>
+: <a class="el" href="class_configuration_distributeur.html#a84ba2cd980c98d3f863dc8f3139debe1">ConfigurationDistributeur</a>
 </li>
 <li>selectionnerOperateur()
 : <a class="el" href="class_planification_intervention.html#aa04de04f4c3e828dc588c0ce762182e9">PlanificationIntervention</a>
@@ -125,6 +134,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>setARemplir()
 : <a class="el" href="class_bac.html#ab248645117b210ebfe2bf633d6e851a2">Bac</a>
 , <a class="el" href="class_intervention.html#a337777a04b2ebf2e3b9aa281b7d6f2d0">Intervention</a>
+</li>
+<li>setCallback()
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html#a38fa92d448ed1cc0b1405c4da212189a">com.justfeed.justfeedandroid.ClientMQTT</a>
 </li>
 <li>setCodePostal()
 : <a class="el" href="class_distributeur.html#af4ac66d196de510c9fcd95d29540d6d7">Distributeur</a>
@@ -202,6 +214,9 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>setNomProduit()
 : <a class="el" href="class_bac.html#ad522c7898f9f7f269606e02f796babdc">Bac</a>
 </li>
+<li>setOnEditTextChangedListener()
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_vue_bac.html#ab927616eea9c2ce77ad074ba79982af8">com.justfeed.justfeedandroid.VueBac</a>
+</li>
 <li>setPoidsActuel()
 : <a class="el" href="class_bac.html#a653e0ca3588aa25faa1cb1632cbd983a">Bac</a>
 </li>
@@ -239,12 +254,18 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <li>setVille()
 : <a class="el" href="class_distributeur.html#a1f5019305400e3148c0fddffb15f2626">Distributeur</a>
 </li>
+<li>souscrireTopic()
+: <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html#ab8d782d5c5a80d4b3db2a36f492ee1d3">com.justfeed.justfeedandroid.ClientMQTT</a>
+</li>
 <li>Statistiques()
 : <a class="el" href="class_statistiques.html#a4ecd522328776fb86ba21d6a3dfe8d70">Statistiques</a>
 </li>
 <li>supprimerBac()
-: <a class="el" href="class_configuration_distributeur.html#a422b7e2d1c6a7564cfc36be246c688bf">ConfigurationDistributeur</a>
-, <a class="el" href="class_distributeur.html#a068f8ff4853bb7ce2b59181e0a546848">Distributeur</a>
+: <a class="el" href="class_configuration_distributeur.html#ae587824940e5135f04ba24666b53e65a">ConfigurationDistributeur</a>
+, <a class="el" href="class_distributeur.html#aa8c2adc613517a9a3f33634a47969c64">Distributeur</a>
+</li>
+<li>supprimerBacBaseDeDonnees()
+: <a class="el" href="class_configuration_distributeur.html#a79e1deb82e8f69fbf27ced94c2dc81ca">ConfigurationDistributeur</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -253,7 +274,7 @@ $(document).ready(function(){initNavTree('functions_func_s.html',''); initResiza
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

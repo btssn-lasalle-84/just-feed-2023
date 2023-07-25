@@ -1,11 +1,13 @@
 <map id="ConfigurationDistributeur" name="ConfigurationDistributeur">
-<area shape="rect" id="node1" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="181,608,406,1052"/>
-<area shape="rect" id="node3" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="166,1115,408,1764"/>
-<area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="55,321,130,399"/>
-<area shape="rect" id="node5" href="$class_planification_intervention.html" title="permet de planifier une intervention" alt="" coords="356,1827,618,2285"/>
-<area shape="rect" id="node4" href="$class_q_widget.html" title=" " alt="" coords="78,791,157,869"/>
-<area shape="rect" id="node6" href="$class_intervention.html" title=" " alt="" coords="766,1247,986,1632"/>
-<area shape="rect" id="node7" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="546,711,705,949"/>
-<area shape="rect" id="node8" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="204,175,383,545"/>
-<area shape="rect" id="node9" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="244,5,344,112"/>
+<area shape="rect" id="node1" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="375,608,614,1111"/>
+<area shape="rect" id="node3" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="270,1544,513,2252"/>
+<area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="22,321,97,399"/>
+<area shape="rect" id="node7" href="$class_planification_intervention.html" title="permet de planifier une intervention" alt="" coords="460,2315,723,2773"/>
+<area shape="rect" id="node4" href="$class_q_widget.html" title=" " alt="" coords="272,821,351,898"/>
+<area shape="rect" id="node5" href="$class_communication.html" title="Définition de la classe Communication." alt="" coords="87,703,248,1015"/>
+<area shape="rect" id="node6" href="$class_q_object.html" title=" " alt="" coords="130,321,205,399"/>
+<area shape="rect" id="node8" href="$class_intervention.html" title=" " alt="" coords="698,1135,918,1520"/>
+<area shape="rect" id="node9" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="666,241,824,479"/>
+<area shape="rect" id="node10" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="338,175,493,545"/>
+<area shape="rect" id="node11" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="366,5,466,112"/>
 </map>

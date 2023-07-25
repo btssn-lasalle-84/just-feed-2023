@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -98,6 +98,12 @@ $(document).ready(function(){initNavTree('ihmjustfeed_8h.html',''); initResizabl
 <code>#include &lt;QVector&gt;</code><br />
 <code>#include &lt;QtWidgets&gt;</code><br />
 <code>#include &lt;QWebView&gt;</code><br />
+<code>#include &lt;QPrinter&gt;</code><br />
+<code>#include &lt;QPrintDialog&gt;</code><br />
+<code>#include &lt;QFileDialog&gt;</code><br />
+<code>#include &lt;QPainter&gt;</code><br />
+<code>#include &lt;QFont&gt;</code><br />
+<code>#include &lt;QtMqtt/QtMqtt&gt;</code><br />
 </div>
 <p><a href="ihmjustfeed_8h_source.html">Aller au code source de ce fichier.</a></p>
 <table class="memberdecls">
@@ -113,11 +119,23 @@ Macros</h2></td></tr>
 <tr class="separator:a25f1612cebc7822011a230af2998e9a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afae375907512dd868d03f529a5200063"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#afae375907512dd868d03f529a5200063">BAC_VIDE</a>&#160;&#160;&#160;30</td></tr>
 <tr class="separator:afae375907512dd868d03f529a5200063"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaeadce46701a289ee5585f0489c327f7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#aaeadce46701a289ee5585f0489c327f7">HYGROMETRIE_MAX_NON_VALIDE</a>&#160;&#160;&#160;18</td></tr>
+<tr class="separator:aaeadce46701a289ee5585f0489c327f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f9b7e64e9970b57350674e40166f22f"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#a4f9b7e64e9970b57350674e40166f22f">HYGROMETRIE_MAX_VALIDE</a>&#160;&#160;&#160;15</td></tr>
+<tr class="separator:a4f9b7e64e9970b57350674e40166f22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af582e714204790563a5836144b499942"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#af582e714204790563a5836144b499942">HYGROMETRIE_MIN_NON_VALIDE</a>&#160;&#160;&#160;8</td></tr>
+<tr class="separator:af582e714204790563a5836144b499942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedb36618e98903b28db5b53642321b5c"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#aedb36618e98903b28db5b53642321b5c">HYGROMETRIE_MIN_VALIDE</a>&#160;&#160;&#160;10</td></tr>
+<tr class="separator:aedb36618e98903b28db5b53642321b5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af81019b31b55594c029614dfca89d0c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#af81019b31b55594c029614dfca89d0c3">MAX_REMPLISSAGE</a>&#160;&#160;&#160;100</td></tr>
+<tr class="separator:af81019b31b55594c029614dfca89d0c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef69e039a0ad53e073b1dbaa0d50d793"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#aef69e039a0ad53e073b1dbaa0d50d793">TAILLE_POLICE</a>&#160;&#160;&#160;14</td></tr>
 <tr class="separator:aef69e039a0ad53e073b1dbaa0d50d793"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9eb2396052c2167d0e0f70355a4f6ed5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#a9eb2396052c2167d0e0f70355a4f6ed5">TITRE_APPLICATION</a>&#160;&#160;&#160;QString(&quot;JustFeed&quot;)</td></tr>
 <tr class="memdesc:a9eb2396052c2167d0e0f70355a4f6ed5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit le titre de l'application.  <a href="ihmjustfeed_8h.html#a9eb2396052c2167d0e0f70355a4f6ed5">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a9eb2396052c2167d0e0f70355a4f6ed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac207b6eba0ba8876d0c7e1c65028cc3b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#ac207b6eba0ba8876d0c7e1c65028cc3b">UN</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:ac207b6eba0ba8876d0c7e1c65028cc3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a121d9d72e2cc9cdcf09da6b88fa7859d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ihmjustfeed_8h.html#a121d9d72e2cc9cdcf09da6b88fa7859d">VERSION_APPLICATION</a>&#160;&#160;&#160;QString(&quot;v0.2&quot;)</td></tr>
 <tr class="memdesc:a121d9d72e2cc9cdcf09da6b88fa7859d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Définit la version de l'application.  <a href="ihmjustfeed_8h.html#a121d9d72e2cc9cdcf09da6b88fa7859d">Plus de détails...</a><br /></td></tr>
 <tr class="separator:a121d9d72e2cc9cdcf09da6b88fa7859d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -127,7 +145,7 @@ Macros</h2></td></tr>
 <p>La classe <a class="el" href="class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed.">IHMJustFeed</a> <code>Cette</code> classe permet de définir la GUI de l'application JustFeed (Desktop) </p><dl class="section author"><dt>Auteur</dt><dd>Salaun Matthieu <a href="#" onclick="location.href='mai'+'lto:'+'mat'+'th'+'ieu'+'sa'+'lau'+'n3'+'0@g'+'ma'+'il.'+'co'+'m'; return false;">matth<span style="display: none;">.nosp@m.</span>ieus<span style="display: none;">.nosp@m.</span>alaun<span style="display: none;">.nosp@m.</span>30@g<span style="display: none;">.nosp@m.</span>mail.<span style="display: none;">.nosp@m.</span>com</a> </dd>
 <dd>
 Rouanet Nicolas </dd></dl>
-<dl class="section version"><dt>Version</dt><dd>0.2 </dd></dl>
+<dl class="section version"><dt>Version</dt><dd>1.1 </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>2023 </dd></dl>
 
 <p class="definition">Définition dans le fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
@@ -144,7 +162,7 @@ Rouanet Nicolas </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00048">48</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00055">55</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
 
 </div>
 </div>
@@ -160,7 +178,87 @@ Rouanet Nicolas </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00047">47</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00054">54</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="aaeadce46701a289ee5585f0489c327f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaeadce46701a289ee5585f0489c327f7">&#9670;&nbsp;</a></span>HYGROMETRIE_MAX_NON_VALIDE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HYGROMETRIE_MAX_NON_VALIDE&#160;&#160;&#160;18</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00061">61</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="a4f9b7e64e9970b57350674e40166f22f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f9b7e64e9970b57350674e40166f22f">&#9670;&nbsp;</a></span>HYGROMETRIE_MAX_VALIDE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HYGROMETRIE_MAX_VALIDE&#160;&#160;&#160;15</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00059">59</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="af582e714204790563a5836144b499942"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af582e714204790563a5836144b499942">&#9670;&nbsp;</a></span>HYGROMETRIE_MIN_NON_VALIDE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HYGROMETRIE_MIN_NON_VALIDE&#160;&#160;&#160;8</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00060">60</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="aedb36618e98903b28db5b53642321b5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aedb36618e98903b28db5b53642321b5c">&#9670;&nbsp;</a></span>HYGROMETRIE_MIN_VALIDE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define HYGROMETRIE_MIN_VALIDE&#160;&#160;&#160;10</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00058">58</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="af81019b31b55594c029614dfca89d0c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af81019b31b55594c029614dfca89d0c3">&#9670;&nbsp;</a></span>MAX_REMPLISSAGE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MAX_REMPLISSAGE&#160;&#160;&#160;100</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00056">56</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
 
 </div>
 </div>
@@ -176,7 +274,7 @@ Rouanet Nicolas </dd></dl>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00046">46</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00053">53</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
 
 </div>
 </div>
@@ -194,7 +292,23 @@ Rouanet Nicolas </dd></dl>
 
 <p>Définit le titre de l'application. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00032">32</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00039">39</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+
+</div>
+</div>
+<a id="ac207b6eba0ba8876d0c7e1c65028cc3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac207b6eba0ba8876d0c7e1c65028cc3b">&#9670;&nbsp;</a></span>UN</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UN&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00063">63</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
 
 </div>
 </div>
@@ -212,7 +326,7 @@ Rouanet Nicolas </dd></dl>
 
 <p>Définit la version de l'application. </p>
 
-<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00038">38</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
+<p class="definition">Définition à la ligne <a class="el" href="ihmjustfeed_8h_source.html#l00045">45</a> du fichier <a class="el" href="ihmjustfeed_8h_source.html">ihmjustfeed.h</a>.</p>
 
 </div>
 </div>
@@ -223,7 +337,7 @@ Rouanet Nicolas </dd></dl>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_b8a2b60d7030e4626e1dc7af2c9dc7d8.html">JustFeedDesktop</a></li><li class="navelem"><a class="el" href="ihmjustfeed_8h.html">ihmjustfeed.h</a></li>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

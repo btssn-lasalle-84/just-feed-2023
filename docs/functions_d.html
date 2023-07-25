@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -106,8 +106,13 @@ $(document).ready(function(){initNavTree('functions_d.html',''); initResizable()
 <li>db
 : <a class="el" href="class_base_de_donnees.html#a3e738dcf443370c46a541677ab619f06">BaseDeDonnees</a>
 </li>
+<li>decoderMessageMQTT()
+: <a class="el" href="class_i_h_m_just_feed.html#a04fb5b491cfa979c030857a49587564f">IHMJustFeed</a>
+</li>
 <li>deconnecter()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#ae022ff0b4923d637f8d392cb908aa252">com.justfeed.justfeedandroid.BaseDeDonnees</a>
+, <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html#ada27feb90090cc5f482a02824758d4ef">com.justfeed.justfeedandroid.ClientMQTT</a>
+, <a class="el" href="class_communication.html#a30fc4cf3f0d2c7ee32e2daab097ebb1a">Communication</a>
 </li>
 <li>DECONNEXION_ERREUR
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html#a0941352a985f87154daee19796c6fa5b">com.justfeed.justfeedandroid.BaseDeDonnees</a>
@@ -118,15 +123,20 @@ $(document).ready(function(){initNavTree('functions_d.html',''); initResizable()
 <li>DEMARRER
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_liste_deroulante_gestionnaire.html#aeecaba44457c955473697020cae0830f">com.justfeed.justfeedandroid.ListeDeroulanteGestionnaire</a>
 </li>
+<li>demarrer()
+: <a class="el" href="class_communication.html#af29ea9a1c2ce29436f2331c322f6ebbf">Communication</a>
+</li>
 <li>depanner()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a2d72c088701e15d4ef901691df8f036c">com.justfeed.justfeedandroid.Distributeur</a>
+</li>
+<li>description
+: <a class="el" href="class_distributeur.html#afd0a0b484bd379fa94fb1a1ee253b185">Distributeur</a>
 </li>
 <li>DESCRIPTION
 : <a class="el" href="class_distributeur.html#aff81225d18b21d2333e35734f511622aa5741cc6fff9a86bf10a1c8096a0191f4">Distributeur</a>
 </li>
 <li>description
-: <a class="el" href="class_distributeur.html#afd0a0b484bd379fa94fb1a1ee253b185">Distributeur</a>
-, <a class="el" href="class_produit.html#af13c24a4fbce61179abd1860dd5e7857">Produit</a>
+: <a class="el" href="class_produit.html#af13c24a4fbce61179abd1860dd5e7857">Produit</a>
 </li>
 <li>descriptionDistributeur
 : <a class="el" href="class_i_h_m_just_feed.html#a7d907f82eb1986a412196a25bc0ebbc6">IHMJustFeed</a>
@@ -148,7 +158,7 @@ $(document).ready(function(){initNavTree('functions_d.html',''); initResizable()
 , <a class="el" href="class_configuration_distributeur.html#a4a37c9ebad5a28d657304ddee30c3428">ConfigurationDistributeur</a>
 </li>
 <li>Distributeur()
-: <a class="el" href="class_distributeur.html#a6ddd62497a6339df8a9c7744d1595df7">Distributeur</a>
+: <a class="el" href="class_distributeur.html#a8a474ca50d4b0cc52375e47ae9ccb99a">Distributeur</a>
 </li>
 <li>distributeurEstAttribueDepannage()
 : <a class="el" href="class_planification_intervention.html#a6a93cd2602ae66bafd2deb4d32a2819f">PlanificationIntervention</a>
@@ -162,6 +172,9 @@ $(document).ready(function(){initNavTree('functions_d.html',''); initResizable()
 <li>doInBackground()
 : <a class="el" href="classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_1_1_connexion_my_sql.html#ad77f86748ed79853f6f92c2ac3273f3f">com.justfeed.justfeedandroid.BaseDeDonnees.ConnexionMySql</a>
 </li>
+<li>donneesRecues()
+: <a class="el" href="class_communication.html#a1c8c0637dcd3230ad0221819721dd2d1">Communication</a>
+</li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -169,7 +182,7 @@ $(document).ready(function(){initNavTree('functions_d.html',''); initResizable()
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>
