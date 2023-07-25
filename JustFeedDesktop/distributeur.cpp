@@ -5,7 +5,7 @@
  * distributeur
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
  * @author      Rouanet Nicolas
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #include "distributeur.h"
@@ -200,6 +200,22 @@ Bac* Distributeur::getBac(int numeroBac) const
 }
 
 /**
+ * @brief Accesseur pour récupérer un bac grâce à son id
+ * @return Bac
+ */
+Bac* Distributeur::getBacId(int idBac) const
+{
+    for(int i = 0; i < bacs.size(); i++)
+    {
+        if(bacs[i]->getIdBac() == idBac)
+        {
+            return bacs[i];
+        }
+    }
+    return nullptr;
+}
+
+/**
  * @brief Accesseur pour récupérer le produit dans le bac voulu
  * @return Produit qui permet de connaitre le produit
  */
@@ -366,25 +382,36 @@ void Distributeur::setPrixProduit(const int& numeroBac, const double& prix)
 }
 
 /**
- * @brief Ajoute un bac dans le distributeur
+ * @brief Ajoute un nouveau bac dans le distributeur
+ * @param bac
+ */
+void Distributeur::ajouterBac()
+{
+    bacs.push_back(new Bac());
+}
+
+/**
+ * @brief Ajoute un bac existant dans le distributeur
  * @param bac
  */
 void Distributeur::ajouterBac(const Bac& bac)
 {
+    qDebug() << Q_FUNC_INFO << "nbBacs" << bacs.size();
     bacs.push_back(new Bac(bac));
+    qDebug() << Q_FUNC_INFO << "nbBacs" << bacs.size();
 }
 
 /**
  * @brief Supprime un bac dans le distributeur
  * @param numeroBacASupprimer
  */
-void Distributeur::supprimerBac(const int numeroBacASupprimer)
+void Distributeur::supprimerBac(const int indiceBacASupprimer)
 {
-    if(numeroBacASupprimer >= 0 && numeroBacASupprimer < bacs.size())
+    if(indiceBacASupprimer >= 0 && indiceBacASupprimer < bacs.size())
     {
-        qDebug() << Q_FUNC_INFO << "numeroBacASupprimer" << numeroBacASupprimer;
-        delete bacs[numeroBacASupprimer];
-        bacs.remove(numeroBacASupprimer);
+        qDebug() << Q_FUNC_INFO << "indiceBacASupprimer" << indiceBacASupprimer;
+        delete bacs[indiceBacASupprimer];
+        bacs.remove(indiceBacASupprimer);
         qDebug() << Q_FUNC_INFO << "NbBacs" << bacs.size();
     }
 }

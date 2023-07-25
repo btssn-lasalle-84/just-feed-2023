@@ -1,6 +1,7 @@
 QT       += core gui widgets sql
 QT       += webkitwidgets
-
+QT += mqtt
+QT += printsupport
 CONFIG += c++11
 
 DEFINES += QT_DEPRECATED_WARNINGS

@@ -4,7 +4,7 @@
  * @details     La classe intervention \c Cette classe permet de définir un
  * produit
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     1.1
  * @date        2023
  */
 

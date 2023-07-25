@@ -3,7 +3,7 @@
  * @brief       Définition de la classe Bac.
  * @details     La classe Bac \c Cette classe permet de définir un bac
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.1
+ * @version     1.1
  * @date        2023
  */
 #include "bac.h"
@@ -79,11 +79,21 @@ Bac::Bac(const Bac& bac) :
     aRemplir(bac.aRemplir), aDepanner(bac.aDepanner), hygrometrie(bac.hygrometrie),
     aIntervenir(bac.aIntervenir)
 {
-    qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
-             << produit->getMarque() << "description" << produit->getDescription() << "codeProduit"
-             << produit->getCodeProduit() << "prix" << produit->getPrix() << "poidsActuel"
-             << poidsActuel << "poidsTotal" << poidsTotal << "pourcentageRemplissage"
-             << pourcentageRemplissage << "hygrometrie" << hygrometrie;
+    if(produit != nullptr)
+    {
+        qDebug() << Q_FUNC_INFO << "idBac" << idBac << "nom" << produit->getNom() << "marque"
+                 << produit->getMarque() << "description" << produit->getDescription()
+                 << "codeProduit" << produit->getCodeProduit() << "prix" << produit->getPrix()
+                 << "poidsActuel" << poidsActuel << "poidsTotal" << poidsTotal
+                 << "pourcentageRemplissage" << pourcentageRemplissage << "hygrometrie"
+                 << hygrometrie;
+    }
+    else
+    {
+        qDebug() << Q_FUNC_INFO << "idBac" << idBac << "poidsActuel" << poidsActuel << "poidsTotal"
+                 << poidsTotal << "pourcentageRemplissage" << pourcentageRemplissage
+                 << "hygrometrie" << hygrometrie;
+    }
 }
 
 /**

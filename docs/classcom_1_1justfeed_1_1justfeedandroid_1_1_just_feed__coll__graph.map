@@ -1,4 +1,5 @@
 <map id="com.justfeed.justfeedandroid.JustFeed" name="com.justfeed.justfeedandroid.JustFeed">
-<area shape="rect" id="node1" title="L&#39;activité principale." alt="" coords="5,849,247,1425"/>
-<area shape="rect" id="node2" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="17,5,235,787"/>
+<area shape="rect" id="node1" title="L&#39;activité principale." alt="" coords="81,879,323,1645"/>
+<area shape="rect" id="node2" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html" title="Définition de la classe ClientMQTT." alt="" coords="5,174,223,647"/>
+<area shape="rect" id="node3" href="$classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html" title="Classe BaseDeDonnees." alt="" coords="247,5,464,816"/>
 </map>

@@ -1,11 +1,13 @@
 <map id="PlanificationIntervention" name="PlanificationIntervention">
-<area shape="rect" id="node1" title="permet de planifier une intervention" alt="" coords="86,755,349,1213"/>
-<area shape="rect" id="node5" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="303,1276,545,1925"/>
+<area shape="rect" id="node1" title="permet de planifier une intervention" alt="" coords="58,755,321,1213"/>
+<area shape="rect" id="node5" href="$class_i_h_m_just_feed.html" title="Déclaration de la classe IHMJustFeed." alt="" coords="351,1276,593,1984"/>
 <area shape="rect" id="node2" href="$class_q_dialog.html" title=" " alt="" coords="5,461,80,538"/>
-<area shape="rect" id="node7" href="$class_configuration_distributeur.html" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="299,1988,525,2432"/>
-<area shape="rect" id="node3" href="$class_intervention.html" title=" " alt="" coords="105,307,325,692"/>
-<area shape="rect" id="node4" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="294,5,453,244"/>
-<area shape="rect" id="node6" href="$class_q_widget.html" title=" " alt="" coords="565,945,643,1023"/>
-<area shape="rect" id="node8" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="604,1415,783,1786"/>
-<area shape="rect" id="node9" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="667,931,767,1037"/>
+<area shape="rect" id="node9" href="$class_configuration_distributeur.html" title="Déclaration de la classe ConfigurationDistributeur." alt="" coords="554,2047,793,2549"/>
+<area shape="rect" id="node3" href="$class_intervention.html" title=" " alt="" coords="290,307,510,692"/>
+<area shape="rect" id="node4" href="$class_base_de_donnees.html" title="Déclaration de la classe permettant l&#39;accès à la base de données MySQL." alt="" coords="498,5,657,244"/>
+<area shape="rect" id="node6" href="$class_q_widget.html" title=" " alt="" coords="345,945,423,1023"/>
+<area shape="rect" id="node7" href="$class_communication.html" title="Définition de la classe Communication." alt="" coords="447,828,609,1140"/>
+<area shape="rect" id="node8" href="$class_q_object.html" title=" " alt="" coords="535,461,609,538"/>
+<area shape="rect" id="node10" href="$class_distributeur.html" title="Déclaration de la classe Distributeur." alt="" coords="859,1445,1013,1815"/>
+<area shape="rect" id="node11" href="$struct_localisation.html" title="Pour localiser un distributeur." alt="" coords="923,931,1023,1037"/>
 </map>

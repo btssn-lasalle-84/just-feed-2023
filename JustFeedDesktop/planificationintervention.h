@@ -2,7 +2,7 @@
  * @file        planificationintervention.h
  * @brief       Déclaration de la classe PlanificationIntervention.
  * @author      Salaun Matthieu <matthieusalaun30@gmail.com>
- * @version     0.2
+ * @version     1.1
  * @date        2023
  */
 #ifndef PLANIFICATION_INTERVENTION_H
@@ -22,7 +22,10 @@
 
 // Pourcentage de remplissage
 #define ZERO      0
+#define HUIT      8
+#define DIX       10
 #define QUINZE    15
+#define DIX_HUIT  18
 #define TRENTE    30
 #define CINQUANTE 50
 #define SOIXANTE  60

@@ -4,7 +4,8 @@ var files_dup =
       [ "ActiviteInterventions", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_activite_interventions" ]
     ] ],
     [ "AdaptateurBac.java", "_adaptateur_bac_8java.html", [
-      [ "AdaptateurBac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac" ]
+      [ "AdaptateurBac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac" ],
+      [ "OnEditTextChangedListener", "interfacecom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac_1_1_on_edit_text_changed_listener.html", "interfacecom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac_1_1_on_edit_text_changed_listener" ]
     ] ],
     [ "AdaptateurDistributeur.java", "_adaptateur_distributeur_8java.html", [
       [ "AdaptateurDistributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_distributeur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_distributeur" ]
@@ -26,6 +27,9 @@ var files_dup =
       [ "BaseDeDonnees", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees" ],
       [ "ConnexionMySql", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_1_1_connexion_my_sql.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees_1_1_connexion_my_sql" ]
     ] ],
+    [ "ClientMQTT.java", "_client_m_q_t_t_8java.html", [
+      [ "ClientMQTT", "classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t" ]
+    ] ],
     [ "colors.xml", "colors_8xml.html", null ],
     [ "communication.cpp", "communication_8cpp.html", null ],
     [ "communication.h", "communication_8h.html", [
@@ -34,6 +38,7 @@ var files_dup =
     [ "configurationdistributeur.cpp", "configurationdistributeur_8cpp.html", null ],
     [ "configurationdistributeur.h", "configurationdistributeur_8h.html", "configurationdistributeur_8h" ],
     [ "data_extraction_rules.xml", "data__extraction__rules_8xml.html", null ],
+    [ "dialogue.xml", "dialogue_8xml.html", null ],
     [ "distributeur.cpp", "distributeur_8cpp.html", null ],
     [ "distributeur.h", "distributeur_8h.html", "distributeur_8h" ],
     [ "Distributeur.java", "_distributeur_8java.html", [
@@ -69,6 +74,7 @@ var files_dup =
     ] ],
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
     [ "menu.xml", "menu_8xml.html", null ],
+    [ "network_security_config.xml", "network__security__config_8xml.html", null ],
     [ "operateur.cpp", "operateur_8cpp.html", null ],
     [ "operateur.h", "operateur_8h.html", "operateur_8h" ],
     [ "Operateur.java", "_operateur_8java.html", [

@@ -9,6 +9,7 @@ var annotated_dup =
           [ "AdaptateurIntervention", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_intervention.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_intervention" ],
           [ "Bac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_bac.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_bac" ],
           [ "BaseDeDonnees", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_base_de_donnees" ],
+          [ "ClientMQTT", "classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_client_m_q_t_t" ],
           [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur" ],
           [ "ExampleInstrumentedTest", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_instrumented_test.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_instrumented_test" ],
           [ "ExampleUnitTest", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_unit_test.html", "classcom_1_1justfeed_1_1justfeedandroid_1_1_example_unit_test" ],
@@ -35,6 +36,7 @@ var annotated_dup =
     [ "PlanificationIntervention", "class_planification_intervention.html", "class_planification_intervention" ],
     [ "Produit", "class_produit.html", "class_produit" ],
     [ "QDialog", "class_q_dialog.html", null ],
+    [ "QObject", "class_q_object.html", null ],
     [ "QWidget", "class_q_widget.html", null ],
     [ "Serveur", "class_serveur.html", "class_serveur" ],
     [ "Statistiques", "class_statistiques.html", "class_statistiques" ]

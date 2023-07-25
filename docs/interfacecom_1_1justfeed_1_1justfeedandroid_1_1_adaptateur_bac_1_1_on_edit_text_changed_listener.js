@@ -1,0 +1,4 @@
+var interfacecom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac_1_1_on_edit_text_changed_listener =
+[
+    [ "onTextChanged", "interfacecom_1_1justfeed_1_1justfeedandroid_1_1_adaptateur_bac_1_1_on_edit_text_changed_listener.html#a01c86620d62b097845dd306aac12dc66", null ]
+];

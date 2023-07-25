@@ -27,7 +27,7 @@
   <td id="projectlogo"><img alt="Logo" src="projet-logo.png"/></td>
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Projet just-feed
-   &#160;<span id="projectnumber">1.0</span>
+   &#160;<span id="projectnumber">1.1</span>
    </div>
    <div id="projectbrief">BTS SNIR LaSalle Avignon 2023</div>
   </td>
@@ -93,8 +93,13 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <h1>Le projet just-feed 2023</h1>
 <ul>
 <li><a href="#le-projet-just-feed-2023">Le projet just-feed 2023</a><ul>
+<li><a href="#fonctionnalit%C3%A9s">Fonctionnalités</a></li>
 <li><a href="#documentation-du-code">Documentation du code</a></li>
 <li><a href="#resources-logicielles">Resources logicielles</a></li>
+<li><a href="#pr%C3%A9sentations">Présentations</a></li>
+<li><a href="#vid%C3%A9o">Vidéo</a></li>
+<li><a href="#diagramme-de-classes">Diagramme de classes</a></li>
+<li><a href="#screenshots">Screenshots</a></li>
 <li><a href="#base-de-donn%C3%A9es">Base de données</a></li>
 <li><a href="#mqtt">MQTT</a><ul>
 <li><a href="#donn%C3%A9es">Données</a></li>
@@ -102,19 +107,17 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <li><a href="#paho-mqtt-android">Paho MQTT (Android)</a></li>
 </ul>
 </li>
-<li><a href="#versions">Versions</a><ul>
+<li><a href="#historique-des-versions">Historique des versions</a><ul>
 <li><a href="#10">1.0</a></li>
 <li><a href="#02">0.2</a></li>
 <li><a href="#01">0.1</a></li>
 </ul>
 </li>
-<li><a href="#diagramme-de-classes">Diagramme de classes</a></li>
 <li><a href="#planification">Planification</a></li>
 <li><a href="#auteurs">Auteurs</a></li>
 </ul>
 </li>
 </ul>
-<p><img src="logo.png" alt="" class="inline"/></p>
 <hr  />
 <p>Le système doit permettre de surveiller à distance des distributeurs automatiques (café, fruits secs, céréales, …) afin d’optimiser le processus de réapprovisionnement.</p>
 <p><img src="operateur.png" alt="" class="inline"/></p>
@@ -127,6 +130,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <li>Une application mobile pour <b>Android</b> permettra aux opérateurs d’assurer leur intervention (géolocalisation, parcours, type de produits à réapprovisionner, validation de l’intervention, ...). [Étudiant IR]</li>
 </ul>
 <p><img src="synoptique.png" alt="" class="inline"/></p>
+<h2>Fonctionnalités</h2>
 <ul>
 <li>Android :</li>
 </ul>
@@ -137,7 +141,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Lister les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Réaliser une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
@@ -145,7 +149,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Valider une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <ul>
 <li>Desktop Qt :</li>
@@ -157,17 +161,21 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Lister les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Visualiser l'état d'un distributeur   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Planifier une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Visualiser une intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Configurer les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Configurer les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">/   </td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Dialoguer avec les distributeurs   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">Visualiser les statistiques   </td><td class="markdownTableBodyCenter"></td><td class="markdownTableBodyCenter"></td></tr>
+<td class="markdownTableBodyNone">Sélectionner les bacs pour intervention   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Imprimer une intervention (et sauvegarder en pdf)   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Visualiser un distributeur sur une carte   </td><td class="markdownTableBodyCenter">X   </td><td class="markdownTableBodyCenter"></td></tr>
 </table>
 <h2>Documentation du code</h2>
 <p><a href="https://btssn-lasalle-84.github.io/just-feed-2023/">https://btssn-lasalle-84.github.io/just-feed-2023/</a></p>
@@ -198,6 +206,39 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Développement   </td><td class="markdownTableBodyCenter">Java (JDK 11.0.13)   </td></tr>
 </table>
+<h2>Présentations</h2>
+<p>Diaporamas étudiants IR :</p>
+<ul>
+<li>Android :<ul>
+<li>Mayeul FARGIER : <a href="./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Fargier.pptx">Revue finale - Just Feed - Fargier.pptx</a></li>
+</ul>
+</li>
+<li>Qt :<ul>
+<li>Matthieu SALAUN : <a href="./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Salaun.pptx">Revue finale - Just Feed - Salaun.pptx</a></li>
+<li>Nicolas ROUANET : <a href="./diaporamas/Revue%20finale%20-%20Just%20Feed%20-%20Rouanet.pptx">Revue finale - Just Feed - Rouanet.pptx</a></li>
+</ul>
+</li>
+</ul>
+<h2>Vidéo</h2>
+<p><a href="https://www.youtube.com/@projets-btssn-lasalle84">https://www.youtube.com/@projets-btssn-lasalle84</a></p>
+<h2>Diagramme de classes</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="dc-justfeed-android.png" alt="" class="inline"/></p>
+<ul>
+<li>Qt Desktop :</li>
+</ul>
+<p><img src="dc-justfeed-qt.png" alt="" class="inline"/></p>
+<h2>Screenshots</h2>
+<ul>
+<li>Android :</li>
+</ul>
+<p><img src="android.gif" alt="" class="inline"/></p>
+<ul>
+<li>PC Desktop Qt :</li>
+</ul>
+<p><img src="desktop.gif" alt="" class="inline"/></p>
 <h2>Base de données</h2>
 <p>Base de données MySQL 8.0 <code>justfeed</code> hébergée sur www.db4free.net (pour les tests) :</p>
 <p><img src="sql/justfeed-v0.2.png" alt="" class="inline"/></p>
@@ -475,60 +516,13 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <div class="line">    &lt;/<span class="keywordtype">application</span>&gt;</div>
 <div class="line"> </div>
 <div class="line">&lt;/<span class="keywordtype">manifest</span>&gt;</div>
-</div><!-- fragment --><h2>Versions</h2>
+</div><!-- fragment --><h2>Historique des versions</h2>
 <p><img src="livraisons.png" alt="" class="inline"/></p>
 <h3>1.0</h3>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-justfeed-android-distributeur-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-validees-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-afaire-v1.0.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-encours-v1.0.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-justfeed-qt-distributeurs-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-distributeur-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-interventions-v0.2.png" alt="" class="inline"/></p>
 <h3>0.2</h3>
 <p><img src="jira-tickets-v0.2.png" alt="" class="inline"/></p>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-justfeed-android-distributeur-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-v0.2.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-justfeed-qt-distributeurs-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-distributeur-v0.2.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-interventions-v0.2.png" alt="" class="inline"/></p>
 <h3>0.1</h3>
 <p><img src="jira-tickets-v0.1.png" alt="" class="inline"/></p>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="screenshot-justfeed-android-distributeur-v0.1.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-android-interventions-v0.1.png" alt="" class="inline"/></p>
-<ul>
-<li>PC Desktop Qt :</li>
-</ul>
-<p><img src="screenshot-justfeed-qt-distributeurs-v0.1.png" alt="" class="inline"/></p>
-<p><img src="screenshot-justfeed-qt-configuration-v0.1.png" alt="" class="inline"/></p>
-<h2>Diagramme de classes</h2>
-<ul>
-<li>Android :</li>
-</ul>
-<p><img src="dc-justfeed-android.png" alt="" class="inline"/></p>
-<ul>
-<li>Qt Desktop :</li>
-</ul>
-<p><img src="dc-justfeed-qt.png" alt="" class="inline"/></p>
 <h2>Planification</h2>
 <p><img src="gantt-1.png" alt="" class="inline"/></p>
 <p><img src="gantt-2.png" alt="" class="inline"/></p>
@@ -549,7 +543,7 @@ $(document).ready(function(){initNavTree('md__mnt_sda_home_tv__documents_git_pro
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Dimanche 28 Mai 2023 11:15:27 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
+    <li class="footer"><img class="footer" src="lasalle-logo.png" height="31" alt="La Salle Avignon"/>&nbsp;<b>Campus La Salle Avignon</b>&nbsp;-&nbsp;9 Rue Notre Dame des 7 douleurs&nbsp;-&nbsp;BP 50165&nbsp;-&nbsp;84008 Avignon&nbsp;-&nbsp;Généré le Lundi 19 Juin 2023 22:46:31 pour Projet just-feed par&nbsp;<a href="https://www.doxygen.org/index.html">doxygen</a>&nbsp;1.9.1&nbsp;</li>
   </ul>
 </div>
 </body>

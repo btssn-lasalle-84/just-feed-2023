@@ -91,6 +91,11 @@ public class Produit
      */
     public void modifierPrix(double nouveauPrix)
     {
+        BaseDeDonnees baseDeDonnees = BaseDeDonnees.getInstance();
         this.prix = nouveauPrix;
+
+        baseDeDonnees.executerRequete(
+                "UPDATE `Produit` SET `prix` = "+prix+" WHERE nomProduit = "+"\""+this.nom+"\""
+        );
     }
 }

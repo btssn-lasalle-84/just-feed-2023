@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bac"
     android:layout_width="100dp"
-    android:layout_height="wrap_content" >
+    android:layout_height="wrap_content"
+    android:layout_marginTop="15dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,11 +13,34 @@
         android:orientation="vertical"
         android:padding="0dp">
 
-        <TextView
-            android:id="@+id/hydrometrie"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical" />
+            android:layout_height="match_parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteX="1dp">
+
+            <TextView
+                android:id="@+id/hydrometrie"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintEnd_toStartOf="@+id/imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.662"
+                app:layout_constraintStart_toStartOf="parent"
+                app:srcCompat="@drawable/water_drop"
+                tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/remplissageBac"
@@ -24,6 +48,7 @@
             android:layout_height="300dp"
             android:layout_margin="15dp"
             android:background="#2BF135"
+            android:textStyle="bold"
             android:gravity="center_horizontal|center_vertical" />
 
         <TextView
@@ -32,11 +57,25 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center_vertical" />
 
-        <TextView
-            android:id="@+id/prix"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal|center_vertical" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/prix"
+                android:layout_width="53dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="phone" />
+
+            <TextView
+                android:id="@+id/euro"
+                android:layout_width="47dp"
+                android:layout_height="32dp"
+                android:text="@string/euro" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

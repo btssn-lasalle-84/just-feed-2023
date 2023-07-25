@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -28,11 +30,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.PopupMenu;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @class JustFeed
@@ -43,9 +56,19 @@ public class JustFeed extends AppCompatActivity
     /**
      * Constantes
      */
-    private static final String TAG = "_JustFeed";      //!< TAG pour les logs (cf. Logcat)
+    private static final String TAG = "_JustFeed"; //!< TAG pour les logs (cf. Logcat)
+    private static final String TOPICS = ""; //!< S'abonne à tout les topics
+    public static final int PORT_REMPLISSAGE = 1; //!< Port du simulateur qui envoie le remplissage
+    public static final int PORT_HYGROMETRIE = 2; //!< Port du simulateur qui envoie l'hygrométrie
+    public static final int PORT_PRIX = 4; //!< Port du simulateur pour envoyer le prix
+    private static final int    INDEX_CLIENT_ID =
+      0; //!< Index de l'id client dans la liste des identifiants pour MQTT
     private static final int INDEX_MENU_OPERATEURS = 0; //!< Index de l'item Opérateurs dans le menu
-    public static final String PREFERENCES         = "justfeed"; //!< Clé pour le titre du stockage
+    private static final int INDEX_MDP =
+      1; //!< Index du mot de passe dans la liste des identifiants pour MQTT
+    private static final int INDEX_HOSTNAME =
+      2; //!< Index du hostname dans la liste des identifiants pour MQTT
+    public static final String PREFERENCES = "justfeed"; //!< Clé pour le titre du stockage
     public static final String PREFERENCES_ID_OPERATEUR =
       "idOperateur"; //!< Clé pour l'id de l'opérateur
     public static final int OPERATEUR_NON_DEFINI =
@@ -57,19 +80,19 @@ public class JustFeed extends AppCompatActivity
     private List<Distributeur> listeDistributeurs;                 //!< Liste des distributeurs
     private List<Operateur>    listeOperateurs;                    //!< Liste des opérateurs
     private int                idOperateur = OPERATEUR_NON_DEFINI; //!< Identifiant de l'opérateur
-    private BaseDeDonnees      baseDeDonnees;         //!< Identifiants pour la base de données
-    private Handler            handler = null;        //<! Le handler utilisé par l'activité
+    private static ClientMQTT         clientMQTT;     //!< Client MQTT pour communiquer avec le broker MQTT
+    private BaseDeDonnees      baseDeDonnees;  //!< Identifiants pour la base de données
+    private Handler            handler = null; //<! Le handler utilisé par l'activité
     private RecyclerView       vueListeDistributeurs; //!< Affichage de la liste des distributeurs
     private RecyclerView.Adapter       adapteurDistributeur; //!< Remplit les vues des distributeurs
     private RecyclerView.LayoutManager layoutVueListeDistributeurs; //!< Positionne les vues
+    private static SwipeRefreshLayout rafraichisseur; //!< Rafraîchie les vues
     private SharedPreferences          preferencesPartagees =
       null; //!< système de persistance des données pour l'application
 
     /**
      * Ressources GUI
      */
-    private Button boutonInterventions; //!< Bouton pour démarrer une nouvelle activity qui liste
-                                        //!< les interventions
     private Menu menu;                  //!< Menu de l'application
 
     /**
@@ -88,8 +111,9 @@ public class JustFeed extends AppCompatActivity
         initialiserHandler();
         initialiserBaseDeDonnees();
 
+        baseDeDonnees.recupererDistributeurs(TOPICS);
         baseDeDonnees.recupererOperateurs();
-        baseDeDonnees.recupererDistributeurs();
+        baseDeDonnees.recupererIdentifiantsTTS();
     }
 
     /**
@@ -175,7 +199,6 @@ public class JustFeed extends AppCompatActivity
         super.onResume();
         Log.d(TAG, "onResume()");
         baseDeDonnees.setHandler(handler);
-        baseDeDonnees.recupererDistributeurs();
     }
 
     /**
@@ -228,6 +251,17 @@ public class JustFeed extends AppCompatActivity
         this.vueListeDistributeurs.setHasFixedSize(true);
         this.layoutVueListeDistributeurs = new LinearLayoutManager(this);
         this.vueListeDistributeurs.setLayoutManager(this.layoutVueListeDistributeurs);
+
+        this.rafraichisseur = (SwipeRefreshLayout) findViewById(R.id.justFeedRafraichisseur);
+
+        rafraichisseur.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "_OnRefresh()");
+                rafraichisseur.setRefreshing(false);
+                baseDeDonnees.recupererDistributeurs(TOPICS);
+            }
+        });
     }
 
     /**
@@ -236,13 +270,31 @@ public class JustFeed extends AppCompatActivity
     private void afficherDistributeurs(List<Distributeur> distributeurs)
     {
         Log.d(TAG, "afficherDistributeurs() nb distributeurs = " + distributeurs.size());
+        vueListeDistributeurs.removeAllViews();
         this.listeDistributeurs = distributeurs;
-        if(this.adapteurDistributeur == null)
-        {
-            this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
-            this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
-        }
+        this.adapteurDistributeur = new AdaptateurDistributeur(this.listeDistributeurs);
+        this.vueListeDistributeurs.setAdapter(this.adapteurDistributeur);
+
         adapteurDistributeur.notifyDataSetChanged();
+    }
+
+    /**
+     * @brief Méthode utilisée pour initier la communication avec le broker MQTT
+     */
+    private void initialiserCommunicationMQTT(ArrayList<String> identifiants)
+    {
+        String clientId   = identifiants.get(INDEX_CLIENT_ID);
+        String motDePasse = identifiants.get(INDEX_MDP);
+        String hostname   = identifiants.get(INDEX_HOSTNAME);
+        Log.d(TAG, "initialiserCommunicationMQTT() identifiants : " + identifiants);
+
+        this.clientMQTT = new ClientMQTT(getApplicationContext(), handler);
+        clientMQTT.changerClientId(clientId);
+        clientMQTT.changerNomUtilisateur(clientId);
+        clientMQTT.changerMotDePasse(motDePasse);
+        clientMQTT.changerHostname(hostname);
+        clientMQTT.creerClientMQTTT();
+        clientMQTT.connecter();
     }
 
     /**
@@ -283,11 +335,33 @@ public class JustFeed extends AppCompatActivity
                     case BaseDeDonnees.REQUETE_SQL_SELECT_DISTRIBUTEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_DISTRIBUTEURS");
                         afficherDistributeurs((ArrayList)message.obj);
+                        findViewById(R.id.listeDistributeurs).invalidate();
+
                         break;
                     case BaseDeDonnees.REQUETE_SQL_SELECT_OPERATEURS:
                         Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_OPERATEURS");
                         listeOperateurs = (ArrayList)message.obj;
                         invalidateOptionsMenu();
+                        break;
+                    case BaseDeDonnees.REQUETE_SQL_SELECT_TTS:
+                        Log.d(TAG, "[Handler] REQUETE_SQL_SELECT_TTS");
+                        initialiserCommunicationMQTT((ArrayList<String>)message.obj);
+                        break;
+                    case ClientMQTT.TTN_CONNECTE:
+                        Log.d(TAG, "[Handler] TTS connecté");
+                        clientMQTT.souscrireTopic(TOPICS);
+                        break;
+                    case ClientMQTT.TTN_DECONNECTE:
+                        Log.d(TAG, "[Handler] TTS déconnecté");
+                        break;
+                    case ClientMQTT.TTN_MESSAGE:
+                        Log.d(TAG, "[Handler] TTS message device "+message.obj);
+                        try {
+                            extraireInfoDistributeur(message);
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                        break;
                 }
             }
         };
@@ -301,6 +375,13 @@ public class JustFeed extends AppCompatActivity
         if(idOperateur != OPERATEUR_NON_DEFINI)
         {
             Intent activiteIntervention = new Intent(JustFeed.this, ActiviteInterventions.class);
+            for(Operateur operateur: listeOperateurs)
+            {
+                if(operateur.getIdOperateur() == idOperateur)
+                {
+                    activiteIntervention.putExtra("nomOperateur", operateur.getNom());
+                }
+            }
             activiteIntervention.putExtra("idOperateur", idOperateur);
             startActivity(activiteIntervention);
         }
@@ -308,6 +389,108 @@ public class JustFeed extends AppCompatActivity
         {
             afficherMessage("JustFeed", "Il faut sélectionner un opérateur dans le menu !");
         }
+    }
+
+    /**
+     * @brief Méthode utilisée pour extraire les informations sur le distributeur dans le JSON
+     * @param message
+     */
+    private void extraireInfoDistributeur(@NonNull Message message) throws JSONException
+    {
+        JSONObject jsonMessage = new JSONObject(message.obj.toString());
+        int port = jsonMessage.getJSONObject("uplink_message").getInt("f_port");
+        String distributeur = jsonMessage.getJSONObject("end_device_ids").getString("device_id");
+        String horodatage = jsonMessage.getString("received_at");
+
+        Log.d(TAG, "Distributeur : "+distributeur);
+        if(port == PORT_REMPLISSAGE)
+        {
+            ArrayList<Double> listeRemplissages = extraireRemplissages(message);
+            for(int i = 0; i < listeRemplissages.size(); i++)
+            {
+                baseDeDonnees.executerRequete("UPDATE Bac SET Bac.remplissage = "+listeRemplissages.get(i)
+                        +
+                        " WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        +
+                        "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
+            }
+        }
+        else if (port == PORT_HYGROMETRIE)
+        {
+            ArrayList<Double> listeHygrometries = extraireHygrometrie(message);
+            for(int i = 0; i < listeHygrometries.size(); i++)
+            {
+                baseDeDonnees.executerRequete("UPDATE Bac SET Bac.hygrometrie = "+listeHygrometries.get(i)
+                        +
+                        " WHERE Bac.idDistributeur = ( SELECT idDistributeur FROM Distributeur \n"
+                        +
+                        "WHERE Distributeur.deviceID = "+"\""+distributeur+"\""+") AND Bac.position = "+(i+1));
+            }
+        }
+        baseDeDonnees.recupererDistributeurs(TOPICS);
+    }
+
+    /**
+     * @brief Méthode pour extraire les remplissages en pourcentages des bacs
+     * @param message
+     */
+    private ArrayList<Double> extraireRemplissages(@NonNull Message message)
+    {
+        ArrayList<Double> listeRemplissages = new ArrayList<Double>();
+
+        try
+        {
+            JSONObject jsonMessage = new JSONObject(message.obj.toString());
+            JSONObject chargeUtile = jsonMessage.getJSONObject("uplink_message").getJSONObject("decoded_payload");
+            Iterator<?> clefs = chargeUtile.keys();
+            clefs.next();
+            while(clefs.hasNext())
+            {
+                String clef = (String) clefs.next();
+                listeRemplissages.add(chargeUtile.getDouble(clef));
+            }
+            Log.d(TAG, "remplissages : "+listeRemplissages);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "extraireRemplissages() : "+e.toString());
+        }
+
+        return listeRemplissages;
+    }
+
+    /**
+     * @brief Méthode pour extraire l'hygrométrie des bacs
+     * @param message
+     */
+    private ArrayList<Double> extraireHygrometrie(@NonNull Message message)
+    {
+        ArrayList<Double> listeHygrometries = new ArrayList<Double>();
+
+        try
+        {
+            JSONObject jsonMessage = new JSONObject(message.obj.toString());
+            JSONObject chargeUtile = jsonMessage.getJSONObject("uplink_message").getJSONObject("decoded_payload");
+            Iterator<?> clefs = chargeUtile.keys();
+            clefs.next();
+            while(clefs.hasNext())
+            {
+                String clef = (String) clefs.next();
+                listeHygrometries.add(chargeUtile.getDouble(clef));
+            }
+            Log.d(TAG, "Hygrométrie : "+listeHygrometries);
+        }
+        catch (Exception e)
+        {
+            Log.e(TAG, "extraireHygrometrie() : "+e.toString());
+        }
+
+        return listeHygrometries;
+    }
+
+    static void envoyerMessageMQTT(String topic, int numeroBac, Double prix)
+    {
+        clientMQTT.envoyerMessageMQTT(topic, numeroBac, prix);
     }
 
     /**

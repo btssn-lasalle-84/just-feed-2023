@@ -35,6 +35,7 @@ public class VueIntervention extends ViewHolder {
     private final static String ROUGE    = "#ed3734"; //!< L'intervention n'a pas été effectuée
     private final static String VERT     = "#4eea48"; //!< L'intervention a été effectuée
     private final static String BLEU     = "#039dfc"; //!< L'intervention est en cours
+    private final static String NOIR     = "#000000"; //!< Le couleur des textes
     private final static String TAG      = "_VueIntervention"; //!< TAG pour le débug
     /**
      * Membres statiques
@@ -89,15 +90,19 @@ public class VueIntervention extends ViewHolder {
                     break;
             }
             identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            identifiantDistributeur.setTextColor(Color.parseColor(NOIR));
             if (intervention.estADepanner()) {
                 aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
                         "%) : \n" + intervention.recupererBacsADepanner());
+                aDepanner.setTextColor(Color.parseColor(NOIR));
             }
             if (intervention.estARemplir()) {
                 aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+                aRemplir.setTextColor(Color.parseColor(NOIR));
             }
             dateIntervention.setText("Date de l'intervention : " +
                     Intervention.formaterDate(intervention.getDateIntervention()));
+            dateIntervention.setTextColor(Color.parseColor(NOIR));
         } else if (etatAfiltrer == Intervention.Etats.TOUTES) {
             Log.d(TAG, "TOUTES");
             carteIntervention.setVisibility(View.VISIBLE);
@@ -113,15 +118,19 @@ public class VueIntervention extends ViewHolder {
                     break;
             }
             identifiantDistributeur.setText("Distributeur : " + intervention.getNomDistribteur());
+            identifiantDistributeur.setTextColor(Color.parseColor(NOIR));
             if (intervention.estADepanner()) {
                 aDepanner.setText("Bacs à dépanner (Hygrométrie > " + Intervention.SEUIL_HUMIDITE +
                         "%) : \n" + intervention.recupererBacsADepanner());
+                aDepanner.setTextColor(Color.parseColor(NOIR));
             }
             if (intervention.estARemplir()) {
                 aRemplir.setText("Bac(s) à remplir : \n" + intervention.recupererBacsARemplir());
+                aRemplir.setTextColor(Color.parseColor(NOIR));
             }
             dateIntervention.setText("Date de l'intervention : " +
                     Intervention.formaterDate(intervention.getDateIntervention()));
+            dateIntervention.setTextColor(Color.parseColor(NOIR));
         } else {
             carteIntervention.setVisibility(View.GONE);
         }

@@ -8,7 +8,7 @@
  * @details Crée et affiche la fenêtre principale de l'application Basketgame
  * @author  Salaun Matthieu
  * @author  Rouanet Nicolas
- * @version 1.0
+ * @version     1.1
  *
  * @param argc
  * @param argv[]

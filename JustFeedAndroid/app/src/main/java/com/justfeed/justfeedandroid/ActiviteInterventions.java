@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,13 +42,14 @@ public class ActiviteInterventions extends AppCompatActivity
     private final String TOUTES     = "Toutes";  //!< Constante utilisée pour configurer le filtre.
     private final String A_FAIRE    = "A faire"; //!< Constante utilisée pour configurer le filtre.
     private final String EN_COURS = "En cours";  //!< Constante utilisée pour configurer le filtre.
-    private final String VALIDEES = "Validées";  //!< Constante utilisée pour configurer le filtre.
+    private final String VALIDEE = "Validée";  //!< Constante utilisée pour configurer le filtre.
 
     /**
      * Attributs
      */
     private Intervention.Etats        etat;        //!< Etat qui sert à trier les interventions
     private static int                idOperateur; //!< Identifiant de l'opérateur
+    private static String             nomOperateur; //!< Nom de l'opérateur
     private static List<Intervention> listeInterventions; //!< Liste des interventions à afficher
     private Handler                   handler;            //!< Le handler utilisé par l'activité
     private static BaseDeDonnees      baseDeDonnees;      //!< Identifiants pour la base de données
@@ -56,6 +58,7 @@ public class ActiviteInterventions extends AppCompatActivity
       null; //!< Pour remplir les vues des Interventions
     private RecyclerView.LayoutManager layoutVueListeInterventions; //!< Positionnement des vues
     private Spinner                    menuEtats;      //!< Menu pour trier les interventions
+    private TextView                   operateur; //!< Opérateur qui s'occupe des interventions
     private static SwipeRefreshLayout  rafraichisseur; //!< Pull-to-refresh
     private int positionListe; //!< La position actuelle de la liste déroulante
 
@@ -74,6 +77,7 @@ public class ActiviteInterventions extends AppCompatActivity
         if(extras != null)
         {
             idOperateur = extras.getInt("idOperateur");
+            nomOperateur = extras.getString("nomOperateur");
         }
         else
             idOperateur = JustFeed.OPERATEUR_NON_DEFINI;
@@ -145,6 +149,8 @@ public class ActiviteInterventions extends AppCompatActivity
      */
     private void initialiserVueInterventions(List<Intervention> interventions)
     {
+        this.operateur             = (TextView)findViewById(R.id.nomOperateur);
+        this.operateur.setText(nomOperateur);
         this.vueListeInterventions = (RecyclerView)findViewById(R.id.listeInterventions);
         this.vueListeInterventions.setHasFixedSize(true);
         this.layoutVueListeInterventions = new LinearLayoutManager(this);
@@ -169,7 +175,7 @@ public class ActiviteInterventions extends AppCompatActivity
                     case EN_COURS:
                         etat = Intervention.Etats.EN_COURS;
                         break;
-                    case VALIDEES:
+                    case VALIDEE:
                         etat = Intervention.Etats.VALIDEE;
                         break;
                     case TOUTES:

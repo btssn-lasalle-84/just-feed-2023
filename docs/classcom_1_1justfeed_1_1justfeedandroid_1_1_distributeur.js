@@ -1,7 +1,7 @@
 var classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur =
 [
     [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a176e72799f9e8fe8ace258ed76e8edca", null ],
-    [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac265cd4ebbc7f9be249206a51ad2dd81", null ],
+    [ "Distributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ad26956bf586eaf61c13c92f2a3d4783d", null ],
     [ "ajouterBac", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a9986d57718a6b7dba55173c3733c784a", null ],
     [ "changerProduit", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a2e06aaa9ac937ad3b994331a8eac45eb", null ],
     [ "depanner", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a2d72c088701e15d4ef901691df8f036c", null ],
@@ -9,6 +9,7 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur =
     [ "estARemplir", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a71edac94bf5fff1e3c2bf560f9f821f8", null ],
     [ "getCoordGeographiques", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ae30458bceb0c1931e7bf2078d6ca4cff", null ],
     [ "getIdentifiant", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a121b54f9e8ab19fb97a0eea4bde52901", null ],
+    [ "getIdMachine", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a4ee3ccaee575440b26521c89c97b708e", null ],
     [ "getListeBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a876116a676dc662da5cab979a9698ca6", null ],
     [ "getLocalisation", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#abd2edcca15b15af5993402ad6014b0c4", null ],
     [ "getNbBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#af9129f1b6975e64b57d461c051576a88", null ],
@@ -20,6 +21,7 @@ var classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur =
     [ "codePostal", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac9f72c4e0c7bb7dd9bdc938c1b99cdf4", null ],
     [ "coordGeographiques", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ac781f5cb6f28549fad53ee6b62e5b66a", null ],
     [ "id", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a46c32c9b3f634e8ab709bc5ec0f04048", null ],
+    [ "idMachine", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a4fd2c900df2b862d164859b2f0820e05", null ],
     [ "listeBacs", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a08f0562b0f372f070d10cf05336f5254", null ],
     [ "nomDistributeur", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#ad5bf76a607761e3c14eae1698e8e0fb5", null ],
     [ "TAG", "classcom_1_1justfeed_1_1justfeedandroid_1_1_distributeur.html#a3b3e2afeb2dab4af0ed19cf07e91a990", null ],

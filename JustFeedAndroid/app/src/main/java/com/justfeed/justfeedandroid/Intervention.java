@@ -19,7 +19,7 @@ import java.util.Locale;
  * l'opérateur. elle contient toutes les informations liées à une intervention : heure, trajet, type
  * d'intervention, poids à remplir...
  * @author Fargier Mayeul
- * @version 0.1
+ * @version 1.1
  */
 public class Intervention
 {

@@ -6,6 +6,7 @@
 
 package com.justfeed.justfeedandroid;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +14,10 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * @brief Définition de la classe AdaptateurBac.
@@ -24,6 +28,14 @@ import java.util.List;
  */
 public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
 {
+    /**
+     * Constantes
+     */
+    private final String TAG = "_AdaptateurBac";
+
+    /**
+     * Attributs
+     */
     private List<Bac> listeBacs = null; //!< Liste des bacs à afficher
 
     /**
@@ -68,6 +80,26 @@ public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
     {
         Bac bac = listeBacs.get(position);
         holder.afficherBac(bac);
+
+        holder.setOnEditTextChangedListener(new OnEditTextChangedListener() {
+            @Override
+            public void onTextChanged(int position, String nouveauPrix)
+            {
+                NumberFormat nf   = NumberFormat.getInstance(Locale.FRANCE);
+                double       prix = 0.0;
+                try
+                {
+                    prix = nf.parse(nouveauPrix).doubleValue();
+                    Log.d(TAG, "nouveauPrix = " + nouveauPrix + " -> prix = " + prix);
+                    bac.getTypeProduit().modifierPrix(prix);
+                    JustFeed.envoyerMessageMQTT(bac.getIdSimulateur(), bac.getPosition(), prix);
+                }
+                catch(ParseException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     /**
@@ -83,5 +115,10 @@ public class AdaptateurBac extends RecyclerView.Adapter<VueBac>
         }
 
         return 0;
+    }
+
+    public interface OnEditTextChangedListener
+    {
+        void onTextChanged(int position, String newText);
     }
 }
